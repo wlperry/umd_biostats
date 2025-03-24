@@ -23,9 +23,11 @@ format:
 editor: visual
 ---
 
-# **Lecture 1: Syllabus**
+# **Lecture 2: Review**
 
--   Please look over treh syllabus as it has all the details of the class and how it will run.
+-   We covered inductive vs deductive reasoning
+
+-   
 
 -   
 

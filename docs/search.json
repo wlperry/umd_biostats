@@ -1,5 +1,68 @@
 [
   {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html",
+    "href": "lectures/lecture_02/02_02_class_activity.html",
+    "title": "02_Class_Activity",
+    "section": "",
+    "text": "Note: This activity is really in place of the outline above which you should have read before class."
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#tapestry-plot",
+    "href": "lectures/lecture_02/02_02_class_activity.html#tapestry-plot",
+    "title": "02_Class_Activity",
+    "section": "Tapestry Plot ——",
+    "text": "Tapestry Plot ——\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm))"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#xy-plot",
+    "href": "lectures/lecture_02/02_02_class_activity.html#xy-plot",
+    "title": "02_Class_Activity",
+    "section": "XY Plot —–",
+    "text": "XY Plot —–\nnotice the points are layered on top but some overlap\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n  \nggplot(data = p_df, aes(x=wind, y=len_mm)) + \n  geom_point()"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#xy-plot-with-dodged-points",
+    "href": "lectures/lecture_02/02_02_class_activity.html#xy-plot-with-dodged-points",
+    "title": "02_Class_Activity",
+    "section": "XY Plot with dodged points ——",
+    "text": "XY Plot with dodged points ——\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm)) + \n  geom_point(position = position_dodge2(width=0.2) )\n\n\n\n\n\n\n\n# this dodges the points # position_dodge2 or can use position_dodge depending on grouping\n\nWhat are the other ways to display the data?"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#histogram",
+    "href": "lectures/lecture_02/02_02_class_activity.html#histogram",
+    "title": "02_Class_Activity",
+    "section": "Histogram —–",
+    "text": "Histogram —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm)) + \n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nNote we really want to see the histograms colored by wind direction\nWe can map the wind aesthetic to a fill in the histogram"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#histogram-colors",
+    "href": "lectures/lecture_02/02_02_class_activity.html#histogram-colors",
+    "title": "02_Class_Activity",
+    "section": "Histogram Colors —–",
+    "text": "Histogram Colors —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) + geom_histogram( position = position_dodge2(width = 0.5))\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`."
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#histogram-bins",
+    "href": "lectures/lecture_02/02_02_class_activity.html#histogram-bins",
+    "title": "02_Class_Activity",
+    "section": "Histogram Bins —–",
+    "text": "Histogram Bins —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) +\n  geom_histogram( binwidth = 2, \n# sets the width in units of the bins - try different nubmers\n   position = position_dodge2(width = 0.5))"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#other-plots-if-time",
+    "href": "lectures/lecture_02/02_02_class_activity.html#other-plots-if-time",
+    "title": "02_Class_Activity",
+    "section": "Other Plots if time",
+    "text": "Other Plots if time"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#box-and-whisker-plots",
+    "href": "lectures/lecture_02/02_02_class_activity.html#box-and-whisker-plots",
+    "title": "02_Class_Activity",
+    "section": "Box and Whisker Plots",
+    "text": "Box and Whisker Plots\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm, fill = wind)) + geom_boxplot()"
+  },
+  {
     "objectID": "lectures/lecture_01/01_03_homework_html.html",
     "href": "lectures/lecture_01/01_03_homework_html.html",
     "title": "01_Homework",
@@ -130,7 +193,7 @@
     "href": "index.html",
     "title": "umd_biostats",
     "section": "",
-    "text": "This will be a list of html lectures as html, revealjs, or powerpoint\nLecture 1 - introduction\n\nhtml file - See html file\n\nLecture 1 - Inclass activities\n\nhtml file - See html file\n\nWeek 1 - homework\n\nhtml file - See html file\n\n\n\n Back to top"
+    "text": "This will be a list of html lectures as html, revealjs, or powerpoint\n\n\n\nLecture\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nLecture 2 PowerPoint\nLecture 2 Activity\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "about.html",
@@ -145,5 +208,12 @@
     "title": "Lecture 01",
     "section": "",
     "text": "Lecture 1: Syllabus\n\nPlease look over the syllabus as it has all the details of the class and how it will run.\n\n\n\n\nLecture 1: Who am I?\n\n\n\nBill Perry\nOffice is in XXXX\nPhone is XXXX\nEmail is wlperry@d.umn.edu\n\n\n\n\n\n\n\n\nLecture 1: My goals\n\nHow do we make observations and hypotheses?\nHow do we design an experiment\nHow do we collect data?\nHow do we organize, clean, summarize, and view the data?\nHow do we use statistics to test our hypotheses\n\nwhat tests to use\nwhat are the assumptions\nwhat are the interpretations\n\n\n\n\nLecture 1: My expectations\n\nCommunication\nPractice\nFailure\nLearn to correct and troubleshoot\n\n\n\nLecture 1: Science\n\nWay to acquire knowledge, organize it and apply it back to the real world\nMake predictions and testing these predictions using a falsifiable approach - statistics\nExplanations that cannot be falsified are not science\n\n\n\nWhat is Statistics?\n\n\nZar (1999) - “analysis and interpretation of data with view towards objective evaluation of conclusions based on the data”\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nInductive Reasoning (Specific → General)\nInductive reasoning involves observing specific cases and using them to form a general conclusion.\nExample:\n\nMeasure 10 pine needles from a tree - average length is 75 mm.\nMeasure 10 more needles from the same tree and gets similar results.\nMeasures needles from second tree - average length is 120 mm .\nYou generalize pine needles from different trees vary in length, but each tree tends to have a characteristic range.\n\nConclusion (Induction): “Pine needle length varies by tree, but each tree seems to have a typical range of lengths.\nPotential Issue: Conclusion is not guaranteed to be true - based on patterns observed in a sample, and there could be exceptions.\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nDeductive Reasoning (General → Specific)\nDeductive reasoning starts with a general principle and applies it to a specific case.\nExample:\n\nGeneral Principle: Pine needles from a species of pine tree have a predictable length range (e.g., 70–80 mm).\nSpecific Case: Collect sample of pine needles and measure them.\nPrediction: Since its the species the needle lengths should fall within 70–80 mm.\nMeasurement: Check the data and confirm needles fall within this expected range.\n\nConclusion (Deduction): “This tree belongs the species with a needle length range of 70–80 mm, we expect its needle lengths to fall in this range.”\nStronger than induction because it’s based on a general rule—but if the assumption (length range) is incorrect, conclusion could still be wrong.\n\n\n\n\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nIn reality we are doing both of these processes\n\n\n\n\n\n\n\n\n\n\n\nHow do we test hypotheses\n\n\n\nStatistics\n\nDesign good experiments\nDesign good tests\nSummarize patterns/data\nUse to make probabilistic determinations to see if differences are “real”\n\n\n\n\n\n\n\n\nData Types\n\n\n\nContinuous\n\nnumeric\n\ndiscrete\n\ninteger or numerical\n\ncategorical\n\nnominal – up, down, right, left…\nordinal – order - a, b, c, d or morning, afternoon, evening\n\n\n\n\n\n\n\n\nMeasurements\n\n\nData is obtained through measurement\nThe world is a messy place and how you measure matters\nOur measures depend on\n\naccuracy - how close we are to the real value\nprecision - how close all our measurements are but may not be precise\n\n\n\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_html.html",
+    "href": "lectures/lecture_02/02_01_lecture_powerpoint_html.html",
+    "title": "Lecture 02",
+    "section": "",
+    "text": "Lecture 2: Review\n\nWe covered inductive vs deductive reasoning\n\n\n\n\n\nLecture 1: Who am I?\n\n\n\nBill Perry\nOffice is in XXXX\nPhone is XXXX\nEmail is wlperry@d.umn.edu\n\n\n\n\n\n\n\n\nLecture 1: My goals\n\nHow do we make observations and hypotheses?\nHow do we design an experiment\nHow do we collect data?\nHow do we organize, clean, summarize, and view the data?\nHow do we use statistics to test our hypotheses\n\nwhat tests to use\nwhat are the assumptions\nwhat are the interpretations\n\n\n\n\nLecture 1: My expectations\n\nCommunication\nPractice\nFailure\nLearn to correct and troubleshoot\n\n\n\nLecture 1: Science\n\nWay to acquire knowledge, organize it and apply it back to the real world\nMake predictions and testing these predictions using a falsifiable approach - statistics\nExplanations that cannot be falsified are not science\n\n\n\nWhat is Statistics?\n\n\nZar (1999) - “analysis and interpretation of data with view towards objective evaluation of conclusions based on the data”\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nInductive Reasoning (Specific → General)\nInductive reasoning involves observing specific cases and using them to form a general conclusion.\nExample:\n\nMeasure 10 pine needles from a tree - average length is 75 mm.\nMeasure 10 more needles from the same tree and gets similar results.\nMeasures needles from second tree - average length is 120 mm .\nYou generalize pine needles from different trees vary in length, but each tree tends to have a characteristic range.\n\nConclusion (Induction): “Pine needle length varies by tree, but each tree seems to have a typical range of lengths.\nPotential Issue: Conclusion is not guaranteed to be true - based on patterns observed in a sample, and there could be exceptions.\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nDeductive Reasoning (General → Specific)\nDeductive reasoning starts with a general principle and applies it to a specific case.\nExample:\n\nGeneral Principle: Pine needles from a species of pine tree have a predictable length range (e.g., 70–80 mm).\nSpecific Case: Collect sample of pine needles and measure them.\nPrediction: Since its the species the needle lengths should fall within 70–80 mm.\nMeasurement: Check the data and confirm needles fall within this expected range.\n\nConclusion (Deduction): “This tree belongs the species with a needle length range of 70–80 mm, we expect its needle lengths to fall in this range.”\nStronger than induction because it’s based on a general rule—but if the assumption (length range) is incorrect, conclusion could still be wrong.\n\n\n\n\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nIn reality we are doing both of these processes\n\n\n\n\n\n\n\n\n\n\n\nHow do we test hypotheses\n\n\n\nStatistics\n\nDesign good experiments\nDesign good tests\nSummarize patterns/data\nUse to make probabilistic determinations to see if differences are “real”\n\n\n\n\n\n\n\n\nData Types\n\n\n\nContinuous\n\nnumeric\n\ndiscrete\n\ninteger or numerical\n\ncategorical\n\nnominal – up, down, right, left…\nordinal – order - a, b, c, d or morning, afternoon, evening\n\n\n\n\n\n\n\n\nMeasurements\n\n\nData is obtained through measurement\nThe world is a messy place and how you measure matters\nOur measures depend on\n\naccuracy - how close we are to the real value\nprecision - how close all our measurements are but may not be precise\n\n\n\n\n\n\n\n\n\n Back to top"
   }
 ]
