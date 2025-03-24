@@ -1,5 +1,9 @@
 ---
 title: "About"
+execute:
+  freeze: false
+  cache: true
+  echo: true
 ---
 
 About this site

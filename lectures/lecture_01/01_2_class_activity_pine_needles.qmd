@@ -2,7 +2,8 @@
 title: "01_Class_Activity"
 author: "Bill Perry"
 execute:
-  freeze: false
+  freeze: true
+  cache: true
   echo: true
 format:
   html:
@@ -25,10 +26,6 @@ format:
     reference-doc: ../../ms_templates/custom-reference.docx
     css: ../../css/msword.css
     embed-resources: true
-  pptx:
-    default: true
-    embed-resources: true
-    reference-doc: ../../ms_templates/lecture_template.pptx 
 ---
 
 # In class activity 1:

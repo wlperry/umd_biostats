@@ -1,5 +1,9 @@
 ---
 title: "<center>404: Page Not Found</center>"
+execute:
+  freeze: false
+  cache: true
+  echo: true
 ---
 
 \![\](images/Dalmi_404.png){fig-align="center"}
