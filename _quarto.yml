@@ -1,42 +1,30 @@
 project:
   type: website
-  output-dir: docsd
+  output-dir: docs
 
 website:
   favicon: favicon.png
-  title: "Ben's Website"
-  site-url: https://test.ben-gerdesmann.dog
+  title: "Bill's Biostats Website"
+  site-url: https://wlperry.github.io/umd_biostats/index.html
   navbar:
     left:
-      - href: index.qmd
+      - href: about.qmd
         text: About
-      - publications.qmd
-      - gallery.qmd
-      - blog.qmd
+      href: about.qmd
+        text: Perry's Site
+      - https://wlperry.github.io/index.html
     tools:
-      - icon: twitter
-        href: https://bsky.app/profile/ben-the-dog.bsky.social
       - icon: github
-        href: https://github.com/BENevolent_code
-  reader-mode: true
-  page-navigation: true
+        href: https://github.com/wlperry
+  reader-mode: false
+  page-navigation: false
   back-to-top-navigation: true
-  page-footer:
-    center: "The only cookies I like are the ones you can eat."
-    background: light
-  description: "Some posts about Ben."
-  announcement:
-    icon: info-circle
-    dismissable: true
-    content: "**Please note** - This is a test website associated with the Quarto website tutorial at https://dgerdesmann.de/posts/3_Quarto Website/index.html"
-    type: warning
-    position: below-navbar
 
 format:
   html:
     theme:
-      dark: darkly
       light: flatly
+      dark: darkly
     css: styles.css
     toc: false
 

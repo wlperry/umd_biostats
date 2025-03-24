@@ -1,1 +1,91 @@
-/* css styles */
+/* styles.css */
+
+/* -------------------------- */
+/* Base styling for the body  */
+/* -------------------------- */
+body {
+  background-color: #FFFFFF;  /* Light grey background for overall readability */
+  color: #343a40;             /* Dark grey text for body content */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;  /* Preferred fonts with fallbacks */
+  line-height: 1.6;           /* Improve text readability with adequate line spacing */
+  margin: 0;                  /* Remove default browser margins */
+  padding: 1rem;              /* Add padding around the main content */
+}
+
+/* ------------------------- */
+/* Header styling            */
+/* ------------------------- */
+header {
+  background-color: #FFFFFF;  /* Set header background to purple */
+  color: #343a40;             /* Set header text to purple (Note: same as background; consider adjusting for contrast) */
+  padding: 1rem;              /* Add space inside the header */
+}
+
+
+/* Header links styling */
+header a {
+  color: #F4CD54;             /* Use purple for links within the header */
+}
+
+header a:hover {
+  color: #FFFF09;             /* Change link color on hover for better visual feedback */
+}
+
+/* ------------------------- */
+/* Heading elements styling  */
+/* ------------------------- */
+h1, h2, h3 {
+  color: #212529;             /* Use a dark grey for headings */
+  margin-top: 1.5rem;         /* Add space above headings */
+}
+
+/* ------------------------- */
+/* General link styling      */
+/* ------------------------- */
+a {
+  color: #007bff;             /* Default blue color for links */
+  text-decoration: none;      /* Remove underlines from links */
+}
+
+a:hover {
+  text-decoration: underline; /* Underline links on hover for clarity */
+}
+
+/* ------------------------- */
+/* Image responsiveness      */
+/* ------------------------- */
+img {
+  max-width: 100%;            /* Ensure images scale within their container */
+  height: auto;               /* Maintain the image's aspect ratio */
+  border-radius: 5px;         /* Slightly round the corners of images */
+}
+
+/* ------------------------- */
+/* Navigation bar (navbar)   */
+/* ------------------------- */
+.navbar {
+  background-color: #70131d;  /* Set navbar background to purple */
+  color: #F4CD54;             /* Set navbar text to purple (Note: same as background; may need adjustment for readability) */
+  padding: 1rem;              /* Add padding within the navbar */
+}
+
+/* Navbar links styling */
+.navbar a {
+  color: #F4CD54;             /* Set links inside navbar to purple */
+  text-decoration: none;      /* Remove underlines from navbar links */
+}
+
+.navbar a:hover {
+  color: #FFFF09;             /* Use a lighter color on hover for navbar links */
+}
+
+/* ------------------------- */
+/* Footer styling            */
+/* ------------------------- */
+footer {
+  text-align: center;         /* Center-align footer text */
+  margin-top: 2rem;           /* Add space above the footer */
+  padding: 1rem;              /* Add padding inside the footer */
+  background-color: #343a40;  /* Dark grey background for the footer */
+  color: white;               /* White text for better contrast in the footer */
+}
