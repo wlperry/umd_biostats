@@ -1,0 +1,343 @@
+/* ================================
+   RevealJS-specific overrides
+   ================================ */
+.reveal .slides section {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important; /* Start content from the top */
+    height: auto !important; /* Let height adjust to content */
+    min-height: 100% !important; /* Ensure it fills the slide */
+    padding: 0 !important;
+}
+
+.reveal .slides section > * {
+    position: static !important; /* Override RevealJS absolute positioning */
+    margin: 0 0 15px 0 !important;
+    width: 100% !important;
+}
+
+/* Force titles to the top of slides */
+.reveal .slides h1,
+.reveal .slides h2 {
+    order: -1 !important; /* Move to top of flex container */
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important; /* Disable any RevealJS centering transforms */
+}
+
+/* Make sure paragraphs and other content come immediately after headings */
+.reveal .slides p,
+.reveal .slides ul,
+.reveal .slides ol,
+.reveal .slides h3,
+.reveal .slides h4,
+.reveal .slides h5 {
+    order: 0 !important; /* Ensure they come after h1/h2 but before other elements */
+    margin-top: 0 !important; /* No extra spacing at top */
+}
+
+/* ================================
+   Heading Styles (h1 - h5)
+   ================================ */
+
+/* ================
+   Fix for ALL h1 (Slide Titles + Other h1)
+   ================ */
+.reveal h1, 
+.quarto-title-block h1, 
+body h1 {
+    font-size: 26px !important;
+    background-color: #70131d !important; /* Burgundy */
+    color: #F4CD54 !important; /* Gold */
+    padding: 10px 20px !important;
+    text-align: left !important;
+    margin: 0 0 20px 0 !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    align-self: flex-start !important;
+}
+
+/* ================
+   Fix for ALL h2 (Section Titles)
+   ================ */
+.reveal h2, 
+.quarto-title-block h2, 
+body h2 {
+    font-size: 20px !important;
+    background-color: #70131d !important;
+    color: #F4CD54 !important;
+    text-align: left !important;
+    margin: 10px 0 15px 0 !important;
+    padding: 10px 10px !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    align-self: flex-start !important;
+}
+
+/* ================================
+   Fix for h3, h4, h5 (Subheadings)
+   ================================ */
+.reveal h3, .reveal h4, .reveal h5 {
+    font-size: 18px !important;
+    color: #002147 !important; /* Dark blue */
+    text-align: left !important;
+    margin: 10px 0 5px 0 !important;
+    align-self: flex-start !important;
+}
+
+/* ================================
+   Bullet Point List Styles
+   ================================ */
+
+/* General bullet point styling */
+.reveal ul {
+    font-size: 18px !important;
+    color: #002147 !important; /* Dark blue */
+    margin: 5px 0 15px 0 !important;
+    line-height: 1.3 !important;
+    display: block !important;
+    align-self: flex-start !important;
+    width: 100% !important;
+    padding-left: 20px !important; /* Add consistent left padding for first level */
+}
+
+/* Style for first-level bullet points */
+.reveal ul li {
+    font-size: 18px !important;
+    color: #002147 !important; /* Dark blue */
+    margin-bottom: 2px !important;
+    display: list-item !important;
+    text-align: left !important;
+}
+
+/* Style for second-level bullet points */
+.reveal ul ul {
+    font-size: 18px !important;
+    color: #002147 !important; /* Dark blue */
+    margin-top: 2px !important;
+    margin-bottom: 0 !important; /* Remove bottom margin to tighten nested lists */
+    padding-left: 20px !important; /* Add consistent left padding for indentation */
+}
+
+.reveal ul ul li {
+    font-size: 18px !important;
+    color: #002147 !important; /* Dark blue */
+    margin-bottom: 2px !important;
+}
+
+/* Style for third-level bullet points */
+.reveal ul ul ul {
+    padding-left: 20px !important; /* Add consistent left padding for third level */
+    margin-bottom: 0 !important;
+}
+
+.reveal ul ul ul li {
+    font-size: 18px !important;
+    color: #002147 !important; /* Dark blue */
+}
+
+/* Fix for list marker positioning in RevealJS */
+.reveal ul li::marker,
+.reveal ul ul li::marker,
+.reveal ul ul ul li::marker {
+    text-align: left !important;
+}
+
+/* ================================
+   Numbered (Ordered) List Styles 
+   ================================ */
+
+/* General ordered list styling */
+.reveal ol {
+    font-size: 20px !important; /* Match the font size of ul */
+    color: #002147 !important; /* Dark blue */
+    margin: 5px 0 15px 0 !important;
+    line-height: 1.3 !important;
+    display: block !important;
+    align-self: flex-start !important;
+    width: 100% !important;
+    padding-left: 20px !important; /* Add consistent left padding for first level */
+}
+
+/* Style for first-level numbered points */
+.reveal ol li {
+    font-size: 20px !important;
+    color: #002147 !important; /* Dark blue */
+    margin-bottom: 5px !important;
+    display: list-item !important;
+    text-align: left !important;
+}
+
+/* Style for second-level numbered points */
+.reveal ol ol {
+    font-size: 18px !important;
+    color: #002147 !important; /* Dark blue */
+    margin-top: 5px !important;
+    margin-bottom: 0 !important; /* Remove bottom margin to tighten nested lists */
+    padding-left: 20px !important; /* Add consistent left padding for indentation */
+}
+
+.reveal ol ol li {
+    font-size: 18px !important;
+    color: #002147 !important; /* Dark blue */
+    margin-bottom: 3px !important;
+}
+
+/* Style for third-level numbered points */
+.reveal ol ol ol {
+    padding-left: 18px !important; /* Add consistent left padding for third level */
+    margin-bottom: 0 !important;
+}
+
+.reveal ol ol ol li {
+    font-size: 18px !important;
+    color: #002147 !important; /* Dark blue */
+}
+
+/* Mixed list styling (numbered lists within bullet lists and vice versa) */
+.reveal ul ol {
+    padding-left: 20px !important;
+    margin-bottom: 0 !important;
+}
+
+.reveal ul ol li {
+    font-size: 18px !important; 
+}
+
+.reveal ol ul {
+    padding-left: 20px !important;
+    margin-bottom: 0 !important;
+}
+
+.reveal ol ul li {
+    font-size: 14px !important;
+}
+
+/* Fix for list marker positioning in RevealJS */
+.reveal ol li::marker,
+.reveal ol ol li::marker,
+.reveal ol ol ol li::marker {
+    text-align: left !important;
+}
+
+/* ================================
+   Table Styles for both RevealJS and HTML
+   ================================ */
+
+/* Table styling for both formats */
+.reveal table,
+body table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 15px 0 !important;
+    font-size: 20px !important; /* Setting 20pt font size for all table text */
+    color: #002147 !important; /* Dark blue, matching other text */
+}
+
+/* Table cell styling */
+.reveal table th,
+.reveal table td,
+body table th,
+body table td {
+    border: 1px dotted #cccccc !important; /* Light grey dotted borders */
+    padding: 8px 12px !important;
+    text-align: left !important;
+    font-size: 20px !important; /* Ensure consistent font size */
+    color: #002147 !important; /* Dark blue */
+}
+
+/* Table header styling */
+.reveal table th,
+body table th {
+    background-color: #f2f2f2 !important; /* Light gray background for headers */
+    font-weight: bold !important;
+    font-size: 20px !important; /* Ensure consistent font size */
+}
+
+/* Table caption styling */
+.reveal table caption,
+body table caption {
+    font-size: 18px !important;
+    margin-bottom: 10px !important;
+    color: #002147 !important;
+    text-align: left !important;
+}
+
+/* Ensure tables have proper width within slides */
+.reveal .slides table {
+    width: 100% !important;
+    margin: 15px 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Special overrides for RevealJS default styles */
+.reveal .slides {
+    text-align: left !important;
+}
+
+/* Reset any RevealJS center transformations */
+.reveal.center .slides section {
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 20px !important;
+}
+
+/* Regular paragraph text */
+.reveal p {
+    font-size: 16px !important; /* Match the list text size */
+    color: #002147 !important;
+    margin-bottom: 10px !important;
+    text-align: left !important;
+}
+
+/* Fix for specific slides with content at bottom */
+.reveal .slides section {
+    overflow-y: visible !important; /* Allow content to flow naturally */
+}
+
+/* Fix vertical alignment issues */
+.reveal .slides > section, 
+.reveal .slides > section > section {
+    transform-style: flat !important;
+    transform: none !important;
+    top: 0 !important;
+    margin: 0 !important;
+}
+
+/* Disable any RevealJS vertical centering */
+.reveal .slides > section.present, 
+.reveal .slides > section > section.present {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    height: auto !important;
+    min-height: 100% !important;
+}
+
+p {margin: 0; /* Removes spacing before and after paragraphs */
+}
+
+/* Additional fix for RevealJS list rendering */
+.reveal .slides section ul,
+.reveal .slides section ol {
+    list-style-position: outside !important;
+}
+
+/* Ensure consistent spacing for list elements in RevealJS */
+.reveal .slides li {
+    margin-left: 0 !important;
+}
+
+/* Override any RevealJS unwanted padding/margin */
+.reveal .slides {
+    padding: 0 !important;
+}

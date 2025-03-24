@@ -12,10 +12,10 @@ website:
         href: "https://wlperry.github.io/index.html"
       - text: "Biostats Homepage"
         href: "https://wlperry.github.io/web_stats/index.html"
-      - text: "UMD Biostats"
+      - text: "UMD Biostats course"
         href: https://wlperry.github.io/umd_biostats/
       - text: "About"
-        href: about.qmd
+        href: about.html
     tools:
     - icon: github
       href: https://github.com/wlperry

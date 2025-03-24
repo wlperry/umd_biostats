@@ -5,7 +5,7 @@ format:
     toc: true
     toc-depth: 3
 about:
-  template: jolla
+  template: marquee
   links:
     - icon: github
       href: https://github.com/wlperry
@@ -13,4 +13,16 @@ about:
       href: mailto:wlperry@d.umn.edu
 ---
 
-I will be adding things here soon for a biostats website
+This will be a list of html lectures as html, revealjs, or powerpoint
+
+Lecture 1 - introduction
+
+-   html file - [See html file](lectures/lecture_01/01_1_lecture_powerpoint_html.html)
+
+Lecture 1 - Inclass activities
+
+-   html file - [See html file](lectures/lecture_01/01_2_class_activity_pine_needles.qmd)
+
+Week 1 - homework
+
+-   html file - [See html file](lectures/lecture_01/01_03_take_homework.qmd)

@@ -1,0 +1,97 @@
+---
+title: "01_Homework"
+author: "Bill Perry"
+execute:
+  freeze: true
+  dir: project
+metadata:
+  quarto: 
+    format-links: false
+project:
+  execute-dir: project
+format:
+  html:
+    toc: false
+    output-file: "01_03_homework_html.html"
+    default: true
+    embed-resources: true
+    css: ../../css/activity.css
+  revealjs:
+    output-file: "01_03_homework_reveal.html"
+    default: true
+    self-contained: true
+    slide-number: true
+    transition: fade
+    css: ../../css/activity.css
+  docx:
+    default: true
+    toc: false
+    toc-depth: 3
+    number-sections: false
+    highlight-style: github
+    reference-doc: ../../ms_templates/custom-reference.docx
+    css: ../../css/msword.css
+    embed-resources: true
+  pptx:
+    default: true
+    embed-resources: true
+    reference-doc: ../../ms_templates/lecture_template.pptx 
+---
+
+# Homework for Week 1:
+
+This is an assignment for you to practice the code and all the work we do in class on a different dataframe. We will assign one of these each week for you to do that encompasses all fo the work we do. We give it out on Monday so you can start early and see how this work.
+
+# ![](images/grayling.jpeg)
+
+![](images/I_8.png){width="398" height="586"}
+
+# Objectives and goals
+
+-   Make a new Project in RStudio.
+
+-   Create directories
+
+    -   data, scripts, output, figures, documents
+
+-   Create a quarto markdown file and open in
+
+-   Put this in the top in place of what is there and add your info
+
+    ``` r
+    ---
+    title: "Grayling in Lake I-8" # Title of the file
+    author: "YOUR NAME" # who you are
+    format: # this is the formats that it will render to
+      html:
+        default: true
+        embed-resources: true # makes everything go into the html file
+    editor: visual # type of editing
+    project:
+      execute-dir: project # where it will look for files
+    execute:
+      keep-md: true # retains the images when you start again
+    --- 
+    ```
+
+<!-- -->
+
+-   Load the libraries
+
+``` r
+# Load the libraries ----
+library(readxl) # allows to read in excel files
+library(tidyverse) # provides utilities seen in console
+```
+
+-   Read in the file `grayling_lakes_I3_I8.csv` as a dataframe
+-   Read in the file `grayling_lakes_I3_I8.xlsx` as a separate dataframe
+-   Annotate your code in the code block as what what is going on and why
+-   Annotate the HTML code as you see fit.
+-   Visualize the data as the lengths of fish in lakes I_3 and I_8 as points
+    -   remember `position = position_dodge2(width=0.2)`
+-   Visualize the data as box and whisker plots
+-   Provide summary statistics grouped by lake
+    -   n, mean, standard deviation, standard error
+-   Visualize the data as mean plus or minus error in ggplot
+    -   be sure to have proper axis labels and units where necessary
