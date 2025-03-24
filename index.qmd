@@ -16,8 +16,8 @@ about:
 This will be a list of html lectures as html, revealjs, or powerpoint
 
 | Lecture | PowerPoint lecture | In Class Activity | Homework |
-|------------------|------------------|------------------|------------------|
-| 01 Introduction | [Lecture 1 PowerPoint](lectures/lecture_01/01_1_lecture_powerpoint_html.html) | [Lecture 1 Activity](lectures/lecture_01/01_2_class_activity_pine_needles.qmd) | [Week 1 Homework](lectures/lecture_01/01_03_take_homework.qmd) |
+|----|----|----|----|
+| 01 Introduction | [Lecture 1 PowerPoint](lectures/lecture_01/01_1_lecture_powerpoint.qmd) | [Lecture 1 Activity](lectures/lecture_01/01_2_class_activity_pine_needles.qmd) | [Week 1 Homework](lectures/lecture_01/01_03_take_homework.qmd) |
 | 02 Data wrangling | [Lecture 2 PowerPoint](lectures/lecture_02/02_01_lecture_powerpoint.qmd) | [Lecture 2 Activity](lectures/lecture_02/02_02_class_activity.qmd) |  |
 |  |  |  |  |
 |  |  |  |  |

@@ -25,11 +25,31 @@ editor: visual
 
 # **Lecture 2: Review**
 
+:::: columns
+::: {.column width="60%"}
 -   We covered inductive vs deductive reasoning
 
--   
+-   How to begin to ask questions
 
--   
+-   Accuracy and precision
+
+-   What are general types of data
+
+-   How to set up an R project in Rstudio
+
+-   How to install and load libraries
+
+-   How to read a file into R
+
+-   How to make a graph
+:::
+::::
+
+::: {.column width="40%"}
+Our first graph
+
+![](images/graph_1.png)
+:::
 
 # **Lecture 1:** Who am I?
 

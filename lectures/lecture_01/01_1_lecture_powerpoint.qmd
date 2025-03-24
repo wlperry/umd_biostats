@@ -2,7 +2,7 @@
 title: "Lecture 01"
 author: "Bill Perry"
 execute:
-  freeze: true
+  freeze: false
   dir: project
 format:
   html:
