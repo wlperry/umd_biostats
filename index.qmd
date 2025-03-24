@@ -1,0 +1,59 @@
+---
+title: "umd_biostats"
+image: images/ben_profile.jpg
+about:
+  template: trestles
+  image-width: 15em
+  image-shape: round
+  links:
+    - icon: twitter
+      href: https://bsky.app/profile/ben-the-dog.bsky.social
+    - icon: github
+      href: https://github.com/dogs>cats
+    - icon: envelope-heart-fill
+      href: mailto:dogtor@ben-gerdesmann.dog
+---
+
+::**:** **{**style="text-align**:** center"**}** \### Hi, ::**:**
+
+::**:** **{**style="text-align**:** justify"**}** welcome to my pawsome corner of the internet! I'm Ben, a Dalmatian with a penchant for swimming, devouring delectable treats, and mastering the art of ball-catching. But don't let my playful antics fool you - I’m also an expert in the fine art of manipulating humans with my undeniable cuteness.
+
+When I'm not splashing around in the water or munching on my favorite snacks, you can find me charming my way into extra belly rubs and treats. My human companions say I've got them wrapped around my paw, but hey, who could resist this face?
+
+As an academic in the field of Canine Cuteness Studies, I’ve mastered the techniques of puppy eyes and tail wags to achieve optimal results in treat acquisition. My research is ongoing, but preliminary findings suggest that a well-timed head tilt can increase treat yield by up to 41% (p = .049).
+
+Stay tuned for more updates on my adventures and research, and don’t forget to bring a treat next time you visit! ::**:**
+
+## Experience
+
+\*\*Professional Treat Tester\*\* at Home Kitchen \\\| 2014 - present
+
+**-** Evaluated the palatability of various dog treats with a focus on flavor, texture, and crunch.
+
+**-** Provided immediate feedback through enthusiastic consumption or polite refusal.
+
+\*\*Lead Ball Fetcher\*\* at Local Park \\\| 2015 - present
+
+**-** Retrieved an average of 34 balls per session with a success rate of 92%.
+
+**-** Pioneered new techniques in catch-and-return efficiency.
+
+\*\*Human Manipulation Expert\*\* at Home \\\| 2016 - present
+
+**-** Developed advanced strategies in the application of cuteness for treat acquisition.
+
+**-** Successfully increased daily treat allotment by 40% through targeted behavior.
+
+## Education
+
+\*\*Doctorate in Cuteness Manipulation\*\*, Canine University \\\| 2019 - 2022
+
+**-** Dissertation**:** "The Efficacy of Puppy Eyes and Tail Wags in Human Compliance"
+
+\*\*Masters in Treat Detection\*\*, Doggo Academy \\\| 2017 - 2019
+
+**-** Thesis**:** "Sniffing Out Snacks: An Analysis of Treat Detection Techniques"
+
+\*\*Bachelors in Ball Fetching\*\*, Pup University \\\| 2014 - 2017
+
+**-** Capstone Project**:** "Maximizing Fetch Efficiency: A Study on Speed and Endurance in Ball Retrieval"
