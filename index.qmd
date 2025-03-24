@@ -1,8 +1,11 @@
 ---
 title: "umd_biostats"
-image: images/ben_profile.jpg
+format: 
+  html:
+    toc: true
+    toc-depth: 3
 about:
-  template: broadside
+  template: jolla
   links:
     - icon: github
       href: https://github.com/wlperry

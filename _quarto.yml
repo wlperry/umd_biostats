@@ -8,25 +8,28 @@ website:
   site-url: https://wlperry.github.io/umd_biostats/index.html
   navbar:
     left:
-      - href: about.qmd
-        text: About
-      href: about.qmd
-        text: Perry's Site
-      - https://wlperry.github.io/index.html
+      - text: "Bill's Homepage"
+        href: "https://wlperry.github.io/index.html"
+      - text: "Biostats Homepage"
+        href: "https://wlperry.github.io/web_stats/index.html"
+      - text: "UMD Biostats"
+        href: https://wlperry.github.io/umd_biostats/
+      - text: "About"
+        href: about.qmd
     tools:
-      - icon: github
-        href: https://github.com/wlperry
+    - icon: github
+      href: https://github.com/wlperry
   reader-mode: false
   page-navigation: false
   back-to-top-navigation: true
 
 format:
   html:
-    theme:
-      light: flatly
-      dark: darkly
-    css: styles.css
-    toc: false
+    theme: flatly         # You can experiment with other themes (e.g., cosmo, yeti)
+    css: styles.css        # Reference your custom CSS file
+    toc: true              # Enable a table of contents if your pages are long
+    toc-title: "On this page"
+
 
 editor: visual
 
