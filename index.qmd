@@ -22,7 +22,7 @@ This course teaches the fundamentals of statistics and data analysis for biologi
 
 ## Course Materials
 
-Materials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website.
+Materials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website and may be on canvas website at school.
 
 ## Course Schedule
 
@@ -49,11 +49,18 @@ Below is a summary of the course schedule.
 +-------------------+---------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------------+----------------------------------------------------------------+
 |                   |                                                                           |                                                                          |                                                                                |                                                                |
 +-------------------+---------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------------+----------------------------------------------------------------+
+* Order of topics is subject to change depending on the progress of the class. Changes to the class schedule will be announced in class.
 
 ## Required Readings
 
 -   [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham
--   Whitlock and Schluter Biostatistics
+-   [Whitlock and Schluter The Analysis of Biological Data - 3rd edition](https://store.macmillanlearning.com/us/product/The-Analysis-of-Biological-Data/p/131922623X?srsltid=AfmBOoqRmMWAOsajlUfAZPt1_UGqjmpPzMg-XAgjFhp5oP3mFNKUCw-w)
+
+## Helpful Links for resources
+
+I have put together a page of [helpful links](links.qmd) that might be of great help as you move through the class
+
+## Course [Schedule and Syllabus](syllabus.qmd) 
 
 ## Questions or Issues?
 

@@ -1,11 +1,11 @@
 ---
-title: "<center>404: Page Not Found</center>"
+title: "404: Page Not Found - so you must answer these questions 3"
 execute:
   freeze: false
   cache: true
   echo: true
 ---
 
-\![\](images/Dalmi_404.png){fig-align="center"}
+\![\](images/stop_404.jpg){fig-align="center"}
 
-\<center\>The page you requested cannot be found (perhaps it was moved or renamed).\</center\>
+# The page you requested cannot be found (perhaps it was moved or renamed) or cast into the gorge of eternal peril.

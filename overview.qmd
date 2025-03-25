@@ -2,8 +2,17 @@
 title: "Overview"
 format: 
   html:
-    toc: true
+    toc: false
     toc-depth: 3
+  docx:
+    default: true
+    toc: false
+    toc-depth: 3
+    number-sections: false
+    highlight-style: github
+    reference-doc: ms_templates/custom-reference.docx
+    css: css/msword.css
+    embed-resources: true
 about:
   template: marquee
   links:
@@ -24,32 +33,33 @@ This course will serve as an introduction to reproducible data analysis using R.
 -   Using a controlled vocabulary and organized project structure and documenting the metadata for the project
 -   Importing data into R and doing calculations and transformations
 -   Visualizing data using ggplot
--    Understanding how to decide on statistical tests that are appropriate
-    -   T-Tests - parametric and nonparametric
+-   Understanding how to decide on statistical tests that are appropriate - T-Tests - parametric and nonparametric
 
-    -   Correlations
+```         
+-   Correlations
 
-    -   Linear models
+-   Linear models
 
-        -   linear regression
+    -   linear regression
 
-        -   multiple linear regression
+    -   multiple linear regression
 
-        -   ANOVA
+    -   ANOVA
 
-        -   ANCOVA
+    -   ANCOVA
 
-        -   GLM and logistic regression
+    -   GLM and logistic regression
 
-    -   Analyzing Frequencies
+-   Analyzing Frequencies
 
-    -   Multivariate Statistics
+-   Multivariate Statistics
 
-        -   Principal component analysis
+    -   Principal component analysis
 
-        -   NMDS
+    -   NMDS
 
-        -   Cluster analysis
+    -   Cluster analysis
+```
 
 In the main webpage I have provided links to all the information you will need:
 

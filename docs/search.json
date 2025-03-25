@@ -231,32 +231,46 @@
     "text": "Box and Whisker Plots\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm, fill = wind)) + geom_boxplot()"
   },
   {
+    "objectID": "links.html",
+    "href": "links.html",
+    "title": "Helpful Links",
+    "section": "",
+    "text": "These are the really helpful links I use a lot\nStackoverflow - a site that has a lot of good resources\nR Companion - this is a great stats site with a lot of well done tests\nR4DataScience - this is the book by Grolemund and Whickham that is really good\nA fun site is BlueSky and use #rstats\nStill adding\n\n\n\n Back to top"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "UMD Biostatistics",
     "section": "",
-    "text": "This course teaches the fundamentals of statistics and data analysis for biological sciences. Using R and the tidyverse, you’ll learn how to analyze and visualize data effectively to answer scientific questions.\n\n\nMaterials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website.\n\n\n\nBelow is a summary of the course schedule.\n\n\n\nLecture\nReadings\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nR4DataScience Tidy Data\nLecture 2 PowerPoint\nLecture 2 Activity\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nR for Data Science by Hadley Wickham\nWhitlock and Schluter Biostatistics\n\n\n\n\nIf you have questions about the course or the website, please contact me at wlperry@d.umn.edu"
+    "text": "This course teaches the fundamentals of statistics and data analysis for biological sciences. Using R and the tidyverse, you’ll learn how to analyze and visualize data effectively to answer scientific questions.\n\n\nMaterials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website and may be on canvas website at school.\n\n\n\nBelow is a summary of the course schedule.\n\n\n\nLecture\nReadings\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nR4DataScience Tidy Data\nLecture 2 PowerPoint\nLecture 2 Activity\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOrder of topics is subject to change depending on the progress of the class. Changes to the class schedule will be announced in class.\n\n\n\n\n\nR for Data Science by Hadley Wickham\nWhitlock and Schluter The Analysis of Biological Data - 3rd edition\n\n\n\n\nI have put together a page of helpful links that might be of great help as you move through the class\n\n\n\n\n\n\nIf you have questions about the course or the website, please contact me at wlperry@d.umn.edu"
   },
   {
     "objectID": "index.html#course-materials",
     "href": "index.html#course-materials",
     "title": "UMD Biostatistics",
     "section": "",
-    "text": "Materials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website."
+    "text": "Materials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website and may be on canvas website at school."
   },
   {
     "objectID": "index.html#course-schedule",
     "href": "index.html#course-schedule",
     "title": "UMD Biostatistics",
     "section": "",
-    "text": "Below is a summary of the course schedule.\n\n\n\nLecture\nReadings\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nR4DataScience Tidy Data\nLecture 2 PowerPoint\nLecture 2 Activity"
+    "text": "Below is a summary of the course schedule.\n\n\n\nLecture\nReadings\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nR4DataScience Tidy Data\nLecture 2 PowerPoint\nLecture 2 Activity\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOrder of topics is subject to change depending on the progress of the class. Changes to the class schedule will be announced in class."
   },
   {
     "objectID": "index.html#required-readings",
     "href": "index.html#required-readings",
     "title": "UMD Biostatistics",
     "section": "",
-    "text": "R for Data Science by Hadley Wickham\nWhitlock and Schluter Biostatistics"
+    "text": "R for Data Science by Hadley Wickham\nWhitlock and Schluter The Analysis of Biological Data - 3rd edition"
+  },
+  {
+    "objectID": "index.html#helpful-links-for-resources",
+    "href": "index.html#helpful-links-for-resources",
+    "title": "UMD Biostatistics",
+    "section": "",
+    "text": "I have put together a page of helpful links that might be of great help as you move through the class"
   },
   {
     "objectID": "index.html#questions-or-issues",
@@ -313,6 +327,104 @@
     "title": "About the Instructor",
     "section": "Contact Information",
     "text": "Contact Information\nFeel free to contact me with any questions about the course or research opportunities:\n\nEmail: wlperry@d.umn.edu\nOffice: TBD\nOffice Hours: by appointment"
+  },
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Semester - Fall 2025\nInstructor: Bill Perry\n\n\n\n\nWhen: Monday and Wednesday 14:00 - 15:50\nEmail: wlperry@d.umn.edu\n\n\nWhere: We will see\nAssistant: someone please\n\n\nHow: Mostly working through the ideas in the PowerPoint slides using code some of which is prewritten\nAssistant email: someone@d.umn.edu\n\n\nRequired materials: The textbook and a laptop and tenacity\nOffice hours: TBD and by appointment or walk in\n\n\n\n\n\nWelcome to Ecological Statistics! This is a practical course that will introduce you to the topics of experimental design, hypothesis testing, data analysis and visualization in the ecological sciences context. The goal of the course is to enable you to interpret statistical methods and results in the published literature, carry out your own data analyses and conduct a productive conversation with a statistician. We will learn about common statistical approaches in ecology and use the R statistical computing environment to get practice implementing these approaches. Additionally, this course will provide opportunities for students to practice scientific writing skills.\n\n\n\nLearn some useful data skills nd organizaiton and statistical methods and R skills.\n\n\n\nThe course will be taught in a combined lecture and computer lab format with mostly hands on activities assuming you have read the materials. Some of our meetings will take a primarily lecture and discussion format, others a primarily computer lab format, but most will have elements of both. Lecture portions will be dedicated to taking up homework questions, going over course concepts and discussing examples. Computer laboratory elements will be dedicated to using the R statistical computing package for data analysis and visualization.\nMaterials such as lecture slides, computer labs, homework, and assignments will be distributed through the course Canvas site or on the website. The course will mostly be based on the textbook The Analysis of Biological Data (3rd Edition) Experimental Design and Data Analysis for Biologists (1st edition) by Michael C. Whitlock and Dolph Schluter. The text is required and we can talk about how to get it. Other textbooks and resources that you may find of use are:\n\nThe R Book (1st or 2nd edition) by MJ Crawley. Highly recommended as an all-around reference book.\nA Primer of Ecological Statistics (1st or 2nd edition) by NJ Gotelli and AM Ellison.\nBiostatistical Analysis (4th or 5th edition) by JH Zar.\nHandbook of Biological Statistics by JH McDonald (online at http://www.biostathandbook.com/).\nInstitute for Digital Research and Education (https://stats.idre.ucla.edu/other/dae/).\nA Compendium of Clean Graphs in R (http://shinyapps.org/apps/RGraphCompendium/index.php)\nNumerical Ecology with R by D Borcard, F Gillet and P Legendre. A practical introduction to common multivariate methods in ecology.\nOrdination Methods for Ecologists by Mike Palmer (https://ordination.okstate.edu/)\n\n\n\n\nYour grade will be based on homework, in-class assignments, and take-home assignments:\nI will be making this out of points as we get there\n\n\n\nHomework\n10%\n\n\nIn-class assignments\n20%\n\n\nTake-home assignments (4 assignments)\n70%\n\n\n\n\n\n\nyou are required to read the class readings (see ‘course schedule’) ahead of each class. Homework questions based on the readings will also need to be completed ahead of many classes. Homework questions will be assigned one class meeting before they are due and will need to be submitted before the start of class. We will spend the portions class taking up and discussing homework questions. I will cold-call students to present and explain their answers to the rest of the class. Homework assignments will receive one of four possible grades: 100% (A) for work that meets or exceeds expectations, 85% (B) for work that meets most expectations, 65% (D) for work that misses most expectations or 0% (F) for work deemed unacceptable.\n\n\n\nmost computer lab exercises will be accompanied by in-class questions and disucssion. You will submit answers to these questions and your functional R code for the exercise by the end of the day of each exercise. In-class assignments will be submitted as QUARTO files. In-class assignments will be graded on the same scale as homework.\nTake-home assignments: four assignments will be completed outside of class. Each assignment will involve the independent analysis, presentation and interpretation of a dataset. The written report will include 3 sections: abstract, statistical materials and methods and results (statistical results and figures/ tables), prepared to “publication quality” standards. Assignments will be graded out of 100% and assessed on metrics including statistical literacy (performing analyses correctly), graphical presentation of data, adherence to correct statistical reporting norms, grammar and the quality/functionality of the accompanying R code. The assignments will comprise 70% of your final grade; A1 will be worth 10% of the final grade, A2 15%, A3 20%, and A4 25%.\n\n\n\nwill be assigned on a straight 10% scale, with 90-100% receiving some form of A, 80-89% some form of B, etc. + and – grades will fall on the upper (&gt;X7) and lower (&lt;X4) end of the ranges, respectively. Percentage grades below 60% are equivalent to an ‘F’ letter grade.\n\n\n\n10% of total possible grade will be deducted per day late in absence of valid excuse. A grade of 0 will be given for assignments that are more than 3 days late.\n\n\n\nValid excuses for missed class or late work consist of subpoenas, jury duty, military duty, religious observances, illness, bereavement for immediate family and NCAA varsity intercollegiate athletics. Conflicts with work, vacations, weddings, travel, or some other private situation that was foreseen will not be accommodated.  For further information on excused absences see https://evcaa.d.umn.edu/excused-absences\n\n\n\nI take plagiarism and academic dishonesty very seriously and will invoke the full weight of UMD-approved sanctions at the first instance of plagiarism. I am happy to answer questions on what is considered a violation of academic integrity in this class. Please also refer to UMD’s academic integrity policy at: https://evcaa.d.umn.edu/student-academic-integrity\n\n\n\nI will enforce, and expect you to follow the University’s Student Code of Conduct. Appropriate classroom conduct promotes an environment of academic achievement and integrity. Disruptive classroom behaviour that substantially or repeatedly interrupts either the instructor’s ability to teach, or student learning, is prohibited. Disruptive behaviour includes inappropriate use of technology in the classroom. Examples include ringing cell phones, text-messaging, watching videos of funny cats (and other videos), playing computer games, doing email, or surfing the Internet on your computer instead of note-taking or other instructor-sanctioned activities. See more here: https://regents.umn.edu/sites/regents.umn.edu/files/2022-07/policy_student_conduct_code.pdf\n\n\n\nIndividuals who have any disability, either permanent or temporary, which might affect their ability to perform in this course are encouraged to inform the instructor at the start of the quarter. Methods, materials or testing may be modified to provide for equitable participation.\n\n\n\nThe University of Minnesota is committed to the policy that all of its students shall have equal educational opportunities. The University expressly forbids discrimination on the basis of race, color, gender, sexual orientation, disability, veteran’s status, ethnicity, religion, creed, national origin or marital status. If you believe that your Ecology instructor has not followed this policy, you are invited to bring this to the attention of the Biology Department Head (207 Swenson Science Building; 218-726-8123). Your conference will be kept confidential.\nYou may review other relevant UMD policy statements at: https://evcaa.d.umn.edu/recommended-syllabi-policy-statements"
+  },
+  {
+    "objectID": "syllabus.html#aim-and-scope",
+    "href": "syllabus.html#aim-and-scope",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Welcome to Ecological Statistics! This is a practical course that will introduce you to the topics of experimental design, hypothesis testing, data analysis and visualization in the ecological sciences context. The goal of the course is to enable you to interpret statistical methods and results in the published literature, carry out your own data analyses and conduct a productive conversation with a statistician. We will learn about common statistical approaches in ecology and use the R statistical computing environment to get practice implementing these approaches. Additionally, this course will provide opportunities for students to practice scientific writing skills."
+  },
+  {
+    "objectID": "syllabus.html#student-learning-outcomes",
+    "href": "syllabus.html#student-learning-outcomes",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Learn some useful data skills nd organizaiton and statistical methods and R skills."
+  },
+  {
+    "objectID": "syllabus.html#course-structure",
+    "href": "syllabus.html#course-structure",
+    "title": "Syllabus",
+    "section": "",
+    "text": "The course will be taught in a combined lecture and computer lab format with mostly hands on activities assuming you have read the materials. Some of our meetings will take a primarily lecture and discussion format, others a primarily computer lab format, but most will have elements of both. Lecture portions will be dedicated to taking up homework questions, going over course concepts and discussing examples. Computer laboratory elements will be dedicated to using the R statistical computing package for data analysis and visualization.\nMaterials such as lecture slides, computer labs, homework, and assignments will be distributed through the course Canvas site or on the website. The course will mostly be based on the textbook The Analysis of Biological Data (3rd Edition) Experimental Design and Data Analysis for Biologists (1st edition) by Michael C. Whitlock and Dolph Schluter. The text is required and we can talk about how to get it. Other textbooks and resources that you may find of use are:\n\nThe R Book (1st or 2nd edition) by MJ Crawley. Highly recommended as an all-around reference book.\nA Primer of Ecological Statistics (1st or 2nd edition) by NJ Gotelli and AM Ellison.\nBiostatistical Analysis (4th or 5th edition) by JH Zar.\nHandbook of Biological Statistics by JH McDonald (online at http://www.biostathandbook.com/).\nInstitute for Digital Research and Education (https://stats.idre.ucla.edu/other/dae/).\nA Compendium of Clean Graphs in R (http://shinyapps.org/apps/RGraphCompendium/index.php)\nNumerical Ecology with R by D Borcard, F Gillet and P Legendre. A practical introduction to common multivariate methods in ecology.\nOrdination Methods for Ecologists by Mike Palmer (https://ordination.okstate.edu/)"
+  },
+  {
+    "objectID": "syllabus.html#evaluation-scheme",
+    "href": "syllabus.html#evaluation-scheme",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Your grade will be based on homework, in-class assignments, and take-home assignments:\nI will be making this out of points as we get there\n\n\n\nHomework\n10%\n\n\nIn-class assignments\n20%\n\n\nTake-home assignments (4 assignments)\n70%"
+  },
+  {
+    "objectID": "syllabus.html#homework",
+    "href": "syllabus.html#homework",
+    "title": "Syllabus",
+    "section": "",
+    "text": "you are required to read the class readings (see ‘course schedule’) ahead of each class. Homework questions based on the readings will also need to be completed ahead of many classes. Homework questions will be assigned one class meeting before they are due and will need to be submitted before the start of class. We will spend the portions class taking up and discussing homework questions. I will cold-call students to present and explain their answers to the rest of the class. Homework assignments will receive one of four possible grades: 100% (A) for work that meets or exceeds expectations, 85% (B) for work that meets most expectations, 65% (D) for work that misses most expectations or 0% (F) for work deemed unacceptable."
+  },
+  {
+    "objectID": "syllabus.html#in-class-assignments",
+    "href": "syllabus.html#in-class-assignments",
+    "title": "Syllabus",
+    "section": "",
+    "text": "most computer lab exercises will be accompanied by in-class questions and disucssion. You will submit answers to these questions and your functional R code for the exercise by the end of the day of each exercise. In-class assignments will be submitted as QUARTO files. In-class assignments will be graded on the same scale as homework.\nTake-home assignments: four assignments will be completed outside of class. Each assignment will involve the independent analysis, presentation and interpretation of a dataset. The written report will include 3 sections: abstract, statistical materials and methods and results (statistical results and figures/ tables), prepared to “publication quality” standards. Assignments will be graded out of 100% and assessed on metrics including statistical literacy (performing analyses correctly), graphical presentation of data, adherence to correct statistical reporting norms, grammar and the quality/functionality of the accompanying R code. The assignments will comprise 70% of your final grade; A1 will be worth 10% of the final grade, A2 15%, A3 20%, and A4 25%."
+  },
+  {
+    "objectID": "syllabus.html#final-letter-grades",
+    "href": "syllabus.html#final-letter-grades",
+    "title": "Syllabus",
+    "section": "",
+    "text": "will be assigned on a straight 10% scale, with 90-100% receiving some form of A, 80-89% some form of B, etc. + and – grades will fall on the upper (&gt;X7) and lower (&lt;X4) end of the ranges, respectively. Percentage grades below 60% are equivalent to an ‘F’ letter grade."
+  },
+  {
+    "objectID": "syllabus.html#latemissed-assignment-policy",
+    "href": "syllabus.html#latemissed-assignment-policy",
+    "title": "Syllabus",
+    "section": "",
+    "text": "10% of total possible grade will be deducted per day late in absence of valid excuse. A grade of 0 will be given for assignments that are more than 3 days late."
+  },
+  {
+    "objectID": "syllabus.html#valid-excuses",
+    "href": "syllabus.html#valid-excuses",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Valid excuses for missed class or late work consist of subpoenas, jury duty, military duty, religious observances, illness, bereavement for immediate family and NCAA varsity intercollegiate athletics. Conflicts with work, vacations, weddings, travel, or some other private situation that was foreseen will not be accommodated.  For further information on excused absences see https://evcaa.d.umn.edu/excused-absences"
+  },
+  {
+    "objectID": "syllabus.html#academic-integrity",
+    "href": "syllabus.html#academic-integrity",
+    "title": "Syllabus",
+    "section": "",
+    "text": "I take plagiarism and academic dishonesty very seriously and will invoke the full weight of UMD-approved sanctions at the first instance of plagiarism. I am happy to answer questions on what is considered a violation of academic integrity in this class. Please also refer to UMD’s academic integrity policy at: https://evcaa.d.umn.edu/student-academic-integrity"
+  },
+  {
+    "objectID": "syllabus.html#student-conduct-code",
+    "href": "syllabus.html#student-conduct-code",
+    "title": "Syllabus",
+    "section": "",
+    "text": "I will enforce, and expect you to follow the University’s Student Code of Conduct. Appropriate classroom conduct promotes an environment of academic achievement and integrity. Disruptive classroom behaviour that substantially or repeatedly interrupts either the instructor’s ability to teach, or student learning, is prohibited. Disruptive behaviour includes inappropriate use of technology in the classroom. Examples include ringing cell phones, text-messaging, watching videos of funny cats (and other videos), playing computer games, doing email, or surfing the Internet on your computer instead of note-taking or other instructor-sanctioned activities. See more here: https://regents.umn.edu/sites/regents.umn.edu/files/2022-07/policy_student_conduct_code.pdf"
+  },
+  {
+    "objectID": "syllabus.html#access-for-students-with-disabilities",
+    "href": "syllabus.html#access-for-students-with-disabilities",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Individuals who have any disability, either permanent or temporary, which might affect their ability to perform in this course are encouraged to inform the instructor at the start of the quarter. Methods, materials or testing may be modified to provide for equitable participation."
+  },
+  {
+    "objectID": "syllabus.html#promotion-of-bias-free-instruction",
+    "href": "syllabus.html#promotion-of-bias-free-instruction",
+    "title": "Syllabus",
+    "section": "",
+    "text": "The University of Minnesota is committed to the policy that all of its students shall have equal educational opportunities. The University expressly forbids discrimination on the basis of race, color, gender, sexual orientation, disability, veteran’s status, ethnicity, religion, creed, national origin or marital status. If you believe that your Ecology instructor has not followed this policy, you are invited to bring this to the attention of the Biology Department Head (207 Swenson Science Building; 218-726-8123). Your conference will be kept confidential.\nYou may review other relevant UMD policy statements at: https://evcaa.d.umn.edu/recommended-syllabi-policy-statements"
   },
   {
     "objectID": "lectures/lecture_01/01_1_lecture_powerpoint_html.html",
