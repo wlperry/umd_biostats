@@ -7,9 +7,11 @@ execute:
   echo: true
 format:
   html:
+    toc: false
     output-file: "02_01_lecture_powerpoint_html.html"
     embed-resources: true
     self-contained: true
+    max-width: 80ch  # Limits line length to approximately 80 characters
     css: ../../css/lecture.css
   revealjs:
     output-file: "02_01_lecture_powerpoint_slides.html"
@@ -25,196 +27,323 @@ editor: visual
 
 # **Lecture 2: Review**
 
-:::: columns
+::::: columns
 ::: {.column width="60%"}
 -   We covered inductive vs deductive reasoning
-
 -   How to begin to ask questions
-
 -   Accuracy and precision
-
 -   What are general types of data
-
 -   How to set up an R project in Rstudio
-
 -   How to install and load libraries
-
 -   How to read a file into R
-
 -   How to make a graph
 :::
-::::
 
 ::: {.column width="40%"}
 Our first graph
 
-![](images/graph_1.png)
-:::
-
-# **Lecture 1:** Who am I?
-
-:::: columns
-::: {.column width="60%"}
--   Bill Perry
--   Office is in XXXX
--   Phone is XXXX
--   Email is wlperry\@d.umn.edu
-:::
-::::
-
-::: {.column width="40%"}
-![](images/bill.JPG){width="476"}
-:::
-
-# Lecture 1: My goals
-
--   How do we make observations and hypotheses?
--   How do we design an experiment
--   How do we collect data?
--   How do we organize, clean, summarize, and view the data?
--   How do we use statistics to test our hypotheses
-    -   what tests to use
-    -   what are the assumptions
-    -   what are the interpretations
-
-# Lecture 1: My expectations
-
--   Communication
--   Practice
--   Failure
--   Learn to correct and troubleshoot
-
-# **Lecture 1: Science**
-
--   Way to acquire knowledge, organize it and apply it back to the real world
--   Make predictions and testing these predictions using a falsifiable approach - statistics
--   Explanations that cannot be falsified are not science
-
-# What is Statistics?
-
-:::: columns
-::: {.column width="60%"}
-Zar (1999) - “analysis and interpretation of data with view towards objective evaluation of conclusions based on the data”
-:::
-::::
-
-::: {.column width="40%"}
-![](images/stats_failure.jpg){width="389"}
-:::
-
-# **Lecture 1:** Inductive vs deductive reasoning
-
-::::: columns
-::: {.column width="60%"}
-### **Inductive Reasoning (Specific → General)**
-
-Inductive reasoning involves observing specific cases and using them to form a general conclusion.
-
-**Example:**
-
-1.  Measure **10 pine needles** from a tree - average length is **75 mm**.
-2.  Measure **10 more needles** from the same tree and gets similar results.
-3.  Measures needles from second tree - average length is **120 mm** .
-4.  You **generalize** pine needles from different trees **vary in length**, but each tree tends to have a characteristic range.
-
-**Conclusion (Induction):** *"Pine needle length varies by tree, but each tree seems to have a typical range of lengths.*
-
-**Potential Issue:** Conclusion is **not guaranteed** to be true - based on patterns observed in a sample, and there could be exceptions.
-:::
-
-::: {.column width="40%"}
-![](images/inductive_phase.png){width="350"}
+![](images/graph_1.png){width="500" height="367"}
 :::
 :::::
 
-# **Lecture 1:** Inductive vs deductive reasoning
+# **Lecture 2:** How to deal with data wrangling
 
 ::::: columns
 ::: {.column width="60%"}
-### **Deductive Reasoning (General → Specific)**
-
-Deductive reasoning starts with a general principle and applies it to a specific case.
-
-**Example:**
-
-1.  **General Principle:** *Pine needles from a species of pine tree have a predictable length range (e.g., 70–80 mm).*
-2.  **Specific Case:** Collect sample of pine needles and measure them.
-3.  **Prediction:** Since its the species the needle lengths **should** fall within 70–80 mm.
-4.  **Measurement:** Check the data and confirm needles fall within this expected range.
-
-**Conclusion (Deduction):** *"This tree belongs the species with a needle length range of 70–80 mm, we expect its needle lengths to fall in this range."*
-
-**Stronger than induction** because it's based on a general rule—but if the assumption (length range) is incorrect, conclusion could still be wrong.
+-   Data management overview
+-   How to make a tidy spreadsheet
+-   Metadata - why you really should use it
+-   Data repositories
+-   R in practice
 :::
 
 ::: {.column width="40%"}
-![](images/deductive_phase.png){fig-align="right" width="350"}
+New image here
 :::
 :::::
 
-# **Lecture 1:** Inductive vs deductive reasoning
+# Lecture 2: Data management overview
 
-::::: columns
-::: {.column .r-fit-text width="50%"}
-### **In reality we are doing both of these processes**
-:::
+-   Data: the raw material of science
+-   Wide variety of formats, sizes, complexity
+-   Data management and curation often underemphasized
+-   Good data management: owe it to our funders, colleagues, supervisors, and study systems
 
-::: {.column .r-fit-text width="50%"}
-![](images/deductive_phase.png){fig-align="right" width="300"}
-:::
-:::::
-
-# How do we test hypotheses
+# Lecture 2: Data gathering - managing
 
 ::::: columns
 ::: {.column width="60%"}
-### Statistics
+**Step 1**
 
--   Design good experiments
--   Design good tests
--   Summarize patterns/data
--   Use to make probabilistic determinations to see if differences are "real"
+1.  Decide on what type of data you are collecting
+2.  Decide on controlled vocabulary - odo_mgl, drp_ugl
+3.  Decide on what has to happen to the data flow
+4.  Organize your project -
+5.  Enter the data as soon as you can
+6.  in a spreadsheet as excel and csv
+7.  you really need to be sure it is tidy
+
+Tidy data by Whickham
+
+**Step 2:**
+
+1.  Make a MetaData sheet a. data about data b. descriptions, units, etc.
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1074923439.png){width="437"}
+![](images/clipboard-531200679.png)
+
+[Tidy data](https://r4ds.hadley.nz/data-tidy.html)
 :::
 :::::
 
-# Data Types
+# Lecture 2: Data gathering - managing
 
 ::::: columns
 ::: {.column width="60%"}
--   Continuous
-    -   numeric
--   discrete
-    -   integer or numerical
--   categorical
-    -   nominal – up, down, right, left...
-    -   ordinal – order - a, b, c, d or morning, afternoon, evening
+**Step 3**
+
+1.  Store your raw data and metadata
+2.  Electronic dataframes should be stored in ≥3 copies:
+    1.  Your computer (onsite)
+    2.  External storage (onsite)
+    3.  Offsite storage (e.g., cloud storage)
+3.  Have regular backup strategy
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3726748521.png){width="276"}
+![](images/clipboard-4272535574.png)
 :::
 :::::
 
-# Measurements
+# Lecture 2: Data gathering - managing
 
 ::::: columns
 ::: {.column width="60%"}
-Data is obtained through measurement
+**Step 4**
 
-The world is a messy place and how you measure matters
+1.  Graph your data and check outliers, errors, missing data
+2.  You can choose a NA or space... opinions differ
+    1.  you can set this when you import data
 
-Our measures depend on
-
--   accuracy - how close we are to the real value
-
--   precision - how close all our measurements are but may not be precise
+``` r
+# Specifying NA values explicitly
+data <- read_csv("your_file.csv", 
+    na = c("", "NA", "N/A", "missing", "null"))
+```
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-21056328.png)
+![](images/clipboard-247511122.png){width="594"}
 :::
 :::::
+
+# Lecture 2: Data gathering - managing
+
+::::: columns
+::: {.column width="60%"}
+**Step 5**
+
+Cleaning Data -
+
+1.  Correct erors, fill missing data with "NA", resolve outliers
+2.  save a clean data file as the master file - often good to make read only
+3.  Add information in a notes column or text file about what was done and why.
+:::
+
+::: {.column width="40%"}
+image
+:::
+:::::
+
+# Lecture 2: Data gathering - managing
+
+::::: columns
+::: {.column width="60%"}
+**Step 6**
+
+1.  Time to graph the data and explore, summarize, and transform data
+2.  If there are a lot of steps in cleaning and doing transfomations and calculations save them to new output file.
+:::
+
+::: {.column width="40%"}
+A good way to organize script files is number them in the order they get run.
+
+![](images/clipboard-2204984243.png)
+:::
+:::::
+
+# Lecture 2: Data gathering - managing
+
+::::: columns
+::: {.column width="60%"}
+The important considerations in data
+
+1.  enter field/ lab data into electronic format as soon as possible and back it up in at least one location (e.g., cloud storage)
+2.  do not modify raw data in any way following entry into electronic format
+3.  store all data in an open-access format (e.g., .csv)
+4.  thoroughly check and clean your raw data, saving it as a separate file (e.g., "output/cleaned_raw_data.csv")
+5.  accompany raw field/lab data with meta-data that is unambiguously linked to the raw data file
+6.  carry out all analyses, calculations and visualization on a separate file from the "raw“ or “clean” data: the "analysis" data
+7.  perform all data transformation, analysis and visualization by reproducible code and code shall be stored together with data
+8.  arrange all raw and analysis data in "instance-row, variable-column" or tidy format: one column per variable
+:::
+
+::: {.column width="40%"}
+![](images/clipboard-3725695037.png)
+
+**USE CONTROLLED VOCABULARY AND BE CONSISTENT** **THINK BEFORE DOING --\> WHAT HAPPENS DOWN THE ROAD**
+:::
+:::::
+
+# Lecture 2: Data gathering - managing
+
+::::: columns
+::: {.column width="60%"}
+Broman KW, & Woo KH. 2018. Data organization in spreadsheets. The American Statistician 72: 2-10 ([HERE](https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375989))
+
+-   Spreadsheets break data - use with extreme caution
+-   Spreadsheets: data entry and storage
+-   R: visualization and analysis
+-   **Goal: organize data so readable by humans and computers**
+:::
+
+::: {.column width="40%"}
+![](images/clipboard-2437737241.png){width="544"}
+:::
+:::::
+
+# Lecture 2: Data gathering - managing
+
+::::: columns
+::: {.column width="60%"}
+## **Be consistent!**
+
+-   Variable names
+    -   Codes for categorical variables
+    -   Variable names
+        -   use snake case and lower case - nitrate_n_mgl
+        -   always use the same name
+    -   Codes for missing values - NA or 9999 or a space - I know but I do it
+    -   Date formats -
+        -   YYYY-MM-DD HH:MM:SS
+        -   Time begins in 1970-01-01
+    -   names of objects
+        -   dataframes after import data_df
+        -   plots - len_wt_plot
+        -   models - anova_wt_model
+    -   File names
+        -   use separators - 2025_02_01_lake_x_inflow.csv
+-   Note format Requires considerable foresight and organization
+:::
+
+::: {.column width="40%"}
+example of fish data
+
+![](images/clipboard-2905679869.png)
+:::
+:::::
+
+# Lecture 2: Data gathering - managing
+
+::::: columns
+::: {.column width="60%"}
+## Variable and file names can be a problem
+
+-   Avoid spaces but use underscore `_`
+-   Avoid special characters \@#\$%\^\@\#
+-   Be sure to also use a variety of separators so you can separate later
+    -   or use the same number of characters across a variable name
+    -   2025_03_04_file-site
+:::
+
+::: {.column width="40%"}
+![](images/clipboard-4029723110.png)
+
+image
+:::
+:::::
+
+# Lecture 2: Data gathering - managing
+
+::::: columns
+::: {.column width="60%"}
+## **Excel will drive you mad**
+
+-   it will mess up your dates
+-   store data in separate columns - year - month - day
+-   or use a string 20250401
+-   always use unambiguous format of larges to smallest - why?
+    -   is `01 04 2025` the same as `04 01 2025`
+
+    -   what are the dates in english?
+
+    -   or European
+:::
+
+::: {.column width="40%"}
+![](images/clipboard-1547652293.png){width="351"}
+
+image
+:::
+:::::
+
+# Lecture 2: Data gathering - managing
+
+::::: columns
+::: {.column width="60%"}
+## **Never do Calculations in Excel**
+
+-   always do calculations in R - reproducible
+-   never merge cells
+-   can use highlighting but it will disappear
+-   a nice rectangular dataframe will make you happy
+    -   tears will flow if not
+:::
+
+::: {.column width="40%"}
+![](images/clipboard-2160092094.png)
+
+image
+:::
+:::::
+
+# Lecture 2: Data gathering - managing
+
+::::: columns
+::: {.column width="60%"}
+## Meta Data
+
+-   This data will love beyond you
+-   Someone will need to interpret it - what do they need
+    -   What is data about
+
+    -   Who collected it
+
+    -   When
+
+    -   Where
+
+    -   Funding agency
+
+    -   Methods used to collect
+
+    -   Variable names
+
+        -   description
+
+        -   units
+
+        -   abbreviations
+
+    -   CALCULATIONS AND WHY?
+:::
+
+::: {.column width="40%"}
+![](images/clipboard-3544614084.png){width="361"}
+
+We need to know what happened and why?
+:::
+:::::
+
+# 

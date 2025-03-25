@@ -151,11 +151,11 @@ format:
 1.  Download the compressed file pine_needles.zip
 2.  Unzip this file in both windows and mac as it wont work
 3.  Open the folder and look at what is in there
-4.  Copy the files you have entered data into the data subdirectory with the same names as you see...
+4.  Copy the files you have entered data into the data sub-directory with the same names as you see...
 5.  Then open RStudio
 6.  The window will look below -- what is all this stuff...
 
-# RStutio
+# RStudio
 
 ![](images/rstudio.png){width="783"}
 
@@ -172,7 +172,7 @@ More later - In the files you will see folders and you can click on them to see 
 
 **you can also click the dots next to the green arrow to go back up a level** ![](images/uparrow.png){width="35" height="18"}
 
-# Now let open the project that I created
+# Now lets open the project that I created
 
 1.  click `file` - `open project` and select the `pine_needles.Rproj` file
 2.  your screen will now change as RStudio knows where home is
@@ -202,16 +202,16 @@ We need to cover a bit of syntax in R
     -   a 7 will appear
 -   now type y \<- 2 and enter
 -   now type x \* y and `command` + `return`
-    -   you should see that it pmultiplied the x by the y variable and you get 14
+    -   you should see that it multiplied the x by the y variable and you get 14
 
 # How does RStudio work with R
 
 -   we could do all of our work with R or base R
--   people have written a lot of helper functions called libries stored in packages
+-   people have written a lot of helper functions called libraries stored in packages
 -   we use these a lot of these
--   you install teh package one time - a lot like buying a light bulb and screwing it in... you do that once
+-   you install the package one time - a lot like buying a light bulb and screwing it in... you do that once
 -   then you can load the libraries stored in the package each time you use a library
--   lets see how it works in a scirpt I have made
+-   lets see how it works in a script I have made
 
 # Here is the script I provided to work on:
 

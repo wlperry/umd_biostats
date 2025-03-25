@@ -39,50 +39,6 @@
 }
 
 /* ================================
-   Two-column layout styling - ADDED
-   ================================ */
-.columns {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    width: 100% !important;
-    margin-bottom: 1em !important;
-}
-
-.column {
-    display: block !important;
-    flex: 0 0 auto !important;  /* Don't grow or shrink, respect width */
-    padding: 0 10px !important;
-    box-sizing: border-box !important;
-}
-
-/* Make sure images in columns respect container width */
-.column img {
-    max-width: 100% !important;
-    height: auto !important;
-    display: block !important;
-    margin: 0 auto !important;
-}
-
-/* Add some responsive handling for small screens */
-@media screen and (max-width: 767px) {
-    .columns {
-        flex-direction: column !important;
-    }
-    
-    .column {
-        width: 100% !important;
-        margin-bottom: 15px !important;
-    }
-}
-
-/* Override RevealJS tendency to center content */
-.reveal .slides section .columns {
-    display: flex !important;
-    justify-content: flex-start !important;
-    align-items: flex-start !important;
-}
-
-/* ================================
    Heading Styles (h1 - h5)
    ================================ */
 
@@ -384,10 +340,4 @@ p {margin: 0; /* Removes spacing before and after paragraphs */
 /* Override any RevealJS unwanted padding/margin */
 .reveal .slides {
     padding: 0 !important;
-}
-
-/* Limit text width for better readability */
-.reveal p, .reveal ul, .reveal ol, .reveal li {
-    max-width: 80ch !important;
-    word-wrap: break-word !important;
 }
