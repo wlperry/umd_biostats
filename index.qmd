@@ -13,7 +13,13 @@ about:
       href: mailto:wlperry@d.umn.edu
 ---
 
-When you go to these pages there are other formats such as word and powerpoint you can dowload
+# Biostatistics course
+
+Bill Perry
+
+This course will serve as an introduction to reproducible data analysis using R. Specifically the goal is to introduce students to all facets of managing a research project and anlyzing and presenting the data in a manuscript.
+
+When you go to these pages there are other formats such as word and powerpoint you can download
 
 +-------------------+---------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------------+----------------------------------------------------------------+
 | Lecture           | Readings                                                                  | PowerPoint lecture                                                       | In Class Activity                                                              | Homework                                                       |

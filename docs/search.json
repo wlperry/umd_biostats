@@ -235,14 +235,56 @@
     "href": "index.html",
     "title": "umd_biostats",
     "section": "",
-    "text": "When you go to these pages there are other formats such as word and powerpoint you can dowload\n\n\n\nLecture\nReadings\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nR4DataScience Tidy Data\nLecture 2 PowerPoint\nLecture 2 Activity\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Back to top"
+    "text": "Biostatistics course\nBill Perry\nThis course will serve as an introduction to reproducible data analysis using R. Specifically the goal is to introduce students to all facets of managing a research project and anlyzing and presenting the data in a manuscript.\nWhen you go to these pages there are other formats such as word and powerpoint you can download\n\n\n\nLecture\nReadings\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nR4DataScience Tidy Data\nLecture 2 PowerPoint\nLecture 2 Activity\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "overview.html",
+    "href": "overview.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Biostatistics course\nBill Perry\nThis course will serve as an introduction to reproducible data analysis using R. Specifically the goal is to introduce students to all facets of managing a research project with an emphasis on:\n\nDeveloping questions form observations, hypotheses, and predictions for testing statistically\nDesigning data workflows with data entry, curation, QA/QC, and cleaning\nUsing a controlled vocabulary and organized project structure and documenting the metadata for the project\nImporting data into R and doing calculations and transformations\nVisualizing data using ggplot\nUnderstanding how to decide on statistical tests that are appropriate - T-Tests - parametric and nonparametric\n\n-   Correlations\n-   Linear models\n    -   linear regression\n    -   multiple linear regression\n    -   ANOVA\n    -   ANCOVA\n    -   GLM and logistic regression\n-   Analyzing Frequencies\n-   Multivariate Statistics\n    -   Principal component analysis\n    -   NMDS\n    -   Cluster analysis\nIn the main webpage I have provided links to all the information you will need:\n\nlinks to readings that should be read prior to class\npowerpoint lectures that should be reviewed prior to class\nin-class activities that will actively cover the materials in the powerpoints\nweekly homework to do the in class activities on your own using different data\nassignments that form the crux of the grade and there 4 of them\n\n\n\n\n Back to top"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "About the Instructor",
     "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n Back to top"
+    "text": "Department of Biology\nUniversity of Minnesota Duluth\nI am a professor specializing in aquatic biology, biogeochemistry, invasion biology, and biostatistics and data analysis. My research focuses on statistical methods for aquatic ecology but am open to any data and science. I am particularily adept at working wtih high frequency data from field monitors."
+  },
+  {
+    "objectID": "about.html#bill-perry",
+    "href": "about.html#bill-perry",
+    "title": "About the Instructor",
+    "section": "",
+    "text": "Department of Biology\nUniversity of Minnesota Duluth\nI am a professor specializing in aquatic biology, biogeochemistry, invasion biology, and biostatistics and data analysis. My research focuses on statistical methods for aquatic ecology but am open to any data and science. I am particularily adept at working wtih high frequency data from field monitors."
+  },
+  {
+    "objectID": "about.html#research-interests",
+    "href": "about.html#research-interests",
+    "title": "About the Instructor",
+    "section": "Research Interests",
+    "text": "Research Interests\n\nAquatic Ecology - lakes and streams\nInvasion Biology\nEnvironmental Monitoring\nStatistical methods for ecological data\nData visualization"
+  },
+  {
+    "objectID": "about.html#teaching-philosophy",
+    "href": "about.html#teaching-philosophy",
+    "title": "About the Instructor",
+    "section": "Teaching Philosophy",
+    "text": "Teaching Philosophy\nMy goal is to make statistics accessible and relevant by doing code and data collection in the classroom. The hands-on approach to learning, using real-world data and practical examples to illustrate statistical concepts is essential and actively doing the work. I use of modern tools like R and the tidyverse to prepare students for careers in biological research."
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "About the Instructor",
+    "section": "Education",
+    "text": "Education\n\nPhD in Statistics, University of Notre Dame\nMS in Biology, University of Cincinnati\nBS in Biology, University of Cincinnati"
+  },
+  {
+    "objectID": "about.html#contact-information",
+    "href": "about.html#contact-information",
+    "title": "About the Instructor",
+    "section": "Contact Information",
+    "text": "Contact Information\nFeel free to contact me with any questions about the course or research opportunities:\n\nEmail: wlperry@d.umn.edu\nOffice: TBD\nOffice Hours: by appointment"
   },
   {
     "objectID": "lectures/lecture_01/01_1_lecture_powerpoint_html.html",
