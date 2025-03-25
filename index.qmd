@@ -1,8 +1,10 @@
 ---
-title: "umd_biostats"
+title: "UMD Biostatistics"
+subtitle: "Data Analysis and Statistics for Biological Sciences"
+description: "Welcome to the course website for UMD Biostatistics. Here you'll find the syllabus, schedule, lecture materials, activities, and assignments."
 format: 
   html:
-    toc: true
+    toc: false
     toc-depth: 3
 about:
   template: marquee
@@ -11,15 +13,20 @@ about:
       href: https://github.com/wlperry
     - icon: envelope-heart-fill
       href: mailto:wlperry@d.umn.edu
+page-layout: full
 ---
 
-# Biostatistics course
+# Welcome to Biostatistics at UMD!
 
-Bill Perry
+This course teaches the fundamentals of statistics and data analysis for biological sciences. Using R and the tidyverse, you'll learn how to analyze and visualize data effectively to answer scientific questions.
 
-This course will serve as an introduction to reproducible data analysis using R. Specifically the goal is to introduce students to all facets of managing a research project and anlyzing and presenting the data in a manuscript.
+## Course Materials
 
-When you go to these pages there are other formats such as word and powerpoint you can download
+Materials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website.
+
+## Course Schedule
+
+Below is a summary of the course schedule.
 
 +-------------------+---------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------------+----------------------------------------------------------------+
 | Lecture           | Readings                                                                  | PowerPoint lecture                                                       | In Class Activity                                                              | Homework                                                       |
@@ -42,3 +49,12 @@ When you go to these pages there are other formats such as word and powerpoint y
 +-------------------+---------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------------+----------------------------------------------------------------+
 |                   |                                                                           |                                                                          |                                                                                |                                                                |
 +-------------------+---------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------------+----------------------------------------------------------------+
+
+## Required Readings
+
+-   [R for Data Science](https://r4ds.hadley.nz/) by Hadley Wickham
+-   Whitlock and Schluter Biostatistics
+
+## Questions or Issues?
+
+If you have questions about the course or the website, please contact me at [wlperry\@d.umn.edu](mailto:wlperry@d.umn.edu)

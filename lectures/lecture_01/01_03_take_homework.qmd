@@ -2,16 +2,10 @@
 title: "01_Homework"
 author: "Bill Perry"
 execute:
-  freeze: true
+  freeze: auto
   dir: project
-metadata:
-  quarto: 
-    format-links: false
-project:
-  execute-dir: project
 format:
   html:
-    freeze: false
     toc: false
     output-file: "01_03_homework_html.html"
     default: true

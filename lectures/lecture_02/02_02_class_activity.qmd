@@ -2,9 +2,10 @@
 title: "02_Class_Activity"
 author: "Bill Perry"
 execute:
-  freeze: false
+  freeze: auto
   cache: true
   echo: true
+  cache-dir: _cache
 format:
   html:
     freeze: false

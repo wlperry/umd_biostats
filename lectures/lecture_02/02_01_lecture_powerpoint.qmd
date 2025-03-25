@@ -2,9 +2,10 @@
 title: "Lecture 02"
 author: "Bill Perry"
 execute:
-  freeze: false
+  freeze: auto
   cache: true
   echo: true
+  cache-dir: _cache
 format:
   html:
     toc: false

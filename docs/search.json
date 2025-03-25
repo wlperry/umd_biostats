@@ -233,9 +233,37 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "umd_biostats",
+    "title": "UMD Biostatistics",
     "section": "",
-    "text": "Biostatistics course\nBill Perry\nThis course will serve as an introduction to reproducible data analysis using R. Specifically the goal is to introduce students to all facets of managing a research project and anlyzing and presenting the data in a manuscript.\nWhen you go to these pages there are other formats such as word and powerpoint you can download\n\n\n\nLecture\nReadings\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nR4DataScience Tidy Data\nLecture 2 PowerPoint\nLecture 2 Activity\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Back to top"
+    "text": "This course teaches the fundamentals of statistics and data analysis for biological sciences. Using R and the tidyverse, you’ll learn how to analyze and visualize data effectively to answer scientific questions.\n\n\nMaterials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website.\n\n\n\nBelow is a summary of the course schedule.\n\n\n\nLecture\nReadings\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nR4DataScience Tidy Data\nLecture 2 PowerPoint\nLecture 2 Activity\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nR for Data Science by Hadley Wickham\nWhitlock and Schluter Biostatistics\n\n\n\n\nIf you have questions about the course or the website, please contact me at wlperry@d.umn.edu"
+  },
+  {
+    "objectID": "index.html#course-materials",
+    "href": "index.html#course-materials",
+    "title": "UMD Biostatistics",
+    "section": "",
+    "text": "Materials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website."
+  },
+  {
+    "objectID": "index.html#course-schedule",
+    "href": "index.html#course-schedule",
+    "title": "UMD Biostatistics",
+    "section": "",
+    "text": "Below is a summary of the course schedule.\n\n\n\nLecture\nReadings\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nR4DataScience Tidy Data\nLecture 2 PowerPoint\nLecture 2 Activity"
+  },
+  {
+    "objectID": "index.html#required-readings",
+    "href": "index.html#required-readings",
+    "title": "UMD Biostatistics",
+    "section": "",
+    "text": "R for Data Science by Hadley Wickham\nWhitlock and Schluter Biostatistics"
+  },
+  {
+    "objectID": "index.html#questions-or-issues",
+    "href": "index.html#questions-or-issues",
+    "title": "UMD Biostatistics",
+    "section": "",
+    "text": "If you have questions about the course or the website, please contact me at wlperry@d.umn.edu"
   },
   {
     "objectID": "overview.html",
@@ -289,7 +317,7 @@
   {
     "objectID": "lectures/lecture_01/01_1_lecture_powerpoint_html.html",
     "href": "lectures/lecture_01/01_1_lecture_powerpoint_html.html",
-    "title": "Lecture 1: Syllabus",
+    "title": "01_Lecture",
     "section": "",
     "text": "Lecture 1: Syllabus\n\nPlease look over the syllabus as it has all the details of the class and how it will run.\n\n\n\n\nLecture 1: Who am I?\n\n\n\nBill Perry\nOffice is in XXXX\nPhone is XXXX\nEmail is wlperry@d.umn.edu\n\n\n\n\n\n\n\n\nLecture 1: My goals\n\nHow do we make observations and hypotheses?\nHow do we design an experiment\nHow do we collect data?\nHow do we organize, clean, summarize, and view the data?\nHow do we use statistics to test our hypotheses\n\nwhat tests to use\nwhat are the assumptions\nwhat are the interpretations\n\n\n\n\nLecture 1: My expectations\n\nCommunication\nPractice\nFailure\nLearn to correct and troubleshoot\n\n\n\nLecture 1: Science\n\nWay to acquire knowledge, organize it and apply it back to the real world\nMake predictions and testing these predictions using a falsifiable approach - statistics\nExplanations that cannot be falsified are not science\n\n\n\nWhat is Statistics?\n\n\nZar (1999) - “analysis and interpretation of data with view towards objective evaluation of conclusions based on the data”\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nInductive Reasoning (Specific → General)\nInductive reasoning involves observing specific cases and using them to form a general conclusion.\nExample:\n\nMeasure 10 pine needles from a tree - average length is 75 mm.\nMeasure 10 more needles from the same tree and gets similar results.\nMeasures needles from second tree - average length is 120 mm .\nYou generalize pine needles from different trees vary in length, but each tree tends to have a characteristic range.\n\nConclusion (Induction): “Pine needle length varies by tree, but each tree seems to have a typical range of lengths.\nPotential Issue: Conclusion is not guaranteed to be true - based on patterns observed in a sample, and there could be exceptions.\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nDeductive Reasoning (General → Specific)\nDeductive reasoning starts with a general principle and applies it to a specific case.\nExample:\n\nGeneral Principle: Pine needles from a species of pine tree have a predictable length range (e.g., 70–80 mm).\nSpecific Case: Collect sample of pine needles and measure them.\nPrediction: Since its the species the needle lengths should fall within 70–80 mm.\nMeasurement: Check the data and confirm needles fall within this expected range.\n\nConclusion (Deduction): “This tree belongs the species with a needle length range of 70–80 mm, we expect its needle lengths to fall in this range.”\nStronger than induction because it’s based on a general rule—but if the assumption (length range) is incorrect, conclusion could still be wrong.\n\n\n\n\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nIn reality we are doing both of these processes\n\n\n\n\n\n\n\n\n\n\n\nHow do we test hypotheses\n\n\n\nStatistics\n\nDesign good experiments\nDesign good tests\nSummarize patterns/data\nUse to make probabilistic determinations to see if differences are “real”\n\n\n\n\n\n\n\n\nData Types\n\n\n\nContinuous\n\nnumeric\n\ndiscrete\n\ninteger or numerical\n\ncategorical\n\nnominal – up, down, right, left…\nordinal – order - a, b, c, d or morning, afternoon, evening\n\n\n\n\n\n\n\n\nMeasurements\n\n\nData is obtained through measurement\nThe world is a messy place and how you measure matters\nOur measures depend on\n\naccuracy - how close we are to the real value\nprecision - how close all our measurements are but may not be precise\n\n\n\n\n\n\n\n\n\n Back to top"
   },

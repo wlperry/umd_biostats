@@ -1,7 +1,10 @@
 ---
+title: "01_Lecture"
+author: "Bill Perry"
 execute:
-  freeze: false
-  dir: project
+  freeze: auto
+  cache: true
+  cache-comments: false
 format:
   html:
     toc: false
