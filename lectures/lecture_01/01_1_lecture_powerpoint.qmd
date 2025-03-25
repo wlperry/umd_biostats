@@ -1,6 +1,4 @@
 ---
-title: "Lecture 01"
-author: "Bill Perry"
 execute:
   freeze: false
   dir: project
