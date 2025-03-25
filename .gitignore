@@ -4,3 +4,22 @@
 .Rproj.user
 
 /.quarto/
+
+# ignore these directories
+/css/
+/data/
+/documents/
+/figures/
+/lectures/
+/ms_templates/
+
+
+
+
+# But include these specific directories
+!/docs/
+!/docs/*.*
+!/docs/lecture_01/
+!/docs/lecture_02/
+!/docs/lecture_*/
+!/docs/lecture_*/*.html
