@@ -7,6 +7,7 @@ execute:
   echo: true
 format:
   html:
+    freeze: false
     toc: false
     output-file: "02_02_class_activity.html"
     default: true

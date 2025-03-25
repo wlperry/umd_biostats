@@ -2,7 +2,7 @@
 title: "01_Class_Activity"
 author: "Bill Perry"
 execute:
-  freeze: true
+  freeze: false
   cache: true
   echo: true
 format:

@@ -200,14 +200,14 @@
     "href": "lectures/lecture_01/01_2_class_activity_slides.html#histogram",
     "title": "01_Class_Activity",
     "section": "Histogram —–",
-    "text": "Histogram —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm)) + \n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\nNote we really want to see the histograms colored by wind direction\nWe can map the wind aesthetic to a fill in the histogram"
+    "text": "Histogram —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm)) + \n  geom_histogram()\n\n\nNote we really want to see the histograms colored by wind direction\nWe can map the wind aesthetic to a fill in the histogram"
   },
   {
     "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#histogram-colors",
     "href": "lectures/lecture_01/01_2_class_activity_slides.html#histogram-colors",
     "title": "01_Class_Activity",
     "section": "Histogram Colors —–",
-    "text": "Histogram Colors —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) + geom_histogram( position = position_dodge2(width = 0.5))\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`."
+    "text": "Histogram Colors —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) + geom_histogram( position = position_dodge2(width = 0.5))"
   },
   {
     "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#histogram-bins",
