@@ -49,7 +49,7 @@ This is an assignment for you to practice the code and all the work we do in cla
 
     -   data, scripts, output, figures, documents
 
--   Create a quarto markdown file and open in
+-   Create a quarto markdown file and open it
 
 -   Put this in the top in place of what is there and add your info
 
@@ -66,10 +66,12 @@ This is an assignment for you to practice the code and all the work we do in cla
       execute-dir: project # where it will look for files
     execute:
       keep-md: true # retains the images when you start again
+      cache: true
+      echo: true
     --- 
     ```
 
-<!-- -->
+------------------------------------------------------------------------
 
 -   Load the libraries
 
@@ -90,3 +92,11 @@ library(tidyverse) # provides utilities seen in console
     -   n, mean, standard deviation, standard error
 -   Visualize the data as mean plus or minus error in ggplot
     -   be sure to have proper axis labels and units where necessary
+
+## What to turn in - 
+
+1.  a zipped or compressed folder of the entire project folder
+
+2.  a self-contained html file showing the output
+
+3.  annotations in the quarto file that shows or tells what is being done like in the class activities

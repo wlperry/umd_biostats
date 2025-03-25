@@ -109,7 +109,21 @@
     "href": "lectures/lecture_01/01_03_homework_html.html",
     "title": "01_Homework",
     "section": "",
-    "text": "Homework for Week 1:\nThis is an assignment for you to practice the code and all the work we do in class on a different dataframe. We will assign one of these each week for you to do that encompasses all fo the work we do. We give it out on Monday so you can start early and see how this work.\n\n\n\n\n\n\nObjectives and goals\n\nMake a new Project in RStudio.\nCreate directories\n\ndata, scripts, output, figures, documents\n\nCreate a quarto markdown file and open in\nPut this in the top in place of what is there and add your info\n---\ntitle: \"Grayling in Lake I-8\" # Title of the file\nauthor: \"YOUR NAME\" # who you are\nformat: # this is the formats that it will render to\n  html:\n    default: true\n    embed-resources: true # makes everything go into the html file\neditor: visual # type of editing\nproject:\n  execute-dir: project # where it will look for files\nexecute:\n  keep-md: true # retains the images when you start again\n--- \n\n\n\nLoad the libraries\n\n# Load the libraries ----\nlibrary(readxl) # allows to read in excel files\nlibrary(tidyverse) # provides utilities seen in console\n\nRead in the file grayling_lakes_I3_I8.csv as a dataframe\nRead in the file grayling_lakes_I3_I8.xlsx as a separate dataframe\nAnnotate your code in the code block as what what is going on and why\nAnnotate the HTML code as you see fit.\nVisualize the data as the lengths of fish in lakes I_3 and I_8 as points\n\nremember position = position_dodge2(width=0.2)\n\nVisualize the data as box and whisker plots\nProvide summary statistics grouped by lake\n\nn, mean, standard deviation, standard error\n\nVisualize the data as mean plus or minus error in ggplot\n\nbe sure to have proper axis labels and units where necessary\n\n\n\n\n\n\n Back to top"
+    "text": "This is an assignment for you to practice the code and all the work we do in class on a different dataframe. We will assign one of these each week for you to do that encompasses all fo the work we do. We give it out on Monday so you can start early and see how this work."
+  },
+  {
+    "objectID": "lectures/lecture_01/01_03_homework_html.html#what-to-turn-in--",
+    "href": "lectures/lecture_01/01_03_homework_html.html#what-to-turn-in--",
+    "title": "01_Homework",
+    "section": "What to turn in -",
+    "text": "What to turn in -\n\na zipped or compressed folder of the entire project folder\na self-contained html file showing the output\nannotations in the quarto file that shows or tells what is being done like in the class activities"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_03_homework_reveal.html#what-to-turn-in--",
+    "href": "lectures/lecture_01/01_03_homework_reveal.html#what-to-turn-in--",
+    "title": "01_Homework",
+    "section": "What to turn in -",
+    "text": "What to turn in -\n\na zipped or compressed folder of the entire project folder\na self-contained html file showing the output\nannotations in the quarto file that shows or tells what is being done like in the class activities"
   },
   {
     "objectID": "lectures/lecture_01/01_2_class_activity_html.html",

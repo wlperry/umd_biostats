@@ -5,7 +5,7 @@ execute:
   freeze: auto
   cache: true
   echo: true
-  cache-dir: _cache
+  keep-md: true # retains the images when you start again
 format:
   html:
     toc: false

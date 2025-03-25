@@ -5,7 +5,7 @@ execute:
   freeze: auto
   cache: true
   echo: true
-  cache-dir: _cache
+  keep-md: true # retains the images when you start again
 format:
   html:
     freeze: false
@@ -27,13 +27,13 @@ format:
     embed-resources: true
 ---
 
-# In class activity 1:
+# In class activity 2:
 
 ![](images/pine_needles.jpg){width="250"}
 
 # What did we do last time?
 
--   How to set up a project
+-   How to start RStudio and set up a project
 
 -   How to create a quarto markdown file
 
@@ -45,7 +45,7 @@ format:
 
 -   How to read in a file - csv and excel - `name_df <- read_csv("data/file.csv")`
 
--   How to graph data -
+-   How to graph data - can you read this out loud in English words
 
     ``` r
     ggplot(name_df, aes(x_variable, y_variable, color = categorical_variable)) +
@@ -55,7 +55,9 @@ format:
       geom_line()
     ```
 
-# Objectives and goals
+-   What questions do you have and what is unclear - what did not work so far when you started the homework?
+
+# Objectives and goals for today
 
 ::::: columns
 ::: {.column width="60%"}
@@ -81,7 +83,7 @@ format:
 :::
 :::::
 
-# Before we start
+# Before we start - Planning the workflow
 
 1.  What data do we have
     1.  what is the controlled vocabulary?
