@@ -1,346 +1,276 @@
 [
   {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#in-rstudio",
-    "href": "lectures/lecture_02/02_02_class_activity.html#in-rstudio",
-    "title": "02_Class_Activity",
-    "section": "In RStudio:",
-    "text": "In RStudio:\n\nclick file - open project and select the 2025_UMD_BioStats_Student_Code.Rproj file or double click on it in the finder or data explorer.\nyour screen will now change as RStudio knows where home is\n\n\n\nNote that in the upper right you will see 2025_UMD_BioStats_Student_Code so you know you are in the right spot\nNow click File - New File - Quarto File\n\n\n\nCreate a file that starts with 02_ and then something that will help you know what is going on like 02_class_activity_in_class.qmd\nNow this file thinks this is home.\nSo I usually copy stuff for the header from another file as its just too hard to remember all this…\n\n---\ntitle: \"Title of your file\" # Title of the file\nauthor: \"Your Name\" # who you are\nformat: # this is the formats that it will render to\n  html:\n    toc: false # not table of contents\n    default: true\n    embed-resources: true # makes everything go into the html file\n    self-contained: true # also makes self contained\neditor: visual # type of editing\nproject:\n  execute-dir: project # where it will look for files\nexecute:\n  keep-md: true # retains the images when you start again\n  cache: true # also heps reatain images and code\n---"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#the-whole-dataframe---wont-show-all",
-    "href": "lectures/lecture_02/02_02_class_activity.html#the-whole-dataframe---wont-show-all",
-    "title": "02_Class_Activity",
-    "section": "The whole dataframe - wont show all",
-    "text": "The whole dataframe - wont show all\n\np_df\n\n# A tibble: 48 × 6\n   date    group       n_s   wind  tree_no len_mm\n   &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;\n 1 3/20/25 cephalopods n     lee         1     20\n 2 3/20/25 cephalopods n     lee         1     21\n 3 3/20/25 cephalopods n     lee         1     23\n 4 3/20/25 cephalopods n     lee         1     25\n 5 3/20/25 cephalopods n     lee         1     21\n 6 3/20/25 cephalopods n     lee         1     16\n 7 3/20/25 cephalopods s     wind        1     15\n 8 3/20/25 cephalopods s     wind        1     16\n 9 3/20/25 cephalopods s     wind        1     14\n10 3/20/25 cephalopods s     wind        1     17\n# ℹ 38 more rows"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#the-top-of-the-datafame-to-see-what-it-looks-like",
-    "href": "lectures/lecture_02/02_02_class_activity.html#the-top-of-the-datafame-to-see-what-it-looks-like",
-    "title": "02_Class_Activity",
-    "section": "The top of the datafame to see what it looks like",
-    "text": "The top of the datafame to see what it looks like\n\nhead(p_df)\n\n# A tibble: 6 × 6\n  date    group       n_s   wind  tree_no len_mm\n  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;\n1 3/20/25 cephalopods n     lee         1     20\n2 3/20/25 cephalopods n     lee         1     21\n3 3/20/25 cephalopods n     lee         1     23\n4 3/20/25 cephalopods n     lee         1     25\n5 3/20/25 cephalopods n     lee         1     21\n6 3/20/25 cephalopods n     lee         1     16\n\n# tail(p_df) # the bottom"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#how-to-look-at-one-variable",
-    "href": "lectures/lecture_02/02_02_class_activity.html#how-to-look-at-one-variable",
-    "title": "02_Class_Activity",
-    "section": "How to look at one variable",
-    "text": "How to look at one variable\n\np_df$group # name of dataframe $ varaible\n\n [1] \"cephalopods\" \"cephalopods\" \"cephalopods\" \"cephalopods\" \"cephalopods\"\n [6] \"cephalopods\" \"cephalopods\" \"cephalopods\" \"cephalopods\" \"cephalopods\"\n[11] \"cephalopods\" \"cephalopods\" \"salmon\"      \"salmon\"      \"salmon\"     \n[16] \"salmon\"      \"salmon\"      \"salmon\"      \"salmon\"      \"salmon\"     \n[21] \"salmon\"      \"salmon\"      \"salmon\"      \"salmon\"      \"crayfish\"   \n[26] \"crayfish\"    \"crayfish\"    \"crayfish\"    \"crayfish\"    \"crayfish\"   \n[31] \"crayfish\"    \"crayfish\"    \"crayfish\"    \"crayfish\"    \"crayfish\"   \n[36] \"crayfish\"    \"snail\"       \"snail\"       \"snail\"       \"snail\"      \n[41] \"snail\"       \"snail\"       \"snail\"       \"snail\"       \"snail\"      \n[46] \"snail\"       \"snail\"       \"snail\""
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#xy-plot-with-dodged-points",
-    "href": "lectures/lecture_02/02_02_class_activity.html#xy-plot-with-dodged-points",
-    "title": "02_Class_Activity",
-    "section": "XY Plot with dodged points",
-    "text": "XY Plot with dodged points\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm)) + \n  geom_point(position = position_dodge2(width=0.2) )\n\n\n\n\n\n\n\n# this dodges the points # position_dodge2 or can use position_dodge depending on grouping"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#histogram-color-with-bins",
-    "href": "lectures/lecture_02/02_02_class_activity.html#histogram-color-with-bins",
-    "title": "02_Class_Activity",
-    "section": "Histogram Color with Bins",
-    "text": "Histogram Color with Bins\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) +\n  geom_histogram( binwidth = 2, \n# sets the width in units of the bins - try different nubmers\n   position = position_dodge2(width = 0.5))"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#box-and-whisker-plots",
-    "href": "lectures/lecture_02/02_02_class_activity.html#box-and-whisker-plots",
-    "title": "02_Class_Activity",
-    "section": "Box and Whisker Plots",
-    "text": "Box and Whisker Plots\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm, fill = wind)) + geom_boxplot()"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#xy_plot-is-not-in-the-environment",
-    "href": "lectures/lecture_02/02_02_class_activity.html#xy_plot-is-not-in-the-environment",
-    "title": "02_Class_Activity",
-    "section": "xy_plot is not in the environment",
-    "text": "xy_plot is not in the environment\nwe can save this plot by typing\n\nggsave(xy_plot, # name of the plot you called it\n       file = \"figures/xy_plot.pdf\", # type of file you want - pdf is good\n       units = \"in\", # what are the units you want to measure in\n       width = 6, height = 6) # dimensions - not if large the fonts need to be adjusted\n\nThe file should be in the figures directory"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#we-can-also-add-themes",
-    "href": "lectures/lecture_02/02_02_class_activity.html#we-can-also-add-themes",
-    "title": "02_Class_Activity",
-    "section": "we can also add themes",
-    "text": "we can also add themes\n\nxy_plot &lt;- ggplot(data = p_df, aes(x=wind, y=len_mm, color = wind, shape = wind)) + \n  geom_point(\n    size = 2,\n    position = position_dodge2(width=0.2)) +\n  labs(x=\"Wind Side\", y = \"Length (mm)\", color = \"Wind Side\", shape = \"Wind Side\") +\n  theme_classic()\nxy_plot"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#change-the-scale-by-zooming-in",
-    "href": "lectures/lecture_02/02_02_class_activity.html#change-the-scale-by-zooming-in",
-    "title": "02_Class_Activity",
-    "section": "change the scale by zooming in",
-    "text": "change the scale by zooming in\n\nxy_plot &lt;- ggplot(data = p_df, aes(x=wind, y=len_mm, color = wind, shape = wind)) + \n  geom_point(\n    size = 2,\n    position = position_dodge2(width=0.2)) +\n  labs(x=\"Wind Side\", y = \"Length (mm)\", color = \"Wind Side\", shape = \"Wind Side\") +\n  theme_classic() +\n  coord_cartesian(ylim = c(0,30))\nxy_plot"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#we-need-to-learn-to-pipe-things",
-    "href": "lectures/lecture_02/02_02_class_activity.html#we-need-to-learn-to-pipe-things",
-    "title": "02_Class_Activity",
-    "section": "we need to learn to pipe things",
-    "text": "we need to learn to pipe things\n\nthe dataframe –&gt; pipe command that feed the dataframe into –&gt; next command\n\n\np_df %&gt;% summarize(mean_length = mean(len_mm, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  mean_length\n        &lt;dbl&gt;\n1        17.7"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#what-is-cool-is-we-can-do-a-lot-of-different-things-now",
-    "href": "lectures/lecture_02/02_02_class_activity.html#what-is-cool-is-we-can-do-a-lot-of-different-things-now",
-    "title": "02_Class_Activity",
-    "section": "What is cool is we can do a lot of different things now",
-    "text": "What is cool is we can do a lot of different things now\n\np_df %&gt;% \n  summarize(\n    mean_length = mean(len_mm, na.rm = TRUE),\n    sd_length = sd(len_mm, na.rm = TRUE),\n    n_length = n())\n\n# A tibble: 1 × 3\n  mean_length sd_length n_length\n        &lt;dbl&gt;     &lt;dbl&gt;    &lt;int&gt;\n1        17.7      3.53       48"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#super-cool-code-in-case-there-are-missing-values",
-    "href": "lectures/lecture_02/02_02_class_activity.html#super-cool-code-in-case-there-are-missing-values",
-    "title": "02_Class_Activity",
-    "section": "Super cool code in case there are missing values",
-    "text": "Super cool code in case there are missing values\n\np_df %&gt;% \n  summarize(\n    mean_length = mean(len_mm, na.rm = TRUE),\n    sd_length = sd(len_mm, na.rm = TRUE),\n    n_length = sum(!is.na(len_mm)))\n\n# A tibble: 1 × 3\n  mean_length sd_length n_length\n        &lt;dbl&gt;     &lt;dbl&gt;    &lt;int&gt;\n1        17.7      3.53       48"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#what-else-do-we-want-to-know-though",
-    "href": "lectures/lecture_02/02_02_class_activity.html#what-else-do-we-want-to-know-though",
-    "title": "02_Class_Activity",
-    "section": "what else do we want to know though",
-    "text": "what else do we want to know though\n\nwe want to know the mean and such for each group of the treatements\nhow could we do this?\n\nwe need to add a command - `group_by(wind)\nbut how can we do this for this code?\n\n\n\np_df %&gt;% \n  summarize(\n    mean_length = mean(len_mm, na.rm = TRUE),\n    sd_length = sd(len_mm, na.rm = TRUE),\n    n_length = sum(!is.na(len_mm)))\n\n# A tibble: 1 × 3\n  mean_length sd_length n_length\n        &lt;dbl&gt;     &lt;dbl&gt;    &lt;int&gt;\n1        17.7      3.53       48"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_02_class_activity.html#what-if-we-wanted-to-save-this-output",
-    "href": "lectures/lecture_02/02_02_class_activity.html#what-if-we-wanted-to-save-this-output",
-    "title": "02_Class_Activity",
-    "section": "what if we wanted to save this output",
-    "text": "what if we wanted to save this output\nwhat else do we need to do to save the output"
-  },
-  {
-    "objectID": "lectures/lecture_01/01_03_homework_html.html",
-    "href": "lectures/lecture_01/01_03_homework_html.html",
-    "title": "01_Homework",
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html",
+    "title": "Lecture 03",
     "section": "",
-    "text": "This is an assignment for you to practice the code and all the work we do in class on a different dataframe. We will assign one of these each week for you to do that encompasses all fo the work we do. We give it out on Monday so you can start early and see how this work."
+    "text": "We covered:\n\ndata wrangling and types of variable names\nmeta data\nproject design\nsummary statistics\ngraphing the mean and standard error graphs\npipes and %&gt;% or |&gt; and how to group_by\n\n\n\nOur last graph"
   },
   {
-    "objectID": "lectures/lecture_01/01_03_homework_html.html#what-to-turn-in--",
-    "href": "lectures/lecture_01/01_03_homework_html.html#what-to-turn-in--",
-    "title": "01_Homework",
-    "section": "What to turn in -",
-    "text": "What to turn in -\n\na zipped or compressed folder of the entire project folder\na self-contained html file showing the output\nannotations in the quarto file that shows or tells what is being done like in the class activities"
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#introduction-to-probability-distributions",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#introduction-to-probability-distributions",
+    "title": "Lecture 03",
+    "section": "Introduction to probability distributions",
+    "text": "Introduction to probability distributions\n\nWhat is a frequency distribution?\nWhat is a probability distribution?\nDistributions for variables and for statistics"
   },
   {
-    "objectID": "lectures/lecture_01/01_03_homework_reveal.html#what-to-turn-in--",
-    "href": "lectures/lecture_01/01_03_homework_reveal.html#what-to-turn-in--",
-    "title": "01_Homework",
-    "section": "What to turn in -",
-    "text": "What to turn in -\n\na zipped or compressed folder of the entire project folder\na self-contained html file showing the output\nannotations in the quarto file that shows or tells what is being done like in the class activities"
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#estimation",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#estimation",
+    "title": "Lecture 03",
+    "section": "Estimation",
+    "text": "Estimation\n\nPopulations and samples\nParameters and statistics\n\nwe are going to use some sculpin data that is real!"
   },
   {
-    "objectID": "lectures/lecture_01/01_2_class_activity_html.html",
-    "href": "lectures/lecture_01/01_2_class_activity_html.html",
-    "title": "01_Class_Activity",
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#binomial-multinomial",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#binomial-multinomial",
+    "title": "Lecture 03",
+    "section": "Binomial (multinomial):",
+    "text": "Binomial (multinomial):\n\nprobability of event that have two outcomes (heads/ tails, dead/alive)\nDefined in terms of “successes” out of set number of trials\n\n\nIn large number of trials: approx. normal distribution"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#poisson-occurrences-of-rare-event-in-timespace",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#poisson-occurrences-of-rare-event-in-timespace",
+    "title": "Lecture 03",
+    "section": "Poisson: occurrences of (rare) event in time/space",
+    "text": "Poisson: occurrences of (rare) event in time/space\n\nE.g., number of\n\nTaraxacum officinale - common dandelion in quadrat\ncopepod eaten per minute\ncells in field of view\n\nMeasures Probability(y= certain integer value)\n\ndefined in terms of μ or mean\nRight-skewed at small μ\nmore symmetrical at higher μ"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#also-have-distributions-of-test-statistics",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#also-have-distributions-of-test-statistics",
+    "title": "Lecture 03",
+    "section": "Also have distributions of test statistics",
+    "text": "Also have distributions of test statistics\n\nTest statistics:\n\nsummary values calculated from data used to test hypotheses\nis your result due to chance?\n\n\n\nDifferent test statistics:\n\ndifferent, well-defined distributions\nallows estimation of probabilities associated with results\nExamples:\n\nz-distribution, student’s t-distribution, χ2-distribution, F-distribution"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#mu-fracsumlimits_i1n-y_in",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#mu-fracsumlimits_i1n-y_in",
+    "title": "Lecture 03",
+    "section": "\\(\\mu = \\frac{\\sum\\limits_{i=1}^{n} Y_i}{n}\\)",
+    "text": "\\(\\mu = \\frac{\\sum\\limits_{i=1}^{n} Y_i}{n}\\)"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#formula-for-n-odd-y_n12-text-if-n-text-odd",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#formula-for-n-odd-y_n12-text-if-n-text-odd",
+    "title": "Lecture 03",
+    "section": "Formula for n odd \\(Y_{(n+1)/2} \\text{   if } n \\text{ odd}\\)",
+    "text": "Formula for n odd \\(Y_{(n+1)/2} \\text{   if } n \\text{ odd}\\)"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#formula-for-n-even-fracy_n2-y_n21-2-text-if-n-text-even",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#formula-for-n-even-fracy_n2-y_n21-2-text-if-n-text-even",
+    "title": "Lecture 03",
+    "section": "Formula for n even \\(\\frac{Y_{n/2} + Y_{(n/2)+1}}{  2} \\text{ if } n \\text{ even}\\)",
+    "text": "Formula for n even \\(\\frac{Y_{n/2} + Y_{(n/2)+1}}{  2} \\text{ if } n \\text{ even}\\)"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#spread",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#spread",
+    "title": "Lecture 03",
+    "section": "Spread",
+    "text": "Spread\n\nRange: from highest and lowest observation\nVariance (σ2, s2): sum of squared differences of observations from mean, divided by n-1\n\nE.g., fish lengths = 20, 30, 35, 24, 36 g"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#s2-sum_i1n-fracy_i---bary2n-1",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#s2-sum_i1n-fracy_i---bary2n-1",
+    "title": "Lecture 03",
+    "section": "\\(s^2 = \\sum_{i=1}^{n} \\frac{(y_i - \\bar{y})^2}{n-1}\\)",
+    "text": "\\(s^2 = \\sum_{i=1}^{n} \\frac{(y_i - \\bar{y})^2}{n-1}\\)"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#spread-1",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#spread-1",
+    "title": "Lecture 03",
+    "section": "Spread",
+    "text": "Spread\n\nStandard Deviation(σ, s): square root of variance.\n\nIn same units as observations\nIn example: √48 = 6.9 mm\n\nCoefficient of variation: SD as % of mean.\n\nUseful for comparing spread in samples with different means\nIn example: (6.9/29)*100= 23.8 %"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#sqrtsum_i1n-fracy_i---bary2n-1",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#sqrtsum_i1n-fracy_i---bary2n-1",
+    "title": "Lecture 03",
+    "section": "\\(\\sqrt{\\sum_{i=1}^{n} \\frac{(y_i - \\bar{y})^2}{n-1}}\\)",
+    "text": "\\(\\sqrt{\\sum_{i=1}^{n} \\frac{(y_i - \\bar{y})^2}{n-1}}\\)"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#fracsbary-x-100",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_html.html#fracsbary-x-100",
+    "title": "Lecture 03",
+    "section": "\\(\\frac{S}{\\bar{Y}}  X  100\\)",
+    "text": "\\(\\frac{S}{\\bar{Y}}  X  100\\)"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#introduction-to-probability-distributions",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#introduction-to-probability-distributions",
+    "title": "Lecture 03",
+    "section": "Introduction to probability distributions",
+    "text": "Introduction to probability distributions\n\nWhat is a frequency distribution?\nWhat is a probability distribution?\nDistributions for variables and for statistics"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#estimation",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#estimation",
+    "title": "Lecture 03",
+    "section": "Estimation",
+    "text": "Estimation\n\nPopulations and samples\nParameters and statistics\n\nwe are going to use some sculpin data that is real!"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#binomial-multinomial",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#binomial-multinomial",
+    "title": "Lecture 03",
+    "section": "Binomial (multinomial):",
+    "text": "Binomial (multinomial):\n\nprobability of event that have two outcomes (heads/ tails, dead/alive)\nDefined in terms of “successes” out of set number of trials\n\nIn large number of trials: approx. normal distribution"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#poisson-occurrences-of-rare-event-in-timespace",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#poisson-occurrences-of-rare-event-in-timespace",
+    "title": "Lecture 03",
+    "section": "Poisson: occurrences of (rare) event in time/space",
+    "text": "Poisson: occurrences of (rare) event in time/space\n\nE.g., number of\n\nTaraxacum officinale - common dandelion in quadrat\ncopepod eaten per minute\ncells in field of view\n\nMeasures Probability(y= certain integer value)\n\ndefined in terms of μ or mean\nRight-skewed at small μ\nmore symmetrical at higher μ"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#also-have-distributions-of-test-statistics",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#also-have-distributions-of-test-statistics",
+    "title": "Lecture 03",
+    "section": "Also have distributions of test statistics",
+    "text": "Also have distributions of test statistics\nTest statistics:\n\nsummary values calculated from data used to test hypotheses\nis your result due to chance?\n\nDifferent test statistics:\n\ndifferent, well-defined distributions\nallows estimation of probabilities associated with results\nExamples:\n\nz-distribution, student’s t-distribution, χ2-distribution, F-distribution"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#mu-fracsumlimits_i1n-y_in",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#mu-fracsumlimits_i1n-y_in",
+    "title": "Lecture 03",
+    "section": "\\(\\mu = \\frac{\\sum\\limits_{i=1}^{n} Y_i}{n}\\)",
+    "text": "\\(\\mu = \\frac{\\sum\\limits_{i=1}^{n} Y_i}{n}\\)"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#formula-for-n-odd-y_n12-text-if-n-text-odd",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#formula-for-n-odd-y_n12-text-if-n-text-odd",
+    "title": "Lecture 03",
+    "section": "Formula for n odd \\(Y_{(n+1)/2} \\text{   if } n \\text{ odd}\\)",
+    "text": "Formula for n odd \\(Y_{(n+1)/2} \\text{   if } n \\text{ odd}\\)"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#formula-for-n-even-fracy_n2-y_n21-2-text-if-n-text-even",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#formula-for-n-even-fracy_n2-y_n21-2-text-if-n-text-even",
+    "title": "Lecture 03",
+    "section": "Formula for n even \\(\\frac{Y_{n/2} + Y_{(n/2)+1}}{  2} \\text{ if } n \\text{ even}\\)",
+    "text": "Formula for n even \\(\\frac{Y_{n/2} + Y_{(n/2)+1}}{  2} \\text{ if } n \\text{ even}\\)"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#spread",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#spread",
+    "title": "Lecture 03",
+    "section": "Spread",
+    "text": "Spread\n\nRange: from highest and lowest observation\nVariance (σ2, s2): sum of squared differences of observations from mean, divided by n-1\n\nE.g., fish lengths = 20, 30, 35, 24, 36 g"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#s2-sum_i1n-fracy_i---bary2n-1",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#s2-sum_i1n-fracy_i---bary2n-1",
+    "title": "Lecture 03",
+    "section": "\\(s^2 = \\sum_{i=1}^{n} \\frac{(y_i - \\bar{y})^2}{n-1}\\)",
+    "text": "\\(s^2 = \\sum_{i=1}^{n} \\frac{(y_i - \\bar{y})^2}{n-1}\\)"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#spread-1",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#spread-1",
+    "title": "Lecture 03",
+    "section": "Spread",
+    "text": "Spread\n\nStandard Deviation(σ, s): square root of variance.\n\nIn same units as observations\nIn example: √48 = 6.9 mm\n\nCoefficient of variation: SD as % of mean.\n\nUseful for comparing spread in samples with different means\nIn example: (6.9/29)*100= 23.8 %"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#sqrtsum_i1n-fracy_i---bary2n-1",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#sqrtsum_i1n-fracy_i---bary2n-1",
+    "title": "Lecture 03",
+    "section": "\\(\\sqrt{\\sum_{i=1}^{n} \\frac{(y_i - \\bar{y})^2}{n-1}}\\)",
+    "text": "\\(\\sqrt{\\sum_{i=1}^{n} \\frac{(y_i - \\bar{y})^2}{n-1}}\\)"
+  },
+  {
+    "objectID": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#fracsbary-x-100",
+    "href": "lectures/lecture_03/03_01_lecture_powerpoint_slides.html#fracsbary-x-100",
+    "title": "Lecture 03",
+    "section": "\\(\\frac{S}{\\bar{Y}}  X  100\\)",
+    "text": "\\(\\frac{S}{\\bar{Y}}  X  100\\)"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_html.html",
+    "href": "lectures/lecture_02/02_01_lecture_powerpoint_html.html",
+    "title": "Lecture 02",
     "section": "",
-    "text": "Note: This activity is really in place of the outline above which you should have read before class."
+    "text": "We covered inductive vs deductive reasoning\nHow to begin to ask questions\nAccuracy and precision\nWhat are general types of data\nHow to set up an R project in Rstudio\nHow to install and load libraries\nHow to read a file into R\nHow to make a graph\n\n\nOur first graph"
   },
   {
-    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#tapestry-plot",
-    "href": "lectures/lecture_01/01_2_class_activity_html.html#tapestry-plot",
-    "title": "01_Class_Activity",
-    "section": "Tapestry Plot ——",
-    "text": "Tapestry Plot ——\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm))"
+    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#be-consistent",
+    "href": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#be-consistent",
+    "title": "Lecture 02",
+    "section": "Be consistent!",
+    "text": "Be consistent!\n\nVariable names\n\nCodes for categorical variables\nVariable names\n\nuse snake case and lower case - nitrate_n_mgl\nalways use the same name\n\nCodes for missing values - NA or 9999 or a space - I know but I do it\nDate formats -\n\nYYYY-MM-DD HH:MM:SS\nTime begins in 1970-01-01\n\nnames of objects\n\ndataframes after import data_df\nplots - len_wt_plot\nmodels - anova_wt_model\n\nFile names\n\nuse separators - 2025_02_01_lake_x_inflow.csv\n\n\nNote format Requires considerable foresight and organization"
   },
   {
-    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#xy-plot",
-    "href": "lectures/lecture_01/01_2_class_activity_html.html#xy-plot",
-    "title": "01_Class_Activity",
-    "section": "XY Plot —–",
-    "text": "XY Plot —–\nnotice the points are layered on top but some overlap\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n  \nggplot(data = p_df, aes(x=wind, y=len_mm)) + \n  geom_point()"
+    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#variable-and-file-names-can-be-a-problem",
+    "href": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#variable-and-file-names-can-be-a-problem",
+    "title": "Lecture 02",
+    "section": "Variable and file names can be a problem",
+    "text": "Variable and file names can be a problem\n\nAvoid spaces but use underscore _\nAvoid special characters @#$%^@#\nBe sure to also use a variety of separators so you can separate later\n\nor use the same number of characters across a variable name\n2025_03_04_file-site"
   },
   {
-    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#xy-plot-with-dodged-points",
-    "href": "lectures/lecture_01/01_2_class_activity_html.html#xy-plot-with-dodged-points",
-    "title": "01_Class_Activity",
-    "section": "XY Plot with dodged points ——",
-    "text": "XY Plot with dodged points ——\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm)) + \n  geom_point(position = position_dodge2(width=0.2) )\n\n\n\n\n\n\n\n# this dodges the points # position_dodge2 or can use position_dodge depending on grouping\n\nWhat are the other ways to display the data?"
+    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#excel-will-drive-you-mad",
+    "href": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#excel-will-drive-you-mad",
+    "title": "Lecture 02",
+    "section": "Excel will drive you mad",
+    "text": "Excel will drive you mad\n\nit will mess up your dates\nstore data in separate columns - year - month - day\nor use a string 20250401\nalways use unambiguous format of larges to smallest - why?\n\nis 01 04 2025 the same as 04 01 2025\nwhat are the dates in english?\nor European"
   },
   {
-    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#histogram",
-    "href": "lectures/lecture_01/01_2_class_activity_html.html#histogram",
-    "title": "01_Class_Activity",
-    "section": "Histogram —–",
-    "text": "Histogram —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm)) + \n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nNote we really want to see the histograms colored by wind direction\nWe can map the wind aesthetic to a fill in the histogram"
+    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#never-do-calculations-in-excel",
+    "href": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#never-do-calculations-in-excel",
+    "title": "Lecture 02",
+    "section": "Never do Calculations in Excel",
+    "text": "Never do Calculations in Excel\n\nalways do calculations in R - reproducible\nnever merge cells\ncan use highlighting but it will disappear\na nice rectangular dataframe will make you happy\n\ntears will flow if not"
   },
   {
-    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#histogram-colors",
-    "href": "lectures/lecture_01/01_2_class_activity_html.html#histogram-colors",
-    "title": "01_Class_Activity",
-    "section": "Histogram Colors —–",
-    "text": "Histogram Colors —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) + geom_histogram( position = position_dodge2(width = 0.5))\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`."
+    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#meta-data",
+    "href": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#meta-data",
+    "title": "Lecture 02",
+    "section": "Meta Data",
+    "text": "Meta Data\n\nThis data will love beyond you\nSomeone will need to interpret it - what do they need\n\nWhat is data about\nWho collected it\nWhen\nWhere\nFunding agency\nMethods used to collect\nVariable names\n\ndescription\nunits\nabbreviations\n\nCALCULATIONS AND WHY?"
   },
   {
-    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#histogram-bins",
-    "href": "lectures/lecture_01/01_2_class_activity_html.html#histogram-bins",
-    "title": "01_Class_Activity",
-    "section": "Histogram Bins —–",
-    "text": "Histogram Bins —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) +\n  geom_histogram( binwidth = 2, \n# sets the width in units of the bins - try different nubmers\n   position = position_dodge2(width = 0.5))"
+    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#be-consistent",
+    "href": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#be-consistent",
+    "title": "Lecture 02",
+    "section": "Be consistent!",
+    "text": "Be consistent!\n\nVariable names\n\nCodes for categorical variables\nVariable names\n\nuse snake case and lower case - nitrate_n_mgl\nalways use the same name\n\nCodes for missing values - NA or 9999 or a space - I know but I do it\nDate formats -\n\nYYYY-MM-DD HH:MM:SS\nTime begins in 1970-01-01\n\nnames of objects\n\ndataframes after import data_df\nplots - len_wt_plot\nmodels - anova_wt_model\n\nFile names\n\nuse separators - 2025_02_01_lake_x_inflow.csv\n\n\nNote format Requires considerable foresight and organization"
   },
   {
-    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#other-plots-if-time",
-    "href": "lectures/lecture_01/01_2_class_activity_html.html#other-plots-if-time",
-    "title": "01_Class_Activity",
-    "section": "Other Plots if time",
-    "text": "Other Plots if time"
+    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#variable-and-file-names-can-be-a-problem",
+    "href": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#variable-and-file-names-can-be-a-problem",
+    "title": "Lecture 02",
+    "section": "Variable and file names can be a problem",
+    "text": "Variable and file names can be a problem\n\nAvoid spaces but use underscore _\nAvoid special characters @#$%^@#\nBe sure to also use a variety of separators so you can separate later\n\nor use the same number of characters across a variable name\n2025_03_04_file-site"
   },
   {
-    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#box-and-whisker-plots",
-    "href": "lectures/lecture_01/01_2_class_activity_html.html#box-and-whisker-plots",
-    "title": "01_Class_Activity",
-    "section": "Box and Whisker Plots",
-    "text": "Box and Whisker Plots\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm, fill = wind)) + geom_boxplot()"
+    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#excel-will-drive-you-mad",
+    "href": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#excel-will-drive-you-mad",
+    "title": "Lecture 02",
+    "section": "Excel will drive you mad",
+    "text": "Excel will drive you mad\n\nit will mess up your dates\nstore data in separate columns - year - month - day\nor use a string 20250401\nalways use unambiguous format of larges to smallest - why?\n\nis 01 04 2025 the same as 04 01 2025\nwhat are the dates in english?\nor European"
   },
   {
-    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#tapestry-plot",
-    "href": "lectures/lecture_01/01_2_class_activity_slides.html#tapestry-plot",
-    "title": "01_Class_Activity",
-    "section": "Tapestry Plot ——",
-    "text": "Tapestry Plot ——\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm))"
+    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#never-do-calculations-in-excel",
+    "href": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#never-do-calculations-in-excel",
+    "title": "Lecture 02",
+    "section": "Never do Calculations in Excel",
+    "text": "Never do Calculations in Excel\n\nalways do calculations in R - reproducible\nnever merge cells\ncan use highlighting but it will disappear\na nice rectangular dataframe will make you happy\n\ntears will flow if not"
   },
   {
-    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#xy-plot",
-    "href": "lectures/lecture_01/01_2_class_activity_slides.html#xy-plot",
-    "title": "01_Class_Activity",
-    "section": "XY Plot —–",
-    "text": "XY Plot —–\nnotice the points are layered on top but some overlap\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n  \nggplot(data = p_df, aes(x=wind, y=len_mm)) + \n  geom_point()"
+    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#meta-data",
+    "href": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#meta-data",
+    "title": "Lecture 02",
+    "section": "Meta Data",
+    "text": "Meta Data\n\nThis data will love beyond you\nSomeone will need to interpret it - what do they need\n\nWhat is data about\nWho collected it\nWhen\nWhere\nFunding agency\nMethods used to collect\nVariable names\n\ndescription\nunits\nabbreviations\n\nCALCULATIONS AND WHY?"
   },
   {
-    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#xy-plot-with-dodged-points",
-    "href": "lectures/lecture_01/01_2_class_activity_slides.html#xy-plot-with-dodged-points",
-    "title": "01_Class_Activity",
-    "section": "XY Plot with dodged points ——",
-    "text": "XY Plot with dodged points ——\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm)) + \n  geom_point(position = position_dodge2(width=0.2) )\n\n# this dodges the points # position_dodge2 or can use position_dodge depending on grouping\n\nWhat are the other ways to display the data?"
-  },
-  {
-    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#histogram",
-    "href": "lectures/lecture_01/01_2_class_activity_slides.html#histogram",
-    "title": "01_Class_Activity",
-    "section": "Histogram —–",
-    "text": "Histogram —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm)) + \n  geom_histogram()\n\n\nNote we really want to see the histograms colored by wind direction\nWe can map the wind aesthetic to a fill in the histogram"
-  },
-  {
-    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#histogram-colors",
-    "href": "lectures/lecture_01/01_2_class_activity_slides.html#histogram-colors",
-    "title": "01_Class_Activity",
-    "section": "Histogram Colors —–",
-    "text": "Histogram Colors —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) + geom_histogram( position = position_dodge2(width = 0.5))"
-  },
-  {
-    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#histogram-bins",
-    "href": "lectures/lecture_01/01_2_class_activity_slides.html#histogram-bins",
-    "title": "01_Class_Activity",
-    "section": "Histogram Bins —–",
-    "text": "Histogram Bins —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) +\n  geom_histogram( binwidth = 2, \n# sets the width in units of the bins - try different nubmers\n   position = position_dodge2(width = 0.5))"
-  },
-  {
-    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#other-plots-if-time",
-    "href": "lectures/lecture_01/01_2_class_activity_slides.html#other-plots-if-time",
-    "title": "01_Class_Activity",
-    "section": "Other Plots if time",
-    "text": "Other Plots if time"
-  },
-  {
-    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#box-and-whisker-plots",
-    "href": "lectures/lecture_01/01_2_class_activity_slides.html#box-and-whisker-plots",
-    "title": "01_Class_Activity",
-    "section": "Box and Whisker Plots",
-    "text": "Box and Whisker Plots\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm, fill = wind)) + geom_boxplot()"
-  },
-  {
-    "objectID": "links.html",
-    "href": "links.html",
-    "title": "Helpful Links",
+    "objectID": "lectures/lecture_01/01_1_lecture_powerpoint_html.html",
+    "href": "lectures/lecture_01/01_1_lecture_powerpoint_html.html",
+    "title": "01_Lecture",
     "section": "",
-    "text": "These are the really helpful links I use a lot\nStackoverflow - a site that has a lot of good resources\nR Companion - this is a great stats site with a lot of well done tests\nR4DataScience - this is the book by Grolemund and Whickham that is really good\nA fun site is BlueSky and use #rstats\nStill adding\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "UMD Biostatistics",
-    "section": "",
-    "text": "This course teaches the fundamentals of statistics and data analysis for biological sciences. Using R and the tidyverse, you’ll learn how to analyze and visualize data effectively to answer scientific questions.\n\n\nMaterials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website and may be on canvas website at school.\n\n\n\nBelow is a summary of the course schedule.\n\n\n\nLecture\nReadings\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nR4DataScience Tidy Data\nLecture 2 PowerPoint\nLecture 2 Activity\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOrder of topics is subject to change depending on the progress of the class. Changes to the class schedule will be announced in class.\n\n\n\n\n\nR for Data Science by Hadley Wickham\nWhitlock and Schluter The Analysis of Biological Data - 3rd edition\n\n\n\n\nI have put together a page of helpful links that might be of great help as you move through the class\n\n\n\n\n\n\nIf you have questions about the course or the website, please contact me at wlperry@d.umn.edu"
-  },
-  {
-    "objectID": "index.html#course-materials",
-    "href": "index.html#course-materials",
-    "title": "UMD Biostatistics",
-    "section": "",
-    "text": "Materials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website and may be on canvas website at school."
-  },
-  {
-    "objectID": "index.html#course-schedule",
-    "href": "index.html#course-schedule",
-    "title": "UMD Biostatistics",
-    "section": "",
-    "text": "Below is a summary of the course schedule.\n\n\n\nLecture\nReadings\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nR4DataScience Tidy Data\nLecture 2 PowerPoint\nLecture 2 Activity\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOrder of topics is subject to change depending on the progress of the class. Changes to the class schedule will be announced in class."
-  },
-  {
-    "objectID": "index.html#required-readings",
-    "href": "index.html#required-readings",
-    "title": "UMD Biostatistics",
-    "section": "",
-    "text": "R for Data Science by Hadley Wickham\nWhitlock and Schluter The Analysis of Biological Data - 3rd edition"
-  },
-  {
-    "objectID": "index.html#helpful-links-for-resources",
-    "href": "index.html#helpful-links-for-resources",
-    "title": "UMD Biostatistics",
-    "section": "",
-    "text": "I have put together a page of helpful links that might be of great help as you move through the class"
-  },
-  {
-    "objectID": "index.html#questions-or-issues",
-    "href": "index.html#questions-or-issues",
-    "title": "UMD Biostatistics",
-    "section": "",
-    "text": "If you have questions about the course or the website, please contact me at wlperry@d.umn.edu"
-  },
-  {
-    "objectID": "overview.html",
-    "href": "overview.html",
-    "title": "Overview",
-    "section": "",
-    "text": "Biostatistics course\nBill Perry\nThis course will serve as an introduction to reproducible data analysis using R. Specifically the goal is to introduce students to all facets of managing a research project with an emphasis on:\n\nDeveloping questions form observations, hypotheses, and predictions for testing statistically\nDesigning data workflows with data entry, curation, QA/QC, and cleaning\nUsing a controlled vocabulary and organized project structure and documenting the metadata for the project\nImporting data into R and doing calculations and transformations\nVisualizing data using ggplot\nUnderstanding how to decide on statistical tests that are appropriate - T-Tests - parametric and nonparametric\n\n-   Correlations\n-   Linear models\n    -   linear regression\n    -   multiple linear regression\n    -   ANOVA\n    -   ANCOVA\n    -   GLM and logistic regression\n-   Analyzing Frequencies\n-   Multivariate Statistics\n    -   Principal component analysis\n    -   NMDS\n    -   Cluster analysis\nIn the main webpage I have provided links to all the information you will need:\n\nlinks to readings that should be read prior to class\npowerpoint lectures that should be reviewed prior to class\nin-class activities that will actively cover the materials in the powerpoints\nweekly homework to do the in class activities on your own using different data\nassignments that form the crux of the grade and there 4 of them\n\n\n\n\n Back to top"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About the Instructor",
-    "section": "",
-    "text": "Department of Biology\nUniversity of Minnesota Duluth\nI am a professor specializing in aquatic biology, biogeochemistry, invasion biology, and biostatistics and data analysis. My research focuses on statistical methods for aquatic ecology but am open to any data and science. I am particularily adept at working wtih high frequency data from field monitors."
-  },
-  {
-    "objectID": "about.html#bill-perry",
-    "href": "about.html#bill-perry",
-    "title": "About the Instructor",
-    "section": "",
-    "text": "Department of Biology\nUniversity of Minnesota Duluth\nI am a professor specializing in aquatic biology, biogeochemistry, invasion biology, and biostatistics and data analysis. My research focuses on statistical methods for aquatic ecology but am open to any data and science. I am particularily adept at working wtih high frequency data from field monitors."
-  },
-  {
-    "objectID": "about.html#research-interests",
-    "href": "about.html#research-interests",
-    "title": "About the Instructor",
-    "section": "Research Interests",
-    "text": "Research Interests\n\nAquatic Ecology - lakes and streams\nInvasion Biology\nEnvironmental Monitoring\nStatistical methods for ecological data\nData visualization"
-  },
-  {
-    "objectID": "about.html#teaching-philosophy",
-    "href": "about.html#teaching-philosophy",
-    "title": "About the Instructor",
-    "section": "Teaching Philosophy",
-    "text": "Teaching Philosophy\nMy goal is to make statistics accessible and relevant by doing code and data collection in the classroom. The hands-on approach to learning, using real-world data and practical examples to illustrate statistical concepts is essential and actively doing the work. I use of modern tools like R and the tidyverse to prepare students for careers in biological research."
-  },
-  {
-    "objectID": "about.html#education",
-    "href": "about.html#education",
-    "title": "About the Instructor",
-    "section": "Education",
-    "text": "Education\n\nPhD in Statistics, University of Notre Dame\nMS in Biology, University of Cincinnati\nBS in Biology, University of Cincinnati"
-  },
-  {
-    "objectID": "about.html#contact-information",
-    "href": "about.html#contact-information",
-    "title": "About the Instructor",
-    "section": "Contact Information",
-    "text": "Contact Information\nFeel free to contact me with any questions about the course or research opportunities:\n\nEmail: wlperry@d.umn.edu\nOffice: TBD\nOffice Hours: by appointment"
+    "text": "Lecture 1: Syllabus\n\nPlease look over the syllabus as it has all the details of the class and how it will run.\n\n\n\n\nLecture 1: Who am I?\n\n\n\nBill Perry\nOffice is in XXXX\nPhone is XXXX\nEmail is wlperry@d.umn.edu\n\n\n\n\n\n\n\n\nLecture 1: My goals\n\nHow do we make observations and hypotheses?\nHow do we design an experiment\nHow do we collect data?\nHow do we organize, clean, summarize, and view the data?\nHow do we use statistics to test our hypotheses\n\nwhat tests to use\nwhat are the assumptions\nwhat are the interpretations\n\n\n\n\nLecture 1: My expectations\n\nCommunication\nPractice\nFailure\nLearn to correct and troubleshoot\n\n\n\nLecture 1: Science\n\nWay to acquire knowledge, organize it and apply it back to the real world\nMake predictions and testing these predictions using a falsifiable approach - statistics\nExplanations that cannot be falsified are not science\n\n\n\nWhat is Statistics?\n\n\nZar (1999) - “analysis and interpretation of data with view towards objective evaluation of conclusions based on the data”\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nInductive Reasoning (Specific → General)\nInductive reasoning involves observing specific cases and using them to form a general conclusion.\nExample:\n\nMeasure 10 pine needles from a tree - average length is 75 mm.\nMeasure 10 more needles from the same tree and gets similar results.\nMeasures needles from second tree - average length is 120 mm .\nYou generalize pine needles from different trees vary in length, but each tree tends to have a characteristic range.\n\nConclusion (Induction): “Pine needle length varies by tree, but each tree seems to have a typical range of lengths.\nPotential Issue: Conclusion is not guaranteed to be true - based on patterns observed in a sample, and there could be exceptions.\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nDeductive Reasoning (General → Specific)\nDeductive reasoning starts with a general principle and applies it to a specific case.\nExample:\n\nGeneral Principle: Pine needles from a species of pine tree have a predictable length range (e.g., 70–80 mm).\nSpecific Case: Collect sample of pine needles and measure them.\nPrediction: Since its the species the needle lengths should fall within 70–80 mm.\nMeasurement: Check the data and confirm needles fall within this expected range.\n\nConclusion (Deduction): “This tree belongs the species with a needle length range of 70–80 mm, we expect its needle lengths to fall in this range.”\nStronger than induction because it’s based on a general rule—but if the assumption (length range) is incorrect, conclusion could still be wrong.\n\n\n\n\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nIn reality we are doing both of these processes\n\n\n\n\n\n\n\n\n\n\n\nHow do we test hypotheses\n\n\n\nStatistics\n\nDesign good experiments\nDesign good tests\nSummarize patterns/data\nUse to make probabilistic determinations to see if differences are “real”\n\n\n\n\n\n\n\n\nData Types\n\n\n\nContinuous\n\nnumeric\n\ndiscrete\n\ninteger or numerical\n\ncategorical\n\nnominal – up, down, right, left…\nordinal – order - a, b, c, d or morning, afternoon, evening\n\n\n\n\n\n\n\n\nMeasurements\n\n\nData is obtained through measurement\nThe world is a messy place and how you measure matters\nOur measures depend on\n\naccuracy - how close we are to the real value\nprecision - how close all our measurements are but may not be precise\n\n\n\n\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "syllabus.html",
@@ -441,87 +371,353 @@
     "text": "The University of Minnesota is committed to the policy that all of its students shall have equal educational opportunities. The University expressly forbids discrimination on the basis of race, color, gender, sexual orientation, disability, veteran’s status, ethnicity, religion, creed, national origin or marital status. If you believe that your Ecology instructor has not followed this policy, you are invited to bring this to the attention of the Biology Department Head (207 Swenson Science Building; 218-726-8123). Your conference will be kept confidential.\nYou may review other relevant UMD policy statements at: https://evcaa.d.umn.edu/recommended-syllabi-policy-statements"
   },
   {
-    "objectID": "lectures/lecture_01/01_1_lecture_powerpoint_html.html",
-    "href": "lectures/lecture_01/01_1_lecture_powerpoint_html.html",
-    "title": "01_Lecture",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About the Instructor",
     "section": "",
-    "text": "Lecture 1: Syllabus\n\nPlease look over the syllabus as it has all the details of the class and how it will run.\n\n\n\n\nLecture 1: Who am I?\n\n\n\nBill Perry\nOffice is in XXXX\nPhone is XXXX\nEmail is wlperry@d.umn.edu\n\n\n\n\n\n\n\n\nLecture 1: My goals\n\nHow do we make observations and hypotheses?\nHow do we design an experiment\nHow do we collect data?\nHow do we organize, clean, summarize, and view the data?\nHow do we use statistics to test our hypotheses\n\nwhat tests to use\nwhat are the assumptions\nwhat are the interpretations\n\n\n\n\nLecture 1: My expectations\n\nCommunication\nPractice\nFailure\nLearn to correct and troubleshoot\n\n\n\nLecture 1: Science\n\nWay to acquire knowledge, organize it and apply it back to the real world\nMake predictions and testing these predictions using a falsifiable approach - statistics\nExplanations that cannot be falsified are not science\n\n\n\nWhat is Statistics?\n\n\nZar (1999) - “analysis and interpretation of data with view towards objective evaluation of conclusions based on the data”\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nInductive Reasoning (Specific → General)\nInductive reasoning involves observing specific cases and using them to form a general conclusion.\nExample:\n\nMeasure 10 pine needles from a tree - average length is 75 mm.\nMeasure 10 more needles from the same tree and gets similar results.\nMeasures needles from second tree - average length is 120 mm .\nYou generalize pine needles from different trees vary in length, but each tree tends to have a characteristic range.\n\nConclusion (Induction): “Pine needle length varies by tree, but each tree seems to have a typical range of lengths.\nPotential Issue: Conclusion is not guaranteed to be true - based on patterns observed in a sample, and there could be exceptions.\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nDeductive Reasoning (General → Specific)\nDeductive reasoning starts with a general principle and applies it to a specific case.\nExample:\n\nGeneral Principle: Pine needles from a species of pine tree have a predictable length range (e.g., 70–80 mm).\nSpecific Case: Collect sample of pine needles and measure them.\nPrediction: Since its the species the needle lengths should fall within 70–80 mm.\nMeasurement: Check the data and confirm needles fall within this expected range.\n\nConclusion (Deduction): “This tree belongs the species with a needle length range of 70–80 mm, we expect its needle lengths to fall in this range.”\nStronger than induction because it’s based on a general rule—but if the assumption (length range) is incorrect, conclusion could still be wrong.\n\n\n\n\n\n\n\n\n\n\n\nLecture 1: Inductive vs deductive reasoning\n\n\n\nIn reality we are doing both of these processes\n\n\n\n\n\n\n\n\n\n\n\nHow do we test hypotheses\n\n\n\nStatistics\n\nDesign good experiments\nDesign good tests\nSummarize patterns/data\nUse to make probabilistic determinations to see if differences are “real”\n\n\n\n\n\n\n\n\nData Types\n\n\n\nContinuous\n\nnumeric\n\ndiscrete\n\ninteger or numerical\n\ncategorical\n\nnominal – up, down, right, left…\nordinal – order - a, b, c, d or morning, afternoon, evening\n\n\n\n\n\n\n\n\nMeasurements\n\n\nData is obtained through measurement\nThe world is a messy place and how you measure matters\nOur measures depend on\n\naccuracy - how close we are to the real value\nprecision - how close all our measurements are but may not be precise\n\n\n\n\n\n\n\n\n\n Back to top"
+    "text": "Department of Biology\nUniversity of Minnesota Duluth\nI am a professor specializing in aquatic biology, biogeochemistry, invasion biology, and biostatistics and data analysis. My research focuses on statistical methods for aquatic ecology but am open to any data and science. I am particularily adept at working wtih high frequency data from field monitors."
   },
   {
-    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#be-consistent",
-    "href": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#be-consistent",
-    "title": "Lecture 02",
-    "section": "Be consistent!",
-    "text": "Be consistent!\n\nVariable names\n\nCodes for categorical variables\nVariable names\n\nuse snake case and lower case - nitrate_n_mgl\nalways use the same name\n\nCodes for missing values - NA or 9999 or a space - I know but I do it\nDate formats -\n\nYYYY-MM-DD HH:MM:SS\nTime begins in 1970-01-01\n\nnames of objects\n\ndataframes after import data_df\nplots - len_wt_plot\nmodels - anova_wt_model\n\nFile names\n\nuse separators - 2025_02_01_lake_x_inflow.csv\n\n\nNote format Requires considerable foresight and organization"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#variable-and-file-names-can-be-a-problem",
-    "href": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#variable-and-file-names-can-be-a-problem",
-    "title": "Lecture 02",
-    "section": "Variable and file names can be a problem",
-    "text": "Variable and file names can be a problem\n\nAvoid spaces but use underscore _\nAvoid special characters @#$%^@#\nBe sure to also use a variety of separators so you can separate later\n\nor use the same number of characters across a variable name\n2025_03_04_file-site"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#excel-will-drive-you-mad",
-    "href": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#excel-will-drive-you-mad",
-    "title": "Lecture 02",
-    "section": "Excel will drive you mad",
-    "text": "Excel will drive you mad\n\nit will mess up your dates\nstore data in separate columns - year - month - day\nor use a string 20250401\nalways use unambiguous format of larges to smallest - why?\n\nis 01 04 2025 the same as 04 01 2025\nwhat are the dates in english?\nor European"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#never-do-calculations-in-excel",
-    "href": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#never-do-calculations-in-excel",
-    "title": "Lecture 02",
-    "section": "Never do Calculations in Excel",
-    "text": "Never do Calculations in Excel\n\nalways do calculations in R - reproducible\nnever merge cells\ncan use highlighting but it will disappear\na nice rectangular dataframe will make you happy\n\ntears will flow if not"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#meta-data",
-    "href": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#meta-data",
-    "title": "Lecture 02",
-    "section": "Meta Data",
-    "text": "Meta Data\n\nThis data will love beyond you\nSomeone will need to interpret it - what do they need\n\nWhat is data about\nWho collected it\nWhen\nWhere\nFunding agency\nMethods used to collect\nVariable names\n\ndescription\nunits\nabbreviations\n\nCALCULATIONS AND WHY?"
-  },
-  {
-    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_html.html",
-    "href": "lectures/lecture_02/02_01_lecture_powerpoint_html.html",
-    "title": "Lecture 02",
+    "objectID": "about.html#bill-perry",
+    "href": "about.html#bill-perry",
+    "title": "About the Instructor",
     "section": "",
-    "text": "We covered inductive vs deductive reasoning\nHow to begin to ask questions\nAccuracy and precision\nWhat are general types of data\nHow to set up an R project in Rstudio\nHow to install and load libraries\nHow to read a file into R\nHow to make a graph\n\n\nOur first graph"
+    "text": "Department of Biology\nUniversity of Minnesota Duluth\nI am a professor specializing in aquatic biology, biogeochemistry, invasion biology, and biostatistics and data analysis. My research focuses on statistical methods for aquatic ecology but am open to any data and science. I am particularily adept at working wtih high frequency data from field monitors."
   },
   {
-    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#be-consistent",
-    "href": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#be-consistent",
-    "title": "Lecture 02",
-    "section": "Be consistent!",
-    "text": "Be consistent!\n\nVariable names\n\nCodes for categorical variables\nVariable names\n\nuse snake case and lower case - nitrate_n_mgl\nalways use the same name\n\nCodes for missing values - NA or 9999 or a space - I know but I do it\nDate formats -\n\nYYYY-MM-DD HH:MM:SS\nTime begins in 1970-01-01\n\nnames of objects\n\ndataframes after import data_df\nplots - len_wt_plot\nmodels - anova_wt_model\n\nFile names\n\nuse separators - 2025_02_01_lake_x_inflow.csv\n\n\nNote format Requires considerable foresight and organization"
+    "objectID": "about.html#research-interests",
+    "href": "about.html#research-interests",
+    "title": "About the Instructor",
+    "section": "Research Interests",
+    "text": "Research Interests\n\nAquatic Ecology - lakes and streams\nInvasion Biology\nEnvironmental Monitoring\nStatistical methods for ecological data\nData visualization"
   },
   {
-    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#variable-and-file-names-can-be-a-problem",
-    "href": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#variable-and-file-names-can-be-a-problem",
-    "title": "Lecture 02",
-    "section": "Variable and file names can be a problem",
-    "text": "Variable and file names can be a problem\n\nAvoid spaces but use underscore _\nAvoid special characters @#$%^@#\nBe sure to also use a variety of separators so you can separate later\n\nor use the same number of characters across a variable name\n2025_03_04_file-site"
+    "objectID": "about.html#teaching-philosophy",
+    "href": "about.html#teaching-philosophy",
+    "title": "About the Instructor",
+    "section": "Teaching Philosophy",
+    "text": "Teaching Philosophy\nMy goal is to make statistics accessible and relevant by doing code and data collection in the classroom. The hands-on approach to learning, using real-world data and practical examples to illustrate statistical concepts is essential and actively doing the work. I use of modern tools like R and the tidyverse to prepare students for careers in biological research."
   },
   {
-    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#excel-will-drive-you-mad",
-    "href": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#excel-will-drive-you-mad",
-    "title": "Lecture 02",
-    "section": "Excel will drive you mad",
-    "text": "Excel will drive you mad\n\nit will mess up your dates\nstore data in separate columns - year - month - day\nor use a string 20250401\nalways use unambiguous format of larges to smallest - why?\n\nis 01 04 2025 the same as 04 01 2025\nwhat are the dates in english?\nor European"
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "About the Instructor",
+    "section": "Education",
+    "text": "Education\n\nPhD in Statistics, University of Notre Dame\nMS in Biology, University of Cincinnati\nBS in Biology, University of Cincinnati"
   },
   {
-    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#never-do-calculations-in-excel",
-    "href": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#never-do-calculations-in-excel",
-    "title": "Lecture 02",
-    "section": "Never do Calculations in Excel",
-    "text": "Never do Calculations in Excel\n\nalways do calculations in R - reproducible\nnever merge cells\ncan use highlighting but it will disappear\na nice rectangular dataframe will make you happy\n\ntears will flow if not"
+    "objectID": "about.html#contact-information",
+    "href": "about.html#contact-information",
+    "title": "About the Instructor",
+    "section": "Contact Information",
+    "text": "Contact Information\nFeel free to contact me with any questions about the course or research opportunities:\n\nEmail: wlperry@d.umn.edu\nOffice: TBD\nOffice Hours: by appointment"
   },
   {
-    "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#meta-data",
-    "href": "lectures/lecture_02/02_01_lecture_powerpoint_html.html#meta-data",
-    "title": "Lecture 02",
-    "section": "Meta Data",
-    "text": "Meta Data\n\nThis data will love beyond you\nSomeone will need to interpret it - what do they need\n\nWhat is data about\nWho collected it\nWhen\nWhere\nFunding agency\nMethods used to collect\nVariable names\n\ndescription\nunits\nabbreviations\n\nCALCULATIONS AND WHY?"
+    "objectID": "overview.html",
+    "href": "overview.html",
+    "title": "Overview",
+    "section": "",
+    "text": "Biostatistics course\nBill Perry\nThis course will serve as an introduction to reproducible data analysis using R. Specifically the goal is to introduce students to all facets of managing a research project with an emphasis on:\n\nDeveloping questions form observations, hypotheses, and predictions for testing statistically\nDesigning data workflows with data entry, curation, QA/QC, and cleaning\nUsing a controlled vocabulary and organized project structure and documenting the metadata for the project\nImporting data into R and doing calculations and transformations\nVisualizing data using ggplot\nUnderstanding how to decide on statistical tests that are appropriate - T-Tests - parametric and nonparametric\n\n-   Correlations\n-   Linear models\n    -   linear regression\n    -   multiple linear regression\n    -   ANOVA\n    -   ANCOVA\n    -   GLM and logistic regression\n-   Analyzing Frequencies\n-   Multivariate Statistics\n    -   Principal component analysis\n    -   NMDS\n    -   Cluster analysis\nIn the main webpage I have provided links to all the information you will need:\n\nlinks to readings that should be read prior to class\npowerpoint lectures that should be reviewed prior to class\nin-class activities that will actively cover the materials in the powerpoints\nweekly homework to do the in class activities on your own using different data\nassignments that form the crux of the grade and there 4 of them\n\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "UMD Biostatistics",
+    "section": "",
+    "text": "This course teaches the fundamentals of statistics and data analysis for biological sciences. Using R and the tidyverse, you’ll learn how to analyze and visualize data effectively to answer scientific questions.\n\n\nMaterials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website and may be on canvas website at school.\n\n\n\nBelow is a summary of the course schedule.\n\n\n\nLecture\nReadings\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nR4DataScience Tidy Data\nLecture 2 PowerPoint\nLecture 2 Activity\n\n\n\n03 Probability Distributions and estimation\n\nLecture 3 PowerPoint\nLecture 3 Activity\nWeek 3 Homework\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOrder of topics is subject to change depending on the progress of the class. Changes to the class schedule will be announced in class.\n\n\n\n\n\nR for Data Science by Hadley Wickham\nWhitlock and Schluter The Analysis of Biological Data - 3rd edition\n\n\n\n\nI have put together a page of helpful links that might be of great help as you move through the class\n\n\n\n\n\n\nIf you have questions about the course or the website, please contact me at wlperry@d.umn.edu"
+  },
+  {
+    "objectID": "index.html#course-materials",
+    "href": "index.html#course-materials",
+    "title": "UMD Biostatistics",
+    "section": "",
+    "text": "Materials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website and may be on canvas website at school."
+  },
+  {
+    "objectID": "index.html#course-schedule",
+    "href": "index.html#course-schedule",
+    "title": "UMD Biostatistics",
+    "section": "",
+    "text": "Below is a summary of the course schedule.\n\n\n\nLecture\nReadings\nPowerPoint lecture\nIn Class Activity\nHomework\n\n\n\n\n01 Introduction\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Data wrangling\nR4DataScience Tidy Data\nLecture 2 PowerPoint\nLecture 2 Activity\n\n\n\n03 Probability Distributions and estimation\n\nLecture 3 PowerPoint\nLecture 3 Activity\nWeek 3 Homework\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOrder of topics is subject to change depending on the progress of the class. Changes to the class schedule will be announced in class."
+  },
+  {
+    "objectID": "index.html#required-readings",
+    "href": "index.html#required-readings",
+    "title": "UMD Biostatistics",
+    "section": "",
+    "text": "R for Data Science by Hadley Wickham\nWhitlock and Schluter The Analysis of Biological Data - 3rd edition"
+  },
+  {
+    "objectID": "index.html#helpful-links-for-resources",
+    "href": "index.html#helpful-links-for-resources",
+    "title": "UMD Biostatistics",
+    "section": "",
+    "text": "I have put together a page of helpful links that might be of great help as you move through the class"
+  },
+  {
+    "objectID": "index.html#questions-or-issues",
+    "href": "index.html#questions-or-issues",
+    "title": "UMD Biostatistics",
+    "section": "",
+    "text": "If you have questions about the course or the website, please contact me at wlperry@d.umn.edu"
+  },
+  {
+    "objectID": "links.html",
+    "href": "links.html",
+    "title": "Helpful Links",
+    "section": "",
+    "text": "These are the really helpful links I use a lot\nStackoverflow - a site that has a lot of good resources\nR Companion - this is a great stats site with a lot of well done tests\nR4DataScience - this is the book by Grolemund and Whickham that is really good\nA fun site is BlueSky and use #rstats\nStill adding\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#tapestry-plot",
+    "href": "lectures/lecture_01/01_2_class_activity_slides.html#tapestry-plot",
+    "title": "01_Class_Activity",
+    "section": "Tapestry Plot ——",
+    "text": "Tapestry Plot ——\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm))"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#xy-plot",
+    "href": "lectures/lecture_01/01_2_class_activity_slides.html#xy-plot",
+    "title": "01_Class_Activity",
+    "section": "XY Plot —–",
+    "text": "XY Plot —–\nnotice the points are layered on top but some overlap\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n  \nggplot(data = p_df, aes(x=wind, y=len_mm)) + \n  geom_point()"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#xy-plot-with-dodged-points",
+    "href": "lectures/lecture_01/01_2_class_activity_slides.html#xy-plot-with-dodged-points",
+    "title": "01_Class_Activity",
+    "section": "XY Plot with dodged points ——",
+    "text": "XY Plot with dodged points ——\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm)) + \n  geom_point(position = position_dodge2(width=0.2) )\n\n# this dodges the points # position_dodge2 or can use position_dodge depending on grouping\n\nWhat are the other ways to display the data?"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#histogram",
+    "href": "lectures/lecture_01/01_2_class_activity_slides.html#histogram",
+    "title": "01_Class_Activity",
+    "section": "Histogram —–",
+    "text": "Histogram —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm)) + \n  geom_histogram()\n\n\nNote we really want to see the histograms colored by wind direction\nWe can map the wind aesthetic to a fill in the histogram"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#histogram-colors",
+    "href": "lectures/lecture_01/01_2_class_activity_slides.html#histogram-colors",
+    "title": "01_Class_Activity",
+    "section": "Histogram Colors —–",
+    "text": "Histogram Colors —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) + geom_histogram( position = position_dodge2(width = 0.5))"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#histogram-bins",
+    "href": "lectures/lecture_01/01_2_class_activity_slides.html#histogram-bins",
+    "title": "01_Class_Activity",
+    "section": "Histogram Bins —–",
+    "text": "Histogram Bins —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) +\n  geom_histogram( binwidth = 2, \n# sets the width in units of the bins - try different nubmers\n   position = position_dodge2(width = 0.5))"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#other-plots-if-time",
+    "href": "lectures/lecture_01/01_2_class_activity_slides.html#other-plots-if-time",
+    "title": "01_Class_Activity",
+    "section": "Other Plots if time",
+    "text": "Other Plots if time"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_slides.html#box-and-whisker-plots",
+    "href": "lectures/lecture_01/01_2_class_activity_slides.html#box-and-whisker-plots",
+    "title": "01_Class_Activity",
+    "section": "Box and Whisker Plots",
+    "text": "Box and Whisker Plots\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm, fill = wind)) + geom_boxplot()"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_html.html",
+    "href": "lectures/lecture_01/01_2_class_activity_html.html",
+    "title": "01_Class_Activity",
+    "section": "",
+    "text": "Note: This activity is really in place of the outline above which you should have read before class."
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#tapestry-plot",
+    "href": "lectures/lecture_01/01_2_class_activity_html.html#tapestry-plot",
+    "title": "01_Class_Activity",
+    "section": "Tapestry Plot ——",
+    "text": "Tapestry Plot ——\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm))"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#xy-plot",
+    "href": "lectures/lecture_01/01_2_class_activity_html.html#xy-plot",
+    "title": "01_Class_Activity",
+    "section": "XY Plot —–",
+    "text": "XY Plot —–\nnotice the points are layered on top but some overlap\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n  \nggplot(data = p_df, aes(x=wind, y=len_mm)) + \n  geom_point()"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#xy-plot-with-dodged-points",
+    "href": "lectures/lecture_01/01_2_class_activity_html.html#xy-plot-with-dodged-points",
+    "title": "01_Class_Activity",
+    "section": "XY Plot with dodged points ——",
+    "text": "XY Plot with dodged points ——\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm)) + \n  geom_point(position = position_dodge2(width=0.2) )\n\n\n\n\n\n\n\n# this dodges the points # position_dodge2 or can use position_dodge depending on grouping\n\nWhat are the other ways to display the data?"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#histogram",
+    "href": "lectures/lecture_01/01_2_class_activity_html.html#histogram",
+    "title": "01_Class_Activity",
+    "section": "Histogram —–",
+    "text": "Histogram —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm)) + \n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nNote we really want to see the histograms colored by wind direction\nWe can map the wind aesthetic to a fill in the histogram"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#histogram-colors",
+    "href": "lectures/lecture_01/01_2_class_activity_html.html#histogram-colors",
+    "title": "01_Class_Activity",
+    "section": "Histogram Colors —–",
+    "text": "Histogram Colors —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) + geom_histogram( position = position_dodge2(width = 0.5))\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`."
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#histogram-bins",
+    "href": "lectures/lecture_01/01_2_class_activity_html.html#histogram-bins",
+    "title": "01_Class_Activity",
+    "section": "Histogram Bins —–",
+    "text": "Histogram Bins —–\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) +\n  geom_histogram( binwidth = 2, \n# sets the width in units of the bins - try different nubmers\n   position = position_dodge2(width = 0.5))"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#other-plots-if-time",
+    "href": "lectures/lecture_01/01_2_class_activity_html.html#other-plots-if-time",
+    "title": "01_Class_Activity",
+    "section": "Other Plots if time",
+    "text": "Other Plots if time"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_2_class_activity_html.html#box-and-whisker-plots",
+    "href": "lectures/lecture_01/01_2_class_activity_html.html#box-and-whisker-plots",
+    "title": "01_Class_Activity",
+    "section": "Box and Whisker Plots",
+    "text": "Box and Whisker Plots\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm, fill = wind)) + geom_boxplot()"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_03_homework_reveal.html#what-to-turn-in--",
+    "href": "lectures/lecture_01/01_03_homework_reveal.html#what-to-turn-in--",
+    "title": "01_Homework",
+    "section": "What to turn in -",
+    "text": "What to turn in -\n\na zipped or compressed folder of the entire project folder\na self-contained html file showing the output\nannotations in the quarto file that shows or tells what is being done like in the class activities"
+  },
+  {
+    "objectID": "lectures/lecture_01/01_03_homework_html.html",
+    "href": "lectures/lecture_01/01_03_homework_html.html",
+    "title": "01_Homework",
+    "section": "",
+    "text": "This is an assignment for you to practice the code and all the work we do in class on a different dataframe. We will assign one of these each week for you to do that encompasses all fo the work we do. We give it out on Monday so you can start early and see how this work."
+  },
+  {
+    "objectID": "lectures/lecture_01/01_03_homework_html.html#what-to-turn-in--",
+    "href": "lectures/lecture_01/01_03_homework_html.html#what-to-turn-in--",
+    "title": "01_Homework",
+    "section": "What to turn in -",
+    "text": "What to turn in -\n\na zipped or compressed folder of the entire project folder\na self-contained html file showing the output\nannotations in the quarto file that shows or tells what is being done like in the class activities"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#in-rstudio",
+    "href": "lectures/lecture_02/02_02_class_activity.html#in-rstudio",
+    "title": "02_Class_Activity",
+    "section": "In RStudio:",
+    "text": "In RStudio:\n\nclick file - open project and select the 2025_UMD_BioStats_Student_Code.Rproj file or double click on it in the finder or data explorer.\nyour screen will now change as RStudio knows where home is\n\n\n\nNote that in the upper right you will see 2025_UMD_BioStats_Student_Code so you know you are in the right spot\nNow click File - New File - Quarto File\n\n\n\nCreate a file that starts with 02_ and then something that will help you know what is going on like 02_class_activity_in_class.qmd\nNow this file thinks this is home.\nSo I usually copy stuff for the header from another file as its just too hard to remember all this…\n\n---\ntitle: \"Title of your file\" # Title of the file\nauthor: \"Your Name\" # who you are\nformat: # this is the formats that it will render to\n  html:\n    toc: false # not table of contents\n    default: true\n    embed-resources: true # makes everything go into the html file\n    self-contained: true # also makes self contained\neditor: visual # type of editing\nproject:\n  execute-dir: project # where it will look for files\nexecute:\n  keep-md: true # retains the images when you start again\n  cache: true # also heps reatain images and code\n---"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#the-whole-dataframe---wont-show-all",
+    "href": "lectures/lecture_02/02_02_class_activity.html#the-whole-dataframe---wont-show-all",
+    "title": "02_Class_Activity",
+    "section": "The whole dataframe - wont show all",
+    "text": "The whole dataframe - wont show all\n\np_df\n\n# A tibble: 48 × 6\n   date    group       n_s   wind  tree_no len_mm\n   &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;\n 1 3/20/25 cephalopods n     lee         1     20\n 2 3/20/25 cephalopods n     lee         1     21\n 3 3/20/25 cephalopods n     lee         1     23\n 4 3/20/25 cephalopods n     lee         1     25\n 5 3/20/25 cephalopods n     lee         1     21\n 6 3/20/25 cephalopods n     lee         1     16\n 7 3/20/25 cephalopods s     wind        1     15\n 8 3/20/25 cephalopods s     wind        1     16\n 9 3/20/25 cephalopods s     wind        1     14\n10 3/20/25 cephalopods s     wind        1     17\n# ℹ 38 more rows"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#the-top-of-the-datafame-to-see-what-it-looks-like",
+    "href": "lectures/lecture_02/02_02_class_activity.html#the-top-of-the-datafame-to-see-what-it-looks-like",
+    "title": "02_Class_Activity",
+    "section": "The top of the datafame to see what it looks like",
+    "text": "The top of the datafame to see what it looks like\n\nhead(p_df)\n\n# A tibble: 6 × 6\n  date    group       n_s   wind  tree_no len_mm\n  &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;\n1 3/20/25 cephalopods n     lee         1     20\n2 3/20/25 cephalopods n     lee         1     21\n3 3/20/25 cephalopods n     lee         1     23\n4 3/20/25 cephalopods n     lee         1     25\n5 3/20/25 cephalopods n     lee         1     21\n6 3/20/25 cephalopods n     lee         1     16\n\n# tail(p_df) # the bottom"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#how-to-look-at-one-variable",
+    "href": "lectures/lecture_02/02_02_class_activity.html#how-to-look-at-one-variable",
+    "title": "02_Class_Activity",
+    "section": "How to look at one variable",
+    "text": "How to look at one variable\n\np_df$group # name of dataframe $ varaible\n\n [1] \"cephalopods\" \"cephalopods\" \"cephalopods\" \"cephalopods\" \"cephalopods\"\n [6] \"cephalopods\" \"cephalopods\" \"cephalopods\" \"cephalopods\" \"cephalopods\"\n[11] \"cephalopods\" \"cephalopods\" \"salmon\"      \"salmon\"      \"salmon\"     \n[16] \"salmon\"      \"salmon\"      \"salmon\"      \"salmon\"      \"salmon\"     \n[21] \"salmon\"      \"salmon\"      \"salmon\"      \"salmon\"      \"crayfish\"   \n[26] \"crayfish\"    \"crayfish\"    \"crayfish\"    \"crayfish\"    \"crayfish\"   \n[31] \"crayfish\"    \"crayfish\"    \"crayfish\"    \"crayfish\"    \"crayfish\"   \n[36] \"crayfish\"    \"snail\"       \"snail\"       \"snail\"       \"snail\"      \n[41] \"snail\"       \"snail\"       \"snail\"       \"snail\"       \"snail\"      \n[46] \"snail\"       \"snail\"       \"snail\""
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#xy-plot-with-dodged-points",
+    "href": "lectures/lecture_02/02_02_class_activity.html#xy-plot-with-dodged-points",
+    "title": "02_Class_Activity",
+    "section": "XY Plot with dodged points",
+    "text": "XY Plot with dodged points\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm)) + \n  geom_point(position = position_dodge2(width=0.2) )\n\n\n\n\n\n\n\n# this dodges the points # position_dodge2 or can use position_dodge depending on grouping"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#histogram-color-with-bins",
+    "href": "lectures/lecture_02/02_02_class_activity.html#histogram-color-with-bins",
+    "title": "02_Class_Activity",
+    "section": "Histogram Color with Bins",
+    "text": "Histogram Color with Bins\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=len_mm, fill = wind)) +\n  geom_histogram( binwidth = 2, \n# sets the width in units of the bins - try different nubmers\n   position = position_dodge2(width = 0.5))"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#box-and-whisker-plots",
+    "href": "lectures/lecture_02/02_02_class_activity.html#box-and-whisker-plots",
+    "title": "02_Class_Activity",
+    "section": "Box and Whisker Plots",
+    "text": "Box and Whisker Plots\n\nknitr::opts_chunk$set(\n  comment = '', fig.width = 4, fig.height = 3)\n\nggplot(data = p_df, aes(x=wind, y=len_mm, fill = wind)) + geom_boxplot()"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#xy_plot-is-not-in-the-environment",
+    "href": "lectures/lecture_02/02_02_class_activity.html#xy_plot-is-not-in-the-environment",
+    "title": "02_Class_Activity",
+    "section": "xy_plot is not in the environment",
+    "text": "xy_plot is not in the environment\nwe can save this plot by typing\n\nggsave(xy_plot, # name of the plot you called it\n       file = \"figures/xy_plot.pdf\", # type of file you want - pdf is good\n       units = \"in\", # what are the units you want to measure in\n       width = 6, height = 6) # dimensions - not if large the fonts need to be adjusted\n\nThe file should be in the figures directory"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#we-can-also-add-themes",
+    "href": "lectures/lecture_02/02_02_class_activity.html#we-can-also-add-themes",
+    "title": "02_Class_Activity",
+    "section": "we can also add themes",
+    "text": "we can also add themes\n\nxy_plot &lt;- ggplot(data = p_df, aes(x=wind, y=len_mm, color = wind, shape = wind)) + \n  geom_point(\n    size = 2,\n    position = position_dodge2(width=0.2)) +\n  labs(x=\"Wind Side\", y = \"Length (mm)\", color = \"Wind Side\", shape = \"Wind Side\") +\n  theme_classic()\nxy_plot"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#change-the-scale-by-zooming-in",
+    "href": "lectures/lecture_02/02_02_class_activity.html#change-the-scale-by-zooming-in",
+    "title": "02_Class_Activity",
+    "section": "change the scale by zooming in",
+    "text": "change the scale by zooming in\n\nxy_plot &lt;- ggplot(data = p_df, aes(x=wind, y=len_mm, color = wind, shape = wind)) + \n  geom_point(\n    size = 2,\n    position = position_dodge2(width=0.2)) +\n  labs(x=\"Wind Side\", y = \"Length (mm)\", color = \"Wind Side\", shape = \"Wind Side\") +\n  theme_classic() +\n  coord_cartesian(ylim = c(0,30))\nxy_plot"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#we-need-to-learn-to-pipe-things",
+    "href": "lectures/lecture_02/02_02_class_activity.html#we-need-to-learn-to-pipe-things",
+    "title": "02_Class_Activity",
+    "section": "we need to learn to pipe things",
+    "text": "we need to learn to pipe things\n\nthe dataframe –&gt; pipe command that feed the dataframe into –&gt; next command\n\n\np_df %&gt;% summarize(mean_length = mean(len_mm, na.rm = TRUE))\n\n# A tibble: 1 × 1\n  mean_length\n        &lt;dbl&gt;\n1        17.7"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#what-is-cool-is-we-can-do-a-lot-of-different-things-now",
+    "href": "lectures/lecture_02/02_02_class_activity.html#what-is-cool-is-we-can-do-a-lot-of-different-things-now",
+    "title": "02_Class_Activity",
+    "section": "What is cool is we can do a lot of different things now",
+    "text": "What is cool is we can do a lot of different things now\n\np_df %&gt;% \n  summarize(\n    mean_length = mean(len_mm, na.rm = TRUE),\n    sd_length = sd(len_mm, na.rm = TRUE),\n    n_length = n())\n\n# A tibble: 1 × 3\n  mean_length sd_length n_length\n        &lt;dbl&gt;     &lt;dbl&gt;    &lt;int&gt;\n1        17.7      3.53       48"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#super-cool-code-in-case-there-are-missing-values",
+    "href": "lectures/lecture_02/02_02_class_activity.html#super-cool-code-in-case-there-are-missing-values",
+    "title": "02_Class_Activity",
+    "section": "Super cool code in case there are missing values",
+    "text": "Super cool code in case there are missing values\n\np_df %&gt;% \n  summarize(\n    mean_length = mean(len_mm, na.rm = TRUE),\n    sd_length = sd(len_mm, na.rm = TRUE),\n    n_length = sum(!is.na(len_mm)))\n\n# A tibble: 1 × 3\n  mean_length sd_length n_length\n        &lt;dbl&gt;     &lt;dbl&gt;    &lt;int&gt;\n1        17.7      3.53       48"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#what-else-do-we-want-to-know-though",
+    "href": "lectures/lecture_02/02_02_class_activity.html#what-else-do-we-want-to-know-though",
+    "title": "02_Class_Activity",
+    "section": "what else do we want to know though",
+    "text": "what else do we want to know though\n\nwe want to know the mean and such for each group of the treatments\nhow could we do this?\n\nwe need to add a command - `group_by(wind)\nbut how can we do this for this code?\n\n\n\np_df %&gt;% \n  summarize(\n    mean_length = mean(len_mm, na.rm = TRUE),\n    sd_length = sd(len_mm, na.rm = TRUE),\n    n_length = sum(!is.na(len_mm)))\n\n# A tibble: 1 × 3\n  mean_length sd_length n_length\n        &lt;dbl&gt;     &lt;dbl&gt;    &lt;int&gt;\n1        17.7      3.53       48"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#what-if-we-wanted-to-save-this-output",
+    "href": "lectures/lecture_02/02_02_class_activity.html#what-if-we-wanted-to-save-this-output",
+    "title": "02_Class_Activity",
+    "section": "what if we wanted to save this output",
+    "text": "what if we wanted to save this output\nwhat else do we need to do to save the output"
+  },
+  {
+    "objectID": "lectures/lecture_02/02_02_class_activity.html#given-enough-time-there-are-some-other-tweaks-to-make",
+    "href": "lectures/lecture_02/02_02_class_activity.html#given-enough-time-there-are-some-other-tweaks-to-make",
+    "title": "02_Class_Activity",
+    "section": "given enough time there are some other tweaks to make",
+    "text": "given enough time there are some other tweaks to make\nin this code we can do some piping that will be very useful later on\n\nmean_se_plot &lt;- p_df %&gt;% \n  ggplot(aes(wind, len_mm , color = wind)) +\n  stat_summary(\n    fun = mean, \n    na.rm = TRUE, \n    geom = \"point\", \n    size = 3) +\n  stat_summary(\n    fun.data = mean_se, \n    na.rm = TRUE, \n    geom = \"errorbar\", \n    width = 0.2) +\n  # annotate(\"rect\", \n  #        xmin = -Inf, xmax = Inf,  # Cover the entire x range\n  #        ymin = -Inf, ymax = Inf,  # Cover the entire y range\n  #        fill = \"white\", \n  #        alpha = 1) +\n  labs(\n    x = \"Wind Side\",\n    y = \"Length (mm)\",\n    color = \"Windy Side\"\n  ) +\n  theme_classic()\n\nmean_se_plot"
   }
 ]
