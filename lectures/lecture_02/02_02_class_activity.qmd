@@ -74,7 +74,7 @@ format:
     -   adding labels
     -   doing summary plots
     -   getting fancy
--   combining or splittig dataframes - the bind_rows(1,2)
+-   combining or splitting dataframes - the bind_rows(1,2)
 -   Do we go wide to long and back again? We will see
 :::
 

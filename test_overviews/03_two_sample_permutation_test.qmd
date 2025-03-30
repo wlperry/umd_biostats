@@ -1,0 +1,428 @@
+---
+title: "Two Sample Permutation Test"
+author: "Bill Perry"
+execute:
+  freeze: false
+  cache: true
+  echo: true
+format:
+  html:
+    toc: false
+    output-file: "03_permutation_two_sample_test_html.html"
+    embed-resources: true
+    css: ../css/activity.css
+  docx:
+    default: true
+    toc: false
+    toc-depth: 3
+    number-sections: false
+    highlight-style: github
+    reference-doc: ../ms_templates/custom-reference.docx
+    css: ../css/msword.css
+    embed-resources: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Introduction to Permutation Tests
+
+## Background and Theory
+
+Permutation tests (also known as randomization tests) are non-parametric methods used to test hypotheses without making assumptions about the underlying distribution of the data. This makes them particularly valuable when:
+
+1.  Sample sizes are small
+2.  Data violate normality assumptions
+3.  Data have unequal variances
+4.  Outliers are present
+
+For comparing two independent groups, a permutation test assesses whether the observed difference between groups is likely to occur by chance if there were no true difference between them.
+
+The null and alternative hypotheses are:
+
+$$H_0: \text{The two samples come from the same distribution}$$ $$H_A: \text{The two samples come from different distributions}$$
+
+More specifically, for comparing means:
+
+$$H_0: \mu_1 = \mu_2$$ $$H_A: \mu_1 \neq \mu_2$$
+
+## How Permutation Tests Work
+
+The permutation test follows these steps:
+
+1.  Calculate the observed test statistic (e.g., difference in means) between the two groups.
+2.  Randomly reassign the observations to the two groups, maintaining the original group sizes.
+3.  Calculate the test statistic for this random permutation.
+4.  Repeat steps 2-3 many times (typically 1,000 to 10,000 times) to build a distribution of test statistics under the null hypothesis.
+5.  Calculate the p-value as the proportion of permuted test statistics that are as extreme as or more extreme than the observed test statistic.
+
+The key insight is that if the null hypothesis is true (no difference between groups), then the group labels are essentially arbitrary, and any permutation of the labels is equally likely.
+
+# Data Analysis
+
+## Loading Libraries and Data
+
+```{r}
+# Load required libraries
+library(tidyverse)
+library(coin)  # For permutation tests
+library(rcompanion)  # For plotNormalHistogram
+```
+
+```{r}
+# Load the data
+sculpin_data <- read_csv("data/sculpin.csv")
+
+# Preview the data
+head(sculpin_data)
+```
+
+## Data Overview
+
+Let's first examine the structure of our dataset:
+
+```{r}
+# Structure of the dataset
+str(sculpin_data)
+
+# Summary statistics
+summary(sculpin_data)
+
+# Check for missing values
+colSums(is.na(sculpin_data))
+```
+
+## Data Preparation
+
+For our analysis, we'll filter the data to include only the two lakes we're interested in comparing (S 07 and NE 14) and remove any missing values:
+
+```{r}
+# Select lakes for comparison
+lakes_to_compare <- c("S 07", "NE 14")
+
+# Filter data
+sculpin_filtered <- sculpin_data %>%
+  filter(lake %in% lakes_to_compare) %>%
+  filter(!is.na(total_length_mm))
+
+# Create individual datasets for each lake
+s07_data <- sculpin_filtered %>% filter(lake == "S 07")
+ne14_data <- sculpin_filtered %>% filter(lake == "NE 14")
+
+# Check the number of observations per lake and get basic statistics
+lake_stats <- sculpin_filtered %>%
+  group_by(lake) %>%
+  summarize(
+    n = n(),
+    mean = mean(total_length_mm),
+    sd = sd(total_length_mm),
+    se = sd / sqrt(n),
+    var = var(total_length_mm),
+    median = median(total_length_mm),
+    min = min(total_length_mm),
+    max = max(total_length_mm)
+  )
+
+print(lake_stats)
+```
+
+# Data Visualization
+
+Let's visualize our data to better understand the distributions and differences between the two lakes:
+
+## Box Plot with Individual Data Points
+
+```{r fig.width=10, fig.height=6}
+# Create boxplot with individual points
+ggplot(sculpin_filtered, aes(x = lake, y = total_length_mm, fill = lake)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA) +
+  geom_point(position = position_dodge2(width = 0.3), 
+             alpha = 0.5, size = 2) +
+  labs(
+    title = "Total Length of Slimy Sculpin Fish by Lake",
+    x = "Lake",
+    y = "Total Length (mm)",
+    fill = "Lake"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    legend.position = "bottom"
+  ) +
+  scale_fill_brewer(palette = "Set2")
+```
+
+The boxplot shows the distribution of total lengths for each lake. The box represents the interquartile range (IQR, from the 25th to 75th percentile), with the horizontal line inside the box indicating the median. The individual points help us visualize the full distribution of the data.
+
+## Density Plots
+
+Let's also create density plots to better visualize the distribution shapes:
+
+```{r fig.width=10, fig.height=6}
+# Create density plots
+ggplot(sculpin_filtered, aes(x = total_length_mm, fill = lake)) +
+  geom_density(alpha = 0.6) +
+  labs(
+    title = "Density Distribution of Slimy Sculpin Total Length by Lake",
+    x = "Total Length (mm)",
+    y = "Density",
+    fill = "Lake"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    legend.position = "bottom"
+  ) +
+  scale_fill_brewer(palette = "Set2")
+```
+
+The density plots show the continuous distribution of lengths for each lake, helping us visualize the overall shape, central tendency, and spread of the data.
+
+# Why Use a Permutation Test?
+
+Before proceeding with a permutation test, let's examine whether the data meet the assumptions for parametric tests like the t-test:
+
+## Assessing Normality
+
+```{r fig.width=10, fig.height=5}
+# Create normal quantile plots for each lake with a normal histogram
+par(mfrow = c(1, 2))
+
+# Lake S 07
+plotNormalHistogram(s07_data$total_length_mm,
+                    main = "Distribution of Total Length for Lake S 07",
+                    xlab = "Total Length (mm)")
+
+# Lake NE 14
+plotNormalHistogram(ne14_data$total_length_mm,
+                    main = "Distribution of Total Length for Lake NE 14",
+                    xlab = "Total Length (mm)")
+```
+
+```{r}
+# Shapiro-Wilk test for normality
+shapiro_s07 <- shapiro.test(s07_data$total_length_mm)
+shapiro_ne14 <- shapiro.test(ne14_data$total_length_mm)
+
+cat("Shapiro-Wilk test for Lake S 07:\n")
+print(shapiro_s07)
+
+cat("\nShapiro-Wilk test for Lake NE 14:\n")
+print(shapiro_ne14)
+```
+
+## Assessing Variance Equality
+
+```{r}
+# F-test for equality of variances
+var_test <- var.test(total_length_mm ~ lake, data = sculpin_filtered)
+print(var_test)
+
+# Calculate variance ratio
+var_ratio <- max(lake_stats$var) / min(lake_stats$var)
+cat("Variance ratio (larger/smaller):", var_ratio)
+```
+
+## Interpretation of Assumption Tests
+
+Based on the results of our assumption tests, a permutation test is appropriate because:
+
+1.  **Normality**: The normal quantile plots and Shapiro-Wilk tests suggest potential departures from normality in the data.
+
+2.  **Variance Equality**: The F-test indicates that the variances may not be equal between the two lakes.
+
+3.  **Robustness**: Permutation tests are robust to violations of these assumptions and provide a valid test regardless of the underlying distributions.
+
+# Performing the Permutation Test
+
+Now let's perform a permutation test to compare the total lengths between the two lakes:
+
+Manual Implementation of Permutation Test
+
+We can also implement the permutation test manually to better understand the process:
+
+```{r}
+# Set the number of permutations
+n_permutations <- 10000
+
+# Calculate the observed difference in means
+observed_diff <- mean(s07_data$total_length_mm) - mean(ne14_data$total_length_mm)
+
+# Initialize a vector to store permutation results
+perm_diffs <- numeric(n_permutations)
+
+# Combine all measurements
+all_lengths <- sculpin_filtered$total_length_mm
+
+# Get the sizes of the two groups
+n1 <- nrow(s07_data)
+n2 <- nrow(ne14_data)
+
+# Perform the permutation test
+set.seed(123)  # For reproducibility
+for (i in 1:n_permutations) {
+  # Randomly shuffle the data
+  shuffled <- sample(all_lengths)
+  
+  # Divide into two groups of the original sizes
+  group1 <- shuffled[1:n1]
+  group2 <- shuffled[(n1+1):(n1+n2)]
+  
+  # Calculate and store the difference in means
+  perm_diffs[i] <- mean(group1) - mean(group2)
+}
+
+# Calculate two-sided p-value
+p_value_manual <- mean(abs(perm_diffs) >= abs(observed_diff))
+
+cat("Observed difference in means:", observed_diff, "\n")
+cat("Permutation test p-value (two-sided):", p_value_manual, "\n")
+
+# Visualize the permutation distribution
+ggplot(data.frame(diff = perm_diffs), aes(x = diff)) +
+  geom_histogram(bins = 50, fill = "skyblue", color = "black") +
+  geom_vline(xintercept = observed_diff, color = "red", linewidth = 1) +
+  geom_vline(xintercept = -observed_diff, color = "red", linewidth = 1, linetype = "dashed") +
+  labs(
+    title = "Permutation Distribution of Difference in Means",
+    subtitle = paste("Red lines: observed difference (±", round(abs(observed_diff), 2), ")"),
+    x = "Difference in Means",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        plot.subtitle = element_text(hjust = 0.5))
+```
+
+# Mean and Standard Error Plot with Permutation Test Results
+
+```{r fig.width=10, fig.height=6}
+# Calculate means and standard errors
+lake_means <- sculpin_filtered %>%
+  group_by(lake) %>%
+  summarize(
+    mean = mean(total_length_mm),
+    se = sd(total_length_mm) / sqrt(n())
+  )
+
+# Format p-value text
+p_value_text <- ifelse(p_value_manual < 0.001, 
+                       "p < 0.001", 
+                       paste("p =", round(p_value_manual, 3)))
+
+# Create mean and standard error plot with data points
+ggplot() +
+  # Add individual data points in the background
+  geom_point(data = sculpin_filtered, 
+             aes(x = lake, y = total_length_mm, color = lake),
+             position = position_dodge2(width = 0.3), 
+             alpha = 0.5, size = 1.5) +
+  # Add mean and standard error
+  geom_point(data = lake_means, 
+             aes(x = lake, y = mean, color = lake),
+             size = 4, position = position_dodge(width = 0.3)) +
+  geom_errorbar(data = lake_means, 
+                aes(x = lake, ymin = mean - se, ymax = mean + se, color = lake),
+                width = 0.2, size = 1, position = position_dodge(width = 0.3)) +
+  # Add annotations for the means
+  geom_text(data = lake_means,
+            aes(x = lake, y = mean + se + 3, 
+                label = paste0(round(mean, 1), " ± ", round(se, 1), " mm")),
+            size = 3.5) +
+  # Add permutation test result
+  annotate("text", x = 1.5, y = max(sculpin_filtered$total_length_mm) + 5,
+           label = paste0("Permutation test: ", p_value_text, 
+                          " (", n_permutations, " permutations)"),
+           size = 3.5) +
+  labs(
+    title = "Mean Total Length (± SE) of Slimy Sculpin Fish by Lake",
+    x = "Lake",
+    y = "Total Length (mm)",
+    color = "Lake",
+    caption = paste0("n(S 07) = ", nrow(s07_data), ", n(NE 14) = ", nrow(ne14_data))
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    legend.position = "bottom"
+  ) +
+  scale_color_brewer(palette = "Set2")
+```
+
+# Interpreting the Permutation Test Results
+
+```{r}
+# Calculate means and other statistics for reporting
+mean_se_by_lake <- sculpin_filtered %>%
+  group_by(lake) %>%
+  summarize(
+    n = n(),
+    mean = mean(total_length_mm),
+    sd = sd(total_length_mm),
+    se = sd / sqrt(n),
+    median = median(total_length_mm)
+  )
+
+print(mean_se_by_lake)
+
+
+```
+
+```{r}
+# Calculate mean difference and percent difference
+mean_diff <- diff(mean_se_by_lake$mean)
+abs_mean_diff <- abs(mean_diff)
+percent_diff <- abs_mean_diff / min(mean_se_by_lake$mean) * 100
+
+cat("Absolute mean difference:", round(abs_mean_diff, 2), "mm\n")
+cat("Percent difference:", round(percent_diff, 1), "%\n")
+```
+
+## Understanding the Permutation Test Results
+
+The permutation test provides a p-value that represents the probability of observing a difference as extreme as, or more extreme than, the observed difference in means between the two lakes if the null hypothesis were true (i.e., if there were no real difference between lakes).
+
+Our analysis shows:
+
+1.  **Observed Difference**: The observed difference in mean total length between Lake S 07 and Lake NE 14 is `r round(abs_mean_diff, 2)` mm.
+
+2.  **p-value**: The permutation test yielded a p-value of `r ifelse(p_value_manual < 0.001, "< 0.001", round(p_value_manual, 3))` based on `r n_permutations` random permutations.
+
+3.  **Interpretation**: Since the p-value is `r ifelse(p_value_manual < 0.05, "less than 0.05", "greater than 0.05")`, we `r ifelse(p_value_manual < 0.05, "reject", "fail to reject")` the null hypothesis. This indicates that the observed difference in fish length between the two lakes is `r ifelse(p_value_manual < 0.05, "statistically significant and unlikely to have occurred by chance", "not statistically significant")`.
+
+4.  **Visualization**: The permutation distribution graph shows the distribution of mean differences we would expect to see under the null hypothesis, with the observed difference marked by the red line. The fact that the observed difference falls `r ifelse(p_value_manual < 0.05, "in the extreme tails", "within the main body")` of this distribution supports our conclusion.
+
+## Advantages of the Permutation Test
+
+The permutation test offered several advantages for this analysis:
+
+1.  **No Distributional Assumptions**: Unlike parametric tests like the t-test, permutation tests don't require the data to follow a normal distribution.
+
+2.  **Robust to Unequal Variances**: Permutation tests are valid even when the two groups have different variances.
+
+3.  **Appropriate for Small Samples**: Permutation tests can provide valid inference even with smaller sample sizes.
+
+4.  **Intuitive Interpretation**: The permutation approach provides a direct, intuitive way to assess how likely the observed difference is under the null hypothesis.
+
+5.  **Exact p-values**: With enough permutations, we can get very precise p-values without relying on theoretical approximations.
+
+# How to Report These Results in a Scientific Publication
+
+When reporting these results in a scientific publication, follow this format:
+
+"Slimy sculpin (*Cottus cognatus*) from Lake S 07 were significantly larger than those from Lake NE 14 (`r round(mean_se_by_lake$mean[mean_se_by_lake$lake == "S 07"], 2)` ± `r round(mean_se_by_lake$se[mean_se_by_lake$lake == "S 07"], 2)` mm vs. `r round(mean_se_by_lake$mean[mean_se_by_lake$lake == "NE 14"], 2)` ± `r round(mean_se_by_lake$se[mean_se_by_lake$lake == "NE 14"], 2)` mm, respectively; permutation test with `r n_permutations` permutations, p `r ifelse(p_value_manual < 0.001, "< 0.001", paste("=", round(p_value_manual, 3)))`)."
+
+For the methods section:
+
+"Due to violations of parametric test assumptions, differences in sculpin length between lakes were assessed using a permutation test with `r n_permutations` random permutations. This non-parametric approach was chosen because it does not require normality or equal variances between groups, making it robust to the characteristics of our dataset."
+
+For figures, include a caption such as:
+
+"Figure X. Total length (mean ± SE) of slimy sculpin fish from two Arctic lakes. Fish from Lake S 07 (n = 73) were significantly larger than those from Lake NE 14 (n = 37) (permutation test with 10,000 permutations, p \< 0.001)."
+
+# Conclusion
+
+The permutation test is a powerful, robust alternative to parametric tests for comparing groups when assumptions of normality or equal variances are violated. In our analysis, it revealed a significant difference in the total length of slimy sculpin fish between Lake S 07 and Lake NE 14, with fish from Lake S 07 being approximately `r round(percent_diff, 1)`% larger on average.
+
+The non-parametric nature of the permutation test provides confidence in these results regardless of the underlying distributions of the data, making it an excellent choice for ecological data that often exhibit non-normal distributions or heterogeneous variances.

@@ -1,0 +1,435 @@
+---
+title: "Two Sample T-Test"
+author: "Bill Perry"
+execute:
+  freeze: false
+  cache: true
+  echo: true
+format:
+  html:
+    toc: false
+    output-file: "two_sample_ttest_html.html"
+    embed-resources: true
+    css: ../css/activity.css
+    code-tools:
+      source: true
+  docx:
+    default: true
+    toc: false
+    toc-depth: 3
+    number-sections: false
+    highlight-style: github
+    reference-doc: ../ms_templates/custom-reference.docx
+    css: ../css/msword.css
+    embed-resources: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Introduction to Two-Sample t-Test
+
+## Background and Theory
+
+The two-sample t-test (also known as independent samples t-test) is used to determine whether there is a statistically significant difference between the means of two independent groups. In this analysis, we will examine whether there are significant differences in the total length of slimy sculpin fish between two different lakes.
+
+The two-sample t-test makes the following comparison:
+
+$$H_0: \mu_1 = \mu_2$$ $$H_A: \mu_1 \neq \mu_2$$
+
+Where: - $H_0$ is the null hypothesis stating that the population means are equal - $H_A$ is the alternative hypothesis stating that the population means are different - $\mu_1$ is the population mean of the first group - $\mu_2$ is the population mean of the second group
+
+## Formula
+
+The formula for the two-sample t-test with equal variances (pooled variance) is:
+
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}$$
+
+Where: - $\bar{x}_1$ is the sample mean of the first group - $\bar{x}_2$ is the sample mean of the second group - $s_p$ is the pooled standard deviation - $n_1$ is the sample size of the first group - $n_2$ is the sample size of the second group
+
+The pooled standard deviation is calculated as:
+
+$$s_p = \sqrt{\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2}}$$
+
+Where: - $s_1^2$ is the variance of the first group - $s_2^2$ is the variance of the second group
+
+The degrees of freedom (df) for this test is $n_1 + n_2 - 2$.
+
+For unequal variances (Welch's t-test), the formula is slightly different:
+
+$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
+
+With degrees of freedom approximated using the Welch-Satterthwaite equation:
+
+$$df = \frac{(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2}{\frac{(s_1^2/n_1)^2}{n_1-1} + \frac{(s_2^2/n_2)^2}{n_2-1}}$$
+
+# Data Analysis
+
+## Loading Libraries and Data
+
+```{r}
+# Load required libraries
+library(tidyverse)
+library(car)  # For Levene's test
+library(ggpubr)  # For adding p-values to plots
+
+# Load the data
+sculpin_data <- read_csv("data/sculpin.csv")
+
+# Preview the data
+head(sculpin_data)
+
+
+```
+
+## Data Overview
+
+Let's first examine the structure of our dataset:
+
+```{r}
+# Structure of the dataset
+str(sculpin_data)
+
+# Summary statistics
+summary(sculpin_data)
+
+# Check for missing values
+colSums(is.na(sculpin_data))
+```
+
+## Data Preparation
+
+For our analysis, we'll filter the data to include only the two lakes we're interested in comparing (S 07 and NE 14) and remove any missing values:
+
+```{r}
+# Select lakes for comparison
+lakes_to_compare <- c("S 07", "NE 14")
+
+# Filter data
+sculpin_filtered <- sculpin_data %>%
+  filter(lake %in% lakes_to_compare) %>%
+  filter(!is.na(total_length_mm))
+
+# Create individual datasets for each lake
+s07_data <- sculpin_filtered %>% filter(lake == "S 07")
+ne14_data <- sculpin_filtered %>% filter(lake == "NE 14")
+
+# Check the number of observations per lake
+sculpin_filtered %>%
+  group_by(lake) %>%
+  summarize(
+    count = n(),
+    mean_length = mean(total_length_mm),
+    sd_length = sd(total_length_mm),
+    se_length = sd_length / sqrt(count)
+  )
+```
+
+## Data Visualization
+
+### Box Plot with Individual Data Points
+
+Let's create a box plot with individual data points to visualize the distribution of total length in the two lakes:
+
+```{r fig.width=10, fig.height=6}
+# Create boxplot with individual points
+ggplot(sculpin_filtered, aes(x = lake, y = total_length_mm, fill = lake)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA) +
+  geom_point(position = position_dodge2(width = 0.3), 
+             alpha = 0.5, size = 2) +
+  labs(
+    title = "Total Length of Slimy Sculpin Fish by Lake",
+    x = "Lake",
+    y = "Total Length (mm)",
+    fill = "Lake"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    legend.position = "bottom"
+  ) +
+  scale_fill_brewer(palette = "Set2")
+```
+
+### Mean and Standard Error Plot
+
+Now, let's create a plot showing the mean and standard error for each lake, with individual data points in the background:
+
+```{r fig.width=10, fig.height=6}
+# Create mean and standard error plot with data points
+ggplot(sculpin_filtered, aes(x = lake, y = total_length_mm, color = lake)) +
+  # Add individual data points in the background
+  geom_point(position = position_dodge2(width = 0.3), 
+             alpha = 0.5, size = 1.5) +
+  # Add mean and standard error
+  stat_summary(fun = mean, geom = "point", size = 4) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.1) +
+  labs(
+    title = "Mean Total Length (± SE) of Slimy Sculpin Fish by Lake",
+    x = "Lake",
+    y = "Total Length (mm)",
+    color = "Lake"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    legend.position = "bottom"
+  ) +
+  scale_color_brewer(palette = "Set2")
+```
+
+# Testing t-Test Assumptions
+
+Before conducting the t-test, we need to verify that our data meets the underlying assumptions:
+
+## Assumptions of the Two-Sample t-Test
+
+1.  **Independence**: The observations within each group are independent, and the two groups are independent of each other.
+2.  **Normality**: The data in each group follow a normal distribution.
+3.  **Homogeneity of Variances**: The variances of the two groups are approximately equal (for the standard t-test).
+
+Let's test each of these assumptions:
+
+### 1. Independence Assumption
+
+Independence is a design issue and can't be tested statistically. We assume our sampling design ensures independence between and within groups.
+
+### 2. Normality Assumption
+
+We'll check normality using: - Histograms - Q-Q plots - Shapiro-Wilk test
+
+#### Histograms
+
+```{r fig.width=10, fig.height=5}
+# Create histograms for both lakes
+par(mfrow = c(1, 2))
+
+# Lake S 07
+hist(s07_data$total_length_mm, 
+     main = "Histogram of Total Length for Lake S 07",
+     xlab = "Total Length (mm)",
+     col = "lightblue",
+     breaks = 10)
+
+# Lake NE 14
+hist(ne14_data$total_length_mm, 
+     main = "Histogram of Total Length for Lake NE 14",
+     xlab = "Total Length (mm)",
+     col = "lightgreen",
+     breaks = 8)
+```
+
+#### 
+
+### QQ Plots
+
+Let's create individual QQ plots for each lake:
+
+```{r fig.width=5, fig.height=4}
+# QQ plot for Lake S 07
+s07_data <- sculpin_filtered %>% filter(lake == "S 07")
+ggplot(data = s07_data, aes(sample = total_length_mm)) +
+  stat_qq() +
+  stat_qq_line() +
+  labs(
+    title = "Q-Q Plot for Lake S 07",
+    x = "Theoretical Quantiles",
+    y = "Sample Quantiles"
+  ) +
+  theme_minimal()
+```
+
+```{r fig.width=5, fig.height=4}
+# QQ plot for Lake NE 14
+ne14_data <- sculpin_filtered %>% filter(lake == "NE 14")
+ggplot(data = ne14_data, aes(sample = total_length_mm)) +
+  stat_qq() +
+  stat_qq_line() +
+  labs(
+    title = "Q-Q Plot for Lake NE 14",
+    x = "Theoretical Quantiles",
+    y = "Sample Quantiles"
+  ) +
+  theme_minimal()
+```
+
+### Shapiro-Wilk Test
+
+```{r}
+# Shapiro-Wilk test for Lake S 07
+shapiro_s07 <- shapiro.test(s07_data$total_length_mm)
+print("Shapiro-Wilk test for Lake S 07:")
+print(shapiro_s07)
+
+# Shapiro-Wilk test for Lake NE 14
+shapiro_ne14 <- shapiro.test(ne14_data$total_length_mm)
+print("Shapiro-Wilk test for Lake NE 14:")
+print(shapiro_ne14)
+
+# Summary table
+shapiro_results <- data.frame(
+  Lake = c("S 07", "NE 14"),
+  W_statistic = c(shapiro_s07$statistic, shapiro_ne14$statistic),
+  p_value = c(shapiro_s07$p.value, shapiro_ne14$p.value),
+  is_normal = c(shapiro_s07$p.value > 0.05, shapiro_ne14$p.value > 0.05)
+)
+
+knitr::kable(shapiro_results, caption = "Shapiro-Wilk Test Results")
+```
+
+### 3. Homogeneity of Variances
+
+We'll check for homogeneity of variances using: - Visual inspection of boxplots (already done above) - Levene's test
+
+```{r}
+# Calculate variances for each group
+s07_variance <- var(s07_data$total_length_mm)
+ne14_variance <- var(ne14_data$total_length_mm)
+
+# Print variances
+cat("Variance for Lake S 07:", s07_variance, "\n")
+cat("Variance for Lake NE 14:", ne14_variance, "\n")
+
+# Calculate variance ratio
+variance_ratio <- max(s07_variance, ne14_variance) / min(s07_variance, ne14_variance)
+cat("Variance ratio (larger/smaller):", variance_ratio, "\n")
+
+# Levene's test for homogeneity of variances
+levene_test <- leveneTest(total_length_mm ~ lake, data = sculpin_filtered)
+print(levene_test)
+```
+
+## Interpretation of Assumption Tests
+
+Based on the results of our assumption tests:
+
+1.  **Independence**: We assume this is met based on the data collection process, as samples from each lake were collected independently of one another.
+
+2.  **Normality**:
+
+    -   The Q-Q plots show that the data points largely follow the theoretical normal distribution line for both lakes, with some minor deviations at the extremes.
+    -   The Shapiro-Wilk test results will help us formally assess normality. If the p-value is greater than 0.05, we fail to reject the null hypothesis that the data is normally distributed.
+    -   For samples larger than 30, the Central Limit Theorem suggests that the sampling distribution of means will be approximately normal regardless of the underlying distribution.
+
+3.  **Homogeneity of Variances**:
+
+    -   Levene's test evaluates whether the variances between groups are equal.
+    -   A p-value greater than 0.05 indicates that we cannot reject the null hypothesis of equal variances.
+    -   As a rule of thumb, if the variance ratio is less than 4:1, the t-test is reasonably robust to violations of this assumption.
+    -   If this assumption is violated, we should consider using Welch's t-test instead, which does not assume equal variances.
+
+# Two-Sample t-Test
+
+Now that we've checked the assumptions, we can perform the two-sample t-test:
+
+```{r}
+# Perform the t-test with equal variance (standard t-test)
+t_test_equal_var <- t.test(
+  total_length_mm ~ lake,
+  data = sculpin_filtered,
+  var.equal = TRUE  # Use pooled variance
+)
+
+# Display the results
+print("Two-sample t-test with equal variances:")
+print(t_test_equal_var)
+
+# For comparison, also perform Welch's t-test (unequal variances)
+t_test_welch <- t.test(
+  total_length_mm ~ lake,
+  data = sculpin_filtered,
+  var.equal = FALSE  # Use Welch's correction
+)
+
+print("\nWelch's t-test (unequal variances):")
+print(t_test_welch)
+
+# Extract key values for reporting
+t_statistic <- round(t_test_equal_var$statistic, 2)
+df <- t_test_equal_var$parameter
+p_value <- t_test_equal_var$p.value
+mean_diff <- round(diff(t_test_equal_var$estimate), 2)
+```
+
+## Line-by-Line Interpretation of t-Test Results
+
+Let's break down the t-test output:
+
+1.  **Test Type**: Two Sample t-test
+2.  **Formula**: `total_length_mm ~ lake` means we're testing if total length differs by lake
+3.  **Data**: Our filtered sculpin dataset
+4.  **t-value**: The calculated t-statistic
+5.  **Degrees of Freedom (df)**: n₁ + n₂ - 2
+6.  **p-value**: The probability of observing this data (or more extreme) if the null hypothesis is true
+7.  **Alternative Hypothesis**: The means are different
+8.  **95% Confidence Interval**: The estimated range for the true difference in means
+9.  **Sample Estimates**: The means of each group
+
+## Visual Representation of t-Test Results
+
+```{r fig.width=10, fig.height=6}
+# Create a plot with the t-test results
+p_value_text <- ifelse(p_value < 0.001, "p < 0.001", paste("p =", round(p_value, 3)))
+
+ggplot(sculpin_filtered, aes(x = lake, y = total_length_mm, fill = lake)) +
+  geom_boxplot(alpha = 0.7, outlier.shape = NA) +
+  geom_point(position = position_dodge(width = 0.3), 
+             alpha = 0.5, size = 2) +
+  annotate("text", x = 1.5, y = max(sculpin_filtered$total_length_mm) + 5,
+           label = paste0("t(", round(df), ") = ", t_statistic, ", ", p_value_text),
+           size = 4) +
+  labs(
+    title = "Total Length of Slimy Sculpin Fish by Lake with t-test Results",
+    x = "Lake",
+    y = "Total Length (mm)",
+    fill = "Lake",
+    caption = paste0("n(S 07) = ", nrow(s07_data), ", n(NE 14) = ", nrow(ne14_data))
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    legend.position = "bottom"
+  ) +
+  scale_fill_brewer(palette = "Set2")
+```
+
+# Conclusion and Scientific Reporting
+
+```{r}
+# Calculate means and standard errors for reporting
+mean_se_by_lake <- sculpin_filtered %>%
+  group_by(lake) %>%
+  summarize(
+    n = n(),
+    mean = mean(total_length_mm),
+    sd = sd(total_length_mm),
+    se = sd / sqrt(n)
+  )
+
+print(mean_se_by_lake)
+
+# Calculate percent difference
+percent_diff <- abs(diff(mean_se_by_lake$mean)) / min(mean_se_by_lake$mean) * 100
+```
+
+Based on our analysis, we can conclude:
+
+The total length of slimy sculpin fish differs significantly between Lake S 07 and Lake NE 14 (two-sample t-test: t(`r round(df)`) = `r t_statistic`, p \< 0.001). Fish from Lake S 07 were on average `r abs(mean_diff)` mm longer than those from Lake NE 14 (mean ± SE: `r round(mean_se_by_lake$mean[mean_se_by_lake$lake == "S 07"], 2)` ± `r round(mean_se_by_lake$se[mean_se_by_lake$lake == "S 07"], 2)` mm vs. `r round(mean_se_by_lake$mean[mean_se_by_lake$lake == "NE 14"], 2)` ± `r round(mean_se_by_lake$se[mean_se_by_lake$lake == "NE 14"], 2)` mm).
+
+## How to Report These Results in a Scientific Publication
+
+When reporting these results in a scientific publication, follow this format:
+
+"Slimy sculpin (*Cottus cognatus*) from Lake S 07 were significantly larger than those from Lake NE 14 (`r round(mean_se_by_lake$mean[mean_se_by_lake$lake == "S 07"], 2)` ± `r round(mean_se_by_lake$se[mean_se_by_lake$lake == "S 07"], 2)` mm vs. `r round(mean_se_by_lake$mean[mean_se_by_lake$lake == "NE 14"], 2)` ± `r round(mean_se_by_lake$se[mean_se_by_lake$lake == "NE 14"], 2)` mm, respectively; two-sample t-test: t(`r round(df)`) = `r t_statistic`, p \< 0.001). This represents an approximately `r round(percent_diff, 1)`% difference in total length between the two populations."
+
+For figures, include:
+
+1.  A boxplot or mean/SE plot showing the difference
+2.  Clear labels and scales
+3.  Sample sizes
+4.  Statistical test information in the figure caption
+
+A typical caption would read:
+
+"Figure X. Total length (mean ± SE) of slimy sculpin fish from two Arctic lakes. Fish from Lake S 07 (n = 73) were significantly larger than those from Lake NE 14 (n = 37) (two-sample t-test: t(108) = 3.46, p \< 0.001)."

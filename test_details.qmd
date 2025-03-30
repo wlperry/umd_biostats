@@ -1,0 +1,37 @@
+---
+title: "Statistical Tests"
+format: 
+  html:
+    toc: false
+    toc-depth: 3
+  docx:
+    default: true
+    toc: false
+    toc-depth: 3
+    number-sections: false
+    highlight-style: github
+    reference-doc: ms_templates/custom-reference.docx
+    css: css/msword.css
+    embed-resources: true
+about:
+  template: marquee
+  links:
+    - icon: github
+      href: https://github.com/wlperry
+    - icon: envelope-heart-fill
+      href: mailto:wlperry@d.umn.edu
+---
+
+# This is a breif list of the statistical tests we have done.
+
+I will be adding tests as the course continues
+
+My hope is that this will be a resource you can download and use in the future.
+
+| Statistical Test | webpage | code |
+|--------------------|-------|-------|
+| **Two Sample Test** |  |  |
+| Parametric Two Sample TTest | [web](test_overviews/01_two_sample_ttest.qmd) | code |
+| NonParametric Welches Two Sample Test | [web](test_overviews/02_two_sample_welches_ttest.qmd) | code |
+| NonParametric Permutation Two Sample Test | [web](test_overviews/03_two_sample_permutation_test.qmd) | code |
+| NonParametric Mann Whitney U Two Sample Test | [web](test_overviews/04_two_sample_mann_whitney_u_test.qmd) | code |
