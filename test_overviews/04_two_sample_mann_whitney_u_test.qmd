@@ -67,8 +67,10 @@ If U is sufficiently small or large compared to what would be expected by chance
 ```{r}
 # Load required libraries
 library(tidyverse)
-library(ggpubr)  # For adding statistical test results to plots
-library(coin)    # For exact Mann-Whitney-Wilcoxon test
+library(car)  # For Levene's test
+library(ggpubr)  # For adding p-values to plots
+library(coin)  # For permutation tests
+library(rcompanion)  # For plotNormalHistogram
 
 
 ```

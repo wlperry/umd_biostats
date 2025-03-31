@@ -66,6 +66,8 @@ The key insight is that if the null hypothesis is true (no difference between gr
 ```{r}
 # Load required libraries
 library(tidyverse)
+library(car)  # For Levene's test
+library(ggpubr)  # For adding p-values to plots
 library(coin)  # For permutation tests
 library(rcompanion)  # For plotNormalHistogram
 ```
@@ -83,6 +85,7 @@ head(sculpin_data)
 Let's first examine the structure of our dataset:
 
 ```{r}
+#| paged-print: false
 # Structure of the dataset
 str(sculpin_data)
 

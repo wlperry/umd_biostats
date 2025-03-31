@@ -59,9 +59,13 @@ This often results in a non-integer value for degrees of freedom, which is why y
 ## Loading Libraries and Data
 
 ```{r}
+#| paged-print: false
 # Load required libraries
 library(tidyverse)
 library(car)  # For Levene's test
+library(ggpubr)  # For adding p-values to plots
+library(coin)  # For permutation tests
+library(rcompanion)  # For plotNormalHistogramlibrary(tidyverse)
 
 # Load the data
 sculpin_data <- read_csv("data/sculpin.csv")
@@ -75,6 +79,7 @@ head(sculpin_data)
 Let's first examine the structure of our dataset:
 
 ```{r}
+#| paged-print: false
 # Structure of the dataset
 str(sculpin_data)
 
@@ -90,6 +95,7 @@ colSums(is.na(sculpin_data))
 For our analysis, we'll filter the data to include only the two lakes we're interested in comparing (S 07 and NE 14) and remove any missing values:
 
 ```{r}
+#| paged-print: false
 # Select lakes for comparison
 lakes_to_compare <- c("S 07", "NE 14")
 
@@ -221,7 +227,7 @@ ggplot(sculpin_filtered, aes(x = lake, y = total_length_mm, color = lake)) +
              alpha = 0.5, size = 1.5) +
   # Add mean and standard error
   stat_summary(fun = mean, geom = "point", size = 3) +
-  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.1) +
   labs(
     title = "Mean Total Length (± SE) of Slimy Sculpin Fish by Lake",
     x = "Lake",
@@ -259,9 +265,12 @@ We'll check normality using: - Visual methods: Histograms and Q-Q plots - Formal
 
 #### Histograms
 
-```{r fig.width=10, fig.height=5}
+```{r fig.height=5, fig.width=10}
+#| paged-print: false
 # Create histograms for both lakes
 par(mfrow = c(1, 2))
+
+# note that this is base r plotting
 
 # Lake S 07
 hist(s07_data$total_length_mm, 
@@ -276,6 +285,21 @@ hist(ne14_data$total_length_mm,
      xlab = "Total Length (mm)",
      col = "lightgreen",
      breaks = 8)
+```
+
+```{r}
+# Create normal quantile plots for each lake with a normal histogram
+par(mfrow = c(1, 2))
+
+# Lake S 07
+plotNormalHistogram(s07_data$total_length_mm,
+                    main = "Distribution of Total Length for Lake S 07",
+                    xlab = "Total Length (mm)")
+
+# Lake NE 14
+plotNormalHistogram(ne14_data$total_length_mm,
+                    main = "Distribution of Total Length for Lake NE 14",
+                    xlab = "Total Length (mm)")
 ```
 
 #### QQ Plots
@@ -309,6 +333,7 @@ ggplot(data = ne14_data, aes(sample = total_length_mm)) +
 #### Shapiro-Wilk Test
 
 ```{r}
+#| paged-print: false
 # Shapiro-Wilk test for Lake S 07
 shapiro_s07 <- shapiro.test(s07_data$total_length_mm)
 print("Shapiro-Wilk test for Lake S 07:")
@@ -335,6 +360,7 @@ knitr::kable(shapiro_results, caption = "Shapiro-Wilk Test Results")
 We'll check for homogeneity of variances using: - Visual inspection of boxplots (already done above) - Levene's test
 
 ```{r}
+#| paged-print: false
 # Calculate variances for each group
 s07_variance <- var(s07_data$total_length_mm)
 ne14_variance <- var(ne14_data$total_length_mm)
@@ -376,6 +402,7 @@ Based on the results of our assumption tests:
 Now that we've examined our assumptions, let's perform Welch's t-test:
 
 ```{r}
+#| paged-print: false
 # Perform Welch's t-test (unequal variances)
 welch_t_test <- t.test(
   total_length_mm ~ lake,
@@ -419,6 +446,7 @@ Let's break down the output from the Welch's t-test:
 ## Visual Representation of t-Test Results
 
 ```{r fig.width=10, fig.height=6}
+#| paged-print: false
 # Create a plot with the t-test results
 p_value_text <- ifelse(p_value < 0.001, "p < 0.001", paste("p =", round(p_value, 3)))
 
@@ -518,5 +546,7 @@ For figures, include:
 4.  Statistical test information in the figure caption
 
 A typical caption would read:
+
+again adding in the mean +/- SE for each lake would be better
 
 "Figure X. Total length (mean ± SE) of slimy sculpin fish from two Arctic lakes. Fish from Lake S 07 (n = 73) were significantly larger than those from Lake NE 14 (n = 37) (two-sample t-test: t(108) = 3.46, p \< 0.001)."
