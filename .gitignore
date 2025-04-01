@@ -1,11 +1,8 @@
-
-
-
+# Project files
 .Rproj.user
-
 /.quarto/
 
-# ignore these directories
+# Directories to ignore
 /css/
 /data/
 /documents/
@@ -15,22 +12,12 @@
 /about_cache/
 /test_overviews/
 
-css/*
-data/*
-documents/*
-figures/*
-lectures/*
-ms_templates/*
-test_overviews/*
+# File types to ignore
 *.qmd
 *.txt
-about_cache/*
 *.png
 
-# But include these specific directories
+# Exceptions - files and directories to include
 !/docs/
-!/docs/*.*
-!/docs/lecture_01/
-!/docs/lecture_02/
+!/docs/**/*.html
 !/docs/lecture_*/
-!/docs/lecture_*/*.html
