@@ -12,16 +12,20 @@
 /figures/
 /lectures/
 /ms_templates/
+/about_cache/
+/test_overviews/
 
-css/*.*
-data/*.*
-documents/*.*
-figures/*.*
-lectures/*.*
-ms_templates/*.*
-
-
-
+css/*
+data/*
+documents/*
+figures/*
+lectures/*
+ms_templates/*
+test_overviews/*
+*.qmd
+*.txt
+about_cache/*
+*.png
 
 # But include these specific directories
 !/docs/

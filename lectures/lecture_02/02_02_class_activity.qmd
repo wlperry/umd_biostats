@@ -312,7 +312,11 @@ xy_plot
 
 lets say we want to summarize the data and need to get n, means, standard deviation, standard error
 
-We could do
+We could do the following - if we had missing cells the code below would give an error
+
+```{r}
+mean(p_df$len_mm) # removes missing values
+```
 
 ```{r}
 mean(p_df$len_mm, na.rm = TRUE) # removes missing values
@@ -435,7 +439,7 @@ mean_se_plot <- p_df %>%
 mean_se_plot
 ```
 
-# Using Skimr
+# Using skimr
 
 ```{r}
 #| paged-print: false # will put all output here
