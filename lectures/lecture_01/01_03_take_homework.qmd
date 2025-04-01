@@ -3,20 +3,18 @@ title: "01_Homework"
 author: "Bill Perry"
 execute:
   freeze: auto
-  dir: project
+  cache: true
+  echo: true
+  keep-md: true # retains the images when you start again
 format:
   html:
+    freeze: false
     toc: false
     output-file: "01_03_homework_html.html"
     default: true
     embed-resources: true
-    css: ../../css/activity.css
-  revealjs:
-    output-file: "01_03_homework_reveal.html"
-    default: true
     self-contained: true
-    slide-number: true
-    transition: fade
+    max-width: 80ch  # Limits line length to approximately 80 characters
     css: ../../css/activity.css
   docx:
     default: true
@@ -25,12 +23,8 @@ format:
     number-sections: false
     highlight-style: github
     reference-doc: ../../ms_templates/custom-reference.docx
-    css: ../../css/msword.css
+    css: msword.css
     embed-resources: true
-  pptx:
-    default: true
-    embed-resources: true
-    reference-doc: ../../ms_templates/lecture_template.pptx 
 ---
 
 # Homework for Week 1:
@@ -93,7 +87,7 @@ library(tidyverse) # provides utilities seen in console
 -   Visualize the data as mean plus or minus error in ggplot
     -   be sure to have proper axis labels and units where necessary
 
-## What to turn in - 
+## What to turn in -
 
 1.  a zipped or compressed folder of the entire project folder
 

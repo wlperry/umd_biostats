@@ -11,12 +11,6 @@ format:
     output-file: "01_2_class_activity_html.html"
     embed-resources: true
     css: ../../css/activity.css
-  revealjs:
-    output-file: "01_2_class_activity_slides.html"
-    self-contained: true
-    slide-number: true
-    transition: fade
-    css: ../../css/activity.css
   docx:
     default: true
     toc: false

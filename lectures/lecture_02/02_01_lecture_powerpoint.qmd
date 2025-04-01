@@ -59,6 +59,8 @@ Our first graph
 :::
 
 ::: {.column width="40%"}
+![](images/clipboard-568492770.png){width="390"}
+
 New image here
 :::
 :::::
@@ -67,8 +69,8 @@ New image here
 
 -   Data: the raw material of science
 -   Wide variety of formats, sizes, complexity
--   Data management and curation often underemphasized
--   Good data management: owe it to our funders, colleagues, supervisors, and study systems
+-   Data management and curation often under emphasized
+-   Good data management: owe it to our funding agencies, colleagues, supervisors, and study systems
 
 # Lecture 2: Data gathering - managing
 
@@ -97,6 +99,20 @@ Tidy data by Whickham
 [Tidy data](https://r4ds.hadley.nz/data-tidy.html)
 :::
 :::::
+
+::: callout-tip
+## Practice Exercise 1: Can you do this for the pine data we have collected?
+
+Let's recreate the basic histogram of fish lengths from our last class. Use the `sculpin_df` data frame that's already loaded.
+
+```{r}
+# Write your code here to read in the file
+# How do you examine the data - what are the ways you think and lets try it!
+
+
+
+```
+:::
 
 # Lecture 2: Data gathering - managing
 
@@ -139,6 +155,21 @@ data <- read_csv("your_file.csv",
 :::
 :::::
 
+::: callout-tip
+## Practice Exercise 2: Lets plot our data again
+
+Let's recreate the basic plots you might use to visualize the data and lets see what it looks like.
+
+```{r}
+# Lets practice making a plot!
+# What are the ways you want to see data and lets try them!
+
+
+
+
+```
+:::
+
 # Lecture 2: Data gathering - managing
 
 ::::: columns
@@ -147,13 +178,13 @@ data <- read_csv("your_file.csv",
 
 Cleaning Data -
 
-1.  Correct erors, fill missing data with "NA", resolve outliers
+1.  Correct errors, fill missing data with "NA", resolve outliers
 2.  save a clean data file as the master file - often good to make read only
 3.  Add information in a notes column or text file about what was done and why.
 :::
 
 ::: {.column width="40%"}
-image
+![](images/clipboard-814185367.png){width="509"}
 :::
 :::::
 
@@ -241,9 +272,36 @@ Broman KW, & Woo KH. 2018. Data organization in spreadsheets. The American Stat
 ::: {.column width="40%"}
 example of fish data
 
-![](images/clipboard-2905679869.png)
+![](images/clipboard-2905679869.png){width="666"}
 :::
 :::::
+
+::: callout-tip
+## Practice Exercise 3: How do we fix variable names?
+
+So there are two issues
+
+1.  what can you do when reading in file?
+2.  what can you do when the file is in and need to fix things
+
+```{r}
+# lets do # 2 first - no pun intended
+# if you wanted to rename variables what would would you do?
+
+# now time for #1 - there are tools to make your life easier
+# install.packages("janitor") # what does a janitor or BSW do?
+# library(janitor)
+# lets read in a messy file... junk.csv
+# first look at the file
+# df <- read_csv("data/junk.csv)
+# df_excel <- read_excel("data/junk.csv")
+
+
+
+```
+:::
+
+# 
 
 # Lecture 2: Data gathering - managing
 
@@ -259,9 +317,7 @@ example of fish data
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-4029723110.png)
-
-image
+![](images/clipboard-4029723110.png){width="676"}
 :::
 :::::
 
@@ -283,11 +339,22 @@ image
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1547652293.png){width="351"}
-
-image
+![](images/clipboard-1547652293.png){width="420"}
 :::
 :::::
+
+::: callout-tip
+## Practice Exercise 3: Are there ways to deal with excel and why is it a problem 
+
+Let's look at junk.xlsx
+
+```{r}
+# Write your code here to create a histogram of fish lengths from Toolik Lake
+# Remember to use the pipe operator %>% and ggplot with geom_histogram()
+# copy the date to a new cell and make a number!
+
+```
+:::
 
 # Lecture 2: Data gathering - managing
 
@@ -304,8 +371,6 @@ image
 
 ::: {.column width="40%"}
 ![](images/clipboard-2160092094.png)
-
-image
 :::
 :::::
 
@@ -343,7 +408,13 @@ image
 ::: {.column width="40%"}
 ![](images/clipboard-3544614084.png){width="361"}
 
-We need to know what happened and why?
+We need to know what happened and why and the units and WTF it means?
+
+TGW - yep its a thing
+
+ODO - what do you think it is?
+
+NO3 - what is it? Are you sure? Why might you get in legal trouble if you used this?
 :::
 :::::
 

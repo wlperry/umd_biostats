@@ -118,7 +118,7 @@ format:
 
 4.  Now click File - New File - Quarto File
 
-![](images/clipboard-3396400631.png)
+![](images/clipboard-3396400631.png){width="697"}
 
 5.  Create a file that starts with `02_` and then something that will help you know what is going on like `02_class_activity_in_class.qmd`
 
@@ -164,7 +164,7 @@ Each script you run from then on you will load the libraries from within the pac
 library(readxl) # allows to read in excel files
 library(tidyverse) # provides utilities seen in console
 library(skimr) # provide summary stats
-library(here) # you dont need this one - just me in this html file
+library(janitor) # it cleans ; )
 ```
 
 # Loading files
@@ -176,9 +176,8 @@ We are going to work with the same data we did in the last class.
 ```{r}
 #| message: false
 #| warning: false
-#| include: false
 #| paged-print: false
-p_df <- read_csv(here("data", "lecture_01", "pine_needles.csv"))
+p_df <- read_csv("data/pine_needles.csv")
 
 ```
 
@@ -193,6 +192,8 @@ p_df <- read_csv(here("data", "lecture_01", "pine_needles.csv"))
 p_df <- read_csv("data/lecture_01/pine_needles.csv") # reads in csv file
 # dataframe stored by "<-" reading in csv file in quotes
 ```
+
+Can you do this in excel?
 
 # The Dataframe and variables
 

@@ -4873,10 +4873,9 @@ box-sizing: border-box !important;
 align-self: flex-start !important;
 }
 
+
 .reveal h2, .quarto-title-block h2, body h2 {
 font-size: 20px !important;
-background-color: #70131d !important;
-color: #F4CD54 !important;
 text-align: left !important;
 margin: 10px 0 15px 0 !important;
 padding: 10px 10px !important;
@@ -5104,6 +5103,182 @@ padding: 0 !important;
 .reveal p, .reveal ul, .reveal ol, .reveal li {
 max-width: 80ch !important;
 word-wrap: break-word !important;
+}
+
+
+.reveal pre,
+.reveal code,
+.reveal .sourceCode,
+.reveal .cell-output,
+.reveal div.sourceCode,
+.reveal pre.sourceCode,
+.reveal div.sourceCode pre {
+font-family: monospace !important;
+font-size: 10px !important; 
+line-height: 1.1 !important; 
+max-height: 400px !important; 
+overflow-y: auto !important; 
+background-color: #f5f5f5 !important; 
+border: 1px solid #ddd !important; 
+border-radius: 3px !important;
+padding: 6px !important;
+margin: 8px 0 !important;
+}
+
+.reveal .sourceLine,
+.reveal .code-line,
+.reveal .sourceCode .r,
+.reveal .sourceCode .python,
+.reveal .sourceCode code {
+font-size: 10px !important;
+line-height: 1.1 !important;
+}
+
+.reveal .numberLines pre code,
+.reveal .numberSource pre,
+.reveal .numberSource a.sourceLine {
+font-size: 10px !important;
+line-height: 1.1 !important;
+padding: 0 !important;
+}
+
+.reveal .r-output,
+.reveal .cell-output,
+.reveal .cell-output-stdout pre,
+.reveal .cell-output-stderr pre,
+.reveal .output-data-input pre {
+font-size: 10px !important;
+background-color: #f8f8f8 !important;
+color: #333333 !important;
+line-height: 1.1 !important;
+padding: 4px !important;
+}
+
+.reveal .cell-output-display table,
+.reveal .cell-output table,
+.reveal .cell-output th,
+.reveal .cell-output td {
+font-size: 10px !important;
+padding: 2px 4px !important;
+}
+
+.reveal .slides pre {
+width: 100% !important;
+box-sizing: border-box !important;
+white-space: pre-wrap !important; 
+}
+
+.reveal .sourceCode .kw { color: #007020; font-weight: bold; } 
+.reveal .sourceCode .dt { color: #902000; } 
+.reveal .sourceCode .dv { color: #40a070; } 
+.reveal .sourceCode .bn { color: #40a070; } 
+.reveal .sourceCode .fl { color: #40a070; } 
+.reveal .sourceCode .ch { color: #4070a0; } 
+.reveal .sourceCode .st { color: #4070a0; } 
+.reveal .sourceCode .co { color: #60a0b0; font-style: italic; } 
+.reveal .sourceCode .ot { color: #007020; } 
+.reveal .sourceCode .fu { color: #06287e; } 
+.reveal .sourceCode .cn { color: #880000; } 
+.reveal .sourceCode .sc { color: #4070a0; } 
+.reveal .sourceCode .vs { color: #4070a0; } 
+
+.reveal pre code {
+max-width: 100% !important;
+word-wrap: normal !important;
+-moz-tab-size: 2 !important;
+-o-tab-size: 2 !important;
+tab-size: 2 !important;
+}
+
+.reveal .panel-code-source, .reveal .panel-code-output,
+.reveal .panel-code-output-scroll,
+.reveal .code-panel-source,
+.reveal .code-panel-output {
+font-size: 10px !important;
+line-height: 1.1 !important;
+}
+
+.reveal .tibble,
+.reveal pre.sourceCode {
+font-size: 10px !important;
+line-height: 1.1 !important;
+}
+
+.reveal pre,
+.reveal code,
+.reveal .sourceCode {
+font-size: 10px !important;
+line-height: 1.1 !important;
+}
+
+.reveal .remark-code,
+.reveal .line-numbers {
+font-size: 10px !important;
+}
+
+.reveal .cell-output-stdout pre:contains("A tibble") {
+font-size: 9px !important;
+}
+
+.reveal .exercise pre code {
+font-size: 13px !important; 
+}
+
+
+
+pre, code,
+pre.sourceCode,
+div.sourceCode, div.sourceCode pre,
+pre code,
+pre.r {
+font-family: monospace !important;
+font-size: 12px !important; 
+line-height: 1.2 !important; 
+max-height: 400px !important; 
+overflow-y: auto !important; 
+background-color: #f5f5f5 !important; 
+border: 1px solid #ddd !important; 
+border-radius: 3px !important;
+padding: 8px !important;
+}
+
+.sourceCode .sourceLine,
+.sourceCode code,
+.sourceCode .r,
+.sourceCode .python {
+font-size: 12px !important;
+line-height: 1.2 !important;
+}
+
+.cell-output,
+.cell-output-stdout pre,
+.cell-output-stderr pre,
+.cell-output-display pre {
+font-size: 12px !important;
+line-height: 1.2 !important;
+background-color: #f8f8f8 !important;
+padding: 6px !important;
+}
+
+.cell-output table,
+.cell-output th,
+.cell-output td,
+.dataframe,
+.tibble {
+font-size: 12px !important;
+line-height: 1.2 !important;
+padding: 3px 6px !important;
+}
+
+.code-tools-button {
+font-size: 12px !important;
+}
+
+@media (max-width: 767px) {
+pre, code, .sourceCode {
+font-size: 11px !important;
+padding: 6px !important;
+}
 }</style>
 </head>
 
