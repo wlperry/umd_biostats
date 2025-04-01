@@ -18,11 +18,11 @@
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_05/05_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-04-01T15:20:11.219Z</lastmod>
+    <lastmod>2025-04-01T16:03:24.777Z</lastmod>
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_05/05_01_lecture_powerpoint_slides.html</loc>
-    <lastmod>2025-04-01T15:20:11.219Z</lastmod>
+    <lastmod>2025-04-01T16:03:24.777Z</lastmod>
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_02/02_02_class_activity.html</loc>
@@ -37,52 +37,56 @@
     <lastmod>2025-03-31T20:51:10.586Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/syllabus.html</loc>
-    <lastmod>2025-03-25T20:35:42.093Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_06/06_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-04-01T21:27:21.191Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/about.html</loc>
-    <lastmod>2025-03-25T19:53:25.667Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/test_overviews/04_mann_whitnely_two_sample_test_html.html</loc>
-    <lastmod>2025-03-31T03:00:17.925Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/test_overviews/03_permutation_two_sample_test_html.html</loc>
-    <lastmod>2025-03-31T03:00:19.043Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/overview.html</loc>
-    <lastmod>2025-03-25T20:35:36.966Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/test_details.html</loc>
-    <lastmod>2025-03-30T04:30:02.170Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/test_overviews/two_sample_ttest_html.html</loc>
-    <lastmod>2025-03-31T20:40:08.986Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/test_overviews/02_welches_two_smple_ttest_html.html</loc>
-    <lastmod>2025-03-31T03:00:19.792Z</lastmod>
-  </url>
-  <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/index.html</loc>
-    <lastmod>2025-04-01T15:43:14.772Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_06/06_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-04-01T21:27:21.191Z</lastmod>
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/links.html</loc>
     <lastmod>2025-03-25T20:10:59.786Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_06/06_01_lecture_powerpoint_slides.html</loc>
-    <lastmod>2025-03-31T02:57:51.863Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/index.html</loc>
+    <lastmod>2025-04-01T15:43:14.772Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_06/06_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-03-31T02:57:51.863Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/test_overviews/02_welches_two_smple_ttest_html.html</loc>
+    <lastmod>2025-03-31T03:00:19.792Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/test_overviews/two_sample_ttest_html.html</loc>
+    <lastmod>2025-03-31T20:40:08.986Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/test_details.html</loc>
+    <lastmod>2025-03-30T04:30:02.170Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/overview.html</loc>
+    <lastmod>2025-03-25T20:35:36.966Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/test_overviews/03_permutation_two_sample_test_html.html</loc>
+    <lastmod>2025-03-31T03:00:19.043Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/test_overviews/04_mann_whitnely_two_sample_test_html.html</loc>
+    <lastmod>2025-03-31T03:00:17.925Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/about.html</loc>
+    <lastmod>2025-03-25T19:53:25.667Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/syllabus.html</loc>
+    <lastmod>2025-03-25T20:35:42.093Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_06/06_02_class_activity.html</loc>
+    <lastmod>2025-04-01T21:29:35.352Z</lastmod>
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_01/01_1_lecture_powerpoint_slides.html</loc>
