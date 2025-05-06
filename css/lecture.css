@@ -595,3 +595,109 @@ pre.r {
     padding: 6px !important;
   }
 }
+
+/* Target kable tables specifically */
+.kable_wrapper table,
+table.dataTable, 
+table.table {
+  font-size: 12px !important; /* Adjust this value as needed */
+}
+
+/* Target header and cells in kable tables */
+.kable_wrapper th, .kable_wrapper td,
+table.dataTable th, table.dataTable td,
+table.table th, table.table td {
+  font-size: 12px !important; /* Adjust this value as needed */
+}
+
+/* More specific selector for RevealJS slides */
+.reveal .slides table.table,
+.reveal .slides .kable_wrapper table {
+  font-size: 12px !important; /* Adjust this value as needed */
+}
+
+.reveal .slides table.table th,
+.reveal .slides table.table td,
+.reveal .slides .kable_wrapper th,
+.reveal .slides .kable_wrapper td {
+  font-size: 12px !important; /* Adjust this value as needed */
+  padding: 4px 6px !important;
+}
+
+/* Direct targeting for HTML output */
+.html-widget.datatables table,
+.html-widget.datatables th,
+.html-widget.datatables td {
+  font-size: 12px !important;
+}
+
+/* Additional selector that might be needed for Quarto */
+.quarto-table table,
+.quarto-table th,
+.quarto-table td {
+  font-size: 12px !important;
+}
+
+/* fix scroll */
+pre {
+  max-height: 1200px; /* Adjust as needed */
+  overflow-y: auto;
+}
+
+/* Make sure there's only one scrollbar */
+pre {
+  white-space: pre !important;
+  overflow-y: auto !important;
+  /* height: 50vh !important;  Adjust as needed */
+}
+
+pre code {
+  overflow-y: hidden !important;
+}
+
+/* Remove the outer container borders */
+/*-- scss:rules --*/
+.cell, .cell-output, .cell-output-display {
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+pre.sourceCode {
+  border-left: 1px solid #dee2e6 !important;
+  margin: 0 !important;
+}
+
+.quarto-figure, .cell-output {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Target all container elements that might have borders */
+.cell, 
+.cell-output,
+.cell-output-display,
+.sourceCode,
+pre.sourceCode,
+.code-with-copy,
+.code-annotation-container,
+.quarto-code,
+div.sourceCode {
+  border: none !important;
+  border-left: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Remove any background colors */
+pre {
+  background-color: transparent !important;
+}
+
+/* Target specific border rendering */
+.cell-output-stdout pre {
+  border: none !important;
+}

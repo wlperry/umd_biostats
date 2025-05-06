@@ -1,0 +1,15 @@
+{
+  "hash": "dfb4643f2b02bc783332964362c42a26",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Lecture 13 - ANOVA with random effects\"\nauthor: \"Bill Perry\"\nexecute:\n  freeze: auto\n  cache: true\n  echo: true\n  keep-md: true\n  message: false\n  warning: false\n  fig-height: 5\n  fig-width: 4\n  paged-print: false\nformat:\n  html:\n    toc: false\n    output-file: \"13_01_lecture_powerpoint_html.html\"\n    embed-resources: true\n    self-contained: true\n    max-width: 80ch\n    css: ../../css/lecture.css\n  revealjs:\n    output-file: \"13_01_lecture_powerpoint_slides.html\"\n    self-contained: true\n    css: ../../css/lecture.css\n    slide-number: true\n    transition: fade\n  docx:\n    default: true\n    toc: false\n    toc-depth: 3\n    number-sections: true\n    highlight-style: github\n    reference-doc: ../../ms_templates/custom-reference.docx\n    css: msword.css\n    embed-resources: true\n  pptx:\n    reference-doc: ../../ms_templates/lecture_template.pptx \n    embed-resources: true\neditor: visual\n---\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# Lecture 12: Review\n\n::::: columns\n::: {.column width=\"60%\"}\nANOVA\n\n-   Analysis of variance: single and multi-factor designs\n-   Examples: diatoms, circadian rhythms\n-   Predictor variables: fixed vs. random\n-   ANOVA model\n-   Analysis and partitioning of variance\n-   Null hypothesis\n-   Assumptions and diagnostics\n-   Post F Tests - Tukey and others\n-   Reporting the results\n:::\n\n::: {.column width=\"40%\"}\nFIGURE\\>\\>\\>\n:::\n:::::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
