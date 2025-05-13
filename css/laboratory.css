@@ -1,0 +1,35 @@
+/* Laboratory Document CSS */
+body {
+    font-family: "Times New Roman", serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #70131d;
+    font-weight: bold;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #70131d;
+  }
+  
+  /* Table styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 10px;
+  }
+  
+  /* Links */
+  a {
+    color: #70131d;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  

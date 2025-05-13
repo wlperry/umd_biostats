@@ -1,0 +1,52 @@
+# Creating a Custom Word Reference Document with Your Specifications
+
+## Step 1: Generate a basic reference document
+```bash
+quarto render your_document.qmd --to docx
+```
+
+## Step 2: Customize title and author styles
+1. Open the rendered Word document
+2. Right-click on the title and select "Styles" → "Modify Style" for the "Title" style
+3. In the dialog box:
+   - Set font size to 14pt
+   - Check the Bold checkbox
+   - Click "Format" → "Paragraph"
+   - Under "Alignment", select "Right"
+   - Set "Spacing After" to 0pt
+   - Click OK
+
+4. Right-click on the author name and select "Styles" → "Modify Style" for the "Subtitle" style
+   (Quarto typically maps author to the Subtitle style)
+5. In the dialog box:
+   - Click "Format" → "Paragraph"
+   - Under "Alignment", select "Right" 
+   - Set "Spacing Before" to 0pt
+   - Click OK
+
+## Step 3: Customize code block style
+1. Find a code block in your document
+2. Right-click and select "Styles" → "Modify Style" on the style used (often "Source Code" or "Verbatim")
+3. In the dialog box:
+   - Click "Format" → "Border"
+   - Set border color to black
+   - Set border width to 2pt or "thick"
+   - Apply to all sides
+   - Click "Format" → "Shading" 
+   - Select a grey background color (#f0f0f0 or similar light grey)
+   - Click OK
+
+## Step 4: Save as your reference document
+1. Save the modified document as "custom-reference.docx" in your "ms_templates" folder
+
+## Step 5: Update your YAML to use both approaches
+```yaml
+format:
+  docx: 
+    reference-doc: ms_templates/custom-reference.docx
+  html:
+    css: msword.css
+```
+
+This configuration will use:
+- Th

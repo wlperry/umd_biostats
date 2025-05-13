@@ -1,0 +1,38 @@
+
+# callouts
+
+::: callout-tip
+## Practice Exercise 1: This is something you should do 
+
+Let's try stuffing frogs in our pockets
+
+```{r}
+# Write your code here to create funny plot
+# Remember to use tidy coding skills and comment the HOOI
+
+```
+:::
+
+
+
+# Columns
+
+
+# Title if you want
+::::: columns
+::: {.column width="60%"}
+## Header 2 in the slide
+
+-   List
+-   Of
+-   Things
+
+1   First
+2   Second
+3   Third
+:::
+
+::: {.column width="40%"}
+![](images/IMAGE_TO_INSERT.jpg){width="400"}
+:::
+:::::

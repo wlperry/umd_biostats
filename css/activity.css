@@ -1,0 +1,517 @@
+/* ================================
+   RevealJS-specific overrides
+   ================================ */
+   .reveal .slides section {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important; /* Start content from the top */
+    height: auto !important; /* Let height adjust to content */
+    min-height: 100% !important; /* Ensure it fills the slide */
+    padding: 0 !important;
+}
+
+.reveal .slides section > * {
+    position: static !important; /* Override RevealJS absolute positioning */
+    margin: 0 0 15px 0 !important;
+    width: 100% !important;
+}
+
+/* Force titles to the top of slides */
+.reveal .slides h1,
+.reveal .slides h2 {
+    order: -1 !important; /* Move to top of flex container */
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important; /* Disable any RevealJS centering transforms */
+}
+
+/* Make sure paragraphs and other content come immediately after headings */
+.reveal .slides p,
+.reveal .slides ul,
+.reveal .slides ol,
+.reveal .slides h3,
+.reveal .slides h4,
+.reveal .slides h5 {
+    order: 0 !important; /* Ensure they come after h1/h2 but before other elements */
+    margin-top: 0 !important; /* No extra spacing at top */
+}
+
+/* ================================
+   Heading Styles (h1 - h5)
+   ================================ */
+
+/* ================
+   Fix for ALL h1 (Slide Titles + Other h1)
+   ================ */
+.reveal h1, 
+.quarto-title-block h1, 
+body h1 {
+    font-size: 26px !important;
+    background-color: #70131d !important; /* Burgundy */
+    color: #F4CD54 !important; /* Gold */
+    padding: 10px 20px !important;
+    text-align: left !important;
+    margin: 0 0 20px 0 !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    align-self: flex-start !important;
+}
+
+/* ================
+   Fix for ALL h2 (Section Titles)
+   ================ */
+.reveal h2, 
+.quarto-title-block h2, 
+body h2 {
+    font-size: 20px !important;
+    color: #002147 !important;
+    text-align: left !important;
+    margin: 10px 0 15px 0 !important;
+    padding: 10px 10px !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    align-self: flex-start !important;
+}
+
+/* ================================
+   Fix for h3, h4, h5 (Subheadings)
+   ================================ */
+.reveal h3, .reveal h4, .reveal h5 {
+    font-size: 18px !important;
+    color: #002147 !important; /* Dark blue */
+    text-align: left !important;
+    margin: 10px 0 5px 0 !important;
+    align-self: flex-start !important;
+}
+
+/* ================================
+   Bullet Point List Styles
+   ================================ */
+
+/* General bullet point styling */
+.reveal ul {
+    font-size: 18px !important;
+    color: #002147 !important; /* Dark blue */
+    margin: 5px 0 15px 0 !important;
+    line-height: 1.3 !important;
+    display: block !important;
+    align-self: flex-start !important;
+    width: 100% !important;
+    padding-left: 40px !important; /* Add default padding for first level list */
+}
+
+/* Style for first-level bullet points */
+.reveal ul li {
+    font-size: 18px !important;
+    color: #002147 !important; /* Dark blue */
+    margin-bottom: 5px !important;
+    display: list-item !important;
+    text-align: left !important;
+}
+
+/* Style for second-level bullet points - Fix indentation */
+.reveal ul ul {
+    font-size: 16px !important;
+    color: #002147 !important; /* Dark blue */
+    margin-top: 5px !important;
+    padding-left: 30px !important; /* Add proper indentation */
+    margin-left: 0 !important; /* Reset any margin that might interfere */
+    width: calc(100% - 30px) !important; /* Adjust width to account for padding */
+}
+
+.reveal ul ul li {
+    font-size: 16px !important;
+    color: #002147 !important; /* Dark blue */
+    margin-bottom: 3px !important;
+}
+
+/* Style for third-level bullet points - Fix indentation */
+.reveal ul ul ul {
+    padding-left: 25px !important; /* Add proper indentation */
+    margin-left: 0 !important; /* Reset any margin that might interfere */
+    width: calc(100% - 25px) !important; /* Adjust width to account for padding */
+}
+
+.reveal ul ul ul li {
+    font-size: 16px !important;
+    color: #002147 !important; /* Dark blue */
+}
+
+/* ================================
+   Numbered (Ordered) List Styles 
+   ================================ */
+
+/* General ordered list styling */
+.reveal ol {
+    font-size: 18px !important; /* Match the font size of ul */
+    color: #002147 !important; /* Dark blue */
+    margin: 5px 0 15px 0 !important;
+    line-height: 1.3 !important;
+    display: block !important;
+    align-self: flex-start !important;
+    width: 100% !important;
+    padding-left: 40px !important; /* Add default padding for first level list */
+}
+
+/* Style for first-level numbered points */
+.reveal ol li {
+    font-size: 18px !important;
+    color: #002147 !important; /* Dark blue */
+    margin-bottom: 5px !important;
+    display: list-item !important;
+    text-align: left !important;
+}
+
+/* Style for second-level numbered points - Fix indentation */
+.reveal ol ol {
+    font-size: 16px !important;
+    color: #002147 !important; /* Dark blue */
+    margin-top: 5px !important;
+    padding-left: 30px !important; /* Add proper indentation */
+    margin-left: 0 !important; /* Reset any margin that might interfere */
+    width: calc(100% - 30px) !important; /* Adjust width to account for padding */
+}
+
+.reveal ol ol li {
+    font-size: 16px !important;
+    color: #002147 !important; /* Dark blue */
+    margin-bottom: 3px !important;
+}
+
+/* Style for third-level numbered points - Fix indentation */
+.reveal ol ol ol {
+    padding-left: 25px !important; /* Add proper indentation */
+    margin-left: 0 !important; /* Reset any margin that might interfere */
+    width: calc(100% - 25px) !important; /* Adjust width to account for padding */
+}
+
+.reveal ol ol ol li {
+    font-size: 16px !important;
+    color: #002147 !important; /* Dark blue */
+}
+
+/* Mixed list styling (numbered lists within bullet lists and vice versa) */
+.reveal ul ol {
+    padding-left: 30px !important; /* Add proper indentation */
+    margin-left: 0 !important; /* Reset any margin that might interfere */
+    width: calc(100% - 30px) !important; /* Adjust width to account for padding */
+}
+
+.reveal ul ol li {
+    font-size: 16px !important;
+}
+
+.reveal ol ul {
+    padding-left: 30px !important; /* Add proper indentation */
+    margin-left: 0 !important; /* Reset any margin that might interfere */
+    width: calc(100% - 30px) !important; /* Adjust width to account for padding */
+}
+
+.reveal ol ul li {
+    font-size: 16px !important;
+}
+
+/* ================================
+   Table Styles for both RevealJS and HTML
+   ================================ */
+
+/* Table styling for both formats */
+.reveal table,
+body table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 15px 0 !important;
+    font-size: 20px !important; /* Setting 20pt font size for all table text */
+    color: #002147 !important; /* Dark blue, matching other text */
+}
+
+/* Table cell styling */
+.reveal table th,
+.reveal table td,
+body table th,
+body table td {
+    border: 1px dotted #cccccc !important; /* Light grey dotted borders */
+    padding: 8px 12px !important;
+    text-align: left !important;
+    font-size: 20px !important; /* Ensure consistent font size */
+    color: #002147 !important; /* Dark blue */
+}
+
+/* Table header styling */
+.reveal table th,
+body table th {
+    background-color: #f2f2f2 !important; /* Light gray background for headers */
+    font-weight: bold !important;
+    font-size: 20px !important; /* Ensure consistent font size */
+}
+
+/* Table caption styling */
+.reveal table caption,
+body table caption {
+    font-size: 20px !important;
+    margin-bottom: 10px !important;
+    color: #002147 !important;
+    text-align: left !important;
+}
+
+/* Ensure tables have proper width within slides */
+.reveal .slides table {
+    width: 100% !important;
+    margin: 15px 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Special overrides for RevealJS default styles */
+.reveal .slides {
+    text-align: left !important;
+}
+
+/* Reset any RevealJS center transformations */
+.reveal.center .slides section {
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    margin: 0 !important;
+    padding: 20px !important;
+}
+
+/* Regular paragraph text */
+.reveal p {
+    font-size: 18px !important; /* Match the list text size */
+    color: #002147 !important;
+    margin-bottom: 10px !important;
+    text-align: left !important;
+}
+
+/* Fix for specific slides with content at bottom */
+.reveal .slides section {
+    overflow-y: visible !important; /* Allow content to flow naturally */
+}
+
+/* Fix vertical alignment issues */
+.reveal .slides > section, 
+.reveal .slides > section > section {
+    transform-style: flat !important;
+    transform: none !important;
+    top: 0 !important;
+    margin: 0 !important;
+}
+
+/* Disable any RevealJS vertical centering */
+.reveal .slides > section.present, 
+.reveal .slides > section > section.present {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    height: auto !important;
+    min-height: 100% !important;
+}
+
+/* for code output revealjs added 3/31 */
+
+
+/* Code Block Styling for RevealJS - More Aggressive Size Reduction */
+.reveal pre,
+.reveal code,
+.reveal .sourceCode,
+.reveal .cell-output,
+.reveal div.sourceCode,
+.reveal pre.sourceCode,
+.reveal div.sourceCode pre {
+  font-family: monospace !important;
+  font-size: 10px !important; /* Much smaller font size for code */
+  line-height: 1.1 !important; /* Even tighter line spacing */
+  max-height: 400px !important; /* Maximum height before scrolling */
+  overflow-y: auto !important; /* Add scrollbar when needed */
+  background-color: #f5f5f5 !important; /* Light gray background */
+  border: 1px solid #ddd !important; /* Light border */
+  border-radius: 3px !important;
+  padding: 6px !important;
+  margin: 8px 0 !important;
+}
+
+/* Specific targeting for line numbers - typically these need to be smaller */
+.reveal .sourceLine,
+.reveal .code-line,
+.reveal .sourceCode .r,
+.reveal .sourceCode .python,
+.reveal .sourceCode code {
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+}
+
+/* Code with line numbers - make sure numbers are small too */
+.reveal .numberLines pre code,
+.reveal .numberSource pre,
+.reveal .numberSource a.sourceLine {
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+  padding: 0 !important;
+}
+
+/* R Output Styling - smaller output text */
+.reveal .r-output,
+.reveal .cell-output,
+.reveal .cell-output-stdout pre,
+.reveal .cell-output-stderr pre,
+.reveal .output-data-input pre {
+  font-size: 10px !important;
+  background-color: #f8f8f8 !important;
+  color: #333333 !important;
+  line-height: 1.1 !important;
+  padding: 4px !important;
+}
+
+/* Target output tables specifically */
+.reveal .cell-output-display table,
+.reveal .cell-output table,
+.reveal .cell-output th,
+.reveal .cell-output td {
+  font-size: 10px !important;
+  padding: 2px 4px !important;
+}
+
+/* Specific styling for code in RevealJS slides */
+.reveal .slides pre {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  white-space: pre-wrap !important; /* Allows code to wrap */
+}
+
+/* Code highlighting syntax colors */
+.reveal .sourceCode .kw { color: #007020; font-weight: bold; } /* Keywords */
+.reveal .sourceCode .dt { color: #902000; } /* DataType */
+.reveal .sourceCode .dv { color: #40a070; } /* DecVal (decimal values) */
+.reveal .sourceCode .bn { color: #40a070; } /* BaseN */
+.reveal .sourceCode .fl { color: #40a070; } /* Float */
+.reveal .sourceCode .ch { color: #4070a0; } /* Char */
+.reveal .sourceCode .st { color: #4070a0; } /* String */
+.reveal .sourceCode .co { color: #60a0b0; font-style: italic; } /* Comment */
+.reveal .sourceCode .ot { color: #007020; } /* Other */
+.reveal .sourceCode .fu { color: #06287e; } /* Function */
+.reveal .sourceCode .cn { color: #880000; } /* Constant */
+.reveal .sourceCode .sc { color: #4070a0; } /* SpecialChar */
+.reveal .sourceCode .vs { color: #4070a0; } /* VerbatimString */
+
+/* Make sure code blocks don't overflow the slide */
+.reveal pre code {
+  max-width: 100% !important;
+  word-wrap: normal !important;
+  -moz-tab-size: 2 !important;
+  -o-tab-size: 2 !important;
+  tab-size: 2 !important;
+}
+
+/* Target Quarto-specific code rendering */
+.reveal .panel-code-source, 
+.reveal .panel-code-output,
+.reveal .panel-code-output-scroll,
+.reveal .code-panel-source,
+.reveal .code-panel-output {
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+}
+
+/* Target specific elements from your screenshot */
+.reveal .tibble,
+.reveal pre.sourceCode {
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+}
+
+/* Force important display properties */
+.reveal pre,
+.reveal code,
+.reveal .sourceCode {
+  font-size: 10px !important;
+  line-height: 1.1 !important;
+}
+
+/* Target the specific components in the R code example from your screenshot */
+.reveal .remark-code,
+.reveal .line-numbers {
+  font-size: 10px !important;
+}
+
+/* Ensure this applies to the tibble output specifically */
+.reveal .cell-output-stdout pre:contains("A tibble") {
+  font-size: 9px !important;
+}
+
+/* Adjustments for exercise code blocks if they exist */
+.reveal .exercise pre code {
+  font-size: 13px !important; /* Even smaller for exercises */
+}
+
+/* for code output html smaller code font added 3/31 */
+/* CSS for smaller code chunks in HTML output */
+
+/* Target code blocks in HTML output */
+pre, 
+code,
+pre.sourceCode,
+div.sourceCode, 
+div.sourceCode pre,
+pre code,
+pre.r {
+  font-family: monospace !important;
+  font-size: 12px !important; /* Smaller font size for code */
+  line-height: 1.2 !important; /* Tighter line spacing */
+  max-height: 400px !important; /* Maximum height before scrolling */
+  overflow-y: auto !important; /* Add scrollbar when needed */
+  background-color: #f5f5f5 !important; /* Light gray background */
+  border: 1px solid #ddd !important; /* Light border */
+  border-radius: 3px !important;
+  padding: 8px !important;
+}
+
+/* Target line numbers */
+.sourceCode .sourceLine,
+.sourceCode code,
+.sourceCode .r,
+.sourceCode .python {
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+}
+
+/* Target output results */
+.cell-output,
+.cell-output-stdout pre,
+.cell-output-stderr pre,
+.cell-output-display pre {
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+  background-color: #f8f8f8 !important;
+  padding: 6px !important;
+}
+
+/* Target tibbles and data output */
+.cell-output table,
+.cell-output th,
+.cell-output td,
+.dataframe,
+.tibble {
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+  padding: 3px 6px !important;
+}
+
+/* Target code chunk options/buttons */
+.code-tools-button {
+  font-size: 12px !important;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 767px) {
+  pre, code, .sourceCode {
+    font-size: 11px !important;
+    padding: 6px !important;
+  }
+}
