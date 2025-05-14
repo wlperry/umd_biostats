@@ -1,0 +1,15 @@
+{
+  "hash": "dfc772037a733fb4707b7177ab8d9e89",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Lecture 16 - xxxxxx \"\nauthor: \"Bill Perry\"\nexecute:\n  freeze: auto\n  cache: true\n  echo: true\n  keep-md: true\n  message: false\n  warning: false\n  fig-height: 5\n  fig-width: 4\n  paged-print: false\nformat:\n  html:\n    toc: false\n    output-file: \"16_01_lecture_powerpoint_html.html\"\n    embed-resources: true\n    self-contained: true\n    max-width: 80ch\n    css: ../../css/lecture.css\n  revealjs:\n    output-file: \"16_01_lecture_powerpoint_slides.html\"\n    self-contained: true\n    css: ../../css/lecture.css\n    slide-number: true\n    transition: fade\n  docx:\n    default: true\n    toc: false\n    toc-depth: 3\n    number-sections: true\n    highlight-style: github\n    reference-doc: ../../ms_templates/custom-reference.docx\n    css: msword.css\n    embed-resources: true\n  pptx:\n    reference-doc: ../../ms_templates/lecture_template.pptx \n    embed-resources: true\neditor: visual\n---\n\n\n\n\n\n\n\n\n\n\n\n\n# Lecture 15: Review\n\n::::: columns\n::: {.column width=\"60%\"}\n## **Review**\n:::\n\n::: {.column width=\"40%\"}\nimage\n:::\n:::::\n\n# Lecture 16: Overview\n\n## Overview\n\nAnalysis of variance:\n\n-   Examples:\n\n# **Lecture 16:** ANOVA\n\n::::: columns\n::: {.column width=\"60%\"}\ntext\n:::\n\n::: {.column width=\"40%\"}\n\n\n\n\n\n\n\n\n\n::: {.cell}\n\n:::\n\n\n\n\n\n\n\n\n\n:::\n:::::\n\n::: callout-tip\n# Callout\n\nmore text\n\n\n\n\n\n\n\n\n\n\n::: {.cell}\n\n:::\n\n\n\n\n\n\n\n\n\n:::\n\n# **Lecture 16:** Reporting results\n\n**Formal scientific writing example:**\n\n\"what would you write up\"\n\n# **Lecture 16:** Summary\n\n## Key Principles\n\n1.  **Purpose**:\n\n2.  **The Analysis**\n\n    -   asdf\n\n3.  **asdf**\n\n## Assumptions\n\n1.  Independence of observations\n2.  Normal distribution of residuals\n3.  Homogeneity of variances\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

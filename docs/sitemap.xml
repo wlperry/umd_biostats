@@ -1,44 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/Common_Statistical_Tests.html</loc>
-    <lastmod>2025-04-10T02:21:09.435Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_03/03_03_homework_html.html</loc>
+    <lastmod>2025-04-19T15:04:46.981Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_03/03_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-05-06T15:13:51.651Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_03/03_02_class_activity.html</loc>
+    <lastmod>2025-05-06T15:23:36.241Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_03/03_01_lecture_powerpoint_slides.html</loc>
-    <lastmod>2025-05-06T15:13:51.651Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_04/04_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-04-29T20:38:50.383Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_04/04_02_class_activity.html</loc>
-    <lastmod>2025-04-19T15:04:33.867Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_04/04_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-04-29T20:38:50.383Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_05/05_03_homework_html.html</loc>
-    <lastmod>2025-04-19T15:03:38.735Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_05/05_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-05-06T15:14:35.031Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_05/05_02_class_activity.html</loc>
-    <lastmod>2025-04-19T15:03:38.723Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_05/05_01_lecture_powerpoint_slidesl.html</loc>
+    <lastmod>2025-05-06T15:14:35.031Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_template/0X_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-04-03T20:55:42.057Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_template/06_02_class_activity.html</loc>
+    <lastmod>2025-04-03T20:57:41.302Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_template/0X_01_lecture_powerpoint_slides.html</loc>
-    <lastmod>2025-04-03T20:55:42.057Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_02/02_02_class_activity.html</loc>
+    <lastmod>2025-04-19T16:42:00.943Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_02/02_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-05-06T14:59:00.168Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_11/11_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-05-14T13:54:19.085Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_02/02_01_lecture_powerpoint_slides.html</loc>
-    <lastmod>2025-05-06T14:59:00.168Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_11/11_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-05-14T13:54:19.085Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_20/20_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-05-14T15:56:53.332Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_20/20_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-05-14T15:56:53.332Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_19/19_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-05-14T15:56:44.019Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_19/19_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-05-14T15:56:44.019Z</lastmod>
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_10/10_01_lecture_powerpoint_html.html</loc>
@@ -66,51 +82,55 @@
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_06/06_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-04-29T20:36:22.603Z</lastmod>
+    <lastmod>2025-05-14T13:54:33.004Z</lastmod>
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_06/06_01_lecture_powerpoint_slides.html</loc>
-    <lastmod>2025-04-29T20:36:22.603Z</lastmod>
+    <lastmod>2025-05-14T13:54:33.004Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_12/12_04_how_anova_is_regression_html.html</loc>
-    <lastmod>2025-05-06T15:44:43.001Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_15/15_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-05-14T15:55:56.713Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_12/12_04_how_anova_is_regression_slides.html</loc>
-    <lastmod>2025-05-06T15:44:43.001Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_15/15_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-05-14T15:55:56.713Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_13/13_01_factorial_anova_html.html</loc>
-    <lastmod>2025-05-13T18:23:12.689Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_12/12_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-05-06T15:33:40.205Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_13/13_01_factorial_anova_slides.html</loc>
-    <lastmod>2025-05-13T18:23:12.689Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_12/12_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-05-06T15:33:40.205Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_02_nested_anova_html.html</loc>
-    <lastmod>2025-05-13T18:29:41.089Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-05-13T18:22:35.669Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_02_nested_anova_slides.html</loc>
-    <lastmod>2025-05-13T18:29:41.089Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-05-13T18:22:35.669Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_03_nested_anova_random_html.html</loc>
-    <lastmod>2025-05-13T18:30:23.363Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_04_nested_anova_visual_html.html</loc>
+    <lastmod>2025-05-13T18:31:04.166Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_03_nested_anova_random_slides.html</loc>
-    <lastmod>2025-05-13T18:30:23.363Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_04_nested_anovat_visual_slides.html</loc>
+    <lastmod>2025-05-13T18:31:04.166Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/links.html</loc>
-    <lastmod>2025-05-13T17:59:59.095Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/syllabus.html</loc>
+    <lastmod>2025-05-13T17:59:59.164Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/index.html</loc>
-    <lastmod>2025-05-13T18:06:38.813Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/about.html</loc>
+    <lastmod>2025-05-13T17:59:57.879Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/test_overviews/Common_Statistical_Tests.html</loc>
+    <lastmod>2025-05-14T15:58:30.561Z</lastmod>
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/test_overviews/02_welches_two_smple_ttest_html.html</loc>
@@ -133,44 +153,52 @@
     <lastmod>2025-04-19T17:11:17.806Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/about.html</loc>
-    <lastmod>2025-05-13T17:59:57.879Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/index.html</loc>
+    <lastmod>2025-05-14T16:00:30.038Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/syllabus.html</loc>
-    <lastmod>2025-05-13T17:59:59.164Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/links.html</loc>
+    <lastmod>2025-05-13T17:59:59.095Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_04_nested_anovat_visual_slides.html</loc>
-    <lastmod>2025-05-13T18:31:04.166Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_03_nested_anova_random_slides.html</loc>
+    <lastmod>2025-05-13T18:30:23.363Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_04_nested_anova_visual_html.html</loc>
-    <lastmod>2025-05-13T18:31:04.166Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_03_nested_anova_random_html.html</loc>
+    <lastmod>2025-05-13T18:30:23.363Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_01_lecture_powerpoint_slides.html</loc>
-    <lastmod>2025-05-13T18:22:35.669Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_02_nested_anova_slides.html</loc>
+    <lastmod>2025-05-13T18:29:41.089Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-05-13T18:22:35.669Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_14/14_02_nested_anova_html.html</loc>
+    <lastmod>2025-05-13T18:29:41.089Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_12/12_01_lecture_powerpoint_slides.html</loc>
-    <lastmod>2025-05-06T15:33:40.205Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_13/13_01_factorial_anova_slides.html</loc>
+    <lastmod>2025-05-13T18:23:12.689Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_12/12_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-05-06T15:33:40.205Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_13/13_01_factorial_anova_html.html</loc>
+    <lastmod>2025-05-13T18:23:12.689Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_12/12_04_how_anova_is_regression_slides.html</loc>
+    <lastmod>2025-05-06T15:44:43.001Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_12/12_04_how_anova_is_regression_html.html</loc>
+    <lastmod>2025-05-06T15:44:43.001Z</lastmod>
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_08/08_01_lecture_powerpoint_slides.html</loc>
-    <lastmod>2025-05-06T15:20:52.565Z</lastmod>
+    <lastmod>2025-05-14T13:54:21.654Z</lastmod>
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_08/08_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-05-06T15:20:52.565Z</lastmod>
+    <lastmod>2025-05-14T13:54:21.654Z</lastmod>
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_06/05_02_class_activity.html</loc>
@@ -182,58 +210,78 @@
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_07/07_01_lecture_powerpoint_slides.html</loc>
-    <lastmod>2025-04-29T20:34:43.215Z</lastmod>
+    <lastmod>2025-05-14T13:51:07.625Z</lastmod>
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_07/07_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-04-29T20:34:43.215Z</lastmod>
+    <lastmod>2025-05-14T13:51:07.625Z</lastmod>
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_09/09_01_lecture_powerpoint_slides.html</loc>
-    <lastmod>2025-05-01T11:34:50.311Z</lastmod>
+    <lastmod>2025-05-14T13:54:30.321Z</lastmod>
   </url>
   <url>
     <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_09/09_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-05-01T11:34:50.311Z</lastmod>
+    <lastmod>2025-05-14T13:54:30.321Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_11/11_01_lecture_powerpoint_slides.html</loc>
-    <lastmod>2025-05-13T15:26:58.813Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_17/17_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-05-14T15:56:24.246Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_11/11_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-05-13T15:26:58.813Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_17/17_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-05-14T15:56:24.246Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_02/02_02_class_activity.html</loc>
-    <lastmod>2025-04-19T16:42:00.943Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_18/18_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-05-14T15:56:33.628Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_template/06_02_class_activity.html</loc>
-    <lastmod>2025-04-03T20:57:41.302Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_18/18_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-05-14T15:56:33.628Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_05/05_01_lecture_powerpoint_slidesl.html</loc>
-    <lastmod>2025-05-06T15:14:35.031Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_16/16_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-05-14T15:56:13.594Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_05/05_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-05-06T15:14:35.031Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_16/16_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-05-14T15:56:13.594Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_04/04_01_lecture_powerpoint_slides.html</loc>
-    <lastmod>2025-04-29T20:38:50.383Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_02/02_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-05-06T14:59:00.168Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_04/04_01_lecture_powerpoint_html.html</loc>
-    <lastmod>2025-04-29T20:38:50.383Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_02/02_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-05-06T14:59:00.168Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_03/03_02_class_activity.html</loc>
-    <lastmod>2025-05-06T15:23:36.241Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_template/0X_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-04-03T20:55:42.057Z</lastmod>
   </url>
   <url>
-    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_03/03_03_homework_html.html</loc>
-    <lastmod>2025-04-19T15:04:46.981Z</lastmod>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_template/0X_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-04-03T20:55:42.057Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_05/05_02_class_activity.html</loc>
+    <lastmod>2025-04-19T15:03:38.723Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_05/05_03_homework_html.html</loc>
+    <lastmod>2025-04-19T15:03:38.735Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_04/04_02_class_activity.html</loc>
+    <lastmod>2025-04-19T15:04:33.867Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_03/03_01_lecture_powerpoint_slides.html</loc>
+    <lastmod>2025-05-06T15:13:51.651Z</lastmod>
+  </url>
+  <url>
+    <loc>https://wlperry.github.io/umd_biostats/index.html/lectures/lecture_03/03_01_lecture_powerpoint_html.html</loc>
+    <lastmod>2025-05-06T15:13:51.651Z</lastmod>
   </url>
 </urlset>

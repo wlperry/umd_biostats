@@ -1,0 +1,15 @@
+{
+  "hash": "6922fb9d6c0c085c041b51bf94beaa6a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Lecture 15 - xxxxxx \"\nauthor: \"Bill Perry\"\nexecute:\n  freeze: auto\n  cache: true\n  echo: true\n  keep-md: true\n  message: false\n  warning: false\n  fig-height: 5\n  fig-width: 4\n  paged-print: false\nformat:\n  html:\n    toc: false\n    output-file: \"15_01_lecture_powerpoint_html.html\"\n    embed-resources: true\n    self-contained: true\n    max-width: 80ch\n    css: ../../css/lecture.css\n  revealjs:\n    output-file: \"15_01_lecture_powerpoint_slides.html\"\n    self-contained: true\n    css: ../../css/lecture.css\n    slide-number: true\n    transition: fade\n  docx:\n    default: true\n    toc: false\n    toc-depth: 3\n    number-sections: true\n    highlight-style: github\n    reference-doc: ../../ms_templates/custom-reference.docx\n    css: msword.css\n    embed-resources: true\n  pptx:\n    reference-doc: ../../ms_templates/lecture_template.pptx \n    embed-resources: true\neditor: visual\n---\n\n\n\n\n\n\n\n\n\n\n\n\n# Lecture 14: Review of Anovas\n\n::::: columns\n::: {.column width=\"60%\"}\n## **Review**\n\n-   ANOVA\n\n-   Factorial ANOVA\n\n-   Nested ANOVA\n\n-   ASSUMPIONS OF ALL\n\n    -   Homogeneity of variance - Levenes or Bartlets Test\n\n    -   Normality of Residuals\n\n    -   Independence\n\n    -   \n:::\n\n::: {.column width=\"40%\"}\nimage\n:::\n:::::\n\n# Lecture 15: Overview \n\n## Overview\n\nGeneral Linear Models GLM\n\n-   Examples:\n-   \n\nLogistic Regression\n\n-   \n\n# **Lecture 15:** ANOVA\n\n::::: columns\n::: {.column width=\"60%\"}\ntext\n:::\n\n::: {.column width=\"40%\"}\n\n\n\n\n\n\n\n\n\n::: {.cell}\n\n:::\n\n\n\n\n\n\n\n\n\n:::\n:::::\n\n::: callout-tip\n# Callout\n\nmore text\n\n\n\n\n\n\n\n\n\n\n::: {.cell}\n\n:::\n\n\n\n\n\n\n\n\n\n:::\n\n# **Lecture 15:** Reporting results\n\n**Formal scientific writing example:**\n\n\"what would you write up\"\n\n# **Lecture 15:** Summary\n\n## Key Principles\n\n1.  **Purpose**:\n\n2.  **The Analysis**\n\n    -   asdf\n\n3.  **asdf**\n\n## Assumptions\n\n1.  Independence of observations\n2.  Normal distribution of residuals\n3.  Homogeneity of variances\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
