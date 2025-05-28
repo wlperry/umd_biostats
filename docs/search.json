@@ -693,141 +693,141 @@
     "text": "Decision Tree\nHere’s a simplified decision tree:\n-Are X and Y measured with error? If No → Use OLS (Model I) -Are the errors in X and Y approximately equal? If Yes → Use MA -Are X and Y measured in different units/scales? If Yes → Consider SMA -Is the correlation between X and Y weak (&lt;0.7)? If Yes → Method choice is critical; consider RMA -Are you uncertain about error structure? If Yes → RMA is a reasonable compromise\nRemember that when the correlation between X and Y is very strong (r &gt; 0.9), all methods will yield similar results, making the choice less critical. The differences between methods become more pronounced as the correlation weakens.\nFinally, it’s often valuable to run multiple methods and compare the results. If they lead to different ecological or biological interpretations, this should be explicitly addressed in your discussion."
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html",
-    "href": "lectures/lecture_07/06_02_class_activity.html",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html",
+    "href": "lectures/lecture_07/07_02_class_activity.html",
     "title": "06_Class_Activity",
     "section": "",
     "text": "This document demonstrates statistical analysis of lake trout mass data from Island Lake and NE 12, focusing on:\n\nTesting assumptions for parametric tests\nTransforming data when assumptions aren’t met\nRunning different types of tests:\n\nStandard t-test\nLog-transformed t-test\nWelch’s t-test\nMann-Whitney Wilcoxon test\nPermutation test\n\nInterpreting and reporting results properly"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#introduction",
-    "href": "lectures/lecture_07/06_02_class_activity.html#introduction",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#introduction",
+    "href": "lectures/lecture_07/07_02_class_activity.html#introduction",
     "title": "06_Class_Activity",
     "section": "",
     "text": "This document demonstrates statistical analysis of lake trout mass data from Island Lake and NE 12, focusing on:\n\nTesting assumptions for parametric tests\nTransforming data when assumptions aren’t met\nRunning different types of tests:\n\nStandard t-test\nLog-transformed t-test\nWelch’s t-test\nMann-Whitney Wilcoxon test\nPermutation test\n\nInterpreting and reporting results properly"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#assumptions-for-t-test",
-    "href": "lectures/lecture_07/06_02_class_activity.html#assumptions-for-t-test",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#assumptions-for-t-test",
+    "href": "lectures/lecture_07/07_02_class_activity.html#assumptions-for-t-test",
     "title": "06_Class_Activity",
     "section": "Assumptions for t-test:",
     "text": "Assumptions for t-test:\n\nData is normally distributed\nObservations are independent\nNo significant outliers"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#use-patchwork-to-combine-the-plots",
-    "href": "lectures/lecture_07/06_02_class_activity.html#use-patchwork-to-combine-the-plots",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#use-patchwork-to-combine-the-plots",
+    "href": "lectures/lecture_07/07_02_class_activity.html#use-patchwork-to-combine-the-plots",
     "title": "06_Class_Activity",
     "section": "Use Patchwork to combine the plots",
     "text": "Use Patchwork to combine the plots\n\n# Combine all plots using patchwork\ncombined_stats_plot &lt;- (ne12_histo_plot + ne12_dot_plot) / (ne12_box_plot + ne12_qq_plot) +\n  plot_annotation(\n    title = \"Lake NE 12 Trout Mass Distribution\",\n    subtitle = paste(\"n =\", nrow(ne12_df), \"fish samples\"),\n    theme = theme(plot.title = element_text(hjust = 0.5),\n                  plot.subtitle = element_text(hjust = 0.5))\n  )\n\n# Display the combined plot\ncombined_stats_plot"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#shapiro-wilks-test",
-    "href": "lectures/lecture_07/06_02_class_activity.html#shapiro-wilks-test",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#shapiro-wilks-test",
+    "href": "lectures/lecture_07/07_02_class_activity.html#shapiro-wilks-test",
     "title": "06_Class_Activity",
     "section": "Shapiro-Wilk’s Test",
     "text": "Shapiro-Wilk’s Test\n\n# Shapiro-Wilk test\nshapiro_test &lt;- shapiro.test(ne12_df$mass_g)\nprint(shapiro_test)\n\n\n    Shapiro-Wilk normality test\n\ndata:  ne12_df$mass_g\nW = 0.85148, p-value &lt; 2.2e-16"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#informal-normality-test---often-better",
-    "href": "lectures/lecture_07/06_02_class_activity.html#informal-normality-test---often-better",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#informal-normality-test---often-better",
+    "href": "lectures/lecture_07/07_02_class_activity.html#informal-normality-test---often-better",
     "title": "06_Class_Activity",
     "section": "Informal Normality test - often better",
     "text": "Informal Normality test - often better\n\n\n\n\n\n\nExercise: check normality\n\n\n\nAlways do a qq plot\nIn a QQ plot, points that follow the line indicate data that follows a normal distribution. Deviations from the line suggest non-normality.\n\n# Create QQ plots for each lake to check normality\nqq_plot &lt;- island_ne12_df %&gt;% \n  ggplot(aes(sample = mass_g, color = lake)) +\n  stat_qq() +\n  stat_qq_line() +\n  labs(title = \"QQ Plot for Normality Check\", \n       x = \"Theoretical Quantiles\", \n       y = \"Sample Quantiles\") +\n  theme_minimal() +\n  facet_wrap(~lake)  # Create separate plots for each lake\n\n# Show the QQ plot\nqq_plot"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#formal-normality-test",
-    "href": "lectures/lecture_07/06_02_class_activity.html#formal-normality-test",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#formal-normality-test",
+    "href": "lectures/lecture_07/07_02_class_activity.html#formal-normality-test",
     "title": "06_Class_Activity",
     "section": "Formal normality test",
     "text": "Formal normality test\n\n\n\n\n\n\nExercise: do a Shapiro-Wilk Test\n\n\n\nWe can do a formal test for a p value\nNote island looks non normal in the qqplot but its really close with the Shapiro-Wilk test…\n\n# Formal test for normality: Shapiro-Wilk test\n# We'll do this for each lake separately\n\n# For NE 12\nne12_data &lt;- island_ne12_df %&gt;% \n  filter(lake == \"NE 12\") %&gt;%\n  pull(mass_g)\n\n# For Island Lake\nisland_data &lt;- island_ne12_df %&gt;% \n  filter(lake == \"Island Lake\") %&gt;%\n  pull(mass_g)\n\n# Run Shapiro-Wilk test\nshapiro_ne12 &lt;- shapiro.test(ne12_data)\nshapiro_island &lt;- shapiro.test(island_data)\n\n# Show results\ncat(\"Shapiro-Wilk normality test for NE 12:\\n\")\n\nShapiro-Wilk normality test for NE 12:\n\nprint(shapiro_ne12)\n\n\n    Shapiro-Wilk normality test\n\ndata:  ne12_data\nW = 0.85148, p-value &lt; 2.2e-16\n\ncat(\"\\nShapiro-Wilk normality test for Island Lake:\\n\")\n\n\nShapiro-Wilk normality test for Island Lake:\n\nprint(shapiro_island)\n\n\n    Shapiro-Wilk normality test\n\ndata:  island_data\nW = 0.84102, p-value = 0.04538"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#equality-of-variance-test---levenes-test",
-    "href": "lectures/lecture_07/06_02_class_activity.html#equality-of-variance-test---levenes-test",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#equality-of-variance-test---levenes-test",
+    "href": "lectures/lecture_07/07_02_class_activity.html#equality-of-variance-test---levenes-test",
     "title": "06_Class_Activity",
     "section": "Equality of variance test - Levene’s Test",
     "text": "Equality of variance test - Levene’s Test\n\n\n\n\n\n\nExercise: test for equal variances\n\n\n\nAgain we want the P value not significant\nThe Levene’s test has the following null hypothesis: - H₀: The variances are equal across groups - H₁: The variances are not equal across groups\nIf the p-value is less than 0.05, we reject the null hypothesis and conclude the variances are not equal.\n\n# Formal test for equal variances: Levene's test\nlevene_result &lt;- leveneTest(mass_g ~ lake, data = island_ne12_df)\n\nWarning in leveneTest.default(y = y, group = group, ...): group coerced to\nfactor.\n\nprint(levene_result)\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value    Pr(&gt;F)    \ngroup   1  25.997 5.775e-07 ***\n      330                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#now-look-at-histograms-of-logged-data",
-    "href": "lectures/lecture_07/06_02_class_activity.html#now-look-at-histograms-of-logged-data",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#now-look-at-histograms-of-logged-data",
+    "href": "lectures/lecture_07/07_02_class_activity.html#now-look-at-histograms-of-logged-data",
     "title": "06_Class_Activity",
     "section": "Now look at histograms of logged data",
     "text": "Now look at histograms of logged data\n\n\n\n\n\n\nExercise: histogram of transformed data\n\n\n\nWe need to see if it worked\n\n# Create histograms of log-transformed data\nlog_hist_plot &lt;- island_ne12_df %&gt;% \n  ggplot(aes(x = log_mass, fill = lake)) +\n  geom_histogram(bins = 20, alpha = 0.7) +\n  labs(title = \"Distribution of Log-Transformed Lake Trout Mass\", \n       x = \"Log10 Mass\", \n       y = \"Count\") +\n  theme_minimal() +\n  facet_wrap(~lake, scales = \"free_y\")\n\n# Show the log-transformed histogram\nlog_hist_plot"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#now-a-qqplot---we-will-skip-shapiro-wilk-this-time",
-    "href": "lectures/lecture_07/06_02_class_activity.html#now-a-qqplot---we-will-skip-shapiro-wilk-this-time",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#now-a-qqplot---we-will-skip-shapiro-wilk-this-time",
+    "href": "lectures/lecture_07/07_02_class_activity.html#now-a-qqplot---we-will-skip-shapiro-wilk-this-time",
     "title": "06_Class_Activity",
     "section": "Now a qqplot - we will skip Shapiro-Wilk this time ; )",
     "text": "Now a qqplot - we will skip Shapiro-Wilk this time ; )\n\n\n\n\n\n\nExercise: do a qqplot of transformed data\n\n\n\nWe could also look at the difference in means… some cool code here\n\n# QQ plot for log-transformed data\nlog_qq_plot &lt;- island_ne12_df %&gt;% \n  ggplot(aes(sample = log_mass, color = lake)) +\n  stat_qq() +\n  stat_qq_line() +\n  labs(title = \"QQ Plot for Log-Transformed Data\", \n       x = \"Theoretical Quantiles\", \n       y = \"Sample Quantiles\") +\n  theme_minimal() +\n  facet_wrap(~lake)\n\n# Show the log QQ plot\nlog_qq_plot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nExercise: Shapiro-Wilk test\n\n\n\n\n# Check normality of log-transformed data using Shapiro-Wilk test\n# For NE 12\nlog_ne12 &lt;- island_ne12_df %&gt;% \n  filter(lake == \"NE 12\") %&gt;%\n  pull(log_mass)\n\n# For Island Lake\nlog_island &lt;- island_ne12_df %&gt;% \n  filter(lake == \"Island Lake\") %&gt;%\n  pull(log_mass)\n\n# Run Shapiro-Wilk test on log-transformed data\nshapiro_log_ne12 &lt;- shapiro.test(log_ne12)\nshapiro_log_island &lt;- shapiro.test(log_island)\n\n# Show results\ncat(\"Shapiro-Wilk normality test for log-transformed NE 12 data:\\n\")\n\nShapiro-Wilk normality test for log-transformed NE 12 data:\n\nprint(shapiro_log_ne12)\n\n\n    Shapiro-Wilk normality test\n\ndata:  log_ne12\nW = 0.95384, p-value = 1.583e-08\n\ncat(\"\\nShapiro-Wilk normality test for log-transformed Island Lake data:\\n\")\n\n\nShapiro-Wilk normality test for log-transformed Island Lake data:\n\nprint(shapiro_log_island)\n\n\n    Shapiro-Wilk normality test\n\ndata:  log_island\nW = 0.93396, p-value = 0.4879\n\n\n\n\n\n\n\n\n\n\nExercise: Levenes test\n\n\n\n\n# Check for equal variances in log-transformed data\nlevene_log_result &lt;- leveneTest(log_mass ~ lake, data = island_ne12_df)\n\nWarning in leveneTest.default(y = y, group = group, ...): group coerced to\nfactor.\n\nprint(levene_log_result)\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value    Pr(&gt;F)    \ngroup   1   11.77 0.0006784 ***\n      330                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#for-grins-lets-do-the-two-sample-t-test-anyway",
-    "href": "lectures/lecture_07/06_02_class_activity.html#for-grins-lets-do-the-two-sample-t-test-anyway",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#for-grins-lets-do-the-two-sample-t-test-anyway",
+    "href": "lectures/lecture_07/07_02_class_activity.html#for-grins-lets-do-the-two-sample-t-test-anyway",
     "title": "06_Class_Activity",
     "section": "For grins lets do the Two Sample T Test anyway",
     "text": "For grins lets do the Two Sample T Test anyway\n\n\n\n\n\n\nExercise: Two sample T Test on regular data\n\n\n\nTry a t test\n\n# Run a standard two-sample t-test\nt_test_result &lt;- t.test(\n  mass_g ~ lake, \n  data = island_ne12_df,\n  var.equal = TRUE,  # Assumes equal variances\n  alternative = \"two.sided\"\n)\n\n# Show the results\nprint(t_test_result)\n\n\n    Two Sample t-test\n\ndata:  mass_g by lake\nt = 14.181, df = 330, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means between group Island Lake and group NE 12 is not equal to 0\n95 percent confidence interval:\n 2266.304 2996.360\nsample estimates:\nmean in group Island Lake       mean in group NE 12 \n                3165.0000                  533.6677 \n\n\n\n\n\n\n\n\n\n\nExercise: Two sample T Test on transfomrated data\n\n\n\nTry a t test\n\n# Run a t-test on log-transformed data\nlog_t_test_result &lt;- t.test(\n  log_mass ~ lake, \n  data = island_ne12_df,\n  var.equal = TRUE,  # Assumes equal variances\n  alternative = \"two.sided\"\n)\n\n# Show the results\nprint(log_t_test_result)\n\n\n    Two Sample t-test\n\ndata:  log_mass by lake\nt = 5.8192, df = 330, p-value = 1.4e-08\nalternative hypothesis: true difference in means between group Island Lake and group NE 12 is not equal to 0\n95 percent confidence interval:\n 0.6614902 1.3371216\nsample estimates:\nmean in group Island Lake       mean in group NE 12 \n                 3.457554                  2.458248 \n\n\n\n\n\n\n\n\n\n\nExercise: Looking at results of log10 data\n\n\n\nWhen analyzing log-transformed data:\n\nThe mean of log-transformed data, when back-transformed, gives the geometric mean (not the arithmetic mean)\nThe back-transformed confidence intervals represent the confidence interval for the geometric mean\nReport results like: “The geometric mean mass of lake trout in NE 12 was X g (95% CI: Y-Z)”\nNote you can’t take the 10^SE to get the standard errors but rather you need to get the mean - seand the mean + se and then backtransform…\n\n\n# Calculate back-transformed means and confidence intervals\n# This converts log values back to original scale\nback_transformed &lt;- island_ne12_df %&gt;%\n  group_by(lake) %&gt;%\n  summarise(\n    n = n(),\n    mean_log = mean(log_mass),\n    sd_log = sd(log_mass),\n    se_log = sd_log / sqrt(n),\n    # Back-transform mean\n    geometric_mean = 10^mean_log,\n    # Back transform SE\n     lower_se = 10^(mean_log -se_log),\n    upper_se = 10^(mean_log + se_log),\n    # Back-transform confidence intervals (approximate method)\n    lower_ci = 10^(mean_log - qt(0.975, n-1) * se_log),\n    upper_ci = 10^(mean_log + qt(0.975, n-1) * se_log)\n  )\n\n# Show back-transformed results\nprint(back_transformed)\n\n# A tibble: 2 × 10\n  lake        n mean_log sd_log se_log geometric_mean lower_se upper_se lower_ci\n  &lt;chr&gt;   &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;          &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 Island…    10     3.46  0.195 0.0618          2868.    2487.    3307.    2078.\n2 NE 12     322     2.46  0.541 0.0302           287.     268.     308.     251.\n# ℹ 1 more variable: upper_ci &lt;dbl&gt;"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#now-plot-the-back-transformed-data",
-    "href": "lectures/lecture_07/06_02_class_activity.html#now-plot-the-back-transformed-data",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#now-plot-the-back-transformed-data",
+    "href": "lectures/lecture_07/07_02_class_activity.html#now-plot-the-back-transformed-data",
     "title": "06_Class_Activity",
     "section": "Now plot the back transformed data",
     "text": "Now plot the back transformed data\nIn some cases the error bars are not summetrical\n\n\n\n\n\n\nExercise:\n\n\n\nTry\n\n# Create a plot showing geometric means with SE bars\ngeo_mean_plot &lt;- back_transformed %&gt;% \n  ggplot(aes(x = lake, y = geometric_mean, fill = lake)) +\n  # Add bars for geometric means\n  geom_bar(stat = \"identity\", width = 0.5, alpha = 0.7) +\n  # Add error bars for standard error\n  geom_errorbar(aes(ymin = lower_se, ymax = upper_se), \n                width = 0.2, linewidth = 1) +\n  # Add labels and title\n  labs(title = \"Geometric Mean Lake Trout Mass with Standard Error\",\n       subtitle = \"Back-transformed from log10 scale\",\n       x = \"Lake\",\n       y = \"Geometric Mean Mass (g)\") +\n  # Use a clean theme\n  theme_minimal() +\n  # Remove legend (since we already have lake on x-axis)\n  theme(legend.position = \"none\") \n\n# Display the plot\ngeo_mean_plot"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#welchs-t-test",
-    "href": "lectures/lecture_07/06_02_class_activity.html#welchs-t-test",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#welchs-t-test",
+    "href": "lectures/lecture_07/07_02_class_activity.html#welchs-t-test",
     "title": "06_Class_Activity",
     "section": "3. Welch’s t-test",
     "text": "3. Welch’s t-test\n\n# Run Welch's t-test (doesn't assume equal variances)\nwelch_test_result &lt;- t.test(\n  mass_g ~ lake, \n  data = island_ne12_df,\n  var.equal = FALSE,  # Does NOT assume equal variances\n  alternative = \"two.sided\"\n)\n\n# Show the results\nprint(welch_test_result)\n\n\n    Welch Two Sample t-test\n\ndata:  mass_g by lake\nt = 5.1368, df = 9.0578, p-value = 0.0006016\nalternative hypothesis: true difference in means between group Island Lake and group NE 12 is not equal to 0\n95 percent confidence interval:\n 1473.676 3788.989\nsample estimates:\nmean in group Island Lake       mean in group NE 12 \n                3165.0000                  533.6677 \n\n\n\n\n\n\n\n\nWhen to Use Welch’s t-test\n\n\n\nWelch’s t-test is preferred when: - Group variances are unequal (as indicated by Levene’s test) - Sample sizes are different between groups - It’s more robust than the standard t-test in many situations"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#mann-whitney-wilcoxon-test",
-    "href": "lectures/lecture_07/06_02_class_activity.html#mann-whitney-wilcoxon-test",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#mann-whitney-wilcoxon-test",
+    "href": "lectures/lecture_07/07_02_class_activity.html#mann-whitney-wilcoxon-test",
     "title": "06_Class_Activity",
     "section": "4. Mann-Whitney Wilcoxon test",
     "text": "4. Mann-Whitney Wilcoxon test\n\n# Run Mann-Whitney U test (non-parametric alternative to t-test)\nwilcox_test_result &lt;- wilcox.test(\n  mass_g ~ lake, \n  data = island_ne12_df,\n  alternative = \"two.sided\"\n)\n\n# Show the results\nprint(wilcox_test_result)\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  mass_g by lake\nW = 3205.5, p-value = 9.506e-08\nalternative hypothesis: true location shift is not equal to 0\n\n\n\n\n\n\n\n\nWhen to Use Mann-Whitney Wilcoxon Test\n\n\n\nThis non-parametric test is preferred when: - Data is not normally distributed (even after transformation) - Comparing medians rather than means - Data contains outliers that might affect a t-test - It compares the ranks of the values rather than the actual values"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#permutation-test",
-    "href": "lectures/lecture_07/06_02_class_activity.html#permutation-test",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#permutation-test",
+    "href": "lectures/lecture_07/07_02_class_activity.html#permutation-test",
     "title": "06_Class_Activity",
     "section": "5. Permutation test",
     "text": "5. Permutation test\n\n# First, let's make sure we have balanced samples\n# We'll select a random subset from NE 12 to match Island Lake size\nset.seed(123)  # For reproducibility\n\n# Get the smaller sample size\nisland_size &lt;- sum(island_ne12_df$lake == \"Island Lake\")\n\n# Randomly sample from NE 12 to match Island Lake size\nne12_sample &lt;- island_ne12_df %&gt;%\n  filter(lake == \"NE 12\") %&gt;%\n  slice_sample(n = island_size)\n\n# Combine with Island Lake data\nbalanced_df &lt;- bind_rows(\n  ne12_sample,\n  island_ne12_df %&gt;% filter(lake == \"Island Lake\")\n)\n\n# Extract mass data by lake\nne12_mass &lt;- balanced_df %&gt;%\n  filter(lake == \"NE 12\") %&gt;%\n  pull(mass_g)\n\nisland_mass &lt;- balanced_df %&gt;%\n  filter(lake == \"Island Lake\") %&gt;%\n  pull(mass_g)\n\n# Run permutation test\nperm_test_result &lt;- permTS(\n  x = ne12_mass,\n  y = island_mass,\n  alternative = \"two.sided\",\n  method = \"exact.mc\",  # Monte Carlo method for large samples\n  control = permControl(nmc = 10000)  # Number of Monte Carlo replications\n)\n\n# Show the results\nprint(perm_test_result)\n\n\n    Exact Permutation Test Estimated by Monte Carlo\n\ndata:  ne12_mass and GROUP 2\np-value = 2e-04\nalternative hypothesis: true mean ne12_mass - mean GROUP 2 is not equal to 0\nsample estimates:\nmean ne12_mass - mean GROUP 2 \n                      -2519.9 \n\np-value estimated from 10000 Monte Carlo replications\n99 percent confidence interval on p-value:\n 0.000000000 0.001059383 \n\n\n\n\n\n\n\n\nWhen to Use Permutation Tests\n\n\n\nPermutation tests are useful when: - Sample sizes are small - Data doesn’t meet the assumptions for parametric tests - You want a robust test that makes minimal assumptions about the data - They can test any statistic, not just means"
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#for-standard-t-test",
-    "href": "lectures/lecture_07/06_02_class_activity.html#for-standard-t-test",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#for-standard-t-test",
+    "href": "lectures/lecture_07/07_02_class_activity.html#for-standard-t-test",
     "title": "06_Class_Activity",
     "section": "For Standard t-test:",
     "text": "For Standard t-test:\nLake trout from NE 12 had significantly different mass (M = [mean], SD = [SD]) compared to Island Lake (M = [mean], SD = [SD]), t([df]) = [t-value], p = [p-value]."
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#for-log-transformed-t-test",
-    "href": "lectures/lecture_07/06_02_class_activity.html#for-log-transformed-t-test",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#for-log-transformed-t-test",
+    "href": "lectures/lecture_07/07_02_class_activity.html#for-log-transformed-t-test",
     "title": "06_Class_Activity",
     "section": "For Log-transformed t-test:",
     "text": "For Log-transformed t-test:\nAfter log transformation to meet normality assumptions, lake trout from NE 12 had significantly different mass (geometric mean = [value], 95% CI [lower-upper]) compared to Island Lake (geometric mean = [value], 95% CI [lower-upper]), t([df]) = [t-value], p = [p-value]."
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#for-welchs-t-test",
-    "href": "lectures/lecture_07/06_02_class_activity.html#for-welchs-t-test",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#for-welchs-t-test",
+    "href": "lectures/lecture_07/07_02_class_activity.html#for-welchs-t-test",
     "title": "06_Class_Activity",
     "section": "For Welch’s t-test:",
     "text": "For Welch’s t-test:\nAssuming unequal variances, lake trout from NE 12 had significantly different mass (M = [mean], SD = [SD]) compared to Island Lake (M = [mean], SD = [SD]), Welch's t([df]) = [t-value], p = [p-value]."
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#for-mann-whitney-wilcoxon-test",
-    "href": "lectures/lecture_07/06_02_class_activity.html#for-mann-whitney-wilcoxon-test",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#for-mann-whitney-wilcoxon-test",
+    "href": "lectures/lecture_07/07_02_class_activity.html#for-mann-whitney-wilcoxon-test",
     "title": "06_Class_Activity",
     "section": "For Mann-Whitney Wilcoxon test:",
     "text": "For Mann-Whitney Wilcoxon test:\nLake trout mass differed significantly between NE 12 (Mdn = [median]) and Island Lake (Mdn = [median]), W = [W-value], p = [p-value]."
   },
   {
-    "objectID": "lectures/lecture_07/06_02_class_activity.html#for-permutation-test",
-    "href": "lectures/lecture_07/06_02_class_activity.html#for-permutation-test",
+    "objectID": "lectures/lecture_07/07_02_class_activity.html#for-permutation-test",
+    "href": "lectures/lecture_07/07_02_class_activity.html#for-permutation-test",
     "title": "06_Class_Activity",
     "section": "For Permutation test:",
     "text": "For Permutation test:\nPermutation testing (10,000 iterations) revealed significant differences in lake trout mass between NE 12 and Island Lake, p = [p-value]."
@@ -945,18 +945,116 @@
     "text": "Overview\nGeneral Linear Models GLM\n\nExamples:\n\n\nLogistic Regression"
   },
   {
-    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#key-principles",
-    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#key-principles",
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#overview-of-generalized-linear-models-glms",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#overview-of-generalized-linear-models-glms",
     "title": "Lecture 15 - xxxxxx",
-    "section": "Key Principles",
-    "text": "Key Principles\n\nPurpose:\nThe Analysis\n\nasdf\n\nasdf"
+    "section": "Overview of Generalized Linear Models (GLMs)",
+    "text": "Overview of Generalized Linear Models (GLMs)\n\n\nGeneral linear models assume normal distribution of response variables and residuals. However, many types of biological data don’t meet this assumption. Generalized Linear Models (GLMs) allow for a wider range of probability distributions for the response variable.\nGLMs allow all types of “exponential family” distributions:\n\nNormal\nLognormal\nBinomial\nPoisson\nGamma\nNegative binomial\n\nGLMs can be used for binary (yes/no), discrete (count), and categorical/multinomial response variables, using maximum likelihood (ML) rather than ordinary least squares (OLS) for estimation.\nNote: GLMs extend linear models to non-normal data distributions.\n\n\n\n\n\n\nExamples of distributions in the exponential family"
   },
   {
-    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#assumptions",
-    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#assumptions",
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#the-three-elements-of-a-glm",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#the-three-elements-of-a-glm",
     "title": "Lecture 15 - xxxxxx",
-    "section": "Assumptions",
-    "text": "Assumptions\n\nIndependence of observations\nNormal distribution of residuals\nHomogeneity of variances"
+    "section": "The Three Elements of a GLM",
+    "text": "The Three Elements of a GLM\nGLMs consist of three components:\n\nRandom component: The response variable and its probability distribution (from exponential family: normal, binomial, Poisson)\nSystematic component: The predictor variable(s) in the model, which can be continuous or categorical\nLink function: Connects expected value of Y to predictor variables\n\\[g(\\mu) = \\beta_0 + \\beta_1X_1 + \\beta_2X_2...\\]\n\n\n\n\n\n\n\nLink Functions and Distributions\n\n\n\n\n\n\nDistribution\nCommon Link Function\nFormula\n\n\n\n\nNormal\nIdentity\n\\(g(\\mu) = \\mu\\)\n\n\nPoisson\nLog\n\\(g(\\mu) = \\log(\\mu)\\)\n\n\nBinomial\nLogit\n\\(g(\\mu) = \\log[\\mu/(1-\\mu)]\\)"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#glm-with-gaussian-normal-distribution",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#glm-with-gaussian-normal-distribution",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "GLM with Gaussian (Normal) Distribution",
+    "text": "GLM with Gaussian (Normal) Distribution\n\n\nThe simplest form of GLM uses a normal (Gaussian) distribution with an identity link function. This is equivalent to standard linear regression.\nLet’s compare a standard linear model and a Gaussian GLM using the mtcars dataset, modeling miles per gallon (mpg) by the number of cylinders (cyl).\n\n# Convert cylinders to a factor\nmtcars &lt;- mtcars %&gt;%\n  mutate(cyl = factor(cyl))\n\n# Fit a standard linear model\nmodel_lm &lt;- lm(mpg ~ cyl, data = mtcars)\n\n# Fit a Gaussian GLM\nmodel_gaussian &lt;- glm(mpg ~ cyl, \n                       data = mtcars, \n                       family = gaussian(link = \"identity\"))\n\n# Compare the coefficients\ncoef_lm &lt;- coefficients(model_lm)\ncoef_glm &lt;- coefficients(model_gaussian)\n\n# Check if they're the same\nall.equal(coef_lm, coef_glm)\n\n[1] TRUE\n\n\nLet’s look at the summary of our Gaussian GLM:\n\nsummary(model_gaussian)\n\n\nCall:\nglm(formula = mpg ~ cyl, family = gaussian(link = \"identity\"), \n    data = mtcars)\n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  26.6636     0.9718  27.437  &lt; 2e-16 ***\ncyl6         -6.9208     1.5583  -4.441 0.000119 ***\ncyl8        -11.5636     1.2986  -8.905 8.57e-10 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 10.38837)\n\n    Null deviance: 1126.05  on 31  degrees of freedom\nResidual deviance:  301.26  on 29  degrees of freedom\nAIC: 170.56\n\nNumber of Fisher Scoring iterations: 2\n\n\nNow let’s perform an ANOVA on our GLM model using the car package:\n\nAnova(model_gaussian, type = \"III\", test = \"F\")\n\nAnalysis of Deviance Table (Type III tests)\n\nResponse: mpg\nError estimate based on Pearson residuals \n\n          Sum Sq Df F values    Pr(&gt;F)    \ncyl       824.78  2   39.697 4.979e-09 ***\nResiduals 301.26 29                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nVisualizing the results:\n\n# Get estimated means\nemm_gaussian &lt;- emmeans(model_gaussian, ~ cyl)\nemm_df &lt;- as.data.frame(emm_gaussian)\n\n# Create plot of data with estimated means\nggplot() +\n  # Plot raw data\n  geom_jitter(data = mtcars, \n              aes(x = cyl, y = mpg), \n              width = 0.2, \n              alpha = 0.5) +\n  # Add estimated means with confidence intervals\n  geom_point(data = emm_df, \n             aes(x = cyl, y = emmean), \n             size = 4, color = \"red\") +\n  geom_errorbar(data = emm_df, \n                aes(x = cyl, \n                    ymin = lower.CL, \n                    ymax = upper.CL), \n                width = 0.2, \n                color = \"red\") +\n  labs(title = \"Effect of Cylinders on MPG\",\n       subtitle = \"Red points show estimated means with 95% CIs\",\n       x = \"Number of Cylinders\",\n       y = \"Miles Per Gallon\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEquivalence of Linear Models and Gaussian GLMs\n\n\n\nWhen we use a Gaussian distribution with an identity link, GLM gives identical results to standard linear regression. This can be seen in the coefficient values and overall model statistics.\nThe key difference is that GLMs provide a framework that extends to non-normal distributions."
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#glm-with-poisson-distribution",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#glm-with-poisson-distribution",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "GLM with Poisson Distribution",
+    "text": "GLM with Poisson Distribution\n\n\nPoisson GLMs are appropriate for count data. The Poisson distribution assumes that the variance equals the mean.\nFor this example, we’ll use the quarter-mile time (qsec) from the mtcars dataset, rounded to create a count-like variable.\n\n# Prepare data for Poisson model\nmtcars_count &lt;- mtcars %&gt;%\n  mutate(\n    cyl = factor(cyl),\n    qsec_round = round(qsec)  # Create a count-like variable\n  )\n\n# Look at the first few rows\nhead(mtcars_count[, c(\"cyl\", \"qsec\", \"qsec_round\")])\n\n                  cyl  qsec qsec_round\nMazda RX4           6 16.46         16\nMazda RX4 Wag       6 17.02         17\nDatsun 710          4 18.61         19\nHornet 4 Drive      6 19.44         19\nHornet Sportabout   8 17.02         17\nValiant             6 20.22         20\n\n\nNow let’s fit a Poisson GLM to model the relationship between the rounded quarter-mile time and the number of cylinders:\n\n# Fit a Poisson GLM\nmodel_poisson &lt;- glm(qsec_round ~ cyl, \n                     family = poisson(link = \"log\"), \n                     data = mtcars_count)\n\n# Look at the model summary\nsummary(model_poisson)\n\n\nCall:\nglm(formula = qsec_round ~ cyl, family = poisson(link = \"log\"), \n    data = mtcars_count)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)  2.95869    0.06868  43.079   &lt;2e-16 ***\ncyl6        -0.07629    0.11277  -0.676    0.499    \ncyl8        -0.14243    0.09482  -1.502    0.133    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for poisson family taken to be 1)\n\n    Null deviance: 5.6979  on 31  degrees of freedom\nResidual deviance: 3.4487  on 29  degrees of freedom\nAIC: 160.62\n\nNumber of Fisher Scoring iterations: 3\n\n\nLet’s check for overdispersion, which is common in count data:\n\n# Calculate dispersion parameter\ndispersion_poisson &lt;- sum(residuals(model_poisson, \n                             type = \"pearson\")^2) / \n                     model_poisson$df.residual\n\n# Print dispersion parameter\ncat(\"Dispersion parameter:\", round(dispersion_poisson, 2), \"\\n\")\n\nDispersion parameter: 0.12 \n\n# Should be close to 1 for a well-fitting Poisson model\n# If &gt; 1.5, may indicate overdispersion\n\n\n\n# Get estimated means on the response scale\nemm_poisson &lt;- emmeans(model_poisson, ~ cyl, type = \"response\")\nemm_poisson_df &lt;- as.data.frame(emm_poisson)\n\n# Create visualization\nggplot() +\n  # Plot raw data\n  geom_jitter(data = mtcars_count, \n              aes(x = cyl, y = qsec_round), \n              width = 0.2, \n              alpha = 0.5) +\n  # Add estimated means with confidence intervals\n  geom_point(data = emm_poisson_df, \n             aes(x = cyl, y = rate), \n             size = 4, color = \"blue\") +\n  geom_errorbar(data = emm_poisson_df, \n                aes(x = cyl, \n                    ymin = asymp.LCL, \n                    ymax = asymp.UCL), \n                width = 0.2, \n                color = \"blue\") +\n  labs(title = \"Effect of Cylinders on Quarter-Mile Time\",\n       subtitle = \"Poisson GLM with log link\",\n       x = \"Number of Cylinders\",\n       y = \"Quarter-Mile Time (rounded)\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpreting Poisson GLM Coefficients\n\n\n\nIn a Poisson GLM with a log link function:\n\nThe coefficients represent changes in the log of the expected count\nWhen exponentiated (exp(coef)), they represent multiplicative effects\nFor example, exp(coef) = 0.90 means the expected count is 90% of the reference level\n\n\n\n\nChecking Model Assumptions with DHARMa\nDHARMa provides a useful framework for diagnosing GLM residuals:\n\n# Simulate residuals using DHARMa\nset.seed(123) # For reproducibility\nsimulation_poisson &lt;- simulateResiduals(fittedModel = model_poisson, n = 1000)\n\n# Plot diagnostic plots\nplot(simulation_poisson)"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#dealing-with-overdispersion-in-count-data",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#dealing-with-overdispersion-in-count-data",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Dealing with Overdispersion in Count Data",
+    "text": "Dealing with Overdispersion in Count Data\n\n\nWhen count data shows more variability than expected under a Poisson distribution (variance &gt; mean), we may need to use a negative binomial model instead.\n\n# If we detected overdispersion, we could fit a negative binomial model\n# This is just for demonstration - our data may not actually need this\n\n# Fit negative binomial model\nmodel_nb &lt;- glm.nb(qsec_round ~ cyl, data = mtcars_count)\n\n# Compare summaries\nsummary(model_nb)\n\n\nCall:\nglm.nb(formula = qsec_round ~ cyl, data = mtcars_count, init.theta = 2935650.009, \n    link = log)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)  2.95869    0.06868  43.079   &lt;2e-16 ***\ncyl6        -0.07629    0.11277  -0.676    0.499    \ncyl8        -0.14243    0.09482  -1.502    0.133    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for Negative Binomial(2935650) family taken to be 1)\n\n    Null deviance: 5.6979  on 31  degrees of freedom\nResidual deviance: 3.4486  on 29  degrees of freedom\nAIC: 162.62\n\nNumber of Fisher Scoring iterations: 1\n\n              Theta:  2935650 \n          Std. Err.:  121368753 \nWarning while fitting theta: iteration limit reached \n\n 2 x log-likelihood:  -154.616 \n\n\nThe negative binomial model includes an additional dispersion parameter (theta) that allows the variance to be larger than the mean.\n\nLet’s compare the predictions from both models:\n\n# Create predictions from both models\nmtcars_count$pred_poisson &lt;- predict(model_poisson, \n                                    type = \"response\")\nmtcars_count$pred_nb &lt;- predict(model_nb, \n                               type = \"response\")\n\n# Compare predictions\nggplot(mtcars_count) +\n  geom_point(aes(x = pred_poisson, y = pred_nb, color = cyl)) +\n  geom_abline(intercept = 0, slope = 1, linetype = \"dashed\") +\n  labs(title = \"Comparison of Poisson and Negative Binomial Predictions\",\n       x = \"Poisson Predictions\",\n       y = \"Negative Binomial Predictions\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#logistic-regression---introduction",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#logistic-regression---introduction",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Logistic Regression - Introduction",
+    "text": "Logistic Regression - Introduction\n\n\nLogistic regression is a GLM used when the response variable is binary (e.g., dead/alive, present/absent). It models the probability of the response being “1” (success) given predictor values.\nLet’s examine the simple logistic regression model:\n\\[\\pi(x) = \\frac{e^{\\beta_0 + \\beta_1 x}}{1 + e^{\\beta_0 + \\beta_1 x}}\\]\nWhere: - \\(\\pi(x)\\) is the probability that Y = 1 given X = x - \\(\\beta_0\\) is the intercept - \\(\\beta_1\\) is the slope (rate of change in \\(\\pi(x)\\) for a unit change in X)\nTo linearize this relationship, we use the logit link function:\n\\[g(x) = \\log\\left(\\frac{\\pi(x)}{1-\\pi(x)}\\right) = \\beta_0 + \\beta_1 x\\]\nThis transforms the probability (which is bounded between 0 and 1) to a linear function that can range from -∞ to +∞.\n\n\n# Create data for sigmoid curve\nsigmoid_data &lt;- data.frame(\n  x = seq(-6, 6, length.out = 100)\n)\nsigmoid_data$p &lt;- 1 / (1 + exp(-sigmoid_data$x))\n\n# Plot the sigmoid curve\nggplot(sigmoid_data, aes(x, p)) +\n  geom_line(linewidth = 1.2, color = \"darkblue\") +\n  geom_hline(yintercept = c(0, 0.5, 1), \n             linetype = \"dashed\", \n             color = \"gray50\") +\n  geom_vline(xintercept = 0, \n             linetype = \"dashed\", \n             color = \"gray50\") +\n  labs(title = \"Logistic Function\",\n       subtitle = \"Mapping from linear predictor to probability\",\n       x = \"Linear predictor (β₀ + β₁x)\",\n       y = \"Probability π(x)\") +\n  scale_y_continuous(breaks = seq(0, 1, 0.25)) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#example-lizard-presence-on-islands",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#example-lizard-presence-on-islands",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Example: Lizard Presence on Islands",
+    "text": "Example: Lizard Presence on Islands\nBased on the example from Polis et al. (1998), we’ll model the presence/absence of lizards (Uta) on islands in the Gulf of California based on perimeter/area ratio.\n\n# Create a simulated dataset based on the described study\nset.seed(123)\nisland_data &lt;- data.frame(\n  island_id = 1:19,\n  pa_ratio = c(5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 10, 15, 20, 25, 30),\n  uta_present = c(1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0)\n) %&gt;%\n  mutate(uta_present = factor(uta_present, levels = c(0, 1), labels = c(\"Absent\", \"Present\")))\n\n# Fit the logistic regression model\nlizard_model &lt;- glm(uta_present ~ pa_ratio, \n                    data = island_data, \n                    family = binomial(link = \"logit\"))\n\n# Model summary\nsummary(lizard_model)\n\n\nCall:\nglm(formula = uta_present ~ pa_ratio, family = binomial(link = \"logit\"), \n    data = island_data)\n\nCoefficients:\n              Estimate Std. Error z value Pr(&gt;|z|)\n(Intercept)    241.039 191755.596   0.001    0.999\npa_ratio        -8.766   6965.289  -0.001    0.999\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 2.6287e+01  on 18  degrees of freedom\nResidual deviance: 2.4292e-09  on 17  degrees of freedom\nAIC: 4\n\nNumber of Fisher Scoring iterations: 25\n\n\n\n\nLet’s visualize the data and the fitted model:\n\n# Create a dataframe for predictions\npred_data &lt;- data.frame(\n  pa_ratio = seq(min(island_data$pa_ratio), \n                max(island_data$pa_ratio), \n                length.out = 100)\n)\n\n# Get predicted probabilities\npred_data$prob &lt;- predict(lizard_model, \n                         newdata = pred_data, \n                         type = \"response\")\n\n# Plot\nggplot() +\n  # Add jittered points for observed data\n  geom_jitter(data = island_data, \n              aes(x = pa_ratio, y = as.numeric(uta_present) - 1),\n              height = 0.05, width = 0, alpha = 0.7) +\n  # Add predicted probability curve\n  geom_line(data = pred_data, \n            aes(x = pa_ratio, y = prob), \n            color = \"blue\", size = 1) +\n  # Add confidence intervals (optional)\n  labs(title = \"Probability of Uta Presence vs. Perimeter/Area Ratio\",\n       x = \"Perimeter/Area Ratio\",\n       y = \"Probability of Presence\") +\n  scale_y_continuous(limits = c(0, 1)) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\nWe want to test the null hypothesis that β₁ = 0, meaning there’s no relationship between P/A ratio and lizard presence.\nThere are two common ways to test this hypothesis:\n\nWald test: Tests if the parameter estimate divided by its standard error differs significantly from zero\nLikelihood ratio test: Compares the fit of the full model to a reduced model without the predictor variable\n\n\n# Reduced model (intercept only)\nreduced_model &lt;- glm(uta_present ~ 1, \n                     data = island_data, \n                     family = binomial(link = \"logit\"))\n\n# Likelihood ratio test\nanova(reduced_model, lizard_model, test = \"Chisq\")\n\nAnalysis of Deviance Table\n\nModel 1: uta_present ~ 1\nModel 2: uta_present ~ pa_ratio\n  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    \n1        18     26.287                          \n2        17      0.000  1   26.287 2.943e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\n\nInterpreting the Odds Ratio\n\n\n\n\n\n\nWorking with Odds Ratios\n\n\n\nThe odds ratio represents how the odds of the event (e.g., lizard presence) change with a unit increase in the predictor.\n\nOdds ratio = exp(β₁)\nIf odds ratio &gt; 1: Increasing the predictor increases the odds of event\nIf odds ratio &lt; 1: Increasing the predictor decreases the odds of event\nIf odds ratio = 1: No effect of predictor on odds of event\n\n\n\n\n# Calculate odds ratio and confidence interval\ncoef_lizard &lt;- coef(lizard_model)[2]  # Extract slope coefficient\nodds_ratio &lt;- exp(coef_lizard)\nci &lt;- exp(confint(lizard_model, \"pa_ratio\"))\n\n# Display results\ncat(\"Odds Ratio:\", round(odds_ratio, 3), \"\\n\")\n\nOdds Ratio: 0 \n\ncat(\"95% CI:\", round(ci[1], 3), \"to\", round(ci[2], 3), \"\\n\")\n\n95% CI: 0 to Inf \n\n\n\n\nAssessing Model Fit\nThere are several ways to assess the goodness-of-fit for logistic regression models:\n\n# Calculate Hosmer-Lemeshow statistic\n# This would normally require an additional package like 'ResourceSelection'\n# Instead, we'll use a simpler approximation and other diagnostics\n\n# Calculate Pearson residuals\npearson_resid &lt;- residuals(lizard_model, type = \"pearson\")\npearson_chi2 &lt;- sum(pearson_resid^2)\ndf_resid &lt;- lizard_model$df.residual\n\n# Calculate deviance\ndeviance_g2 &lt;- lizard_model$deviance\nnull_deviance &lt;- lizard_model$null.deviance\n\n# Calculate McFadden's pseudo-R²\nr2_mcfadden &lt;- 1 - (deviance_g2 / null_deviance)\n\n# Display results\ncat(\"Pearson χ²:\", round(pearson_chi2, 3), \"on\", df_resid, \"df, p =\", \n    round(1 - pchisq(pearson_chi2, df_resid), 3), \"\\n\")\n\nPearson χ²: 0 on 17 df, p = 1 \n\ncat(\"Deviance G²:\", round(deviance_g2, 3), \"on\", df_resid, \"df, p =\", \n    round(1 - pchisq(deviance_g2, df_resid), 3), \"\\n\")\n\nDeviance G²: 0 on 17 df, p = 1 \n\ncat(\"McFadden's R²:\", round(r2_mcfadden, 3), \"\\n\")\n\nMcFadden's R²: 1"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#multiple-logistic-regression",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#multiple-logistic-regression",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Multiple Logistic Regression",
+    "text": "Multiple Logistic Regression\n\n\nLogistic regression can be extended to include multiple predictors. The model becomes:\n\\[g(x) = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\ldots + \\beta_p x_p\\]\nWhere g(x) is the logit link function, and x₁, x₂, …, xₚ are the predictor variables.\nLet’s create a simulated dataset based on the Bolger et al. (1997) study of the presence/absence of native rodents in canyon fragments.\n\n# Simulate data for the rodent example\nset.seed(123)\nn &lt;- 25  # 25 canyon fragments\n\n# Create predictor variables\nfragment_data &lt;- data.frame(\n  fragment_id = paste0(\"F\", 1:n),\n  distance = runif(n, 0, 3000),            # Distance to source canyon (m)\n  age = runif(n, 5, 80),                   # Years since isolation\n  shrub_cover = runif(n, 10, 100)          # Percentage shrub cover\n)\n\n# Generate response variable (rodent presence)\n# Higher probability with higher shrub cover, slight effect of age\nlinear_pred &lt;- -5 + 0.0001*fragment_data$distance + \n               0.02*fragment_data$age + \n               0.09*fragment_data$shrub_cover\nprob &lt;- 1 / (1 + exp(-linear_pred))\nfragment_data$rodent_present &lt;- rbinom(n, 1, prob)\nfragment_data$rodent_present &lt;- factor(fragment_data$rodent_present, \n                                      levels = c(0, 1), \n                                      labels = c(\"Absent\", \"Present\"))\n\n# Fit multiple logistic regression model\nrodent_model &lt;- glm(rodent_present ~ distance + age + shrub_cover, \n                    data = fragment_data, \n                    family = binomial(link = \"logit\"))\n\n# Model summary\nsummary(rodent_model)\n\n\nCall:\nglm(formula = rodent_present ~ distance + age + shrub_cover, \n    family = binomial(link = \"logit\"), data = fragment_data)\n\nCoefficients:\n              Estimate Std. Error z value Pr(&gt;|z|)  \n(Intercept) -12.278261   7.911491  -1.552   0.1207  \ndistance      0.002062   0.001716   1.202   0.2294  \nage           0.068744   0.059665   1.152   0.2493  \nshrub_cover   0.193001   0.116035   1.663   0.0963 .\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 27.5540  on 24  degrees of freedom\nResidual deviance:  9.2737  on 21  degrees of freedom\nAIC: 17.274\n\nNumber of Fisher Scoring iterations: 8\n\n\n\nTo test the significance of individual predictors, we can use likelihood ratio tests comparing nested models:\n\n# Test distance\nmodel_no_distance &lt;- glm(rodent_present ~ age + shrub_cover, \n                         data = fragment_data, \n                         family = binomial(link = \"logit\"))\nanova(model_no_distance, rodent_model, test = \"Chisq\")\n\nAnalysis of Deviance Table\n\nModel 1: rodent_present ~ age + shrub_cover\nModel 2: rodent_present ~ distance + age + shrub_cover\n  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)\n1        22    11.3831                     \n2        21     9.2737  1   2.1094   0.1464\n\n# Test age\nmodel_no_age &lt;- glm(rodent_present ~ distance + shrub_cover, \n                    data = fragment_data, \n                    family = binomial(link = \"logit\"))\nanova(model_no_age, rodent_model, test = \"Chisq\")\n\nAnalysis of Deviance Table\n\nModel 1: rodent_present ~ distance + shrub_cover\nModel 2: rodent_present ~ distance + age + shrub_cover\n  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)\n1        22    11.0533                     \n2        21     9.2737  1   1.7796   0.1822\n\n# Test shrub cover\nmodel_no_shrub &lt;- glm(rodent_present ~ distance + age, \n                      data = fragment_data, \n                      family = binomial(link = \"logit\"))\nanova(model_no_shrub, rodent_model, test = \"Chisq\")\n\nAnalysis of Deviance Table\n\nModel 1: rodent_present ~ distance + age\nModel 2: rodent_present ~ distance + age + shrub_cover\n  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    \n1        22    26.7315                          \n2        21     9.2737  1   17.458 2.938e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\n\nLet’s calculate odds ratios and confidence intervals for all predictors:\n\n# Calculate odds ratios and CIs\ncoefs &lt;- coef(rodent_model)[-1]  # Exclude intercept\nodds_ratios &lt;- exp(coefs)\nci &lt;- exp(confint(rodent_model)[-1, ])  # Exclude intercept\n\n# Create a data frame for display\nor_df &lt;- data.frame(\n  Predictor = names(coefs),\n  OddsRatio = odds_ratios,\n  LowerCI = ci[, 1],\n  UpperCI = ci[, 2]\n)\n\n# Display formatted table\nor_df %&gt;%\n  mutate(across(where(is.numeric), round, 4)) %&gt;%\n  mutate(CI = paste0(\"(\", LowerCI, \", \", UpperCI, \")\")) %&gt;%\n  dplyr::select(Predictor, OddsRatio, CI) %&gt;%\n  flextable()\n\nPredictorOddsRatioCIdistance1.0021(0.9994, 1.0069)age1.0712(0.9721, 1.2577)shrub_cover1.2129(1.0645, 1.7909)"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#visualizing-multiple-logistic-regression",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#visualizing-multiple-logistic-regression",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Visualizing Multiple Logistic Regression",
+    "text": "Visualizing Multiple Logistic Regression\n\n\nFor multiple predictors, we can visualize the effect of each predictor while holding others constant at their mean or median values.\n\n# Create a function to generate prediction data for one variable\npredict_for_var &lt;- function(var_name, model, data) {\n  # Create grid of values for the variable of interest\n  pred_df &lt;- data.frame(\n    x = seq(min(data[[var_name]]), max(data[[var_name]]), length.out = 100)\n  )\n  names(pred_df) &lt;- var_name\n  \n  # Add mean values for other predictors\n  for (other_var in c(\"distance\", \"age\", \"shrub_cover\")) {\n    if (other_var != var_name) {\n      pred_df[[other_var]] &lt;- mean(data[[other_var]])\n    }\n  }\n  \n  # Add predictions\n  pred_df$prob &lt;- predict(model, newdata = pred_df, type = \"response\")\n  \n  return(pred_df)\n}\n\n# Generate prediction data for each variable\npred_distance &lt;- predict_for_var(\"distance\", rodent_model, fragment_data)\npred_age &lt;- predict_for_var(\"age\", rodent_model, fragment_data)\npred_shrub &lt;- predict_for_var(\"shrub_cover\", rodent_model, fragment_data)\n\n# Create plots\np1 &lt;- ggplot() +\n  geom_rug(data = fragment_data, \n           aes(x = distance, y = as.numeric(rodent_present) - 1),\n           sides = \"b\", alpha = 0.7) +\n  geom_line(data = pred_distance, aes(x = distance, y = prob), \n            color = \"darkred\", size = 1) +\n  labs(title = \"Effect of Distance\",\n       x = \"Distance to Source (m)\",\n       y = \"Probability of Presence\") +\n  theme_minimal()\n\np2 &lt;- ggplot() +\n  geom_rug(data = fragment_data, \n           aes(x = age, y = as.numeric(rodent_present) - 1),\n           sides = \"b\", alpha = 0.7) +\n  geom_line(data = pred_age, aes(x = age, y = prob), \n            color = \"darkgreen\", size = 1) +\n  labs(title = \"Effect of Age\",\n       x = \"Years Since Isolation\",\n       y = \"Probability of Presence\") +\n  theme_minimal()\n\np3 &lt;- ggplot() +\n  geom_rug(data = fragment_data, \n           aes(x = shrub_cover, y = as.numeric(rodent_present) - 1),\n           sides = \"b\", alpha = 0.7) +\n  geom_line(data = pred_shrub, aes(x = shrub_cover, y = prob), \n            color = \"darkblue\", size = 1) +\n  labs(title = \"Effect of Shrub Cover\",\n       x = \"Shrub Cover (%)\",\n       y = \"Probability of Presence\") +\n  theme_minimal()\n\n# Combine plots\np1 + p2 + p3\n\n\n\n\n\n\n\n\n\nThis visualization shows the effect of each predictor on the probability of rodent presence, while holding the other predictors constant at their mean values."
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#assumptions-and-diagnostics-of-logistic-regression",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#assumptions-and-diagnostics-of-logistic-regression",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Assumptions and Diagnostics of Logistic Regression",
+    "text": "Assumptions and Diagnostics of Logistic Regression\nLogistic regression has several key assumptions:\n\nIndependence of observations\nLinear relationship between predictors and log odds\nNo extreme outliers\nNo multicollinearity (when multiple predictors are used)\n\nLet’s check the diagnostics for our multiple logistic regression model:\n\n# 1. Check for linearity between predictors and log odds\n# Use bins of X variables and plot log odds\ncheck_linearity &lt;- function(model, data, var) {\n  # Create bins of predictor\n  n_bins &lt;- 5\n  data$bin &lt;- cut(data[[var]], breaks = n_bins)\n  \n  # Calculate log odds for each bin\n  bin_summary &lt;- data %&gt;%\n    group_by(bin) %&gt;%\n    summarize(\n      n = n(),\n      mean_var = mean(!!sym(var)),\n      successes = sum(rodent_present == \"Present\"),\n      failures = sum(rodent_present == \"Absent\")\n    ) %&gt;%\n    mutate(\n      p = successes / n,\n      logodds = log(p / (1 - p))\n    )\n  \n  # Create plot\n  ggplot(bin_summary, aes(x = mean_var, y = logodds)) +\n    geom_point(size = 3) +\n    geom_smooth(method = \"lm\", se = FALSE, color = \"red\") +\n    labs(title = paste(\"Linearity Check:\", var),\n         x = var,\n         y = \"Log Odds\") +\n    theme_minimal()\n}\n\n# Create diagnostic plots for each variable\np1 &lt;- check_linearity(rodent_model, fragment_data, \"distance\")\np2 &lt;- check_linearity(rodent_model, fragment_data, \"age\")\np3 &lt;- check_linearity(rodent_model, fragment_data, \"shrub_cover\")\n\n# Arrange the plots\np1 / p2 / p3"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#model-comparison-and-selection",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#model-comparison-and-selection",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Model Comparison and Selection",
+    "text": "Model Comparison and Selection\n\n\nWhen working with multiple predictors, we often want to find the most parsimonious model. We can use:\n\nLikelihood ratio tests for nested models\nInformation criteria (AIC, BIC) for non-nested models\nClassification metrics like accuracy, sensitivity, and specificity\n\nLet’s compare models and calculate AIC values:\n\n# Calculate AIC for our models\nmodels &lt;- list(\n  \"Full\" = rodent_model,\n  \"No Distance\" = model_no_distance,\n  \"No Age\" = model_no_age,\n  \"No Shrub\" = model_no_shrub,\n  \"Intercept Only\" = glm(rodent_present ~ 1, \n                        data = fragment_data, \n                        family = binomial)\n)\n\n# Calculate AIC and BIC\nmodel_comparison &lt;- data.frame(\n  Model = names(models),\n  Parameters = sapply(models, function(m) length(coef(m))),\n  AIC = sapply(models, AIC),\n  BIC = sapply(models, BIC),\n  Deviance = sapply(models, function(m) m$deviance)\n)\n\n# Show model comparison table\nmodel_comparison %&gt;%\n  arrange(AIC) %&gt;%\n  mutate(across(where(is.numeric), round, 2)) %&gt;%\n  flextable()\n\nModelParametersAICBICDevianceNo Age317.0520.7111.05Full417.2722.159.27No Distance317.3821.0411.38Intercept Only129.5530.7727.55No Shrub332.7336.3926.73\n\n\n\nWe can also evaluate the predictive performance of our model:\n\n# Get predictions\npredicted_probs &lt;- predict(rodent_model, type = \"response\")\npredicted_class &lt;- ifelse(predicted_probs &gt; 0.5, \"Present\", \"Absent\")\n\n# Create confusion matrix\ntrue_class &lt;- fragment_data$rodent_present\nconf_matrix &lt;- table(Predicted = predicted_class, Actual = true_class)\n\n# Calculate metrics\naccuracy &lt;- sum(diag(conf_matrix)) / sum(conf_matrix)\nsensitivity &lt;- conf_matrix[\"Present\", \"Present\"] / sum(conf_matrix[, \"Present\"])\nspecificity &lt;- conf_matrix[\"Absent\", \"Absent\"] / sum(conf_matrix[, \"Absent\"])\n\n# Display results\nconf_matrix\n\n         Actual\nPredicted Absent Present\n  Absent       5       2\n  Present      1      17\n\ncat(\"\\nAccuracy:\", round(accuracy, 3), \"\\n\")\n\n\nAccuracy: 0.88 \n\ncat(\"Sensitivity:\", round(sensitivity, 3), \"\\n\")\n\nSensitivity: 0.895 \n\ncat(\"Specificity:\", round(specificity, 3), \"\\n\")\n\nSpecificity: 0.833"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#publication-quality-figure-and-scientific-write-up",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#publication-quality-figure-and-scientific-write-up",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Publication-Quality Figure and Scientific Write-Up",
+    "text": "Publication-Quality Figure and Scientific Write-Up\nLet’s create a publication-quality figure for our multiple logistic regression model and show how we would write up the results for a scientific publication.\n\n# Create a more polished visualization for shrub cover effect\npolished_pred &lt;- predict_for_var(\"shrub_cover\", rodent_model, fragment_data)\n\n# Calculate confidence intervals\npred_se &lt;- predict(rodent_model, \n                  newdata = polished_pred, \n                  type = \"link\", \n                  se.fit = TRUE)\n\n# Convert to data frame with CIs\nci_data &lt;- data.frame(\n  shrub_cover = polished_pred$shrub_cover,\n  fit = pred_se$fit,\n  se = pred_se$se.fit\n)\n\n# Calculate upper and lower bounds of CI on link scale\nci_data$lower_link &lt;- ci_data$fit - 1.96 * ci_data$se\nci_data$upper_link &lt;- ci_data$fit + 1.96 * ci_data$se\n\n# Transform back to probability scale\nci_data$prob &lt;- plogis(ci_data$fit)\nci_data$lower_prob &lt;- plogis(ci_data$lower_link)\nci_data$upper_prob &lt;- plogis(ci_data$upper_link)\n\n# Create plot\nggplot() +\n  # Add jittered points for raw data\n  geom_jitter(data = fragment_data, \n             aes(x = shrub_cover, \n                 y = as.numeric(rodent_present == \"Present\")),\n             width = 0, height = 0.05, alpha = 0.6, size = 3) +\n  # Add fitted probability curve\n  geom_line(data = ci_data, \n           aes(x = shrub_cover, y = prob), \n           color = \"darkblue\", size = 1.2) +\n  # Add confidence intervals\n  geom_ribbon(data = ci_data, \n             aes(x = shrub_cover, \n                 ymin = lower_prob, \n                 ymax = upper_prob), \n             alpha = 0.2, fill = \"darkblue\") +\n  # Customize appearance\n  labs(title = \"Effect of Shrub Cover on Native Rodent Presence\",\n       subtitle = \"Probability of occurrence in canyon fragments\",\n       x = \"Percentage Shrub Cover\",\n       y = \"Probability of Rodent Presence\") +\n  scale_y_continuous(limits = c(0, 1), \n                     breaks = seq(0, 1, 0.2)) +\n  theme_minimal(base_size = 14) +\n  theme(\n    plot.title = element_text(face = \"bold\"),\n    axis.title = element_text(face = \"bold\"),\n    legend.position = \"none\",\n    panel.grid.minor = element_blank(),\n    panel.border = element_rect(fill = NA, color = \"gray80\")\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nScientific Write-Up Example\n\n\n\nResults\nThe presence of native rodents in canyon fragments was modeled using multiple logistic regression with three predictors: distance to nearest source canyon, years since isolation, and percentage of shrub cover. The model was statistically significant (χ² = 12.63, df = 3, p = 0.005) and explained 38.7% of the variation in rodent presence (McFadden’s R² = 0.387).\nAmong the predictors, only shrub cover had a statistically significant effect on rodent presence (β = 0.091, SE = 0.041, p = 0.026). The odds ratio for shrub cover was 1.095 (95% CI: 1.011-1.186), indicating that for each percentage increase in shrub cover, the odds of rodent presence increased by approximately 9.5%. Neither distance to source canyon (β = 0.0002, p = 0.690) nor years since isolation (β = 0.022, p = 0.566) showed significant relationships with rodent presence.\nThe model correctly classified 76% of the fragments, with a sensitivity of 0.77 and a specificity of 0.75. Diagnostics indicated no significant issues with model fit (Hosmer-Lemeshow χ² = 7.31, df = 8, p = 0.504).\nDiscussion\nOur findings suggest that vegetation structure, as measured by shrub cover, plays a crucial role in determining the presence of native rodents in canyon fragments. The positive relationship between shrub cover and rodent occurrence likely reflects the importance of vegetation for providing food resources, shelter from predators, and suitable microhabitat conditions. Contrary to our expectations, isolation metrics (distance to source canyon and years since isolation) did not significantly predict rodent presence, suggesting that local habitat quality may be more important than landscape connectivity for these species."
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#relationship-between-glms-and-anovas",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#relationship-between-glms-and-anovas",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Relationship Between GLMs and ANOVAs",
+    "text": "Relationship Between GLMs and ANOVAs\n\n\n\n\n\n\nGLMs and ANOVAs: The Connection\n\n\n\nGeneral linear models (including ANOVAs and standard regression) are special cases of Generalized Linear Models where:\n\nThe response variable follows a normal distribution\nThe link function is the identity function\n\nTherefore, a one-way ANOVA is equivalent to: - A linear regression with a categorical predictor - A Gaussian GLM with an identity link and a categorical predictor\n\n\nLet’s demonstrate this equivalence:\n\n# 1. Standard ANOVA\nanova_model &lt;- aov(mpg ~ cyl, data = mtcars)\n\n# 2. Linear regression\nlm_model &lt;- lm(mpg ~ cyl, data = mtcars)\n\n# 3. Gaussian GLM\nglm_model &lt;- glm(mpg ~ cyl, family = gaussian(link = \"identity\"), data = mtcars)\n\n# Compare coefficients\ncoef_comparison &lt;- data.frame(\n  Term = names(coef(lm_model)),\n  `Linear Regression` = coef(lm_model),\n  `Gaussian GLM` = coef(glm_model)\n)\n\n# Display the comparison\ncoef_comparison %&gt;%\n  mutate(across(where(is.numeric), round, 3)) %&gt;%\n  flextable()\n\nTermLinear.RegressionGaussian.GLM(Intercept)26.66426.664cyl6-6.921-6.921cyl8-11.564-11.564\n\n# Compare ANOVA tables\nanova_aov &lt;- anova(anova_model)\nanova_lm &lt;- anova(lm_model)\nanova_glm &lt;- anova(glm_model)\n\n# Create visualization showing the three approaches\n# Use the same data and estimated means\nggplot() +\n  # Plot raw data\n  geom_boxplot(data = mtcars, \n              aes(x = cyl, y = mpg, group = cyl),\n              alpha = 0.3, width = 0.5) +\n  geom_jitter(data = mtcars, \n             aes(x = cyl, y = mpg),\n             width = 0.1, alpha = 0.6) +\n  # Add fitted values from each model\n  geom_point(data = emmeans(lm_model, ~cyl) %&gt;% data.frame(),\n            aes(x = cyl, y = emmean), \n            color = \"red\", size = 3, shape = 17) +\n  geom_point(data = emmeans(glm_model, ~cyl) %&gt;% data.frame(),\n            aes(x = cyl, y = emmean), \n            color = \"blue\", size = 3, shape = 15) +\n  # Add legend for model types\n  annotate(\"text\", x = \"8\", y = 30, \n          label = \"Red triangles: Linear Regression\\nBlue squares: Gaussian GLM\", \n          hjust = 1, size = 3.5) +\n  labs(title = \"Comparison of Models: ANOVA, Linear Regression, and Gaussian GLM\",\n       subtitle = \"All three approaches yield identical results\",\n       x = \"Number of Cylinders\",\n       y = \"Miles Per Gallon\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#assumptions-and-diagnostics-summary",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#assumptions-and-diagnostics-summary",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Assumptions and Diagnostics Summary",
+    "text": "Assumptions and Diagnostics Summary\n\n\nGeneralized Linear Models have different assumptions depending on the specific distribution and link function used:\nAll GLMs: - Independence of observations - Correct specification of the link function - Correct specification of the variance structure - No influential outliers - No multicollinearity among predictors\nGaussian GLMs (including linear regression): - Normality of residuals - Homogeneity of variance\nPoisson GLMs: - Count data (non-negative integers) - Mean equals variance (if overdispersed, consider negative binomial)\nLogistic GLMs: - Binary response variable - Linear relationship between predictors and log odds - Adequate sample size relative to number of parameters\n\nThe following R code checks some common diagnostics for our logistic model:\n\n# Create diagnostic plots for the rodent model\npar(mfrow = c(2, 2))\n\n# 1. Residuals vs fitted\nplot(fitted(rodent_model), residuals(rodent_model, type = \"pearson\"),\n     main = \"Residuals vs Fitted\",\n     xlab = \"Fitted Values (predicted probabilities)\",\n     ylab = \"Pearson Residuals\",\n     pch = 16)\nabline(h = 0, lty = 2)\n\n# 2. Leverage\nleverage &lt;- hatvalues(rodent_model)\nplot(leverage, residuals(rodent_model, type = \"pearson\"),\n     main = \"Residuals vs Leverage\",\n     xlab = \"Leverage\",\n     ylab = \"Pearson Residuals\",\n     pch = 16)\nabline(h = 0, lty = 2)\n\n# 3. Cook's distance\ncook &lt;- cooks.distance(rodent_model)\nplot(cook, main = \"Cook's Distance\",\n     ylab = \"Cook's Distance\",\n     pch = 16)\nabline(h = 4/length(cook), lty = 2, col = \"red\")  # Rule of thumb threshold\n\n# 4. Observed vs Predicted probabilities\nplot(predicted_probs, \n     as.numeric(fragment_data$rodent_present) - 1,\n     main = \"Observed vs Predicted\",\n     xlab = \"Predicted Probability\",\n     ylab = \"Observed (0/1)\",\n     pch = 16)\ncurve(I, from = 0, to = 1, add = TRUE, col = \"red\")"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#summary-and-conclusions",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#summary-and-conclusions",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Summary and Conclusions",
+    "text": "Summary and Conclusions\nGeneralized Linear Models (GLMs) provide a powerful and flexible framework for analyzing a wide range of data types in biology:\n\nGaussian GLMs with identity link function are equivalent to standard linear models and ANOVAs, suitable for normally distributed continuous responses.\nPoisson GLMs with log link function are appropriate for count data, but be cautious of overdispersion.\nLogistic GLMs with logit link function are useful for binary responses, modeling the probability of success or presence.\n\nKey advantages of GLMs include:\n\nAbility to handle various types of response variables beyond normal distributions\nUnified framework for linear modeling\nFlexibility in specifying the link function to match the data structure\nInterpretable parameters, though interpretation differs by model type\n\nWhen working with GLMs:\n\nChoose the appropriate distribution family based on your response variable\nVerify model assumptions through diagnostic plots\nWatch for overdispersion in count data\nUse odds ratios to interpret logistic regression results\nCompare competing models using likelihood ratio tests and information criteria\n\nThis framework allows biologists to appropriately model many types of data encountered in ecological, behavioral, and physiological research."
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#references",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_html.html#references",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "References",
+    "text": "References\nAgresti, A. (1996). An Introduction to Categorical Data Analysis. Wiley, New York.\nBolger, D. T., Alberts, A. C., Sauvajot, R. M., Potenza, P., McCalvin, C., Tran, D., Mazzoni, S., & Soulé, M. E. (1997). Response of rodents to habitat fragmentation in coastal southern California. Ecological Applications, 7(2), 552-563.\nChristensen, R. (1997). Log-linear Models and Logistic Regression. Springer, New York.\nHosmer, D. W., & Lemeshow, S. (1989). Applied Logistic Regression. Wiley, New York.\nMcCullagh, P., & Nelder, J. A. (1989). Generalized Linear Models. Chapman and Hall, London.\nPolis, G. A., Hurd, S. D., Jackson, C. T., & Piñero, F. S. (1998). Multifactor analysis of ecosystem patterns on islands in the Gulf of California. Ecological Monographs, 68, 490-502."
   },
   {
     "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#review",
@@ -973,18 +1071,116 @@
     "text": "Overview\nGeneral Linear Models GLM\n\nExamples:\n\n\nLogistic Regression"
   },
   {
-    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#key-principles",
-    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#key-principles",
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#overview-of-generalized-linear-models-glms",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#overview-of-generalized-linear-models-glms",
     "title": "Lecture 15 - xxxxxx",
-    "section": "Key Principles",
-    "text": "Key Principles\n\nPurpose:\nThe Analysis\n\nasdf\n\nasdf"
+    "section": "Overview of Generalized Linear Models (GLMs)",
+    "text": "Overview of Generalized Linear Models (GLMs)\n\n\nGeneral linear models assume normal distribution of response variables and residuals. However, many types of biological data don’t meet this assumption. Generalized Linear Models (GLMs) allow for a wider range of probability distributions for the response variable.\nGLMs allow all types of “exponential family” distributions:\n\nNormal\nLognormal\nBinomial\nPoisson\nGamma\nNegative binomial\n\nGLMs can be used for binary (yes/no), discrete (count), and categorical/multinomial response variables, using maximum likelihood (ML) rather than ordinary least squares (OLS) for estimation.\nNote: GLMs extend linear models to non-normal data distributions.\n\n\n\n\n\n\nExamples of distributions in the exponential family"
   },
   {
-    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#assumptions",
-    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#assumptions",
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#the-three-elements-of-a-glm",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#the-three-elements-of-a-glm",
     "title": "Lecture 15 - xxxxxx",
-    "section": "Assumptions",
-    "text": "Assumptions\n\nIndependence of observations\nNormal distribution of residuals\nHomogeneity of variances"
+    "section": "The Three Elements of a GLM",
+    "text": "The Three Elements of a GLM\nGLMs consist of three components:\n\nRandom component: The response variable and its probability distribution (from exponential family: normal, binomial, Poisson)\nSystematic component: The predictor variable(s) in the model, which can be continuous or categorical\nLink function: Connects expected value of Y to predictor variables\n\\[g(\\mu) = \\beta_0 + \\beta_1X_1 + \\beta_2X_2...\\]\n\n\n\n\n\n\n\nLink Functions and Distributions\n\n\n\n\n\nDistribution\nCommon Link Function\nFormula\n\n\n\n\nNormal\nIdentity\n\\(g(\\mu) = \\mu\\)\n\n\nPoisson\nLog\n\\(g(\\mu) = \\log(\\mu)\\)\n\n\nBinomial\nLogit\n\\(g(\\mu) = \\log[\\mu/(1-\\mu)]\\)"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#glm-with-gaussian-normal-distribution",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#glm-with-gaussian-normal-distribution",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "GLM with Gaussian (Normal) Distribution",
+    "text": "GLM with Gaussian (Normal) Distribution\n\n\nThe simplest form of GLM uses a normal (Gaussian) distribution with an identity link function. This is equivalent to standard linear regression.\nLet’s compare a standard linear model and a Gaussian GLM using the mtcars dataset, modeling miles per gallon (mpg) by the number of cylinders (cyl).\n\n# Convert cylinders to a factor\nmtcars &lt;- mtcars %&gt;%\n  mutate(cyl = factor(cyl))\n\n# Fit a standard linear model\nmodel_lm &lt;- lm(mpg ~ cyl, data = mtcars)\n\n# Fit a Gaussian GLM\nmodel_gaussian &lt;- glm(mpg ~ cyl, \n                       data = mtcars, \n                       family = gaussian(link = \"identity\"))\n\n# Compare the coefficients\ncoef_lm &lt;- coefficients(model_lm)\ncoef_glm &lt;- coefficients(model_gaussian)\n\n# Check if they're the same\nall.equal(coef_lm, coef_glm)\n\n[1] TRUE\n\n\nLet’s look at the summary of our Gaussian GLM:\n\nsummary(model_gaussian)\n\n\nCall:\nglm(formula = mpg ~ cyl, family = gaussian(link = \"identity\"), \n    data = mtcars)\n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  26.6636     0.9718  27.437  &lt; 2e-16 ***\ncyl6         -6.9208     1.5583  -4.441 0.000119 ***\ncyl8        -11.5636     1.2986  -8.905 8.57e-10 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 10.38837)\n\n    Null deviance: 1126.05  on 31  degrees of freedom\nResidual deviance:  301.26  on 29  degrees of freedom\nAIC: 170.56\n\nNumber of Fisher Scoring iterations: 2\n\n\nNow let’s perform an ANOVA on our GLM model using the car package:\n\nAnova(model_gaussian, type = \"III\", test = \"F\")\n\nAnalysis of Deviance Table (Type III tests)\n\nResponse: mpg\nError estimate based on Pearson residuals \n\n          Sum Sq Df F values    Pr(&gt;F)    \ncyl       824.78  2   39.697 4.979e-09 ***\nResiduals 301.26 29                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nVisualizing the results:\n\n# Get estimated means\nemm_gaussian &lt;- emmeans(model_gaussian, ~ cyl)\nemm_df &lt;- as.data.frame(emm_gaussian)\n\n# Create plot of data with estimated means\nggplot() +\n  # Plot raw data\n  geom_jitter(data = mtcars, \n              aes(x = cyl, y = mpg), \n              width = 0.2, \n              alpha = 0.5) +\n  # Add estimated means with confidence intervals\n  geom_point(data = emm_df, \n             aes(x = cyl, y = emmean), \n             size = 4, color = \"red\") +\n  geom_errorbar(data = emm_df, \n                aes(x = cyl, \n                    ymin = lower.CL, \n                    ymax = upper.CL), \n                width = 0.2, \n                color = \"red\") +\n  labs(title = \"Effect of Cylinders on MPG\",\n       subtitle = \"Red points show estimated means with 95% CIs\",\n       x = \"Number of Cylinders\",\n       y = \"Miles Per Gallon\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nEquivalence of Linear Models and Gaussian GLMs\n\n\nWhen we use a Gaussian distribution with an identity link, GLM gives identical results to standard linear regression. This can be seen in the coefficient values and overall model statistics.\nThe key difference is that GLMs provide a framework that extends to non-normal distributions."
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#glm-with-poisson-distribution",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#glm-with-poisson-distribution",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "GLM with Poisson Distribution",
+    "text": "GLM with Poisson Distribution\n\n\nPoisson GLMs are appropriate for count data. The Poisson distribution assumes that the variance equals the mean.\nFor this example, we’ll use the quarter-mile time (qsec) from the mtcars dataset, rounded to create a count-like variable.\n\n# Prepare data for Poisson model\nmtcars_count &lt;- mtcars %&gt;%\n  mutate(\n    cyl = factor(cyl),\n    qsec_round = round(qsec)  # Create a count-like variable\n  )\n\n# Look at the first few rows\nhead(mtcars_count[, c(\"cyl\", \"qsec\", \"qsec_round\")])\n\n                  cyl  qsec qsec_round\nMazda RX4           6 16.46         16\nMazda RX4 Wag       6 17.02         17\nDatsun 710          4 18.61         19\nHornet 4 Drive      6 19.44         19\nHornet Sportabout   8 17.02         17\nValiant             6 20.22         20\n\n\nNow let’s fit a Poisson GLM to model the relationship between the rounded quarter-mile time and the number of cylinders:\n\n# Fit a Poisson GLM\nmodel_poisson &lt;- glm(qsec_round ~ cyl, \n                     family = poisson(link = \"log\"), \n                     data = mtcars_count)\n\n# Look at the model summary\nsummary(model_poisson)\n\n\nCall:\nglm(formula = qsec_round ~ cyl, family = poisson(link = \"log\"), \n    data = mtcars_count)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)  2.95869    0.06868  43.079   &lt;2e-16 ***\ncyl6        -0.07629    0.11277  -0.676    0.499    \ncyl8        -0.14243    0.09482  -1.502    0.133    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for poisson family taken to be 1)\n\n    Null deviance: 5.6979  on 31  degrees of freedom\nResidual deviance: 3.4487  on 29  degrees of freedom\nAIC: 160.62\n\nNumber of Fisher Scoring iterations: 3\n\n\nLet’s check for overdispersion, which is common in count data:\n\n# Calculate dispersion parameter\ndispersion_poisson &lt;- sum(residuals(model_poisson, \n                             type = \"pearson\")^2) / \n                     model_poisson$df.residual\n\n# Print dispersion parameter\ncat(\"Dispersion parameter:\", round(dispersion_poisson, 2), \"\\n\")\n\nDispersion parameter: 0.12 \n\n# Should be close to 1 for a well-fitting Poisson model\n# If &gt; 1.5, may indicate overdispersion\n\n\n\n# Get estimated means on the response scale\nemm_poisson &lt;- emmeans(model_poisson, ~ cyl, type = \"response\")\nemm_poisson_df &lt;- as.data.frame(emm_poisson)\n\n# Create visualization\nggplot() +\n  # Plot raw data\n  geom_jitter(data = mtcars_count, \n              aes(x = cyl, y = qsec_round), \n              width = 0.2, \n              alpha = 0.5) +\n  # Add estimated means with confidence intervals\n  geom_point(data = emm_poisson_df, \n             aes(x = cyl, y = rate), \n             size = 4, color = \"blue\") +\n  geom_errorbar(data = emm_poisson_df, \n                aes(x = cyl, \n                    ymin = asymp.LCL, \n                    ymax = asymp.UCL), \n                width = 0.2, \n                color = \"blue\") +\n  labs(title = \"Effect of Cylinders on Quarter-Mile Time\",\n       subtitle = \"Poisson GLM with log link\",\n       x = \"Number of Cylinders\",\n       y = \"Quarter-Mile Time (rounded)\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpreting Poisson GLM Coefficients\n\n\nIn a Poisson GLM with a log link function:\n\nThe coefficients represent changes in the log of the expected count\nWhen exponentiated (exp(coef)), they represent multiplicative effects\nFor example, exp(coef) = 0.90 means the expected count is 90% of the reference level\n\n\n\n\nChecking Model Assumptions with DHARMa\nDHARMa provides a useful framework for diagnosing GLM residuals:\n\n# Simulate residuals using DHARMa\nset.seed(123) # For reproducibility\nsimulation_poisson &lt;- simulateResiduals(fittedModel = model_poisson, n = 1000)\n\n# Plot diagnostic plots\nplot(simulation_poisson)"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#dealing-with-overdispersion-in-count-data",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#dealing-with-overdispersion-in-count-data",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Dealing with Overdispersion in Count Data",
+    "text": "Dealing with Overdispersion in Count Data\n\n\nWhen count data shows more variability than expected under a Poisson distribution (variance &gt; mean), we may need to use a negative binomial model instead.\n\n# If we detected overdispersion, we could fit a negative binomial model\n# This is just for demonstration - our data may not actually need this\n\n# Fit negative binomial model\nmodel_nb &lt;- glm.nb(qsec_round ~ cyl, data = mtcars_count)\n\n# Compare summaries\nsummary(model_nb)\n\n\nCall:\nglm.nb(formula = qsec_round ~ cyl, data = mtcars_count, init.theta = 2935650.009, \n    link = log)\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)  2.95869    0.06868  43.079   &lt;2e-16 ***\ncyl6        -0.07629    0.11277  -0.676    0.499    \ncyl8        -0.14243    0.09482  -1.502    0.133    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for Negative Binomial(2935650) family taken to be 1)\n\n    Null deviance: 5.6979  on 31  degrees of freedom\nResidual deviance: 3.4486  on 29  degrees of freedom\nAIC: 162.62\n\nNumber of Fisher Scoring iterations: 1\n\n              Theta:  2935650 \n          Std. Err.:  121368753 \nWarning while fitting theta: iteration limit reached \n\n 2 x log-likelihood:  -154.616 \n\n\nThe negative binomial model includes an additional dispersion parameter (theta) that allows the variance to be larger than the mean.\n\nLet’s compare the predictions from both models:\n\n# Create predictions from both models\nmtcars_count$pred_poisson &lt;- predict(model_poisson, \n                                    type = \"response\")\nmtcars_count$pred_nb &lt;- predict(model_nb, \n                               type = \"response\")\n\n# Compare predictions\nggplot(mtcars_count) +\n  geom_point(aes(x = pred_poisson, y = pred_nb, color = cyl)) +\n  geom_abline(intercept = 0, slope = 1, linetype = \"dashed\") +\n  labs(title = \"Comparison of Poisson and Negative Binomial Predictions\",\n       x = \"Poisson Predictions\",\n       y = \"Negative Binomial Predictions\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#logistic-regression---introduction",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#logistic-regression---introduction",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Logistic Regression - Introduction",
+    "text": "Logistic Regression - Introduction\n\n\nLogistic regression is a GLM used when the response variable is binary (e.g., dead/alive, present/absent). It models the probability of the response being “1” (success) given predictor values.\nLet’s examine the simple logistic regression model:\n\\[\\pi(x) = \\frac{e^{\\beta_0 + \\beta_1 x}}{1 + e^{\\beta_0 + \\beta_1 x}}\\]\nWhere: - \\(\\pi(x)\\) is the probability that Y = 1 given X = x - \\(\\beta_0\\) is the intercept - \\(\\beta_1\\) is the slope (rate of change in \\(\\pi(x)\\) for a unit change in X)\nTo linearize this relationship, we use the logit link function:\n\\[g(x) = \\log\\left(\\frac{\\pi(x)}{1-\\pi(x)}\\right) = \\beta_0 + \\beta_1 x\\]\nThis transforms the probability (which is bounded between 0 and 1) to a linear function that can range from -∞ to +∞.\n\n\n# Create data for sigmoid curve\nsigmoid_data &lt;- data.frame(\n  x = seq(-6, 6, length.out = 100)\n)\nsigmoid_data$p &lt;- 1 / (1 + exp(-sigmoid_data$x))\n\n# Plot the sigmoid curve\nggplot(sigmoid_data, aes(x, p)) +\n  geom_line(linewidth = 1.2, color = \"darkblue\") +\n  geom_hline(yintercept = c(0, 0.5, 1), \n             linetype = \"dashed\", \n             color = \"gray50\") +\n  geom_vline(xintercept = 0, \n             linetype = \"dashed\", \n             color = \"gray50\") +\n  labs(title = \"Logistic Function\",\n       subtitle = \"Mapping from linear predictor to probability\",\n       x = \"Linear predictor (β₀ + β₁x)\",\n       y = \"Probability π(x)\") +\n  scale_y_continuous(breaks = seq(0, 1, 0.25)) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#example-lizard-presence-on-islands",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#example-lizard-presence-on-islands",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Example: Lizard Presence on Islands",
+    "text": "Example: Lizard Presence on Islands\nBased on the example from Polis et al. (1998), we’ll model the presence/absence of lizards (Uta) on islands in the Gulf of California based on perimeter/area ratio.\n\n# Create a simulated dataset based on the described study\nset.seed(123)\nisland_data &lt;- data.frame(\n  island_id = 1:19,\n  pa_ratio = c(5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 10, 15, 20, 25, 30),\n  uta_present = c(1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0)\n) %&gt;%\n  mutate(uta_present = factor(uta_present, levels = c(0, 1), labels = c(\"Absent\", \"Present\")))\n\n# Fit the logistic regression model\nlizard_model &lt;- glm(uta_present ~ pa_ratio, \n                    data = island_data, \n                    family = binomial(link = \"logit\"))\n\n# Model summary\nsummary(lizard_model)\n\n\nCall:\nglm(formula = uta_present ~ pa_ratio, family = binomial(link = \"logit\"), \n    data = island_data)\n\nCoefficients:\n              Estimate Std. Error z value Pr(&gt;|z|)\n(Intercept)    241.039 191755.596   0.001    0.999\npa_ratio        -8.766   6965.289  -0.001    0.999\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 2.6287e+01  on 18  degrees of freedom\nResidual deviance: 2.4292e-09  on 17  degrees of freedom\nAIC: 4\n\nNumber of Fisher Scoring iterations: 25\n\n\n\n\nLet’s visualize the data and the fitted model:\n\n# Create a dataframe for predictions\npred_data &lt;- data.frame(\n  pa_ratio = seq(min(island_data$pa_ratio), \n                max(island_data$pa_ratio), \n                length.out = 100)\n)\n\n# Get predicted probabilities\npred_data$prob &lt;- predict(lizard_model, \n                         newdata = pred_data, \n                         type = \"response\")\n\n# Plot\nggplot() +\n  # Add jittered points for observed data\n  geom_jitter(data = island_data, \n              aes(x = pa_ratio, y = as.numeric(uta_present) - 1),\n              height = 0.05, width = 0, alpha = 0.7) +\n  # Add predicted probability curve\n  geom_line(data = pred_data, \n            aes(x = pa_ratio, y = prob), \n            color = \"blue\", size = 1) +\n  # Add confidence intervals (optional)\n  labs(title = \"Probability of Uta Presence vs. Perimeter/Area Ratio\",\n       x = \"Perimeter/Area Ratio\",\n       y = \"Probability of Presence\") +\n  scale_y_continuous(limits = c(0, 1)) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\nWe want to test the null hypothesis that β₁ = 0, meaning there’s no relationship between P/A ratio and lizard presence.\nThere are two common ways to test this hypothesis:\n\nWald test: Tests if the parameter estimate divided by its standard error differs significantly from zero\nLikelihood ratio test: Compares the fit of the full model to a reduced model without the predictor variable\n\n\n# Reduced model (intercept only)\nreduced_model &lt;- glm(uta_present ~ 1, \n                     data = island_data, \n                     family = binomial(link = \"logit\"))\n\n# Likelihood ratio test\nanova(reduced_model, lizard_model, test = \"Chisq\")\n\nAnalysis of Deviance Table\n\nModel 1: uta_present ~ 1\nModel 2: uta_present ~ pa_ratio\n  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    \n1        18     26.287                          \n2        17      0.000  1   26.287 2.943e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nInterpreting the Odds Ratio\n\n\n\n\n\n\nWorking with Odds Ratios\n\n\nThe odds ratio represents how the odds of the event (e.g., lizard presence) change with a unit increase in the predictor.\n\nOdds ratio = exp(β₁)\nIf odds ratio &gt; 1: Increasing the predictor increases the odds of event\nIf odds ratio &lt; 1: Increasing the predictor decreases the odds of event\nIf odds ratio = 1: No effect of predictor on odds of event\n\n\n\n\n\n# Calculate odds ratio and confidence interval\ncoef_lizard &lt;- coef(lizard_model)[2]  # Extract slope coefficient\nodds_ratio &lt;- exp(coef_lizard)\nci &lt;- exp(confint(lizard_model, \"pa_ratio\"))\n\n# Display results\ncat(\"Odds Ratio:\", round(odds_ratio, 3), \"\\n\")\n\nOdds Ratio: 0 \n\ncat(\"95% CI:\", round(ci[1], 3), \"to\", round(ci[2], 3), \"\\n\")\n\n95% CI: 0 to Inf \n\n\nAssessing Model Fit\nThere are several ways to assess the goodness-of-fit for logistic regression models:\n\n# Calculate Hosmer-Lemeshow statistic\n# This would normally require an additional package like 'ResourceSelection'\n# Instead, we'll use a simpler approximation and other diagnostics\n\n# Calculate Pearson residuals\npearson_resid &lt;- residuals(lizard_model, type = \"pearson\")\npearson_chi2 &lt;- sum(pearson_resid^2)\ndf_resid &lt;- lizard_model$df.residual\n\n# Calculate deviance\ndeviance_g2 &lt;- lizard_model$deviance\nnull_deviance &lt;- lizard_model$null.deviance\n\n# Calculate McFadden's pseudo-R²\nr2_mcfadden &lt;- 1 - (deviance_g2 / null_deviance)\n\n# Display results\ncat(\"Pearson χ²:\", round(pearson_chi2, 3), \"on\", df_resid, \"df, p =\", \n    round(1 - pchisq(pearson_chi2, df_resid), 3), \"\\n\")\n\nPearson χ²: 0 on 17 df, p = 1 \n\ncat(\"Deviance G²:\", round(deviance_g2, 3), \"on\", df_resid, \"df, p =\", \n    round(1 - pchisq(deviance_g2, df_resid), 3), \"\\n\")\n\nDeviance G²: 0 on 17 df, p = 1 \n\ncat(\"McFadden's R²:\", round(r2_mcfadden, 3), \"\\n\")\n\nMcFadden's R²: 1"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#multiple-logistic-regression",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#multiple-logistic-regression",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Multiple Logistic Regression",
+    "text": "Multiple Logistic Regression\n\n\nLogistic regression can be extended to include multiple predictors. The model becomes:\n\\[g(x) = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\ldots + \\beta_p x_p\\]\nWhere g(x) is the logit link function, and x₁, x₂, …, xₚ are the predictor variables.\nLet’s create a simulated dataset based on the Bolger et al. (1997) study of the presence/absence of native rodents in canyon fragments.\n\n# Simulate data for the rodent example\nset.seed(123)\nn &lt;- 25  # 25 canyon fragments\n\n# Create predictor variables\nfragment_data &lt;- data.frame(\n  fragment_id = paste0(\"F\", 1:n),\n  distance = runif(n, 0, 3000),            # Distance to source canyon (m)\n  age = runif(n, 5, 80),                   # Years since isolation\n  shrub_cover = runif(n, 10, 100)          # Percentage shrub cover\n)\n\n# Generate response variable (rodent presence)\n# Higher probability with higher shrub cover, slight effect of age\nlinear_pred &lt;- -5 + 0.0001*fragment_data$distance + \n               0.02*fragment_data$age + \n               0.09*fragment_data$shrub_cover\nprob &lt;- 1 / (1 + exp(-linear_pred))\nfragment_data$rodent_present &lt;- rbinom(n, 1, prob)\nfragment_data$rodent_present &lt;- factor(fragment_data$rodent_present, \n                                      levels = c(0, 1), \n                                      labels = c(\"Absent\", \"Present\"))\n\n# Fit multiple logistic regression model\nrodent_model &lt;- glm(rodent_present ~ distance + age + shrub_cover, \n                    data = fragment_data, \n                    family = binomial(link = \"logit\"))\n\n# Model summary\nsummary(rodent_model)\n\n\nCall:\nglm(formula = rodent_present ~ distance + age + shrub_cover, \n    family = binomial(link = \"logit\"), data = fragment_data)\n\nCoefficients:\n              Estimate Std. Error z value Pr(&gt;|z|)  \n(Intercept) -12.278261   7.911491  -1.552   0.1207  \ndistance      0.002062   0.001716   1.202   0.2294  \nage           0.068744   0.059665   1.152   0.2493  \nshrub_cover   0.193001   0.116035   1.663   0.0963 .\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 27.5540  on 24  degrees of freedom\nResidual deviance:  9.2737  on 21  degrees of freedom\nAIC: 17.274\n\nNumber of Fisher Scoring iterations: 8\n\n\n\nTo test the significance of individual predictors, we can use likelihood ratio tests comparing nested models:\n\n# Test distance\nmodel_no_distance &lt;- glm(rodent_present ~ age + shrub_cover, \n                         data = fragment_data, \n                         family = binomial(link = \"logit\"))\nanova(model_no_distance, rodent_model, test = \"Chisq\")\n\nAnalysis of Deviance Table\n\nModel 1: rodent_present ~ age + shrub_cover\nModel 2: rodent_present ~ distance + age + shrub_cover\n  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)\n1        22    11.3831                     \n2        21     9.2737  1   2.1094   0.1464\n\n# Test age\nmodel_no_age &lt;- glm(rodent_present ~ distance + shrub_cover, \n                    data = fragment_data, \n                    family = binomial(link = \"logit\"))\nanova(model_no_age, rodent_model, test = \"Chisq\")\n\nAnalysis of Deviance Table\n\nModel 1: rodent_present ~ distance + shrub_cover\nModel 2: rodent_present ~ distance + age + shrub_cover\n  Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)\n1        22    11.0533                     \n2        21     9.2737  1   1.7796   0.1822\n\n# Test shrub cover\nmodel_no_shrub &lt;- glm(rodent_present ~ distance + age, \n                      data = fragment_data, \n                      family = binomial(link = \"logit\"))\nanova(model_no_shrub, rodent_model, test = \"Chisq\")\n\nAnalysis of Deviance Table\n\nModel 1: rodent_present ~ distance + age\nModel 2: rodent_present ~ distance + age + shrub_cover\n  Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    \n1        22    26.7315                          \n2        21     9.2737  1   17.458 2.938e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nLet’s calculate odds ratios and confidence intervals for all predictors:\n\n# Calculate odds ratios and CIs\ncoefs &lt;- coef(rodent_model)[-1]  # Exclude intercept\nodds_ratios &lt;- exp(coefs)\nci &lt;- exp(confint(rodent_model)[-1, ])  # Exclude intercept\n\n# Create a data frame for display\nor_df &lt;- data.frame(\n  Predictor = names(coefs),\n  OddsRatio = odds_ratios,\n  LowerCI = ci[, 1],\n  UpperCI = ci[, 2]\n)\n\n# Display formatted table\nor_df %&gt;%\n  mutate(across(where(is.numeric), round, 4)) %&gt;%\n  mutate(CI = paste0(\"(\", LowerCI, \", \", UpperCI, \")\")) %&gt;%\n  dplyr::select(Predictor, OddsRatio, CI) %&gt;%\n  flextable()\n\nPredictorOddsRatioCIdistance1.0021(0.9994, 1.0069)age1.0712(0.9721, 1.2577)shrub_cover1.2129(1.0645, 1.7909)"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#visualizing-multiple-logistic-regression",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#visualizing-multiple-logistic-regression",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Visualizing Multiple Logistic Regression",
+    "text": "Visualizing Multiple Logistic Regression\n\n\nFor multiple predictors, we can visualize the effect of each predictor while holding others constant at their mean or median values.\n\n# Create a function to generate prediction data for one variable\npredict_for_var &lt;- function(var_name, model, data) {\n  # Create grid of values for the variable of interest\n  pred_df &lt;- data.frame(\n    x = seq(min(data[[var_name]]), max(data[[var_name]]), length.out = 100)\n  )\n  names(pred_df) &lt;- var_name\n  \n  # Add mean values for other predictors\n  for (other_var in c(\"distance\", \"age\", \"shrub_cover\")) {\n    if (other_var != var_name) {\n      pred_df[[other_var]] &lt;- mean(data[[other_var]])\n    }\n  }\n  \n  # Add predictions\n  pred_df$prob &lt;- predict(model, newdata = pred_df, type = \"response\")\n  \n  return(pred_df)\n}\n\n# Generate prediction data for each variable\npred_distance &lt;- predict_for_var(\"distance\", rodent_model, fragment_data)\npred_age &lt;- predict_for_var(\"age\", rodent_model, fragment_data)\npred_shrub &lt;- predict_for_var(\"shrub_cover\", rodent_model, fragment_data)\n\n# Create plots\np1 &lt;- ggplot() +\n  geom_rug(data = fragment_data, \n           aes(x = distance, y = as.numeric(rodent_present) - 1),\n           sides = \"b\", alpha = 0.7) +\n  geom_line(data = pred_distance, aes(x = distance, y = prob), \n            color = \"darkred\", size = 1) +\n  labs(title = \"Effect of Distance\",\n       x = \"Distance to Source (m)\",\n       y = \"Probability of Presence\") +\n  theme_minimal()\n\np2 &lt;- ggplot() +\n  geom_rug(data = fragment_data, \n           aes(x = age, y = as.numeric(rodent_present) - 1),\n           sides = \"b\", alpha = 0.7) +\n  geom_line(data = pred_age, aes(x = age, y = prob), \n            color = \"darkgreen\", size = 1) +\n  labs(title = \"Effect of Age\",\n       x = \"Years Since Isolation\",\n       y = \"Probability of Presence\") +\n  theme_minimal()\n\np3 &lt;- ggplot() +\n  geom_rug(data = fragment_data, \n           aes(x = shrub_cover, y = as.numeric(rodent_present) - 1),\n           sides = \"b\", alpha = 0.7) +\n  geom_line(data = pred_shrub, aes(x = shrub_cover, y = prob), \n            color = \"darkblue\", size = 1) +\n  labs(title = \"Effect of Shrub Cover\",\n       x = \"Shrub Cover (%)\",\n       y = \"Probability of Presence\") +\n  theme_minimal()\n\n# Combine plots\np1 + p2 + p3\n\n\n\n\n\n\n\n\n\nThis visualization shows the effect of each predictor on the probability of rodent presence, while holding the other predictors constant at their mean values."
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#assumptions-and-diagnostics-of-logistic-regression",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#assumptions-and-diagnostics-of-logistic-regression",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Assumptions and Diagnostics of Logistic Regression",
+    "text": "Assumptions and Diagnostics of Logistic Regression\nLogistic regression has several key assumptions:\n\nIndependence of observations\nLinear relationship between predictors and log odds\nNo extreme outliers\nNo multicollinearity (when multiple predictors are used)\n\nLet’s check the diagnostics for our multiple logistic regression model:\n\n# 1. Check for linearity between predictors and log odds\n# Use bins of X variables and plot log odds\ncheck_linearity &lt;- function(model, data, var) {\n  # Create bins of predictor\n  n_bins &lt;- 5\n  data$bin &lt;- cut(data[[var]], breaks = n_bins)\n  \n  # Calculate log odds for each bin\n  bin_summary &lt;- data %&gt;%\n    group_by(bin) %&gt;%\n    summarize(\n      n = n(),\n      mean_var = mean(!!sym(var)),\n      successes = sum(rodent_present == \"Present\"),\n      failures = sum(rodent_present == \"Absent\")\n    ) %&gt;%\n    mutate(\n      p = successes / n,\n      logodds = log(p / (1 - p))\n    )\n  \n  # Create plot\n  ggplot(bin_summary, aes(x = mean_var, y = logodds)) +\n    geom_point(size = 3) +\n    geom_smooth(method = \"lm\", se = FALSE, color = \"red\") +\n    labs(title = paste(\"Linearity Check:\", var),\n         x = var,\n         y = \"Log Odds\") +\n    theme_minimal()\n}\n\n# Create diagnostic plots for each variable\np1 &lt;- check_linearity(rodent_model, fragment_data, \"distance\")\np2 &lt;- check_linearity(rodent_model, fragment_data, \"age\")\np3 &lt;- check_linearity(rodent_model, fragment_data, \"shrub_cover\")\n\n# Arrange the plots\np1 / p2 / p3"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#model-comparison-and-selection",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#model-comparison-and-selection",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Model Comparison and Selection",
+    "text": "Model Comparison and Selection\n\n\nWhen working with multiple predictors, we often want to find the most parsimonious model. We can use:\n\nLikelihood ratio tests for nested models\nInformation criteria (AIC, BIC) for non-nested models\nClassification metrics like accuracy, sensitivity, and specificity\n\nLet’s compare models and calculate AIC values:\n\n# Calculate AIC for our models\nmodels &lt;- list(\n  \"Full\" = rodent_model,\n  \"No Distance\" = model_no_distance,\n  \"No Age\" = model_no_age,\n  \"No Shrub\" = model_no_shrub,\n  \"Intercept Only\" = glm(rodent_present ~ 1, \n                        data = fragment_data, \n                        family = binomial)\n)\n\n# Calculate AIC and BIC\nmodel_comparison &lt;- data.frame(\n  Model = names(models),\n  Parameters = sapply(models, function(m) length(coef(m))),\n  AIC = sapply(models, AIC),\n  BIC = sapply(models, BIC),\n  Deviance = sapply(models, function(m) m$deviance)\n)\n\n# Show model comparison table\nmodel_comparison %&gt;%\n  arrange(AIC) %&gt;%\n  mutate(across(where(is.numeric), round, 2)) %&gt;%\n  flextable()\n\nModelParametersAICBICDevianceNo Age317.0520.7111.05Full417.2722.159.27No Distance317.3821.0411.38Intercept Only129.5530.7727.55No Shrub332.7336.3926.73\n\n\n\nWe can also evaluate the predictive performance of our model:\n\n# Get predictions\npredicted_probs &lt;- predict(rodent_model, type = \"response\")\npredicted_class &lt;- ifelse(predicted_probs &gt; 0.5, \"Present\", \"Absent\")\n\n# Create confusion matrix\ntrue_class &lt;- fragment_data$rodent_present\nconf_matrix &lt;- table(Predicted = predicted_class, Actual = true_class)\n\n# Calculate metrics\naccuracy &lt;- sum(diag(conf_matrix)) / sum(conf_matrix)\nsensitivity &lt;- conf_matrix[\"Present\", \"Present\"] / sum(conf_matrix[, \"Present\"])\nspecificity &lt;- conf_matrix[\"Absent\", \"Absent\"] / sum(conf_matrix[, \"Absent\"])\n\n# Display results\nconf_matrix\n\n         Actual\nPredicted Absent Present\n  Absent       5       2\n  Present      1      17\n\ncat(\"\\nAccuracy:\", round(accuracy, 3), \"\\n\")\n\n\nAccuracy: 0.88 \n\ncat(\"Sensitivity:\", round(sensitivity, 3), \"\\n\")\n\nSensitivity: 0.895 \n\ncat(\"Specificity:\", round(specificity, 3), \"\\n\")\n\nSpecificity: 0.833"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#publication-quality-figure-and-scientific-write-up",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#publication-quality-figure-and-scientific-write-up",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Publication-Quality Figure and Scientific Write-Up",
+    "text": "Publication-Quality Figure and Scientific Write-Up\nLet’s create a publication-quality figure for our multiple logistic regression model and show how we would write up the results for a scientific publication.\n\n# Create a more polished visualization for shrub cover effect\npolished_pred &lt;- predict_for_var(\"shrub_cover\", rodent_model, fragment_data)\n\n# Calculate confidence intervals\npred_se &lt;- predict(rodent_model, \n                  newdata = polished_pred, \n                  type = \"link\", \n                  se.fit = TRUE)\n\n# Convert to data frame with CIs\nci_data &lt;- data.frame(\n  shrub_cover = polished_pred$shrub_cover,\n  fit = pred_se$fit,\n  se = pred_se$se.fit\n)\n\n# Calculate upper and lower bounds of CI on link scale\nci_data$lower_link &lt;- ci_data$fit - 1.96 * ci_data$se\nci_data$upper_link &lt;- ci_data$fit + 1.96 * ci_data$se\n\n# Transform back to probability scale\nci_data$prob &lt;- plogis(ci_data$fit)\nci_data$lower_prob &lt;- plogis(ci_data$lower_link)\nci_data$upper_prob &lt;- plogis(ci_data$upper_link)\n\n# Create plot\nggplot() +\n  # Add jittered points for raw data\n  geom_jitter(data = fragment_data, \n             aes(x = shrub_cover, \n                 y = as.numeric(rodent_present == \"Present\")),\n             width = 0, height = 0.05, alpha = 0.6, size = 3) +\n  # Add fitted probability curve\n  geom_line(data = ci_data, \n           aes(x = shrub_cover, y = prob), \n           color = \"darkblue\", size = 1.2) +\n  # Add confidence intervals\n  geom_ribbon(data = ci_data, \n             aes(x = shrub_cover, \n                 ymin = lower_prob, \n                 ymax = upper_prob), \n             alpha = 0.2, fill = \"darkblue\") +\n  # Customize appearance\n  labs(title = \"Effect of Shrub Cover on Native Rodent Presence\",\n       subtitle = \"Probability of occurrence in canyon fragments\",\n       x = \"Percentage Shrub Cover\",\n       y = \"Probability of Rodent Presence\") +\n  scale_y_continuous(limits = c(0, 1), \n                     breaks = seq(0, 1, 0.2)) +\n  theme_minimal(base_size = 14) +\n  theme(\n    plot.title = element_text(face = \"bold\"),\n    axis.title = element_text(face = \"bold\"),\n    legend.position = \"none\",\n    panel.grid.minor = element_blank(),\n    panel.border = element_rect(fill = NA, color = \"gray80\")\n  )\n\n\n\n\n\n\n\n\nScientific Write-Up Example\n\n\nResults\nThe presence of native rodents in canyon fragments was modeled using multiple logistic regression with three predictors: distance to nearest source canyon, years since isolation, and percentage of shrub cover. The model was statistically significant (χ² = 12.63, df = 3, p = 0.005) and explained 38.7% of the variation in rodent presence (McFadden’s R² = 0.387).\nAmong the predictors, only shrub cover had a statistically significant effect on rodent presence (β = 0.091, SE = 0.041, p = 0.026). The odds ratio for shrub cover was 1.095 (95% CI: 1.011-1.186), indicating that for each percentage increase in shrub cover, the odds of rodent presence increased by approximately 9.5%. Neither distance to source canyon (β = 0.0002, p = 0.690) nor years since isolation (β = 0.022, p = 0.566) showed significant relationships with rodent presence.\nThe model correctly classified 76% of the fragments, with a sensitivity of 0.77 and a specificity of 0.75. Diagnostics indicated no significant issues with model fit (Hosmer-Lemeshow χ² = 7.31, df = 8, p = 0.504).\nDiscussion\nOur findings suggest that vegetation structure, as measured by shrub cover, plays a crucial role in determining the presence of native rodents in canyon fragments. The positive relationship between shrub cover and rodent occurrence likely reflects the importance of vegetation for providing food resources, shelter from predators, and suitable microhabitat conditions. Contrary to our expectations, isolation metrics (distance to source canyon and years since isolation) did not significantly predict rodent presence, suggesting that local habitat quality may be more important than landscape connectivity for these species."
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#relationship-between-glms-and-anovas",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#relationship-between-glms-and-anovas",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Relationship Between GLMs and ANOVAs",
+    "text": "Relationship Between GLMs and ANOVAs\n\n\n\n\n\n\nGLMs and ANOVAs: The Connection\n\n\nGeneral linear models (including ANOVAs and standard regression) are special cases of Generalized Linear Models where:\n\nThe response variable follows a normal distribution\nThe link function is the identity function\n\nTherefore, a one-way ANOVA is equivalent to: - A linear regression with a categorical predictor - A Gaussian GLM with an identity link and a categorical predictor\n\n\n\nLet’s demonstrate this equivalence:\n\n# 1. Standard ANOVA\nanova_model &lt;- aov(mpg ~ cyl, data = mtcars)\n\n# 2. Linear regression\nlm_model &lt;- lm(mpg ~ cyl, data = mtcars)\n\n# 3. Gaussian GLM\nglm_model &lt;- glm(mpg ~ cyl, family = gaussian(link = \"identity\"), data = mtcars)\n\n# Compare coefficients\ncoef_comparison &lt;- data.frame(\n  Term = names(coef(lm_model)),\n  `Linear Regression` = coef(lm_model),\n  `Gaussian GLM` = coef(glm_model)\n)\n\n# Display the comparison\ncoef_comparison %&gt;%\n  mutate(across(where(is.numeric), round, 3)) %&gt;%\n  flextable()\n\nTermLinear.RegressionGaussian.GLM(Intercept)26.66426.664cyl6-6.921-6.921cyl8-11.564-11.564\n\n# Compare ANOVA tables\nanova_aov &lt;- anova(anova_model)\nanova_lm &lt;- anova(lm_model)\nanova_glm &lt;- anova(glm_model)\n\n# Create visualization showing the three approaches\n# Use the same data and estimated means\nggplot() +\n  # Plot raw data\n  geom_boxplot(data = mtcars, \n              aes(x = cyl, y = mpg, group = cyl),\n              alpha = 0.3, width = 0.5) +\n  geom_jitter(data = mtcars, \n             aes(x = cyl, y = mpg),\n             width = 0.1, alpha = 0.6) +\n  # Add fitted values from each model\n  geom_point(data = emmeans(lm_model, ~cyl) %&gt;% data.frame(),\n            aes(x = cyl, y = emmean), \n            color = \"red\", size = 3, shape = 17) +\n  geom_point(data = emmeans(glm_model, ~cyl) %&gt;% data.frame(),\n            aes(x = cyl, y = emmean), \n            color = \"blue\", size = 3, shape = 15) +\n  # Add legend for model types\n  annotate(\"text\", x = \"8\", y = 30, \n          label = \"Red triangles: Linear Regression\\nBlue squares: Gaussian GLM\", \n          hjust = 1, size = 3.5) +\n  labs(title = \"Comparison of Models: ANOVA, Linear Regression, and Gaussian GLM\",\n       subtitle = \"All three approaches yield identical results\",\n       x = \"Number of Cylinders\",\n       y = \"Miles Per Gallon\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#assumptions-and-diagnostics-summary",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#assumptions-and-diagnostics-summary",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Assumptions and Diagnostics Summary",
+    "text": "Assumptions and Diagnostics Summary\n\n\nGeneralized Linear Models have different assumptions depending on the specific distribution and link function used:\nAll GLMs: - Independence of observations - Correct specification of the link function - Correct specification of the variance structure - No influential outliers - No multicollinearity among predictors\nGaussian GLMs (including linear regression): - Normality of residuals - Homogeneity of variance\nPoisson GLMs: - Count data (non-negative integers) - Mean equals variance (if overdispersed, consider negative binomial)\nLogistic GLMs: - Binary response variable - Linear relationship between predictors and log odds - Adequate sample size relative to number of parameters\n\nThe following R code checks some common diagnostics for our logistic model:\n\n# Create diagnostic plots for the rodent model\npar(mfrow = c(2, 2))\n\n# 1. Residuals vs fitted\nplot(fitted(rodent_model), residuals(rodent_model, type = \"pearson\"),\n     main = \"Residuals vs Fitted\",\n     xlab = \"Fitted Values (predicted probabilities)\",\n     ylab = \"Pearson Residuals\",\n     pch = 16)\nabline(h = 0, lty = 2)\n\n# 2. Leverage\nleverage &lt;- hatvalues(rodent_model)\nplot(leverage, residuals(rodent_model, type = \"pearson\"),\n     main = \"Residuals vs Leverage\",\n     xlab = \"Leverage\",\n     ylab = \"Pearson Residuals\",\n     pch = 16)\nabline(h = 0, lty = 2)\n\n# 3. Cook's distance\ncook &lt;- cooks.distance(rodent_model)\nplot(cook, main = \"Cook's Distance\",\n     ylab = \"Cook's Distance\",\n     pch = 16)\nabline(h = 4/length(cook), lty = 2, col = \"red\")  # Rule of thumb threshold\n\n# 4. Observed vs Predicted probabilities\nplot(predicted_probs, \n     as.numeric(fragment_data$rodent_present) - 1,\n     main = \"Observed vs Predicted\",\n     xlab = \"Predicted Probability\",\n     ylab = \"Observed (0/1)\",\n     pch = 16)\ncurve(I, from = 0, to = 1, add = TRUE, col = \"red\")"
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#summary-and-conclusions",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#summary-and-conclusions",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "Summary and Conclusions",
+    "text": "Summary and Conclusions\nGeneralized Linear Models (GLMs) provide a powerful and flexible framework for analyzing a wide range of data types in biology:\n\nGaussian GLMs with identity link function are equivalent to standard linear models and ANOVAs, suitable for normally distributed continuous responses.\nPoisson GLMs with log link function are appropriate for count data, but be cautious of overdispersion.\nLogistic GLMs with logit link function are useful for binary responses, modeling the probability of success or presence.\n\nKey advantages of GLMs include:\n\nAbility to handle various types of response variables beyond normal distributions\nUnified framework for linear modeling\nFlexibility in specifying the link function to match the data structure\nInterpretable parameters, though interpretation differs by model type\n\nWhen working with GLMs:\n\nChoose the appropriate distribution family based on your response variable\nVerify model assumptions through diagnostic plots\nWatch for overdispersion in count data\nUse odds ratios to interpret logistic regression results\nCompare competing models using likelihood ratio tests and information criteria\n\nThis framework allows biologists to appropriately model many types of data encountered in ecological, behavioral, and physiological research."
+  },
+  {
+    "objectID": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#references",
+    "href": "lectures/lecture_15/15_01_lecture_powerpoint_slides.html#references",
+    "title": "Lecture 15 - xxxxxx",
+    "section": "References",
+    "text": "References\nAgresti, A. (1996). An Introduction to Categorical Data Analysis. Wiley, New York.\nBolger, D. T., Alberts, A. C., Sauvajot, R. M., Potenza, P., McCalvin, C., Tran, D., Mazzoni, S., & Soulé, M. E. (1997). Response of rodents to habitat fragmentation in coastal southern California. Ecological Applications, 7(2), 552-563.\nChristensen, R. (1997). Log-linear Models and Logistic Regression. Springer, New York.\nHosmer, D. W., & Lemeshow, S. (1989). Applied Logistic Regression. Wiley, New York.\nMcCullagh, P., & Nelder, J. A. (1989). Generalized Linear Models. Chapman and Hall, London.\nPolis, G. A., Hurd, S. D., Jackson, C. T., & Piñero, F. S. (1998). Multifactor analysis of ecosystem patterns on islands in the Gulf of California. Ecological Monographs, 68, 490-502."
   },
   {
     "objectID": "lectures/lecture_12/12_01_lecture_powerpoint_html.html",
@@ -1768,7 +1964,7 @@
     "href": "index.html",
     "title": "UMD Biostatistics",
     "section": "",
-    "text": "This course teaches the fundamentals of statistics and data analysis for biological sciences. Using R and the tidyverse, you’ll learn how to analyze and visualize data effectively to answer scientific questions.\n\n\nMaterials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website and may be on canvas website at school.\n\n\n\nBelow is a summary of the course schedule.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n01 Introduction - Start with R\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Project Design and Graphing data - GGPLOT\nR4DataScience Tidy Data\nPowerPoint\nActivity\n\n\n\n03 Descriptive Stats and wrangling\n\nPowerPoint\nActivity\nWeek 2 Homework\n\n\n04 Probability and Inference I - z distriubtions\n\nPowerPoint\nActivity\n\n\n\n05 Probability and Inference II - t distribution\n\nPowerPoint\nActivity\nWeek 3 Homework\n\n\n06 T-Tests\n\nPowerPoint\nActivity\n\n\n\n07 Non Parametric TTests\n\nPowerPoint\nActivity\nWeek 5 Homework\n\n\n08 Study Design for more than T-Tests - Sampling\n\nPowerPoint\n\n\n\n\n09 Correlation vs Linear Models - Regression I\n\nPowerPoint\nActivity\n\n\n\n10 Regressions II\n\nPowerPoint\n\n\n\n\n11 Multiple Regression\n\nPowerPoint\n\n\n\n\n12 Analysis of Variance\n\nPowerPoint\n\n\n\n\n13 Analysis of Variance - 2 way anova\n\nPowerPoint\n\n\n\n\n14 Analysis of Variance - nested anovas\n\nPowerPoint\n\n\n\n\n15 GLM and Logistic Regression (27) - What if assumptions Fail\n\nPowerPoint\n\n\n\n\n16 ANCOVA - Analysis of Covariance (20)\n\nPowerPoint\n\n\n\n\n17 Multivariate Statistics (21)\n\nPowerPoint\n\n\n\n\n18 Principal Component Analysis - PCA (23)\n\nPowerPoint\n\n\n\n\n19 NMDS - CLUSTER ANALYSIS - HYPOTHESES (25)\n\nPowerPoint\n\n\n\n\n20 - Review (28)\n\nPowerPoint\n\n\n\n\n\n\nOrder of topics is subject to change depending on the progress of the class. Changes to the class schedule will be announced in class.\n\n\n\n\n\nR for Data Science by Hadley Wickham\nWhitlock and Schluter The Analysis of Biological Data - 3rd edition\n\n\n\n\nI have put together a page of helpful links that might be of great help as you move through the class\n\n\n\n\n\n\nBelow is a link to all the statistical tests that we are covering in the class. These should be helpful to accomplish most of the statistics you will need to do. The format of all of these tests is:\n\ntype of data for the test\nhypotheses being tests\nassumptions of the test\nthe test itself and interpretation of the output\ntests of assumptions\nhow to make a final publication quality plot\nhow to write up the results of your output\n\n\n\n\nIf you have questions about the course or the website, please contact me at wlperry@d.umn.edu"
+    "text": "This course teaches the fundamentals of statistics and data analysis for biological sciences. Using R and the tidyverse, you’ll learn how to analyze and visualize data effectively to answer scientific questions.\n\n\nMaterials for this course are organized into lectures, in-class activities, and homework assignments. All materials are available through this website and may be on canvas website at school.\n\n\n\nBelow is a summary of the course schedule.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n01 Introduction - Start with R\nR4DataScience Intro\nR4DataScience Visualizaiton\nLecture 1 PowerPoint\nLecture 1 Activity\nWeek 1 Homework\n\n\n02 Project Design and Graphing data - GGPLOT\nR4DataScience Tidy Data\nPowerPoint\nActivity\n\n\n\n03 Descriptive Stats and wrangling\n\nPowerPoint\nActivity\nWeek 2 Homework\n\n\n04 Probability and Inference I - z distriubtions\n\nPowerPoint\nActivity\n\n\n\n05 Probability and Inference II - t distribution\n\nPowerPoint\nActivity\nWeek 3 Homework\n\n\n06 T-Tests\n\nPowerPoint\nActivity\n\n\n\n07 Non Parametric TTests\n\nPowerPoint\nActivity\nWeek 5 Homework\n\n\n08 Study Design for more than T-Tests - Sampling\n\nPowerPoint\n\n\n\n\n09 Correlation vs Linear Models - Regression I\n\nPowerPoint\nActivity\n\n\n\n10 Regressions II\n\nPowerPoint\n\n\n\n\n11 Multiple Regression\n\nPowerPoint\n\n\n\n\n12 Analysis of Variance\n\nPowerPoint\n\n\n\n\n13 Analysis of Variance - 2 way anova\n\nPowerPoint\n\n\n\n\n14 Analysis of Variance - nested anovas\n\nPowerPoint\n\n\n\n\n15 GLM and Logistic Regression (27) - What if assumptions Fail\n\nPowerPoint\n\n\n\n\n16 ANCOVA - Analysis of Covariance (20)\n\nPowerPoint\n\n\n\n\n17 Multivariate Statistics (21)\n\nPowerPoint\n\n\n\n\n18 Principal Component Analysis - PCA (23)\n\nPowerPoint\n\n\n\n\n19 NMDS - CLUSTER ANALYSIS - HYPOTHESES (25)\n\nPowerPoint\n\n\n\n\n20 - Review (28)\n\nPowerPoint\n\n\n\n\n\n\nOrder of topics is subject to change depending on the progress of the class. Changes to the class schedule will be announced in class.\n\n\n\n\n\nR for Data Science by Hadley Wickham\nWhitlock and Schluter The Analysis of Biological Data - 3rd edition\n\n\n\n\n\nI have put together a page of helpful links that might be of great help as you move through the class\n\n\n\n\n\n\nBelow is a link to all the statistical tests that we are covering in the class. These should be helpful to accomplish most of the statistics you will need to do. The format of all of these tests is:\n\ntype of data for the test\nhypotheses being tests\nassumptions of the test\nthe test itself and interpretation of the output\ntests of assumptions\nhow to make a final publication quality plot\nhow to write up the results of your output\n\n\n\n\nIf you have questions about the course or the website, please contact me at wlperry@d.umn.edu"
   },
   {
     "objectID": "index.html#course-materials",
@@ -2730,60 +2926,102 @@
     "text": "Simple Linear Regression Model\nlinear regression has four key assumptions:\n\nLinearity: The relationship between X and Y is linear\nIndependence: Observations are independent\nHomoscedasticity: Equal variance across all values of X\nNormality: Residuals are normally distributed\n\nIf assumptions are violated: 1. Transform the data (Section 17.6) 2. Use weighted least squares for heteroscedasticity 3. Consider non-linear models (Section 17.8)"
   },
   {
-    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#review",
-    "href": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#review",
-    "title": "Lecture 17 - xxxxxx",
-    "section": "Review",
-    "text": "Review"
-  },
-  {
     "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#overview",
     "href": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#overview",
-    "title": "Lecture 17 - xxxxxx",
+    "title": "Lecture 17 - Multivariate STATS",
     "section": "Overview",
-    "text": "Overview\nAnalysis of variance:\n\nExamples:"
+    "text": "Overview\n\nMultivariate data: multiple variables per object\nTypes of multivariate analyses\n\nFunctional vs. structural methods\nR-mode vs. Q-mode analyses\n\nEigenvectors, eigenvalues, and components\nDistance and dissimilarity measures\nData transformations and standardization\nScreening multivariate data\nMANOVA"
   },
   {
-    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#key-principles",
-    "href": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#key-principles",
-    "title": "Lecture 17 - xxxxxx",
-    "section": "Key Principles",
-    "text": "Key Principles\n\nPurpose:\nThe Analysis\n\nasdf\n\nasdf"
+    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#functional-vs.-structural-methods",
+    "href": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#functional-vs.-structural-methods",
+    "title": "Lecture 17 - Multivariate STATS",
+    "section": "Functional vs. Structural Methods",
+    "text": "Functional vs. Structural Methods\nFunctional methods: - Clear response and predictor variables - Goal: relate Y’s to X’s - Examples: MANOVA, PERMANOVA\nStructural methods: - Find patterns/structure in data - Often no clear predictors - Examples: PCA, NMDS, Cluster Analysis"
   },
   {
-    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#assumptions",
-    "href": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#assumptions",
-    "title": "Lecture 17 - xxxxxx",
-    "section": "Assumptions",
-    "text": "Assumptions\n\nIndependence of observations\nNormal distribution of residuals\nHomogeneity of variances"
+    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#two-main-approaches",
+    "href": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#two-main-approaches",
+    "title": "Lecture 17 - Multivariate STATS",
+    "section": "Two Main Approaches",
+    "text": "Two Main Approaches\nScaling/Ordination Methods: - Reduce dimensions with new derived variables - Summarize patterns in data - Examples: PCA, CCA\nDissimilarity-Based Methods: - Measure dissimilarity between objects - Visualize relationships between objects - Examples: NMDS, Cluster Analysis"
   },
   {
-    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_html.html",
-    "href": "lectures/lecture_17/17_01_lecture_powerpoint_html.html",
-    "title": "Lecture 17 - xxxxxx",
-    "section": "",
-    "text": "image"
+    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#common-approaches",
+    "href": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#common-approaches",
+    "title": "Lecture 17 - Multivariate STATS",
+    "section": "Common Approaches",
+    "text": "Common Approaches\nTransformations: - Log transformation for skewed data - Root transformations for count data - Fourth-root for species abundance data\nStandardization: - Centering: subtract mean (mean = 0) - Standardization: divide by SD (SD = 1) - Crucial for variables with different units - May not be appropriate for species data"
+  },
+  {
+    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#visual-representation-methods",
+    "href": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#visual-representation-methods",
+    "title": "Lecture 17 - Multivariate STATS",
+    "section": "Visual Representation Methods",
+    "text": "Visual Representation Methods\n\nSPLOMS/Scatterplot Matrices: show bivariate relationships\nStar plots: display multiple variables per object\nChernoff faces: represent variables as facial features\nHeatmaps: visualize data matrices with color\nBiplots: show objects and variables together\nOrdination plots: visualize relationships in reduced dimensions"
+  },
+  {
+    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#key-issues-to-check",
+    "href": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#key-issues-to-check",
+    "title": "Lecture 17 - Multivariate STATS",
+    "section": "Key Issues to Check",
+    "text": "Key Issues to Check\nMultivariate Outliers: - Objects with unusual patterns across variables - Detected with Mahalanobis distance (d²) - Test against χ² distribution with p df\nMissing Observations: - Common approaches: - Deletion: remove affected object or variable - Imputation: estimate missing values - Maximum likelihood methods - Multiple imputation"
+  },
+  {
+    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#key-concepts",
+    "href": "lectures/lecture_17/17_01_lecture_powerpoint_slides.html#key-concepts",
+    "title": "Lecture 17 - Multivariate STATS",
+    "section": "Key Concepts",
+    "text": "Key Concepts\n\nMultivariate data requires special techniques to account for correlations between variables\nFunctional methods (MANOVA) test hypotheses about group differences\nStructural methods (PCA, NMDS) find patterns in data\nDistance measures quantify similarities between objects\nData standardization is crucial for variables with different units\nMultivariate graphics help visualize complex relationships"
   },
   {
     "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#overview",
     "href": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#overview",
-    "title": "Lecture 17 - xxxxxx",
+    "title": "Lecture 17 - Multivariate STATS",
     "section": "Overview",
-    "text": "Overview\nAnalysis of variance:\n\nExamples:"
+    "text": "Overview\n\nMultivariate data: multiple variables per object\nTypes of multivariate analyses\n\nFunctional vs. structural methods\nR-mode vs. Q-mode analyses\n\nEigenvectors, eigenvalues, and components\nDistance and dissimilarity measures\nData transformations and standardization\nScreening multivariate data\nMANOVA"
   },
   {
-    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#key-principles",
-    "href": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#key-principles",
-    "title": "Lecture 17 - xxxxxx",
-    "section": "Key Principles",
-    "text": "Key Principles\n\nPurpose:\nThe Analysis\n\nasdf\n\nasdf"
+    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#functional-vs.-structural-methods",
+    "href": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#functional-vs.-structural-methods",
+    "title": "Lecture 17 - Multivariate STATS",
+    "section": "Functional vs. Structural Methods",
+    "text": "Functional vs. Structural Methods\nFunctional methods: - Clear response and predictor variables - Goal: relate Y’s to X’s - Examples: MANOVA, PERMANOVA\nStructural methods: - Find patterns/structure in data - Often no clear predictors - Examples: PCA, NMDS, Cluster Analysis"
   },
   {
-    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#assumptions",
-    "href": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#assumptions",
-    "title": "Lecture 17 - xxxxxx",
-    "section": "Assumptions",
-    "text": "Assumptions\n\nIndependence of observations\nNormal distribution of residuals\nHomogeneity of variances"
+    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#two-main-approaches",
+    "href": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#two-main-approaches",
+    "title": "Lecture 17 - Multivariate STATS",
+    "section": "Two Main Approaches",
+    "text": "Two Main Approaches\nScaling/Ordination Methods: - Reduce dimensions with new derived variables - Summarize patterns in data - Examples: PCA, CCA\nDissimilarity-Based Methods: - Measure dissimilarity between objects - Visualize relationships between objects - Examples: NMDS, Cluster Analysis"
+  },
+  {
+    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#common-approaches",
+    "href": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#common-approaches",
+    "title": "Lecture 17 - Multivariate STATS",
+    "section": "Common Approaches",
+    "text": "Common Approaches\nTransformations: - Log transformation for skewed data - Root transformations for count data - Fourth-root for species abundance data\nStandardization: - Centering: subtract mean (mean = 0) - Standardization: divide by SD (SD = 1) - Crucial for variables with different units - May not be appropriate for species data"
+  },
+  {
+    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#visual-representation-methods",
+    "href": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#visual-representation-methods",
+    "title": "Lecture 17 - Multivariate STATS",
+    "section": "Visual Representation Methods",
+    "text": "Visual Representation Methods\n\nSPLOMS/Scatterplot Matrices: show bivariate relationships\nStar plots: display multiple variables per object\nChernoff faces: represent variables as facial features\nHeatmaps: visualize data matrices with color\nBiplots: show objects and variables together\nOrdination plots: visualize relationships in reduced dimensions"
+  },
+  {
+    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#key-issues-to-check",
+    "href": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#key-issues-to-check",
+    "title": "Lecture 17 - Multivariate STATS",
+    "section": "Key Issues to Check",
+    "text": "Key Issues to Check\nMultivariate Outliers: - Objects with unusual patterns across variables - Detected with Mahalanobis distance (d²) - Test against χ² distribution with p df\nMissing Observations: - Common approaches: - Deletion: remove affected object or variable - Imputation: estimate missing values - Maximum likelihood methods - Multiple imputation"
+  },
+  {
+    "objectID": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#key-concepts",
+    "href": "lectures/lecture_17/17_01_lecture_powerpoint_html.html#key-concepts",
+    "title": "Lecture 17 - Multivariate STATS",
+    "section": "Key Concepts",
+    "text": "Key Concepts\n\nMultivariate data requires special techniques to account for correlations between variables\nFunctional methods (MANOVA) test hypotheses about group differences\nStructural methods (PCA, NMDS) find patterns in data\nDistance measures quantify similarities between objects\nData standardization is crucial for variables with different units\nMultivariate graphics help visualize complex relationships"
   },
   {
     "objectID": "lectures/lecture_18/18_01_lecture_powerpoint_slides.html#review",
@@ -2844,58 +3082,401 @@
   {
     "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#review",
     "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#review",
-    "title": "Lecture 16 - xxxxxx",
+    "title": "Lecture 16 - ANCOVA",
     "section": "Review",
-    "text": "Review"
+    "text": "Review\n\nGeneral linearized models (GLM"
   },
   {
     "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#overview",
     "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#overview",
-    "title": "Lecture 16 - xxxxxx",
+    "title": "Lecture 16 - ANCOVA",
     "section": "Overview",
-    "text": "Overview\nAnalysis of variance:\n\nExamples:"
+    "text": "Overview\nAnalysis of covariance (ANCOVA):\n\nIntroduction to ANCOVA\nWhen to use ANCOVA\nLinear model for ANCOVA\nAnalysis of variance in ANCOVA\nAssumptions of ANCOVA\n\nHomogeneous slopes\n\nRobust ANCOVA approaches\nSpecific comparisons of means\nExamples and interpretation\nScientific reporting of ANCOVA results"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#what-is-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#what-is-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "What is ANCOVA?",
+    "text": "What is ANCOVA?\n\nANCOVA = Analysis of COVAriance\nCombination of regression and ANOVA\nA continuous covariate is measured along with the response variable for each experimental unit\nCommon use: compare means of factor levels (groups), adjusting for variance from continuous covariate\nAnother use: determine whether two or more regression lines differ in slopes and intercepts"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#common-applications-of-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#common-applications-of-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Common Applications of ANCOVA",
+    "text": "Common Applications of ANCOVA\n\nIncreasing statistical power\n\nRemoving variation associated with a covariate can reduce residual error\nMore powerful test of treatment effects\n\nAdjusting for confounding variables\n\nWhen treatments might differ in some continuous variable\nNeed to separate treatment effects from covariate effects\n\nTesting equality of regression lines\n\nDo treatments have the same relationship with a continuous variable?\nTests for both slopes and intercepts"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#cricket-chirping-example",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#cricket-chirping-example",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Cricket Chirping Example",
+    "text": "Cricket Chirping Example\nWant to compare chirping rate of two cricket species:\n\n- Oecanthus exclamationis\n- Oecanthus niveus\n\nBut:\n\n- Measured rates at different temperatures\n- Range of temperatures differed between species\n- Apparent relationship between pulse rate and temperature\n\nANCOVA lets us adjust for temperature effect to get a more powerful test!"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#the-ancova-model",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#the-ancova-model",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "The ANCOVA Model",
+    "text": "The ANCOVA Model\nKey concept in ANCOVA: the difference between “unadjusted” group means and “adjusted” means.\nIn this visualization:\n\nGroup Means (shown as asterisks): raw/unadjusted means for each group - simply the average X value and average Y value for all points in that group. Notice that Group A and Group B have different mean X values (they’re positioned at different points along the X axis).\nAdjusted Means (shown as triangles): These are what ANCOVA actually compares. The adjusted means represent what each group’s mean would be if all groups had the same value of the covariate (in this case, the overall mean X).\n\nThe core purpose of ANCOVA is to make this adjustment. This is important because:\n\nWhen groups differ in their covariate values (as they often do in observational studies or even in experiments with random assignment), comparing raw means can be misleading\nThe adjustment helps “level the playing field” by estimating what each group’s mean would be if they all had the same value of the covariate\n\nIn the diagram:\n\ndistance between adjusted means represents the estimated treatment effect after controlling for the covariate\n\nThe fundamental concept of ANCOVA\n\ncomparing what the group means would be if all groups had the same value of the covariate, thereby removing the influence of the covariate from our comparison of treatment effects."
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#mathematical-model-for-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#mathematical-model-for-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Mathematical Model for ANCOVA",
+    "text": "Mathematical Model for ANCOVA\nFor a single-factor ANCOVA with factor A (p levels, i = 1 to p), a continuous covariate (x), and response variable (y):\n\\(Y_{ij} = \\mu + \\alpha_i + \\beta(X_{ij} - \\bar{X}) + \\varepsilon_{ij}\\)\nWhere: - \\(Y_{ij}\\) = response value for observation j in level i of factor A - \\(\\mu\\) = overall mean - \\(\\alpha_i\\) = effect of level i of factor A - \\(\\beta\\) = common regression slope relating Y to X - \\(X_{ij}\\) = covariate value for observation j in level i of factor A - \\(\\bar{X}\\) = mean value of covariate - \\(\\varepsilon_{ij}\\) = error term"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#interpretation-of-parameters",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#interpretation-of-parameters",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Interpretation of Parameters",
+    "text": "Interpretation of Parameters\n\n\\(\\mu\\) = overall mean response\n\\(\\alpha_i\\) = effect of level i (difference between group mean and overall mean)\n\\(\\beta\\) = pooled within-group regression coefficient\n\\(X_{ij}\\) = covariate value for observation j in group i\n\\(\\bar{X}\\) = overall mean of covariate\n\\(\\varepsilon_{ij}\\) = unexplained error\n\nThis model assumes homogeneous slopes across all treatment groups (we’ll test this later)."
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#running-ancova-in-r",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#running-ancova-in-r",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Running ANCOVA in R",
+    "text": "Running ANCOVA in R\nBasic ANCOVA model: - Response: continuous variable (y) - Predictor: categorical factor (A) - Covariate: continuous variable (x)\nThe simplest ANCOVA model is:\nmodel &lt;- lm(y ~ A + x, data = mydata)\nanova(model)\nAlternative: use aov() function\nmodel &lt;- aov(y ~ A + x, data = mydata)\nsummary(model)\nBoth approaches use Type I SS (sequential). For unbalanced designs, you may want Type III SS using car package."
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#partitioning-of-variation-in-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#partitioning-of-variation-in-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Partitioning of Variation in ANCOVA",
+    "text": "Partitioning of Variation in ANCOVA"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#anova-table-for-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#anova-table-for-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "ANOVA Table for ANCOVA",
+    "text": "ANOVA Table for ANCOVA\nThe ANOVA table for a single-factor ANCOVA has these components:\n\n\nSourcedfSum of SquaresMean SquareF-ratioExpected MSFactor A (adjusted)(p-1)SS_A(adj)MS_A(adj) = SS_A(adj)/(p-1)MS_A(adj)/MS_Residualσ² + n∑α²/(p-1)Covariate1SS_CovariateMS_Covariate = SS_Covariate/1MS_Covariate/MS_Residualσ² + β²∑(X-X̄)²Residualn-p-1SS_ResidualMS_Residual = SS_Residual/(n-p-1)σ²Totaln-1SS_Total"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#null-hypotheses-in-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#null-hypotheses-in-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Null Hypotheses in ANCOVA",
+    "text": "Null Hypotheses in ANCOVA\n\nTreatment Effect (adjusted for covariate) \\(H_0: \\alpha_1 = \\alpha_2 = ... = \\alpha_p = 0\\)\n\nAre the adjusted group means equal?\nTest with F = MS_A(adj)/MS_Residual\n\nCovariate Effect \\(H_0: \\beta = 0\\)\n\nIs there a relationship between the covariate and the response?\nTest with F = MS_Covariate/MS_Residual\n\nHomogeneity of Slopes (test this first!) \\(H_0: \\beta_1 = \\beta_2 = ... = \\beta_p\\)\n\nAre the regression slopes the same for all groups?\nTest by adding group*covariate interaction term"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#testing-for-homogeneous-slopes",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#testing-for-homogeneous-slopes",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Testing for Homogeneous Slopes",
+    "text": "Testing for Homogeneous Slopes\nANCOVA assumes the regression slopes are the same for all groups (parallel regression lines)\nTo test this assumption:\n\nFit model with interaction term:\n\nmodel_int &lt;- lm(y ~ A * x, data = mydata)\n\nTest significance of interaction:\n\nanova(model_int)\n\nIf interaction is significant (p &lt; 0.05):\n\nSlopes are not homogeneous\nStandard ANCOVA inappropriate\nUse alternative approaches"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#parallel-vs.-non-parallel-slopes",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#parallel-vs.-non-parallel-slopes",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Parallel vs. Non-Parallel Slopes",
+    "text": "Parallel vs. Non-Parallel Slopes"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#when-slopes-are-not-homogeneous",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#when-slopes-are-not-homogeneous",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "When Slopes Are Not Homogeneous",
+    "text": "When Slopes Are Not Homogeneous\nIf the interaction term is significant (p &lt; 0.05), the slope-group relationship is not the same across groups.\nOptions:\n\nReport the interaction - this is a biologically interesting result!\nSeparate regressions - analyze each group separately\nJohnson-Neyman procedure - identifies regions of the covariate where groups differ significantly\nAlternative models - consider transformation, polynomial terms, or more complex models"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#ancova-on-longevity-of-male-fruitflies",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#ancova-on-longevity-of-male-fruitflies",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "ANCOVA on Longevity of Male Fruitflies",
+    "text": "ANCOVA on Longevity of Male Fruitflies\n\n# 1. Examine the partridge data structure\n# str(partridge)\n\n# Create better names for treatments\npartridge$treatment &lt;- factor(partridge$TREATMEN,\n                            levels = 1:5,\n                            labels = c(\"No females\", \n                                      \"One virgin female daily\",\n                                      \"Eight virgin females daily\",\n                                      \"One inseminated female daily\",\n                                      \"Eight inseminated females daily\"))\n\n# 2. Create a plot of the data showing relationship\nggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) + \n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  labs(title = \"Relationship between Thorax Length and Longevity\",\n       x = \"Thorax Length (mm)\",\n       y = \"Longevity (days)\",\n       color = \"Treatment\") +\n  theme_minimal() +\n  theme(legend.position = \"bottom\")"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#testing-homogeneity-of-slopes",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#testing-homogeneity-of-slopes",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Testing Homogeneity of Slopes",
+    "text": "Testing Homogeneity of Slopes\n\n# Test for homogeneity of slopes\nhomo_slopes_model &lt;- lm(LONGEV ~ THORAX * treatment, data = partridge)\nanova(homo_slopes_model)\n\nAnalysis of Variance Table\n\nResponse: LONGEV\n                  Df  Sum Sq Mean Sq  F value    Pr(&gt;F)    \nTHORAX             1 15496.6 15496.6 136.0170 &lt; 2.2e-16 ***\ntreatment          4  9611.5  2402.9  21.0905 4.617e-13 ***\nTHORAX:treatment   4    42.5    10.6   0.0933    0.9844    \nResiduals        115 13102.1   113.9                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Extract the p-value for the interaction\np_interaction &lt;- anova(homo_slopes_model)[3, \"Pr(&gt;F)\"]\n\nThe p-value for the interaction term (treatment × THORAX) is 0.984. Since this value is &gt; 0.05, we can assume homogeneous slopes and proceed with the standard ANCOVA."
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#full-ancova-analysis",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#full-ancova-analysis",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Full ANCOVA Analysis",
+    "text": "Full ANCOVA Analysis\n\n# Fit the ANCOVA model (without interaction)\nancova_model &lt;- lm(LONGEV ~ THORAX + treatment, data = partridge)\n\n# View ANOVA table\nanova(ancova_model)\n\nAnalysis of Variance Table\n\nResponse: LONGEV\n           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    \nTHORAX      1 15496.6 15496.6 140.293 &lt; 2.2e-16 ***\ntreatment   4  9611.5  2402.9  21.753 1.719e-13 ***\nResiduals 119 13144.7   110.5                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Get more detailed summary\nsummary(ancova_model)\n\n\nCall:\nlm(formula = LONGEV ~ THORAX + treatment, data = partridge)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-26.189  -6.599  -0.989   6.408  30.244 \n\nCoefficients:\n                                         Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                               -46.055     10.239  -4.498 1.61e-05\nTHORAX                                    135.819     12.439  10.919  &lt; 2e-16\ntreatmentOne virgin female daily           -3.929      2.997  -1.311 0.192347\ntreatmentEight virgin females daily        -1.276      2.983  -0.428 0.669517\ntreatmentOne inseminated female daily     -10.946      2.999  -3.650 0.000391\ntreatmentEight inseminated females daily  -23.879      2.973  -8.031 7.83e-13\n                                            \n(Intercept)                              ***\nTHORAX                                   ***\ntreatmentOne virgin female daily            \ntreatmentEight virgin females daily         \ntreatmentOne inseminated female daily    ***\ntreatmentEight inseminated females daily ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 10.51 on 119 degrees of freedom\nMultiple R-squared:  0.6564,    Adjusted R-squared:  0.6419 \nF-statistic: 45.46 on 5 and 119 DF,  p-value: &lt; 2.2e-16\n\n# Get adjusted means using emmeans\nadjusted_means &lt;- emmeans(ancova_model, \"treatment\")\nadjusted_means\n\n treatment                       emmean   SE  df lower.CL upper.CL\n No females                        65.4 2.11 119     61.3     69.6\n One virgin female daily           61.5 2.11 119     57.3     65.7\n Eight virgin females daily        64.2 2.10 119     60.0     68.3\n One inseminated female daily      54.5 2.11 119     50.3     58.7\n Eight inseminated females daily   41.6 2.12 119     37.4     45.8\n\nConfidence level used: 0.95"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#pairwise-comparisons-of-adjusted-means",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#pairwise-comparisons-of-adjusted-means",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Pairwise Comparisons of Adjusted Means",
+    "text": "Pairwise Comparisons of Adjusted Means\n\n# Pairwise comparisons of adjusted means\npairs(adjusted_means, adjust = \"tukey\")\n\n contrast                                                       estimate   SE\n No females - One virgin female daily                               3.93 3.00\n No females - Eight virgin females daily                            1.28 2.98\n No females - One inseminated female daily                         10.95 3.00\n No females - Eight inseminated females daily                      23.88 2.97\n One virgin female daily - Eight virgin females daily              -2.65 2.98\n One virgin female daily - One inseminated female daily             7.02 2.97\n One virgin female daily - Eight inseminated females daily         19.95 3.01\n Eight virgin females daily - One inseminated female daily          9.67 2.98\n Eight virgin females daily - Eight inseminated females daily      22.60 2.99\n One inseminated female daily - Eight inseminated females daily    12.93 3.01\n  df t.ratio p.value\n 119   1.311  0.6849\n 119   0.428  0.9929\n 119   3.650  0.0035\n 119   8.031  &lt;.0001\n 119  -0.891  0.8996\n 119   2.361  0.1336\n 119   6.636  &lt;.0001\n 119   3.249  0.0129\n 119   7.560  &lt;.0001\n 119   4.298  0.0003\n\nP value adjustment: tukey method for comparing a family of 5 estimates \n\n# Plot adjusted means with confidence intervals\nplot(adjusted_means, comparisons = TRUE) + \n  labs(title = \"Adjusted Means by Treatment\",\n       x = \"Adjusted Longevity (days)\",\n       y = \"Treatment\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#visualization-options-for-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#visualization-options-for-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Visualization Options for ANCOVA",
+    "text": "Visualization Options for ANCOVA"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#heterogeneous-slopes-example",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#heterogeneous-slopes-example",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Heterogeneous Slopes Example",
+    "text": "Heterogeneous Slopes Example\nConstable (1993) studied shrinking in sea urchin test: - Compared suture widths between treatments - Three groups: high food, low food, initial sample - Covariate: body volume (cube root transformed)\nThe analysis showed: - Significant interaction between treatment and covariate - Heterogeneous slopes across treatments - Can’t use standard ANCOVA"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#johnson-neyman-procedure-for-heterogeneous-slopes",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#johnson-neyman-procedure-for-heterogeneous-slopes",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Johnson-Neyman Procedure for Heterogeneous Slopes",
+    "text": "Johnson-Neyman Procedure for Heterogeneous Slopes\n\n\nAnalysis of Variance Table\n\nResponse: suture_width\n                 Df   Sum Sq   Mean Sq F value    Pr(&gt;F)    \nvolume            1 0.015724 0.0157238  176.91 &lt; 2.2e-16 ***\ntreatment         2 0.036482 0.0182411  205.23 &lt; 2.2e-16 ***\nvolume:treatment  2 0.006213 0.0031064   34.95 4.453e-11 ***\nResiduals        66 0.005866 0.0000889                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#interpretation-of-heterogeneous-slopes",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#interpretation-of-heterogeneous-slopes",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Interpretation of Heterogeneous Slopes",
+    "text": "Interpretation of Heterogeneous Slopes\nWhen you have heterogeneous slopes, the Johnson-Neyman procedure identifies regions of the covariate where groups differ:\n\nInitial &gt; Low Food when cube root body volume &gt; 2.95\n\nFor large urchins, the initial sample has wider sutures than low food urchins\n\nHigh Food &gt; Initial when cube root body volume &gt; 1.81\n\nFor most urchins, high food treatment results in wider sutures than initial samples\n\nHigh Food &gt; Low Food when cube root body volume &gt; 2.07\n\nFor most medium to large urchins, high food results in wider sutures than low food\n\n\nThe biological interpretation is that food regime affects suture width differently depending on urchin size. This interaction is biologically meaningful and would be missed if we only looked at adjusted means!"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#key-assumptions",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#key-assumptions",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Key Assumptions",
+    "text": "Key Assumptions\n\nIndependence of observations\n\nSamples are random and independent\nNo clustering or repeated measures\n\nNormal distribution of residuals\n\nResiduals follow a normal distribution\nCheck with QQ plots or formal tests\n\nHomogeneity of variances\n\nEqual variances across groups\nCheck with residual plots vs. fitted values\n\nLinearity\n\nLinear relationship between Y and X within each group\nCheck with scatterplots\n\nHomogeneity of regression slopes (critical!)\n\nRegression slopes equal across all groups\nTest with interaction term"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#checking-assumptions-in-r",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#checking-assumptions-in-r",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Checking Assumptions in R",
+    "text": "Checking Assumptions in R\n\n# Fit ANCOVA model for partridge data\nancova_model &lt;- lm(LONGEV ~ THORAX + treatment, data = partridge)\n\n# Create a 2x2 panel of diagnostic plots\npar(mfrow = c(2, 2))\nplot(ancova_model)"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#non-parametric-alternatives",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#non-parametric-alternatives",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Non-Parametric Alternatives",
+    "text": "Non-Parametric Alternatives\nWhen ANCOVA assumptions are violated, consider:\n\nRank Transformation\n\nRank transform both Y and X variables\nRun standard ANCOVA on ranked data\nSimple but may not handle interactions well\n\nANCOVA on Bootstrapped Data\n\nUse bootstrapping to estimate parameters\nDoesn’t require normality assumption\n\nQuantile Regression\n\nModels relationships at different quantiles\nRobust to outliers and heteroscedasticity\n\nPermutation Tests\n\nRandomization tests of treatment effects\nNo distributional assumptions"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#scientific-writing-example",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#scientific-writing-example",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Scientific Writing Example",
+    "text": "Scientific Writing Example\nHere’s how you might write up ANCOVA results for publication:\n\n“We analyzed the effects of mating strategy on male fruitfly longevity using analysis of covariance (ANCOVA), with thorax length as a covariate. Before conducting the main analysis, we tested the homogeneity of slopes assumption and found no significant interaction between treatment and thorax length (F₄,₁₁₅ = 1.56, P = 0.19), indicating that the effect of body size on longevity was consistent across treatments.\nThe ANCOVA revealed significant effects of both treatment (F₄,₁₁₉ = 27.97, P &lt; 0.001) and thorax length (F₁,₁₁₉ = 145.44, P &lt; 0.001) on longevity. Thorax length was positively associated with longevity (b = 1.19), with larger males living longer. After adjusting for body size, males with no female partners lived significantly longer (adjusted mean ± SE: 1.81 ± 0.02 log₁₀ days) than males in any other treatment group. Males provided with a single virgin female daily (1.77 ± 0.02) or a single inseminated female daily (1.79 ± 0.02) showed intermediate longevity, while males with eight females per day showed the lowest longevity (1.72 ± 0.02 for inseminated females; 1.59 ± 0.02 for virgin females). Pairwise comparisons using Tukey’s HSD test indicated significant differences between all treatment groups (P &lt; 0.05) except between the two treatments with a single female per day (P = 0.42).”"
   },
   {
     "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#key-principles",
     "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#key-principles",
-    "title": "Lecture 16 - xxxxxx",
+    "title": "Lecture 16 - ANCOVA",
     "section": "Key Principles",
-    "text": "Key Principles\n\nPurpose:\nThe Analysis\n\nasdf\n\nasdf"
+    "text": "Key Principles\n\nPurpose:\n\nANCOVA combines regression and ANOVA approaches\nIncreases power by accounting for continuous covariates\nAllows comparison of adjusted means\n\nThe Analysis\n\nAlways test for homogeneity of slopes first!\nIf slopes are homogeneous, proceed with standard ANCOVA\nIf slopes are heterogeneous, use alternatives (Johnson-Neyman procedure)\n\nInterpretation\n\nFocus on adjusted means (at mean covariate value)\nConsider both statistical and biological significance\nVisualize results clearly with appropriate graphs"
   },
   {
     "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#assumptions",
     "href": "lectures/lecture_16/16_01_lecture_powerpoint_slides.html#assumptions",
-    "title": "Lecture 16 - xxxxxx",
+    "title": "Lecture 16 - ANCOVA",
     "section": "Assumptions",
-    "text": "Assumptions\n\nIndependence of observations\nNormal distribution of residuals\nHomogeneity of variances"
-  },
-  {
-    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html",
-    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html",
-    "title": "Lecture 16 - xxxxxx",
-    "section": "",
-    "text": "image"
+    "text": "Assumptions\n\nIndependence of observations\nNormal distribution of residuals\nHomogeneity of variances\nLinearity of relationships within groups\nHomogeneity of regression slopes\n\n\\\\"
   },
   {
     "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#overview",
     "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#overview",
-    "title": "Lecture 16 - xxxxxx",
+    "title": "Lecture 16 - ANCOVA",
     "section": "Overview",
-    "text": "Overview\nAnalysis of variance:\n\nExamples:"
+    "text": "Overview\nAnalysis of covariance (ANCOVA):\n\nIntroduction to ANCOVA\nWhen to use ANCOVA\nLinear model for ANCOVA\nAnalysis of variance in ANCOVA\nAssumptions of ANCOVA\n\nHomogeneous slopes\n\nRobust ANCOVA approaches\nSpecific comparisons of means\nExamples and interpretation\nScientific reporting of ANCOVA results"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#what-is-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#what-is-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "What is ANCOVA?",
+    "text": "What is ANCOVA?\n\nANCOVA = Analysis of COVAriance\nCombination of regression and ANOVA\nA continuous covariate is measured along with the response variable for each experimental unit\nCommon use: compare means of factor levels (groups), adjusting for variance from continuous covariate\nAnother use: determine whether two or more regression lines differ in slopes and intercepts"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#common-applications-of-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#common-applications-of-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Common Applications of ANCOVA",
+    "text": "Common Applications of ANCOVA\n\nIncreasing statistical power\n\nRemoving variation associated with a covariate can reduce residual error\nMore powerful test of treatment effects\n\nAdjusting for confounding variables\n\nWhen treatments might differ in some continuous variable\nNeed to separate treatment effects from covariate effects\n\nTesting equality of regression lines\n\nDo treatments have the same relationship with a continuous variable?\nTests for both slopes and intercepts"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#cricket-chirping-example",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#cricket-chirping-example",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Cricket Chirping Example",
+    "text": "Cricket Chirping Example\nWant to compare chirping rate of two cricket species:\n\n- Oecanthus exclamationis\n- Oecanthus niveus\n\nBut:\n\n- Measured rates at different temperatures\n- Range of temperatures differed between species\n- Apparent relationship between pulse rate and temperature\n\nANCOVA lets us adjust for temperature effect to get a more powerful test!"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#the-ancova-model",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#the-ancova-model",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "The ANCOVA Model",
+    "text": "The ANCOVA Model\nKey concept in ANCOVA: the difference between “unadjusted” group means and “adjusted” means.\nIn this visualization:\n\nGroup Means (shown as asterisks): raw/unadjusted means for each group - simply the average X value and average Y value for all points in that group. Notice that Group A and Group B have different mean X values (they’re positioned at different points along the X axis).\nAdjusted Means (shown as triangles): These are what ANCOVA actually compares. The adjusted means represent what each group’s mean would be if all groups had the same value of the covariate (in this case, the overall mean X).\n\nThe core purpose of ANCOVA is to make this adjustment. This is important because:\n\nWhen groups differ in their covariate values (as they often do in observational studies or even in experiments with random assignment), comparing raw means can be misleading\nThe adjustment helps “level the playing field” by estimating what each group’s mean would be if they all had the same value of the covariate\n\nIn the diagram:\n\ndistance between adjusted means represents the estimated treatment effect after controlling for the covariate\n\nThe fundamental concept of ANCOVA\n\ncomparing what the group means would be if all groups had the same value of the covariate, thereby removing the influence of the covariate from our comparison of treatment effects."
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#mathematical-model-for-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#mathematical-model-for-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Mathematical Model for ANCOVA",
+    "text": "Mathematical Model for ANCOVA\nFor a single-factor ANCOVA with factor A (p levels, i = 1 to p), a continuous covariate (x), and response variable (y):\n\\(Y_{ij} = \\mu + \\alpha_i + \\beta(X_{ij} - \\bar{X}) + \\varepsilon_{ij}\\)\nWhere: - \\(Y_{ij}\\) = response value for observation j in level i of factor A - \\(\\mu\\) = overall mean - \\(\\alpha_i\\) = effect of level i of factor A - \\(\\beta\\) = common regression slope relating Y to X - \\(X_{ij}\\) = covariate value for observation j in level i of factor A - \\(\\bar{X}\\) = mean value of covariate - \\(\\varepsilon_{ij}\\) = error term"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#interpretation-of-parameters",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#interpretation-of-parameters",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Interpretation of Parameters",
+    "text": "Interpretation of Parameters\n\n\\(\\mu\\) = overall mean response\n\\(\\alpha_i\\) = effect of level i (difference between group mean and overall mean)\n\\(\\beta\\) = pooled within-group regression coefficient\n\\(X_{ij}\\) = covariate value for observation j in group i\n\\(\\bar{X}\\) = overall mean of covariate\n\\(\\varepsilon_{ij}\\) = unexplained error\n\nThis model assumes homogeneous slopes across all treatment groups (we’ll test this later)."
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#running-ancova-in-r",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#running-ancova-in-r",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Running ANCOVA in R",
+    "text": "Running ANCOVA in R\nBasic ANCOVA model: - Response: continuous variable (y) - Predictor: categorical factor (A) - Covariate: continuous variable (x)\nThe simplest ANCOVA model is:\nmodel &lt;- lm(y ~ A + x, data = mydata)\nanova(model)\nAlternative: use aov() function\nmodel &lt;- aov(y ~ A + x, data = mydata)\nsummary(model)\nBoth approaches use Type I SS (sequential). For unbalanced designs, you may want Type III SS using car package."
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#partitioning-of-variation-in-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#partitioning-of-variation-in-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Partitioning of Variation in ANCOVA",
+    "text": "Partitioning of Variation in ANCOVA"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#anova-table-for-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#anova-table-for-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "ANOVA Table for ANCOVA",
+    "text": "ANOVA Table for ANCOVA\nThe ANOVA table for a single-factor ANCOVA has these components:\n\n\nSourcedfSum of SquaresMean SquareF-ratioExpected MSFactor A (adjusted)(p-1)SS_A(adj)MS_A(adj) = SS_A(adj)/(p-1)MS_A(adj)/MS_Residualσ² + n∑α²/(p-1)Covariate1SS_CovariateMS_Covariate = SS_Covariate/1MS_Covariate/MS_Residualσ² + β²∑(X-X̄)²Residualn-p-1SS_ResidualMS_Residual = SS_Residual/(n-p-1)σ²Totaln-1SS_Total"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#null-hypotheses-in-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#null-hypotheses-in-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Null Hypotheses in ANCOVA",
+    "text": "Null Hypotheses in ANCOVA\n\nTreatment Effect (adjusted for covariate) \\(H_0: \\alpha_1 = \\alpha_2 = ... = \\alpha_p = 0\\)\n\nAre the adjusted group means equal?\nTest with F = MS_A(adj)/MS_Residual\n\nCovariate Effect \\(H_0: \\beta = 0\\)\n\nIs there a relationship between the covariate and the response?\nTest with F = MS_Covariate/MS_Residual\n\nHomogeneity of Slopes (test this first!) \\(H_0: \\beta_1 = \\beta_2 = ... = \\beta_p\\)\n\nAre the regression slopes the same for all groups?\nTest by adding group*covariate interaction term"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#testing-for-homogeneous-slopes",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#testing-for-homogeneous-slopes",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Testing for Homogeneous Slopes",
+    "text": "Testing for Homogeneous Slopes\nANCOVA assumes the regression slopes are the same for all groups (parallel regression lines)\nTo test this assumption:\n\nFit model with interaction term:\n\nmodel_int &lt;- lm(y ~ A * x, data = mydata)\n\nTest significance of interaction:\n\nanova(model_int)\n\nIf interaction is significant (p &lt; 0.05):\n\nSlopes are not homogeneous\nStandard ANCOVA inappropriate\nUse alternative approaches"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#parallel-vs.-non-parallel-slopes",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#parallel-vs.-non-parallel-slopes",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Parallel vs. Non-Parallel Slopes",
+    "text": "Parallel vs. Non-Parallel Slopes"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#when-slopes-are-not-homogeneous",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#when-slopes-are-not-homogeneous",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "When Slopes Are Not Homogeneous",
+    "text": "When Slopes Are Not Homogeneous\nIf the interaction term is significant (p &lt; 0.05), the slope-group relationship is not the same across groups.\nOptions:\n\nReport the interaction - this is a biologically interesting result!\nSeparate regressions - analyze each group separately\nJohnson-Neyman procedure - identifies regions of the covariate where groups differ significantly\nAlternative models - consider transformation, polynomial terms, or more complex models"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#ancova-on-longevity-of-male-fruitflies",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#ancova-on-longevity-of-male-fruitflies",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "ANCOVA on Longevity of Male Fruitflies",
+    "text": "ANCOVA on Longevity of Male Fruitflies\n\n# 1. Examine the partridge data structure\n# str(partridge)\n\n# Create better names for treatments\npartridge$treatment &lt;- factor(partridge$TREATMEN,\n                            levels = 1:5,\n                            labels = c(\"No females\", \n                                      \"One virgin female daily\",\n                                      \"Eight virgin females daily\",\n                                      \"One inseminated female daily\",\n                                      \"Eight inseminated females daily\"))\n\n# 2. Create a plot of the data showing relationship\nggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) + \n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  labs(title = \"Relationship between Thorax Length and Longevity\",\n       x = \"Thorax Length (mm)\",\n       y = \"Longevity (days)\",\n       color = \"Treatment\") +\n  theme_minimal() +\n  theme(legend.position = \"bottom\")"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#testing-homogeneity-of-slopes",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#testing-homogeneity-of-slopes",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Testing Homogeneity of Slopes",
+    "text": "Testing Homogeneity of Slopes\n\n# Test for homogeneity of slopes\nhomo_slopes_model &lt;- lm(LONGEV ~ THORAX * treatment, data = partridge)\nanova(homo_slopes_model)\n\nAnalysis of Variance Table\n\nResponse: LONGEV\n                  Df  Sum Sq Mean Sq  F value    Pr(&gt;F)    \nTHORAX             1 15496.6 15496.6 136.0170 &lt; 2.2e-16 ***\ntreatment          4  9611.5  2402.9  21.0905 4.617e-13 ***\nTHORAX:treatment   4    42.5    10.6   0.0933    0.9844    \nResiduals        115 13102.1   113.9                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Extract the p-value for the interaction\np_interaction &lt;- anova(homo_slopes_model)[3, \"Pr(&gt;F)\"]\n\nThe p-value for the interaction term (treatment × THORAX) is 0.984. Since this value is &gt; 0.05, we can assume homogeneous slopes and proceed with the standard ANCOVA."
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#full-ancova-analysis",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#full-ancova-analysis",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Full ANCOVA Analysis",
+    "text": "Full ANCOVA Analysis\n\n# Fit the ANCOVA model (without interaction)\nancova_model &lt;- lm(LONGEV ~ THORAX + treatment, data = partridge)\n\n# View ANOVA table\nanova(ancova_model)\n\nAnalysis of Variance Table\n\nResponse: LONGEV\n           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    \nTHORAX      1 15496.6 15496.6 140.293 &lt; 2.2e-16 ***\ntreatment   4  9611.5  2402.9  21.753 1.719e-13 ***\nResiduals 119 13144.7   110.5                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Get more detailed summary\nsummary(ancova_model)\n\n\nCall:\nlm(formula = LONGEV ~ THORAX + treatment, data = partridge)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-26.189  -6.599  -0.989   6.408  30.244 \n\nCoefficients:\n                                         Estimate Std. Error t value Pr(&gt;|t|)\n(Intercept)                               -46.055     10.239  -4.498 1.61e-05\nTHORAX                                    135.819     12.439  10.919  &lt; 2e-16\ntreatmentOne virgin female daily           -3.929      2.997  -1.311 0.192347\ntreatmentEight virgin females daily        -1.276      2.983  -0.428 0.669517\ntreatmentOne inseminated female daily     -10.946      2.999  -3.650 0.000391\ntreatmentEight inseminated females daily  -23.879      2.973  -8.031 7.83e-13\n                                            \n(Intercept)                              ***\nTHORAX                                   ***\ntreatmentOne virgin female daily            \ntreatmentEight virgin females daily         \ntreatmentOne inseminated female daily    ***\ntreatmentEight inseminated females daily ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 10.51 on 119 degrees of freedom\nMultiple R-squared:  0.6564,    Adjusted R-squared:  0.6419 \nF-statistic: 45.46 on 5 and 119 DF,  p-value: &lt; 2.2e-16\n\n# Get adjusted means using emmeans\nadjusted_means &lt;- emmeans(ancova_model, \"treatment\")\nadjusted_means\n\n treatment                       emmean   SE  df lower.CL upper.CL\n No females                        65.4 2.11 119     61.3     69.6\n One virgin female daily           61.5 2.11 119     57.3     65.7\n Eight virgin females daily        64.2 2.10 119     60.0     68.3\n One inseminated female daily      54.5 2.11 119     50.3     58.7\n Eight inseminated females daily   41.6 2.12 119     37.4     45.8\n\nConfidence level used: 0.95"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#pairwise-comparisons-of-adjusted-means",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#pairwise-comparisons-of-adjusted-means",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Pairwise Comparisons of Adjusted Means",
+    "text": "Pairwise Comparisons of Adjusted Means\n\n# Pairwise comparisons of adjusted means\npairs(adjusted_means, adjust = \"tukey\")\n\n contrast                                                       estimate   SE\n No females - One virgin female daily                               3.93 3.00\n No females - Eight virgin females daily                            1.28 2.98\n No females - One inseminated female daily                         10.95 3.00\n No females - Eight inseminated females daily                      23.88 2.97\n One virgin female daily - Eight virgin females daily              -2.65 2.98\n One virgin female daily - One inseminated female daily             7.02 2.97\n One virgin female daily - Eight inseminated females daily         19.95 3.01\n Eight virgin females daily - One inseminated female daily          9.67 2.98\n Eight virgin females daily - Eight inseminated females daily      22.60 2.99\n One inseminated female daily - Eight inseminated females daily    12.93 3.01\n  df t.ratio p.value\n 119   1.311  0.6849\n 119   0.428  0.9929\n 119   3.650  0.0035\n 119   8.031  &lt;.0001\n 119  -0.891  0.8996\n 119   2.361  0.1336\n 119   6.636  &lt;.0001\n 119   3.249  0.0129\n 119   7.560  &lt;.0001\n 119   4.298  0.0003\n\nP value adjustment: tukey method for comparing a family of 5 estimates \n\n# Plot adjusted means with confidence intervals\nplot(adjusted_means, comparisons = TRUE) + \n  labs(title = \"Adjusted Means by Treatment\",\n       x = \"Adjusted Longevity (days)\",\n       y = \"Treatment\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#visualization-options-for-ancova",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#visualization-options-for-ancova",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Visualization Options for ANCOVA",
+    "text": "Visualization Options for ANCOVA"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#heterogeneous-slopes-example",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#heterogeneous-slopes-example",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Heterogeneous Slopes Example",
+    "text": "Heterogeneous Slopes Example\nConstable (1993) studied shrinking in sea urchin test: - Compared suture widths between treatments - Three groups: high food, low food, initial sample - Covariate: body volume (cube root transformed)\nThe analysis showed: - Significant interaction between treatment and covariate - Heterogeneous slopes across treatments - Can’t use standard ANCOVA"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#johnson-neyman-procedure-for-heterogeneous-slopes",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#johnson-neyman-procedure-for-heterogeneous-slopes",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Johnson-Neyman Procedure for Heterogeneous Slopes",
+    "text": "Johnson-Neyman Procedure for Heterogeneous Slopes\n\n\nAnalysis of Variance Table\n\nResponse: suture_width\n                 Df   Sum Sq   Mean Sq F value    Pr(&gt;F)    \nvolume            1 0.015724 0.0157238  176.91 &lt; 2.2e-16 ***\ntreatment         2 0.036482 0.0182411  205.23 &lt; 2.2e-16 ***\nvolume:treatment  2 0.006213 0.0031064   34.95 4.453e-11 ***\nResiduals        66 0.005866 0.0000889                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#interpretation-of-heterogeneous-slopes",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#interpretation-of-heterogeneous-slopes",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Interpretation of Heterogeneous Slopes",
+    "text": "Interpretation of Heterogeneous Slopes\nWhen you have heterogeneous slopes, the Johnson-Neyman procedure identifies regions of the covariate where groups differ:\n\nInitial &gt; Low Food when cube root body volume &gt; 2.95\n\nFor large urchins, the initial sample has wider sutures than low food urchins\n\nHigh Food &gt; Initial when cube root body volume &gt; 1.81\n\nFor most urchins, high food treatment results in wider sutures than initial samples\n\nHigh Food &gt; Low Food when cube root body volume &gt; 2.07\n\nFor most medium to large urchins, high food results in wider sutures than low food\n\n\nThe biological interpretation is that food regime affects suture width differently depending on urchin size. This interaction is biologically meaningful and would be missed if we only looked at adjusted means!"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#key-assumptions",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#key-assumptions",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Key Assumptions",
+    "text": "Key Assumptions\n\nIndependence of observations\n\nSamples are random and independent\nNo clustering or repeated measures\n\nNormal distribution of residuals\n\nResiduals follow a normal distribution\nCheck with QQ plots or formal tests\n\nHomogeneity of variances\n\nEqual variances across groups\nCheck with residual plots vs. fitted values\n\nLinearity\n\nLinear relationship between Y and X within each group\nCheck with scatterplots\n\nHomogeneity of regression slopes (critical!)\n\nRegression slopes equal across all groups\nTest with interaction term"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#checking-assumptions-in-r",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#checking-assumptions-in-r",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Checking Assumptions in R",
+    "text": "Checking Assumptions in R\n\n# Fit ANCOVA model for partridge data\nancova_model &lt;- lm(LONGEV ~ THORAX + treatment, data = partridge)\n\n# Create a 2x2 panel of diagnostic plots\npar(mfrow = c(2, 2))\nplot(ancova_model)"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#non-parametric-alternatives",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#non-parametric-alternatives",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Non-Parametric Alternatives",
+    "text": "Non-Parametric Alternatives\nWhen ANCOVA assumptions are violated, consider:\n\nRank Transformation\n\nRank transform both Y and X variables\nRun standard ANCOVA on ranked data\nSimple but may not handle interactions well\n\nANCOVA on Bootstrapped Data\n\nUse bootstrapping to estimate parameters\nDoesn’t require normality assumption\n\nQuantile Regression\n\nModels relationships at different quantiles\nRobust to outliers and heteroscedasticity\n\nPermutation Tests\n\nRandomization tests of treatment effects\nNo distributional assumptions"
+  },
+  {
+    "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#scientific-writing-example",
+    "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#scientific-writing-example",
+    "title": "Lecture 16 - ANCOVA",
+    "section": "Scientific Writing Example",
+    "text": "Scientific Writing Example\nHere’s how you might write up ANCOVA results for publication:\n\n“We analyzed the effects of mating strategy on male fruitfly longevity using analysis of covariance (ANCOVA), with thorax length as a covariate. Before conducting the main analysis, we tested the homogeneity of slopes assumption and found no significant interaction between treatment and thorax length (F₄,₁₁₅ = 1.56, P = 0.19), indicating that the effect of body size on longevity was consistent across treatments.\nThe ANCOVA revealed significant effects of both treatment (F₄,₁₁₉ = 27.97, P &lt; 0.001) and thorax length (F₁,₁₁₉ = 145.44, P &lt; 0.001) on longevity. Thorax length was positively associated with longevity (b = 1.19), with larger males living longer. After adjusting for body size, males with no female partners lived significantly longer (adjusted mean ± SE: 1.81 ± 0.02 log₁₀ days) than males in any other treatment group. Males provided with a single virgin female daily (1.77 ± 0.02) or a single inseminated female daily (1.79 ± 0.02) showed intermediate longevity, while males with eight females per day showed the lowest longevity (1.72 ± 0.02 for inseminated females; 1.59 ± 0.02 for virgin females). Pairwise comparisons using Tukey’s HSD test indicated significant differences between all treatment groups (P &lt; 0.05) except between the two treatments with a single female per day (P = 0.42).”"
   },
   {
     "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#key-principles",
     "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#key-principles",
-    "title": "Lecture 16 - xxxxxx",
+    "title": "Lecture 16 - ANCOVA",
     "section": "Key Principles",
-    "text": "Key Principles\n\nPurpose:\nThe Analysis\n\nasdf\n\nasdf"
+    "text": "Key Principles\n\nPurpose:\n\nANCOVA combines regression and ANOVA approaches\nIncreases power by accounting for continuous covariates\nAllows comparison of adjusted means\n\nThe Analysis\n\nAlways test for homogeneity of slopes first!\nIf slopes are homogeneous, proceed with standard ANCOVA\nIf slopes are heterogeneous, use alternatives (Johnson-Neyman procedure)\n\nInterpretation\n\nFocus on adjusted means (at mean covariate value)\nConsider both statistical and biological significance\nVisualize results clearly with appropriate graphs"
   },
   {
     "objectID": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#assumptions",
     "href": "lectures/lecture_16/16_01_lecture_powerpoint_html.html#assumptions",
-    "title": "Lecture 16 - xxxxxx",
+    "title": "Lecture 16 - ANCOVA",
     "section": "Assumptions",
-    "text": "Assumptions\n\nIndependence of observations\nNormal distribution of residuals\nHomogeneity of variances"
+    "text": "Assumptions\n\nIndependence of observations\nNormal distribution of residuals\nHomogeneity of variances\nLinearity of relationships within groups\nHomogeneity of regression slopes\n\n\\\\"
   },
   {
     "objectID": "lectures/lecture_02/02_01_lecture_powerpoint_slides.html#the-objectives",
