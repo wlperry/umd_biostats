@@ -1,0 +1,42 @@
+execute:
+  freeze: auto
+  cache: true
+  echo: true
+  keep-md: true
+  message: true
+  warning: true
+  fig-height: 4
+  fig-width: 6
+  paged-print: false
+format:
+  html:
+    code-overflow: scroll
+    toc: false
+    embed-resources: true
+    self-contained: true
+    max-width: 80ch
+    css: ../css/activity.css
+    fig-width: 7
+    fig-height: 5
+  docx:
+    docx:
+    default: true
+    toc: false
+    toc-depth: 3
+    number-sections: false
+    highlight-style: github
+    reference-doc: ../ms_templates/custom-reference.docx
+    embed-resources: true
+    fig-width: 5.5      # Smaller figures for better document layout
+    fig-height: 3.5     # Better proportions for printing
+    fig-dpi: 300        # High resolution for crisp printing
+  typst:
+    margin: 
+      x: 0.5in
+      y: 0.5in
+    fig-width: 4
+    fig-height: 4
+    fig-dpi: 300
+    number-sections: false
+    toc: false
+editor: visual

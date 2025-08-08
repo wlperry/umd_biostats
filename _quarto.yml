@@ -1,0 +1,35 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  favicon: favicon.png
+  title: "Bill's Biostats Website"
+  site-url: https://wlperry.github.io/umd_biostats/index.html
+  navbar:
+    left:
+      - text: "Bill's Homepage"
+        href: "https://wlperry.github.io/index.html"
+      - text: "Biostats Homepage"
+        href: "https://wlperry.github.io/web_stats/index.html"
+      - text: "UMD Biostats course"
+        href: https://wlperry.github.io/umd_biostats/
+      - text: "About"
+        href: about.html
+    tools:
+    - icon: github
+      href: https://github.com/wlperry
+  reader-mode: false
+  page-navigation: false
+  back-to-top-navigation: true
+
+format:
+  html:
+    theme: flatly         # You can experiment with other themes (e.g., cosmo, yeti)
+    css: styles.css        # Reference your custom CSS file
+    toc: true              # Enable a table of contents if your pages are long
+    toc-title: "On this page"
+
+
+editor: visual
+

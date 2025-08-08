@@ -1,0 +1,620 @@
+crayfish.id,species,lifestyle,sex,clawside,carapace.length.mm,claw.length,maxclawstr.N,PC1.claw.size
+CC05,c.carinirostris,Stream-dwelling,Female,l,15.62,8.38,0.573363,-4.69
+CC05,c.carinirostris,Stream-dwelling,Female,r,15.62,9.07,0.915369,-4.64
+CC06,c.carinirostris,Stream-dwelling,Male,r,34.02,29.16,15.79263,3.68
+CC06,c.carinirostris,Stream-dwelling,Male,l,34.02,28.34,18.840507,2.51
+CC07,c.carinirostris,Stream-dwelling,Male,l,24,14.63,7.333011,-1.13
+CC07,c.carinirostris,Stream-dwelling,Male,r,24,14.58,9.012864,-1.25
+CC08,c.carinirostris,Stream-dwelling,Male,r,17.21,7.57,3.842538,-1.9
+CC08,c.carinirostris,Stream-dwelling,Male,l,17.21,9.28,10.76313,1.03
+CC09,c.carinirostris,Stream-dwelling,Female,l,35.38,21.95,7.976787,1.77
+CC09,c.carinirostris,Stream-dwelling,Female,r,35.38,25.78,11.698617,1.39
+CC10,c.carinirostris,Stream-dwelling,Male,r,34.16,25.06,9.495696,0.93
+CC10,c.carinirostris,Stream-dwelling,Male,l,34.16,24.68,14.122836,2.01
+CC100,c.carinirostris,Stream-dwelling,Male,l,24.62,15.59,8.610504,-2.41
+CC100,c.carinirostris,Stream-dwelling,Male,r,24.62,15.87,11.86962,-2.17
+CC102,c.carinirostris,Stream-dwelling,Female,r,20.56,12.79,3.510591,-3.4
+CC102,c.carinirostris,Stream-dwelling,Female,l,20.56,12.52,5.93481,-3.12
+CC103,c.carinirostris,Stream-dwelling,Female,l,24.22,13.07,4.667376,-2.88
+CC103,c.carinirostris,Stream-dwelling,Female,r,24.22,14.73,5.160267,-2.39
+CC104,c.carinirostris,Stream-dwelling,Female,r,25.42,17.22,4.908792,-1.58
+CC104,c.carinirostris,Stream-dwelling,Female,l,25.42,16.96,10.572009,-1.72
+CC105,c.carinirostris,Stream-dwelling,Female,l,33.95,19.11,5.170326,-0.951
+CC105,c.carinirostris,Stream-dwelling,Female,r,33.95,22.22,13.247703,0.176
+CC106,c.carinirostris,Stream-dwelling,Female,l,16,9.59,1.066254,-4.55
+CC106,c.carinirostris,Stream-dwelling,Female,r,16,9.49,21.274785,-4.37
+CC107,c.carinirostris,Stream-dwelling,Female,r,30.61,20.81,1.237257,-0.0794
+CC107,c.carinirostris,Stream-dwelling,Female,l,30.61,20.05,4.234839,-0.36
+CC108,c.carinirostris,Stream-dwelling,Female,r,34.81,22.66,10.119354,0.153
+CC108,c.carinirostris,Stream-dwelling,Female,l,34.81,23.97,17.462424,0.393
+CC109,c.carinirostris,Stream-dwelling,Male,r,28.42,18.75,11.779089,-0.926
+CC109,c.carinirostris,Stream-dwelling,Male,l,28.42,18.46,13.650063,-0.961
+CC110,c.carinirostris,Stream-dwelling,Female,l,19.12,10.97,2.565045,-3.72
+CC110,c.carinirostris,Stream-dwelling,Female,r,19.12,11.11,14.857143,-3.78
+CC111,c.carinirostris,Stream-dwelling,Male,r,33.65,21.09,4.32537,1.88
+CC111,c.carinirostris,Stream-dwelling,Male,l,33.65,26.08,12.986169,1.66
+CC112,c.carinirostris,Stream-dwelling,Male,l,38.19,30.7,14.032305,2.11
+CC112,c.carinirostris,Stream-dwelling,Male,r,38.19,31.96,20.671245,2.66
+CC113,c.carinirostris,Stream-dwelling,Female,r,41.3,31.43,17.190831,2.74
+CC113,c.carinirostris,Stream-dwelling,Female,l,41.3,30.22,23.859948,2.82
+CC115,c.carinirostris,Stream-dwelling,Female,l,32.79,21.44,17.381952,0.0993
+CC115,c.carinirostris,Stream-dwelling,Female,r,32.79,21.75,23.900184,-0.12
+CC12,c.carinirostris,Stream-dwelling,Male,l,26.01,14.91,1.740207,-2.19
+CC12,c.carinirostris,Stream-dwelling,Male,r,26.01,16.73,16.49676,-1.86
+CC13,c.carinirostris,Stream-dwelling,Female,l,28.68,17.39,8.308734,-0.511
+CC13,c.carinirostris,Stream-dwelling,Female,r,28.68,18.2,17.925138,-0.941
+CC14,c.carinirostris,Stream-dwelling,Male,l,18.68,10.46,3.057936,-2.59
+CC14,c.carinirostris,Stream-dwelling,Male,r,18.68,10.76,5.793984,-3.14
+CC15,c.carinirostris,Stream-dwelling,Male,l,25.88,16.95,8.399265,-0.776
+CC15,c.carinirostris,Stream-dwelling,Male,r,25.88,15.06,8.680917,-0.658
+CC16,c.carinirostris,Stream-dwelling,Female,r,22.22,10.97,3.037818,-3.43
+CC16,c.carinirostris,Stream-dwelling,Female,l,22.22,14.03,5.371506,-1.99
+CC17,c.carinirostris,Stream-dwelling,Female,r,37.28,28.38,1.659735,4.51
+CC17,c.carinirostris,Stream-dwelling,Female,l,37.28,27.61,16.879002,4.13
+CC18,c.carinirostris,Stream-dwelling,Female,r,31.85,23.19,0.663894,0.492
+CC18,c.carinirostris,Stream-dwelling,Female,l,31.85,22.63,15.541155,1.03
+CC19,c.carinirostris,Stream-dwelling,Female,l,34.59,23.33,16.446465,1.09
+CC19,c.carinirostris,Stream-dwelling,Female,r,34.59,23.15,20.178354,0.482
+CC21,c.carinirostris,Stream-dwelling,Male,l,25.15,14.08,1.217139,-2.48
+CC21,c.carinirostris,Stream-dwelling,Male,r,25.15,17.38,15.702099,-1.49
+CC22,c.carinirostris,Stream-dwelling,Female,l,22.12,13.1,2.363865,-2.46
+CC22,c.carinirostris,Stream-dwelling,Female,r,22.12,12.2,18.096141,-3.56
+CC23,c.carinirostris,Stream-dwelling,Male,l,17.18,9.93,1.458555,-3.57
+CC23,c.carinirostris,Stream-dwelling,Male,r,17.18,9.84,9.495696,-3.94
+CC26,c.carinirostris,Stream-dwelling,Female,r,30.18,21.3,1.50885,0.00167
+CC26,c.carinirostris,Stream-dwelling,Female,l,30.18,21.07,12.453042,0.903
+CC27,c.carinirostris,Stream-dwelling,Female,r,26.69,16.94,1.850856,-1.56
+CC27,c.carinirostris,Stream-dwelling,Female,l,26.69,15.9,2.394042,-1.43
+CC29,c.carinirostris,Stream-dwelling,Female,l,28.06,17.53,10.411065,-0.143
+CC29,c.carinirostris,Stream-dwelling,Female,r,28.06,10.03,13.841184,-3.63
+CC30,c.carinirostris,Stream-dwelling,Female,r,33.96,24.66,4.707612,1.47
+CC30,c.carinirostris,Stream-dwelling,Female,l,33.96,24.19,17.552955,0.788
+CC32,c.carinirostris,Stream-dwelling,Male,r,26.51,17.95,0.352065,-0.843
+CC32,c.carinirostris,Stream-dwelling,Male,l,26.51,17.46,4.576845,-0.788
+CC33,c.carinirostris,Stream-dwelling,Male,l,33.11,18.23,11.406906,2.92
+CC33,c.carinirostris,Stream-dwelling,Male,r,33.11,25.18,13.971951,2.35
+CC34,c.carinirostris,Stream-dwelling,Male,r,31.92,21.33,9.908115,2.45
+CC34,c.carinirostris,Stream-dwelling,Male,l,31.92,24.07,11.758971,2.05
+CC35,c.carinirostris,Stream-dwelling,Male,l,26.21,17.74,9.083277,-0.839
+CC35,c.carinirostris,Stream-dwelling,Male,r,26.21,12.6,11.587968,-2.73
+CC36,c.carinirostris,Stream-dwelling,Female,r,31.26,20.51,6.095754,0.654
+CC36,c.carinirostris,Stream-dwelling,Female,l,31.26,20.59,11.980269,0.696
+CC37,c.carinirostris,Stream-dwelling,Male,l,17.69,10.07,0.452655,-3.14
+CC37,c.carinirostris,Stream-dwelling,Male,r,17.69,10.17,0.865074,-2.17
+CC38,c.carinirostris,Stream-dwelling,Female,l,36,21.67,7.101654,1
+CC38,c.carinirostris,Stream-dwelling,Female,r,36,26.35,11.427024,4.53
+CC39,c.carinirostris,Stream-dwelling,Female,r,16.57,9.8,0.523068,-3.43
+CC39,c.carinirostris,Stream-dwelling,Female,l,16.57,9.44,1.418319,-3.36
+CC40,c.carinirostris,Stream-dwelling,Male,r,35.9,27.41,13.821066,3.44
+CC40,c.carinirostris,Stream-dwelling,Male,l,35.9,28.39,15.008028,3.49
+CC41,c.carinirostris,Stream-dwelling,Female,r,32.98,23.2,1.086372,1.46
+CC41,c.carinirostris,Stream-dwelling,Female,l,32.98,22.72,10.612245,1.98
+CC42,c.carinirostris,Stream-dwelling,Male,l,33.65,23.83,9.515814,3.29
+CC42,c.carinirostris,Stream-dwelling,Male,r,33.65,24.62,16.265403,1.39
+CC43,c.carinirostris,Stream-dwelling,Male,l,31.16,23.35,6.548409,1.37
+CC43,c.carinirostris,Stream-dwelling,Male,r,31.16,23.48,10.139472,0.463
+CC44,c.carinirostris,Stream-dwelling,Female,l,26.7,17.05,7.966728,-0.219
+CC44,c.carinirostris,Stream-dwelling,Female,r,26.7,16.89,8.811684,-0.225
+CC45,c.carinirostris,Stream-dwelling,Male,r,28.8,18.83,8.338911,-0.283
+CC45,c.carinirostris,Stream-dwelling,Male,l,28.8,18.74,9.847761,0.863
+CC47,c.carinirostris,Stream-dwelling,Male,l,30.59,22.75,7.775607,2.36
+CC47,c.carinirostris,Stream-dwelling,Male,r,30.59,23.06,8.560209,0.682
+CC48,c.carinirostris,Stream-dwelling,Female,r,29.36,19.29,9.395106,0.207
+CC48,c.carinirostris,Stream-dwelling,Female,l,29.36,19.28,10.059,0.943
+CC49,c.carinirostris,Stream-dwelling,Male,r,29.62,22.19,8.389206,1.64
+CC49,c.carinirostris,Stream-dwelling,Male,l,29.62,21.57,14.032305,2.39
+CC51,c.carinirostris,Stream-dwelling,Male,l,34.17,24.84,7.866138,3.04
+CC51,c.carinirostris,Stream-dwelling,Male,r,34.17,25.7,10.390947,1.42
+CC52,c.carinirostris,Stream-dwelling,Male,l,NA,21.29,12.714576,1.1
+CC53,c.carinirostris,Stream-dwelling,Female,l,28.92,18.8,6.910533,-0.196
+CC53,c.carinirostris,Stream-dwelling,Female,r,28.92,17.53,16.718058,-0.581
+CC54,c.carinirostris,Stream-dwelling,Male,r,35.31,27.98,9.45546,2.77
+CC54,c.carinirostris,Stream-dwelling,Male,l,35.31,27.71,17.80443,3.19
+CC55,c.carinirostris,Stream-dwelling,Male,l,22.51,14.31,8.389206,-2.32
+CC55,c.carinirostris,Stream-dwelling,Male,r,22.51,14.61,9.998646,-2.27
+CC56,c.carinirostris,Stream-dwelling,Male,l,24.02,15,7.151949,-1.85
+CC57,c.carinirostris,Stream-dwelling,Female,l,18.53,10.97,1.056195,-3.29
+CC57,c.carinirostris,Stream-dwelling,Female,r,18.53,11.12,18.156495,-3.25
+CC58,c.carinirostris,Stream-dwelling,Female,l,20.83,13.31,6.7898250000000004,-2.27
+CC58,c.carinirostris,Stream-dwelling,Female,r,20.83,12.7,8.711094,-2.75
+CC59,c.carinirostris,Stream-dwelling,Male,r,20.28,11.88,1.971564,-3.08
+CC59,c.carinirostris,Stream-dwelling,Male,l,20.28,11.77,3.067995,-2.92
+CC60,c.carinirostris,Stream-dwelling,Male,l,19.71,10.43,1.60944,-3.58
+CC60,c.carinirostris,Stream-dwelling,Male,r,19.71,11.55,2.927169,-3.1
+CC61,c.carinirostris,Stream-dwelling,Male,r,21.12,12.64,2.736048,-2.68
+CC61,c.carinirostris,Stream-dwelling,Male,l,21.12,12.64,4.436019,-2.47
+CC63,c.carinirostris,Stream-dwelling,Male,l,22.31,11.04,0.251475,-3.6
+CC63,c.carinirostris,Stream-dwelling,Male,r,22.31,14.29,4.134249,-2.32
+CC65,c.carinirostris,Stream-dwelling,Female,l,33.26,16.05,1.0059,-2.18
+CC65,c.carinirostris,Stream-dwelling,Female,r,33.26,22.18,4.667376,0.428
+CC66,c.carinirostris,Stream-dwelling,Female,r,25.87,17.28,3.228939,-1.18
+CC66,c.carinirostris,Stream-dwelling,Female,l,25.87,16.93,13.167231,-1.02
+CC67,c.carinirostris,Stream-dwelling,Male,l,19.83,12.14,2.424219,-3.15
+CC67,c.carinirostris,Stream-dwelling,Male,r,19.83,12.25,9.334752,-3.23
+CC69,c.carinirostris,Stream-dwelling,Female,r,28.35,17.52,13.106877,-0.147
+CC69,c.carinirostris,Stream-dwelling,Female,l,28.35,18.3,14.112777,-0.597
+CC71,c.carinirostris,Stream-dwelling,Female,l,15.16,8.44,0.784602,-4.02
+CC71,c.carinirostris,Stream-dwelling,Female,r,15.16,8.62,3.238998,-4.17
+CC72,c.carinirostris,Stream-dwelling,Female,l,29.6,17.09,7.44366,-0.393
+CC72,c.carinirostris,Stream-dwelling,Female,r,29.6,19.72,8.540091,0.13
+CC73,c.carinirostris,Stream-dwelling,Male,r,32.5,26.47,1.10649,2.49
+CC73,c.carinirostris,Stream-dwelling,Male,l,32.5,25.32,21.486024,2.79
+CC74,c.carinirostris,Stream-dwelling,Female,r,29.9,18.43,14.042364,-0.0577
+CC74,c.carinirostris,Stream-dwelling,Female,l,29.9,19.79,15.782571,0.58
+CC75,c.carinirostris,Stream-dwelling,Female,l,19.74,11.77,3.088113,-2.76
+CC75,c.carinirostris,Stream-dwelling,Female,r,19.74,11.72,24.061128,-2.88
+CC76,c.carinirostris,Stream-dwelling,Male,l,31.11,22.29,7.383306,1.57
+CC76,c.carinirostris,Stream-dwelling,Male,r,31.11,22.76,10.36077,1.43
+CC77,c.carinirostris,Stream-dwelling,Male,r,29.18,20.38,3.078054,0.361
+CC77,c.carinirostris,Stream-dwelling,Male,l,29.18,18.95,7.976787,0.123
+CC78,c.carinirostris,Stream-dwelling,Male,l,27.83,17.65,4.82832,-0.737
+CC78,c.carinirostris,Stream-dwelling,Male,r,27.83,18.64,6.0354,-0.528
+CC79,c.carinirostris,Stream-dwelling,Male,l,19.37,11.41,1.015959,-2.87
+CC79,c.carinirostris,Stream-dwelling,Male,r,19.37,11.9,13.629945,-2.77
+CC80,c.carinirostris,Stream-dwelling,Male,r,26.45,15.71,7.926492,-1.17
+CC80,c.carinirostris,Stream-dwelling,Male,l,26.45,18.13,10.048941,-0.85
+CC84,c.carinirostris,Stream-dwelling,Female,r,31.84,22.3,2.373924,0.845
+CC84,c.carinirostris,Stream-dwelling,Female,l,31.84,23.04,21.486024,1.14
+CC85,c.carinirostris,Stream-dwelling,Female,l,28.7,17.5,7.624722,-1.3
+CC86,c.carinirostris,Stream-dwelling,Female,r,22.93,14.81,5.653158,-2.63
+CC86,c.carinirostris,Stream-dwelling,Female,l,22.93,14.39,7.001064,-2.51
+CC87,c.carinirostris,Stream-dwelling,Male,l,21.34,12.99,4.637199,-3.06
+CC87,c.carinirostris,Stream-dwelling,Male,r,21.34,13.31,17.683722,-3.17
+CC88,c.carinirostris,Stream-dwelling,Female,l,27.1,18.82,8.912274,-0.871
+CC88,c.carinirostris,Stream-dwelling,Female,r,27.1,18.9,21.164136,-1.2
+CC89,c.carinirostris,Stream-dwelling,Male,r,35.81,28.43,17.844666,1.83
+CC89,c.carinirostris,Stream-dwelling,Male,l,35.81,27.8,19.091982,1.84
+CC90,c.carinirostris,Stream-dwelling,Female,l,24.47,12.63,1.428378,-3.24
+CC90,c.carinirostris,Stream-dwelling,Female,r,24.47,15.78,6.850179,-2.3
+CC91,c.carinirostris,Stream-dwelling,Male,l,22.55,12.89,6.196344,-2.98
+CC91,c.carinirostris,Stream-dwelling,Male,r,22.55,12.85,6.226521,-3.2
+CC92,c.carinirostris,Stream-dwelling,Female,r,30.26,20.31,6.015282,-0.773
+CC92,c.carinirostris,Stream-dwelling,Female,l,30.26,19.18,9.173808,-0.931
+CC93,c.carinirostris,Stream-dwelling,Female,r,39.26,29.92,21.234549,2.37
+CC93,c.carinirostris,Stream-dwelling,Female,l,39.26,29.54,25.288326,2.29
+CC95,c.carinirostris,Stream-dwelling,Male,r,32.65,23.06,7.564368,-0.34
+CC95,c.carinirostris,Stream-dwelling,Male,l,32.65,23.06,13.408647,-0.184
+CC96,c.carinirostris,Stream-dwelling,Female,l,25.07,14.38,2.001741,-2.5
+CC96,c.carinirostris,Stream-dwelling,Female,r,25.07,15.39,3.359706,-2.22
+CC97,c.carinirostris,Stream-dwelling,Male,l,24.99,15.72,8.932392,-2.16
+CC97,c.carinirostris,Stream-dwelling,Male,r,24.99,15.66,16.355934,-2.04
+CC99,c.carinirostris,Stream-dwelling,Male,l,31.3,19.13,5.039559,-0.97
+CC99,c.carinirostris,Stream-dwelling,Male,r,31.3,20.21,22.874166,-0.665
+CD01,c. dubius,Burrowing,Male,l,25.63,13.23,8.389206,-2.44
+CD01,c. dubius,Burrowing,Male,r,25.63,12,17.120418,-3.43
+CD02,c. dubius,Burrowing,Female,r,38.24,20.42,15.410388,-0.355
+CD02,c. dubius,Burrowing,Female,l,38.24,19.5,17.633427,0.86
+CD03,c. dubius,Burrowing,Female,l,40.17,19.27,10.018764,0.296
+CD03,c. dubius,Burrowing,Female,r,40.17,20.92,10.038882,0.573
+CD04,c. dubius,Burrowing,Female,r,33.74,17.87,10.974369,-1.47
+CD04,c. dubius,Burrowing,Female,l,33.74,17.64,13.408647,-0.449
+CD05,c. dubius,Burrowing,Female,r,29.05,15.4,6.306993,-1.46
+CD05,c. dubius,Burrowing,Female,l,29.05,14.99,8.811684,-1.35
+CD06,c. dubius,Burrowing,Male,r,28.35,15.4,3.963246,-1.53
+CD06,c. dubius,Burrowing,Male,l,28.35,15,13.589709,-1.19
+CD07,c. dubius,Burrowing,Male,l,33.1,18.57,16.124577,-0.723
+CD07,c. dubius,Burrowing,Male,r,33.1,18.8,16.929297,-0.797
+CD08,c. dubius,Burrowing,Male,l,27.65,14.44,11.085018,-1.43
+CD08,c. dubius,Burrowing,Male,r,27.65,15.07,19.464165,-2.34
+CD09,c. dubius,Burrowing,Male,l,24.69,12.51,6.125931,-2.51
+CD09,c. dubius,Burrowing,Male,r,24.69,12.89,13.458942,-2.5
+CD10,c. dubius,Burrowing,Female,l,24.56,12.12,5.582745,-2.4
+CD10,c. dubius,Burrowing,Female,r,24.56,12.49,8.570268,-2.55
+CD11,c. dubius,Burrowing,Male,l,26.28,14.35,8.077377,-1.96
+CD11,c. dubius,Burrowing,Male,r,26.28,13.57,14.142954,-2.65
+CD12,c. dubius,Burrowing,Female,r,40.18,21.62,15.269562,0.0107
+CD12,c. dubius,Burrowing,Female,l,40.18,20.79,25.127382,0.662
+CD13,c. dubius,Burrowing,Male,l,26.61,13.37,9.928233,-1.25
+CD13,c. dubius,Burrowing,Male,r,26.61,13.81,10.129413,-2.44
+CD16,c. dubius,Burrowing,Female,r,38.12,19.43,5.079795,-0.466
+CD16,c. dubius,Burrowing,Female,l,38.12,19.88,18.699681000000002,0.951
+CD17,c. dubius,Burrowing,Female,l,18.63,8.36,1.176903,-2.93
+CD17,c. dubius,Burrowing,Female,r,18.63,8.6,3.963246,-3.6
+CD18,c. dubius,Burrowing,Male,l,28.26,15.33,9.173808,-1.05
+CD18,c. dubius,Burrowing,Male,r,28.26,15.24,21.154077,-1.85
+CD19,c. dubius,Burrowing,Female,r,28.95,14.06,10.109295,0.604
+CD19,c. dubius,Burrowing,Female,l,28.95,14.17,11.256021,0.268
+CD20,c. dubius,Burrowing,Female,r,25.72,12.52,4.52655,-0.291
+CD20,c. dubius,Burrowing,Female,l,25.72,12.51,6.0354,-0.194
+CD21,c. dubius,Burrowing,Female,r,23.01,12.7,0.171003,-0.283
+CD21,c. dubius,Burrowing,Female,l,23.01,12.53,6.7898250000000004,-0.283
+CD22,c. dubius,Burrowing,Male,r,33.91,19.99,11.537673,2.86
+CD22,c. dubius,Burrowing,Male,l,33.91,18.3,17.653545,2.28
+CD23,c. dubius,Burrowing,Female,r,31.92,16.06,1.076313,1.85
+CD23,c. dubius,Burrowing,Female,l,31.92,16.61,14.505078,2.29
+CD24,c. dubius,Burrowing,Female,r,31.93,16.83,10.109295,1.88
+CD24,c. dubius,Burrowing,Female,l,31.93,16.24,14.525196,2.26
+CD25,c. dubius,Burrowing,Female,r,36.18,17.65,12.795048,1.49
+CD25,c. dubius,Burrowing,Female,l,36.18,19.59,16.19499,3.65
+CD26,c. dubius,Burrowing,Male,r,31.04,17.6,7.815843,2.21
+CD26,c. dubius,Burrowing,Male,l,31.04,14.48,14.98791,2.79
+CD27,c. dubius,Burrowing,Female,r,38.25,21.2,5.743689,3.71
+CD27,c. dubius,Burrowing,Female,l,38.25,21.14,20.540478,4.07
+CD28,c. dubius,Burrowing,Female,r,37.32,19.86,14.676081,0.691
+CD28,c. dubius,Burrowing,Female,l,37.32,21.24,18.941097,3.23
+CD29,c. dubius,Burrowing,Female,r,36.37,19.27,13.589709,1.44
+CD29,c. dubius,Burrowing,Female,l,36.37,17.8,15.108618,1.44
+CD30,c. dubius,Burrowing,Female,r,34.43,19.62,11.416965,1.26
+CD30,c. dubius,Burrowing,Female,l,34.43,19.32,17.623368,3.56
+CD31,c. dubius,Burrowing,Male,r,29.36,15.46,4.82832,0.0568
+CD31,c. dubius,Burrowing,Male,l,29.36,15.24,5.079795,0.258
+CD32,c. dubius,Burrowing,Male,r,34.76,19.78,15.18909,1.23
+CD32,c. dubius,Burrowing,Male,l,34.76,19.72,16.215108,2.65
+CD33,c. dubius,Burrowing,Female,l,34.91,17.25,9.344811,2.8
+CD33,c. dubius,Burrowing,Female,r,34.91,18.66,18.669504,1.84
+CD34,c. dubius,Burrowing,Male,l,24.97,12.07,2.786343,-0.608
+CD34,c. dubius,Burrowing,Male,r,24.97,12.28,16.013928,-1.28
+CM01,c.monongalensis,Burrowing,Female,l,23.17,13.19,7.956669,-2.62
+CM01,c.monongalensis,Burrowing,Female,r,23.17,13.29,16.969533,-2.93
+CM02,c.monongalensis,Burrowing,Female,l,22.92,14.41,9.45546,-2.16
+CM02,c.monongalensis,Burrowing,Female,r,22.92,14.08,14.354193,-2.34
+CM03,c.monongalensis,Burrowing,Female,r,34.98,24,7.222362,0.855
+CM03,c.monongalensis,Burrowing,Female,l,34.98,23.94,22.1298,1.33
+CM04,c.monongalensis,Burrowing,Female,l,37.11,23.88,17.039946,0.977
+CM04,c.monongalensis,Burrowing,Female,r,37.11,24.21,19.423929,0.927
+CM05,c.monongalensis,Burrowing,Female,l,28.43,16.36,10.048941,-1.71
+CM05,c.monongalensis,Burrowing,Female,r,28.43,17.89,17.221008,-1.46
+CM06,c.monongalensis,Burrowing,Female,l,18.2,9.72,1.790502,-3.94
+CM06,c.monongalensis,Burrowing,Female,r,18.2,9.98,4.737789,-3.89
+CM07,c.monongalensis,Burrowing,Female,l,22.73,14.15,6.588645,-2.42
+CM07,c.monongalensis,Burrowing,Female,r,22.73,13.85,8.701035,-2.72
+CM08,c.monongalensis,Burrowing,Female,r,27.76,17.84,7.34307,-1.38
+CM08,c.monongalensis,Burrowing,Female,l,27.76,17.63,10.038882,-1.26
+CM09,c.monongalensis,Burrowing,Male,l,27.09,18.28,11.044782,-1.3
+CM09,c.monongalensis,Burrowing,Male,r,27.09,18.22,27.702486,-0.937
+CM10,c.monongalensis,Burrowing,Female,l,35.93,21.42,8.359029,0.177
+CM10,c.monongalensis,Burrowing,Female,r,35.93,23.09,16.255344,1.33
+CM11,c.monongalensis,Burrowing,Male,l,23.92,18.15,2.092272,-0.63
+CM11,c.monongalensis,Burrowing,Male,r,23.92,17,9.324693,-1.1
+CM12,c.monongalensis,Burrowing,Female,l,34.07,13.64,1.368024,-2.89
+CM12,c.monongalensis,Burrowing,Female,r,34.07,22.04,2.182803,0.865
+CM13,c.monongalensis,Burrowing,Female,l,19.86,11.14,1.176903,-3.78
+CM13,c.monongalensis,Burrowing,Female,r,19.86,11.37,4.234839,-3.42
+CM14,c.monongalensis,Burrowing,Female,r,30.86,21.22,12.302157,0.39
+CM14,c.monongalensis,Burrowing,Female,l,30.86,20.72,18.277203,-0.751
+CM15,c.monongalensis,Burrowing,Male,l,29.39,16.68,4.687494,-2.01
+CM15,c.monongalensis,Burrowing,Male,r,29.39,21.41,9.525873,-0.0241
+CM16,c.monongalensis,Burrowing,Female,l,38.37,24.33,19.41387,1.71
+CM16,c.monongalensis,Burrowing,Female,r,38.37,23.77,21.445788,1.22
+CM18,c.monongalensis,Burrowing,Female,r,21.86,12.96,3.440178,-1.96
+CM19,c.monongalensis,Burrowing,Female,l,28.98,15.48,3.892833,1.64
+CM19,c.monongalensis,Burrowing,Female,r,28.98,18.83,19.232808,2.66
+CM22,c.monongalensis,Burrowing,Female,r,31.22,12.72,0.885192,-0.295
+CM22,c.monongalensis,Burrowing,Female,l,31.22,20.71,24.302544,2.56
+CM23,c.monongalensis,Burrowing,Female,r,37.53,23.59,17.392011,0.938
+CM23,c.monongalensis,Burrowing,Female,l,37.53,23.92,18.166554,0.919
+CM24,c.monongalensis,Burrowing,Female,l,35.33,22.98,13.458942,1.05
+CM24,c.monongalensis,Burrowing,Female,r,35.33,22.5,21.32508,0.612
+CM25,c.monongalensis,Burrowing,Female,l,30.8,20.35,10.26018,-0.565
+CM25,c.monongalensis,Burrowing,Female,r,30.8,20.57,23.246349,-0.328
+CM27,c.monongalensis,Burrowing,Male,l,16.82,7.03,0.342006,-5.26
+CM27,c.monongalensis,Burrowing,Male,r,16.82,8.36,7.755489,-4.41
+CM28,c.monongalensis,Burrowing,Female,l,17.36,9.27,2.243157,-4.18
+CM28,c.monongalensis,Burrowing,Female,r,17.36,9.11,13.720476,-4.35
+CM29,c.monongalensis,Burrowing,Female,l,31.7,21.93,18.599091,0.146
+CM29,c.monongalensis,Burrowing,Female,r,31.7,22.12,23.316762,-0.133
+CM30,c.monongalensis,Burrowing,Male,l,17.38,8.55,1.026018,-4.44
+CM30,c.monongalensis,Burrowing,Male,r,17.38,8.77,16.838766,-4.35
+CM32,c.monongalensis,Burrowing,Male,r,21.66,12.83,1.780443,-2.94
+CM32,c.monongalensis,Burrowing,Male,l,21.66,12.68,4.003482,-2.99
+CM33,c.monongalensis,Burrowing,Male,l,26.77,17.98,13.126995,-0.97
+CM33,c.monongalensis,Burrowing,Male,r,26.77,18.04,19.534578,-0.972
+CM34,c.monongalensis,Burrowing,Male,l,26.96,18.38,13.78083,-0.745
+CM34,c.monongalensis,Burrowing,Male,r,26.96,15.8,16.406229,-1.79
+CM35,c.monongalensis,Burrowing,Female,l,33.32,17.09,1.247316,-1.47
+CM35,c.monongalensis,Burrowing,Female,r,33.32,16.98,19.383693,-1.27
+CM36,c.monongalensis,Burrowing,Female,r,35.08,23.89,1.347906,1.06
+CM36,c.monongalensis,Burrowing,Female,l,35.08,22.6,13.861302,0.264
+CM37,c.monongalensis,Burrowing,Male,r,28.95,17.81,1.549086,-1.68
+CM37,c.monongalensis,Burrowing,Male,l,28.95,20.75,11.889738,0.0526
+CM38,c.monongalensis,Burrowing,Male,l,19.29,10.68,3.0177,-3.41
+CM38,c.monongalensis,Burrowing,Male,r,19.29,10,22.320921,-3.49
+CM39,c.monongalensis,Burrowing,Male,r,25.34,15.26,1.166844,-1.54
+CM39,c.monongalensis,Burrowing,Male,l,25.34,15.4,14.072541,-1.59
+CM40,c.monongalensis,Burrowing,Male,r,23.94,15.04,1.730148,-1.84
+CM40,c.monongalensis,Burrowing,Male,l,23.94,14.48,12.191508,-1.77
+CM41,c.monongalensis,Burrowing,Male,r,27.38,20.3,3.088113,-0.143
+CM41,c.monongalensis,Burrowing,Male,l,27.38,19.75,16.959474,-0.164
+CR01,c.robustus,Stream-dwelling,Female,r,45.26,33.11,15.571332,4.47
+CR01,c.robustus,Stream-dwelling,Female,l,45.26,32.95,18.900861,4.44
+CR02,c.robustus,Stream-dwelling,Female,r,50.93,39.5,7.624722,7.75
+CR02,c.robustus,Stream-dwelling,Female,l,50.93,38.85,16.99971,5.41
+CR03,c.robustus,Stream-dwelling,Male,r,36.17,26.65,0.814779,2.54
+CR03,c.robustus,Stream-dwelling,Male,l,36.17,25.85,10.833543,2.01
+CR04,c.robustus,Stream-dwelling,Male,l,44.81,42.18,21.687204,5.58
+CR04,c.robustus,Stream-dwelling,Male,r,44.81,44.8,25.610214,6.3
+CR05,c.robustus,Stream-dwelling,Male,r,32.84,24.85,8.892156,0.659
+CR05,c.robustus,Stream-dwelling,Male,l,32.84,23.62,9.002805,1.23
+CR06,c.robustus,Stream-dwelling,Male,r,29.98,18.89,1.30767,-0.522
+CR06,c.robustus,Stream-dwelling,Male,l,29.98,18.01,6.196344,-0.716
+CR07,c.robustus,Stream-dwelling,Female,l,26.79,16.8,4.858497,-0.422
+CR07,c.robustus,Stream-dwelling,Female,r,26.79,16.63,13.338234,-1.3
+CR08,c.robustus,Stream-dwelling,Male,r,39.77,31.44,9.063159,3.51
+CR08,c.robustus,Stream-dwelling,Male,l,39.77,30.68,19.081923,4.42
+CR09,c.robustus,Stream-dwelling,Male,l,30.89,20.9,11.105136,0.55
+CR09,c.robustus,Stream-dwelling,Male,r,30.89,20.35,13.760712,-0.307
+CR10,c.robustus,Stream-dwelling,Male,l,37.78,28.11,14.676081,2.56
+CR10,c.robustus,Stream-dwelling,Male,r,37.78,28.63,18.558855,2.07
+CR11,c.robustus,Stream-dwelling,Female,r,36.2,25.19,7.765548,2.57
+CR11,c.robustus,Stream-dwelling,Female,l,36.2,25.1,8.057259,1.34
+CR13,c.robustus,Stream-dwelling,Female,r,34.83,23.34,11.145372,1.61
+CR13,c.robustus,Stream-dwelling,Female,l,34.83,23.08,12.734694,1.7
+CR14,c.robustus,Stream-dwelling,Male,l,35.85,23.34,10.471419,1.04
+CR14,c.robustus,Stream-dwelling,Male,r,35.85,25.01,27.541542,0.985
+CR15,c.robustus,Stream-dwelling,Female,r,37.34,26.61,9.264339,2.75
+CR15,c.robustus,Stream-dwelling,Female,l,37.34,26.4,18.548796,1.69
+CR16,c.robustus,Stream-dwelling,Female,r,43.53,32.66,10.46136,5.04
+CR16,c.robustus,Stream-dwelling,Female,l,43.53,31.38,15.903279,5.25
+CR17,c.robustus,Stream-dwelling,Female,r,43.15,31.85,7.654899,3.6
+CR17,c.robustus,Stream-dwelling,Female,l,43.15,30.78,25.911984,6.13
+CR18,c.robustus,Stream-dwelling,Female,l,32.16,19.62,5.814102,-0.313
+CR18,c.robustus,Stream-dwelling,Female,r,32.16,21.79,20.671245,2.22
+CR19,c.robustus,Stream-dwelling,Female,l,35.19,21.09,6.880356,1.89
+CR19,c.robustus,Stream-dwelling,Female,r,35.19,22.17,11.789148,2.43
+CR20,c.robustus,Stream-dwelling,Female,l,36.44,24.5,15.118677,2.23
+CR20,c.robustus,Stream-dwelling,Female,r,36.44,25.26,16.69794,2.64
+CR21,c.robustus,Stream-dwelling,Male,r,36.45,27.25,9.908115,2.84
+CR21,c.robustus,Stream-dwelling,Male,l,36.45,26.25,15.99381,3.04
+CR22,c.robustus,Stream-dwelling,Female,r,41.24,29.39,13.841184,3.57
+CR22,c.robustus,Stream-dwelling,Female,l,41.24,29.56,19.806171,4.51
+CR23,c.robustus,Stream-dwelling,Female,l,33.75,22.05,11.598027,1
+CR23,c.robustus,Stream-dwelling,Female,r,33.75,22.48,18.347616,1.36
+CR24,c.robustus,Stream-dwelling,Female,l,33.97,22.29,9.435342,1.33
+CR24,c.robustus,Stream-dwelling,Female,r,33.97,20.97,12.654222,1.82
+CR25,c.robustus,Stream-dwelling,Male,l,19.92,11.07,2.021859,-3.55
+CR25,c.robustus,Stream-dwelling,Male,r,19.92,11.91,20.540478,-3.57
+CR26,c.robustus,Stream-dwelling,Male,r,41.99,31.73,14.102718,2.76
+CR26,c.robustus,Stream-dwelling,Male,l,41.99,32.6,17.392011,3.36
+CR27,c.robustus,Stream-dwelling,Female,l,16.97,9.04,0.50295,-4.69
+CR27,c.robustus,Stream-dwelling,Female,r,16.97,9.8,35.970984,-4.54
+CR28,c.robustus,Stream-dwelling,Male,l,41.97,31.93,15.39027,3.38
+CR28,c.robustus,Stream-dwelling,Male,r,41.97,33.08,15.621627,3.75
+CR29,c.robustus,Stream-dwelling,Male,r,37.83,29.98,14.877261,1.8
+CR29,c.robustus,Stream-dwelling,Male,l,37.83,29.08,18.599091,1.99
+CR30,c.robustus,Stream-dwelling,Male,l,27.66,16.82,8.882097,-1.82
+CR30,c.robustus,Stream-dwelling,Male,r,27.66,17.1,15.59145,-1.53
+CR31,c.robustus,Stream-dwelling,Male,l,38.29,26.89,16.315698,1.89
+CR31,c.robustus,Stream-dwelling,Male,r,38.29,27.23,17.593191,1.39
+CR32,c.robustus,Stream-dwelling,Male,l,39.29,31.66,17.070123,2.54
+CR32,c.robustus,Stream-dwelling,Male,r,39.29,32.61,20.389593,2.3
+CR34,c.robustus,Stream-dwelling,Male,r,42.7,34.72,12.0708,4.03
+CR34,c.robustus,Stream-dwelling,Male,l,42.7,32.92,23.53806,3.93
+CR35,c.robustus,Stream-dwelling,Male,r,29.38,18.49,3.359706,-1.82
+CR35,c.robustus,Stream-dwelling,Male,l,29.38,18.47,8.711094,-1.02
+CR36,c.robustus,Stream-dwelling,Female,r,40.29,30.26,1.60944,2.15
+CR36,c.robustus,Stream-dwelling,Female,l,40.29,29.37,19.695522,2.35
+CR37,c.robustus,Stream-dwelling,Female,r,46.58,37.94,19.765935,4.84
+CR37,c.robustus,Stream-dwelling,Female,l,46.58,38.11,23.809653,6.12
+CR38,c.robustus,Stream-dwelling,Female,r,39.12,26.83,0.975723,1.24
+CR38,c.robustus,Stream-dwelling,Female,l,39.12,27.54,25.338621,2.31
+CR39,c.robustus,Stream-dwelling,Female,l,40.5,26.61,14.947674,1.73
+CR39,c.robustus,Stream-dwelling,Female,r,40.5,27.43,18.116259,1.79
+CR40,c.robustus,Stream-dwelling,Female,l,16.34,10.07,0.824838,-4.49
+CR40,c.robustus,Stream-dwelling,Female,r,16.34,10.26,13.197408,-4.43
+CR41,c.robustus,Stream-dwelling,Female,r,38.37,27.87,9.898056,2.2
+CR41,c.robustus,Stream-dwelling,Female,l,38.37,27.34,19.564755,2.28
+CR42,c.robustus,Stream-dwelling,Male,r,43.14,33.14,17.432247,4.22
+CR42,c.robustus,Stream-dwelling,Male,l,43.14,32.47,21.194313,4.58
+CR43,c.robustus,Stream-dwelling,Male,l,21.75,13.15,3.480414,-2.76
+CR43,c.robustus,Stream-dwelling,Male,r,21.75,13.22,12.0708,-2.73
+CR45,c.robustus,Stream-dwelling,Male,l,37.59,23.16,4.094013,0.0169
+CR45,c.robustus,Stream-dwelling,Male,r,37.59,28.42,22.391334,2.26
+CR46,c.robustus,Stream-dwelling,Male,r,38.06,28.21,5.220621,2.96
+CR46,c.robustus,Stream-dwelling,Male,l,38.06,24.04,7.795725,0.661
+CR47,c.robustus,Stream-dwelling,Female,l,43.43,33.02,24.634491,4.79
+CR47,c.robustus,Stream-dwelling,Female,r,43.43,33.97,24.64455,4.25
+CR48,c.robustus,Stream-dwelling,Female,l,33.96,23.29,16.536996,1.18
+CR48,c.robustus,Stream-dwelling,Female,r,33.96,23.65,29.945643,1.16
+CR49,c.robustus,Stream-dwelling,Male,r,41.73,38.52,15.279621,4.9
+CR49,c.robustus,Stream-dwelling,Male,l,41.73,37.47,25.600155,4.61
+CR50,c.robustus,Stream-dwelling,Female,l,37.97,25.96,20.097882,1.24
+CR50,c.robustus,Stream-dwelling,Female,r,37.97,26.21,22.713222,1.36
+CR51,c.robustus,Stream-dwelling,Female,r,21.79,13.15,1.156785,-2.81
+CR51,c.robustus,Stream-dwelling,Female,l,21.79,13.19,6.457878,-2.69
+CR52,c.robustus,Stream-dwelling,Female,l,29.27,19.43,6.980946,-0.897
+CR52,c.robustus,Stream-dwelling,Female,r,29.27,19.88,16.265403,-0.993
+CR53,c.robustus,Stream-dwelling,Male,l,25.6,16.52,7.574427,-2.21
+CR53,c.robustus,Stream-dwelling,Male,r,25.6,14.34,12.87552,-3.15
+CR54,c.robustus,Stream-dwelling,Female,l,17.49,9.85,1.076313,-4.1
+CR54,c.robustus,Stream-dwelling,Female,r,17.49,10.63,3.399942,-3.95
+CR55,c.robustus,Stream-dwelling,Female,l,22.78,13.15,1.227198,-2.46
+CR55,c.robustus,Stream-dwelling,Female,r,22.78,13.64,14.022246,-2.44
+CR56,c.robustus,Stream-dwelling,Female,l,37.66,27.18,17.915079,1.93
+CR56,c.robustus,Stream-dwelling,Female,r,37.66,27.85,20.299062,2.1
+CR57,c.robustus,Stream-dwelling,Male,l,28.24,17.6,12.241803,-1.12
+CR57,c.robustus,Stream-dwelling,Male,r,28.24,17.51,22.83393,-1.66
+CR58,c.robustus,Stream-dwelling,Female,r,38.27,27.12,16.929297,2.89
+CR58,c.robustus,Stream-dwelling,Female,l,38.27,26.56,24.674727,3.11
+CR59,c.robustus,Stream-dwelling,Male,l,25.22,17.06,8.892156,-1.27
+CR59,c.robustus,Stream-dwelling,Male,r,25.22,16.88,25.499565,-1.31
+CR60,c.robustus,Stream-dwelling,Male,r,39.17,31.38,16.506819,4.17
+CR60,c.robustus,Stream-dwelling,Male,l,39.17,31.13,24.222072,4.29
+CR61,c.robustus,Stream-dwelling,Male,l,21.61,13.89,2.474514,-2.66
+CR61,c.robustus,Stream-dwelling,Male,r,21.61,13.91,6.850179,-2.71
+CR62,c.robustus,Stream-dwelling,Male,r,35.75,25.91,10.219944,1.84
+CR62,c.robustus,Stream-dwelling,Male,l,35.75,25.2,15.470742,1.77
+FO02,f. obscurus,Stream-dwelling,Male,l,21.22,10.92,1.116549,-3.72
+FO02,f. obscurus,Stream-dwelling,Male,r,21.22,10.67,2.172744,-3.82
+FO03,f. obscurus,Stream-dwelling,Male,r,26.51,16.18,1.649676,-1.48
+FO03,f. obscurus,Stream-dwelling,Male,l,26.51,15.44,4.456137,-1.9
+FO04,f. obscurus,Stream-dwelling,Male,r,25.52,13.83,1.277493,-2.86
+FO04,f. obscurus,Stream-dwelling,Male,l,25.52,14.47,3.349647,-2.14
+FO06,f. obscurus,Stream-dwelling,Male,l,25.82,17.26,2.001741,-1.63
+FO06,f. obscurus,Stream-dwelling,Male,r,25.82,14.57,8.14779,-3.32
+FO07,f. obscurus,Stream-dwelling,Male,l,26.42,17.01,8.107554,-2.15
+FO07,f. obscurus,Stream-dwelling,Male,r,26.42,17.51,27.682368,-1.75
+FO08,f. obscurus,Stream-dwelling,Female,l,23.18,11.77,0.452655,-2.98
+FO08,f. obscurus,Stream-dwelling,Female,r,23.18,11.82,9.002805,-2.22
+FO09,f. obscurus,Stream-dwelling,Female,l,23.78,13.62,5.683335,-2.31
+FO09,f. obscurus,Stream-dwelling,Female,r,23.78,13.81,21.395493,-2.2
+FO10,f. obscurus,Stream-dwelling,Male,r,30.07,21.47,3.349647,-0.373
+FO10,f. obscurus,Stream-dwelling,Male,l,30.07,23.38,10.883838,-0.136
+FO11,f. obscurus,Stream-dwelling,Female,l,22.67,13.61,7.071477,-2.22
+FO11,f. obscurus,Stream-dwelling,Female,r,22.67,13.89,25.610214,-2.31
+FO12,f. obscurus,Stream-dwelling,Male,r,30.38,21.18,1.790502,-0.0918
+FO12,f. obscurus,Stream-dwelling,Male,l,30.38,21.74,9.183867,0.26
+FO13,f. obscurus,Stream-dwelling,Female,l,20.09,11.38,4.003482,-2.93
+FO13,f. obscurus,Stream-dwelling,Female,r,20.09,11.5,5.482155,-2.88
+FO14,f. obscurus,Stream-dwelling,Male,r,31.97,22.64,1.40826,-0.0899
+FO14,f. obscurus,Stream-dwelling,Male,l,31.97,21.83,9.566109,0.233
+FO15,f. obscurus,Stream-dwelling,Male,r,29.51,20.27,8.067318,-0.875
+FO15,f. obscurus,Stream-dwelling,Male,l,29.51,19.98,10.46136,-0.287
+FO16,f. obscurus,Stream-dwelling,Female,r,20.3,11.62,0.774543,-3.24
+FO16,f. obscurus,Stream-dwelling,Female,l,20.3,11.65,4.989264,-3.13
+FO17,f. obscurus,Stream-dwelling,Male,l,27.7,18.63,7.835961,-0.848
+FO17,f. obscurus,Stream-dwelling,Male,r,27.7,18.48,9.193926,-0.82
+FO18,f. obscurus,Stream-dwelling,Female,l,22.4,11.02,0.794661,-3.45
+FO18,f. obscurus,Stream-dwelling,Female,r,22.4,11.26,1.015959,-3.49
+FO19,f. obscurus,Stream-dwelling,Male,r,30.75,22.26,6.669117,-0.0609
+FO19,f. obscurus,Stream-dwelling,Male,l,30.75,21.95,9.123513,0.495
+FO22,f. obscurus,Stream-dwelling,Female,l,24.04,14.68,9.264339,-2.14
+FO22,f. obscurus,Stream-dwelling,Female,r,24.04,12.35,11.225844,-2.9
+FO24,f. obscurus,Stream-dwelling,Male,l,22.29,11.69,0.885192,-3.47
+FO24,f. obscurus,Stream-dwelling,Male,r,22.29,11.75,7.755489,-3.3
+FO26,f. obscurus,Stream-dwelling,Male,l,40.53,29.44,5.763807,1.72
+FO26,f. obscurus,Stream-dwelling,Male,r,40.53,35.29,8.861979,2.83
+FO29,f. obscurus,Stream-dwelling,Female,l,26.71,14.74,2.796402,-1.7
+FO29,f. obscurus,Stream-dwelling,Female,r,26.71,18.24,3.72183,-0.631
+FO30,f. obscurus,Stream-dwelling,Male,l,41.74,18.4,3.681594,-1.3
+FO30,f. obscurus,Stream-dwelling,Male,r,41.74,29.99,11.024664,2.7
+FO31,f. obscurus,Stream-dwelling,Male,l,33.06,18.95,2.31357,-1.32
+FO31,f. obscurus,Stream-dwelling,Male,r,33.06,30.77,10.46136,2.26
+FO32,f. obscurus,Stream-dwelling,Female,r,29.78,21.36,6.860238,0.174
+FO32,f. obscurus,Stream-dwelling,Female,l,29.78,20.62,13.126995,0.123
+FO33,f. obscurus,Stream-dwelling,Female,r,38.02,28.18,8.027082,2.77
+FO33,f. obscurus,Stream-dwelling,Female,l,38.02,27.7,18.337557,2.83
+FO34,f. obscurus,Stream-dwelling,Female,r,28.79,19.35,1.0059,-0.561
+FO34,f. obscurus,Stream-dwelling,Female,l,28.79,18.67,9.324693,-0.765
+FO36,f. obscurus,Stream-dwelling,Female,l,16.19,9.01,0.613599,-4.47
+FO36,f. obscurus,Stream-dwelling,Female,r,16.19,8.26,8.781507,-4.61
+FO37,f. obscurus,Stream-dwelling,Female,r,28.67,18.6,2.394042,-0.668
+FO37,f. obscurus,Stream-dwelling,Female,l,28.67,18.29,13.629945,-0.649
+FO38,f. obscurus,Stream-dwelling,Male,r,34.23,32.2,1.146726,3.14
+FO38,f. obscurus,Stream-dwelling,Male,l,34.23,31.21,12.141213,3.41
+FO39,f. obscurus,Stream-dwelling,Male,r,33.57,30.74,7.906374,2.83
+FO39,f. obscurus,Stream-dwelling,Male,l,33.57,31.11,12.724635,3.48
+FO40,f. obscurus,Stream-dwelling,Male,r,34.54,32.4,5.793984,3.07
+FO40,f. obscurus,Stream-dwelling,Male,l,34.54,32.78,13.800948,3.39
+FO41,f. obscurus,Stream-dwelling,Male,r,29.72,24.41,14.746494,0.447
+FO41,f. obscurus,Stream-dwelling,Male,l,29.72,23.88,16.667763,0.496
+FO42,f. obscurus,Stream-dwelling,Female,l,27.9,16.25,6.980946,-1.36
+FO42,f. obscurus,Stream-dwelling,Female,r,27.9,18.05,11.839443,-1.11
+FO43,f. obscurus,Stream-dwelling,Male,l,27.36,18.62,6.53835,-1.15
+FO43,f. obscurus,Stream-dwelling,Male,r,27.36,20.72,9.606345,-0.543
+FO44,f. obscurus,Stream-dwelling,Male,l,32.88,28.04,6.528291,2.42
+FO44,f. obscurus,Stream-dwelling,Male,r,32.88,29.15,21.898443,2.18
+FO45,f. obscurus,Stream-dwelling,Female,l,28.27,14.59,1.116549,-1.67
+FO45,f. obscurus,Stream-dwelling,Female,r,28.27,15.14,6.196344,-1.86
+FO46,f. obscurus,Stream-dwelling,Female,r,27.76,18.19,0.684012,-0.81
+FO46,f. obscurus,Stream-dwelling,Female,l,27.76,17.58,6.085695,-0.647
+FO48,f. obscurus,Stream-dwelling,Female,r,34.08,24.44,14.414547,1.46
+FO48,f. obscurus,Stream-dwelling,Female,l,34.08,23.81,17.271303,1.37
+FO49,f. obscurus,Stream-dwelling,Male,r,29.69,23.03,11.024664,0.528
+FO49,f. obscurus,Stream-dwelling,Male,l,29.69,22.21,14.927556,0.54
+FO50,f. obscurus,Stream-dwelling,Male,r,32.65,31.03,13.529355,2.72
+FO50,f. obscurus,Stream-dwelling,Male,l,32.65,30.35,16.979592,2.73
+FO53,f. obscurus,Stream-dwelling,Female,r,34.83,25.15,13.086759,4.67
+FO53,f. obscurus,Stream-dwelling,Female,l,34.83,24.73,20.208531,1.87
+FO55,f. obscurus,Stream-dwelling,Male,r,32.11,31.14,14.112777,3.2
+FO55,f. obscurus,Stream-dwelling,Male,l,32.11,30.4,14.364252,3.15
+FO56,f. obscurus,Stream-dwelling,Male,l,33.39,31.22,9.867879,3.27
+FO56,f. obscurus,Stream-dwelling,Male,r,33.39,33.43,17.120418,3.74
+FO57,f. obscurus,Stream-dwelling,Male,r,36.68,37.75,2.062095,3.72
+FO57,f. obscurus,Stream-dwelling,Male,l,36.68,36.85,20.480124,3.79
+FO58,f. obscurus,Stream-dwelling,Male,r,37.37,26.63,8.771448,0.96
+FO58,f. obscurus,Stream-dwelling,Male,l,37.37,35.63,18.900861,4.87
+FO59,f. obscurus,Stream-dwelling,Female,l,35,21.01,9.0531,0.309
+FO59,f. obscurus,Stream-dwelling,Female,r,35,21.07,12.865461,0.143
+FO60,f. obscurus,Stream-dwelling,Male,l,28.08,23.79,10.401006,0.657
+FO60,f. obscurus,Stream-dwelling,Male,r,28.08,24.26,11.276139,0.55
+FO61,f. obscurus,Stream-dwelling,Male,l,29.76,23.1,11.235903,0.0753
+FO61,f. obscurus,Stream-dwelling,Male,r,29.76,24.28,15.329916,0.519
+FO62,f. obscurus,Stream-dwelling,Female,l,33.63,23.08,12.040623,0.452
+FO62,f. obscurus,Stream-dwelling,Female,r,33.63,23.6,19.51446,0.356
+FO63,f. obscurus,Stream-dwelling,Female,l,30.94,19.29,9.304575,-0.676
+FO63,f. obscurus,Stream-dwelling,Female,r,30.94,19.63,16.114518,-0.797
+FO64,f. obscurus,Stream-dwelling,Male,l,32,29.77,14.746494,1.98
+FO64,f. obscurus,Stream-dwelling,Male,r,32,27.72,16.748235,0.596
+FO65,f. obscurus,Stream-dwelling,Male,r,37.15,36.25,15.460683,4.7
+FO65,f. obscurus,Stream-dwelling,Male,l,37.15,35.72,16.506819,4.65
+FO66,f. obscurus,Stream-dwelling,Female,r,34.41,31.78,14.957733,2.75
+FO66,f. obscurus,Stream-dwelling,Female,l,34.41,30.73,16.778412,3
+FO67,f. obscurus,Stream-dwelling,Male,r,33.28,28.92,13.539414,2.8
+FO67,f. obscurus,Stream-dwelling,Male,l,33.28,28.39,20.178354,2.69
+FO68,f. obscurus,Stream-dwelling,Male,r,33.53,30.14,3.892833,2.71
+FO68,f. obscurus,Stream-dwelling,Male,l,33.53,28.66,12.362511,2.22
+FO69,f. obscurus,Stream-dwelling,Female,r,28.32,17.89,8.24838,-1.2
+FO69,f. obscurus,Stream-dwelling,Female,l,28.32,17.63,10.411065,-0.975
+FO71,f. obscurus,Stream-dwelling,Female,l,27.73,17.22,9.566109,-0.877
+FO71,f. obscurus,Stream-dwelling,Female,r,27.73,17.2,15.943515,-1.17
+FO72,f. obscurus,Stream-dwelling,Female,l,37.93,25.67,13.096818,1.8
+FO72,f. obscurus,Stream-dwelling,Female,r,37.93,25.35,18.70974,1.21
+FO73,f. obscurus,Stream-dwelling,Female,r,29.24,18.2,6.0354,-0.53
+FO73,f. obscurus,Stream-dwelling,Female,l,29.24,17.63,11.577909,-0.59
+FO74,f. obscurus,Stream-dwelling,Male,l,17,9.01,1.036077,-4.26
+FO74,f. obscurus,Stream-dwelling,Male,r,17,9.61,10.491537,-4.29
+FO76,f. obscurus,Stream-dwelling,Male,r,34.34,34.38,13.489119,3.54
+FO76,f. obscurus,Stream-dwelling,Male,l,34.34,34.57,14.102718,3.82
+FO77,f. obscurus,Stream-dwelling,Male,l,37.37,36.46,13.921656,4.58
+FO77,f. obscurus,Stream-dwelling,Male,r,37.37,37.92,18.548796,4.59
+FO78,f. obscurus,Stream-dwelling,Female,r,34.27,24.53,12.080859,1.13
+FO78,f. obscurus,Stream-dwelling,Female,l,34.27,22.5,17.784312,1.26
+FO79,f. obscurus,Stream-dwelling,Female,r,33.19,24.72,17.271303,1.42
+FO79,f. obscurus,Stream-dwelling,Female,l,33.19,24.11,19.132218,1.48
+FO80,f. obscurus,Stream-dwelling,Male,l,26.07,20.65,7.956669,-0.614
+FO81,f. obscurus,Stream-dwelling,Female,l,29.32,16.56,9.727053,-1.49
+FO81,f. obscurus,Stream-dwelling,Female,r,29.32,17.2,11.698617,-1.29
+FO82,f. obscurus,Stream-dwelling,Male,r,36.08,36.29,9.706935,3.91
+FO82,f. obscurus,Stream-dwelling,Male,l,36.08,35.08,16.29558,3.99
+FO83,f. obscurus,Stream-dwelling,Female,r,35.48,25.9,13.971951,1.56
+FO83,f. obscurus,Stream-dwelling,Female,l,35.48,25.59,14.374311,1.68
+FO85,f. obscurus,Stream-dwelling,Male,l,26.7,20.6,3.601122,-0.51
+FO85,f. obscurus,Stream-dwelling,Male,r,26.7,18.99,14.474901,-1.28
+LT01,l. thomai,Burrowing,Male,r,38.19,26.55,0.90531,2.65
+LT01,l. thomai,Burrowing,Male,l,38.19,27.31,18.629268,2.16
+LT03,l. thomai,Burrowing,Male,l,30.03,15.57,3.581004,-1.49
+LT03,l. thomai,Burrowing,Male,r,30.03,17.36,16.919238,-0.979
+LT05,l. thomai,Burrowing,Male,l,18.08,8.98,0.623658,-4.39
+LT05,l. thomai,Burrowing,Male,r,18.08,9.18,12.302157,-4.66
+LT06,l. thomai,Burrowing,Female,l,34.13,20.21,10.109295,-0.00207
+LT06,l. thomai,Burrowing,Female,r,34.13,20.85,13.700358,-0.469
+LT07,l. thomai,Burrowing,Female,r,33.25,19.81,14.122836,0.262
+LT07,l. thomai,Burrowing,Female,l,33.25,21.41,15.329916,0.298
+LT08,l. thomai,Burrowing,Male,l,31.63,21.762,8.721153,-0.0977
+LT08,l. thomai,Burrowing,Male,r,31.63,21.47,22.582455,0.0319
+LT09,l. thomai,Burrowing,Female,r,40.7,27.11,7.312893,2.8
+LT09,l. thomai,Burrowing,Female,l,40.7,17.43,8.34897,1.05
+LT10,l. thomai,Burrowing,Female,l,36.5,14.53,6.870297,-0.0835
+LT10,l. thomai,Burrowing,Female,r,36.5,21.9,9.244221,1.27
+LT12,l. thomai,Burrowing,Female,l,39.59,21.63,7.755489,0.647
+LT12,l. thomai,Burrowing,Female,r,39.59,16.71,18.126318,-1.99
+LT13,l. thomai,Burrowing,Female,l,35.28,21.39,7.504014,0.212
+LT13,l. thomai,Burrowing,Female,r,35.28,23.08,20.007351,0.883
+LT14,l. thomai,Burrowing,Female,r,36.35,23.34,2.202921,2
+LT14,l. thomai,Burrowing,Female,l,36.35,23.16,18.558855,1.9
+LT15,l. thomai,Burrowing,Female,r,37.06,24.74,16.547055,1.76
+LT15,l. thomai,Burrowing,Female,l,37.06,22.99,24.04101,1.69
+LT16,l. thomai,Burrowing,Female,r,46.42,30.5,8.027082,3.84
+LT16,l. thomai,Burrowing,Female,l,46.42,30.1,39.521811,3.98
+LT17,l. thomai,Burrowing,Male,r,37.58,25.9,1.20708,2.58
+LT17,l. thomai,Burrowing,Male,l,37.58,25.74,24.564078,2.39
+LT18,l. thomai,Burrowing,Female,l,29.16,17.94,11.477319,-0.597
+LT18,l. thomai,Burrowing,Female,r,29.16,18.89,12.191508,-0.238
+LT19,l. thomai,Burrowing,Female,l,34.68,17.18,7.514073,-0.912
+LT19,l. thomai,Burrowing,Female,r,34.68,22.74,9.998646,1.53
+LT20,l. thomai,Burrowing,Female,r,34.75,21.69,13.529355,1.09
+LT20,l. thomai,Burrowing,Female,l,34.75,22.62,30.348003,0.847
+LT22,l. thomai,Burrowing,Female,l,36.5,23.64,20.379534,1.19
+LT22,l. thomai,Burrowing,Female,r,36.5,24.3,22.672986,1.04
+LT23,l. thomai,Burrowing,Female,r,42.06,27.94,11.386788,2.6
+LT23,l. thomai,Burrowing,Female,l,42.06,28.18,32.309508,3.01
+LT24,l. thomai,Burrowing,Female,l,35.98,10.91,2.072154,-2.84
+LT24,l. thomai,Burrowing,Female,r,35.98,13.62,9.65664,-2.91
+LT25,l. thomai,Burrowing,Male,l,22.01,8.46,0.271593,-4.24
+LT25,l. thomai,Burrowing,Male,r,22.01,12.59,3.641358,-2.76
+LT26,l. thomai,Burrowing,Female,l,21.12,9.13,0.633717,-4.18
+LT26,l. thomai,Burrowing,Female,r,21.12,10.74,14.122836,-3.09
+LT27,l. thomai,Burrowing,Male,l,26.61,17.03,6.317052,-1.09
+LT27,l. thomai,Burrowing,Male,r,26.61,16.93,18.186672,-1.29
+LT28,l. thomai,Burrowing,Male,l,28.53,17.62,10.753071,-0.598
+LT28,l. thomai,Burrowing,Male,r,28.53,17.73,22.019151,-0.727

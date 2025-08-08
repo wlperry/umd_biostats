@@ -1,0 +1,457 @@
+---
+title: "Lecture 10 - Class Activity: Multiple Regression"
+author: "Your Name"
+execute:
+  freeze: auto
+  cache: true
+  echo: true
+  keep-md: true
+  message: true
+  warning: true
+  fig-height: 4
+  fig-width: 6
+  paged-print: false
+format:
+  html:
+    output-file: "10_02_class_activity.html"
+    default: true
+    embed-resources: true
+    self-contained: true
+    max-width: 80ch  # Limits line length to approximately 80 characters
+    css: ../../css/activity.css
+  docx:
+    default: true
+    toc: false
+    toc-depth: 3
+    fig-width: 5.5      # Smaller figures for better document layout
+    fig-height: 3.5     # Better proportions for printing
+    fig-dpi: 300        # High resolution for crisp printing
+    number-sections: false
+    highlight-style: github
+    reference-doc: ../../ms_templates/custom-reference.docx
+    embed-resources: true
+  pdf:
+    documentclass: article
+    geometry:
+      - margin=0.5in
+    fig-width: 4
+    fig-height: 4
+    fig-dpi: 300
+    colorlinks: true
+    highlight-style: github
+    number-sections: false
+    toc: false
+    keep-tex: false
+    output-file: "10_02_class_activity.pdf"
+editor: visual  
+---
+
+# Analysis of Net Primary Production in Forests: A Modern Tidyverse Approach
+
+*Based on Michaletz et al. (2014) data*
+
+## Introduction
+
+This analysis examines the relationships between Net Primary Production
+(npp) and various climate and forest characteristics across global
+forest sites. We'll explore multicollinearity, model selection, and
+variable transformations.
+
+**Key Learning Objectives:**
+
+-   Understand multicollinearity in multiple regression
+-   Learn model diagnostics and assumption checking
+-   Practice variable selection techniques
+-   Apply data transformations appropriately
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, 
+                      fig.width = 10, fig.height = 6)
+```
+
+## Load Required Packages
+
+```{r packages}
+# Load required packages
+library(tidyverse)    # For data manipulation and visualization
+library(car)          # For regression diagnostics (VIF, etc.)
+library(corrplot)     # For correlation plots
+library(GGally)       # For pairs plots
+library(broom)        # For tidy model outputs
+library(performance)  # For model performance metrics
+library(see)          # For better diagnostic plots
+```
+
+## Load and Explore the Data
+
+```{r load-data}
+# Load the forest npp data
+forest_df <- read_csv("data/michaletz_etal_2014_clean.csv")
+
+# Display top lines
+head(forest_df)
+
+```
+
+## Data Preparation
+
+Following the original analysis, we'll focus on the key variables from a
+cleaned dataframe
+
+## 1. Initial Exploration: Variable Relationships and Multicollinearity
+
+### Correlation Matrix and Visualization
+
+```{r correlation-analysis}
+# Create correlation matrix for numeric variables only
+num_vars <- forest_df %>%
+  select_if(is.numeric)
+
+# Calculate correlation matrix
+cor_matrix <- cor(num_vars, use = "complete.obs")
+
+# Display correlation matrix
+cor_matrix
+
+
+```
+
+```{r visual_corr}
+# Create a visual correlation plot
+corrplot(cor_matrix, method = "color", type = "upper", 
+         addCoef.col = "grey45", tl.cex = 0.8, number.cex = 0.7)
+```
+
+### Pairs Plot for Visual Inspection
+
+```{r pairs-plot, fig.height=10, fig.width=10}
+# Create pairs plot to visualize relationships
+# This replaces the original pairs() function with ggplot2
+forest_df %>%
+  select(-leaf) %>%  # Exclude categorical variable for pairs plot
+  ggpairs(
+    upper = list(continuous = wrap("cor", size = 5)),
+    lower = list(continuous = wrap("points", alpha = 0.6, size = 0.8))
+  ) +
+  theme_minimal()
+```
+
+## 2. Initial Multiple Regression Model
+
+Let's start with a full model including all predictors:
+
+```{r initial-model}
+# Fit initial model with all predictors (Model 1)
+model_init <- lm(npp ~ age + biomass + season + temp + 
+             precip + teb + leaf, data = forest_df)
+
+# Get model summary
+summary(model_init)
+
+
+```
+
+### Check for Multicollinearity
+
+```{r vif-analysis}
+# Calculate Variance Inflation Factors (VIF)
+vif_values <- vif(model_init)
+vif_values
+
+
+```
+
+```{r}
+# Create a data frame for better visualization
+vif_df <- data.frame(
+  Variable = names(vif_values),
+  VIF = as.numeric(vif_values)
+) %>%
+  arrange(desc(VIF))
+
+# Visualize VIF values
+ggplot(vif_df, aes(x = reorder(Variable, VIF), y = VIF)) +
+  geom_col(fill = "steelblue", alpha = 0.7) +
+  geom_hline(yintercept = 10, color = "red", linetype = "dashed", 
+             linewidth = 1) +
+  geom_hline(yintercept = 5, color = "orange", linetype = "dashed", 
+             linewidth = 1) +
+  coord_flip() +
+  labs(
+    title = "Variance Inflation Factors",
+    subtitle = "Red line: VIF = 10 (serious concern), Orange line: VIF = 5 (moderate concern)",
+    x = "Variables",
+    y = "VIF"
+  ) +
+  theme_minimal()
+```
+
+### Address Multicollinearity by Removing Growing Season
+
+Based on the original analysis, season and Temperature are highly
+correlated. Let's remove season:
+
+```{r model2}
+# Model 2: Remove season due to multicollinearity
+model_2 <- lm(npp ~ age + biomass + temp + precip + teb + leaf, 
+             data = forest_df)
+
+# Model summary
+summary(model_2)
+
+```
+
+```{r}
+# Check VIF again
+vif_values2 <- vif(model_2)
+vif_values2
+
+```
+
+## 3. Exploring Variable Transformations
+
+### Check the Shape of Relationships with Partial Regression Plots
+
+```{r partial-plots}
+# Create partial regression plots (Added Variable Plots)
+# This helps us see the relationship between each predictor and response
+# after accounting for other variables
+
+par(mfrow = c(2, 3))
+avPlots(model_2, main = "Partial Regression Plots")
+par(mfrow = c(1, 1))
+```
+
+### Apply Log Transformation to age
+
+The original analysis found that age showed a curvy relationship. Let's
+try log transformation: REally what you should do is log transform of
+the response variable first..
+
+```{r log-transformation}
+# Create dataset with log-transformed age
+forest_df <- forest_df %>%
+  mutate(log_age = log10(age))
+
+# Model 3: With log-transformed age
+model_3 <- lm(npp ~ log_age + biomass + temp + precip + teb + leaf, 
+             data = forest_df)
+
+
+# Model summary
+summary(model_3)
+```
+
+```{r}
+# Compare partial regression plots
+par(mfrow = c(2, 3))
+avPlots(model_3, main = "Partial Regression Plots (Log age)")
+par(mfrow = c(1, 1))
+
+```
+
+## 4. Model Diagnostics and Assumption Checking
+
+```{r diagnostics}
+# Create diagnostic plots
+par(mfrow = c(2, 2))
+plot(model_3, main = "Model Diagnostics")
+par(mfrow = c(1, 1))
+
+
+```
+
+## Residuals - its the upper left above
+
+```{r}
+# Check for normality of residuals
+residuals_data <- data.frame(
+  Fitted = fitted(model_3),
+  Residuals = residuals(model_3),
+  Standardized_Residuals = rstandard(model_3)
+)
+
+# Residuals vs Fitted plot using ggplot
+ggplot(residuals_data, aes(x = Fitted, y = Residuals)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "lm", color = "red") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(
+    title = "Residuals vs Fitted Values",
+    x = "Fitted Values",
+    y = "Residuals"
+  ) +
+  theme_minimal()
+```
+
+### Try Response Variable Transformation
+
+Following the original analysis, let's try a cube root transformation of
+npp:
+
+```{r response-transformation}
+# Model 4: Cube root transformation of npp
+forest_df <- forest_df %>%
+  mutate(npp_cuberoot = npp^(1/3))
+
+model_4 <- lm(npp_cuberoot ~ log_age + biomass + temp + precip + 
+             teb + leaf, data = forest_df)
+
+summary(model_4)
+```
+
+```{r}
+# Check diagnostics
+par(mfrow = c(2, 2))
+plot(model_4, main = "Model Diagnostics (Cube Root npp)")
+par(mfrow = c(1, 1))
+
+```
+
+## 5. Model Simplification and Comparison
+
+### Remove Non-significant Variables
+
+```{r model-simplification}
+#| paged-print: false
+# Model 5: Remove non-significant Precipitation
+model_5 <- lm(npp_cuberoot ~ log_age + biomass + temp + teb + leaf, 
+             data = forest_df)
+
+summary(model_5)
+
+```
+
+```{r}
+# Compare models using AIC
+model_comparison <- data.frame(
+  Model = c("Model 4 (Full)", "Model 5 (No precip)"),
+  AIC = c(AIC(model_4), AIC(model_5)),
+  R_squared = c(summary(model_4)$r.squared, summary(model_5)$r.squared),
+  Adj_R_squared = c(summary(model_4)$adj.r.squared, summary(model_5)$adj.r.squared)
+)
+
+model_comparison
+
+```
+
+### Model Performance and Interpretation
+
+```{r final-interpretation}
+
+# Get tidy summary of final model
+summary(model_5, conf.int = TRUE)
+
+```
+
+## using the sensemaker package
+
+```{r sensemaker}
+library(sensemakr)
+# Calculate partial R-squared for all variables at once
+partial_r2_sensemakr <- partial_r2(model_5)
+partial_r2_sensemakr
+```
+
+```{r}
+#| paged-print: false
+# Calculate partial R-squared for each variable
+# Using the car package
+print("Using car package Anova() with Type III sums of squares:")
+anova_type2 <- Anova(model_5, type = "III")
+print(anova_type2)
+
+# Convert F-statistics to partial R-squared
+# Partial R² = F * df_num / (F * df_num + df_den)
+f_stats <- anova_type2$`F value`[!is.na(anova_type2$`F value`)]
+df_num <- anova_type2$Df[!is.na(anova_type2$`F value`)]
+df_den <- anova_type2$Df[nrow(anova_type2)]  # Residual df
+
+partial_r2_from_f <- f_stats * df_num / (f_stats * df_num + df_den)
+
+results_table <- data.frame(
+  Variable = rownames(anova_type2)[!is.na(anova_type2$`F value`)],
+  F_statistic = f_stats,
+  p_value = anova_type2$`Pr(>F)`[!is.na(anova_type2$`F value`)],
+  Partial_R_squared = partial_r2_from_f
+)
+
+print("Complete results with partial R-squared:")
+print(results_table)
+```
+
+## 6. Alternative Approach: Standardized Variables
+
+Following the original analysis, let's also try the standardized
+approach:
+
+```{r standardized-approach}
+# Create standardized variables
+forest_standardized <- forest_df %>%
+  mutate(
+    npp_sqrt_scaled = scale(sqrt(npp))[,1],
+    log_age_scaled = scale(log10(age))[,1],
+    biomass_scaled = scale(biomass)[,1],
+    temp_scaled = scale(temp)[,1],
+    precip_scaled = scale(precip)[,1],
+    teb_scaled = scale(teb)[,1]
+  )
+
+# Standardized model
+model_std <- lm(npp_sqrt_scaled ~ log_age_scaled + biomass_scaled + 
+                temp_scaled * precip_scaled + teb_scaled, 
+                data = forest_standardized)
+
+# Summary
+summary(model_std)
+
+```
+
+## 7. Key Findings and Conclusions
+
+1.  MULTICOLLINEARITY:
+
+    -   Growing season length and temperature were highly correlated
+    -   Removed growing season to address multicollinearity
+
+2.  VARIABLE TRANSFORMATIONS:
+
+    -   Log transformation of age improved model fit
+    -   Cube root transformation of npp addressed assumption violations
+
+3.  FINAL MODEL RESULTS:
+
+    -   Significant predictors: age (negative), biomass (positive), temp
+        (positive)
+    -   teb had negative effect, Leaf type differences were significant
+
+4.  BIOLOGICAL INTERPRETATION:
+
+    -   Younger stands had higher npp (for given biomass)
+    -   Higher biomass associated with higher npp
+    -   temp positively related to npp
+    -   Coniferous forests had lower npp than broadleaf forests
+
+## References and Additional Notes
+
+This analysis is based on:
+
+-   **Michaletz, S.T., Cheng, D., Kerkhoff, A.J. & Enquist, B.J.**
+    (2014). Convergence of terrestrial plant production across global
+    climate gradients. *Nature*, 512, 39-43.
+
+**Key Learning Points:**
+
+1.  **Multicollinearity Detection**: Use VIF values and correlation
+    matrices
+2.  **Variable Transformations**: Log and power transformations can
+    improve model fit
+3.  **Model Diagnostics**: Always check residual plots and assumption
+    violations
+4.  **Model Comparison**: Use AIC and other criteria for model selection
+5.  **Interpretation**: Focus on biologically meaningful relationships
+
+```{r session-info}
+# Session information for reproducibility
+sessionInfo()
+```

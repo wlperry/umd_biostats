@@ -1,0 +1,23 @@
+# Project files
+.Rproj.user
+/.quarto/
+
+# Directories to ignore
+/css/
+/data/
+/documents/
+/figures/
+/lectures/
+/ms_templates/
+/about_cache/
+/test_overviews/
+
+# File types to ignore
+*.qmd
+*.txt
+*.png
+
+# Exceptions - files and directories to include
+!/docs/
+!/docs/**/*.html
+!/docs/lecture_*/

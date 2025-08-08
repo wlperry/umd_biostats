@@ -1,0 +1,449 @@
+---
+title: "Lecture 12 - Factorial ANOVA of Limpet Egg Production"
+author: "Bill Perry"
+execute:
+  freeze: auto
+  cache: true
+  echo: true
+  keep-md: true
+  message: true
+  warning: true
+  fig-height: 4
+  fig-width: 6
+  paged-print: false
+format:
+  html:
+    output-file: "12_02_class_activity.html"
+    default: true
+    embed-resources: true
+    self-contained: true
+    max-width: 80ch  # Limits line length to approximately 80 characters
+    css: ../../css/activity.css
+  docx:
+    default: true
+    toc: false
+    toc-depth: 3
+    fig-width: 5.5      # Smaller figures for better document layout
+    fig-height: 3.5     # Better proportions for printing
+    fig-dpi: 300        # High resolution for crisp printing
+    number-sections: false
+    highlight-style: github
+    reference-doc: ../../ms_templates/custom-reference.docx
+    embed-resources: true
+  pdf:
+    documentclass: article
+    geometry:
+      - margin=0.5in
+    fig-width: 4
+    fig-height: 4
+    fig-dpi: 300
+    colorlinks: true
+    highlight-style: github
+    number-sections: false
+    toc: false
+    keep-tex: false
+    output-file: "12_02_class_activity.pdf"
+editor: visual  
+---
+
+# Lecture 12: Factorial ANOVA
+
+The set up and data overview
+
+```{r setup}
+#| message: false
+#| warning: false
+#| 
+# Load required packages
+
+library(car)       # For Levene's test and Type III SS
+library(emmeans)   # For estimated marginal means
+library(broom)     # For tidying model outputs
+library(patchwork) # For combining plots
+library(janitor)
+library(tidyverse)
+
+# Set theme for plots
+theme_set(theme_light(base_size = 12))
+```
+
+```{r read_data}
+# Read the data
+l_df <- read_csv("data/quinn.csv") %>% clean_names()
+
+
+# Convert factors
+l_df <- l_df %>%
+  mutate(
+    density = factor(density, levels = c(8, 15, 30, 45)),
+    season = factor(season)
+  )
+
+
+```
+
+```{r stats}
+# Summary statistics
+l_df %>%
+  group_by(density, season) %>%
+  summarise(
+    mean_eggs = mean(eggs),
+    sd_eggs = sd(eggs),
+    n = n(),
+    .groups = 'drop'
+  )
+```
+
+# Lecture 12: Factorial ANOVA
+
+## ANOVA Assumptions
+
+Before conducting the factorial ANOVA, we need to check several
+assumptions:
+
+1.  Independence of observations
+2.  Normality of residuals
+3.  Homogeneity of variances
+
+Fit the model
+
+```{r fit_model}
+# Fit the factorial ANOVA using linear model (lm) instead of aov
+l_model <- lm(eggs ~ density * season, data = l_df)
+
+# View the model summary to see coefficients, standard errors, etc.
+summary(l_model)
+
+```
+
+```{r anova}
+Anova(l_model, type = 3)
+```
+
+# Lecture 12: Factorial ANOVA
+
+## ASSUMPTIONS
+
+```{r model_diagnostics}
+# Create diagnostic plots
+par(mfrow = c(2, 2))
+plot(l_model)
+par(mfrow = c(1, 1))
+```
+
+## Check for Normality of Residuals
+
+```{r normality_1}
+# Extract residuals from the model
+l_resid <- augment(l_model)
+
+# Create Q-Q plot of residuals
+ggplot(l_resid, aes(sample = .resid)) +
+  stat_qq() +
+  stat_qq_line() +
+  labs(title = "Q-Q Plot of Residuals",
+       x = "Theoretical Quantiles",
+       y = "Sample Quantiles")
+
+
+```
+
+# Lecture 12: Factorial ANOVA
+
+## Check for Normality of Residuals
+
+```{r normality_2}
+# Histogram of residuals
+ggplot(l_resid, aes(x = .resid)) +
+  geom_histogram(bins = 8, fill = "steelblue", color = "black") +
+  labs(title = "Histogram of Residuals",
+       x = "Residuals",
+       y = "Count")
+
+
+```
+
+# Lecture 12: Factorial ANOVA
+
+## Check for Normality of Residuals
+
+```{r normality_3}
+# Shapiro-Wilk test for normality
+shapiro.test(l_model$residuals)
+
+# or
+shapiro.test(residuals(l_model))
+
+```
+
+# Lecture 12: Factorial ANOVA
+
+```{r homogeneity_1}
+# Levene's test for homogeneity of variances
+leveneTest(eggs ~ density * season, data = l_df)
+
+```
+
+# Lecture 12: Factorial ANOVA
+
+## Check for homogeneity of variances
+
+```{r homogeneity_2}
+# Residuals vs. fitted values plot
+ggplot(l_resid, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") 
+
+```
+
+# Lecture 12: Factorial ANOVA
+
+## Check for homogeneity of variances
+
+```{r homogeneity_3}
+# Add residuals to original data for plotting
+l_df <- l_df %>%
+  mutate(residuals = residuals(l_model))
+
+# Residuals by group
+ggplot(l_df, aes(x = interaction(density, season), y = residuals)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+```
+
+# Lecture 12: Factorial ANOVA
+
+## Estimated Marginal Means and Effects
+
+```{r emmeans_lm_1}
+#| message: false
+#| warning: false
+#| paged-print: false
+# Get estimated marginal means from the linear model
+# Main effect of density
+density_emm <- emmeans(l_model, ~ density)
+print(density_emm)
+pairs(density_emm)
+
+```
+
+## Estimated Marginal Means and Effects
+
+```{r emmeans_lm_2}
+#| message: false
+#| warning: false
+#| paged-print: false
+
+plot(density_emm)
+```
+
+# Lecture 12: Factorial ANOVA
+
+## Estimated Marginal Means and Effects
+
+```{r emmeans_lm_3}
+
+#| message: false
+#| warning: false
+#| paged-print: false
+# Get estimated marginal means from the linear model
+# Main effect of density
+# density_emm <- emmeans(l_model, ~ DENSITY)
+# print(density_emm)
+# pairs(density_emm)
+
+# Main effect of season
+season_emm <- emmeans(l_model, ~ season)
+season_emm
+pairs(season_emm)
+
+
+```
+
+# Lecture 12: Factorial ANOVA
+
+## Estimated Marginal Means and Effects
+
+```{r emmeans_lm_4}
+
+#| message: false
+#| warning: false
+#| paged-print: false
+
+# Main effect of season
+plot(season_emm)
+
+```
+
+# Lecture 12: Factorial ANOVA
+
+## Estimated Marginal Means and Effects
+
+```{r emmeans_lm_5}
+#| message: false
+#| warning: false
+#| paged-print: false
+
+# Interaction effects (even though interaction wasn't significant)
+interaction_emm <- emmeans(l_model, ~ density | season)
+interaction_emm
+interaction_emm
+
+
+```
+
+```{r}
+# Compare to raw means
+l_df %>%
+  group_by(density, season) %>%
+  summarise(
+    raw_mean = mean(eggs),
+    .groups = 'drop'
+  ) %>%
+  pivot_wider(names_from = season, values_from = raw_mean)
+
+
+```
+
+# Lecture 12: Factorial ANOVA
+
+## Estimated Marginal Means and Effects
+
+```{r emmeans_lm_6}
+#| message: false
+#| warning: false
+#| paged-print: false
+
+# Get estimated marginal means from the linear model
+# Main effect of density
+# density_emm <- emmeans(l_model, ~ density)
+# print(density_emm)
+# pairs(density_emm)
+# 
+# # Main effect of season
+# season_emm <- emmeans(l_model, ~ season)
+# print(season_emm)
+# pairs(season_emm)
+
+# Interaction effects (even though interaction wasn't significant)
+emmip(l_model, season ~ density, CIs = TRUE) 
+
+
+
+```
+
+# Lecture 12: Factorial ANOVA
+
+## Estimated Marginal Means and Effects
+
+```{r emmeans_lm_7}
+#| message: false
+#| warning: false
+#| paged-print: false
+
+# Alternative approach using ggplot2 for more customization
+# Convert emmeans object to data frame
+interaction_df <- as.data.frame(interaction_emm)
+interaction_df
+
+```
+
+# Lecture 12: Factorial ANOVA
+
+## This is a plot you might produce for publication
+
+```{r pub_plot}
+# Publication-quality plot with both raw data and model predictions
+# need to fix something for rendering
+# Convert emmeans object to data frame and ensure density is a factor
+interaction_df <- as.data.frame(interaction_emm)
+interaction_df$density <- factor(interaction_df$density, levels = c(8, 15, 30, 45))
+
+# Create enhanced boxplot with model predictions
+pub_plot <- ggplot(interaction_df, aes(x = density, y = emmean, 
+                                       color = season, group = season)) +
+  # Add lines connecting the means
+  geom_line(linewidth = 1,
+             position = position_dodge2(width= 0.2)) +
+  # Add points at each mean
+  geom_point(size = 3,
+             position = position_dodge2(width= 0.2)) +
+  # Add error bars showing standard error
+  geom_errorbar(aes(ymin = emmean - SE, ymax = emmean + SE), 
+                width =  0.2,
+             position = position_dodge2(width= 0.2)) +
+  # Simple labels
+  labs(
+    x = "Density",
+    y = "Egg Masses per Limpet"
+  ) 
+
+pub_plot
+```
+
+# Lecture 12: Results Interpretation for Linear Model Approach
+
+The factorial ANOVA was conducted using a linear model approach, which
+provides additional insights beyond the traditional ANOVA table.
+
+Key findings from the linear model analysis:
+
+1.  **Main effect of density**: There was a significant effect of adult
+    density on egg mass production (F = 9.67, df = 3, 16, p = 0.001).
+    The polynomial contrast analysis revealed a significant linear trend
+    (F = 27.58, df = 1, 16, p = 0.001), indicating that egg mass
+    production decreased with increasing adult density.
+
+2.  **Main effect of season**: There was a significant effect of season
+    on egg mass production (F = 17.84, df = 1, 16, p = 0.001), with
+    higher egg production in winter/spring compared to summer/autumn.
+
+3.  **Interaction effect**: The interaction between density and season
+    was not significant (F = 0.30, df = 3, 16, p = 0.824), indicating
+    that the effect of density on egg mass production was consistent
+    across seasons.
+
+4.  **Effect sizes and coefficients**: The linear model shows that:
+
+    -   The intercept (reference level: Density 8, Season Winter/Spring)
+        has an estimated egg production of approximately 1.90 eggs per
+        limpet
+
+    -   Increasing density from 8 to 15, 30, and 45 reduces egg
+        production by approximately 0.28, 0.74, and 0.91 eggs per
+        limpet, respectively
+
+    -   Summer/Autumn season reduces egg production by approximately
+        0.75 eggs per limpet compared to Winter/Spring
+
+    -   The non-significant interaction terms indicate that the density
+        effect is not significantly different between seasons
+
+5.  **Polynomial contrasts**: The significant linear contrast (p =
+    0.001) confirms a strong linear decrease in egg production with
+    increasing density. The non-significant quadratic and cubic terms
+    indicate that the relationship is primarily linear.
+
+6.  **Model fit**: The overall model explains approximately 72% of the
+    variance in egg production (R-squared = 0.72), indicating a good fit
+    to the data.
+
+# Lecture 12: Writing the Results for a Scientific Paper
+
+Here's how you might write up these results using the linear model
+approach for a scientific paper:
+
+```         
+Results
+
+A two-way factorial ANOVA revealed that egg mass production in limpets was significantly affected by both adult density (F3,16 = 9.67, P = 0.001) and season (F1,16 = 17.84, P = 0.001), with no significant interaction between these factors (F3,16 = 0.30, P = 0.824). The model explained 72% of the variance in egg production (adjusted R² = 0.65).
+
+Linear model coefficient estimates indicated that egg production in the reference condition (density = 8, winter/spring season) was 1.90 ± 0.17 (estimate ± SE) egg masses per limpet. Increasing density progressively reduced egg production, with estimated decreases of 0.28 ± 0.25, 0.74 ± 0.25, and 0.91 ± 0.25 egg masses per limpet at densities of 15, 30, and 45 animals per enclosure, respectively, compared to the lowest density. Summer/autumn season reduced egg production by 0.75 ± 0.18 egg masses per limpet compared to winter/spring.
+
+Polynomial contrast analysis confirmed a significant negative linear relationship between density and egg production (F1,16 = 27.58, P = 0.001), while quadratic (F1,16 = 1.29, P = 0.272) and cubic (F1,16 = 0.13, P = 0.720) components were not significant. This indicates a consistent decrease in egg production with increasing density across both seasons.
+
+Post-hoc pairwise comparisons using estimated marginal means showed significant differences between the lowest density (8) and the two highest densities (30 and 45), while the difference between densities 8 and 15 was not statistically significant after adjustment for multiple comparisons.
+```
+
+Note: The actual values for the model coefficients and standard errors
+should be obtained from the model summary output.

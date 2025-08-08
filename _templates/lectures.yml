@@ -1,0 +1,60 @@
+execute:
+  freeze: auto
+  cache: true
+  echo: true
+  keep-md: true
+  message: false
+  warning: false
+  fig-height: 4
+  fig-width: 6
+  paged-print: false
+
+format:
+  html:
+    code-overflow: scroll
+    toc: false
+    embed-resources: true
+    self-contained: true
+    max-width: 80ch
+    css: ../../css/lecture.css
+    fig-width: 7
+    fig-height: 5
+
+
+  revealjs:
+    self-contained: true
+    css: ../../css/lecture.css
+    slide-number: true
+    transition: fade
+    background-transition: none
+    scrollable: true
+    smaller: true
+    width: 1280
+    height: 720
+    margin: 0.1
+    min-scale: 0.2
+    max-scale: 2.0
+    fig-width: 8
+    fig-height: 5
+
+
+  docx:
+    default: true
+    toc: false
+    toc-depth: 3
+    number-sections: false
+    highlight-style: github
+    reference-doc: ../../ms_templates/custom-reference.docx
+    embed-resources: true
+    fig-width: 5.5      # Smaller figures for better document layout
+    fig-height: 3.5     # Better proportions for printing
+    fig-dpi: 300        # High resolution for crisp printing
+
+  pptx:
+    reference-doc: ../../ms_templates/lecture_template.pptx 
+    embed-resources: true
+    fig-width: 6.5      # Good size for PowerPoint slides
+    fig-height: 4       # Proper aspect ratio for slides
+    fig-dpi: 300        # High resolution for projection
+        
+editor: visual

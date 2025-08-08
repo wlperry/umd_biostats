@@ -1,0 +1,1503 @@
+sampling_site,species,length_mm,mass_g,lake
+I8,lake trout,515,1400,I8
+I8,lake trout,468,1100,I8
+I8,lake trout,527,1550,I8
+I8,lake trout,525,1350,I8
+I8,lake trout,517,1300,I8
+I8,lake trout,607,2100,I8
+I8,lake trout,325,260,I8
+I8,lake trout,428,600,I8
+I8,lake trout,297,205,I8
+I8,lake trout,327,265,I8
+I8,lake trout,334,300,I8
+I8,lake trout,383,210,I8
+I8,lake trout,450,873,I8
+I8,lake trout,480,1000,I8
+I8,lake trout,440,735,I8
+I8,lake trout,447,985,I8
+I8,lake trout,450,825,I8
+I8,lake trout,427,795,I8
+I8,lake trout,386,535,I8
+I8,lake trout,373,435,I8
+I8,lake trout,360,375,I8
+I8,lake trout,412,638,I8
+I8,lake trout,472,1021,I8
+I8,lake trout,467,985,I8
+I8,lake trout,475,1000,I8
+I8,lake trout,470,1000,I8
+I8,lake trout,343,833,I8
+I8,lake trout,264,155,I8
+I8,lake trout,820,6212,I8
+I8,lake trout,556,1475,I8
+I8,lake trout,221,84,I8
+I8,lake trout,363,395,I8
+I8,lake trout,476,1000,I8
+I8,lake trout,505,1250,I8
+I8,lake trout,501,1250,I8
+I8,lake trout,432,695,I8
+I8,lake trout,348,350,I8
+I8,lake trout,456,825,I8
+I8,lake trout,558,1035,I8
+I8,lake trout,465,925,I8
+I8,lake trout,365,360,I8
+I8,lake trout,500,1100,I8
+I8,lake trout,632,2500,I8
+I8,lake trout,424,NA,I8
+I8,lake trout,405,650,I8
+I8,lake trout,256,170,I8
+I8,lake trout,282,172,I8
+I8,lake trout,477,885,I8
+I8,lake trout,478,1200,I8
+I8,lake trout,450,740,I8
+I8,lake trout,378,425,I8
+I8,lake trout,410,600,I8
+I8,lake trout,404,595,I8
+I8,lake trout,420,645,I8
+I8,lake trout,377,450,I8
+I8,lake trout,405,570,I8
+I8,lake trout,506,1150,I8
+I8,lake trout,495,1050,I8
+I8,lake trout,422,635,I8
+I8,lake trout,370,380,I8
+I8,lake trout,361,365,I8
+I8,lake trout,610,2500,I8
+I8,lake trout,445,740,I8
+I8,lake trout,469,820,I8
+I8,lake trout,237,100,I8
+I8,lake trout,300,211,I8
+I8,lake trout,481,1030,I8
+I8,lake trout,423,670,I8
+I8,lake trout,491,920,I8
+I8,lake trout,456,760,I8
+I8,lake trout,446,775,I8
+I8,lake trout,488,1000,I8
+I8,lake trout,434,710,I8
+I8,lake trout,332,280,I8
+I8,lake trout,484,750,I8
+I8,lake trout,505,1150,I8
+I8,lake trout,400,490,I8
+I8,lake trout,452,770,I8
+I8,lake trout,445,760,I8
+I8,lake trout,508,1230,I8
+I8,lake trout,483,565,I8
+I8,lake trout,525,1600,I8
+I8,lake trout,403,495,I8
+I8,lake trout,393,455,I8
+I8,lake trout,431,695,I8
+I8,lake trout,485,950,I8
+I8,lake trout,507,990,I8
+Island Lake,lake trout,640,2600,Island Lake
+Island Lake,lake trout,650,2350,Island Lake
+Island Lake,lake trout,585,2200,Island Lake
+Island Lake,lake trout,720,3950,Island Lake
+Island Lake,lake trout,880,6800,Island Lake
+Island Lake,lake trout,830,3200,Island Lake
+Island Lake,lake trout,590,2200,Island Lake
+Island Lake,lake trout,636,1850,Island Lake
+Island Lake,lake trout,875,4850,Island Lake
+Island Lake,lake trout,576,1650,Island Lake
+N 01,lake trout,290,180,N 01
+N 01,lake trout,451,950,N 01
+N 01,lake trout,455,870,N 01
+N 01,lake trout,414,530,N 01
+N 01,lake trout,385,465,N 01
+N 01,lake trout,476,1200,N 01
+N 01,lake trout,338,270,N 01
+N 01,lake trout,303,210,N 01
+N 01,lake trout,208,65,N 01
+N 01,lake trout,289,190,N 01
+N 01,lake trout,317,237,N 01
+N 01,lake trout,315,225,N 01
+N 01,lake trout,445,700,N 01
+N 01,lake trout,292,190,N 01
+N 01,lake trout,402,575,N 01
+N 01,lake trout,103,67,N 01
+N 01,lake trout,311,225,N 01
+N 01,lake trout,464,900,N 01
+N 01,lake trout,335,470,N 01
+N 01,lake trout,329,280,N 01
+N 01,lake trout,424,665,N 01
+N 01,lake trout,505,1250,N 01
+N 01,lake trout,320,250,N 01
+N 01,lake trout,387,485,N 01
+N 01,lake trout,34,270,N 01
+N 01,lake trout,257,131,N 01
+N 01,lake trout,487,920,N 01
+N 01,lake trout,345,307,N 01
+N 01,lake trout,375,435,N 01
+N 01,lake trout,380,465,N 01
+N 01,lake trout,302,200,N 01
+N 01,lake trout,357,410,N 01
+N 01,lake trout,337,290,N 01
+N 01,lake trout,452,840,N 01
+N 01,lake trout,399,500,N 01
+N 01,lake trout,265,120,N 01
+N 01,lake trout,447,785,N 01
+N 01,lake trout,375,405,N 01
+N 01,lake trout,185,53,N 01
+N 01,lake trout,442,870,N 01
+N 01,lake trout,446,805,N 01
+N 01,lake trout,443,900,N 01
+N 01,lake trout,300,207,N 01
+N 01,lake trout,502,1100,N 01
+N 01,lake trout,330,275,N 01
+N 01,lake trout,520,1350,N 01
+N 01,lake trout,350,340,N 01
+N 01,lake trout,526,1250,N 01
+N 01,lake trout,478,1160,N 01
+N 01,lake trout,303,220,N 01
+N 01,lake trout,355,330,N 01
+N 01,lake trout,507,1350,N 01
+N 01,lake trout,270,150,N 01
+N 01,lake trout,379,380,N 01
+N 01,lake trout,526,1100,N 01
+N 01,lake trout,384,430,N 01
+N 01,lake trout,484,1000,N 01
+N 01,lake trout,475,1050,N 01
+N 01,lake trout,303,235,N 01
+N 01,lake trout,436,740,N 01
+N 01,lake trout,418,555,N 01
+N 01,lake trout,357,340,N 01
+N 01,lake trout,350,320,N 01
+N 01,lake trout,439,805,N 01
+N 01,lake trout,357,350,N 01
+N 01,lake trout,415,635,N 01
+N 01,lake trout,340,310,N 01
+N 01,lake trout,487,835,N 01
+N 01,lake trout,354,295,N 01
+N 01,lake trout,455,825,N 01
+N 01,lake trout,490,940,N 01
+N 01,lake trout,370,405,N 01
+N 01,lake trout,414,530,N 01
+N 01,lake trout,325,260,N 01
+N 01,lake trout,410,545,N 01
+N 01,lake trout,375,415,N 01
+N 01,lake trout,338,280,N 01
+N 01,lake trout,372,405,N 01
+N 01,lake trout,308,240,N 01
+N 01,lake trout,380,485,N 01
+N 01,lake trout,450,740,N 01
+N 01,lake trout,432,730,N 01
+N 01,lake trout,330,245,N 01
+N 01,lake trout,490,870,N 01
+N 01,lake trout,490,1000,N 01
+N 01,lake trout,315,235,N 01
+N 01,lake trout,340,305,N 01
+N 01,lake trout,460,800,N 01
+N 01,lake trout,294,185,N 01
+N 01,lake trout,456,785,N 01
+N 01,lake trout,298,190,N 01
+N 01,lake trout,NA,255,N 01
+N 01,lake trout,NA,280,N 01
+N 01,lake trout,421,649,N 01
+N 01,lake trout,369,450,N 01
+N 01,lake trout,NA,435,N 01
+N 01,lake trout,431,620,N 01
+N 01,lake trout,480,1125,N 01
+N 01,lake trout,500,1000,N 01
+N 01,lake trout,NA,NA,N 01
+N 01,lake trout,465,910,N 01
+N 01,lake trout,485,810,N 01
+N 01,lake trout,335,360,N 01
+N 01,lake trout,320,250,N 01
+N 01,lake trout,435,660,N 01
+N 01,lake trout,397,550,N 01
+N 01,lake trout,450,845,N 01
+N 01,lake trout,318,220,N 01
+N 01,lake trout,372,410,N 01
+N 01,lake trout,358,360,N 01
+N 01,lake trout,450,550,N 01
+N 01,lake trout,370,415,N 01
+N 01,lake trout,335,250,N 01
+N 01,lake trout,390,490,N 01
+N 01,lake trout,345,310,N 01
+N 01,lake trout,530,1150,N 01
+N 01,lake trout,426,705,N 01
+N 01,lake trout,23,94,N 01
+N 01,lake trout,432,640,N 01
+N 01,lake trout,457,850,N 01
+N 01,lake trout,405,580,N 01
+N 01,lake trout,413,650,N 01
+N 01,lake trout,445,840,N 01
+N 01,lake trout,445,745,N 01
+N 01,lake trout,500,955,N 01
+N 01,lake trout,NA,450,N 01
+N 01,lake trout,365,400,N 01
+N 01,lake trout,347,440,N 01
+N 01,lake trout,420,625,N 01
+N 01,lake trout,NA,490,N 01
+N 01,lake trout,NA,310,N 01
+N 01,lake trout,352,365,N 01
+N 01,lake trout,442,785,N 01
+N 01,lake trout,350,315,N 01
+N 01,lake trout,460,875,N 01
+N 01,lake trout,325,315,N 01
+N 01,lake trout,410,545,N 01
+N 01,lake trout,390,485,N 01
+N 01,lake trout,310,220,N 01
+N 01,lake trout,285,175,N 01
+N 01,lake trout,435,750,N 01
+N 01,lake trout,360,390,N 01
+N 01,lake trout,340,315,N 01
+N 01,lake trout,415,715,N 01
+N 01,lake trout,380,420,N 01
+N 01,lake trout,310,230,N 01
+N 01,lake trout,NA,430,N 01
+N 01,lake trout,520,1500,N 01
+N 01,lake trout,358,365,N 01
+N 01,lake trout,330,280,N 01
+N 01,lake trout,275,145,N 01
+N 01,lake trout,350,355,N 01
+N 01,lake trout,425,665,N 01
+N 01,lake trout,315,240,N 01
+N 01,lake trout,348,345,N 01
+N 01,lake trout,280,170,N 01
+N 01,lake trout,NA,310,N 01
+N 01,lake trout,NA,690,N 01
+N 01,lake trout,476,690,N 01
+N 01,lake trout,440,710,N 01
+N 01,lake trout,320,250,N 01
+N 01,lake trout,297,200,N 01
+N 01,lake trout,340,335,N 01
+N 01,lake trout,394,490,N 01
+N 01,lake trout,337,320,N 01
+N 01,lake trout,350,300,N 01
+N 01,lake trout,375,430,N 01
+N 01,lake trout,310,215,N 01
+N 01,lake trout,375,430,N 01
+N 01,lake trout,305,200,N 01
+N 01,lake trout,391,500,N 01
+N 01,lake trout,332,260,N 01
+N 01,lake trout,380,425,N 01
+N 01,lake trout,432,730,N 01
+N 01,lake trout,345,295,N 01
+N 01,lake trout,429,670,N 01
+N 01,lake trout,292,170,N 01
+N 01,lake trout,366,355,N 01
+N 01,lake trout,280,160,N 01
+N 01,lake trout,362,360,N 01
+N 01,lake trout,238,100,N 01
+N 01,lake trout,372,420,N 01
+N 01,lake trout,484,900,N 01
+N 01,lake trout,335,300,N 01
+N 01,lake trout,325,280,N 01
+N 01,lake trout,361,375,N 01
+N 01,lake trout,359,375,N 01
+N 01,lake trout,353,350,N 01
+N 01,lake trout,430,710,N 01
+N 01,lake trout,402,510,N 01
+N 01,lake trout,347,290,N 01
+N 01,lake trout,275,150,N 01
+N 01,lake trout,512,1250,N 01
+N 01,lake trout,255,120,N 01
+N 01,lake trout,402,525,N 01
+N 01,lake trout,355,335,N 01
+N 01,lake trout,451,800,N 01
+N 01,lake trout,345,700,N 01
+N 01,lake trout,270,145,N 01
+N 01,lake trout,357,315,N 01
+N 01,lake trout,372,420,N 01
+N 01,lake trout,407,565,N 01
+N 01,lake trout,374,420,N 01
+N 01,lake trout,410,560,N 01
+N 01,lake trout,452,680,N 01
+N 01,lake trout,NA,NA,N 01
+N 01,lake trout,430,630,N 01
+N 01,lake trout,426,725,N 01
+N 01,lake trout,362,320,N 01
+N 01,lake trout,362,320,N 01
+N 01,lake trout,352,320,N 01
+N 01,lake trout,342,300,N 01
+N 01,lake trout,285,180,N 01
+N 01,lake trout,427,700,N 01
+N 01,lake trout,354,345,N 01
+N 01,lake trout,479,1000,N 01
+N 01,lake trout,NA,NA,N 01
+N 01,lake trout,332,275,N 01
+N 01,lake trout,NA,NA,N 01
+N 01,lake trout,430,735,N 01
+N 01,lake trout,NA,NA,N 01
+N 01,lake trout,NA,NA,N 01
+N 01,lake trout,NA,360,N 01
+N 01,lake trout,400,515,N 01
+N 01,lake trout,NA,420,N 01
+N 01,lake trout,NA,NA,N 01
+N 01,lake trout,442,640,N 01
+N 01,lake trout,495,1053,N 01
+N 01,lake trout,NA,720,N 01
+N 01,lake trout,397,515,N 01
+N 01,lake trout,442,625,N 01
+N 01,lake trout,NA,NA,N 01
+N 01,lake trout,375,400,N 01
+N 01,lake trout,465,830,N 01
+N 01,lake trout,390,475,N 01
+N 01,lake trout,316,215,N 01
+N 01,lake trout,NA,1000,N 01
+N 01,lake trout,NA,405,N 01
+N 01,lake trout,252,110,N 01
+N 01,lake trout,308,205,N 01
+N 01,lake trout,272,150,N 01
+N 01,lake trout,234,95,N 01
+N 01,lake trout,NA,355,N 01
+N 01,lake trout,424,700,N 01
+N 01,lake trout,300,185,N 01
+N 01,lake trout,365,375,N 01
+N 01,lake trout,415,600,N 01
+N 01,lake trout,368,365,N 01
+N 01,lake trout,329,270,N 01
+N 01,lake trout,525,1150,N 01
+N 01,lake trout,NA,300,N 01
+N 01,lake trout,230,110,N 01
+N 01,lake trout,369,400,N 01
+N 01,lake trout,NA,NA,N 01
+N 01,lake trout,341,290,N 01
+N 01,lake trout,409,520,N 01
+N 01,lake trout,382,480,N 01
+N 01,lake trout,365,370,N 01
+N 01,lake trout,323,250,N 01
+N 01,lake trout,392,440,N 01
+N 01,lake trout,449,950,N 01
+N 01,lake trout,455,800,N 01
+N 01,lake trout,411,565,N 01
+N 01,lake trout,421,670,N 01
+N 01,lake trout,395,525,N 01
+N 01,lake trout,391,480,N 01
+N 01,lake trout,393,440,N 01
+N 01,lake trout,501,1200,N 01
+N 01,lake trout,348,320,N 01
+N 01,lake trout,380,455,N 01
+N 01,lake trout,478,935,N 01
+N 01,lake trout,299,190,N 01
+N 01,lake trout,371,400,N 01
+N 01,lake trout,362,370,N 01
+N 01,lake trout,293,170,N 01
+N 01,lake trout,337,290,N 01
+N 01,lake trout,406,570,N 01
+N 01,lake trout,390,480,N 01
+N 01,lake trout,419,640,N 01
+N 01,lake trout,390,425,N 01
+N 01,lake trout,405,515,N 01
+N 01,lake trout,435,810,N 01
+N 01,lake trout,362,380,N 01
+N 01,lake trout,453,880,N 01
+N 01,lake trout,460,830,N 01
+N 01,lake trout,382,460,N 01
+N 01,lake trout,340,290,N 01
+N 01,lake trout,446,770,N 01
+N 01,lake trout,410,570,N 01
+N 01,lake trout,388,455,N 01
+N 01,lake trout,371,410,N 01
+N 01,lake trout,361,350,N 01
+N 01,lake trout,316,255,N 01
+N 01,lake trout,328,210,N 01
+N 01,lake trout,412,565,N 01
+N 01,lake trout,314,215,N 01
+N 01,lake trout,300,210,N 01
+N 01,lake trout,357,385,N 01
+N 01,lake trout,412,530,N 01
+N 01,lake trout,483,1000,N 01
+N 01,lake trout,424,640,N 01
+N 01,lake trout,285,160,N 01
+N 01,lake trout,324,260,N 01
+N 01,lake trout,291,160,N 01
+N 01,lake trout,294,190,N 01
+N 01,lake trout,366,380,N 01
+N 01,lake trout,456,870,N 01
+N 01,lake trout,503,1200,N 01
+N 01,lake trout,400,590,N 01
+N 01,lake trout,512,1220,N 01
+N 01,lake trout,282,193,N 01
+N 01,lake trout,283,185,N 01
+N 01,lake trout,397,470,N 01
+N 01,lake trout,262,155,N 01
+N 01,lake trout,208,68.5,N 01
+N 01,lake trout,236,96,N 01
+N 01,lake trout,225,97,N 01
+N 01,lake trout,303,208,N 01
+N 01,lake trout,314,260,N 01
+N 01,lake trout,312,240,N 01
+N 01,lake trout,310,280,N 01
+N 01,lake trout,288,190,N 01
+N 01,lake trout,259,150,N 01
+N 01,lake trout,314,265,N 01
+N 01,lake trout,470,980,N 01
+N 01,lake trout,390,450,N 01
+N 01,lake trout,307,250,N 01
+N 01,lake trout,432,710,N 01
+N 01,lake trout,269,140,N 01
+N 01,lake trout,388,500,N 01
+N 01,lake trout,328,300,N 01
+N 01,lake trout,346,340,N 01
+N 01,lake trout,390,450,N 01
+N 01,lake trout,285,170,N 01
+N 01,lake trout,370,225,N 01
+N 01,lake trout,304,235,N 01
+N 01,lake trout,361,370,N 01
+N 01,lake trout,375,410,N 01
+N 01,lake trout,385,465,N 01
+N 01,lake trout,403,510,N 01
+N 01,lake trout,405,510,N 01
+N 01,lake trout,405,510,N 01
+N 01,lake trout,420,580,N 01
+N 01,lake trout,438,690,N 01
+N 01,lake trout,430,690,N 01
+N 01,lake trout,435,725,N 01
+N 01,lake trout,452,760,N 01
+N 01,lake trout,442,770,N 01
+N 01,lake trout,452,810,N 01
+N 01,lake trout,471,940,N 01
+N 01,lake trout,474,960,N 01
+N 01,lake trout,463,810,N 01
+N 01,lake trout,451,890,N 01
+N 01,lake trout,470,1000,N 01
+N 01,lake trout,507,1150,N 01
+N 01,lake trout,536,1400,N 01
+N 01,lake trout,283,150,N 01
+N 01,lake trout,345,320,N 01
+N 01,lake trout,380,425,N 01
+N 01,lake trout,389,480,N 01
+N 01,lake trout,388,500,N 01
+N 01,lake trout,400,530,N 01
+N 01,lake trout,409,550,N 01
+N 01,lake trout,423,600,N 01
+N 01,lake trout,420,640,N 01
+N 01,lake trout,440,750,N 01
+N 01,lake trout,446,800,N 01
+N 01,lake trout,440,905,N 01
+N 01,lake trout,217,95,N 01
+N 01,lake trout,234,120,N 01
+N 01,lake trout,309,255,N 01
+N 01,lake trout,374,430,N 01
+N 01,lake trout,385,440,N 01
+N 01,lake trout,410,640,N 01
+N 01,lake trout,424,710,N 01
+N 01,lake trout,465,910,N 01
+N 01,lake trout,469,985,N 01
+N 01,lake trout,479,1200,N 01
+N 01,lake trout,400,590,N 01
+N 01,lake trout,450,750,N 01
+N 01,lake trout,457,950,N 01
+N 01,lake trout,425,710,N 01
+N 01,lake trout,481,1250,N 01
+N 01,lake trout,451,820,N 01
+N 01,lake trout,441,770,N 01
+N 01,lake trout,496,1200,N 01
+N 01,lake trout,393,565,N 01
+N 01,lake trout,396,540,N 01
+N 01,lake trout,411,550,N 01
+N 01,lake trout,444,770,N 01
+N 01,lake trout,480,1000,N 01
+N 01,lake trout,462,930,N 01
+N 01,lake trout,439,870,N 01
+N 01,lake trout,456,770,N 01
+N 01,lake trout,449,870,N 01
+N 01,lake trout,493,1200,N 01
+N 01,lake trout,400,590,N 01
+N 01,lake trout,451,850,N 01
+N 01,lake trout,446,835,N 01
+N 01,lake trout,466,940,N 01
+N 01,lake trout,416,660,N 01
+N 01,lake trout,535,1500,N 01
+N 01,lake trout,465,880,N 01
+N 01,lake trout,432,700,N 01
+N 01,lake trout,498,1300,N 01
+N 01,lake trout,452,835,N 01
+N 01,lake trout,372,500,N 01
+N 01,lake trout,495,1350,N 01
+N 01,lake trout,387,500,N 01
+N 01,lake trout,440,750,N 01
+N 01,lake trout,415,675,N 01
+N 01,lake trout,464,1000,N 01
+N 01,lake trout,395,525,N 01
+N 01,lake trout,431,720,N 01
+N 01,lake trout,436,760,N 01
+N 01,lake trout,460,935,N 01
+N 01,lake trout,440,800,N 01
+N 01,lake trout,402,630,N 01
+N 01,lake trout,393,590,N 01
+N 01,lake trout,391,550,N 01
+N 01,lake trout,388,575,N 01
+N 01,lake trout,448,770,N 01
+N 01,lake trout,355,420,N 01
+N 01,lake trout,410,580,N 01
+N 01,lake trout,467,1050,N 01
+N 01,lake trout,341,620,N 01
+N 01,lake trout,561,1750,N 01
+N 01,lake trout,438,340,N 01
+N 01,lake trout,447,870,N 01
+N 01,lake trout,465,1000,N 01
+N 01,lake trout,444,770,N 01
+N 01,lake trout,494,1100,N 01
+N 01,lake trout,464,910,N 01
+N 01,lake trout,438,740,N 01
+N 01,lake trout,436,740,N 01
+N 01,lake trout,470,1150,N 01
+N 01,lake trout,390,570,N 01
+N 01,lake trout,417,650,N 01
+N 01,lake trout,461,1100,N 01
+N 01,lake trout,381,500,N 01
+N 01,lake trout,404,660,N 01
+N 01,lake trout,456,1100,N 01
+N 01,lake trout,520,1400,N 01
+N 01,lake trout,460,960,N 01
+N 01,lake trout,473,1000,N 01
+N 01,lake trout,375,470,N 01
+N 01,lake trout,379,450,N 01
+N 01,lake trout,399,600,N 01
+N 01,lake trout,422,690,N 01
+N 01,lake trout,321,245,N 01
+N 01,lake trout,435,675,N 01
+N 01,lake trout,430,800,N 01
+N 01,lake trout,485,1200,N 01
+N 01,lake trout,445,760,N 01
+N 01,lake trout,481,970,N 01
+N 01,lake trout,476,1050,N 01
+N 01,lake trout,481,950,N 01
+N 01,lake trout,522,1400,N 01
+N 01,lake trout,497,1150,N 01
+N 01,lake trout,487,1100,N 01
+N 01,lake trout,491,1000,N 01
+N 01,lake trout,468,980,N 01
+N 01,lake trout,455,840,N 01
+N 01,lake trout,484,890,N 01
+N 01,lake trout,445,780,N 01
+N 01,lake trout,443,810,N 01
+N 01,lake trout,475,1100,N 01
+N 01,lake trout,483,1300,N 01
+N 01,lake trout,439,760,N 01
+N 01,lake trout,467,890,N 01
+N 01,lake trout,408,580,N 01
+N 01,lake trout,479,1100,N 01
+N 01,lake trout,435,710,N 01
+N 01,lake trout,433,750,N 01
+N 01,lake trout,442,770,N 01
+N 01,lake trout,496,1200,N 01
+N 01,lake trout,397,540,N 01
+N 01,lake trout,493,1120,N 01
+N 01,lake trout,484,1100,N 01
+N 01,lake trout,514,1350,N 01
+N 01,lake trout,459,1000,N 01
+N 01,lake trout,491,1200,N 01
+N 01,lake trout,458,930,N 01
+N 01,lake trout,492,1150,N 01
+N 01,lake trout,474,1000,N 01
+N 01,lake trout,485,1000,N 01
+N 01,lake trout,447,850,N 01
+N 01,lake trout,455,905,N 01
+N 01,lake trout,451,875,N 01
+N 01,lake trout,443,820,N 01
+N 01,lake trout,501,1250,N 01
+N 01,lake trout,450,870,N 01
+N 01,lake trout,310,200,N 01
+N 01,lake trout,492,1100,N 01
+N 01,lake trout,402,550,N 01
+N 01,lake trout,480,1000,N 01
+N 01,lake trout,464,850,N 01
+N 01,lake trout,465,840,N 01
+N 01,lake trout,486,1050,N 01
+N 01,lake trout,490,1000,N 01
+N 01,lake trout,482,1000,N 01
+N 01,lake trout,481,970,N 01
+N 01,lake trout,481,950,N 01
+N 01,lake trout,486,1050,N 01
+N 01,lake trout,505,1300,N 01
+N 01,lake trout,298,165,N 01
+N 01,lake trout,414,655,N 01
+N 01,lake trout,443,740,N 01
+N 01,lake trout,545,1710,N 01
+N 01,lake trout,469,1000,N 01
+N 01,lake trout,484,1000,N 01
+N 01,lake trout,483,1100,N 01
+N 01,lake trout,394,540,N 01
+N 01,lake trout,460,950,N 01
+N 01,lake trout,410,680,N 01
+N 01,lake trout,482,1250,N 01
+N 01,lake trout,465,88,N 01
+N 01,lake trout,491,1150,N 01
+N 01,lake trout,476,1125,N 01
+N 01,lake trout,570,1600,N 01
+N 01,lake trout,490,1190,N 01
+N 01,lake trout,478,1000,N 01
+N 01,lake trout,416,650,N 01
+N 01,lake trout,460,850,N 01
+N 01,lake trout,507,1250,N 01
+N 01,lake trout,414,645,N 01
+N 01,lake trout,479,950,N 01
+N 01,lake trout,477,1000,N 01
+N 01,lake trout,500,1400,N 01
+N 01,lake trout,525,1400,N 01
+N 01,lake trout,502,1150,N 01
+N 01,lake trout,506,1220,N 01
+N 01,lake trout,209,62,N 01
+N 01,lake trout,399,458,N 01
+N 01,lake trout,400,457,N 01
+N 01,lake trout,328,262,N 01
+N 01,lake trout,212,58,N 01
+N 01,lake trout,513,1000,N 01
+N 01,lake trout,205,54,N 01
+N 01,lake trout,212,74,N 01
+N 01,lake trout,511,1194,N 01
+N 01,lake trout,304,186,N 01
+N 01,lake trout,432,640,N 01
+N 01,lake trout,590,1491,N 01
+N 01,lake trout,285,169,N 01
+N 01,lake trout,270,140,N 01
+N 01,lake trout,251,106,N 01
+N 01,lake trout,272,132,N 01
+N 01,lake trout,375,389,N 01
+N 01,lake trout,331,262,N 01
+N 01,lake trout,294,172,N 01
+N 01,lake trout,538,1337,N 01
+N 01,lake trout,286,167,N 01
+N 01,lake trout,516,1000,N 01
+N 01,lake trout,515,1214,N 01
+N 01,lake trout,223,79,N 01
+N 01,lake trout,544,1456,N 01
+N 01,lake trout,593,2259,N 01
+N 01,lake trout,312,215,N 01
+N 01,lake trout,457,741,N 01
+N 01,lake trout,282,166,N 01
+N 01,lake trout,284,150,N 01
+N 01,lake trout,539,1623,N 01
+N 01,lake trout,495,1150,N 01
+N 01,lake trout,470,950,N 01
+N 01,lake trout,486,1050,N 01
+N 01,lake trout,505,1200,N 01
+N 01,lake trout,566,1550,N 01
+N 01,lake trout,467,1050,N 01
+N 01,lake trout,500,1050,N 01
+N 01,lake trout,498,1050,N 01
+N 01,lake trout,517,1150,N 01
+N 01,lake trout,500,1250,N 01
+N 01,lake trout,484,950,N 01
+N 01,lake trout,491,1100,N 01
+N 01,lake trout,475,910,N 01
+N 01,lake trout,486,1100,N 01
+N 01,lake trout,513,1300,N 01
+N 01,lake trout,499,1150,N 01
+N 01,lake trout,491,1100,N 01
+N 01,lake trout,448,895,N 01
+N 01,lake trout,511,1450,N 01
+N 01,lake trout,490,1100,N 01
+N 01,lake trout,520,1450,N 01
+N 01,lake trout,503,1300,N 01
+N 01,lake trout,488,940,N 01
+N 01,lake trout,481,1100,N 01
+N 01,lake trout,485,1100,N 01
+N 01,lake trout,500,1050,N 01
+N 01,lake trout,485,1200,N 01
+N 01,lake trout,485,1100,N 01
+N 01,lake trout,480,1000,N 01
+N 01,lake trout,512,1250,N 01
+N 01,lake trout,495,1500,N 01
+N 01,lake trout,499,1200,N 01
+N 01,lake trout,510,1300,N 01
+N 01,lake trout,485,1200,N 01
+N 01,lake trout,492,1100,N 01
+N 01,lake trout,493,1150,N 01
+N 01,lake trout,495,1150,N 01
+N 01,lake trout,497,1100,N 01
+N 01,lake trout,502,1250,N 01
+N 01,lake trout,502,1200,N 01
+N 01,lake trout,456,900,N 01
+N 01,lake trout,494,1150,N 01
+N 01,lake trout,NA,NA,N 01
+N 01,lake trout,503,1100,N 01
+N 01,lake trout,555,1600,N 01
+N 01,lake trout,505,1300,N 01
+N 01,lake trout,499,1150,N 01
+N 01,lake trout,485,1150,N 01
+N 01,lake trout,199,44,N 01
+N 01,lake trout,289,172,N 01
+N 01,lake trout,303,197,N 01
+N 01,lake trout,279,153,N 01
+N 01,lake trout,182,42,N 01
+N 01,lake trout,308,190,N 01
+N 01,lake trout,273,125,N 01
+N 01,lake trout,203,53,N 01
+N 01,lake trout,286,156,N 01
+N 01,lake trout,400,497,N 01
+N 01,lake trout,277,148,N 01
+N 01,lake trout,211,57,N 01
+N 01,lake trout,292,168,N 01
+N 01,lake trout,194,51,N 01
+N 01,lake trout,200,49,N 01
+N 01,lake trout,311,193,N 01
+N 01,lake trout,198,40,N 01
+N 01,lake trout,210,70,N 01
+N 01,lake trout,194,43,N 01
+N 01,lake trout,216,61,N 01
+N 01,lake trout,343,265,N 01
+N 01,lake trout,213,59,N 01
+N 01,lake trout,287,175,N 01
+N 01,lake trout,300,188,N 01
+N 01,lake trout,546,1395,N 01
+N 01,lake trout,293,183,N 01
+N 01,lake trout,321,260,N 01
+N 01,lake trout,272,140,N 01
+N 01,lake trout,273,134,N 01
+N 01,lake trout,348,302,N 01
+N 01,lake trout,204,54,N 01
+N 01,lake trout,274,135,N 01
+N 01,lake trout,352,308,N 01
+N 01,lake trout,199,62,N 01
+N 01,lake trout,485,1230,N 01
+N 01,lake trout,496,1100,N 01
+N 01,lake trout,515,1250,N 01
+N 01,lake trout,515,1275,N 01
+N 01,lake trout,495,1075,N 01
+N 01,lake trout,505,975,N 01
+N 01,lake trout,489,1200,N 01
+N 01,lake trout,500,1200,N 01
+N 01,lake trout,505,1400,N 01
+N 01,lake trout,510,1125,N 01
+N 01,lake trout,500,1175,N 01
+N 01,lake trout,585,1925,N 01
+N 01,lake trout,516,1225,N 01
+N 01,lake trout,182,50,N 01
+N 01,lake trout,475,1000,N 01
+N 01,lake trout,482,900,N 01
+N 01,lake trout,495,900,N 01
+N 01,lake trout,500,1050,N 01
+N 01,lake trout,482,1125,N 01
+N 01,lake trout,504,1150,N 01
+N 01,lake trout,513,1350,N 01
+N 01,lake trout,498,1100,N 01
+N 01,lake trout,310,230,N 01
+N 01,lake trout,490,1050,N 01
+N 01,lake trout,492,900,N 01
+N 01,lake trout,495,1100,N 01
+N 01,lake trout,531,1530,N 01
+N 01,lake trout,499,980,N 01
+N 01,lake trout,492,1010,N 01
+N 01,lake trout,485,960,N 01
+N 01,lake trout,495,1015,N 01
+N 01,lake trout,512,1028,N 01
+N 01,lake trout,504,1172,N 01
+N 01,lake trout,489,1022,N 01
+N 01,lake trout,510,1100,N 01
+N 01,lake trout,491,1050,N 01
+N 01,lake trout,472,850,N 01
+N 01,lake trout,529,1150,N 01
+N 01,lake trout,480,945,N 01
+NE 12,lake trout,206,83,NE 12
+NE 12,lake trout,191,48,NE 12
+NE 12,lake trout,228,98,NE 12
+NE 12,lake trout,208,65,NE 12
+NE 12,lake trout,228,90,NE 12
+NE 12,lake trout,215,86,NE 12
+NE 12,lake trout,256,120,NE 12
+NE 12,lake trout,330,305,NE 12
+NE 12,lake trout,368,460,NE 12
+NE 12,lake trout,416,580,NE 12
+NE 12,lake trout,303,220,NE 12
+NE 12,lake trout,459,950,NE 12
+NE 12,lake trout,433,740,NE 12
+NE 12,lake trout,472,1150,NE 12
+NE 12,lake trout,415,580,NE 12
+NE 12,lake trout,445,970,NE 12
+NE 12,lake trout,455,1100,NE 12
+NE 12,lake trout,137,18,NE 12
+NE 12,lake trout,143,19,NE 12
+NE 12,lake trout,285,195,NE 12
+NE 12,lake trout,370,375,NE 12
+NE 12,lake trout,356,355,NE 12
+NE 12,lake trout,525,1500,NE 12
+NE 12,lake trout,477,1100,NE 12
+NE 12,lake trout,490,1200,NE 12
+NE 12,lake trout,567,1400,NE 12
+NE 12,lake trout,280,172,NE 12
+NE 12,lake trout,187,54,NE 12
+NE 12,lake trout,135,17.5,NE 12
+NE 12,lake trout,423,747,NE 12
+NE 12,lake trout,418,725,NE 12
+NE 12,lake trout,495,1300,NE 12
+NE 12,lake trout,328,285,NE 12
+NE 12,lake trout,225,76,NE 12
+NE 12,lake trout,164,27.5,NE 12
+NE 12,lake trout,141,19.5,NE 12
+NE 12,lake trout,488,1260,NE 12
+NE 12,lake trout,424,841,NE 12
+NE 12,lake trout,135,19.5,NE 12
+NE 12,lake trout,147,25.5,NE 12
+NE 12,lake trout,138,19,NE 12
+NE 12,lake trout,343,331,NE 12
+NE 12,lake trout,505,1400,NE 12
+NE 12,lake trout,462,929,NE 12
+NE 12,lake trout,448,928,NE 12
+NE 12,lake trout,360,440,NE 12
+NE 12,lake trout,331,340,NE 12
+NE 12,lake trout,340,370,NE 12
+NE 12,lake trout,324,275,NE 12
+NE 12,lake trout,288,182,NE 12
+NE 12,lake trout,262,134,NE 12
+NE 12,lake trout,240,108,NE 12
+NE 12,lake trout,207,65,NE 12
+NE 12,lake trout,482,1050,NE 12
+NE 12,lake trout,206,NA,NE 12
+NE 12,lake trout,367,375,NE 12
+NE 12,lake trout,465,1000,NE 12
+NE 12,lake trout,421,641,NE 12
+NE 12,lake trout,432,631,NE 12
+NE 12,lake trout,502,1450,NE 12
+NE 12,lake trout,443,795,NE 12
+NE 12,lake trout,259,132,NE 12
+NE 12,lake trout,299,221,NE 12
+NE 12,lake trout,268,170,NE 12
+NE 12,lake trout,144,23.5,NE 12
+NE 12,lake trout,125,13.1,NE 12
+NE 12,lake trout,454,895,NE 12
+NE 12,lake trout,493,1050,NE 12
+NE 12,lake trout,480,1100,NE 12
+NE 12,lake trout,330,297,NE 12
+NE 12,lake trout,305,250,NE 12
+NE 12,lake trout,255,148,NE 12
+NE 12,lake trout,208,70,NE 12
+NE 12,lake trout,435,810,NE 12
+NE 12,lake trout,477,1040,NE 12
+NE 12,lake trout,387,465,NE 12
+NE 12,lake trout,348,329,NE 12
+NE 12,lake trout,428,600,NE 12
+NE 12,lake trout,344,355,NE 12
+NE 12,lake trout,283,208,NE 12
+NE 12,lake trout,206,71,NE 12
+NE 12,lake trout,263,155,NE 12
+NE 12,lake trout,425,730,NE 12
+NE 12,lake trout,295,205,NE 12
+NE 12,lake trout,383,430,NE 12
+NE 12,lake trout,482,1150,NE 12
+NE 12,lake trout,285,185,NE 12
+NE 12,lake trout,211,68,NE 12
+NE 12,lake trout,417,745,NE 12
+NE 12,lake trout,444,870,NE 12
+NE 12,lake trout,490,1050,NE 12
+NE 12,lake trout,511,1490,NE 12
+NE 12,lake trout,509,1120,NE 12
+NE 12,lake trout,484,1030,NE 12
+NE 12,lake trout,382,525,NE 12
+NE 12,lake trout,300,235,NE 12
+NE 12,lake trout,544,930,NE 12
+NE 12,lake trout,482,100,NE 12
+NE 12,lake trout,443,840,NE 12
+NE 12,lake trout,298,240,NE 12
+NE 12,lake trout,247,138,NE 12
+NE 12,lake trout,NA,58,NE 12
+NE 12,lake trout,311,282,NE 12
+NE 12,lake trout,387,638,NE 12
+NE 12,lake trout,432,895,NE 12
+NE 12,lake trout,215,88,NE 12
+NE 12,lake trout,204,72,NE 12
+NE 12,lake trout,230,98,NE 12
+NE 12,lake trout,413,760,NE 12
+NE 12,lake trout,312,250,NE 12
+NE 12,lake trout,341,375,NE 12
+NE 12,lake trout,192,43,NE 12
+NE 12,lake trout,210,57,NE 12
+NE 12,lake trout,244,100,NE 12
+NE 12,lake trout,206,76,NE 12
+NE 12,lake trout,221,97,NE 12
+NE 12,lake trout,215,90,NE 12
+NE 12,lake trout,331,370,NE 12
+NE 12,lake trout,415,705,NE 12
+NE 12,lake trout,218,100,NE 12
+NE 12,lake trout,180,58,NE 12
+NE 12,lake trout,192,66,NE 12
+NE 12,lake trout,176,50,NE 12
+NE 12,lake trout,180,55,NE 12
+NE 12,lake trout,190,65,NE 12
+NE 12,lake trout,285,220,NE 12
+NE 12,lake trout,302,285,NE 12
+NE 12,lake trout,296,66,NE 12
+NE 12,lake trout,225,105,NE 12
+NE 12,lake trout,210,76,NE 12
+NE 12,lake trout,204,82.5,NE 12
+NE 12,lake trout,203,86,NE 12
+NE 12,lake trout,261,180,NE 12
+NE 12,lake trout,235,130,NE 12
+NE 12,lake trout,200,80,NE 12
+NE 12,lake trout,180,57,NE 12
+NE 12,lake trout,295,305,NE 12
+NE 12,lake trout,345,450,NE 12
+NE 12,lake trout,210,88,NE 12
+NE 12,lake trout,207,80,NE 12
+NE 12,lake trout,225,110,NE 12
+NE 12,lake trout,265,205,NE 12
+NE 12,lake trout,177,51,NE 12
+NE 12,lake trout,217,100,NE 12
+NE 12,lake trout,209,73,NE 12
+NE 12,lake trout,318,310,NE 12
+NE 12,lake trout,238,140,NE 12
+NE 12,lake trout,181,50,NE 12
+NE 12,lake trout,248,175,NE 12
+NE 12,lake trout,176,65,NE 12
+NE 12,lake trout,188,63,NE 12
+NE 12,lake trout,217,100,NE 12
+NE 12,lake trout,204,85,NE 12
+NE 12,lake trout,208,84,NE 12
+NE 12,lake trout,203,93,NE 12
+NE 12,lake trout,238,160,NE 12
+NE 12,lake trout,186,67,NE 12
+NE 12,lake trout,193,73,NE 12
+NE 12,lake trout,205,96,NE 12
+NE 12,lake trout,220,90,NE 12
+NE 12,lake trout,216,97,NE 12
+NE 12,lake trout,210,95,NE 12
+NE 12,lake trout,253,179,NE 12
+NE 12,lake trout,222,92.5,NE 12
+NE 12,lake trout,250,171,NE 12
+NE 12,lake trout,196,72,NE 12
+NE 12,lake trout,197,75,NE 12
+NE 12,lake trout,183,58.3,NE 12
+NE 12,lake trout,204,80,NE 12
+NE 12,lake trout,206,85.5,NE 12
+NE 12,lake trout,240,139,NE 12
+NE 12,lake trout,248,169,NE 12
+NE 12,lake trout,182,57,NE 12
+NE 12,lake trout,203,82.5,NE 12
+NE 12,lake trout,193,76.5,NE 12
+NE 12,lake trout,210,99,NE 12
+NE 12,lake trout,423,630,NE 12
+NE 12,lake trout,425,640,NE 12
+NE 12,lake trout,407,600,NE 12
+NE 12,lake trout,430,670,NE 12
+NE 12,lake trout,459,1100,NE 12
+NE 12,lake trout,444,770,NE 12
+NE 12,lake trout,444,830,NE 12
+NE 12,lake trout,460,900,NE 12
+NE 12,lake trout,439,790,NE 12
+NE 12,lake trout,120,11,NE 12
+NE 12,lake trout,120,9,NE 12
+NE 12,lake trout,502,1240,NE 12
+NE 12,lake trout,499,1310,NE 12
+NE 12,lake trout,508,1380,NE 12
+NE 12,lake trout,502,1300,NE 12
+NE 12,lake trout,465,1000,NE 12
+NE 12,lake trout,479,1050,NE 12
+NE 12,lake trout,374,385,NE 12
+NE 12,lake trout,356,370,NE 12
+NE 12,lake trout,367,385,NE 12
+NE 12,lake trout,341,299,NE 12
+NE 12,lake trout,235,100,NE 12
+NE 12,lake trout,369,380,NE 12
+NE 12,lake trout,232,95,NE 12
+NE 12,lake trout,549,1500,NE 12
+NE 12,lake trout,489,1140,NE 12
+NE 12,lake trout,527,1750,NE 12
+NE 12,lake trout,574,1500,NE 12
+NE 12,lake trout,537,1400,NE 12
+NE 12,lake trout,527,NA,NE 12
+NE 12,lake trout,515,1400,NE 12
+NE 12,lake trout,267,145,NE 12
+NE 12,lake trout,335,310,NE 12
+NE 12,lake trout,258,120,NE 12
+NE 12,lake trout,251,115,NE 12
+NE 12,lake trout,211,58,NE 12
+NE 12,lake trout,405,430,NE 12
+NE 12,lake trout,269,122,NE 12
+NE 12,lake trout,328,252,NE 12
+NE 12,lake trout,549,1584,NE 12
+NE 12,lake trout,261,109,NE 12
+NE 12,lake trout,375,398,NE 12
+NE 12,lake trout,532,1378,NE 12
+NE 12,lake trout,385,428,NE 12
+NE 12,lake trout,419,525,NE 12
+NE 12,lake trout,517,1233,NE 12
+NE 12,lake trout,407,488,NE 12
+NE 12,lake trout,540,1579,NE 12
+NE 12,lake trout,371,351,NE 12
+NE 12,lake trout,245,102,NE 12
+NE 12,lake trout,535,1200,NE 12
+NE 12,lake trout,360,375,NE 12
+NE 12,lake trout,335,270,NE 12
+NE 12,lake trout,504,1325,NE 12
+NE 12,lake trout,357,340,NE 12
+NE 12,lake trout,302,235,NE 12
+NE 12,lake trout,538,1500,NE 12
+NE 12,lake trout,469,815,NE 12
+NE 12,lake trout,521,1275,NE 12
+NE 12,lake trout,527,1600,NE 12
+NE 12,lake trout,572,2250,NE 12
+NE 12,lake trout,250,116.5,NE 12
+NE 12,lake trout,371,365,NE 12
+NE 12,lake trout,535,1694,NE 12
+NE 12,lake trout,530,1520,NE 12
+NE 12,lake trout,537,1634,NE 12
+NE 12,lake trout,365,408,NE 12
+NE 12,lake trout,525,1641,NE 12
+NE 12,lake trout,511,1266,NE 12
+NE 12,lake trout,516,1508,NE 12
+NE 12,lake trout,528,1496,NE 12
+NE 12,lake trout,522,1468,NE 12
+NE 12,lake trout,207,68,NE 12
+NE 12,lake trout,276,163,NE 12
+NE 12,lake trout,325,220,NE 12
+NE 12,lake trout,409,534,NE 12
+NE 12,lake trout,420,612,NE 12
+NE 12,lake trout,427,548,NE 12
+NE 12,lake trout,474,763,NE 12
+NE 12,lake trout,398,500,NE 12
+NE 12,lake trout,382,417,NE 12
+NE 12,lake trout,519,1500,NE 12
+NE 12,lake trout,196,55,NE 12
+NE 12,lake trout,204,60,NE 12
+NE 12,lake trout,265,143,NE 12
+NE 12,lake trout,605,2120,NE 12
+NE 12,lake trout,499,1234,NE 12
+NE 12,lake trout,496,1014,NE 12
+NE 12,lake trout,439,758,NE 12
+NE 12,lake trout,454,751,NE 12
+NE 12,lake trout,509,1211,NE 12
+NE 12,lake trout,369,414,NE 12
+NE 12,lake trout,364,367,NE 12
+NE 12,lake trout,364,360,NE 12
+NE 12,lake trout,406,560,NE 12
+NE 12,lake trout,467,937,NE 12
+NE 12,lake trout,583,2320,NE 12
+NE 12,lake trout,176,162,NE 12
+NE 12,lake trout,505,1292,NE 12
+NE 12,lake trout,257,140,NE 12
+NE 12,lake trout,265,144,NE 12
+NE 12,lake trout,452,883,NE 12
+NE 12,lake trout,266,152,NE 12
+NE 12,lake trout,456,817,NE 12
+NE 12,lake trout,289,195,NE 12
+NE 12,lake trout,523,1268,NE 12
+NE 12,lake trout,542,1417,NE 12
+NE 12,lake trout,439,646,NE 12
+NE 12,lake trout,550,1650,NE 12
+NE 12,lake trout,535,1415,NE 12
+NE 12,lake trout,466,779,NE 12
+NE 12,lake trout,523,1499,NE 12
+NE 12,lake trout,535,1414,NE 12
+NE 12,lake trout,504,1012,NE 12
+NE 12,lake trout,518,1317,NE 12
+NE 12,lake trout,460,1002,NE 12
+NE 12,lake trout,300,197,NE 12
+NE 12,lake trout,299,195,NE 12
+NE 12,lake trout,513,1164,NE 12
+NE 12,lake trout,302,217,NE 12
+NE 12,lake trout,356,354,NE 12
+NE 12,lake trout,326,281,NE 12
+NE 12,lake trout,384,455,NE 12
+NE 12,lake trout,351,344,NE 12
+NE 12,lake trout,520,1380,NE 12
+NE 12,lake trout,498,1088,NE 12
+NE 12,lake trout,303,229,NE 12
+NE 12,lake trout,235,90,NE 12
+NE 12,lake trout,565,1310,NE 12
+NE 12,lake trout,475,578,NE 12
+NE 12,lake trout,217,44,NE 12
+NE 12,lake trout,377,219,NE 12
+NE 12,lake trout,520,670,NE 12
+NE 12,lake trout,470,450,NE 12
+NE 12,lake trout,220,70,NE 12
+NE 12,lake trout,221,78,NE 12
+NE 12,lake trout,226,90,NE 12
+NE 12,lake trout,235,90,NE 12
+NE 12,lake trout,255,122,NE 12
+NE 12,lake trout,331,219,NE 12
+NE 12,lake trout,445,241,NE 12
+NE 12,lake trout,404,527,NE 12
+NE 12,lake trout,553,1907,NE 12
+NE 12,lake trout,523,1422,NE 12
+NE 12,lake trout,457,750,NE 12
+NE 12,lake trout,360,352,NE 12
+NE 12,lake trout,108,10,NE 12
+NE 12,lake trout,146,22.6,NE 12
+NE 14,lake trout,229,86,NE 14
+NE 14,lake trout,246,111,NE 14
+NE 14,lake trout,NA,NA,NE 14
+NE 14,lake trout,251,130,NE 14
+NE 14,lake trout,484,1210,NE 14
+NE 14,lake trout,252,145,NE 14
+NE 14,lake trout,514,1400,NE 14
+NE 14,lake trout,496,1210,NE 14
+NE 14,lake trout,260,162,NE 14
+NE 14,lake trout,484,1350,NE 14
+NE 14,lake trout,524,1720,NE 14
+NE 14,lake trout,479,1920,NE 14
+NE 14,lake trout,499,1190,NE 14
+NE 14,lake trout,478,1080,NE 14
+NE 14,lake trout,526,1120,NE 14
+NE 14,lake trout,520,1550,NE 14
+NE 14,lake trout,472,990,NE 14
+NE 14,lake trout,490,1200,NE 14
+NE 14,lake trout,487,1050,NE 14
+NE 14,lake trout,482,1150,NE 14
+NE 14,lake trout,501,1450,NE 14
+NE 14,lake trout,495,1200,NE 14
+NE 14,lake trout,519,1330,NE 14
+NE 14,lake trout,526,1600,NE 14
+NE 14,lake trout,529,1300,NE 14
+NE 14,lake trout,410,565,NE 14
+NE 14,lake trout,476,1100,NE 14
+NE 14,lake trout,429,775,NE 14
+NE 14,lake trout,493,1150,NE 14
+NE 14,lake trout,492,1150,NE 14
+NE 14,lake trout,549,1650,NE 14
+NE 14,lake trout,343,1475,NE 14
+NE 14,lake trout,497,1300,NE 14
+NE 14,lake trout,491,1075,NE 14
+NE 14,lake trout,493,1225,NE 14
+NE 14,lake trout,481,1225,NE 14
+NE 14,lake trout,485,1200,NE 14
+NE 14,lake trout,486,1125,NE 14
+NE 14,lake trout,539,1575,NE 14
+NE 14,lake trout,491,1225,NE 14
+NE 14,lake trout,486,1020,NE 14
+NE 14,lake trout,505,1040,NE 14
+NE 14,lake trout,436,675,NE 14
+NE 14,lake trout,458,1015,NE 14
+NE 14,lake trout,552,2018,NE 14
+NE 14,lake trout,434,755,NE 14
+NE 14,lake trout,442,785,NE 14
+NE 14,lake trout,418,606,NE 14
+NE 14,lake trout,513,1025,NE 14
+NE 14,lake trout,442,781,NE 14
+NE 14,lake trout,436,745,NE 14
+NE 14,lake trout,460,1005,NE 14
+NE 14,lake trout,461,855,NE 14
+NE 14,lake trout,455,838,NE 14
+NE 14,lake trout,433,680,NE 14
+NE 14,lake trout,364,375,NE 14
+NE 14,lake trout,297,207,NE 14
+NE 14,lake trout,325,287,NE 14
+NE 14,lake trout,285,180,NE 14
+NE 14,lake trout,233,102,NE 14
+NE 14,lake trout,214,78,NE 14
+NE 14,lake trout,204,88,NE 14
+NE 14,lake trout,228,93,NE 14
+NE 14,lake trout,162,39,NE 14
+NE 14,lake trout,152,30,NE 14
+NE 14,lake trout,158,33,NE 14
+NE 14,lake trout,165,34,NE 14
+NE 14,lake trout,154,29,NE 14
+NE 14,lake trout,151,33,NE 14
+NE 14,lake trout,521,1500,NE 14
+NE 14,lake trout,487,1300,NE 14
+NE 14,lake trout,515,1300,NE 14
+NE 14,lake trout,512,1570,NE 14
+NE 14,lake trout,489,1200,NE 14
+NE 14,lake trout,425,1120,NE 14
+NE 14,lake trout,485,1050,NE 14
+NE 14,lake trout,468,1150,NE 14
+NE 14,lake trout,492,1150,NE 14
+NE 14,lake trout,362,412,NE 14
+NE 14,lake trout,302,240,NE 14
+NE 14,lake trout,291,135,NE 14
+NE 14,lake trout,443,910,NE 14
+NE 14,lake trout,537,2100,NE 14
+NE 14,lake trout,471,1100,NE 14
+NE 14,lake trout,490,1200,NE 14
+NE 14,lake trout,433,690,NE 14
+NE 14,lake trout,187,62,NE 14
+NE 14,lake trout,530,1750,NE 14
+NE 14,lake trout,431,665,NE 14
+NE 14,lake trout,471,905,NE 14
+NE 14,lake trout,190,53,NE 14
+NE 14,lake trout,189,58,NE 14
+NE 14,lake trout,134,78,NE 14
+NE 14,lake trout,480,1050,NE 14
+NE 14,lake trout,445,815,NE 14
+NE 14,lake trout,474,1100,NE 14
+NE 14,lake trout,505,1650,NE 14
+NE 14,lake trout,472,815,NE 14
+NE 14,lake trout,454,825,NE 14
+NE 14,lake trout,413,560,NE 14
+NE 14,lake trout,473,980,NE 14
+NE 14,lake trout,498,1150,NE 14
+NE 14,lake trout,384,446,NE 14
+NE 14,lake trout,510,1274,NE 14
+NE 14,lake trout,505,1232,NE 14
+NE 14,lake trout,479,1060,NE 14
+NE 14,lake trout,480,1069,NE 14
+NE 14,lake trout,464,1161,NE 14
+NE 14,lake trout,335,307,NE 14
+NE 14,lake trout,320,263,NE 14
+NE 14,lake trout,368,395,NE 14
+NE 14,lake trout,335,290,NE 14
+NE 14,lake trout,389,463,NE 14
+NE 14,lake trout,523,1306,NE 14
+NE 14,lake trout,554,1696,NE 14
+NE 14,lake trout,462,964,NE 14
+NE 14,lake trout,389,423,NE 14
+NE 14,lake trout,399,498,NE 14
+NE 14,lake trout,454,909,NE 14
+NE 14,lake trout,457,1062,NE 14
+NE 14,lake trout,489,1107,NE 14
+NE 14,lake trout,311,230,NE 14
+NE 14,lake trout,260,129,NE 14
+NE 14,lake trout,479,1044,NE 14
+NE 14,lake trout,467,1009,NE 14
+NE 14,lake trout,468,1018,NE 14
+NE 14,lake trout,489,1095,NE 14
+NE 14,lake trout,313,245,NE 14
+NE 14,lake trout,352,304,NE 14
+NE 14,lake trout,469,995,NE 14
+NE 14,lake trout,503,1094,NE 14
+NE 14,lake trout,463,946,NE 14
+NE 14,lake trout,365,399,NE 14
+NE 14,lake trout,423,684,NE 14
+NE 14,lake trout,324,265,NE 14
+NE 14,lake trout,335,289,NE 14
+Toolik,lake trout,720,3400,Toolik
+Toolik,lake trout,410,NA,Toolik
+Toolik,lake trout,495,950,Toolik
+Toolik,lake trout,630,1900,Toolik
+Toolik,lake trout,475,860,Toolik
+Toolik,lake trout,452,720,Toolik
+Toolik,lake trout,465,800,Toolik
+Toolik,lake trout,455,710,Toolik
+Toolik,lake trout,508,990,Toolik
+Toolik,lake trout,500,925,Toolik
+Toolik,lake trout,233,83,Toolik
+Toolik,lake trout,441,665,Toolik
+Toolik,lake trout,490,920,Toolik
+Toolik,lake trout,463,790,Toolik
+Toolik,lake trout,471,800,Toolik
+Toolik,lake trout,474,960,Toolik
+Toolik,lake trout,462,885,Toolik
+Toolik,lake trout,468,750,Toolik
+Toolik,lake trout,489,935,Toolik
+Toolik,lake trout,454,730,Toolik
+Toolik,lake trout,450,725,Toolik
+Toolik,lake trout,521,1300,Toolik
+Toolik,lake trout,487,1100,Toolik
+Toolik,lake trout,299,195,Toolik
+Toolik,lake trout,275,160,Toolik
+Toolik,lake trout,337,285,Toolik
+Toolik,lake trout,437,650,Toolik
+Toolik,lake trout,347,315,Toolik
+Toolik,lake trout,292,200,Toolik
+Toolik,lake trout,415,575,Toolik
+Toolik,lake trout,427,665,Toolik
+Toolik,lake trout,411,555,Toolik
+Toolik,lake trout,525,1400,Toolik
+Toolik,lake trout,507,1200,Toolik
+Toolik,lake trout,431,675,Toolik
+Toolik,lake trout,445,780,Toolik
+Toolik,lake trout,442,670,Toolik
+Toolik,lake trout,503,1300,Toolik
+Toolik,lake trout,512,1500,Toolik
+Toolik,lake trout,340,300,Toolik
+Toolik,lake trout,344,320,Toolik
+Toolik,lake trout,371,370,Toolik
+Toolik,lake trout,284,170,Toolik
+Toolik,lake trout,337,305,Toolik
+Toolik,lake trout,311,230,Toolik
+Toolik,lake trout,277,180,Toolik
+Toolik,lake trout,371,NA,Toolik
+Toolik,lake trout,447,675,Toolik
+Toolik,lake trout,431,575,Toolik
+Toolik,lake trout,269,155,Toolik
+Toolik,lake trout,300,205,Toolik
+Toolik,lake trout,265,145,Toolik
+Toolik,lake trout,300,205,Toolik
+Toolik,lake trout,316,250,Toolik
+Toolik,lake trout,320,300,Toolik
+Toolik,lake trout,NA,460,Toolik
+Toolik,lake trout,NA,340,Toolik
+Toolik,lake trout,NA,430,Toolik
+Toolik,lake trout,395,640,Toolik
+Toolik,lake trout,325,310,Toolik
+Toolik,lake trout,NA,415,Toolik
+Toolik,lake trout,NA,360,Toolik
+Toolik,lake trout,NA,350,Toolik
+Toolik,lake trout,NA,165,Toolik
+Toolik,lake trout,490,970,Toolik
+Toolik,lake trout,NA,NA,Toolik
+Toolik,lake trout,490,965,Toolik
+Toolik,lake trout,470,1000,Toolik
+Toolik,lake trout,515,1250,Toolik
+Toolik,lake trout,490,1150,Toolik
+Toolik,lake trout,340,310,Toolik
+Toolik,lake trout,383,410,Toolik
+Toolik,lake trout,439,635,Toolik
+Toolik,lake trout,437,655,Toolik
+Toolik,lake trout,449,770,Toolik
+Toolik,lake trout,444,645,Toolik
+Toolik,lake trout,443,75,Toolik
+Toolik,lake trout,196,56,Toolik
+Toolik,lake trout,430,740,Toolik
+Toolik,lake trout,323,262,Toolik
+Toolik,lake trout,362,430,Toolik
+Toolik,lake trout,445,745,Toolik
+Toolik,lake trout,31,0.165,Toolik
+Toolik,lake trout,461,920,Toolik
+Toolik,lake trout,474,920,Toolik
+Toolik,lake trout,423,640,Toolik
+Toolik,lake trout,370,380,Toolik
+Toolik,lake trout,440,770,Toolik
+Toolik,lake trout,405,570,Toolik
+Toolik,lake trout,539,1200,Toolik
+Toolik,lake trout,366,340,Toolik
+Toolik,lake trout,408,460,Toolik
+Toolik,lake trout,341,252,Toolik
+Toolik,lake trout,330,252,Toolik
+Toolik,lake trout,301,189,Toolik
+Toolik,lake trout,356,329,Toolik
+Toolik,lake trout,392,500,Toolik
+Toolik,lake trout,500,1050,Toolik
+Toolik,lake trout,389,500,Toolik
+Toolik,lake trout,383,400,Toolik
+Toolik,lake trout,392,495,Toolik
+Toolik,lake trout,471,930,Toolik
+Toolik,lake trout,365,320,Toolik
+Toolik,lake trout,340,290,Toolik
+Toolik,lake trout,313,205,Toolik
+Toolik,lake trout,490,1350,Toolik
+Toolik,lake trout,444,745,Toolik
+Toolik,lake trout,375,340,Toolik
+Toolik,lake trout,362,340,Toolik
+Toolik,lake trout,349,295,Toolik
+Toolik,lake trout,400,460,Toolik
+Toolik,lake trout,390,465,Toolik
+Toolik,lake trout,360,315,Toolik
+Toolik,lake trout,377,505,Toolik
+Toolik,lake trout,510,1010,Toolik
+Toolik,lake trout,340,295,Toolik
+Toolik,lake trout,353,335,Toolik
+Toolik,lake trout,360,340,Toolik
+Toolik,lake trout,434,710,Toolik
+Toolik,lake trout,463,925,Toolik
+Toolik,lake trout,470,970,Toolik
+Toolik,lake trout,310,310,Toolik
+Toolik,lake trout,344,268,Toolik
+Toolik,lake trout,465,832,Toolik
+Toolik,lake trout,498,1290,Toolik
+Toolik,lake trout,418,605,Toolik
+Toolik,lake trout,431,648,Toolik
+Toolik,lake trout,383,398,Toolik
+Toolik,lake trout,518,1260,Toolik
+Toolik,lake trout,222,81.5,Toolik
+Toolik,lake trout,424,665,Toolik
+Toolik,lake trout,426,661,Toolik
+Toolik,lake trout,296,194,Toolik
+Toolik,lake trout,275,181,Toolik
+Toolik,lake trout,357,363,Toolik
+Toolik,lake trout,392,471,Toolik
+Toolik,lake trout,299,193,Toolik
+Toolik,lake trout,399,583,Toolik
+Toolik,lake trout,398,568,Toolik
+Toolik,lake trout,443,732,Toolik
+Toolik,lake trout,387,489,Toolik
+Toolik,lake trout,187,59.5,Toolik
+Toolik,lake trout,402,580,Toolik
+Toolik,lake trout,490,1110,Toolik
+Toolik,lake trout,434,741,Toolik
+Toolik,lake trout,427,755,Toolik
+Toolik,lake trout,411,640,Toolik
+Toolik,lake trout,424,625,Toolik
+Toolik,lake trout,259,330,Toolik
+Toolik,lake trout,398,478,Toolik
+Toolik,lake trout,373,415,Toolik
+Toolik,lake trout,363,321,Toolik
+Toolik,lake trout,285,162,Toolik
+Toolik,lake trout,391,490,Toolik
+Toolik,lake trout,374,407,Toolik
+Toolik,lake trout,219,71,Toolik
+Toolik,lake trout,358,361,Toolik
+Toolik,lake trout,410,597,Toolik
+Toolik,lake trout,386,459,Toolik
+Toolik,lake trout,397,473,Toolik
+Toolik,lake trout,415,490,Toolik
+Toolik,lake trout,350,310,Toolik
+Toolik,lake trout,257,110,Toolik
+Toolik,lake trout,362,352,Toolik
+Toolik,lake trout,350,300,Toolik
+Toolik,lake trout,342,275,Toolik
+Toolik,lake trout,300,185,Toolik
+Toolik,lake trout,345,315,Toolik
+Toolik,lake trout,280,155,Toolik
+Toolik,lake trout,315,210,Toolik
+Toolik,lake trout,333,270,Toolik
+Toolik,lake trout,351,340,Toolik
+Toolik,lake trout,373,395,Toolik
+Toolik,lake trout,442,585,Toolik
+Toolik,lake trout,782,170,Toolik
+Toolik,lake trout,411,668,Toolik
+Toolik,lake trout,438,625,Toolik
+Toolik,lake trout,30.5,0.15,Toolik
+Toolik,lake trout,510,1200,Toolik
+Toolik,lake trout,409,520,Toolik
+Toolik,lake trout,61,255,Toolik
+Toolik,lake trout,39,430,Toolik
+Toolik,lake trout,314,230,Toolik
+Toolik,lake trout,339,280,Toolik
+Toolik,lake trout,358,320,Toolik
+Toolik,lake trout,383,440,Toolik
+Toolik,lake trout,384,410,Toolik
+Toolik,lake trout,456,750,Toolik
+Toolik,lake trout,295,220,Toolik
+Toolik,lake trout,281,165,Toolik
+Toolik,lake trout,292,200,Toolik
+Toolik,lake trout,393,450,Toolik
+Toolik,lake trout,379,410,Toolik
+Toolik,lake trout,413,520,Toolik
+Toolik,lake trout,412,540,Toolik
+Toolik,lake trout,402,455,Toolik
+Toolik,lake trout,390,450,Toolik
+Toolik,lake trout,294,190,Toolik
+Toolik,lake trout,330,200,Toolik
+Toolik,lake trout,278,160,Toolik
+Toolik,lake trout,403,490,Toolik
+Toolik,lake trout,350,330,Toolik
+Toolik,lake trout,342,295,Toolik
+Toolik,lake trout,370,450,Toolik
+Toolik,lake trout,126,17,Toolik
+Toolik,lake trout,465,920,Toolik
+Toolik,lake trout,360,370,Toolik
+Toolik,lake trout,324,260,Toolik
+Toolik,lake trout,438,780,Toolik
+Toolik,lake trout,352,310,Toolik
+Toolik,lake trout,305,215,Toolik
+Toolik,lake trout,185,50,Toolik
+Toolik,lake trout,366,380,Toolik
+Toolik,lake trout,323,250,Toolik
+Toolik,lake trout,339,270,Toolik
+Toolik,lake trout,383,425,Toolik
+Toolik,lake trout,374,160,Toolik
+Toolik,lake trout,263,130,Toolik
+Toolik,lake trout,131,17.5,Toolik
+Toolik,lake trout,451,810,Toolik
+Toolik,lake trout,406,520,Toolik
+Toolik,lake trout,390,500,Toolik
+Toolik,lake trout,485,1000,Toolik
+Toolik,lake trout,87,4.6,Toolik
+Toolik,lake trout,436,726,Toolik
+Toolik,lake trout,486,954,Toolik
+Toolik,lake trout,497,1035,Toolik
+Toolik,lake trout,522,885,Toolik
+Toolik,lake trout,398,523,Toolik
+Toolik,lake trout,454,755,Toolik
+Toolik,lake trout,357,366,Toolik
+Toolik,lake trout,470,990,Toolik
+Toolik,lake trout,387,462,Toolik
+Toolik,lake trout,411,473,Toolik
+Toolik,lake trout,375,386,Toolik
+Toolik,lake trout,319,259,Toolik
+Toolik,lake trout,301,214,Toolik
+Toolik,lake trout,330,302,Toolik
+Toolik,lake trout,339,374,Toolik
+Toolik,lake trout,250,131,Toolik
+Toolik,lake trout,200,65,Toolik
+Toolik,lake trout,240,108,Toolik
+Toolik,lake trout,236,90,Toolik
+Toolik,lake trout,260,134,Toolik
+Toolik,lake trout,390,427,Toolik
+Toolik,lake trout,411,536,Toolik
+Toolik,lake trout,347,289,Toolik
+Toolik,lake trout,330,275,Toolik
+Toolik,lake trout,352,379,Toolik
+I8,lake trout,NA,854,I8
+Toolik,lake trout,NA,430,Toolik
+Toolik,lake trout,NA,440,Toolik
+Toolik,lake trout,NA,300,Toolik
+I8,lake trout,NA,552,I8
+I8,lake trout,NA,742,I8
+I8,lake trout,NA,910,I8
+I8,lake trout,NA,529,I8
+NE 14,lake trout,NA,500.6,NE 14
+NE 14,lake trout,NA,406.2,NE 14
+NE 14,lake trout,NA,1307.2,NE 14
+NE 14,lake trout,NA,384.8,NE 14
