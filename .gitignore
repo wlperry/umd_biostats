@@ -11,6 +11,14 @@
 /ms_templates/
 /about_cache/
 /test_overviews/
+/admin/
+/archive/
+/docs/
+/ecostats_assignments/
+/ecostats_homework/
+/ecostats_lectures/
+/ecostats_stat_overview/
+/images/
 
 # File types to ignore
 *.qmd
