@@ -26,8 +26,8 @@ format:
 ::::: columns
 ::: {.column width="60%"}
 -   Bill Perry
--   Office is in XXXX
--   Phone is XXXX
+-   Office is in SSB 13
+-   Phone is not available yet ; )
 -   Email is wlperry\@d.umn.edu
 :::
 

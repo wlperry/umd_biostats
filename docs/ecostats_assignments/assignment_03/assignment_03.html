@@ -8,7 +8,7 @@
 
 <meta name="author" content="Bill Perry">
 
-<title>assignment_03 factorial anovas – Bill’s Biostats Website</title>
+<title>assignment_03 – Bill’s Biostats Website</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -5270,13 +5270,13 @@ padding: 6px !important;
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="assignment_03 factorial anovas.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="assignment_03.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">assignment_03 factorial anovas</h1>
+<h1 class="title">assignment_03</h1>
 </div>
 
 
@@ -5301,27 +5301,85 @@ padding: 6px !important;
 
 <section id="ecological-statistics-assignment-03" class="level1">
 <h1>Ecological Statistics Assignment 03</h1>
-<p>Females of the yellow dung fly, <em>Scathophaga stercoraria</em>, mate with multiple males, leading to “sperm competition” among different males trying to fertilize the females eggs.</p>
-<p>What determines a sperm’s competitiveness? To explore this, Hosken, Blanckenhorn, and Garner (2002) tested whether the origin of males and females (fUK or Switzerland) and their interaction influenced the percentage of offspring sired by the second male.</p>
-<p>Our model is:</p>
-<p>Siring by second male = Female + Male + Female * Male</p>
-<section id="biological-hypotheses" class="level3">
-<h3 class="anchored" data-anchor-id="biological-hypotheses"><strong>Biological Hypotheses</strong></h3>
-<p>There are a few possibilities:</p>
+<p>The goal of this assignment is to test whether crayfish chelae (claw) length differs between upstream and downstream locations in six different rivers where waterfalls separate them. We hypothesize that downstream crayfish will have larger chelae due to increased food availability and different selective pressures.</p>
+<p><strong>Yo goal is to use an ANOVA of some sort to analyze this data.</strong></p>
+<section id="there-are-16-columns-in-the-dataframe" class="level2">
+<h2 class="anchored" data-anchor-id="there-are-16-columns-in-the-dataframe">There are 16 columns in the dataframe:</h2>
+<ol type="1">
+<li><p>crayfish_id - crayfish ID sampled</p></li>
+<li><p>river - the river it was collected form</p></li>
+<li><p>position - upstream downstream</p></li>
+<li><p>chelae_length - length of chelae</p></li>
+</ol>
+</section>
+<section id="your-primary-task-is-to-answer-the-following-questions" class="level2">
+<h2 class="anchored" data-anchor-id="your-primary-task-is-to-answer-the-following-questions">Your primary task is to answer the following questions:</h2>
+<p>Your task is to use the dataframe to examine patterns in crayfish chelae lenght in the different rivers upstream and downstream using some form of an ANOVA.</p>
+</section>
+<section id="to-complete-the-task-you-will-submit-two-files" class="level2">
+<h2 class="anchored" data-anchor-id="to-complete-the-task-you-will-submit-two-files">To complete the task you will submit two files</h2>
+<ol type="1">
+<li>one containing your write-up</li>
+<li>another containing fully functional and annotated R code that was used to generate summary statistics, figures and perform analyses.</li>
+</ol>
+<p>Your write-up will include the following sections:</p>
+</section>
+<section id="your-write-up-will-include-the-following-sections" class="level2">
+<h2 class="anchored" data-anchor-id="your-write-up-will-include-the-following-sections">Your write-up will include the following sections:</h2>
+<section id="hypothesis-statements" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-statements">Hypothesis statements</h3>
 <ul>
-<li><p>Females from the UK populations may reject (or accept) more sperm from the second male than females from Switzerland (main effect of female population).</p></li>
-<li><p>Sperm from UK males may have higher (or lower) siring success than sperm from Swiss males (main effect of male population).</p></li>
-<li><p>Alternatively, sperm from Swiss males might have high siring success with Swiss females, while UK male sperm has high success with UK females, suggesting harmonious co-adaptation (interaction).</p></li>
-<li><p>Or perhaps females have evolved to resist local sperm, so sperm from Swiss males has high success with UK females but low success with Swiss females, suggesting intersexual conflict.</p></li>
+<li>In this section you will state the hypotheses you are testing in this assignment in verbal form as well as in mathematical symbol notation.</li>
 </ul>
 </section>
-<section id="the-data" class="level3">
-<h3 class="anchored" data-anchor-id="the-data">The Data</h3>
-<p>The data are in the data subdirectory data - dung_fly_data.csv</p>
-<p>These have been modified slightly such that the first data point is the mating between a UK Female and a Swiss Male</p>
+<section id="statistical-methods-description" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-methods-description">Statistical methods description</h3>
+<ul>
+<li><p>This section will include a detailed description of the statistical analyses you performed:</p>
+<ul>
+<li><p>assumptions of tests</p></li>
+<li><p>how these assumptions were checked</p></li>
+<li><p>name and version of the software used to perform analyses (R and the libraries used)</p></li>
+</ul></li>
+</ul>
 </section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References:</h2>
+<section id="statistical-results-description" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-results-description">Statistical results description</h3>
+<p>In this section you should present a description of the data, report the main trends and results of statistical analyses (together with information about results of assumption testing) in text form (use standard format for reporting results of tests) and refer the reader to any figures and tables summarizing the data. Each figure or table presented <strong>must</strong> be explicitly mentioned in this section, with a short description of the information contained in the table or figure. Remember to include statements on what your results mean for the hypotheses you are testing.</p>
+</section>
+<section id="tables-and-figures" class="level3">
+<h3 class="anchored" data-anchor-id="tables-and-figures">Tables and figures</h3>
+<p>Here you will place all the figures and tables mentioned in the text. Tables go first, followed by figures. Tables and figures should be placed in the same order in which they are mentioned in the body of the text. Each table or figure should be accompanied by an informative caption that will allow the reader to understand what is shown in the table/figure without reference to the text. Captions go below figures and above tables.</p>
+</section>
+<section id="appendix" class="level3">
+<h3 class="anchored" data-anchor-id="appendix">Appendix</h3>
+<p>This section will contain any additional figures (e.g., residual and qq plots). All these figures should also be referred to in the text in the appropriate order.</p>
+</section>
+</section>
+<section id="assignment-tasks" class="level2">
+<h2 class="anchored" data-anchor-id="assignment-tasks">Assignment Tasks:</h2>
+<ul>
+<li><p>State the question and hypotheses using words and math</p></li>
+<li><p>State the type of test you are doing and why</p></li>
+<li><p>State the assumptions of the test</p></li>
+<li><p>Show the model statement you chose and what it means</p></li>
+<li><p>show the assumption tests in the appendix</p></li>
+<li><p>Do the post f tests of the model</p></li>
+<li><p>present the methods and results</p></li>
+<li><p>with final figures for publication</p></li>
+</ul>
+</section>
+<section id="grading-rubric" class="level2">
+<h2 class="anchored" data-anchor-id="grading-rubric"><strong>Grading Rubric:</strong></h2>
+<p>Total is 100 points</p>
+<ul>
+<li>Hypotheses Statements - 10 points</li>
+<li>Statistical Methods - 20 points</li>
+<li>Results Statement - 30 points</li>
+<li>Figure and Table Quality - 20 points</li>
+<li>R Code - 16 points</li>
+<li>Grammar/Writing - 4 points</li>
+</ul>
 
 
 </section>

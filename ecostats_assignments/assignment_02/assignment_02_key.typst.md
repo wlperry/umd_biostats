@@ -1033,7 +1033,8 @@ Log all AIC: 484.87
 
 ## Remove Non-significant Variables
 
-So this means removing area_km2 and watershed_km2 and lets see where we are
+So this means removing area_km2 and watershed_km2 and lets see where we
+are
 
 
 
@@ -1142,7 +1143,8 @@ F-statistic: 143.3 on 4 and 588 DF,  p-value: < 2.2e-16
 
 
 
-Ok now we have cool results of how all of these affect the model and the model looks good...
+Ok now we have cool results of how all of these affect the model and the
+model looks good...
 
 # Get a tidy model
 
@@ -1258,47 +1260,65 @@ final_summary %>%
 
 Interpreting Each Coefficient: 1. Total Nitrogen (tn_ug_l = 6.661e-05)
 
-Meaning: For every 1 μg/L increase in TN, log₁₀(Chl-a) increases by 0.0000666 units Practical interpretation:
+Meaning: For every 1 μg/L increase in TN, log₁₀(Chl-a) increases by
+0.0000666 units Practical interpretation:
 
-A 100 μg/L increase in TN → 0.00666 increase in log₁₀(Chl-a) This equals 10\^0.00666 = 1.015-fold change (1.5% increase in Chl-a)
+A 100 μg/L increase in TN → 0.00666 increase in log₁₀(Chl-a) This equals
+10\^0.00666 = 1.015-fold change (1.5% increase in Chl-a)
 
 Or more meaningfully: A 1000 μg/L increase in TN → 15% increase in Chl-a
 
 2.  Total Phosphorus (tp_ug_l = 3.883e-03)
 
-Meaning: For every 1 μg/L increase in TP, log₁₀(Chl-a) increases by 0.00388 units Practical interpretation:
+Meaning: For every 1 μg/L increase in TP, log₁₀(Chl-a) increases by
+0.00388 units Practical interpretation:
 
-A 10 μg/L increase in TP → 0.0388 increase in log₁₀(Chl-a) This equals 10\^0.0388 = 1.094-fold change (9.4% increase in Chl-a)
+A 10 μg/L increase in TP → 0.0388 increase in log₁₀(Chl-a) This equals
+10\^0.0388 = 1.094-fold change (9.4% increase in Chl-a)
 
 Strong effect: TP has much stronger per-unit effect than TN
 
 3.  Mean Depth (z_mean_m = -3.156e-02)
 
-Meaning: For every 1 meter increase in depth, log₁₀(Chl-a) decreases by 0.0316 units Practical interpretation:
+Meaning: For every 1 meter increase in depth, log₁₀(Chl-a) decreases by
+0.0316 units Practical interpretation:
 
-A 5-meter deeper lake → 0.158 decrease in log₁₀(Chl-a) This equals 10\^-0.158 = 0.695-fold change (30% decrease in Chl-a)
+A 5-meter deeper lake → 0.158 decrease in log₁₀(Chl-a) This equals
+10\^-0.158 = 0.695-fold change (30% decrease in Chl-a)
 
-Clear ecological meaning: Deeper lakes have less algae (light limitation)
+Clear ecological meaning: Deeper lakes have less algae (light
+limitation)
 
 4.  Watershed Land Use (watershed_proportion = 2.524e-01)
 
-Meaning: Lakes with high ag/urban watersheds have 0.252 higher log₁₀(Chl-a) Practical interpretation:
+Meaning: Lakes with high ag/urban watersheds have 0.252 higher
+log₁₀(Chl-a) Practical interpretation:
 
-High ag/urban watersheds → 10\^0.252 = 1.79-fold higher Chl-a 79% more algae in agricultural/urban watersheds vs. natural watersheds
+High ag/urban watersheds → 10\^0.252 = 1.79-fold higher Chl-a 79% more
+algae in agricultural/urban watersheds vs. natural watersheds
 
 Model Performance:
 
-R² = 0.494: Model explains 49% of variation in log(Chl-a) All predictors significant (p \< 0.001) F-statistic highly significant: Overall model is valid
+R² = 0.494: Model explains 49% of variation in log(Chl-a) All predictors
+significant (p \< 0.001) F-statistic highly significant: Overall model
+is valid
 
 Ranking Effect Sizes:
 
-Watershed land use: Strongest effect (79% difference) Lake depth: Moderate-strong effect (30% per 5m) Total phosphorus: Moderate effect per unit, but nutrients vary widely Total nitrogen: Weakest per-unit effect
+Watershed land use: Strongest effect (79% difference) Lake depth:
+Moderate-strong effect (30% per 5m) Total phosphorus: Moderate effect
+per unit, but nutrients vary widely Total nitrogen: Weakest per-unit
+effect
 
-Ecological Interpretation: This model shows that chlorophyll-a concentrations are primarily driven by:
+Ecological Interpretation: This model shows that chlorophyll-a
+concentrations are primarily driven by:
 
-Nutrient inputs (especially phosphorus) Light availability (deeper lakes = less algae) Watershed disturbance (agriculture/urban = more nutrients/algae)
+Nutrient inputs (especially phosphorus) Light availability (deeper lakes
+= less algae) Watershed disturbance (agriculture/urban = more
+nutrients/algae)
 
-The untransformed predictors make this easier to interpret in original units that managers understand!
+The untransformed predictors make this easier to interpret in original
+units that managers understand!
 
 A great write up
 
@@ -1306,49 +1326,107 @@ A great write up
 
 ## Data Characteristics
 
-The dataset comprised 593 lakes across Iowa, Wisconsin, and Michigan, with chlorophyll-a concentrations ranging from 0.5 to 384.2 μg/L (median = 8.7 μg/L). Total nitrogen ranged from 98 to 7,420 μg/L (median = 695 μg/L), while total phosphorus ranged from 3 to 410 μg/L (median = 25 μg/L). Lake areas varied from 0.01 to 647.5 km² (median = 0.4 km²), with mean depths ranging from 0.3 to 21.3 m (median = 3.2 m). Watershed areas ranged from 0.1 to 9,847 km² (median = 23.8 km²), and 47% of lakes had watersheds classified as high agricultural/urban land use (≥50% developed land).
+The dataset comprised 593 lakes across Iowa, Wisconsin, and Michigan,
+with chlorophyll-a concentrations ranging from 0.5 to 384.2 μg/L (median
+= 8.7 μg/L). Total nitrogen ranged from 98 to 7,420 μg/L (median = 695
+μg/L), while total phosphorus ranged from 3 to 410 μg/L (median = 25
+μg/L). Lake areas varied from 0.01 to 647.5 km² (median = 0.4 km²), with
+mean depths ranging from 0.3 to 21.3 m (median = 3.2 m). Watershed areas
+ranged from 0.1 to 9,847 km² (median = 23.8 km²), and 47% of lakes had
+watersheds classified as high agricultural/urban land use (≥50%
+developed land).
 
 ## Model Development and Transformation Analysis
 
-Initial regression analysis using untransformed variables revealed severe violations of model assumptions, with significant heteroscedasticity (Breusch-Pagan test, p \< 0.001) and non-normality of residuals (Shapiro-Wilk test, p \< 0.001). Log₁₀ transformation of the response variable (chlorophyll-a) substantially improved model diagnostics and assumption compliance.
+Initial regression analysis using untransformed variables revealed
+severe violations of model assumptions, with significant
+heteroscedasticity (Breusch-Pagan test, p \< 0.001) and non-normality of
+residuals (Shapiro-Wilk test, p \< 0.001). Log₁₀ transformation of the
+response variable (chlorophyll-a) substantially improved model
+diagnostics and assumption compliance.
 
-Individual predictor transformation analysis using AIC comparisons showed that log transformations of total nitrogen (ΔAIC = 8.7) and total phosphorus (ΔAIC = 15.3) provided substantial model improvements, while transformations of other variables showed minimal benefit (ΔAIC \< 2). However, to maintain interpretability in original measurement units, we retained untransformed predictors in the final model.
+Individual predictor transformation analysis using AIC comparisons
+showed that log transformations of total nitrogen (ΔAIC = 8.7) and total
+phosphorus (ΔAIC = 15.3) provided substantial model improvements, while
+transformations of other variables showed minimal benefit (ΔAIC \< 2).
+However, to maintain interpretability in original measurement units, we
+retained untransformed predictors in the final model.
 
-Multicollinearity assessment revealed acceptable variance inflation factors for all predictors (VIF \< 2.5), indicating minimal redundancy among variables. Partial regression plots confirmed appropriate linear relationships between predictors and the log-transformed response variable.
+Multicollinearity assessment revealed acceptable variance inflation
+factors for all predictors (VIF \< 2.5), indicating minimal redundancy
+among variables. Partial regression plots confirmed appropriate linear
+relationships between predictors and the log-transformed response
+variable.
 
 ## Final Model Selection
 
-Backward stepwise selection based on statistical significance (α = 0.05) resulted in a final model containing four predictors: total nitrogen, total phosphorus, mean depth, and watershed land use proportion. Lake area and watershed area were removed during model selection due to non-significance (p \> 0.05). The final model showed good fit to the data (adjusted R² = 0.490, F₄,₅₈₈ = 143.3, p \< 0.001) and met all regression assumptions based on residual diagnostics.
+Backward stepwise selection based on statistical significance (α = 0.05)
+resulted in a final model containing four predictors: total nitrogen,
+total phosphorus, mean depth, and watershed land use proportion. Lake
+area and watershed area were removed during model selection due to
+non-significance (p \> 0.05). The final model showed good fit to the
+data (adjusted R² = 0.490, F₄,₅₈₈ = 143.3, p \< 0.001) and met all
+regression assumptions based on residual diagnostics.
 
 ## Predictors of Lake Chlorophyll-a Concentrations
 
-The final multiple regression model (Table 1) revealed that all retained predictors significantly influenced log₁₀-transformed chlorophyll-a concentrations. Total phosphorus was the strongest predictor (β = 0.00388, t = 12.51, p \< 0.001), followed by watershed land use (β = 0.252, t = 6.57, p \< 0.001), mean depth (β = -0.0316, t = -5.76, p \< 0.001), and total nitrogen (β = 0.0000666, t = 5.07, p \< 0.001).
+The final multiple regression model (Table 1) revealed that all retained
+predictors significantly influenced log₁₀-transformed chlorophyll-a
+concentrations. Total phosphorus was the strongest predictor (β =
+0.00388, t = 12.51, p \< 0.001), followed by watershed land use (β =
+0.252, t = 6.57, p \< 0.001), mean depth (β = -0.0316, t = -5.76, p \<
+0.001), and total nitrogen (β = 0.0000666, t = 5.07, p \< 0.001).
 
-In terms of ecological significance, lakes with high agricultural/urban watershed land use had 79% higher chlorophyll-a concentrations compared to lakes in predominantly natural watersheds (antilog₁₀ of 0.252 = 1.79). Each 10 μg/L increase in total phosphorus corresponded to a 9.4% increase in chlorophyll-a (antilog₁₀ of 0.0388 = 1.094). Lake depth showed a strong negative relationship, with each additional meter of mean depth associated with a 3.1% decrease in chlorophyll-a concentrations (antilog₁₀ of -0.0316 = 0.969). Total nitrogen showed the weakest per-unit effect, with each 100 μg/L increase corresponding to a 1.5% increase in chlorophyll-a.
+In terms of ecological significance, lakes with high agricultural/urban
+watershed land use had 79% higher chlorophyll-a concentrations compared
+to lakes in predominantly natural watersheds (antilog₁₀ of 0.252 =
+1.79). Each 10 μg/L increase in total phosphorus corresponded to a 9.4%
+increase in chlorophyll-a (antilog₁₀ of 0.0388 = 1.094). Lake depth
+showed a strong negative relationship, with each additional meter of
+mean depth associated with a 3.1% decrease in chlorophyll-a
+concentrations (antilog₁₀ of -0.0316 = 0.969). Total nitrogen showed the
+weakest per-unit effect, with each 100 μg/L increase corresponding to a
+1.5% increase in chlorophyll-a.
 
-Partial R² analysis (Table 2) indicated that total phosphorus explained the largest proportion of variance in chlorophyll-a (16.2%), followed by watershed land use (6.8%), mean depth (5.5%), and total nitrogen (4.2%). Together, these four variables explained 49% of the total variance in log₁₀-transformed chlorophyll-a concentrations across the 593 study lakes.
+Partial R² analysis (Table 2) indicated that total phosphorus explained
+the largest proportion of variance in chlorophyll-a (16.2%), followed by
+watershed land use (6.8%), mean depth (5.5%), and total nitrogen (4.2%).
+Together, these four variables explained 49% of the total variance in
+log₁₀-transformed chlorophyll-a concentrations across the 593 study
+lakes.
 
 ## Model Validation
 
-Diagnostic plots confirmed adequate model performance (Figure 1). Residuals showed random scatter around zero with no systematic patterns, indicating appropriate model specification. The normal Q-Q plot revealed good adherence to normality assumptions, with only minor deviations in the tails. Scale-location plots showed relatively constant variance across fitted values, confirming homoscedasticity. Cook's distance analysis identified no highly influential observations (all values \< 0.02), indicating robust model estimates.
+Diagnostic plots confirmed adequate model performance (Figure 1).
+Residuals showed random scatter around zero with no systematic patterns,
+indicating appropriate model specification. The normal Q-Q plot revealed
+good adherence to normality assumptions, with only minor deviations in
+the tails. Scale-location plots showed relatively constant variance
+across fitted values, confirming homoscedasticity. Cook's distance
+analysis identified no highly influential observations (all values \<
+0.02), indicating robust model estimates.
 
 ------------------------------------------------------------------------
 
-**Table 1.** Multiple regression analysis of log₁₀-transformed chlorophyll-a concentrations in 593 lakes across Iowa, Wisconsin, and Michigan.
+**Table 1.** Multiple regression analysis of log₁₀-transformed
+chlorophyll-a concentrations in 593 lakes across Iowa, Wisconsin, and
+Michigan.
 
 | Predictor | Coefficient | SE | t-value | p-value | 95% CI |
-|------------|------------|------------|------------|------------|------------|
+|----|----|----|----|----|----|
 | Intercept | 0.588 | 0.036 | 16.29 | \<0.001 | 0.517, 0.659 |
 | Total nitrogen (μg/L) | 6.66×10⁻⁵ | 1.32×10⁻⁵ | 5.07 | \<0.001 | 4.08×10⁻⁵, 9.24×10⁻⁵ |
 | Total phosphorus (μg/L) | 0.00388 | 0.00031 | 12.51 | \<0.001 | 0.00327, 0.00449 |
 | Mean depth (m) | -0.0316 | 0.0055 | -5.76 | \<0.001 | -0.0424, -0.0208 |
 | Watershed proportion | 0.252 | 0.038 | 6.57 | \<0.001 | 0.177, 0.327 |
 
-Model: F₄,₅₈₈ = 143.3, p \< 0.001; Adjusted R² = 0.490; Residual SE = 0.407
+Model: F₄,₅₈₈ = 143.3, p \< 0.001; Adjusted R² = 0.490; Residual SE =
+0.407
 
 ------------------------------------------------------------------------
 
-**Table 2.** Partial contributions of predictors to chlorophyll-a variance in the final multiple regression model.
+**Table 2.** Partial contributions of predictors to chlorophyll-a
+variance in the final multiple regression model.
 
 | Predictor            | df  | Sum of Squares | F-value | p-value | Partial R² |
 |----------------------|-----|----------------|---------|---------|------------|
