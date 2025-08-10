@@ -4872,6 +4872,10 @@ padding: 0 10px !important;
 box-sizing: border-box !important;
 }
 
+.column[width*="60"] { width: 60% !important; }
+.column[width*="40"] { width: 40% !important; }
+.column[width*="50"] { width: 50% !important; }
+
 .column img {
 max-width: 100% !important;
 height: auto !important;
@@ -4897,7 +4901,7 @@ align-items: flex-start !important;
 
 
 .reveal h1, .quarto-title-block h1, body h1 {
-font-size: 26px !important;
+font-size: 36px !important; 
 background-color: #70131d !important; 
 color: #F4CD54 !important; 
 padding: 10px 20px !important;
@@ -4910,9 +4914,8 @@ box-sizing: border-box !important;
 align-self: flex-start !important;
 }
 
-
 .reveal h2, .quarto-title-block h2, body h2 {
-font-size: 20px !important;
+font-size: 30px !important; 
 text-align: left !important;
 margin: 10px 0 15px 0 !important;
 padding: 10px 10px !important;
@@ -4924,7 +4927,7 @@ align-self: flex-start !important;
 }
 
 .reveal h3, .reveal h4, .reveal h5 {
-font-size: 18px !important;
+font-size: 24px !important; 
 color: #002147 !important; 
 text-align: left !important;
 margin: 10px 0 5px 0 !important;
@@ -4933,10 +4936,10 @@ align-self: flex-start !important;
 
 
 .reveal ul {
-font-size: 18px !important;
+font-size: 26px !important; 
 color: #002147 !important; 
 margin: 5px 0 15px 0 !important;
-line-height: 1.3 !important;
+line-height: 1.5 !important; 
 display: block !important;
 align-self: flex-start !important;
 width: 100% !important;
@@ -4944,22 +4947,22 @@ padding-left: 20px !important;
 }
 
 .reveal ul li {
-font-size: 18px !important;
+font-size: 26px !important; 
 color: #002147 !important; 
-margin-bottom: 2px !important;
+margin-bottom: 6px !important; 
 display: list-item !important;
 text-align: left !important;
 }
 
 .reveal ul ul {
-font-size: 18px !important;
+font-size: 20px !important; 
 color: #002147 !important; 
 margin-top: 2px !important;
 margin-bottom: 0 !important; 
 padding-left: 20px !important; 
 }
 .reveal ul ul li {
-font-size: 18px !important;
+font-size: 20px !important; 
 color: #002147 !important; 
 margin-bottom: 2px !important;
 }
@@ -4969,7 +4972,7 @@ padding-left: 20px !important;
 margin-bottom: 0 !important;
 }
 .reveal ul ul ul li {
-font-size: 18px !important;
+font-size: 20px !important; 
 color: #002147 !important; 
 }
 
@@ -4981,10 +4984,10 @@ text-align: left !important;
 
 
 .reveal ol {
-font-size: 20px !important; 
+font-size: 26px !important; 
 color: #002147 !important; 
 margin: 5px 0 15px 0 !important;
-line-height: 1.3 !important;
+line-height: 1.5 !important; 
 display: block !important;
 align-self: flex-start !important;
 width: 100% !important;
@@ -4992,22 +4995,22 @@ padding-left: 20px !important;
 }
 
 .reveal ol li {
-font-size: 20px !important;
+font-size: 26px !important; 
 color: #002147 !important; 
-margin-bottom: 5px !important;
+margin-bottom: 6px !important;
 display: list-item !important;
 text-align: left !important;
 }
 
 .reveal ol ol {
-font-size: 18px !important;
+font-size: 20px !important; 
 color: #002147 !important; 
 margin-top: 5px !important;
 margin-bottom: 0 !important; 
 padding-left: 20px !important; 
 }
 .reveal ol ol li {
-font-size: 18px !important;
+font-size: 20px !important; 
 color: #002147 !important; 
 margin-bottom: 3px !important;
 }
@@ -5017,7 +5020,7 @@ padding-left: 18px !important;
 margin-bottom: 0 !important;
 }
 .reveal ol ol ol li {
-font-size: 18px !important;
+font-size: 20px !important; 
 color: #002147 !important; 
 }
 
@@ -5026,13 +5029,14 @@ padding-left: 20px !important;
 margin-bottom: 0 !important;
 }
 .reveal ul ol li {
-font-size: 18px !important; }
+font-size: 20px !important; 
+}
 .reveal ol ul {
 padding-left: 20px !important;
 margin-bottom: 0 !important;
 }
 .reveal ol ul li {
-font-size: 14px !important;
+font-size: 20px !important; 
 }
 
 .reveal ol li::marker,
@@ -5096,10 +5100,11 @@ padding: 20px !important;
 }
 
 .reveal p {
-font-size: 16px !important; 
+font-size: 32px !important; 
 color: #002147 !important;
 margin-bottom: 10px !important;
 text-align: left !important;
+line-height: 1.45 !important; 
 }
 
 .reveal .slides section {
@@ -5121,8 +5126,6 @@ align-items: flex-start !important;
 height: auto !important;
 min-height: 100% !important;
 }
-p {margin: 0; 
-}
 
 .reveal .slides section ul,
 .reveal .slides section ol {
@@ -5138,7 +5141,7 @@ padding: 0 !important;
 }
 
 .reveal p, .reveal ul, .reveal ol, .reveal li {
-max-width: 80ch !important;
+
 word-wrap: break-word !important;
 }
 
@@ -5151,8 +5154,8 @@ word-wrap: break-word !important;
 .reveal pre.sourceCode,
 .reveal div.sourceCode pre {
 font-family: monospace !important;
-font-size: 10px !important; 
-line-height: 1.1 !important; 
+font-size: 14px !important; 
+line-height: 1.2 !important; 
 max-height: 400px !important; 
 overflow-y: auto !important; 
 background-color: #f5f5f5 !important; 
@@ -5167,15 +5170,15 @@ margin: 8px 0 !important;
 .reveal .sourceCode .r,
 .reveal .sourceCode .python,
 .reveal .sourceCode code {
-font-size: 10px !important;
-line-height: 1.1 !important;
+font-size: 14px !important; 
+line-height: 1.2 !important;
 }
 
 .reveal .numberLines pre code,
 .reveal .numberSource pre,
 .reveal .numberSource a.sourceLine {
-font-size: 10px !important;
-line-height: 1.1 !important;
+font-size: 14px !important; 
+line-height: 1.2 !important;
 padding: 0 !important;
 }
 
@@ -5184,10 +5187,10 @@ padding: 0 !important;
 .reveal .cell-output-stdout pre,
 .reveal .cell-output-stderr pre,
 .reveal .output-data-input pre {
-font-size: 10px !important;
+font-size: 14px !important; 
 background-color: #f8f8f8 !important;
 color: #333333 !important;
-line-height: 1.1 !important;
+line-height: 1.2 !important;
 padding: 4px !important;
 }
 
@@ -5195,7 +5198,7 @@ padding: 4px !important;
 .reveal .cell-output table,
 .reveal .cell-output th,
 .reveal .cell-output td {
-font-size: 10px !important;
+font-size: 14px !important; 
 padding: 2px 4px !important;
 }
 
@@ -5231,37 +5234,69 @@ tab-size: 2 !important;
 .reveal .panel-code-output-scroll,
 .reveal .code-panel-source,
 .reveal .code-panel-output {
-font-size: 10px !important;
-line-height: 1.1 !important;
+font-size: 14px !important; 
+line-height: 1.2 !important;
 }
 
 .reveal .tibble,
 .reveal pre.sourceCode {
-font-size: 10px !important;
-line-height: 1.1 !important;
+font-size: 14px !important; 
+line-height: 1.2 !important;
 }
 
 .reveal pre,
 .reveal code,
 .reveal .sourceCode {
-font-size: 10px !important;
-line-height: 1.1 !important;
+font-size: 14px !important; 
+line-height: 1.2 !important;
 }
 
 .reveal .remark-code,
 .reveal .line-numbers {
-font-size: 10px !important;
+font-size: 14px !important; 
 }
 
 .reveal .cell-output-stdout pre:contains("A tibble") {
-font-size: 9px !important;
-}
-
-.reveal .exercise pre code {
 font-size: 13px !important; 
 }
 
+.reveal .exercise pre code {
+font-size: 14px !important; 
+}
 
+
+body:not(.reveal) h1 {
+font-size: 24px !important; 
+background-color: #70131d !important;
+color: #F4CD54 !important;
+padding: 8px 15px !important;
+}
+body:not(.reveal) h2 {
+font-size: 20px !important; 
+padding: 6px 10px !important;
+}
+body:not(.reveal) h3,
+body:not(.reveal) h4,
+body:not(.reveal) h5 {
+font-size: 18px !important; 
+color: #002147 !important;
+}
+
+body:not(.reveal) p {
+font-size: 16px !important;
+color: #002147 !important;
+line-height: 1.6 !important;
+}
+
+body:not(.reveal) ul,
+body:not(.reveal) ol {
+font-size: 16px !important;
+line-height: 1.6 !important;
+}
+body:not(.reveal) ul li,
+body:not(.reveal) ol li {
+font-size: 16px !important;
+}
 
 pre, code,
 pre.sourceCode,
@@ -5320,24 +5355,24 @@ padding: 6px !important;
 
 .kable_wrapper table,
 table.dataTable, table.table {
-font-size: 12px !important; 
+font-size: 12px !important;
 }
 
 .kable_wrapper th, .kable_wrapper td,
 table.dataTable th, table.dataTable td,
 table.table th, table.table td {
-font-size: 12px !important; 
+font-size: 12px !important;
 }
 
 .reveal .slides table.table,
 .reveal .slides .kable_wrapper table {
-font-size: 12px !important; 
+font-size: 12px !important;
 }
 .reveal .slides table.table th,
 .reveal .slides table.table td,
 .reveal .slides .kable_wrapper th,
 .reveal .slides .kable_wrapper td {
-font-size: 12px !important; 
+font-size: 12px !important;
 padding: 4px 6px !important;
 }
 
@@ -5361,12 +5396,10 @@ overflow-y: auto;
 pre {
 white-space: pre !important;
 overflow-y: auto !important;
-
 }
 pre code {
 overflow-y: hidden !important;
 }
-
 
 .cell, .cell-output, .cell-output-display {
 border: none !important;
@@ -5454,7 +5487,7 @@ border: none !important;
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="16_01_lecture_powerpoint_slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="16_01_lecture_powerpoint_slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li><li><a href="16_01_lecture_powerpoint.docx"><i class="bi bi-file-word"></i>MS Word</a></li><li><a href="16_01_lecture_powerpoint.pptx"><i class="bi bi-file-slides"></i>Powerpoint</a></li><li><a href="16_01_lecture_powerpoint.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 

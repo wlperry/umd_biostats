@@ -6,9 +6,22 @@ metadata-files:
 format:
   html:
     output-file: "05_01_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "05_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "05_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "05_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "05_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
+
+
 
 
 
@@ -64,6 +77,12 @@ format:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 
@@ -75,6 +94,12 @@ format:
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -100,11 +125,23 @@ The goals for today
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-2-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -154,11 +191,23 @@ When sample sizes are small, the **t-distribution** is more appropriate than the
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-3-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -197,6 +246,12 @@ When sample sizes are small, the **t-distribution** is more appropriate than the
 ## Practice Exercise 4: Using the t-distribution
 
 Let's compare confidence intervals using the normal approximation (z) versus the t-distribution for our fish data.
+
+
+
+
+
+
 
 
 
@@ -304,6 +359,12 @@ t critical value: 2.262 vs z critical value: 1.96
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -435,6 +496,12 @@ H₁: μ ≠ 240 (The mean fish length in I3 is not 240mm)
 
 
 
+
+
+
+
+
+
 ::: {.cell exercise='true'}
 
 ```{.r .cell-code}
@@ -466,9 +533,21 @@ qqPlot(i3_df$length_mm,
 
 
 
+
+
+
+
+
+
 # Statistical Test of Normality
 
 ## Shapiro-Wilk test
+
+
+
+
+
+
 
 
 
@@ -502,7 +581,19 @@ W = 0.91051, p-value = 0.0001623
 
 
 
+
+
+
+
+
+
 # Checking for Outliers
+
+
+
+
+
+
 
 
 
@@ -527,12 +618,24 @@ i3_df %>% ggplot(aes(lake, length_mm))+geom_boxplot()
 
 
 
+
+
+
+
+
+
 # Practice Exercise 1: One-Sample t-Test
 
 ::: callout-tip
 ## Practice Exercise 1: One-Sample t-Test
 
 Let's perform a one-sample t-test to determine if the mean fish length in I3 Lake differs from 240 mm:
+
+
+
+
+
+
 
 
 
@@ -589,6 +692,12 @@ mean of x
 
 
 
+
+
+
+
+
+
 Interpret this test result by answering these questions:
 
 1.  What was the null hypothesis?
@@ -621,11 +730,23 @@ Hypothesis testing is a systematic way to evaluate research questions using data
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-8-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -661,11 +782,23 @@ Hypothesis testing is a systematic way to evaluate research questions using data
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-9-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -720,6 +853,12 @@ How would you assess this question using what we learned?
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -749,6 +888,12 @@ pine_wind_plot
 # what can you conclude about the fish populations in these two lakes?
 ```
 :::
+
+
+
+
+
+
 
 
 
@@ -808,6 +953,12 @@ Before conducting the test, we need to understand the data for each group.
 
 
 
+
+
+
+
+
+
     ::: {.cell}
     
     ```{.r .cell-code}
@@ -841,9 +992,21 @@ Before conducting the test, we need to understand the data for each group.
 
 
 
+
+
+
+
+
+
 :::
 
 # Visualizing Group Differences
+
+
+
+
+
+
 
 
 
@@ -867,12 +1030,24 @@ pine_wind_plot
 
 
 
+
+
+
+
+
+
 # Practice Exercise 4: Effect Size
 
 ::: callout-tip
 ## Practice Exercise 4: Effect size
 
 We could also look at the difference in means... some cool code here
+
+
+
+
+
+
 
 
 
@@ -904,6 +1079,12 @@ group_summary %>%
 
 
 
+
+
+
+
+
+
 :::
 
 # Practice Exercise 5: ggplot Summary Statistics
@@ -912,6 +1093,12 @@ group_summary %>%
 ## Practice Exercise 5: Using GGPLOT to get summary stats
 
 GGplot also has code to make the mean and standard error plots we are interested in along whit a lot of others
+
+
+
+
+
+
 
 
 
@@ -939,6 +1126,12 @@ pine_mean_se_plot
 ![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-14-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -973,6 +1166,12 @@ Note you need to test each groups separately...
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -989,6 +1188,12 @@ pine_mean_se_plot
 
 
 
+
+
+
+
+
+
 :::
 
 # Practice Exercise 7: Separate Group Data
@@ -999,6 +1204,12 @@ pine_mean_se_plot
 qqplots
 
 Note you need to test each groups separately...
+
+
+
+
+
+
 
 
 
@@ -1037,6 +1248,12 @@ head(leeward_data)
 
 
 
+
+
+
+
+
+
 :::
 
 # Practice Exercise 8: QQ Plot for Windward Data
@@ -1047,6 +1264,12 @@ head(leeward_data)
 qqplots
 
 Note you need to test each groups separately...
+
+
+
+
+
+
 
 
 
@@ -1080,6 +1303,12 @@ qqPlot(windward_data$length_mm,
 
 
 
+
+
+
+
+
+
 :::
 
 # Practice Exercise 9: Shapiro-Wilk Test
@@ -1090,6 +1319,12 @@ qqPlot(windward_data$length_mm,
 Shapiro-Wilk test
 
 Note you need to test each groups separately...
+
+
+
+
+
+
 
 
 
@@ -1135,6 +1370,12 @@ W = 0.96062, p-value = 0.451
 
 
 
+
+
+
+
+
+
 :::
 
 # Practice Exercise 10: QQ Plot for Leeward Data
@@ -1145,6 +1386,12 @@ W = 0.96062, p-value = 0.451
 qqplots
 
 Note you need to test each groups separately...
+
+
+
+
+
+
 
 
 
@@ -1179,6 +1426,12 @@ qqPlot(leeward_data$length_mm,
 
 
 
+
+
+
+
+
+
 :::
 
 # Practice Exercise 11: Shapiro-Wilk for Leeward
@@ -1189,6 +1442,12 @@ qqPlot(leeward_data$length_mm,
 Shapiro-Wilk test
 
 Note you need to test each groups separately...
+
+
+
+
+
+
 
 
 
@@ -1234,6 +1493,12 @@ W = 0.95477, p-value = 0.3425
 
 
 
+
+
+
+
+
+
 :::
 
 # Practice Exercise 12: Combined Normality Test
@@ -1242,6 +1507,12 @@ W = 0.95477, p-value = 0.3425
 ## Practice Exercise 12: Test Normality at one time
 
 There are always a lot of ways to do this in R
+
+
+
+
+
+
 
 
 
@@ -1284,6 +1555,12 @@ print(normality_results)
 
 
 
+
+
+
+
+
+
 :::
 
 # Practice Exercise 13: Test Equal Variances
@@ -1292,6 +1569,12 @@ print(normality_results)
 ## Practice Exercise 13: Test equal variances
 
 Levenes test can be done on the original dataframe
+
+
+
+
+
+
 
 
 
@@ -1337,6 +1620,12 @@ group  1  1.2004 0.2789
 
 
 
+
+
+
+
+
+
 :::
 
 # **Lecture 5:** Conducting the Two-Sample T-Test
@@ -1364,6 +1653,12 @@ Deciding between:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -1377,6 +1672,12 @@ group  1  1.2004 0.2789
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -1396,6 +1697,12 @@ YOUR CODE HERE:
 t = (mean1 - mean2) / sqrt((s1\^2/n1) + (s2\^2/n2))
 
 ::: callout-tip
+
+
+
+
+
+
 
 
 
@@ -1454,6 +1761,12 @@ sample estimates:
 
 
 
+
+
+
+
+
+
 :::
 
 # **Lecture 5:** Interpreting Two-Sample T-Test Results
@@ -1475,11 +1788,23 @@ What can we conclude about the needle lengths on windward vs. leeward sides?
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-24-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -1507,11 +1832,23 @@ What can we conclude about the needle lengths on windward vs. leeward sides?
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-25-1.png){width=576}
 :::
 :::
+
+
+
+
+
+
 
 
 

@@ -5,10 +5,23 @@ metadata-files:
   - ../../_templates/lectures.yml
 format:
   html:
-      output-file: "17_01_lecture_powerpoint_html.html"
+    output-file: "17_01_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "17_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "17_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "17_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "17_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
+
+
 
 
 
@@ -94,6 +107,12 @@ Eigenvectors, eigenvalues and components
 -   In PCA: take p old variables and transform them into p "new/derived" uncorrelated variables (principal components)
 
 # Data for PCA Analysis
+
+
+
+
+
+
 
 
 
@@ -439,6 +458,12 @@ iris_df
 
 
 
+
+
+
+
+
+
 # Step 1: Explore the Iris Dataset
 
 ::::: columns
@@ -449,6 +474,12 @@ Right is the data on iris from a long dataframe
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -468,6 +499,12 @@ overview_plot
 ![](17_01_lecture_powerpoint_files/figure-html/unnamed-chunk-1-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -496,11 +533,23 @@ overview_plot
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](17_01_lecture_powerpoint_files/figure-html/correaltions-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -529,6 +578,12 @@ overview_plot
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 
@@ -541,6 +596,12 @@ overview_plot
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -565,6 +626,12 @@ overview_plot
 **Let's check these assumptions with our iris data...**
 
 # Step 2: Check PCA Assumptions - Correlations
+
+
+
+
+
+
 
 
 
@@ -604,7 +671,19 @@ petal_width         0.818      -0.366        0.963       1.000
 
 
 
+
+
+
+
+
+
 # Step 2: Check PCA Assumptions - Linearity
+
+
+
+
+
+
 
 
 
@@ -622,7 +701,19 @@ petal_width         0.818      -0.366        0.963       1.000
 
 
 
+
+
+
+
+
+
 # Step 2: Check PCA Assumptions - Outliers
+
+
+
+
+
+
 
 
 
@@ -634,6 +725,12 @@ petal_width         0.818      -0.366        0.963       1.000
 ![](17_01_lecture_powerpoint_files/figure-html/check_outliers-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -668,6 +765,12 @@ How to interpret standardized values: Example: A sepal length of 5.1 cm might be
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -717,6 +820,12 @@ sepal_length  sepal_width petal_length  petal_width
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -751,6 +860,12 @@ We already standardized our data in Step 3, so we tell R not to do it again: - c
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -778,6 +893,12 @@ Cumulative Proportion  0.7296 0.9581 0.99482 1.00000
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -866,6 +987,12 @@ This table helps us decide how many components to keep.
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -916,6 +1043,12 @@ kable(pca_summary, digits = 3)
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -954,6 +1087,12 @@ Look for where the line "bends" or forms an elbow:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](17_01_lecture_powerpoint_files/figure-html/scree_plot-1.png){width=672}
@@ -964,10 +1103,22 @@ Look for where the line "bends" or forms an elbow:
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
 # Step 5: Component Selection Rules
+
+
+
+
+
+
 
 
 
@@ -1012,6 +1163,12 @@ print(paste("Components needed for 80% variance:", components_80_percent))
 
 
 
+
+
+
+
+
+
 # Step 6: Interpret the Components - Loadings
 
 ::::: columns
@@ -1043,6 +1200,12 @@ If PC1 has all negative loadings around -0.5, it means:
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -1089,6 +1252,12 @@ petal_width   petal_width  0.5648565 -0.06694199 -0.6342727  0.5235971
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -1148,11 +1317,23 @@ PC2 (vertical axis, 22.9% variance):
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](17_01_lecture_powerpoint_files/figure-html/loading_visualization-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -1207,6 +1388,12 @@ The practical meaning:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](17_01_lecture_powerpoint_files/figure-html/pca_biplot_species-1.png){width=672}
@@ -1217,10 +1404,22 @@ The practical meaning:
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
 # Step 7: PCA Scores Plot - Alternative Visualization
+
+
+
+
+
+
 
 
 
@@ -1254,6 +1453,12 @@ ggplot(pca_scores, aes(x = PC1, y = PC2, color = species)) +
 
 
 
+
+
+
+
+
+
 # Step 8: Interpret PC1 Results
 
 ### Understanding PC1 Loadings:
@@ -1264,6 +1469,12 @@ The loadings show how each original variable contributes to PC1:
 -   **Sepal width: -0.269** - Moderate negative contribution
 -   **Petal length: 0.580** - Strong positive contribution
 -   **Petal width: 0.565** - Strong positive contribution
+
+
+
+
+
+
 
 
 
@@ -1363,6 +1574,12 @@ cat("\n- Lower PC1 values = larger flowers overall")
 
 
 
+
+
+
+
+
+
 # PC1 Interpretation: Overall Flower Size
 
 ### PC1 Interpretation: Overall flower size (with a twist)
@@ -1396,6 +1613,12 @@ The loadings show how each original variable contributes to PC2:
 -   **Sepal width: -0.923** - Very strong negative contribution
 -   **Petal length: -0.024** - Almost no contribution
 -   **Petal width: -0.067** - Very small negative contribution
+
+
+
+
+
+
 
 
 
@@ -1509,6 +1732,12 @@ cat("\n- Lower PC2 = longer/wider petals relative to sepal width")
 
 
 
+
+
+
+
+
+
 # PC2 Interpretation: Flower Shape Contrast
 
 ### PC2 Interpretation: Correcting the output
@@ -1536,6 +1765,12 @@ PC2 helps distinguish:
 -   This dimension helps separate species that have similar PC1 scores but different sepal proportions
 
 # Step 9: How Well Does PCA Work?
+
+
+
+
+
+
 
 
 
@@ -1573,6 +1808,12 @@ tibble(
 ![](17_01_lecture_powerpoint_files/figure-html/pca_effectiveness-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 

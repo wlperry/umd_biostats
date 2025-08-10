@@ -1,73 +1,24 @@
 ---
 title: "Lecture 12 - Factorial ANOVA of Limpet Egg Production"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: false
-  warning: false
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
 
+metadata-files:
+  - ../../_templates/lectures.yml
 format:
   html:
-    code-overflow: scroll
-    toc: false
-    output-file: "12_01_factorial_anova_html.html"
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch
-    css: ../../css/lecture.css
-    fig-width: 7
-    fig-height: 5
-
-  # RevealJS - UNCHANGED (keeps your two-column layout and large images)
+    output-file: "12_02_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "12_01_factorial_anova_slides.html"
-    self-contained: true
-    css: ../../css/lecture.css
-    slide-number: true
-    transition: fade
-    background-transition: none
-    scrollable: true
-    smaller: true
-    width: 1280
-    height: 720
-    margin: 0.1
-    min-scale: 0.2
-    max-scale: 2.0
-    fig-width: 8
-    fig-height: 5
-
-  # Word format - optimized for printing and document flow
   docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    css: msword.css
-    embed-resources: true
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    df-print: kable     # Better table formatting
-
-  # PowerPoint format - optimized for traditional PowerPoint presentation
+    output-file: "12_01_lecture_powerpoint.docx"
   pptx:
-    reference-doc: ../../ms_templates/lecture_template.pptx
-    embed-resources: true
-    fig-width: 6.5      # Good size for PowerPoint slides
-    fig-height: 4       # Proper aspect ratio for slides
-    fig-dpi: 300        # High resolution for projection
-    df-print: kable     # Better table formatting
-
-editor: visual
+    output-file: "12_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "12_01_lecture_powerpoint.pdf"
 ---
+
+
 
 
 
@@ -460,6 +411,8 @@ The set up and data overview
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -493,21 +446,28 @@ quinn_data %>%
   )
 ```
 
-::: {.cell-output-display}
+::: {.cell-output .cell-output-stdout}
 
-|DENSITY |SEASON | mean_eggs|   sd_eggs|  n|
-|:-------|:------|---------:|---------:|--:|
-|8       |spring | 2.4166667| 0.5907270|  3|
-|8       |summer | 1.8333333| 0.3145764|  3|
-|15      |spring | 2.1773333| 0.3794540|  3|
-|15      |summer | 1.1776667| 0.4820636|  3|
-|30      |spring | 1.5653333| 0.6209874|  3|
-|30      |summer | 0.8113333| 0.4114564|  3|
-|45      |spring | 1.1996667| 0.1900167|  3|
-|45      |summer | 0.5926667| 0.2049593|  3|
+```
+# A tibble: 8 × 5
+# Groups:   DENSITY [4]
+  DENSITY SEASON mean_eggs sd_eggs     n
+  <fct>   <fct>      <dbl>   <dbl> <int>
+1 8       spring     2.42    0.591     3
+2 8       summer     1.83    0.315     3
+3 15      spring     2.18    0.379     3
+4 15      summer     1.18    0.482     3
+5 30      spring     1.57    0.621     3
+6 30      summer     0.811   0.411     3
+7 45      spring     1.20    0.190     3
+8 45      summer     0.593   0.205     3
+```
+
 
 :::
 :::
+
+
 
 
 
@@ -534,6 +494,8 @@ assumptions:
 
 ::: {.column width="40%"}
 Fit the model
+
+
 
 
 
@@ -638,6 +600,8 @@ F-statistic: 6.822 on 7 and 16 DF,  p-value: 0.000745
 
 
 
+
+
 :::
 :::::
 
@@ -649,6 +613,8 @@ Q-Q Plot of Residuals
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -683,6 +649,8 @@ ggplot(quinn_data, aes(sample = residuals)) +
 
 
 
+
+
 :::
 :::::
 
@@ -694,6 +662,8 @@ Histogram of Residuals
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -727,6 +697,8 @@ ggplot(quinn_data, aes(x = residuals)) +
 
 
 
+
+
 :::
 :::::
 
@@ -738,6 +710,8 @@ Shapiro-Wilk Test for Normality
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -776,6 +750,8 @@ W = 0.97373, p-value = 0.7587
 
 
 
+
+
 :::
 :::::
 
@@ -796,6 +772,8 @@ Levene's Test for Homogeneity of Variances
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -803,15 +781,20 @@ Levene's Test for Homogeneity of Variances
 leveneTest(EGGS ~ DENSITY * SEASON, data = quinn_data)
 ```
 
-::: {.cell-output-display}
+::: {.cell-output .cell-output-stdout}
 
-|      | Df|   F value|    Pr(>F)|
-|:-----|--:|---------:|---------:|
-|group |  7| 0.3337251| 0.9268371|
-|      | 16|        NA|        NA|
+```
+Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(>F)
+group  7  0.3337 0.9268
+      16               
+```
+
 
 :::
 :::
+
+
 
 
 
@@ -832,6 +815,8 @@ Residuals vs. Fitted Values
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -866,6 +851,8 @@ ggplot(quinn_data, aes(x = fitted, y = residuals)) +
 
 
 
+
+
 :::
 :::::
 
@@ -877,6 +864,8 @@ Residuals by Treatment Combination
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -911,6 +900,8 @@ ggplot(quinn_data, aes(x = interaction(DENSITY, SEASON), y = residuals)) +
 
 
 
+
+
 :::
 :::::
 
@@ -922,6 +913,8 @@ Now to run the Factorial ANOVA
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -963,17 +956,26 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 anova(quinn_model_lm)
 ```
 
-::: {.cell-output-display}
+::: {.cell-output .cell-output-stdout}
 
-|               | Df|    Sum Sq|   Mean Sq|   F value|    Pr(>F)|
-|:--------------|--:|---------:|---------:|---------:|---------:|
-|DENSITY        |  3| 5.2841388| 1.7613796|  9.669120| 0.0007041|
-|SEASON         |  1| 3.2501760| 3.2501760| 17.841890| 0.0006453|
-|DENSITY:SEASON |  3| 0.1646883| 0.0548961|  0.301353| 0.8239545|
-|Residuals      | 16| 2.9146473| 0.1821655|        NA|        NA|
+```
+Analysis of Variance Table
+
+Response: EGGS
+               Df Sum Sq Mean Sq F value    Pr(>F)    
+DENSITY         3 5.2841  1.7614  9.6691 0.0007041 ***
+SEASON          1 3.2502  3.2502 17.8419 0.0006453 ***
+DENSITY:SEASON  3 0.1647  0.0549  0.3014 0.8239545    
+Residuals      16 2.9146  0.1822                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
 
 :::
 :::
+
+
 
 
 
@@ -994,6 +996,8 @@ To get the polynomial and quadratic contrasts
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -1115,6 +1119,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
 :::
 :::::
 
@@ -1126,6 +1132,8 @@ Estimated Marginal Means and Effects
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -1191,6 +1199,8 @@ P value adjustment: tukey method for comparing a family of 4 estimates
 
 
 
+
+
 :::
 :::::
 
@@ -1202,6 +1212,8 @@ Main Effect of Density Plot
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -1233,6 +1245,8 @@ density_plot
 
 
 
+
+
 :::
 :::::
 
@@ -1244,6 +1258,8 @@ Main Effect of Season
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -1300,6 +1316,8 @@ Results are averaged over the levels of: DENSITY
 
 
 
+
+
 :::
 :::::
 
@@ -1311,6 +1329,8 @@ Main Effect of Season Plot
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -1343,6 +1363,8 @@ season_plot
 
 
 
+
+
 :::
 :::::
 
@@ -1354,6 +1376,8 @@ Interaction Effects and Raw Means Comparison
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -1436,17 +1460,23 @@ quinn_data %>%
   pivot_wider(names_from = SEASON, values_from = raw_mean)
 ```
 
-::: {.cell-output-display}
+::: {.cell-output .cell-output-stdout}
 
-|DENSITY |   spring|    summer|
-|:-------|--------:|---------:|
-|8       | 2.416667| 1.8333333|
-|15      | 2.177333| 1.1776667|
-|30      | 1.565333| 0.8113333|
-|45      | 1.199667| 0.5926667|
+```
+# A tibble: 4 × 3
+  DENSITY spring summer
+  <fct>    <dbl>  <dbl>
+1 8         2.42  1.83 
+2 15        2.18  1.18 
+3 30        1.57  0.811
+4 45        1.20  0.593
+```
+
 
 :::
 :::
+
+
 
 
 
@@ -1467,6 +1497,8 @@ Standard Interaction Plot
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -1500,6 +1532,8 @@ interaction_plot
 
 
 
+
+
 :::
 :::::
 
@@ -1511,6 +1545,8 @@ Custom Interaction Plot with Error Bars
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -1563,6 +1599,8 @@ custom_interaction
 
 
 
+
+
 :::
 :::::
 
@@ -1574,6 +1612,8 @@ This is a plot you might produce for publication
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -1622,6 +1662,8 @@ pub_plot
 ![](12_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-3-1.png)
 :::
 :::
+
+
 
 
 

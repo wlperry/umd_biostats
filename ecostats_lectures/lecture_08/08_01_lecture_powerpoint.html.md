@@ -6,9 +6,22 @@ metadata-files:
 format:
   html:
     output-file: "08_01_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "08_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "08_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "08_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "08_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
+
+
 
 
 
@@ -186,6 +199,12 @@ Suppose we want to investigate whether wind exposure affects pine needle length 
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -210,6 +229,12 @@ fake_pine_data <- rbind(exposed_locations, sheltered_locations)
 fake_pine_data %>% ggplot(aes(wind, length_mm, color = wind)) + geom_boxplot()
 ```
 :::
+
+
+
+
+
+
 
 
 
@@ -405,6 +430,12 @@ Randomization is essential at two levels:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -438,6 +469,12 @@ data.frame(
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -590,6 +627,12 @@ Let's consider sampling pine needles across campus:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -613,6 +656,12 @@ ggplot() +
   labs(title = "Pine Tree Locations on Campus Grid (North Clustered)")
 ```
 :::
+
+
+
+
+
+
 
 
 
@@ -681,6 +730,12 @@ Helps determine the practical significance of research findings, as opposed to j
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -723,6 +778,12 @@ NOTE: n is number in *each* group
 
 
 
+
+
+
+
+
+
 # Post Hoc Power Analysis
 
 Imagine you did not reject null hypothesis - still worth publishing result?
@@ -738,6 +799,12 @@ Cohen's d is calculated as: d = (Mean1 - Mean2) / SD_pooled Where SD_pooled is t
 Can help convince reviewers that you are a good experimenter, but there really is no effect... please publish my non-significant finding!
 
 # Post Hoc Power Analysis Example
+
+
+
+
+
+
 
 
 
@@ -786,12 +853,24 @@ NOTE: n is number in *each* group
 
 
 
+
+
+
+
+
+
 # Activity 6: Power Analysis for Pine Needle Experiment
 
 ::: callout-important
 ## Activity 6: Power Analysis for Pine Needle Experiment
 
 Let's design a study to compare needle lengths between exposed and sheltered pine trees:
+
+
+
+
+
+
 
 
 
@@ -822,6 +901,12 @@ pwr.t.test(d = effect_size,
 
 
 
+
+
+
+
+
+
 :::
 
 # Activity 6: Power Curve Visualization
@@ -830,6 +915,12 @@ pwr.t.test(d = effect_size,
 ## Activity 6: Power Analysis for Pine Needle Experiment
 
 Let's design a study to compare needle lengths between exposed and sheltered pine trees:
+
+
+
+
+
+
 
 
 
@@ -869,6 +960,12 @@ ggplot(power_df, aes(x = sample_size, y = power)) +
 
 
 
+
+
+
+
+
+
 Questions:
 
 1.  How many trees should we sample to achieve 80% power?
@@ -884,6 +981,12 @@ Questions:
 Power vs. Effect Size Interactive Demonstration
 
 Try adjusting these parameters to see how they affect required sample size:
+
+
+
+
+
+
 
 
 
@@ -933,6 +1036,12 @@ Required sample size per group: 24 trees
 
 :::
 :::
+
+
+
+
+
+
 
 
 

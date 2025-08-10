@@ -1,72 +1,23 @@
 ---
 title: "Lecture 01"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: false
-  warning: false
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
-
+metadata-files:
+  - ../../_templates/lectures.yml
 format:
   html:
     output-file: "01_01_lecture_powerpoint_html.html"
-    code-overflow: scroll
-    toc: false
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch
-    css: ../../css/lecture.css
-    fig-width: 7
-    fig-height: 5
-
-
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "01_01_lecture_powerpoint_slides.html"
-    self-contained: true
-    css: ../../css/lecture.css
-    slide-number: true
-    transition: fade
-    background-transition: none
-    scrollable: true
-    smaller: true
-    width: 1280
-    height: 720
-    margin: 0.1
-    min-scale: 0.2
-    max-scale: 2.0
-    fig-width: 8
-    fig-height: 5
-
-
   docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    css: msword.css
-    embed-resources: true
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    df-print: kable     # Better table formatting
-
+    output-file: "01_01_lecture_powerpoint.docx"
   pptx:
-    reference-doc: ../../ms_templates/lecture_template.pptx 
-    embed-resources: true
-    fig-width: 6.5      # Good size for PowerPoint slides
-    fig-height: 4       # Proper aspect ratio for slides
-    fig-dpi: 300        # High resolution for projection
-    df-print: kable     # Better table formatting
-        
-editor: visual
+    output-file: "01_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "01_01_lecture_powerpoint.pdf"
 ---
+
+
 
 
 
@@ -80,16 +31,15 @@ editor: visual
 
 # **Lecture 1: Syllabus**
 
--   Please look over the syllabus as it has all the details of the class
-    and how it will run.
+-   Please look over the syllabus as it has all the details of the class and how it will run.
 
 # **Lecture 1:** Who am I?
 
 ::::: columns
 ::: {.column width="60%"}
 -   Bill Perry
--   Office is in XXXX
--   Phone is XXXX
+-   Office is in SSB 13
+-   Phone is not available yet ; )
 -   Email is wlperry\@d.umn.edu
 :::
 
@@ -118,18 +68,15 @@ editor: visual
 
 # **Lecture 1: Science**
 
--   Way to acquire knowledge, organize it and apply it back to the real
-    world
--   Make predictions and testing these predictions using a falsifiable
-    approach - statistics
+-   Way to acquire knowledge, organize it and apply it back to the real world
+-   Make predictions and testing these predictions using a falsifiable approach - statistics
 -   Explanations that cannot be falsified are not science
 
 # What is Statistics?
 
 ::::: columns
 ::: {.column width="60%"}
-Zar (1999) - "analysis and interpretation of data with view towards
-objective evaluation of conclusions based on the data"
+Zar (1999) - "analysis and interpretation of data with view towards objective evaluation of conclusions based on the data"
 :::
 
 ::: {.column width="40%"}
@@ -143,24 +90,18 @@ objective evaluation of conclusions based on the data"
 ::: {.column width="60%"}
 ### **Inductive Reasoning (Specific → General)**
 
-Inductive reasoning involves observing specific cases and using them to
-form a general conclusion.
+Inductive reasoning involves observing specific cases and using them to form a general conclusion.
 
 **Example:**
 
-1.  Measure **10 pine needles** from a tree - average length is **75
-    mm**.
-2.  Measure **10 more needles** from the same tree and gets similar
-    results.
+1.  Measure **10 pine needles** from a tree - average length is **75 mm**.
+2.  Measure **10 more needles** from the same tree and gets similar results.
 3.  Measures needles from second tree - average length is **120 mm** .
-4.  You **generalize** pine needles from different trees **vary in
-    length**, but each tree tends to have a characteristic range.
+4.  You **generalize** pine needles from different trees **vary in length**, but each tree tends to have a characteristic range.
 
-**Conclusion (Induction):** *"Pine needle length varies by tree, but
-each tree seems to have a typical range of lengths.*
+**Conclusion (Induction):** *"Pine needle length varies by tree, but each tree seems to have a typical range of lengths.*
 
-**Potential Issue:** Conclusion is **not guaranteed** to be true - based
-on patterns observed in a sample, and there could be exceptions.
+**Potential Issue:** Conclusion is **not guaranteed** to be true - based on patterns observed in a sample, and there could be exceptions.
 :::
 
 ::: {.column width="40%"}
@@ -174,31 +115,22 @@ on patterns observed in a sample, and there could be exceptions.
 ::: {.column width="60%"}
 ### **Deductive Reasoning (General → Specific)**
 
-Deductive reasoning starts with a general principle and applies it to a
-specific case.
+Deductive reasoning starts with a general principle and applies it to a specific case.
 
 **Example:**
 
-1.  **General Principle:** *Pine needles from a species of pine tree
-    have a predictable length range (e.g., 70–80 mm).*
+1.  **General Principle:** *Pine needles from a species of pine tree have a predictable length range (e.g., 70–80 mm).*
 2.  **Specific Case:** Collect sample of pine needles and measure them.
-3.  **Prediction:** Since its the species the needle lengths **should**
-    fall within 70–80 mm.
-4.  **Measurement:** Check the data and confirm needles fall within this
-    expected range.
+3.  **Prediction:** Since its the species the needle lengths **should** fall within 70–80 mm.
+4.  **Measurement:** Check the data and confirm needles fall within this expected range.
 
-**Conclusion (Deduction):** *"This tree belongs the species with a
-needle length range of 70–80 mm, we expect its needle lengths to fall in
-this range."*
+**Conclusion (Deduction):** *"This tree belongs the species with a needle length range of 70–80 mm, we expect its needle lengths to fall in this range."*
 
-**Stronger than induction** because it's based on a general rule—but if
-the assumption (length range) is incorrect, conclusion could still be
-wrong.
+**Stronger than induction** because it's based on a general rule—but if the assumption (length range) is incorrect, conclusion could still be wrong.
 :::
 
 ::: {.column width="40%"}
-![](images/deductive_phase.png){fig-align="right" width="300"
-height="350"}
+![](images/deductive_phase.png){fig-align="right" width="300" height="350"}
 :::
 :::::
 
@@ -223,8 +155,7 @@ height="350"}
 -   Design good experiments
 -   Design good tests
 -   Summarize patterns/data
--   Use to make probabilistic determinations to see if differences are
-    "real"
+-   Use to make probabilistic determinations to see if differences are "real"
 :::
 
 ::: {.column width="40%"}
@@ -261,8 +192,7 @@ The world is a messy place and how you measure matters
 Our measures depend on
 
 -   **accuracy** - how close we are to the real value
--   **precision** - how close all our measurements are but may not be
-    precise
+-   **precision** - how close all our measurements are but may not be precise
 :::
 
 ::: {.column width="40%"}

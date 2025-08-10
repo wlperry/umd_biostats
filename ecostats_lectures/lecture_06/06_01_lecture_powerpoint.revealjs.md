@@ -6,9 +6,22 @@ metadata-files:
 format:
   html:
     output-file: "06_01_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "06_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "06_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "06_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "06_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
+
+
 
 
 
@@ -233,11 +246,23 @@ A **p-value** is the probability of observing the sample result (or something mo
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](06_01_lecture_powerpoint_files/figure-html/unnamed-chunk-1-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -346,11 +371,23 @@ The farther apart the means the lower the beta error is... or you have higher po
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](06_01_lecture_powerpoint_files/figure-html/unnamed-chunk-2-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -378,6 +415,12 @@ Given the following scenarios, identify whether a Type I or Type II error might 
 
     -   standardized difference between means - here assuming a difference of 30 units (mm)
     -   `delta = 0.6741298`: The standardized effect size (Cohen's d)
+
+
+
+
+
+
 
 
 
@@ -441,6 +484,12 @@ NOTE: n is number in *each* group
 
 
 
+
+
+
+
+
+
 :::
 
 # What is Power
@@ -484,11 +533,23 @@ When interpreting graphs:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](06_01_lecture_powerpoint_files/figure-html/unnamed-chunk-4-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -526,11 +587,23 @@ When interpreting graphs:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](06_01_lecture_powerpoint_files/figure-html/unnamed-chunk-5-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -565,11 +638,23 @@ The statistical concepts we've covered today are essential for fisheries biologi
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](06_01_lecture_powerpoint_files/figure-html/unnamed-chunk-6-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 

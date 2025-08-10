@@ -6,9 +6,22 @@ metadata-files:
 format:
   html:
     output-file: "10_01_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "10_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "10_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "10_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "10_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
+
+
 
 
 
@@ -35,9 +48,21 @@ Covered
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 :::
+
+
+
+
+
+
 
 
 

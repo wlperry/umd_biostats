@@ -1,71 +1,23 @@
 ---
 title: "Lecture 08"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: false
-  warning: false
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+metadata-files:
+  - ../../_templates/lectures.yml
 format:
   html:
-    toc: true
     output-file: "08_01_lecture_powerpoint_html.html"
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch
-    css: ../../css/lecture.css
-    fig-width: 7
-    fig-height: 5
-
-  # RevealJS - optimized for presentation (keeps two-column layout and large images)
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "08_01_lecture_powerpoint_slides.html"
-    self-contained: true
-    css: ../../css/lecture.css
-    slide-number: true
-    transition: fade
-    background-transition: none
-    scrollable: true
-    smaller: true
-    width: 1280
-    height: 720
-    margin: 0.1
-    min-scale: 0.2
-    max-scale: 2.0
-    fig-width: 8
-    fig-height: 5
-
-  # Word format - optimized for printing and document flow
   docx:
-    default: true
-    toc: true
-    toc-depth: 3
-    number-sections: true
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    css: msword.css
-    embed-resources: true
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    df-print: kable     # Better table formatting
-
-  # PowerPoint format - optimized for traditional PowerPoint presentation
+    output-file: "08_01_lecture_powerpoint.docx"
   pptx:
-    reference-doc: ../../ms_templates/lecture_template.pptx 
-    embed-resources: true
-    fig-width: 6.5      # Good size for PowerPoint slides
-    fig-height: 4       # Proper aspect ratio for slides
-    fig-dpi: 300        # High resolution for projection
-    df-print: kable     # Better table formatting
-
-editor: visual
+    output-file: "08_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "08_01_lecture_powerpoint.pdf"
 ---
+
+
 
 
 
@@ -149,11 +101,9 @@ Common scientific questions:
 ::: callout-important
 ## Activity 1: Formulating Research Questions
 
--   Take 5 minutes to write down 2-3 potential research questions about
-    pine trees on our campus.
+-   Take 5 minutes to write down 2-3 potential research questions about pine trees on our campus.
 -   Be as specific as possible about what you would measure.
--   Share with a partner and discuss which questions would be easier to
-    address experimentally.
+-   Share with a partner and discuss which questions would be easier to address experimentally.
 :::
 
 # Causality in Ecology - Introduction
@@ -161,8 +111,7 @@ Common scientific questions:
 ::::: columns
 ::: {.column width="60%"}
 -   Common question: what is the **cause** of Y?
--   Causality is challenging; modern statistics lacks clear language for
-    causality
+-   Causality is challenging; modern statistics lacks clear language for causality
 -   Strength of causal inference varies with study design
 -   Key factor: control of confounding variables
 :::
@@ -177,8 +126,7 @@ Common scientific questions:
 ::::: columns
 ::: {.column width="60%"}
 -   Common question: what is the **cause** of Y?
--   Causality is challenging; modern statistics lacks clear language for
-    causality
+-   Causality is challenging; modern statistics lacks clear language for causality
 -   Strength of causal inference varies with study design
 -   Key factor: control of confounding variables
 :::
@@ -194,8 +142,7 @@ Common scientific questions:
 ::: {.column width="60%"}
 **Example:** Spider and lizard populations on small islands
 
-**Hypothesis:** On small islands, lizard predation controls spider
-density
+**Hypothesis:** On small islands, lizard predation controls spider density
 
 We're interested in causality. How do we get there?
 :::
@@ -245,9 +192,9 @@ We're interested in causality. How do we get there?
 ::: callout-note
 ## Activity 2: Pine Needle Natural Experiment Design
 
-Suppose we want to investigate whether wind exposure affects pine needle
-length across our campus. We decide to pick exposed sheltered locations.
-What sort of design would we conduct?
+Suppose we want to investigate whether wind exposure affects pine needle length across our campus. We decide to pick exposed sheltered locations. What sort of design would we conduct?
+
+
 
 
 
@@ -292,6 +239,8 @@ fake_pine_data %>% ggplot(aes(wind, length_mm, color = wind)) + geom_boxplot()
 
 
 
+
+
 In small groups, discuss:
 
 1.  What confounding variables might affect this natural experiment?
@@ -303,8 +252,7 @@ In small groups, discuss:
 
 ::::: columns
 ::: {.column width="60%"}
-Experimenter directly manipulates predictor variable and measures
-response
+Experimenter directly manipulates predictor variable and measures response
 
 Randomized, controlled trials: gold standard
 
@@ -312,8 +260,7 @@ Randomized, controlled trials: gold standard
 
 -   Often restricted to small "plots"; scale-replication trade-off
 -   Often restricted to small, short-lived organisms
--   Often limited to small number of treatments; treatment-replication
-    trade-off
+-   Often limited to small number of treatments; treatment-replication trade-off
 -   Still requires **careful control of confounding!**
 :::
 
@@ -354,12 +301,9 @@ Replication is important because:
 -   Ecological systems are variable
 -   Need estimate of variability for many statistical methods
 
-Without appropriate replication: Is the difference due to manipulation
-or something else?
+Without appropriate replication: Is the difference due to manipulation or something else?
 
-Replication must be on the appropriate scale: match scale of replication
-to population of interest, otherwise run into **pseudoreplication**
-(Hurlbert)
+Replication must be on the appropriate scale: match scale of replication to population of interest, otherwise run into **pseudoreplication** (Hurlbert)
 :::
 
 ::: {.column width="40%"}
@@ -401,8 +345,7 @@ When you pseudoreplicate, you:
 -   Underestimate variability
 -   Increase type I error rate
 
-Replicates must be on scale appropriate to population (& hypothesis!) of
-interest:
+Replicates must be on scale appropriate to population (& hypothesis!) of interest:
 
 -   Different burnt/unburnt forest areas
 -   Different aquaria
@@ -417,16 +360,11 @@ interest:
 ::: callout-tip
 ## Activity 3: Identifying True Replication
 
-For each scenario below, identify whether there is true replication or
-pseudoreplication:
+For each scenario below, identify whether there is true replication or pseudoreplication:
 
-1.  Testing soil pH effects on pine seedling growth by using one large
-    pot with acidic soil and one with basic soil, with 10 seedlings in
-    each pot
-2.  Testing the effect of a fertilizer on pine growth by applying it to
-    5 randomly selected trees in a stand, with 5 other trees as controls
-3.  Measuring air pollution effects by sampling needle damage in 3 pine
-    stands near a factory and 3 stands 50km away
+1.  Testing soil pH effects on pine seedling growth by using one large pot with acidic soil and one with basic soil, with 10 seedlings in each pot
+2.  Testing the effect of a fertilizer on pine growth by applying it to 5 randomly selected trees in a stand, with 5 other trees as controls
+3.  Measuring air pollution effects by sampling needle damage in 3 pine stands near a factory and 3 stands 50km away
 
 Discuss how you would redesign any pseudoreplicated studies.
 :::
@@ -445,8 +383,7 @@ What if replication is impossible/difficult/expensive?
 Possible solutions:
 
 -   Rerun the experiment a few times, changing temperature of chambers
--   Try to account for all possible differences between chambers (light
-    levels, humidity, contamination)
+-   Try to account for all possible differences between chambers (light levels, humidity, contamination)
 :::
 
 ![](images/clipboard-3600266009.png){width="300" height="200"}
@@ -462,11 +399,9 @@ Randomization helps deconfound "lurking" variables:
 
 **Random sampling from population:**
 
--   Experimental units should represent random sample from population of
-    interest
+-   Experimental units should represent random sample from population of interest
 -   Ensures unbiased population estimates and inference
--   E.g., animals in experiment are random subset of all animals that
-    could have been used
+-   E.g., animals in experiment are random subset of all animals that could have been used
 :::
 
 ::: {.column width="40%"}
@@ -480,8 +415,7 @@ Randomization helps deconfound "lurking" variables:
 ::: {.column width="60%"}
 **Allocation of experimental units to treatment/control:**
 
--   Experimental units must have equal chance of being allocated to
-    control or experimental group
+-   Experimental units must have equal chance of being allocated to control or experimental group
 -   Properly done by random number generation
 
 Randomization is essential at two levels:
@@ -491,6 +425,8 @@ Randomization is essential at two levels:
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -519,18 +455,22 @@ data.frame(
 )
 ```
 
-::: {.cell-output-display}
+::: {.cell-output .cell-output-stdout}
 
-| Treatment| Control|
-|---------:|-------:|
-|        18|      49|
-|        74|     100|
-|        65|      47|
-|        24|      71|
-|        25|      89|
+```
+  Treatment Control
+1        18      49
+2        74     100
+3        65      47
+4        24      71
+5        25      89
+```
+
 
 :::
 :::
+
+
 
 
 
@@ -547,19 +487,16 @@ data.frame(
 
 ::::: columns
 ::: {.column width="60%"}
-**Key question:** Is response due to manipulation/hypothesized mechanism
-or external factor?
+**Key question:** Is response due to manipulation/hypothesized mechanism or external factor?
 
 Controls help address this question:
 
--   Experimental units treated exactly as the manipulated units, except
-    no manipulation under investigation
+-   Experimental units treated exactly as the manipulated units, except no manipulation under investigation
 -   Can be tricky to implement; requires careful thought
 
 **Examples:**
 
--   In toxicology, controls and treatment groups must both be injected,
-    but control does not receive the substance under study
+-   In toxicology, controls and treatment groups must both be injected, but control does not receive the substance under study
 -   Predator exclosures often produce "cage effects"
 -   need two controls: a grazer/predator control and a "cage control"
 :::
@@ -576,12 +513,9 @@ Controls help address this question:
 
 Work in small groups to design appropriate controls for each experiment:
 
-1.  Testing whether pine needle length is affected by a particular
-    fertilizer
-2.  Testing whether pine needle density affects water retention during
-    drought using enclosed branches
-3.  Testing whether sunlight exposure affects pine seedling growth using
-    shade cloth
+1.  Testing whether pine needle length is affected by a particular fertilizer
+2.  Testing whether pine needle density affects water retention during drought using enclosed branches
+3.  Testing whether sunlight exposure affects pine seedling growth using shade cloth
 
 For each experiment, identify:
 
@@ -596,18 +530,14 @@ For each experiment, identify:
 ::: {.column width="60%"}
 Independence of observations: assumption of many statistical methods
 
-Events are independent if occurrence of one has no effect on occurrence
-of another
+Events are independent if occurrence of one has no effect on occurrence of another
 
--   E.g., offspring of one mother for treatment, offspring of another
-    for control
+-   E.g., offspring of one mother for treatment, offspring of another for control
 
 **Temporal/spatial autocorrelation:** violation of independence
 
--   Values of variables at certain place/time correlated with values at
-    another place/time
--   "Everything is related to everything, but near things are more
-    related than distant things"
+-   Values of variables at certain place/time correlated with values at another place/time
+-   "Everything is related to everything, but near things are more related than distant things"
 -   Special methods to adjust for autocorrelation
 :::
 
@@ -623,8 +553,7 @@ of another
 **Simple random design:**
 
 -   all individuals/sampling units have equal chance of being selected
--   Assign number to all possible units, select units using random
-    number generator
+-   Assign number to all possible units, select units using random number generator
 -   Often tricky in ecology; haphazard is common alternative
 -   Most population estimates and tests assume random sampling
 :::
@@ -638,14 +567,11 @@ of another
 
 ::::: columns
 ::: {.column width="60%"}
-**Stratified designs:** if there are distinct strata (groups) in
-population, may want to sample each independently
+**Stratified designs:** if there are distinct strata (groups) in population, may want to sample each independently
 
--   Samples collected from each stratum randomly, n proportional to
-    "size" of stratum
+-   Samples collected from each stratum randomly, n proportional to "size" of stratum
 
--   Means and variances need to be estimated using different procedure;
-    strata included in model
+-   Means and variances need to be estimated using different procedure; strata included in model
 :::
 
 ::: {.column width="40%"}
@@ -679,8 +605,7 @@ population, may want to sample each independently
 ::: {.column width="60%"}
 **Systematic designs:**
 
--   sampling units evenly dispersed: "transect" sampling common in
-    ecology
+-   sampling units evenly dispersed: "transect" sampling common in ecology
 -   Used to determine changes along gradient
 -   Risk: might coincide with some natural pattern
 :::
@@ -696,6 +621,8 @@ population, may want to sample each independently
 ## Activity 5: Field Sampling Pine Trees
 
 Let's consider sampling pine needles across campus:
+
+
 
 
 
@@ -739,14 +666,13 @@ ggplot() +
 
 
 
+
+
 In groups of 3-4, design a sampling strategy to:
 
-1.  Estimate average needle length across campus (simple random
-    sampling)
-2.  Compare needle lengths between north and south campus areas
-    (stratified sampling)
-3.  Study how needle length changes with distance from the main road
-    (systematic sampling)
+1.  Estimate average needle length across campus (simple random sampling)
+2.  Compare needle lengths between north and south campus areas (stratified sampling)
+3.  Study how needle length changes with distance from the main road (systematic sampling)
 
 For each strategy, describe:
 
@@ -760,15 +686,13 @@ For each strategy, describe:
 Power is an important aspect of experimental design:
 
 -   Low power → higher likelihood of type II error (1-β)
--   A study's power tells us how likely we are to see an effect if one
-    really exists
+-   A study's power tells us how likely we are to see an effect if one really exists
 
 Can use power analysis:
 
 -   Before experiment (*a priori*): how many samples do we need?
     -   what effect size can we detect?
--   After experiment (*post hoc*): was finding of no effect due to lack
-    of effect or poor design?
+-   After experiment (*post hoc*): was finding of no effect due to lack of effect or poor design?
 
 Power is a function of:
 
@@ -785,28 +709,23 @@ Using power analysis to plan experiments:
 
 **Sample size calculation:** how many samples will be needed?
 
-Need to know: desired power, variability, significance level, effect
-size
+Need to know: desired power, variability, significance level, effect size
 
-**Effect size calculation:** what kind of effect can we find, given
-particular design?
+**Effect size calculation:** what kind of effect can we find, given particular design?
 
 Need to know: desired power, variability, significance level, n
 
-Cohen's d - standardized measure of effect size used in statistical
-analysis, particularly when comparing two means
+Cohen's d - standardized measure of effect size used in statistical analysis, particularly when comparing two means
 
 -   0.2 = small effect
 -   0.5 = medium effect
 -   0.8 = large effect
 
-Helps determine the practical significance of research findings, as
-opposed to just statistical significance (p-values). A Cohen's d of 0.8
-means that the difference between groups is large enough to be
-substantial in practical terms - specifically, it indicates that the
-means differ by 0.8 standard deviations.
+Helps determine the practical significance of research findings, as opposed to just statistical significance (p-values). A Cohen's d of 0.8 means that the difference between groups is large enough to be substantial in practical terms - specifically, it indicates that the means differ by 0.8 standard deviations.
 
 # A Priori Power Analysis Example
+
+
 
 
 
@@ -863,25 +782,25 @@ NOTE: n is number in *each* group
 
 
 
+
+
 # Post Hoc Power Analysis
 
-Imagine you did not reject null hypothesis - still worth publishing
-result?
+Imagine you did not reject null hypothesis - still worth publishing result?
 
-Is non-significant result due to low power (poor design) or actual
-no-effect situation?
+Is non-significant result due to low power (poor design) or actual no-effect situation?
 
 -   Have n and estimate of σ
 -   Need to define effect size that wanted to detect
 -   In return get estimate of experiment's power
 
-Cohen's d is calculated as: d = (Mean1 - Mean2) / SD_pooled Where
-SD_pooled is the pooled standard deviation of both groups.
+Cohen's d is calculated as: d = (Mean1 - Mean2) / SD_pooled Where SD_pooled is the pooled standard deviation of both groups.
 
-Can help convince reviewers that you are a good experimenter, but there
-really is no effect... please publish my non-significant finding!
+Can help convince reviewers that you are a good experimenter, but there really is no effect... please publish my non-significant finding!
 
 # Post Hoc Power Analysis Example
+
+
 
 
 
@@ -938,13 +857,16 @@ NOTE: n is number in *each* group
 
 
 
+
+
 # Activity 6: Power Analysis for Pine Needle Experiment
 
 ::: callout-important
 ## Activity 6: Power Analysis for Pine Needle Experiment
 
-Let's design a study to compare needle lengths between exposed and
-sheltered pine trees:
+Let's design a study to compare needle lengths between exposed and sheltered pine trees:
+
+
 
 
 
@@ -983,6 +905,8 @@ pwr.t.test(d = effect_size,
 
 
 
+
+
 :::
 
 # Activity 6: Power Curve Visualization
@@ -990,8 +914,9 @@ pwr.t.test(d = effect_size,
 ::: callout-important
 ## Activity 6: Power Analysis for Pine Needle Experiment
 
-Let's design a study to compare needle lengths between exposed and
-sheltered pine trees:
+Let's design a study to compare needle lengths between exposed and sheltered pine trees:
+
+
 
 
 
@@ -1039,14 +964,15 @@ ggplot(power_df, aes(x = sample_size, y = power)) +
 
 
 
+
+
 Questions:
 
 1.  How many trees should we sample to achieve 80% power?
 
 2.  If we can only sample 5 trees per group, what is our power?
 
-3.  How would increasing variability (SD) affect our sample size
-    requirements?
+3.  How would increasing variability (SD) affect our sample size requirements?
 :::
 
 # Interactive Power Analysis
@@ -1054,8 +980,9 @@ Questions:
 ::: callout-note
 Power vs. Effect Size Interactive Demonstration
 
-Try adjusting these parameters to see how they affect required sample
-size:
+Try adjusting these parameters to see how they affect required sample size:
+
+
 
 
 
@@ -1118,6 +1045,8 @@ Required sample size per group: 24 trees
 
 
 
+
+
 :::
 
 # Study Design and Analysis
@@ -1126,8 +1055,7 @@ Required sample size per group: 24 trees
 ::: {.column width="60%"}
 Study design is closely linked to statistical analysis
 
-Recall: - Categorical vs. continuous variables - Dependent vs.
-independent variables
+Recall: - Categorical vs. continuous variables - Dependent vs. independent variables
 
 Nature of variables dictates analytical approach:
 
@@ -1147,16 +1075,14 @@ Nature of variables dictates analytical approach:
 Key concepts we covered today:
 
 1.  **Study design is critical** - statistics cannot save poor design
-2.  **Natural vs. manipulative experiments** - different approaches to
-    causality
+2.  **Natural vs. manipulative experiments** - different approaches to causality
 3.  **Principles of good design:**
     -   Replication at the right scale
     -   Proper randomization
     -   Appropriate controls
     -   Independence
 4.  **Power analysis** - planning for sufficient sample size
-5.  **Match analysis to design** - your statistical approach should
-    follow from your experimental design
+5.  **Match analysis to design** - your statistical approach should follow from your experimental design
 :::
 
 ::: {.column width="40%"}
@@ -1172,12 +1098,7 @@ Key concepts we covered today:
 
 # References and Additional Resources
 
--   Gotelli, N. J., & Ellison, A. M. (2012). A primer of ecological
-    statistics (2nd ed.). Sinauer Associates.
--   Hurlbert, S. H. (1984). Pseudoreplication and the design of
-    ecological field experiments. Ecological Monographs, 54(2), 187-211.
--   Quinn, G. P., & Keough, M. J. (2002). Experimental design and data
-    analysis for biologists. Cambridge University Press.
--   Zuur, A. F., Ieno, E. N., & Elphick, C. S. (2010). A protocol for
-    data exploration to avoid common statistical problems. Methods in
-    Ecology and Evolution, 1(1), 3-14.
+-   Gotelli, N. J., & Ellison, A. M. (2012). A primer of ecological statistics (2nd ed.). Sinauer Associates.
+-   Hurlbert, S. H. (1984). Pseudoreplication and the design of ecological field experiments. Ecological Monographs, 54(2), 187-211.
+-   Quinn, G. P., & Keough, M. J. (2002). Experimental design and data analysis for biologists. Cambridge University Press.
+-   Zuur, A. F., Ieno, E. N., & Elphick, C. S. (2010). A protocol for data exploration to avoid common statistical problems. Methods in Ecology and Evolution, 1(1), 3-14.

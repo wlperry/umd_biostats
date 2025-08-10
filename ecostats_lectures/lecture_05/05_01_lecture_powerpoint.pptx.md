@@ -1,69 +1,23 @@
 ---
 title: "Lecture 05: Probability and Statistical Inference"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  keep-md: true # retains the images when you start again
-  message: false
-  warning: false
-  fig-height: 4
-  fig-width: 6
+metadata-files:
+  - ../../_templates/lectures.yml
 format:
   html:
-    toc: false
     output-file: "05_01_lecture_powerpoint_html.html"
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch  # Limits line length to approximately 80 characters
-    css: ../../css/lecture.css
-    fig-width: 7
-    fig-height: 5
-
-  # RevealJS - optimized for presentation (keeps two-column layout and large images)
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "05_01_lecture_powerpoint_slides.html"
-    self-contained: true
-    css: ../../css/lecture.css
-    slide-number: true
-    transition: fade
-    background-transition: none
-    scrollable: true
-    smaller: true
-    width: 1280
-    height: 720
-    margin: 0.1
-    min-scale: 0.2
-    max-scale: 2.0
-    fig-width: 8
-    fig-height: 5
-
-  # Word format - optimized for printing and document flow
   docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    css: msword.css
-    embed-resources: true
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    df-print: kable     # Better table formatting
-
-  # PowerPoint format - optimized for traditional PowerPoint presentation
+    output-file: "05_01_lecture_powerpoint.docx"
   pptx:
-    reference-doc: ../../ms_templates/lecture_template.pptx 
-    embed-resources: true
-    fig-width: 6.5      # Good size for PowerPoint slides
-    fig-height: 4       # Proper aspect ratio for slides
-    fig-dpi: 300        # High resolution for projection
-    df-print: kable     # Better table formatting
-
-editor: visual
+    output-file: "05_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "05_01_lecture_powerpoint.pdf"
 ---
+
+
 
 
 
@@ -127,18 +81,22 @@ editor: visual
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 
 
 ``````{=openxml}
-<p:graphicFrame xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"><p:nvGraphicFramePr><p:cNvPr id="493793968" name=""/><p:cNvGraphicFramePr><a:graphicFrameLocks noGrp="true"/></p:cNvGraphicFramePr><p:nvPr/></p:nvGraphicFramePr><p:xfrm rot="0"><a:off x="914400" y="1828800"/><a:ext cx="9144000" cy="5486400"/></p:xfrm><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/table"><a:tbl><a:tblPr/><a:tblGrid><a:gridCol w="685800"/><a:gridCol w="685800"/><a:gridCol w="685800"/><a:gridCol w="685800"/><a:gridCol w="685800"/></a:tblGrid><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>lake</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>mean_length</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>sd_length</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>se_length</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>count</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>I3</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>265.6061</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>28.30378</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>3.483954</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>66</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>I8</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>362.5980</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>52.33901</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>5.182334</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>102</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr></a:tbl></a:graphicData></a:graphic></p:graphicFrame>
+<p:graphicFrame xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"><p:nvGraphicFramePr><p:cNvPr id="569973134" name=""/><p:cNvGraphicFramePr><a:graphicFrameLocks noGrp="true"/></p:cNvGraphicFramePr><p:nvPr/></p:nvGraphicFramePr><p:xfrm rot="0"><a:off x="914400" y="1828800"/><a:ext cx="9144000" cy="5486400"/></p:xfrm><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/table"><a:tbl><a:tblPr/><a:tblGrid><a:gridCol w="685800"/><a:gridCol w="685800"/><a:gridCol w="685800"/><a:gridCol w="685800"/><a:gridCol w="685800"/></a:tblGrid><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>lake</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>mean_length</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>sd_length</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>se_length</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>count</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>I3</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>265.6061</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>28.30378</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>3.483954</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>66</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>I8</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>362.5980</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>52.33901</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>5.182334</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="63500" marR="63500"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="500" /></a:spcBef><a:spcAft><a:spcPts val="500" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1100" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>102</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="63500" marT="63500" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr></a:tbl></a:graphicData></a:graphic></p:graphicFrame>
 ``````
 
 
 
 :::
 :::
+
+
 
 
 
@@ -172,11 +130,15 @@ The goals for today
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-2-1.png)
 :::
 :::
+
+
 
 
 
@@ -193,8 +155,7 @@ The goals for today
 
 :::: columns
 ::: {.column width="60%"}
-In the more typical case DON'T know the population σ or standard
-deviation
+In the more typical case DON'T know the population σ or standard deviation
 
 -   estimate it from the samples
 -   and when sample size is \<\~30)
@@ -210,8 +171,7 @@ deviation
 
 ::::: columns
 ::: {.column width="60%"}
-When sample sizes are small, the **t-distribution** is more appropriate
-than the normal distribution.
+When sample sizes are small, the **t-distribution** is more appropriate than the normal distribution.
 
 -   Similar to normal distribution but with heavier tails
 -   Shape depends on **degrees of freedom** (df = n-1)
@@ -236,11 +196,15 @@ than the normal distribution.
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-3-1.png)
 :::
 :::
+
+
 
 
 
@@ -257,11 +221,9 @@ than the normal distribution.
 
 ::::: columns
 ::: {.column width="50%"}
-When sample sizes are small, the **t-distribution** is more appropriate
-than the normal distribution.
+When sample sizes are small, the **t-distribution** is more appropriate than the normal distribution.
 
--   Similar to normal distribution (1.96 = 2.5% tails) but with heavier
-    tails
+-   Similar to normal distribution (1.96 = 2.5% tails) but with heavier tails
 -   Shape depends on **degrees of freedom** (df = n-1)
 -   With large df (\>30), approaches the normal distribution
 -   Used for:
@@ -284,8 +246,9 @@ than the normal distribution.
 ::: callout-tip
 ## Practice Exercise 4: Using the t-distribution
 
-Let's compare confidence intervals using the normal approximation (z)
-versus the t-distribution for our fish data.
+Let's compare confidence intervals using the normal approximation (z) versus the t-distribution for our fish data.
+
+
 
 
 
@@ -297,50 +260,96 @@ versus the t-distribution for our fish data.
 
 
 ::: {.cell}
+
+```{.r .cell-code}
+# Calculate CI using both z and t distributions for a smaller subset
+small_sample <- grayling_df %>% 
+  filter(lake == "I3") %>% 
+  slice_sample(n = 10)
+
+# Calculate statistics
+sample_mean <- mean(small_sample$length_mm)
+sample_sd <- sd(small_sample$length_mm)
+sample_n <- nrow(small_sample)
+sample_se <- sample_sd / sqrt(sample_n)
+
+# Calculate confidence intervals
+z_ci_lower <- sample_mean - 1.96 * sample_se
+z_ci_upper <- sample_mean + 1.96 * sample_se
+
+# For t-distribution, get critical value for 95% CI with df = n-1
+t_crit <- qt(0.975, df = sample_n - 1)
+t_ci_lower <- sample_mean - t_crit * sample_se
+t_ci_upper <- sample_mean + t_crit * sample_se
+
+# Display results
+cat("Mean:", round(sample_mean, 1), "mm\n")
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Mean: 272.9 mm
+Mean: 276.2 mm
 ```
 
 
 :::
 
+```{.r .cell-code}
+cat("Standard deviation:", round(sample_sd, 2), "mm\n")
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Standard deviation: 19.68 mm
+Standard deviation: 17.22 mm
 ```
 
 
 :::
 
+```{.r .cell-code}
+cat("Standard error:", round(sample_se, 2), "mm\n")
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Standard error: 6.22 mm
+Standard error: 5.44 mm
 ```
 
 
 :::
 
+```{.r .cell-code}
+cat("95% CI using z:", round(z_ci_lower, 1), "to", round(z_ci_upper, 1), "mm\n")
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
-95% CI using z: 260.7 to 285.1 mm
+95% CI using z: 265.5 to 286.9 mm
 ```
 
 
 :::
 
+```{.r .cell-code}
+cat("95% CI using t:", round(t_ci_lower, 1), "to", round(t_ci_upper, 1), "mm\n")
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
-95% CI using t: 258.8 to 287 mm
+95% CI using t: 263.9 to 288.5 mm
 ```
 
 
 :::
+
+```{.r .cell-code}
+cat("t critical value:", round(t_crit, 3), "vs z critical value: 1.96\n")
+```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -351,6 +360,8 @@ t critical value: 2.262 vs z critical value: 1.96
 
 :::
 :::
+
+
 
 
 
@@ -405,8 +416,7 @@ Here is a t-table
 
 ::::: columns
 ::: {.column width="60%"}
-One-tailed questions: area of distribution left or (right) of a certain
-value
+One-tailed questions: area of distribution left or (right) of a certain value
 
 -   n=20 (df=19) - 90% of the observations found left
 -   t= 1.328 (10% are outside)
@@ -461,10 +471,8 @@ So:
 
 -   Can assess confidence that population mean is within a certain range
 -   Can use t distribution to ask questions like:
-    -   "What is probability of getting sample with mean = ȳ from
-        population with mean = µ?" (1 sample t-test)
-    -   "What is the probability that two samples came from same
-        population?" (2 sample t-test)
+    -   "What is probability of getting sample with mean = ȳ from population with mean = µ?" (1 sample t-test)
+    -   "What is the probability that two samples came from same population?" (2 sample t-test)
 
 # **Lecture 5:** Single Sample T-Test
 
@@ -493,7 +501,20 @@ H₁: μ ≠ 240 (The mean fish length in I3 is not 240mm)
 
 
 
+
+
 ::: {.cell exercise='true'}
+
+```{.r .cell-code}
+# Filter for just windward side needles
+
+# YOUR TASK: Test normality of windward pine needle lengths
+# QQ Plot
+qqPlot(i3_df$length_mm, 
+       main = "QQ Plot for length of Grayling",
+       ylab = "Sample Quantiles")
+```
+
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-pptx/test_assumptions-1.png)
 :::
@@ -517,6 +538,8 @@ H₁: μ ≠ 240 (The mean fish length in I3 is not 240mm)
 
 
 
+
+
 # Statistical Test of Normality
 
 ## Shapiro-Wilk test
@@ -530,7 +553,16 @@ H₁: μ ≠ 240 (The mean fish length in I3 is not 240mm)
 
 
 
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# Shapiro-Wilk test
+shapiro_test <- shapiro.test(i3_df$length_mm)
+print(shapiro_test)
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -554,6 +586,8 @@ W = 0.91051, p-value = 0.0001623
 
 
 
+
+
 # Checking for Outliers
 
 
@@ -565,11 +599,22 @@ W = 0.91051, p-value = 0.0001623
 
 
 
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# Check for outliers using boxplot
+# YOUR CODE HERE
+i3_df %>% ggplot(aes(lake, length_mm))+geom_boxplot()
+```
+
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-6-1.png)
 :::
 :::
+
+
 
 
 
@@ -585,8 +630,9 @@ W = 0.91051, p-value = 0.0001623
 ::: callout-tip
 ## Practice Exercise 1: One-Sample t-Test
 
-Let's perform a one-sample t-test to determine if the mean fish length
-in I3 Lake differs from 240 mm:
+Let's perform a one-sample t-test to determine if the mean fish length in I3 Lake differs from 240 mm:
+
+
 
 
 
@@ -598,6 +644,13 @@ in I3 Lake differs from 240 mm:
 
 
 ::: {.cell}
+
+```{.r .cell-code}
+# what is the mean
+i3_mean <- mean(i3_df$length_mm, na.rm=TRUE)
+cat("Mean:", round(i3_mean, 1), "mm\n")
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -606,6 +659,14 @@ Mean: 265.6 mm
 
 
 :::
+
+```{.r .cell-code}
+# Perform a one-sample t-test
+t_test_result <- t.test(i3_df$length_mm, mu = 240)
+
+# View the test results
+t_test_result
+```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -636,38 +697,37 @@ mean of x
 
 
 
+
+
 Interpret this test result by answering these questions:
 
 1.  What was the null hypothesis?
 2.  What was the alternative hypothesis?
 3.  What does the p-value tell us?
 4.  Should we reject or fail to reject the null hypothesis at α = 0.05?
-5.  What is the practical interpretation of this result for fish
-    biologists?
+5.  What is the practical interpretation of this result for fish biologists?
 :::
 
 # **Lecture 5:** Hypothesis Testing Framework
 
 ::::: columns
 ::: {.column width="60%"}
-Hypothesis testing is a systematic way to evaluate research questions
-using data.
+Hypothesis testing is a systematic way to evaluate research questions using data.
 
 **Key components:**
 
-1.  **Null hypothesis (Ho)**: Typically assumes "no effect" or "no
-    difference"
+1.  **Null hypothesis (Ho)**: Typically assumes "no effect" or "no difference"
 2.  **Alternative hypothesis (Ha)**: The claim we're trying to support
 3.  **Statistical test**: Method for evaluating evidence against H₀
-4.  **P-value**: Probability of observing our results (or more extreme)
-    if H₀ is true
-5.  **Significance level (α)**: Threshold for rejecting H₀, typically
-    0.05
+4.  **P-value**: Probability of observing our results (or more extreme) if H₀ is true
+5.  **Significance level (α)**: Threshold for rejecting H₀, typically 0.05
 
 **Decision rule**: Reject Ho if p-value \< α == p \< 0.05
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -691,6 +751,8 @@ using data.
 
 
 
+
+
 :::
 :::::
 
@@ -698,28 +760,26 @@ using data.
 
 ::::: columns
 ::: {.column width="60%"}
-Hypothesis testing is a systematic way to evaluate research questions
-using data.
+Hypothesis testing is a systematic way to evaluate research questions using data.
 
 **Key components:**
 
-1.  **Null hypothesis (H₀)**: Typically assumes "no effect" or "no
-    difference"
+1.  **Null hypothesis (H₀)**: Typically assumes "no effect" or "no difference"
 
 2.  **Alternative hypothesis (Hₐ)**: The claim we're trying to support
 
 3.  **Statistical test**: Method for evaluating evidence against H₀
 
-4.  **P-value**: Probability of observing our results (or more extreme)
-    if H₀ is true
+4.  **P-value**: Probability of observing our results (or more extreme) if H₀ is true
 
-5.  **Significance level (α)**: Threshold for rejecting H₀, typically
-    0.05
+5.  **Significance level (α)**: Threshold for rejecting H₀, typically 0.05
 
 **Decision rule**: Reject H₀ if p-value \< α
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -743,6 +803,8 @@ using data.
 
 
 
+
+
 :::
 :::::
 
@@ -755,9 +817,7 @@ using data.
 
 **How to report this result in a scientific paper:**
 
-"A two-tailed, one-sample t-test at α=0.05 showed that the mean pine
-needle length on the windward side (... mm, SD = ...) \[was/was not\]
-significantly different from the expected 55 mm, t(...) = ..., p = ..."
+"A two-tailed, one-sample t-test at α=0.05 showed that the mean pine needle length on the windward side (... mm, SD = ...) \[was/was not\] significantly different from the expected 55 mm, t(...) = ..., p = ..."
 
 # **Lecture 5:** Two Sample T-Tests Introduction
 
@@ -798,11 +858,39 @@ How would you assess this question using what we learned?
 
 
 
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# Now create a boxplot to visualize the difference in fish lengths between these lakes:
+pine_df <- read_csv("data/pine_needles.csv")
+
+# Create a boxplot comparing the two lakes
+pine_wind_plot <- pine_df %>%
+  ggplot(aes(x = wind, y = length_mm, fill = wind)) +
+  geom_boxplot() +
+  labs(title = "Pine Needle Lengths by Wind Exposure",
+       x = "Position",
+       y = "Length (mm)",
+       fill = "Wind Position") +
+  scale_fill_manual(values = c("lee" = "forestgreen", "wind" = "skyblue"),
+                   labels = c("lee" = "Leeward", "wind" = "Windward"))
+pine_wind_plot
+```
+
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-10-1.png)
 :::
+
+```{.r .cell-code}
+# Based on the t-test results and the boxplot
+# 
+# what can you conclude about the fish populations in these two lakes?
+```
 :::
+
+
 
 
 
@@ -820,11 +908,9 @@ How would you assess this question using what we learned?
 ::: callout-tip
 ## Practice Exercise 2: Formulating Hypotheses
 
-For the following research questions about pine needles write the null
-and alternative hypotheses:
+For the following research questions about pine needles write the null and alternative hypotheses:
 
-1.  Are needles on the lee side longer than the needles on the windy
-    side?
+1.  Are needles on the lee side longer than the needles on the windy side?
 
 What are the hypotheses?
 
@@ -835,11 +921,9 @@ Ha =
 
 # **Lecture 5:** Two-Sample T-Test Framework
 
-Now, let's compare pine needle lengths between windward and leeward
-sides of trees.
+Now, let's compare pine needle lengths between windward and leeward sides of trees.
 
-Question: **Is there a significant difference in needle length between
-the windward and leeward sides?**
+Question: **Is there a significant difference in needle length between the windward and leeward sides?**
 
 This requires a two-sample t-test.
 
@@ -849,11 +933,8 @@ Two-sample t-test compares means from two independent groups.
 
 where:
 
--   x̄₁ and x̄₂: These represent the sample means of the two groups you're
-    comparing
--   s²ₚ: This is the pooled variance, calculated as: s²ₚ = \[(n₁ -
-    1)s₁² + (n₂ - 1)s₂²\] / (n₁ + n₂ - 2), where s₁² and s₂² are the
-    sample variances of the two groups.
+-   x̄₁ and x̄₂: These represent the sample means of the two groups you're comparing
+-   s²ₚ: This is the pooled variance, calculated as: s²ₚ = \[(n₁ - 1)s₁² + (n₂ - 1)s₂²\] / (n₁ + n₂ - 2), where s₁² and s₂² are the sample variances of the two groups.
 -   **n₁ and n₂:** These are the sample sizes of the two groups.
 -   **√(1/n₁ + 1/n₂):** This represents the pooled standard error.
 
@@ -864,8 +945,7 @@ where:
 ::: callout-tip
 ## Practice Exercise 3: **Calculate summary statistics grouped by wind exposure**
 
-Before conducting the test, we need to understand the data for each
-group.
+Before conducting the test, we need to understand the data for each group.
 
 1.  You need this and the graph to see what is going on ....
 
@@ -878,7 +958,23 @@ group.
 
 
 
+
+
     ::: {.cell}
+    
+    ```{.r .cell-code}
+    group_summary <- pine_df %>%
+      group_by(wind) %>%
+      summarize(
+        mean_length = mean(length_mm),
+        sd_length = sd(length_mm),
+        n = n(),
+        se_length = sd_length / sqrt(n)
+      )
+    
+    print(group_summary)
+    ```
+    
     ::: {.cell-output .cell-output-stdout}
     
     ```
@@ -901,6 +997,8 @@ group.
 
 
 
+
+
 :::
 
 # Visualizing Group Differences
@@ -914,11 +1012,21 @@ group.
 
 
 
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# Create a boxplot comparing the two sides
+pine_wind_plot
+```
+
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-12-1.png)
 :::
 :::
+
+
 
 
 
@@ -945,15 +1053,30 @@ We could also look at the difference in means... some cool code here
 
 
 
+
+
 ::: {.cell}
-::: {.cell-output-display}
 
-| difference|
-|----------:|
-|       -5.5|
+```{.r .cell-code}
+# Assuming your dataframe is called df
+group_summary %>%
+  summarize(difference = mean_length[wind == "wind"] - mean_length[wind == "lee"])
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 1 × 1
+  difference
+       <dbl>
+1       -5.5
+```
+
 
 :::
 :::
+
+
 
 
 
@@ -970,8 +1093,9 @@ We could also look at the difference in means... some cool code here
 ::: callout-tip
 ## Practice Exercise 5: Using GGPLOT to get summary stats
 
-GGplot also has code to make the mean and standard error plots we are
-interested in along whit a lot of others
+GGplot also has code to make the mean and standard error plots we are interested in along whit a lot of others
+
+
 
 
 
@@ -983,10 +1107,28 @@ interested in along whit a lot of others
 
 
 ::: {.cell}
+
+```{.r .cell-code}
+# Assuming your dataframe is called df
+pine_mean_se_plot <- ggplot(pine_df, aes(x = wind, y = length_mm, color = wind)) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  labs(title = "Mean Pine Needle Length by Wind Exposure",
+       x = "Wind Exposure",
+       y = "Mean Length (mm)") +
+  coord_cartesian(ylim = c(0,25))+
+  scale_color_manual(values = c("lee" = "forestgreen", "wind" = "skyblue"),
+                   labels = c("lee" = "Leeward", "wind" = "Windward"))+
+  theme_classic()
+pine_mean_se_plot
+```
+
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-14-1.png)
 :::
 :::
+
+
 
 
 
@@ -1029,11 +1171,21 @@ Note you need to test each groups separately...
 
 
 
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# Assuming your dataframe is called df
+pine_mean_se_plot
+```
+
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-15-1.png)
 :::
 :::
+
+
 
 
 
@@ -1063,20 +1215,37 @@ Note you need to test each groups separately...
 
 
 
+
+
 ::: {.cell}
-::: {.cell-output-display}
 
-|date    |group       |n_s |wind | tree_no| length_mm|
-|:-------|:-----------|:---|:----|-------:|---------:|
-|3/20/25 |cephalopods |n   |lee  |       1|        20|
-|3/20/25 |cephalopods |n   |lee  |       1|        21|
-|3/20/25 |cephalopods |n   |lee  |       1|        23|
-|3/20/25 |cephalopods |n   |lee  |       1|        25|
-|3/20/25 |cephalopods |n   |lee  |       1|        21|
-|3/20/25 |cephalopods |n   |lee  |       1|        16|
+```{.r .cell-code}
+# how do you make separate dataframes to do this on?
+# Separate data by groups
+windward_data <- pine_df %>% filter(wind == "wind")
+leeward_data <- pine_df %>% filter(wind == "lee")
+head(leeward_data)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 6 × 6
+  date    group       n_s   wind  tree_no length_mm
+  <chr>   <chr>       <chr> <chr>   <dbl>     <dbl>
+1 3/20/25 cephalopods n     lee         1        20
+2 3/20/25 cephalopods n     lee         1        21
+3 3/20/25 cephalopods n     lee         1        23
+4 3/20/25 cephalopods n     lee         1        25
+5 3/20/25 cephalopods n     lee         1        21
+6 3/20/25 cephalopods n     lee         1        16
+```
+
 
 :::
 :::
+
+
 
 
 
@@ -1106,7 +1275,17 @@ Note you need to test each groups separately...
 
 
 
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# QQ Plot for windward group
+qqPlot(windward_data$length_mm, 
+       main = "QQ Plot for Windward Pine Needles",
+       ylab = "Sample Quantiles")
+```
+
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-17-1.png)
 :::
@@ -1120,6 +1299,8 @@ Note you need to test each groups separately...
 
 :::
 :::
+
+
 
 
 
@@ -1149,7 +1330,16 @@ Note you need to test each groups separately...
 
 
 
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# Shapiro-Wilk test for windward group
+shapiro_windward <- shapiro.test(windward_data$length_mm)
+print("Shapiro-Wilk test for windward data:")
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1158,6 +1348,10 @@ Note you need to test each groups separately...
 
 
 :::
+
+```{.r .cell-code}
+print(shapiro_windward)
+```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1172,6 +1366,8 @@ W = 0.96062, p-value = 0.451
 
 :::
 :::
+
+
 
 
 
@@ -1201,7 +1397,18 @@ Note you need to test each groups separately...
 
 
 
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# You can also test the leeward group
+# QQ Plot for leeward group
+qqPlot(leeward_data$length_mm, 
+       main = "QQ Plot for Leeward Pine Needles",
+       ylab = "Sample Quantiles")
+```
+
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-19-1.png)
 :::
@@ -1215,6 +1422,8 @@ Note you need to test each groups separately...
 
 :::
 :::
+
+
 
 
 
@@ -1244,7 +1453,16 @@ Note you need to test each groups separately...
 
 
 
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# Shapiro-Wilk test for leeward group
+shapiro_lee <- shapiro.test(leeward_data$length_mm)
+print("Shapiro-Wilk test for leeward data:")
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1253,6 +1471,10 @@ Note you need to test each groups separately...
 
 
 :::
+
+```{.r .cell-code}
+print(shapiro_lee)
+```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1267,6 +1489,8 @@ W = 0.95477, p-value = 0.3425
 
 :::
 :::
+
+
 
 
 
@@ -1294,7 +1518,26 @@ There are always a lot of ways to do this in R
 
 
 
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# there are always two ways
+# Test for normality using Shapiro-Wilk test for each wind group
+# All in one pipeline using tidyverse approach
+normality_results <- pine_df %>%
+  group_by(wind) %>%
+  summarize(
+    shapiro_stat = shapiro.test(length_mm)$statistic,
+    shapiro_p_value = shapiro.test(length_mm)$p.value,
+    normal_distribution = if_else(shapiro_p_value > 0.05, "Normal", "Non-normal")
+  )
+
+# Print the results
+print(normality_results)
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1308,6 +1551,8 @@ There are always a lot of ways to do this in R
 
 :::
 :::
+
+
 
 
 
@@ -1335,7 +1580,17 @@ Levenes test can be done on the original dataframe
 
 
 
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# Method 1: Using car package's leveneTest
+# This is often preferred as it's more robust to departures from normality
+levene_result <- leveneTest(length_mm ~ wind, data = pine_df)
+print("Levene's Test for Homogeneity of Variance:")
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1344,6 +1599,10 @@ Levenes test can be done on the original dataframe
 
 
 :::
+
+```{.r .cell-code}
+print(levene_result)
+```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1366,14 +1625,15 @@ group  1  1.2004 0.2789
 
 
 
+
+
 :::
 
 # **Lecture 5:** Conducting the Two-Sample T-Test
 
 ::::: columns
 ::: {.column width="60%"}
-Now we can compare the mean pine needle lengths between windward and
-leeward sides.
+Now we can compare the mean pine needle lengths between windward and leeward sides.
 
 Ho: μ₁ = μ₂ (The mean needle lengths are equal)
 
@@ -1385,8 +1645,7 @@ Deciding between:
 
 -   Welch's t-test (unequal variances)
 
-**Note the Levenes Test should be NOT SIGNIFICANT - What is the null
-hypothesis**
+**Note the Levenes Test should be NOT SIGNIFICANT - What is the null hypothesis**
 :::
 
 ::: {.column width="40%"}
@@ -1399,16 +1658,23 @@ hypothesis**
 
 
 
+
+
 ::: {.cell}
-::: {.cell-output-display}
+::: {.cell-output .cell-output-stdout}
 
-|      | Df|  F value|    Pr(>F)|
-|:-----|--:|--------:|---------:|
-|group |  1| 1.200417| 0.2789416|
-|      | 46|       NA|        NA|
+```
+Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(>F)
+group  1  1.2004 0.2789
+      46               
+```
+
 
 :::
 :::
+
+
 
 
 
@@ -1441,7 +1707,19 @@ t = (mean1 - mean2) / sqrt((s1\^2/n1) + (s2\^2/n2))
 
 
 
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# YOUR TASK: Conduct a two-sample t-test
+# Use var.equal=TRUE for standard t-test or var.equal=FALSE for Welch's t-test
+
+# Standard t-test (if variances are equal)
+t_test_result <- t.test(length_mm ~ wind, data = pine_df, var.equal = TRUE)
+print("Standard two-sample t-test:")
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1450,6 +1728,10 @@ t = (mean1 - mean2) / sqrt((s1\^2/n1) + (s2\^2/n2))
 
 
 :::
+
+```{.r .cell-code}
+print(t_test_result)
+```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1469,7 +1751,14 @@ sample estimates:
 
 
 :::
+
+```{.r .cell-code}
+# Welch's t-test (if variances are unequal)
+# YOUR CODE HERE
+```
 :::
+
+
 
 
 
@@ -1487,18 +1776,16 @@ sample estimates:
 ::: {.column width="60%"}
 **Interpret the results of the two-sample t-test**
 
-What can we conclude about the needle lengths on windward vs. leeward
-sides?
+What can we conclude about the needle lengths on windward vs. leeward sides?
 
 **How to report this result in a scientific paper:**
 
-"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no
-significant\] difference in needle length between windward (M = ..., SD
-= ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) =
-..., p = ...."
+"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no significant\] difference in needle length between windward (M = ..., SD = ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) = ..., p = ...."
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -1522,6 +1809,8 @@ significant\] difference in needle length between windward (M = ..., SD
 
 
 
+
+
 :::
 :::::
 
@@ -1531,18 +1820,16 @@ significant\] difference in needle length between windward (M = ..., SD
 ::: {.column width="60%"}
 **Interpret the results of the two-sample t-test**
 
-What can we conclude about the needle lengths on windward vs. leeward
-sides?
+What can we conclude about the needle lengths on windward vs. leeward sides?
 
 **How to report this result in a scientific paper:**
 
-"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no
-significant\] difference in needle length between windward (M = ..., SD
-= ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) =
-..., p = ...."
+"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no significant\] difference in needle length between windward (M = ..., SD = ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) = ..., p = ...."
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -1557,6 +1844,8 @@ significant\] difference in needle length between windward (M = ..., SD
 ![](05_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-25-1.png)
 :::
 :::
+
+
 
 
 

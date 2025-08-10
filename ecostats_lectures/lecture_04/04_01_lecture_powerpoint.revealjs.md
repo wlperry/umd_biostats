@@ -7,9 +7,22 @@ metadata-files:
 format:
   html:
     output-file: "04_01_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "04_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "04_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "04_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "04_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
+
+
 
 
 
@@ -36,11 +49,23 @@ format:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-2-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -55,6 +80,12 @@ format:
 ## Practice Exercise 1: Exploring the Grayling Dataset
 
 Let's explore the Arctic grayling data from lakes I3 and I8. Use the `grayling_df` data frame to create basic summary statistics.
+
+
+
+
+
+
 
 
 
@@ -125,6 +156,12 @@ summary(grayling_df)
 
 
 
+
+
+
+
+
+
 :::
 
 # **Lecture 4:** Probability Distributions
@@ -145,11 +182,23 @@ summary(grayling_df)
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-4-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -181,11 +230,23 @@ Z-scores allow us to convert any normal distribution to the standard normal dist
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-5-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -200,6 +261,12 @@ Z-scores allow us to convert any normal distribution to the standard normal dist
 ## Practice Exercise 2: Calculating Z-scores
 
 Let's practice converting raw values to Z-scores using the Arctic grayling data.
+
+
+
+
+
+
 
 
 
@@ -243,9 +310,21 @@ head(grayling_df)
 
 
 
+
+
+
+
+
+
 :::
 
 # Z-score Results
+
+
+
+
+
+
 
 
 
@@ -275,6 +354,12 @@ Proportion within 1 SD: 64.3 %
 
 
 
+
+
+
+
+
+
 # Lecture 4: Standard normal distribution - Fish Data
 
 ::::: columns
@@ -289,6 +374,12 @@ You want to know things about this population like
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -311,6 +402,12 @@ You want to know things about this population like
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-8-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -342,11 +439,23 @@ Standard Normal Distribution
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-9-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -375,11 +484,23 @@ Areas under curve of Standard Normal Distribution
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-10-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -414,6 +535,12 @@ z = (300 - 265.61)/28.3 = 1.215194
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -442,6 +569,12 @@ i3_stats
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -505,11 +638,23 @@ Where:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-12-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -524,6 +669,12 @@ Where:
 ## Practice Exercise 5: Sampling Distributions
 
 Let's explore how sample size affects our estimates by taking samples of different sizes:
+
+
+
+
+
+
 
 
 
@@ -580,6 +731,12 @@ results
 
 
 
+
+
+
+
+
+
 What do you observe about the standard error as sample size increases? Why does this happen?
 :::
 
@@ -606,11 +763,23 @@ What do you observe about the standard error as sample size increases? Why does 
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-14-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -642,11 +811,23 @@ What do you observe about the standard error as sample size increases? Why does 
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-15-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -672,11 +853,23 @@ How and why? - Decreases with sample n - number - increases with sample s - stan
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-16-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -711,11 +904,23 @@ Where:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-17-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -769,11 +974,23 @@ A **confidence interval** is a range of values that is likely to contain the tru
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-18-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -795,11 +1012,23 @@ Lets compare what the two plots look like near each other
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-19-1.png){width=576}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -814,6 +1043,12 @@ Lets compare what the two plots look like near each other
 ## Practice Exercise 3: Calculating Standard Error and Confidence Intervals
 
 Calculate the standard error and 95% confidence interval for the mean length of Arctic grayling in each lake.
+
+
+
+
+
+
 
 
 
@@ -854,6 +1089,12 @@ ci_results
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -901,11 +1142,23 @@ When sample sizes are small, the **t-distribution** is more appropriate than the
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-21-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -920,6 +1173,12 @@ When sample sizes are small, the **t-distribution** is more appropriate than the
 ## Practice Exercise 4: Using the t-distribution
 
 Let's compare confidence intervals using the normal approximation (z) versus the t-distribution for our fish data.
+
+
+
+
+
+
 
 
 
@@ -1027,6 +1286,12 @@ t critical value: 2.262 vs z critical value: 1.96
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -1152,11 +1417,23 @@ Hypothesis testing is a systematic way to evaluate research questions using data
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-23-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -1192,11 +1469,23 @@ Hypothesis testing is a systematic way to evaluate research questions using data
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-24-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -1211,6 +1500,12 @@ Hypothesis testing is a systematic way to evaluate research questions using data
 ## Practice Exercise 5: Lets practice a One-Sample t-Test
 
 Let's perform a one-sample t-test to determine if the mean fish length in Toolik Lake differs from 50 mm:
+
+
+
+
+
+
 
 
 
@@ -1270,6 +1565,12 @@ mean of x
 
 
 
+
+
+
+
+
+
 Interpret this test result by answering these questions:
 
 1.  What was the null hypothesis?
@@ -1289,6 +1590,12 @@ For the following research questions about Arctic grayling, write the null and a
 1.  Are fish in Lake I8 longer than fish in Lake I3?
 2.  Is the mean length of Arctic grayling in these lakes different from 300 mm?
 3.  Is there a relationship between fish length and mass?
+
+
+
+
+
+
 
 
 
@@ -1333,6 +1640,12 @@ mean in group I3 mean in group I8
 
 
 
+
+
+
+
+
+
 Based on this t-test, what can we conclude about the difference in fish length between the two lakes?
 :::
 
@@ -1353,11 +1666,23 @@ A **p-value** is the probability of observing the sample result (or something mo
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-27-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -1385,11 +1710,23 @@ When making decisions based on hypothesis tests, two types of errors can occur:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-28-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -1410,6 +1747,12 @@ Given the following scenarios, identify whether a Type I or Type II error might 
 2.  A study fails to detect a real decline in grayling population due to warming water, concluding there was no effect.
 
 3.  Let's calculate the power of our t-test to detect a 30 mm difference in length between lakes:
+
+
+
+
+
+
 
 
 
@@ -1469,6 +1812,12 @@ NOTE: n is number in *each* group
 
 
 
+
+
+
+
+
+
 :::
 
 # **Lecture 4:** Summary
@@ -1498,11 +1847,23 @@ NOTE: n is number in *each* group
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-30-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 

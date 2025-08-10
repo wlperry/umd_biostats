@@ -1,71 +1,23 @@
 ---
 title: "Lecture 06"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true # retains the images when you start again
-  message: false
-  warning: false
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+metadata-files:
+  - ../../_templates/lectures.yml
 format:
   html:
-    toc: false
     output-file: "06_01_lecture_powerpoint_html.html"
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch  # Limits line length to approximately 80 characters
-    css: ../../css/lecture.css
-    fig-width: 7
-    fig-height: 5
-
-  # RevealJS - optimized for presentation (keeps two-column layout and large images)
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "06_01_lecture_powerpoint_slides.html"
-    self-contained: true
-    css: ../../css/lecture.css
-    slide-number: true
-    transition: fade
-    background-transition: none
-    scrollable: true
-    smaller: true
-    width: 1280
-    height: 720
-    margin: 0.1
-    min-scale: 0.2
-    max-scale: 2.0
-    fig-width: 8
-    fig-height: 5
-
-  # Word format - optimized for printing and document flow
   docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    css: msword.css
-    embed-resources: true
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    df-print: kable     # Better table formatting
-
-  # PowerPoint format - optimized for traditional PowerPoint presentation
+    output-file: "06_01_lecture_powerpoint.docx"
   pptx:
-    reference-doc: ../../ms_templates/lecture_template.pptx 
-    embed-resources: true
-    fig-width: 6.5      # Good size for PowerPoint slides
-    fig-height: 4       # Proper aspect ratio for slides
-    fig-dpi: 300        # High resolution for projection
-    df-print: kable     # Better table formatting
-
-editor: visual
+    output-file: "06_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "06_01_lecture_powerpoint.pdf"
 ---
+
+
 
 
 
@@ -123,8 +75,7 @@ Covered
         -   assign degree of confidence to inferences
     -   Statistical hypothesis testing:
         -   formalized approach to inference
-    -   Hypotheses ask whether samples come from populations with
-        certain properties
+    -   Hypotheses ask whether samples come from populations with certain properties
     -   Often interested in questions about population means
         -   but other questions are of interest
 :::
@@ -179,8 +130,7 @@ Together Ho and Ha encompass all possible outcomes:
 
 -   Ho: µ \> 0, Ha: µ ≤ 0
 
-    -   can be directional mean is greater than 0 or mean is not equal
-        or less than 0
+    -   can be directional mean is greater than 0 or mean is not equal or less than 0
 
     -   this becomes a one sided test as it predicts only one direction
 :::
@@ -198,10 +148,8 @@ Statistical tests assess likelihood of the null hypothesis being true
 
 -   If the Ho is likely false, then Ha assumed to be correct
 -   More precisely:
-    -   the long run probability of obtaining sample value (or more
-        extreme one) if the null hypothesis is true
-        -   p(data\|Ho) - the probability of observing the data given
-            that the null hypothesis Ho is true
+    -   the long run probability of obtaining sample value (or more extreme one) if the null hypothesis is true
+        -   p(data\|Ho) - the probability of observing the data given that the null hypothesis Ho is true
 :::
 
 ::: {.column width="40%"}
@@ -217,20 +165,14 @@ Hypothesis tests
 
 -   Expressed as p-value (0-never to 1-always )
 -   Interpret p-value as:
-    -   probability of obtaining sample value of statistic (or more
-        extreme one) if Ho is true
+    -   probability of obtaining sample value of statistic (or more extreme one) if Ho is true
 -   High p-value:
     -   high probability of obtaining sample statistic under Ho
-        -   if the null hypothesis (Ho) were true, you would frequently
-            observe data similar to your sample statistic
-        -   your observed results are quite compatible with what the
-            null hypothesis predicts
+        -   if the null hypothesis (Ho) were true, you would frequently observe data similar to your sample statistic
+        -   your observed results are quite compatible with what the null hypothesis predicts
 -   Low p-value: low probability of obtaining sample statistic under Ho
-    -   if the null hypothesis (Ho) were true, you would rarely observe
-        data similar to or more extreme than your sample statistic
-    -   Your results are unusual under the null hypothesis, suggesting
-        that either you've witnessed a rare event or the null hypothesis
-        may be incorrect
+    -   if the null hypothesis (Ho) were true, you would rarely observe data similar to or more extreme than your sample statistic
+    -   Your results are unusual under the null hypothesis, suggesting that either you've witnessed a rare event or the null hypothesis may be incorrect
 :::
 
 ::: {.column width="40%"}
@@ -242,11 +184,9 @@ Hypothesis tests
 
 Statistical test results:
 
--   p = 0.3 means that if I repeated the study 100 times, I would get
-    this (or more extreme) result due to chance 30 times
+-   p = 0.3 means that if I repeated the study 100 times, I would get this (or more extreme) result due to chance 30 times
 
--   p = 0.03 means that if I repeated the study 100 times, I would get
-    this (or more extreme) result due to chance 3 times
+-   p = 0.03 means that if I repeated the study 100 times, I would get this (or more extreme) result due to chance 3 times
 
 *Which p-value suggests Ho likely false?*
 
@@ -256,24 +196,19 @@ p \< 0.05 conventional "significance threshold" (α = alpha or p value)
 
 p \< 0.05 means: if Ho is true and we repeated the study 100 times
 
--   we would get this (or more extreme) result less than 5 times due to
-    chance
+-   we would get this (or more extreme) result less than 5 times due to chance
 
 # **Lecture 6:** Significance Levels and Interpretation
 
 Statistical test results:
 
--   α is the rate at which we will reject a true null hypothesis (Type I
-    error rate)
--   Lowering α will lower likelihood of incorrectly rejecting a true
-    null hypothesis (e.g., 0.01, 0.001)
--   *Both Hs and α are specified* *BEFORE collection of data and
-    analysis*
+-   α is the rate at which we will reject a true null hypothesis (Type I error rate)
+-   Lowering α will lower likelihood of incorrectly rejecting a true null hypothesis (e.g., 0.01, 0.001)
+-   *Both Hs and α are specified* *BEFORE collection of data and analysis*
 
 Traditionally α=0.05 is used as a cut off for rejecting null hypothesis
 
-There is nothing magical about 0.05 - actual p-values need to be
-reported - also need to decide prior to study
+There is nothing magical about 0.05 - actual p-values need to be reported - also need to decide prior to study
 
 | p-value range | Interpretation |
 |----|----|
@@ -287,8 +222,7 @@ reported - also need to decide prior to study
 
 ::::: columns
 ::: {.column width="60%"}
-A **p-value** is the probability of observing the sample result (or
-something more extreme) if the null hypothesis is true.
+A **p-value** is the probability of observing the sample result (or something more extreme) if the null hypothesis is true.
 
 -   **Common interpretations:**
     -   p \< 0.05: Strong evidence against H₀
@@ -316,11 +250,15 @@ something more extreme) if the null hypothesis is true.
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](06_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-1-1.png)
 :::
 :::
+
+
 
 
 
@@ -345,10 +283,7 @@ Fisher:
 
 p-value as informal measure of discrepancy between data and Ho
 
-"If p is between 0.1 and 0.9 there is certainly no reason to suspect the
-hypothesis tested. If it is below 0.02 it is strongly indicated that the
-hypothesis fails to account for the whole of the facts. We shall not
-often be astray if we draw a conventional line at .05 …"
+"If p is between 0.1 and 0.9 there is certainly no reason to suspect the hypothesis tested. If it is below 0.02 it is strongly indicated that the hypothesis fails to account for the whole of the facts. We shall not often be astray if we draw a conventional line at .05 …"
 :::
 
 ![](images/clipboard-694363384.png){width="300" height="250"}
@@ -378,10 +313,8 @@ often be astray if we draw a conventional line at .05 …"
     -   α = 0.05 means a type I error rate of 5%
 -   **Type II error rate, β**
     -   wrongly fail to reject H₀ when it's false
--   **Power = 1-β**: probability of correctly rejecting H₀ when H₁ is
-    true
--   Inverse relationship between type I and type II error - but not
-    straightforward
+-   **Power = 1-β**: probability of correctly rejecting H₀ when H₁ is true
+-   Inverse relationship between type I and type II error - but not straightforward
 -   Result of chance - sample not representative of population
 -   Which type of error is more dangerous?
 :::
@@ -397,24 +330,17 @@ the dotted line is the alpha = 0.05
 
 ::::: columns
 ::: {.column width="60%"}
-When making decisions based on hypothesis tests, two types of errors can
-occur:
+When making decisions based on hypothesis tests, two types of errors can occur:
 
-**Type I Error (False Positive)** - Rejecting H₀ when it's actually
-true - Probability = α (significance level) - "Finding an effect that
-isn't real"
+**Type I Error (False Positive)** - Rejecting H₀ when it's actually true - Probability = α (significance level) - "Finding an effect that isn't real"
 
-**Type II Error (False Negative)** - Failing to reject H₀ when it's
-actually false - Probability = β - "Missing an effect that is real"
+**Type II Error (False Negative)** - Failing to reject H₀ when it's actually false - Probability = β - "Missing an effect that is real"
 
-**Statistical Power = 1 - β** - Probability of correctly rejecting a
-false H₀ - Increases with: - Larger sample size - Larger effect size -
-Lower variability - Higher α level
+**Statistical Power = 1 - β** - Probability of correctly rejecting a false H₀ - Increases with: - Larger sample size - Larger effect size - Lower variability - Higher α level
 
 The red area represents the power in the experiment
 
-The farther apart the means the lower the beta error is... or you have
-higher power.
+The farther apart the means the lower the beta error is... or you have higher power.
 :::
 
 ::: {.column width="40%"}
@@ -426,27 +352,22 @@ higher power.
 
 ::::: columns
 ::: {.column width="60%"}
-When making decisions based on hypothesis tests, two types of errors can
-occur:
+When making decisions based on hypothesis tests, two types of errors can occur:
 
-**Type I Error (False Positive)** - Rejecting H₀ when it's actually
-true - Probability = α (significance level) - "Finding an effect that
-isn't real"
+**Type I Error (False Positive)** - Rejecting H₀ when it's actually true - Probability = α (significance level) - "Finding an effect that isn't real"
 
-**Type II Error (False Negative)** - Failing to reject H₀ when it's
-actually false - Probability = β - "Missing an effect that is real"
+**Type II Error (False Negative)** - Failing to reject H₀ when it's actually false - Probability = β - "Missing an effect that is real"
 
-**Statistical Power = 1 - β** - Probability of correctly rejecting a
-false H₀ - Increases with: - Larger sample size - Larger effect size -
-Lower variability - Higher α level
+**Statistical Power = 1 - β** - Probability of correctly rejecting a false H₀ - Increases with: - Larger sample size - Larger effect size - Lower variability - Higher α level
 
 The red area represents the power in the experiment
 
-The farther apart the means the lower the beta error is... or you have
-higher power.
+The farther apart the means the lower the beta error is... or you have higher power.
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -470,6 +391,8 @@ higher power.
 
 
 
+
+
 :::
 :::::
 
@@ -478,26 +401,22 @@ higher power.
 ::: callout-tip
 ## Practice Exercise 6: Interpreting P-values and Errors
 
-Given the following scenarios, identify whether a Type I or Type II
-error might have occurred:
+Given the following scenarios, identify whether a Type I or Type II error might have occurred:
 
-1.  A researcher concludes that a new fishing regulation increased
-    grayling size, when in fact it had no effect.
-2.  A study fails to detect a real decline in grayling population due to
-    warming water, concluding there was no effect.
-3.  Let's calculate the power of our t-test to detect a 30 mm difference
-    in length between lakes:
+1.  A researcher concludes that a new fishing regulation increased grayling size, when in fact it had no effect.
+2.  A study fails to detect a real decline in grayling population due to warming water, concluding there was no effect.
+3.  Let's calculate the power of our t-test to detect a 30 mm difference in length between lakes:
 
 -   pooled standard deviation
 
-    -   This is the combined standard deviation of both groups weighted
-        by respective degrees of freedom.
+    -   This is the combined standard deviation of both groups weighted by respective degrees of freedom.
 
 -   Cohen's d
 
-    -   standardized difference between means - here assuming a
-        difference of 30 units (mm)
+    -   standardized difference between means - here assuming a difference of 30 units (mm)
     -   `delta = 0.6741298`: The standardized effect size (Cohen's d)
+
+
 
 
 
@@ -569,34 +488,27 @@ NOTE: n is number in *each* group
 
 
 
+
+
 :::
 
 # What is Power
 
-Statistical power represents the probability of detecting a true effect
-(rejecting the null hypothesis when it is false). In this case, with a
-power of 97%, there's a 97% chance of detecting a true difference of 30
-units between the means of the two groups if such a difference actually
-exists.
+Statistical power represents the probability of detecting a true effect (rejecting the null hypothesis when it is false). In this case, with a power of 97%, there's a 97% chance of detecting a true difference of 30 units between the means of the two groups if such a difference actually exists.
 
 A power analysis like this is typically done for one of these purposes:
 
 1.  Before data collection to determine required sample size
 2.  After a study to evaluate if the sample size was adequate
-3.  To determine the minimum detectable effect size with the given
-    sample
+3.  To determine the minimum detectable effect size with the given sample
 
-With 97% power, this test has excellent ability to detect the specified
-effect size. Generally, **80% power is considered acceptable**, so 97%
-indicates a very well-powered study for detecting a difference of 30mm
-between the groups.
+With 97% power, this test has excellent ability to detect the specified effect size. Generally, **80% power is considered acceptable**, so 97% indicates a very well-powered study for detecting a difference of 30mm between the groups.
 
 # **Lecture 6:** Error Bars and Their Interpretation
 
 ::::: columns
 ::: {.column width="60%"}
-Error bars are graphical representations of the variability of data that
-show:
+Error bars are graphical representations of the variability of data that show:
 
 -   The **precision** of a measurement
 -   The **uncertainty** around an estimate
@@ -611,12 +523,13 @@ Common types of error bars:
 When interpreting graphs:
 
 -   Always check what the error bars represent
--   Non-overlapping 95% CI bars suggest statistically significant
-    differences
+-   Non-overlapping 95% CI bars suggest statistically significant differences
 -   Error bars help assess both statistical and practical significance
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -640,6 +553,8 @@ When interpreting graphs:
 
 
 
+
+
 :::
 :::::
 
@@ -647,8 +562,7 @@ When interpreting graphs:
 
 ::::: columns
 ::: {.column width="60%"}
-**Pseudoreplication** occurs when measurements that are not independent
-are analyzed as if they were independent.
+**Pseudoreplication** occurs when measurements that are not independent are analyzed as if they were independent.
 
 -   A critical consideration in experimental design
 -   Results in underestimated standard errors and confidence intervals
@@ -677,11 +591,15 @@ are analyzed as if they were independent.
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](06_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-5-1.png)
 :::
 :::
+
+
 
 
 
@@ -698,12 +616,10 @@ are analyzed as if they were independent.
 
 ::::: columns
 ::: {.column width="60%"}
-The statistical concepts we've covered today are essential for fisheries
-biologists and ecologists:
+The statistical concepts we've covered today are essential for fisheries biologists and ecologists:
 
 -   **Standard error** quantifies uncertainty in growth rate estimates
--   **Confidence intervals** provide plausible ranges for population
-    parameters
+-   **Confidence intervals** provide plausible ranges for population parameters
 -   **Hypothesis testing** evaluates effects of management practices
 -   **P-values** determine significance of environmental impacts
 
@@ -726,11 +642,15 @@ biologists and ecologists:
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](06_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-6-1.png)
 :::
 :::
+
+
 
 
 

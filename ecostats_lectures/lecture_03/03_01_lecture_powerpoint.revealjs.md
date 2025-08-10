@@ -6,9 +6,22 @@ metadata-files:
 format:
   html:
     output-file: "03_01_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "03_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "03_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "03_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "03_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
+
+
 
 
 
@@ -38,8 +51,7 @@ TGW - yep its a thing
 
 ODO - what do you think it is?
 
-NO3 - what is it? Are you sure? Why might you get in legal trouble if
-you used this?
+NO3 - what is it? Are you sure? Why might you get in legal trouble if you used this?
 
 ![](images/clipboard-3544614084.png){width="300" height="250"}
 :::
@@ -54,16 +66,13 @@ you used this?
 -   Understand why statistics is vital in biology
 -   Distinguish between different types of biological variables
 -   Learn about accuracy, precision, and bias in measurements
--   Calculate and interpret measures of central tendency (mean, median,
-    geometric mean)
--   Calculate and interpret measures of spread (standard deviation,
-    variance, IQR)
+-   Calculate and interpret measures of central tendency (mean, median, geometric mean)
+-   Calculate and interpret measures of spread (standard deviation, variance, IQR)
 -   Understand data transformations for skewed distributions
 -   Visualize descriptive statistics for our data
 -   Learn how to handle uncertainty in our data
 
-We'll use a dataset on grayling fish from two different lakes to explore
-these concepts..
+We'll use a dataset on grayling fish from two different lakes to explore these concepts..
 
 ![](images/grayling.jpeg){width="250" height="180"}
 :::
@@ -79,29 +88,29 @@ these concepts..
 ::: {.column width="60%"}
 Biology is fundamentally different from fields like physics in that:
 
--   Most biological phenomena are **probabilistic** rather than
-    **deterministic**
-    -   Responses occur with some characteristic probability, not with
-        certainty
--   All biological material varies, which is essential for evolution
-    (recall Darwin's postulates):
+-   Most biological phenomena are **probabilistic** rather than **deterministic**
+    -   Responses occur with some characteristic probability, not with certainty
+-   All biological material varies, which is essential for evolution (recall Darwin's postulates):
     -   Variation exists within populations
     -   Some variation is heritable
     -   Some heritable variation affects survival/reproduction
 -   Environmental conditions (in nature, lab, or greenhouse) always vary
 -   Measurements include error
--   Multiple unmeasured causal factors influence nearly all biological
-    systems
+-   Multiple unmeasured causal factors influence nearly all biological systems
 
-Statistics helps us understand biological processes in this variable
-world by:
+Statistics helps us understand biological processes in this variable world by:
 
 1.  Condensing variation into summary form (Descriptive statistics)
-2.  Testing whether observations are consistent with predictions
-    (Inferential statistics)
+2.  Testing whether observations are consistent with predictions (Inferential statistics)
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -117,6 +126,12 @@ world by:
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -125,8 +140,13 @@ world by:
 ::: callout-tip
 ## Practice Exercise 1: Can you do this for the pine data we have collected?
 
-Let's recreate the basic histogram of fish lengths from our last class.
-Use the `sculpin_df` data frame that's already loaded.
+Let's recreate the basic histogram of fish lengths from our last class. Use the `sculpin_df` data frame that's already loaded.
+
+
+
+
+
+
 
 
 
@@ -145,33 +165,32 @@ Use the `sculpin_df` data frame that's already loaded.
 
 
 
+
+
+
+
+
+
 :::
 
 # Lecture 3: Populations and Samples
 
 ::::: columns
 ::: {.column width="60%"}
-Before we dive into descriptive statistics, let's clarify some
-fundamental concepts:
+Before we dive into descriptive statistics, let's clarify some fundamental concepts:
 
--   **Population**: The entire group of things under consideration; the
-    group for which answers obtained from measurements and statistical
-    analysis are pertinent.
+-   **Population**: The entire group of things under consideration; the group for which answers obtained from measurements and statistical analysis are pertinent.
 -   **Sample**: A subset of the population that is actually measured.
 -   **Sample unit**: The individual thing drawn from the population.
 
 Types of populations:
 
--   **Observational population**: Usually finite but may be very large
-    (e.g., head width of all corn earworms in a field)
--   **Experimental population**: Often conceptually infinite (e.g., all
-    possible goldenrod plants that could receive a specific fertilizer
-    treatment)
+-   **Observational population**: Usually finite but may be very large (e.g., head width of all corn earworms in a field)
+-   **Experimental population**: Often conceptually infinite (e.g., all possible goldenrod plants that could receive a specific fertilizer treatment)
 
 Sampling involves
 
--   **inference** - generalizing from what is observed in the sample to
-    what is present in the population.
+-   **inference** - generalizing from what is observed in the sample to what is present in the population.
 -   Valid inference requires **random sampling**.
 :::
 
@@ -186,20 +205,15 @@ Sampling involves
 ::: {.column width="60%"}
 It's important to distinguish between:
 
--   **Parameters**: True numerical values for a population (usually
-    denoted by Greek letters)
--   **Statistics**: Estimates of parameters based on samples (usually
-    denoted by Roman letters)
+-   **Parameters**: True numerical values for a population (usually denoted by Greek letters)
+-   **Statistics**: Estimates of parameters based on samples (usually denoted by Roman letters)
 
 For example:
 
 -   Population mean (μ) is estimated by sample mean (Y̅)
--   Population standard deviation (σ) is estimated by sample standard
-    deviation (s)
+-   Population standard deviation (σ) is estimated by sample standard deviation (s)
 
-The standard deviation formula above includes n-1 in the denominator
-(rather than n) to provide an unbiased estimate of the population
-parameter.
+The standard deviation formula above includes n-1 in the denominator (rather than n) to provide an unbiased estimate of the population parameter.
 :::
 
 ::: {.column width="40%"}
@@ -211,15 +225,12 @@ parameter.
 
 ::::: columns
 ::: {.column width="60%"}
-Understanding the type of variable you're working with is essential for
-selecting appropriate statistics:
+Understanding the type of variable you're working with is essential for selecting appropriate statistics:
 
 ### Measurement or Quantitative Variables
 
--   **Continuous**: Any value between extremes of scale is possible
-    (e.g., mass, length)
--   **Discrete (meristic)**: Only fixed values (usually integers)
-    between extremes are possible (e.g., bristle number, egg count)
+-   **Continuous**: Any value between extremes of scale is possible (e.g., mass, length)
+-   **Discrete (meristic)**: Only fixed values (usually integers) between extremes are possible (e.g., bristle number, egg count)
 
 ### Rank Variables (Ordinal)
 
@@ -229,8 +240,7 @@ selecting appropriate statistics:
 ### Categorical Variables (Qualitative)
 
 -   No quantitative information (e.g., male/female, living/dead)
--   Some are simplifications of quantitative variables (e.g., color
-    instead of wavelength)
+-   Some are simplifications of quantitative variables (e.g., color instead of wavelength)
 :::
 
 ::: {.column width="40%"}
@@ -248,8 +258,7 @@ Derived Variables
 -   **Rates**: Quantity per unit (time, mass, etc.)
 -   **Indices**: More complex derived variables (e.g., condition index)
 
-Let's explore our grayling fish dataset and identify the types of
-variables it contains.
+Let's explore our grayling fish dataset and identify the types of variables it contains.
 :::
 
 ::: {.column width="40%"}
@@ -262,6 +271,12 @@ variables it contains.
 ## Practice Exercise 2: Can you do this for the pine data we have collected?
 
 Let's examine the different data and determine what they are?
+
+
+
+
+
+
 
 
 
@@ -303,22 +318,25 @@ head(grayling_df)
 
 
 
+
+
+
+
+
+
 :::
 
 # Lecture 3: Accuracy, Precision, and Bias
 
 ::::: columns
 ::: {.column width="60%"}
-When taking biological measurements, understanding measurement quality
-is essential:
+When taking biological measurements, understanding measurement quality is essential:
 
 -   **Accuracy**: Closeness of measured value to true value
--   **Precision**: Closeness of repeated measurements to each other
-    (repeatability)
+-   **Precision**: Closeness of repeated measurements to each other (repeatability)
 -   **Bias**: Systematic departure from the true value
 
-Accuracy is a function of both precision and bias. For statisticians,
-bias is usually a more serious problem than low precision because:
+Accuracy is a function of both precision and bias. For statisticians, bias is usually a more serious problem than low precision because:
 
 -   It's harder to detect (true value usually unknown)
 
@@ -335,8 +353,7 @@ bias is usually a more serious problem than low precision because:
 ::: callout-tip
 ## Practice Exercise 1: What are potential sources of error in pine needles or fish?
 
-For our grayling data, potential sources of measurement error might
-include:
+For our grayling data, potential sources of measurement error might include:
 
 -   Precision issues:
 
@@ -344,8 +361,7 @@ include:
 
 -   Bias issues:
 
-    -   Systematic underestimation of length if measurements aren't
-        taken from the true tip of the snout to the end of the tail
+    -   Systematic underestimation of length if measurements aren't taken from the true tip of the snout to the end of the tail
 
 -   Accuracy issues? what could they be?
 :::
@@ -354,11 +370,9 @@ include:
 
 ::::: columns
 ::: {.column width="60%"}
-The two most common measures of central tendency are the **mean** and
-the **median**.
+The two most common measures of central tendency are the **mean** and the **median**.
 
-The Arithmetic Mean The arithmetic mean is the average of a set of
-measurements:
+The Arithmetic Mean The arithmetic mean is the average of a set of measurements:
 
 ## $$\bar{Y} = \frac{\sum_{i=1}^{n} Y_i}{n}$$
 
@@ -370,6 +384,12 @@ Where:
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -400,6 +420,12 @@ Mean length of all fish: 324.5 mm
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -408,8 +434,13 @@ Mean length of all fish: 324.5 mm
 The Median
 
 -   The median is the middle value of a sorted dataset.
--   If there is an even number of observations, it's the average of the
-    two middle values.
+-   If there is an even number of observations, it's the average of the two middle values.
+
+
+
+
+
+
 
 
 
@@ -442,6 +473,12 @@ Median length of all fish: 324.5 mm
 
 
 
+
+
+
+
+
+
 # Lecture 3: Measures of Spread - Variance and Standard Deviation
 
 ::::: columns
@@ -456,13 +493,18 @@ The variance is
 
 The standard deviation is the square root of variance
 
--   measures how far observations typically are from the mean and are in
-    the units of the mean:
+-   measures how far observations typically are from the mean and are in the units of the mean:
 
 ## $$s = \sqrt{\frac{\sum_{i=1}^{n} (Y_i - \bar{Y})^2}{n-1}}$$
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -502,6 +544,12 @@ Standard deviation of length: 65 mm
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -509,8 +557,13 @@ Standard deviation of length: 65 mm
 
 ::::: columns
 ::: {.column width="60%"}
-The area under the curve of a bell shaped curve within + and - 2
-Standard deviations on each side includes about 95% of the data
+The area under the curve of a bell shaped curve within + and - 2 Standard deviations on each side includes about 95% of the data
+
+
+
+
+
+
 
 
 
@@ -577,9 +630,21 @@ Percentage within ±2 SD: 90.91 %
 
 
 
+
+
+
+
+
+
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -595,6 +660,12 @@ Percentage within ±2 SD: 90.91 %
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -602,16 +673,20 @@ Percentage within ±2 SD: 90.91 %
 
 ::::: columns
 ::: {.column width="60%"}
-The coefficient of variation (CV) expresses the standard deviation as a
-percentage of the mean:
+The coefficient of variation (CV) expresses the standard deviation as a percentage of the mean:
 
 ## $$CV = \frac{s}{\bar{Y}} \times 100\%$$
 
-This is useful for comparing the variability of measurements with
-different units or vastly different scales.
+This is useful for comparing the variability of measurements with different units or vastly different scales.
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -642,6 +717,12 @@ Coefficient of variation: 10.7 %
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -649,16 +730,20 @@ Coefficient of variation: 10.7 %
 
 ::::: columns
 ::: {.column width="60%"}
-The interquartile range (IQR) is the range of the middle 50% of the
-data:
+The interquartile range (IQR) is the range of the middle 50% of the data:
 
 $$IQR = Q_3 - Q_1$$
 
-Where $Q_1$ is the first quartile (25th percentile) and $Q_3$ is the
-third quartile (75th percentile).
+Where $Q_1$ is the first quartile (25th percentile) and $Q_3$ is the third quartile (75th percentile).
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -707,6 +792,12 @@ Interquartile range: 106.25 mm
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -714,20 +805,22 @@ Interquartile range: 106.25 mm
 
 ::::: columns
 ::: {.column width="60%"}
-Biological data are often skewed (asymmetrical), which can make the
-arithmetic mean less representative of central tendency. Data
-transformations can help address this issue.
+Biological data are often skewed (asymmetrical), which can make the arithmetic mean less representative of central tendency. Data transformations can help address this issue.
 
 ### Logarithmic Transformation
 
-The logarithmic transformation is one of the most common for
-right-skewed biological data:
+The logarithmic transformation is one of the most common for right-skewed biological data:
 
-When data are log-normally distributed, the geometric mean often
-provides a better measure of central tendency than the arithmetic mean.
+When data are log-normally distributed, the geometric mean often provides a better measure of central tendency than the arithmetic mean.
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -761,6 +854,12 @@ Geometric mean (back-transformed mean of logs): NA mm
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -768,13 +867,10 @@ Geometric mean (back-transformed mean of logs): NA mm
 
 ::::: columns
 ::: {.column width="60%"}
--   **Log transformation**: When data are right-skewed or follow
-    multiplicative rather than additive processes
--   **Square root transformation**: For count data or data where
-    variance increases with the mean
+-   **Log transformation**: When data are right-skewed or follow multiplicative rather than additive processes
+-   **Square root transformation**: For count data or data where variance increases with the mean
 -   **Inverse transformation**: For strongly right-skewed data
--   **Arcsine square root transformation**: For proportions or
-    percentages (though logistic regression is often preferred now)
+-   **Arcsine square root transformation**: For proportions or percentages (though logistic regression is often preferred now)
 :::
 
 ::: {.column width="40%"}
@@ -793,11 +889,23 @@ Histograms show the frequency distribution of our data.
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-html/histogram-1.png){width=768}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -815,11 +923,23 @@ Box plots show the median, quartiles, and potential outliers.
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-html/boxplot-1.png){width=768}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -836,11 +956,16 @@ The mean and median measure different aspects of a distribution:
 
 **Median**: Middle value of the data
 
-When a distribution is symmetric, the mean and median are similar. When
-it's skewed or has outliers, they can differ significantly.
+When a distribution is symmetric, the mean and median are similar. When it's skewed or has outliers, they can differ significantly.
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -862,6 +987,12 @@ it's skewed or has outliers, they can differ significantly.
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -875,11 +1006,16 @@ The mean and median measure different aspects of a distribution:
 
 **Median**: Middle value of the data
 
-When a distribution is symmetric, the mean and median are similar. When
-it's skewed or has outliers, they can differ significantly.
+When a distribution is symmetric, the mean and median are similar. When it's skewed or has outliers, they can differ significantly.
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -890,6 +1026,12 @@ it's skewed or has outliers, they can differ significantly.
 ![](03_01_lecture_powerpoint_files/figure-html/mean-vs-median-plot-1.png){width=576}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -908,11 +1050,16 @@ The standard deviation and interquartile range both measure spread, but:
 
 **Interquartile range**: Robust against outliers
 
-When the data is approximately normal, the IQR ≈ 1.35 × standard
-deviation.
+When the data is approximately normal, the IQR ≈ 1.35 × standard deviation.
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -929,6 +1076,12 @@ deviation.
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -958,6 +1111,12 @@ The IQR is the difference between Q3 and Q1.
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 
@@ -974,13 +1133,24 @@ The IQR is the difference between Q3 and Q1.
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
 # Lecture 3: Handling Missing Values
 
-Let's examine how missing values affect our descriptive statistics by
-looking at the mass variable, which has some missing data.
+Let's examine how missing values affect our descriptive statistics by looking at the mass variable, which has some missing data.
+
+
+
+
+
+
 
 
 
@@ -1031,28 +1201,29 @@ Mean mass with na.rm=TRUE: 351.2289 g
 
 
 
+
+
+
+
+
+
 # Lecture 3: Best Practices for Missing Values
 
-1.  Always check for missing values in your data before calculating
-    statistics.
+1.  Always check for missing values in your data before calculating statistics.
 
-2.  Use na.rm = TRUE when calculating summary statistics to handle
-    missing values.
+2.  Use na.rm = TRUE when calculating summary statistics to handle missing values.
 
 3.  Report the number of missing values along with your statistics.
 
-4.  Consider whether the missing values are random or might introduce
-    bias.
+4.  Consider whether the missing values are random or might introduce bias.
 
 # **Sampling from a Population**
 
-Now that we have estimates of the sample we need to relate that to the
-population
+Now that we have estimates of the sample we need to relate that to the population
 
 ::::: columns
 ::: {.column width="60%"}
-In reality, we rarely know the true population parameters. When studying
-fish in lakes I3 and I8:
+In reality, we rarely know the true population parameters. When studying fish in lakes I3 and I8:
 
 -   The **population** includes all grayling fish in each lake
 -   The true population mean (μ) and standard deviation (σ) are unknown
@@ -1060,20 +1231,23 @@ fish in lakes I3 and I8:
 -   We use the sample mean (x̄) to estimate μ
 -   Sampling introduces random variation in our estimates
 
-Let's demonstrate how different samples from the same population can
-give different estimates.
+Let's demonstrate how different samples from the same population can give different estimates.
 :::
 
 ::: {.column width="40%"}
-If we could sample all fish in the lake, we would know the true mean
-length. But that's usually impossible in ecology!
+If we could sample all fish in the lake, we would know the true mean length. But that's usually impossible in ecology!
 :::
 :::::
 
 # **Demonstrating Sampling Variation**
 
-Let's take several random samples from Lake I3 and see how the sample
-means vary:
+Let's take several random samples from Lake I3 and see how the sample means vary:
+
+
+
+
+
+
 
 
 
@@ -1110,7 +1284,19 @@ samples_df <- data.frame(
 
 
 
+
+
+
+
+
+
 # **Plotting Sample Variation**
+
+
+
+
+
+
 
 
 
@@ -1194,36 +1380,41 @@ ggplot(samples_df, aes(x = factor(sample_number), y = sample_mean)) +
 
 
 
-Notice how each sample's mean differs from the overall mean. This
-demonstrates sampling variation.
+
+
+
+
+
+
+Notice how each sample's mean differs from the overall mean. This demonstrates sampling variation.
 
 # **Standard Error: Quantifying Uncertainty**
 
 ::::: columns
 ::: {.column width="60%"}
-The **standard error of the mean (SEM)** measures the precision of a
-sample mean as an estimate of the population mean.
+The **standard error of the mean (SEM)** measures the precision of a sample mean as an estimate of the population mean.
 
 Formula: $SE_{\bar{x}} = \frac{s}{\sqrt{n}}$
 
 Where: - s is the sample standard deviation - n is the sample size
 
-The standard error tells us: - How much uncertainty is in our estimate -
-How much sample means are expected to vary - How close our sample mean
-is likely to be to the true population mean
+The standard error tells us: - How much uncertainty is in our estimate - How much sample means are expected to vary - How close our sample mean is likely to be to the true population mean
 :::
 
 ::: {.column width="40%"}
-**Remember:** - Standard deviation (s) describes the variability in the
-individual data points - Standard error (SE) describes the variability
-in the sample mean itself - As sample size increases, SE decreases (more
-precise estimate)
+**Remember:** - Standard deviation (s) describes the variability in the individual data points - Standard error (SE) describes the variability in the sample mean itself - As sample size increases, SE decreases (more precise estimate)
 :::
 :::::
 
 # **Standard Error for Our Grayling Data**
 
 Let's calculate and visualize the standard error for both lakes:
+
+
+
+
+
+
 
 
 
@@ -1266,7 +1457,19 @@ grayling_stats
 
 
 
+
+
+
+
+
+
 # **Visualizing Standard Error**
+
+
+
+
+
+
 
 
 
@@ -1284,21 +1487,21 @@ grayling_stats
 
 
 
+
+
+
+
+
+
 # **Sampling Distribution of the Mean**
 
 ::::: columns
 ::: {.column width="60%"}
-The **sampling distribution of the mean** is the theoretical
-distribution of all possible sample means of a given sample size from a
-population.
+The **sampling distribution of the mean** is the theoretical distribution of all possible sample means of a given sample size from a population.
 
-Important properties: 1. It is centered at the population mean (μ) 2.
-Its standard deviation is the standard error (σ/√n) 3. For large sample
-sizes, it approaches a normal distribution (Central Limit Theorem)
+Important properties: 1. It is centered at the population mean (μ) 2. Its standard deviation is the standard error (σ/√n) 3. For large sample sizes, it approaches a normal distribution (Central Limit Theorem)
 
-The larger the sample size: - The narrower the sampling distribution -
-The smaller the standard error - The more precise our estimate of the
-population mean
+The larger the sample size: - The narrower the sampling distribution - The smaller the standard error - The more precise our estimate of the population mean
 :::
 
 ::: {.column width="40%"}
@@ -1308,8 +1511,13 @@ Let's simulate the sampling distribution for Lake I3 fish data.
 
 # **Simulating the Sampling Distribution**
 
-Let's simulate taking many samples from Lake I3 to visualize the
-sampling distribution:
+Let's simulate taking many samples from Lake I3 to visualize the sampling distribution:
+
+
+
+
+
+
 
 
 
@@ -1344,7 +1552,19 @@ simulated_df <- data.frame(sample_mean = simulated_means)
 
 
 
+
+
+
+
+
+
 # **Plotting Sampling Distribution**
+
+
+
+
+
+
 
 
 
@@ -1378,6 +1598,12 @@ ggplot(simulated_df, aes(x = sample_mean)) +
 
 
 
+
+
+
+
+
+
 Notice that the simulated sampling distribution:
 
 1.  Is approximately normally distributed
@@ -1395,6 +1621,12 @@ Let's see how the standard error changes with different sample sizes:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 :::
@@ -1404,7 +1636,19 @@ Let's see how the standard error changes with different sample sizes:
 
 
 
+
+
+
+
+
+
 # **Sample Size vs. Standard Error**
+
+
+
+
+
+
 
 
 
@@ -1461,33 +1705,39 @@ ggplot(results_long, aes(x = sample_size, y = standard_error, color = se_type)) 
 
 
 
+
+
+
+
+
+
 # **Confidence Intervals**
 
 ::::: columns
 ::: {.column width="60%"}
-A **confidence interval** is a range of values that is likely to contain
-the true population parameter.
+A **confidence interval** is a range of values that is likely to contain the true population parameter.
 
 The 95% confidence interval for the mean is approximately:
 
 $\bar{x} \pm 2 \times SE_{\bar{x}}$
 
-This "2 SE rule of thumb" means: - The interval extends 2 standard
-errors below and above the sample mean - About 95% of such intervals
-constructed from different samples would contain the true population
-mean
+This "2 SE rule of thumb" means: - The interval extends 2 standard errors below and above the sample mean - About 95% of such intervals constructed from different samples would contain the true population mean
 :::
 
 ::: {.column width="40%"}
-Confidence intervals provide a way to express the precision of our
-estimates.
+Confidence intervals provide a way to express the precision of our estimates.
 :::
 :::::
 
 # **Calculating Confidence Intervals for Grayling Data**
 
-Let's calculate and visualize the 95% confidence intervals for the mean
-fish length in each lake:
+Let's calculate and visualize the 95% confidence intervals for the mean fish length in each lake:
+
+
+
+
+
+
 
 
 
@@ -1532,7 +1782,19 @@ grayling_ci
 
 
 
+
+
+
+
+
+
 # **Visualizing Confidence Intervals**
+
+
+
+
+
+
 
 
 
@@ -1564,9 +1826,21 @@ ggplot(grayling_ci, aes(x = lake, y = mean_length, fill = lake)) +
 
 
 
+
+
+
+
+
+
 # **Different Types of Error Bars**
 
 Let's compare different ways of displaying uncertainty in our estimates:
+
+
+
+
+
+
 
 
 
@@ -1603,7 +1877,19 @@ error_types <- data.frame(
 
 
 
+
+
+
+
+
+
 # **Comparing Error Bar Types**
+
+
+
+
+
+
 
 
 
@@ -1640,31 +1926,28 @@ ggplot() +
 
 
 
+
+
+
+
+
+
 # **Key Takeaways**
 
--   The **standard error** measures the precision of a sample statistic
-    as an estimate of a population parameter
--   The standard error of the mean decreases as sample size increases:
-    $SE_{\bar{x}} = \frac{s}{\sqrt{n}}$
--   The **sampling distribution** shows the variation in sample
-    statistics that would be expected due to random sampling
--   **Confidence intervals** provide a range of plausible values for the
-    population parameter
--   Larger sample sizes provide more precise estimates (narrower
-    confidence intervals)
+-   The **standard error** measures the precision of a sample statistic as an estimate of a population parameter
+-   The standard error of the mean decreases as sample size increases: $SE_{\bar{x}} = \frac{s}{\sqrt{n}}$
+-   The **sampling distribution** shows the variation in sample statistics that would be expected due to random sampling
+-   **Confidence intervals** provide a range of plausible values for the population parameter
+-   Larger sample sizes provide more precise estimates (narrower confidence intervals)
 -   When reporting results, always include a measure of precision (SE or
     CI) 
 
 # **For Further Practice**
 
--   Try calculating the standard error and confidence intervals for
-    other variables in the dataset
--   Experiment with different sample sizes to see how they affect the
-    precision of estimates
--   Compare the means of the two lakes using confidence intervals - do
-    they overlap?
--   Consider how these concepts extend to other statistics beyond the
-    mean
+-   Try calculating the standard error and confidence intervals for other variables in the dataset
+-   Experiment with different sample sizes to see how they affect the precision of estimates
+-   Compare the means of the two lakes using confidence intervals - do they overlap?
+-   Consider how these concepts extend to other statistics beyond the mean
 
 # Lecture 3: Conclusion
 
@@ -1674,11 +1957,9 @@ In this lecture, we've explored:
 -   Types of biological variables and their properties
 -   Accuracy, precision, and bias in measurements
 -   Measures of central tendency (mean, median, geometric mean)
--   Measures of spread (standard deviation, variance, and interquartile
-    range)
+-   Measures of spread (standard deviation, variance, and interquartile range)
 -   Data transformations for skewed distributions
 -   Visualization techniques for understanding distributions
 -   Handling missing values
 
-These tools form the foundation of statistical analysis and will be
-essential as we move forward to more complex statistical methods.
+These tools form the foundation of statistical analysis and will be essential as we move forward to more complex statistical methods.

@@ -7,9 +7,22 @@ metadata-files:
 format:
   html:
     output-file: "18_01_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "18_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "18_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "18_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "18_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
+
+
 
 
 
@@ -27,6 +40,12 @@ Let's import the data and start to explore it
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -159,6 +178,12 @@ tibble [29 × 13] (S3: tbl_df/tbl/data.frame)
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -188,6 +213,12 @@ tibble [29 × 13] (S3: tbl_df/tbl/data.frame)
 :::
 
 ::: {.column width="50%"}
+
+
+
+
+
+
 
 
 
@@ -235,6 +266,12 @@ p1 / p2
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -260,6 +297,12 @@ p1 / p2
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -300,6 +343,12 @@ tibble(
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -320,6 +369,12 @@ tibble(
 :::
 
 ::: {.column width="50%"}
+
+
+
+
+
+
 
 
 
@@ -356,6 +411,12 @@ tibble(iterations, stress) %>%
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -382,6 +443,12 @@ tibble(iterations, stress) %>%
 :::
 
 ::: {.column width="50%"}
+
+
+
+
+
+
 
 
 
@@ -418,12 +485,24 @@ tibble(x, y, group) %>%
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
 # NMDS in Practice
 
 ## Running NMDS on Fish Communities
+
+
+
+
+
+
 
 
 
@@ -506,6 +585,12 @@ Final stress: 0.074
 
 
 
+
+
+
+
+
+
 ::::: columns
 ::: {.column width="50%"}
 **Code Explanation:**
@@ -519,6 +604,12 @@ Final stress: 0.074
 :::
 
 ::: {.column width="50%"}
+
+
+
+
+
+
 
 
 
@@ -540,10 +631,22 @@ stressplot(fish_nmds, main = "NMDS Stress Plot")
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
 ## Interpreting NMDS Output
+
+
+
+
+
+
 
 
 
@@ -608,6 +711,12 @@ species     54    -none- numeric
 
 
 
+
+
+
+
+
+
 ::::: columns
 ::: {.column width="50%"}
 **Understanding the Output:**
@@ -620,6 +729,12 @@ species     54    -none- numeric
 :::
 
 ::: {.column width="50%"}
+
+
+
+
+
+
 
 
 
@@ -641,10 +756,22 @@ plot(fish_nmds, type = "t", main = "Basic NMDS Plot")
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
 ## Creating Enhanced NMDS Plots
+
+
+
+
+
+
 
 
 
@@ -696,6 +823,12 @@ p1 + p2
 
 
 
+
+
+
+
+
+
 **What the NMDS Shows:**
 
 -   **Clear separation** between river reaches
@@ -723,6 +856,12 @@ p1 + p2
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -765,6 +904,12 @@ combined %>%
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -791,6 +936,12 @@ combined %>%
 :::
 
 ::: {.column width="50%"}
+
+
+
+
+
+
 
 
 
@@ -826,6 +977,12 @@ tibble(F_statistic = null_F,
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -848,6 +1005,12 @@ tibble(F_statistic = null_F,
 :::
 
 ::: {.column width="50%"}
+
+
+
+
+
+
 
 
 
@@ -885,6 +1048,12 @@ nmds_scores %>%
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -913,6 +1082,12 @@ nmds_scores %>%
 :::
 
 ::: {.column width="50%"}
+
+
+
+
+
+
 
 
 
@@ -953,12 +1128,24 @@ plot(dispersion_test, main = "Multivariate Dispersion by Group")
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
 # Running PERMANOVA
 
 ## PERMANOVA on Fish Communities
+
+
+
+
+
+
 
 
 
@@ -1003,6 +1190,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
+
+
+
+
 ::::: columns
 ::: {.column width="50%"}
 **Line-by-line interpretation:**
@@ -1026,6 +1219,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::::
 
 ## Pairwise PERMANOVA Tests
+
+
+
+
+
+
 
 
 
@@ -1106,6 +1305,12 @@ pairwise_results %>%
 
 
 
+
+
+
+
+
+
 **Interpretation of Pairwise Results:**
 
 -   All pairwise comparisons are **statistically significant** even after Bonferroni correction
@@ -1114,6 +1319,12 @@ pairwise_results %>%
 -   **Biological interpretation**: Fish communities change progressively down the river
 
 ## Visualizing PERMANOVA Results
+
+
+
+
+
+
 
 
 
@@ -1163,6 +1374,12 @@ p1 + p2
 
 
 
+
+
+
+
+
+
 # ANOSIM: Analysis of Similarities
 
 ## What is ANOSIM?
@@ -1187,6 +1404,12 @@ p1 + p2
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -1236,6 +1459,12 @@ sample_points %>%
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -1261,6 +1490,12 @@ sample_points %>%
 :::
 
 ::: {.column width="50%"}
+
+
+
+
+
+
 
 
 
@@ -1305,10 +1540,22 @@ tibble(
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
 ## Running ANOSIM
+
+
+
+
+
+
 
 
 
@@ -1350,6 +1597,12 @@ Number of permutations: 999
 
 
 
+
+
+
+
+
+
 ::::: columns
 ::: {.column width="50%"}
 **ANOSIM Results Interpretation:**
@@ -1360,6 +1613,12 @@ Number of permutations: 999
 :::
 
 ::: {.column width="50%"}
+
+
+
+
+
+
 
 
 
@@ -1381,10 +1640,22 @@ plot(anosim_result, main = "ANOSIM Results")
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
 ## ANOSIM vs PERMANOVA Comparison
+
+
+
+
+
+
 
 
 
@@ -1430,6 +1701,12 @@ comparison_table
 
 
 
+
+
+
+
+
+
 ::::: columns
 ::: {.column width="50%"}
 **When to use which:**
@@ -1450,6 +1727,12 @@ comparison_table
 :::
 
 ::: {.column width="50%"}
+
+
+
+
+
+
 
 
 
@@ -1487,12 +1770,24 @@ tibble(
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
 # Environmental Drivers
 
 ## Which Environmental Variables Matter?
+
+
+
+
+
+
 
 
 
@@ -1545,11 +1840,23 @@ Number of permutations: 999
 
 
 
+
+
+
+
+
+
 ::::: columns
 ::: {.column width="50%"}
 **Environmental Vector Results:**
 
 **Significant variables (p \< 0.05):**
+
+
+
+
+
+
 
 
 
@@ -1606,6 +1913,12 @@ for(var in sig_env) {
 
 
 
+
+
+
+
+
+
 **What this means:**
 
 -   These variables significantly correlate with community composition
@@ -1613,6 +1926,12 @@ for(var in sig_env) {
 :::
 
 ::: {.column width="50%"}
+
+
+
+
+
+
 
 
 
@@ -1639,10 +1958,22 @@ legend("topright", legend = levels(doubs_env$reach),
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
 ## Environmental Gradient Analysis
+
+
+
+
+
+
 
 
 
@@ -1695,6 +2026,12 @@ p1 / p2
 ![](18_01_lecture_powerpoint_files/figure-html/environmental-gradients-1.png){width=1152}
 :::
 :::
+
+
+
+
+
+
 
 
 

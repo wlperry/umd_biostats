@@ -6,9 +6,22 @@ metadata-files:
 format:
   html:
     output-file: "07_01_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "07_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "07_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "07_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "07_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
+
+
 
 
 
@@ -62,6 +75,12 @@ lake trout
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -83,7 +102,19 @@ library(tidyverse)    # For data manipulation and visualization
 
 
 
+
+
+
+
+
+
 # Loading Lake Trout Data
+
+
+
+
+
+
 
 
 
@@ -119,6 +150,12 @@ head(lt_df)
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -221,11 +258,23 @@ Basic assumptions of parametric t-tests:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](07_01_lecture_powerpoint_files/figure-html/unnamed-chunk-2-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -267,6 +316,12 @@ Basic assumptions of parametric t-tests:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -290,6 +345,12 @@ W = 0.94528, p-value = 1.56e-09
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -324,11 +385,23 @@ Equal variance: samples are from populations with similar degree of variability
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](07_01_lecture_powerpoint_files/figure-html/unnamed-chunk-4-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -358,11 +431,23 @@ Equal variance: samples are from populations with similar degree of variability
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](07_01_lecture_powerpoint_files/figure-html/unnamed-chunk-5-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -389,11 +474,23 @@ Equal variance: samples are from populations with similar degree of variability
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](07_01_lecture_powerpoint_files/figure-html/unnamed-chunk-6-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -418,11 +515,23 @@ Equal variance: samples are from populations with similar degree of variability
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](07_01_lecture_powerpoint_files/figure-html/unnamed-chunk-7-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -466,11 +575,23 @@ Equal variance: samples are from populations with similar degree of variability
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](07_01_lecture_powerpoint_files/figure-html/unnamed-chunk-8-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -487,6 +608,12 @@ Equal variance: samples are from populations with similar degree of variability
         -   **t.test(y1, y2, var.equal = TRUE, paired = FALSE)**
     -   Welch's T-Test is:
         -   **t.test(y1, y2, var.equal = FALSE, paired = FALSE)**
+
+
+
+
+
+
 
 
 
@@ -556,6 +683,12 @@ mean in group Island Lake       mean in group NE 12
 
 
 
+
+
+
+
+
+
 # Rank-Based Tests
 
 Rank-based tests: no assumptions about distribution (non-parametric)
@@ -573,6 +706,12 @@ Rank-based tests: no assumptions about distribution (non-parametric)
 -   Best when normality assumption can not be met by transformation (weird distribution) or large outliers
 
 # Mann-Whitney U Test Results
+
+
+
+
+
+
 
 
 
@@ -609,6 +748,12 @@ alternative hypothesis: true location shift is not equal to 0
 
 
 
+
+
+
+
+
+
 # Permutation Tests - Concept
 
 ::::: columns
@@ -634,11 +779,23 @@ alternative hypothesis: true location shift is not equal to 0
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](07_01_lecture_powerpoint_files/figure-html/unnamed-chunk-11-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -667,6 +824,12 @@ alternative hypothesis: true location shift is not equal to 0
 
 -   In R (using 'perm' package):
 -   Assumptions: both groups have similar distribution; equal variance
+
+
+
+
+
+
 
 
 
@@ -722,6 +885,12 @@ p-value estimated from 10000 Monte Carlo replications
 
 :::
 :::
+
+
+
+
+
+
 
 
 

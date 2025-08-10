@@ -6,9 +6,22 @@ metadata-files:
 format:
   html:
     output-file: "09_02_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "09_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "09_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "09_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "09_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
+
+
 
 
 
@@ -39,11 +52,23 @@ Covered
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-html/review-plot-1.png){width=384}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -97,11 +122,23 @@ This lecture covers two fundamental statistical techniques in biology: correlati
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-html/unnamed-chunk-1-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -140,11 +177,23 @@ Where $s_X$ and $s_Y$ are the standard deviations of X and Y.
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-html/overview-plot-1i-1.png){width=384}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -169,6 +218,12 @@ For a Pearson correlation coefficient (r) of 0.53372:
 -   means about 28.49% of the variance in one variable can be explained by the other variable
 
 ### Note $\text{t}=\frac{r}{SE_r}$
+
+
+
+
+
+
 
 
 
@@ -210,6 +265,12 @@ sample estimates:
 
 
 
+
+
+
+
+
+
 # **Lecture 9:** Correlation Analysis
 
 ::::: columns
@@ -233,11 +294,23 @@ Need to be sure relationship is not curved - note below
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-html/overview-plot-1k-1.png){width=288}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -262,6 +335,12 @@ Let's check these assumptions using the lion data from Example 17.1 Lion Noses:
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -299,6 +378,12 @@ W = 0.87615, p-value = 0.001615
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -323,11 +408,23 @@ Let's check these assumptions using the lion data from Example 17.1 Lion Noses:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-html/overview-plot-1m-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -359,6 +456,12 @@ This means approximately 55.48% of the variance in ranks of one variable can be 
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -377,6 +480,12 @@ sample estimates:
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -421,11 +530,23 @@ sample estimates:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-html/overview-plot-1o-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -515,11 +636,23 @@ Where:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-html/overview-plot-1p-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -545,11 +678,23 @@ This means: - When a lion has no black on its nose (proportion = 0), its predict
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-html/overview-plot-1q-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -564,6 +709,12 @@ This means: - When a lion has no black on its nose (proportion = 0), its predict
 
 -   male lions develop more black pigmentation on their noses as they age.
 -   can be used to estimate the age of lions in the field.
+
+
+
+
+
+
 
 
 
@@ -597,6 +748,12 @@ F-statistic: 49.75 on 1 and 30 DF,  p-value: 7.677e-08
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -638,11 +795,23 @@ Both intervals are narrowest near $\bar{X}$ and widen as X moves away from the m
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-html/overview-plot-1b-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -657,6 +826,12 @@ Both intervals are narrowest near $\bar{X}$ and widen as X moves away from the m
 
 -   Does biodiversity affect ecosystem stability?
 -   Tilman et al. (2006) investigated using experimental plots varying plant species
+
+
+
+
+
+
 
 
 
@@ -738,6 +913,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
+
+
+
+
 # **Lecture 9:** Linear Regression
 
 ::::: columns
@@ -768,11 +949,23 @@ This supports the biodiversity-stability hypothesis: more diverse plant communit
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-html/overview-plot-1d-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -861,11 +1054,23 @@ Let's check these assumptions for the lion regression model:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-html/overview-plot-1e-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -891,6 +1096,12 @@ Let's check these assumptions for the lion regression model:
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -906,6 +1117,12 @@ Let's check these assumptions for the lion regression model:
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -926,6 +1143,12 @@ Let's check these assumptions for the lion regression model:
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -945,6 +1168,12 @@ W = 0.93879, p-value = 0.0692
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -975,11 +1204,23 @@ If assumptions are violated: 1. Transform the data (Section 17.6) 2. Use weighte
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-html/overview-plot-1h-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 

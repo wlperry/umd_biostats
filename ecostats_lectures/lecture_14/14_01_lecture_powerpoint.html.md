@@ -6,10 +6,21 @@ metadata-files:
 format:
   html:
     output-file: "14_02_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   # RevealJS - UNCHANGED (keeps your two-column layout and large images)
   revealjs:
     output-file: "14_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "14_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "14_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "14_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
 
 
 
@@ -87,11 +98,19 @@ GLMs can be used for binary (yes/no), discrete (count), and categorical/multinom
 
 
 
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![Examples of distributions in the exponential family](14_01_lecture_powerpoint_files/figure-html/glm-distributions-1.png){width=672}
 :::
 :::
+
+
+
+
 
 
 
@@ -139,6 +158,10 @@ Let's compare a standard linear model and a Gaussian GLM using the `mtcars` data
 
 
 
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -178,10 +201,18 @@ all.equal(coef_lm, coef_glm)
 
 
 
+
+
+
+
 :::
 
 ::: {.column width="40%"}
 Let's look at the summary of our Gaussian GLM:
+
+
+
+
 
 
 
@@ -231,6 +262,10 @@ Number of Fisher Scoring iterations: 2
 
 
 
+
+
+
+
 :::
 :::::
 
@@ -239,6 +274,10 @@ Number of Fisher Scoring iterations: 2
 ::::: columns
 ::: {.column width="60%"}
 Now let's perform an ANOVA on our GLM model using the `car` package:
+
+
+
+
 
 
 
@@ -278,10 +317,18 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
+
+
 :::
 
 ::: {.column width="40%"}
 Visualizing the results:
+
+
+
+
 
 
 
@@ -332,6 +379,10 @@ ggplot() +
 
 
 
+
+
+
+
 :::
 :::::
 
@@ -352,6 +403,10 @@ The key difference is that GLMs provide a framework that extends to non-normal d
 Poisson GLMs are appropriate for count data. The Poisson distribution assumes that the variance equals the mean.
 
 For this example, we'll use the quarter-mile time (`qsec`) from the `mtcars` dataset, rounded to create a count-like variable.
+
+
+
+
 
 
 
@@ -397,7 +452,15 @@ Valiant             6 20.22         20
 
 
 
+
+
+
+
 Now let's fit a Poisson GLM to model the relationship between the rounded quarter-mile time and the number of cylinders:
+
+
+
+
 
 
 
@@ -453,10 +516,18 @@ Number of Fisher Scoring iterations: 3
 
 
 
+
+
+
+
 :::
 
 ::: {.column width="40%"}
 Let's check for overdispersion, which is common in count data:
+
+
+
+
 
 
 
@@ -498,6 +569,10 @@ Dispersion parameter: 0.12
 
 
 
+
+
+
+
 :::
 :::::
 
@@ -505,6 +580,10 @@ Dispersion parameter: 0.12
 
 :::::: columns
 ::: {.column width="60%"}
+
+
+
+
 
 
 
@@ -554,6 +633,10 @@ ggplot() +
 
 
 
+
+
+
+
 :::
 
 :::: {.column width="40%"}
@@ -572,6 +655,10 @@ In a Poisson GLM with a log link function:
 ::::::
 
 # Checking Model Assumptions with DHARMa
+
+
+
+
 
 
 
@@ -603,11 +690,19 @@ plot(simulation_poisson)
 
 
 
+
+
+
+
 # Dealing with Overdispersion in Count Data
 
 ::::: columns
 ::: {.column width="60%"}
 When count data shows more variability than expected under a Poisson distribution (variance \> mean), we may need to use a negative binomial model instead.
+
+
+
+
 
 
 
@@ -671,11 +766,19 @@ Warning while fitting theta: iteration limit reached
 
 
 
+
+
+
+
 The negative binomial model includes an additional dispersion parameter (theta) that allows the variance to be larger than the mean.
 :::
 
 ::: {.column width="40%"}
 Let's compare the predictions from both models:
+
+
+
+
 
 
 
@@ -714,6 +817,10 @@ ggplot(mtcars_count) +
 
 
 
+
+
+
+
 :::
 :::::
 
@@ -737,6 +844,10 @@ This transforms the probability (which is bounded between 0 and 1) to a linear f
 :::
 
 ::: {.column width="40%"}
+
+
+
+
 
 
 
@@ -781,12 +892,20 @@ ggplot(sigmoid_data, aes(x, p)) +
 
 
 
+
+
+
+
 :::
 :::::
 
 # Example: Lizard Presence on Islands
 
 Based on the example from Polis et al. (1998), we'll model the presence/absence of lizards (*Uta*) on islands in the Gulf of California based on perimeter/area ratio.
+
+
+
+
 
 
 
@@ -849,11 +968,19 @@ Number of Fisher Scoring iterations: 25
 
 
 
+
+
+
+
 # Lizard Example: Visualization and Testing
 
 ::::: columns
 ::: {.column width="60%"}
 Let's visualize the data and the fitted model:
+
+
+
+
 
 
 
@@ -906,6 +1033,10 @@ ggplot() +
 
 
 
+
+
+
+
 :::
 
 ::: {.column width="40%"}
@@ -916,6 +1047,10 @@ There are two common ways to test this hypothesis:
 1.  **Wald test**: Tests if the parameter estimate divided by its standard error differs significantly from zero
 
 2.  **Likelihood ratio test**: Compares the fit of the full model to a reduced model without the predictor variable
+
+
+
+
 
 
 
@@ -960,6 +1095,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
+
+
 :::
 :::::
 
@@ -975,6 +1114,10 @@ The odds ratio represents how the odds of the event (e.g., lizard presence) chan
 -   If odds ratio \< 1: Increasing the predictor decreases the odds of event
 -   If odds ratio = 1: No effect of predictor on odds of event
 :::
+
+
+
+
 
 
 
@@ -1025,9 +1168,17 @@ cat("95% CI:", round(ci[1], 3), "to", round(ci[2], 3), "\n")
 
 
 
+
+
+
+
 # Assessing Model Fit
 
 There are several ways to assess the goodness-of-fit for logistic regression models:
+
+
+
+
 
 
 
@@ -1104,6 +1255,10 @@ McFadden's R²: 1
 
 
 
+
+
+
+
 # Multiple Logistic Regression: Setup
 
 ::::: columns
@@ -1115,6 +1270,10 @@ $$g(x) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_p x_p$$
 Where g(x) is the logit link function, and x₁, x₂, ..., xₚ are the predictor variables.
 
 Let's create a simulated dataset based on the Bolger et al. (1997) study of the presence/absence of native rodents in canyon fragments.
+
+
+
+
 
 
 
@@ -1194,10 +1353,18 @@ Number of Fisher Scoring iterations: 8
 
 
 
+
+
+
+
 :::
 
 ::: {.column width="40%"}
 To test the significance of individual predictors, we can use likelihood ratio tests comparing nested models:
+
+
+
+
 
 
 
@@ -1286,12 +1453,20 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
+
+
 :::
 :::::
 
 # Multiple Logistic Regression: Odds Ratios
 
 Let's calculate odds ratios and confidence intervals for all predictors:
+
+
+
+
 
 
 
@@ -1342,11 +1517,19 @@ or_df %>%
 
 
 
+
+
+
+
 # Visualizing Multiple Logistic Regression
 
 ::::: columns
 ::: {.column width="60%"}
 For multiple predictors, we can visualize the effect of each predictor while holding others constant at their mean or median values.
+
+
+
+
 
 
 
@@ -1433,6 +1616,10 @@ p1 + p2 + p3
 
 
 
+
+
+
+
 :::
 
 ::: {.column width="40%"}
@@ -1450,6 +1637,10 @@ Logistic regression has several key assumptions:
 4.  No multicollinearity (when multiple predictors are used)
 
 Let's check the diagnostics for our multiple logistic regression model:
+
+
+
+
 
 
 
@@ -1513,6 +1704,10 @@ p1 / p2 / p3
 
 
 
+
+
+
+
 # Model Comparison and Selection
 
 ::::: columns
@@ -1524,6 +1719,10 @@ When working with multiple predictors, we often want to find the most parsimonio
 3.  Classification metrics like accuracy, sensitivity, and specificity
 
 Let's compare models and calculate AIC values:
+
+
+
+
 
 
 
@@ -1579,10 +1778,18 @@ model_comparison %>%
 
 
 
+
+
+
+
 :::
 
 ::: {.column width="40%"}
 We can also evaluate the predictive performance of our model:
+
+
+
+
 
 
 
@@ -1670,12 +1877,20 @@ Specificity: 0.833
 
 
 
+
+
+
+
 :::
 :::::
 
 # Publication-Quality Figure
 
 Let's create a publication-quality figure for our multiple logistic regression model and show how we would write up the results for a scientific publication.
+
+
+
+
 
 
 
@@ -1758,6 +1973,10 @@ ggplot() +
 
 
 
+
+
+
+
 # Scientific Write-Up Example
 
 ::: callout-note
@@ -1792,6 +2011,10 @@ Therefore, a one-way ANOVA is equivalent to: - A linear regression with a catego
 # Demonstrating ANOVA-GLM Equivalence
 
 Let's demonstrate this equivalence:
+
+
+
+
 
 
 
@@ -1881,6 +2104,10 @@ ggplot() +
 
 
 
+
+
+
+
 # Assumptions and Diagnostics Summary
 
 ::::: columns
@@ -1898,6 +2125,10 @@ Generalized Linear Models have different assumptions depending on the specific d
 
 ::: {.column width="40%"}
 The following R code checks some common diagnostics for our logistic model:
+
+
+
+
 
 
 
@@ -1950,6 +2181,10 @@ curve(I, from = 0, to = 1, add = TRUE, col = "red")
 ![](14_01_lecture_powerpoint_files/figure-html/diagnostic-summary-1.png){width=672}
 :::
 :::
+
+
+
+
 
 
 

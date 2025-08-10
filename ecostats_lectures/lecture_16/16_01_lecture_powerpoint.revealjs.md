@@ -6,10 +6,23 @@ metadata-files:
 format:
   html:
     output-file: "16_02_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   # RevealJS - UNCHANGED (keeps your two-column layout and large images)
   revealjs:
     output-file: "16_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "16_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "16_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "16_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
+
+
 
 
 
@@ -86,11 +99,23 @@ We've already seen multivariate data in multiple regression and multi-factor ANO
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-1-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -168,11 +193,23 @@ Can divide ecological MV methods into "functional" and "structural"
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](16_01_lecture_powerpoint_files/figure-html/label_code_chunk-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -237,11 +274,23 @@ Structural methods can be divided further into:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-2-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -267,11 +316,23 @@ How to think about the new values
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-3-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -340,11 +401,23 @@ Derived variables are found so that:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-4-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -415,11 +488,23 @@ Data transformation is common and useful in MV analyses
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-5-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -470,11 +555,23 @@ Standardization ensures all variables contribute equally to the analysis regardl
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-6-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -542,6 +639,12 @@ Question: are there differences bw species?
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -573,6 +676,12 @@ head(iris_df)
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -595,6 +704,12 @@ Question: are there differences bw species?
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -607,6 +722,12 @@ iris_long_df %>% ggplot(aes(species, measure, fill=species))+
 ![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-8-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -633,6 +754,12 @@ But:
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -667,6 +794,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -680,6 +813,12 @@ but for all of the variables not just two
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -714,6 +853,12 @@ iris_plot
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -735,6 +880,12 @@ A one-way MANOVA tests the Ho that there are no differences in population centro
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -745,6 +896,12 @@ iris_plot
 ![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-11-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -770,6 +927,12 @@ Several test statistics can be determined:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -780,6 +943,12 @@ iris_plot
 ![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-12-1.png){width=672}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -800,6 +969,12 @@ iris_plot
 :::
 
 # MANOVA: Model Fitting
+
+
+
+
+
+
 
 
 
@@ -833,6 +1008,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
+
+
+
+
 # MANOVA: Assumption Testing - Normality
 
 ::::: columns
@@ -843,6 +1024,12 @@ Assumption test
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -878,6 +1065,12 @@ W = 0.97935, p-value = 0.02342
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -891,6 +1084,12 @@ Assumption test
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -925,6 +1124,12 @@ Chi-Sq (approx.) = 140.94, df = 20, p-value < 2.2e-16
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -938,6 +1143,12 @@ Assumption test
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -970,6 +1181,12 @@ iris_long %>%
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -981,6 +1198,12 @@ iris_long %>%
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -1071,6 +1294,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -1082,6 +1311,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -1226,6 +1461,12 @@ P value adjustment: tukey method for comparing a family of 3 estimates
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -1237,6 +1478,12 @@ P value adjustment: tukey method for comparing a family of 3 estimates
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -1380,6 +1627,12 @@ print(cumulative_prop)
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -1391,6 +1644,12 @@ print(cumulative_prop)
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -1497,6 +1756,12 @@ petal_width  -0.9728120 0.22290236
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -1508,6 +1773,12 @@ Multivariate Visualization
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -1563,6 +1834,12 @@ canonical_df_plot %>%
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -1589,6 +1866,12 @@ canonical_df_plot %>%
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1609,6 +1892,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -1644,6 +1933,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1665,6 +1960,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -1694,6 +1995,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1712,6 +2019,12 @@ partial_eta_sq
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -1740,6 +2053,12 @@ partial_eta_sq
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -1779,6 +2098,12 @@ sum(prop_variance)
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -1796,6 +2121,12 @@ Proportion of trace: - **LD1**: Explains 99.12% of between-group discrimination 
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -1840,6 +2171,12 @@ Proportion of trace:
 
 :::
 :::
+
+
+
+
+
+
 
 
 

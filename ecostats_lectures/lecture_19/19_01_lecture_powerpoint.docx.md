@@ -1,44 +1,23 @@
 ---
 title: "Lecture 19 - Logistic Regression "
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: false
-  warning: false
-  fig-height: 5
-  fig-width: 4
-  paged-print: false
+metadata-files:
+  - ../../_templates/lectures.yml
 format:
   html:
-    toc: false
     output-file: "19_01_lecture_powerpoint_html.html"
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch
-    css: ../../css/lecture.css
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "19_01_lecture_powerpoint_slides.html"
-    self-contained: true
-    css: ../../css/lecture.css
-    slide-number: true
-    transition: fade
   docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    number-sections: true
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    css: msword.css
-    embed-resources: true
+    output-file: "19_01_lecture_powerpoint.docx"
   pptx:
-    reference-doc: ../../ms_templates/lecture_template.pptx 
-    embed-resources: true
-editor: visual
+    output-file: "19_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "19_01_lecture_powerpoint.pdf"
 ---
+
+
 
 
 
@@ -85,6 +64,8 @@ Can we predict the probability of sexual maturity from body size?
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -121,12 +102,16 @@ head(lizards_df)
 
 
 
+
+
 # Step 2: Initial Data Visualization
 
 ## **Creating a Boxplot**
 
 Let's visualize how body length differs between sexually mature and
 immature lizards:
+
+
 
 
 
@@ -165,6 +150,8 @@ maturity_boxplot
 
 
 
+
+
 ## **What do we see?**
 
 -   There appears to be a relationship between size and sexual maturity
@@ -178,6 +165,8 @@ maturity_boxplot
 
 The `glm()` function is similar to `lm()` but requires specifying the
 distribution family:
+
+
 
 
 
@@ -237,6 +226,8 @@ Number of Fisher Scoring iterations: 6
 
 
 
+
+
 ## **Interpreting the Model Output**
 
 ### **Coefficients:**
@@ -262,6 +253,8 @@ of maturity increase by 0.2503
 ## **Making the Results More Interpretable**
 
 Log-odds are hard to interpret. Let's convert to odds:
+
+
 
 
 
@@ -309,9 +302,13 @@ odds_ratio
 
 
 
+
+
 # Step 5: Create the Logistic Regression Plot
 
 ## **Visualizing the Probability Curve**
+
+
 
 
 
@@ -374,6 +371,8 @@ logistic_plot
 
 
 
+
+
 ## **What the S-curve tells us:**
 
 -   The red line shows how probability changes with length
@@ -387,6 +386,8 @@ logistic_plot
 
 Let's predict the probability of sexual maturity for specific lizard
 sizes:
+
+
 
 
 
@@ -463,6 +464,8 @@ prob_40cm
 
 
 
+
+
 ## **Interpretation:**
 
 -   A 20 cm lizard has about 14% probability of being sexually mature
@@ -471,7 +474,7 @@ prob_40cm
 
 # Step 7: Model Fit Assessment
 
-## **Calculating Pseudo-R² Values**
+## **Calculating Pseudo-R2 Values**
 
 Unlike linear regression, logistic regression doesn't have a traditional
 R². We use pseudo-R² instead:
@@ -485,10 +488,12 @@ R². We use pseudo-R² instead:
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
-# Calculate pseudo-R² values using pscl package
+# Calculate pseudo-R2 values using pscl package
 pseudo_r2 <- pR2(logistic_model)
 ```
 
@@ -525,13 +530,15 @@ pseudo_r2
 
 
 
-## **Interpreting Pseudo-R² Values:**
+
+
+## Interpreting Pseudo-R2 Values
 
 The last three values are the pseudo-R² statistics:
 
--   \- **McFadden**: Compares model to null model
--   \- **r2ML**: Maximum likelihood based R²
--   \- **r2CU**: Cragg-Uhler (Nagelkerke) R²
+-   **McFadden**: Compares model to null model
+-   **r2ML**: Maximum likelihood based R²
+-   **r2CU**: Cragg-Uhler (Nagelkerke) R²
 
 Values around 0.4-0.5 indicate moderate to good fit. Our model explains
 approximately 40-50% of the variation in sexual maturity status.
@@ -539,6 +546,8 @@ approximately 40-50% of the variation in sexual maturity status.
 # Step 8: Additional Diagnostics
 
 ## **Creating a More Detailed Summary Plot**
+
+
 
 
 
@@ -575,6 +584,8 @@ diagnostic_plot
 ![](19_01_lecture_powerpoint_files/figure-docx/diagnostic_plot-1.png)
 :::
 :::
+
+
 
 
 

@@ -56,5 +56,14 @@ format:
     fig-width: 6.5      # Good size for PowerPoint slides
     fig-height: 4       # Proper aspect ratio for slides
     fig-dpi: 300        # High resolution for projection
-        
+
+  typst:
+    default: true
+    toc: false
+    number-sections: false
+    embed-resources: true
+    fig-width: 6
+    fig-height: 4
+    fig-dpi: 300
+    
 editor: visual

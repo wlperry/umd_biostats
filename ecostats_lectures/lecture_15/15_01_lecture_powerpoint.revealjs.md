@@ -6,10 +6,23 @@ metadata-files:
 format:
   html:
     output-file: "15_02_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   # RevealJS - UNCHANGED (keeps your two-column layout and large images)
   revealjs:
     output-file: "15_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "15_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "15_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "15_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
+
+
 
 
 
@@ -40,9 +53,21 @@ General Linearized Models (GLM)
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 :::
+
+
+
+
+
+
 
 
 
@@ -87,11 +112,23 @@ Analysis of covariance (ANCOVA):
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/intro_ancova_diagram-1.png){width=384}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -140,11 +177,23 @@ ANCOVA lets us adjust for temperature effect to get a more powerful test!
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/cricket_example-1.png){width=384}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -177,11 +226,23 @@ The core purpose of ANCOVA is to make this adjustment. This is important because
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/ancova_model_diagram-1.png){width=768}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -218,11 +279,23 @@ This model assumes **homogeneous slopes** across all treatment groups (we'll tes
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/parameters_illustration-1.png){width=384}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -258,6 +331,12 @@ Both approaches use Type I SS (sequential). For unbalanced designs, you may want
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -329,6 +408,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
+
+
+
+
 :::
 :::::
 
@@ -337,6 +422,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ::::: columns
 ::: {.column width="60%"}
 Using Type III SS from car package:
+
+
+
+
+
+
 
 
 
@@ -375,6 +466,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
+
+
+
+
 :::
 
 ::: {.column width="40%"}
@@ -383,6 +480,12 @@ The Type III approach is often preferred for: - Unbalanced designs - When you wa
 :::::
 
 # Analysis of Variance for ANCOVA: Partitioning
+
+
+
+
+
+
 
 
 
@@ -400,9 +503,21 @@ The Type III approach is often preferred for: - Unbalanced designs - When you wa
 
 
 
+
+
+
+
+
+
 # ANOVA Table for ANCOVA
 
 The ANOVA table for a single-factor ANCOVA has these components:
+
+
+
+
+
+
 
 
 
@@ -420,6 +535,12 @@ The ANOVA table for a single-factor ANCOVA has these components:
 
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -477,6 +598,12 @@ anova(model_int)
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -518,6 +645,12 @@ interaction_pvalue <- anova(model_int)[3, "Pr(>F)"]
 
 
 
+
+
+
+
+
+
 The p-value for the interaction is 0.984. Since p \> 0.05, we can proceed with standard ANCOVA (assuming homogeneous slopes).
 :::
 :::::
@@ -531,11 +664,23 @@ The p-value for the interaction is 0.984. Since p \> 0.05, we can proceed with s
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/slopes_visualization-1.png){width=768}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -567,11 +712,23 @@ Options:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/heterogeneous_slopes_example-1.png){width=480}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -583,6 +740,12 @@ Options:
 # Partridge Example: Data Overview
 
 ## ANCOVA on Longevity of Male Fruitflies
+
+
+
+
+
+
 
 
 
@@ -626,9 +789,21 @@ ggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) +
 
 
 
+
+
+
+
+
+
 # Partridge Example: Testing Homogeneity
 
 ## Testing Homogeneity of Slopes
+
+
+
+
+
+
 
 
 
@@ -672,9 +847,21 @@ p_interaction <- anova(homo_slopes_model)[3, "Pr(>F)"]
 
 
 
+
+
+
+
+
+
 The p-value for the interaction term (treatment × THORAX) is 0.984. Since this value is \> 0.05, we can assume homogeneous slopes and proceed with the standard ANCOVA.
 
 # Partridge Example: Full ANCOVA Analysis
+
+
+
+
+
+
 
 
 
@@ -778,9 +965,21 @@ Confidence level used: 0.95
 
 
 
+
+
+
+
+
+
 # Partridge Example: Pairwise Comparisons
 
 ## Pairwise Comparisons of Adjusted Means
+
+
+
+
+
+
 
 
 
@@ -845,9 +1044,21 @@ plot(adjusted_means, comparisons = TRUE) +
 
 
 
+
+
+
+
+
+
 # Visualizing ANCOVA Results
 
 ## Visualization Options for ANCOVA
+
+
+
+
+
+
 
 
 
@@ -859,6 +1070,12 @@ plot(adjusted_means, comparisons = TRUE) +
 ![](15_01_lecture_powerpoint_files/figure-html/ancova_visualization-1.png){width=864}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -882,11 +1099,23 @@ The analysis showed: - Significant interaction between treatment and covariate -
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/urchin_heterogeneous-1.png){width=432}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -898,6 +1127,12 @@ The analysis showed: - Significant interaction between treatment and covariate -
 # Johnson-Neyman Procedure
 
 ## Johnson-Neyman Procedure for Heterogeneous Slopes
+
+
+
+
+
+
 
 
 
@@ -927,6 +1162,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ![](15_01_lecture_powerpoint_files/figure-html/jn_procedure-1.png){width=864}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -975,6 +1216,12 @@ The biological interpretation is that **food regime affects suture width differe
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -990,6 +1237,12 @@ plot(ancova_model)
 ![](15_01_lecture_powerpoint_files/figure-html/check_assumptions-1.png){width=768}
 :::
 :::
+
+
+
+
+
+
 
 
 
@@ -1020,6 +1273,12 @@ When ANCOVA assumptions are violated, consider:
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
+
 
 
 
@@ -1101,6 +1360,12 @@ P-value for treatment effect (rank-based): 0
 
 
 
+
+
+
+
+
+
 Note: The permutation test is commented out as it requires the lmPerm package, which may not be installed. The rank-based approach is shown as a simple alternative.
 :::
 :::::
@@ -1122,11 +1387,23 @@ Here's how you might write up ANCOVA results for publication:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/publication_figure-1.png){width=960}
 :::
 :::
+
+
+
+
+
+
 
 
 

@@ -6,9 +6,17 @@ metadata-files:
 format:
   html:
     output-file: "02_01_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "02_01_lecture_powerpoint_slides.html"
+  docx:
+    output-file: "02_01_lecture_powerpoint.docx"
+  pptx:
+    output-file: "02_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "02_01_lecture_powerpoint.pdf"
 ---
+
 
 
 
@@ -132,6 +140,7 @@ outputs and figures?
 
 
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -166,6 +175,7 @@ pine_df
 
 :::
 :::
+
 
 
 
@@ -233,6 +243,7 @@ Create a histogram of pine needle lengths to check the distribution:
 
 
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -240,6 +251,7 @@ Create a histogram of pine needle lengths to check the distribution:
 # How do you examine the data - what are the ways you think and lets try it!
 ```
 :::
+
 
 
 
@@ -323,6 +335,7 @@ lecture.
 
 
 
+
 ::: {.cell tbl-responsive='false' tbl-striped='true' css='.table { font-size: 0.85rem; }'}
 ::: {.cell-output-display}
 
@@ -334,6 +347,7 @@ lecture.
 
 :::
 :::
+
 
 
 
@@ -359,11 +373,13 @@ lecture.
 
 
 
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](02_01_lecture_powerpoint_files/figure-html/unnamed-chunk-3-1.png){width=576}
 :::
 :::
+
 
 
 
@@ -385,6 +401,7 @@ good scientific graphics:
 5.  **Reveal multiple layers** of information
 6.  **Serve a clear purpose** in telling your story
 7.  **Integrate with statistical methods** appropriately
+
 
 
 
@@ -413,6 +430,7 @@ good scientific graphics:
 
 
 
+
 # **Lecture 2:** Creating Effective Graphics
 
 ::::: columns
@@ -435,9 +453,11 @@ good scientific graphics:
 
 
 
+
 ::: {.cell}
 
 :::
+
 
 
 
@@ -469,11 +489,13 @@ To make good graphics:
 
 
 
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](02_01_lecture_powerpoint_files/figure-html/good-graphics-2-1.png){width=480}
 :::
 :::
+
 
 
 
@@ -506,11 +528,13 @@ Does this -
 
 
 
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](02_01_lecture_powerpoint_files/figure-html/unnamed-chunk-5-1.png){width=480}
 :::
 :::
+
 
 
 
@@ -545,11 +569,13 @@ What is one of the most common plots you make all the time?
 
 
 
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](02_01_lecture_powerpoint_files/figure-html/unnamed-chunk-6-1.png){width=480}
 :::
 :::
+
 
 
 
@@ -588,11 +614,13 @@ What is one of the most common plots you make all the time?
 
 
 
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](02_01_lecture_powerpoint_files/figure-html/unnamed-chunk-7-1.png){width=480}
 :::
 :::
+
 
 
 

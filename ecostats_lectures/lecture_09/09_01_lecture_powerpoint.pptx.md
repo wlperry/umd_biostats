@@ -1,70 +1,23 @@
 ---
 title: "Lecture 09 Correlation and Regression"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: false
-  warning: false
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
-
+metadata-files:
+  - ../../_templates/lectures.yml
 format:
   html:
-    code-overflow: scroll
-    toc: false
-    output-file: "09_01_lecture_powerpoint_html.html"
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch
-    css: ../../css/lecture.css
-    fig-width: 7
-    fig-height: 5
-
+    output-file: "09_02_lecture_powerpoint_html.html"
+    downloads: [docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "09_01_lecture_powerpoint_slides.html"
-    self-contained: true
-    css: ../../css/lecture.css
-    slide-number: true
-    transition: fade
-    background-transition: none
-    scrollable: true
-    smaller: true
-    width: 1280
-    height: 720
-    margin: 0.1
-    min-scale: 0.2
-    max-scale: 2.0
-    fig-width: 8
-    fig-height: 5
-
   docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    css: msword.css
-    embed-resources: true
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    df-print: kable     # Better table formatting
-
+    output-file: "09_01_lecture_powerpoint.docx"
   pptx:
-    reference-doc: ../../ms_templates/lecture_template.pptx 
-    embed-resources: true
-    fig-width: 6.5      # Good size for PowerPoint slides
-    fig-height: 4       # Proper aspect ratio for slides
-    fig-dpi: 300        # High resolution for projection
-    df-print: kable     # Better table formatting
-        
-editor: visual
+    output-file: "09_01_lecture_powerpoint.pptx"
+  typst:
+    output-file: "09_01_lecture_powerpoint.pdf"
 ---
+
+
 
 
 
@@ -103,11 +56,15 @@ Covered
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/review-plot-1.png)
 :::
 :::
+
+
 
 
 
@@ -124,10 +81,7 @@ Covered
 
 ### The objectives:
 
-This lecture covers two fundamental statistical techniques in biology:
-correlation and regression analysis. Based on Chapters 16-17 from
-Whitlock & Schluter's *The Analysis of Biological Data* (3rd edition),
-we'll explore:
+This lecture covers two fundamental statistical techniques in biology: correlation and regression analysis. Based on Chapters 16-17 from Whitlock & Schluter's *The Analysis of Biological Data* (3rd edition), we'll explore:
 
 -   Correlation analysis: measuring relationships between variables
 -   The distinction between correlation and regression
@@ -145,10 +99,8 @@ we'll explore:
 ::: {.column width="60%"}
 **Correlation Analysis:**
 
--   Measures the strength and direction of a relationship between two
-    numerical variables
--   Both X and Y are random variables (both measured, neither
-    manipulated)
+-   Measures the strength and direction of a relationship between two numerical variables
+-   Both X and Y are random variables (both measured, neither manipulated)
 -   Variables are typically on equal footing (either could be X or Y)
 -   No cause-effect relationship implied
 -   Quantifies the degree to which variables are related
@@ -174,11 +126,15 @@ we'll explore:
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-1-1.png)
 :::
 :::
+
+
 
 
 
@@ -197,8 +153,7 @@ we'll explore:
 ::: {.column width="60%"}
 ### What Is Correlation?
 
-**Correlation analysis** measures the strength and direction of a
-relationship between two numerical variables:
+**Correlation analysis** measures the strength and direction of a relationship between two numerical variables:
 
 -   Ranges from -1 to +1
 -   +1 indicates perfect positive correlation
@@ -226,11 +181,15 @@ Where $s_X$ and $s_Y$ are the standard deviations of X and Y.
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1i-1.png)
 :::
 :::
+
+
 
 
 
@@ -247,22 +206,20 @@ Where $s_X$ and $s_Y$ are the standard deviations of X and Y.
 
 ### Example 16.1: Flipping the Bird
 
-Nazca boobies (*Sula granti*) - Do aggressive behaviors as a chick
-predict future aggressive behavior as an adult?
+Nazca boobies (*Sula granti*) - Do aggressive behaviors as a chick predict future aggressive behavior as an adult?
 
 -   correlation is r = 0.534 - moderate positive relationship
 -   p-value = 0.007 correlation is statistically significant.
 
 For a Pearson correlation coefficient (r) of 0.53372:
 
--   This is r (not rho as Spearman nonparticipant below), as indicated
-    by "cor" in your output
--   To determine the amount of variation explained, you square this
-    value: r² = 0.53372² = 0.2849 (or approximately 28.49%)
--   means about 28.49% of the variance in one variable can be explained
-    by the other variable
+-   This is r (not rho as Spearman nonparticipant below), as indicated by "cor" in your output
+-   To determine the amount of variation explained, you square this value: r² = 0.53372² = 0.2849 (or approximately 28.49%)
+-   means about 28.49% of the variance in one variable can be explained by the other variable
 
 ### Note $\text{t}=\frac{r}{SE_r}$
+
+
 
 
 
@@ -312,17 +269,15 @@ sample estimates:
 
 
 
+
+
 # **Lecture 9:** Correlation Analysis
 
 ::::: columns
 ::: {.column width="60%"}
 ### Example 16.1: Flipping the Bird
 
-**Interpretation:** The correlation coefficient of r = 0.534 suggests
-that Nazca boobies who experienced more visits from non-parent adults as
-nestlings tend to display more aggressive behavior as adults. This
-supports the hypothesis that early experiences influence adult behavior
-patterns in this species.
+**Interpretation:** The correlation coefficient of r = 0.534 suggests that Nazca boobies who experienced more visits from non-parent adults as nestlings tend to display more aggressive behavior as adults. This supports the hypothesis that early experiences influence adult behavior patterns in this species.
 
 **Standard Error:**
 
@@ -334,6 +289,8 @@ Need to be sure relationship is not curved - note below
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -357,6 +314,8 @@ Need to be sure relationship is not curved - note below
 
 
 
+
+
 :::
 :::::
 
@@ -368,18 +327,16 @@ Need to be sure relationship is not curved - note below
 
 As described in Section 16.3, correlation analysis has key assumptions:
 
-1.  **Random sampling**: Observations should be a random sample from the
-    population
-2.  **Bivariate normality**: Both variables follow a normal
-    distribution, and their joint distribution is bivariate normal
-3.  **Linear relationship**: The relationship between variables is
-    linear, not curved
+1.  **Random sampling**: Observations should be a random sample from the population
+2.  **Bivariate normality**: Both variables follow a normal distribution, and their joint distribution is bivariate normal
+3.  **Linear relationship**: The relationship between variables is linear, not curved
 
-Let's check these assumptions using the lion data from Example 17.1 Lion
-Noses:
+Let's check these assumptions using the lion data from Example 17.1 Lion Noses:
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -425,6 +382,8 @@ W = 0.87615, p-value = 0.001615
 
 
 
+
+
 :::
 :::::
 
@@ -436,18 +395,16 @@ W = 0.87615, p-value = 0.001615
 
 As described in Section 16.3, correlation analysis has key assumptions:
 
-1.  **Random sampling**: Observations should be a random sample from the
-    population
-2.  **Bivariate normality**: Both variables follow a normal
-    distribution, and their joint distribution is bivariate normal
-3.  **Linear relationship**: The relationship between variables is
-    linear, not curved
+1.  **Random sampling**: Observations should be a random sample from the population
+2.  **Bivariate normality**: Both variables follow a normal distribution, and their joint distribution is bivariate normal
+3.  **Linear relationship**: The relationship between variables is linear, not curved
 
-Let's check these assumptions using the lion data from Example 17.1 Lion
-Noses:
+Let's check these assumptions using the lion data from Example 17.1 Lion Noses:
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -471,6 +428,8 @@ Noses:
 
 
 
+
+
 :::
 :::::
 
@@ -480,21 +439,19 @@ Noses:
 
 Transform one or both variables (log, square root, etc.)
 
-Use non-parametric correlation (**Spearman's rank correlation**) or
-Kendall's tau 𝛕
+Use non-parametric correlation (**Spearman's rank correlation**) or Kendall's tau 𝛕
 
 Examine the data for outliers or influential points
 
-To understand the amount of variation explained, you can square the
-Spearman's rho value.
+To understand the amount of variation explained, you can square the Spearman's rho value.
 
 For your value of 0.74485:
 
 ρ² = 0.74485² = 0.5548
 
-This means approximately 55.48% of the variance in ranks of one variable
-can be explained by the ranks of the other variable. This is similar to
-how R² works in linear regression, but specifically for ranked data.
+This means approximately 55.48% of the variance in ranks of one variable can be explained by the ranks of the other variable. This is similar to how R² works in linear regression, but specifically for ranked data.
+
+
 
 
 
@@ -533,6 +490,8 @@ sample estimates:
 
 
 
+
+
 # **Lecture 9:** Correlation Analysis
 
 ::::: columns
@@ -542,8 +501,7 @@ sample estimates:
 **The correlation coefficient depends on the range**
 
 -   Restricting range of values can reduce the correlation coefficient
--   Comparing correlations between studies requires similar ranges of
-    values
+-   Comparing correlations between studies requires similar ranges of values
 
 **Measurement error affects correlation**
 
@@ -576,11 +534,15 @@ sample estimates:
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1o-1.png)
 :::
 :::
+
+
 
 
 
@@ -678,11 +640,15 @@ Where:
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1p-1.png)
 :::
 :::
+
+
 
 
 
@@ -716,11 +682,15 @@ This means: - When a lion has no black on its nose (proportion = 0), its predict
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1q-1.png)
 :::
 :::
+
+
 
 
 
@@ -739,6 +709,8 @@ This means: - When a lion has no black on its nose (proportion = 0), its predict
 
 -   male lions develop more black pigmentation on their noses as they age.
 -   can be used to estimate the age of lions in the field.
+
+
 
 
 
@@ -776,6 +748,8 @@ F-statistic: 49.75 on 1 and 30 DF,  p-value: 7.677e-08
 
 :::
 :::
+
+
 
 
 
@@ -825,11 +799,15 @@ Both intervals are narrowest near $\bar{X}$ and widen as X moves away from the m
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1b-1.png)
 :::
 :::
+
+
 
 
 
@@ -858,17 +836,23 @@ Both intervals are narrowest near $\bar{X}$ and widen as X moves away from the m
 
 
 
-::: {.cell}
-::: {.cell-output-display}
 
-| species_number| log_stability|
-|--------------:|-------------:|
-|              1|     0.7627675|
-|              1|     1.4506214|
-|              1|     1.5133061|
-|              1|     0.7468877|
-|              1|     0.9829751|
-|              1|     1.1195786|
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 6 × 2
+  species_number log_stability
+           <dbl>         <dbl>
+1              1         0.763
+2              1         1.45 
+3              1         1.51 
+4              1         0.747
+5              1         0.983
+6              1         1.12 
+```
+
 
 :::
 
@@ -907,15 +891,24 @@ F-statistic: 27.83 on 1 and 159 DF,  p-value: 4.276e-07
 
 :::
 
-::: {.cell-output-display}
+::: {.cell-output .cell-output-stdout}
 
-|               |  Df|    Sum Sq|   Mean Sq|  F value| Pr(>F)|
-|:--------------|---:|---------:|---------:|--------:|------:|
-|species_number |   1|  3.279216| 3.2792156| 27.82878|  4e-07|
-|Residuals      | 159| 18.735830| 0.1178354|       NA|     NA|
+```
+Analysis of Variance Table
+
+Response: log_stability
+                Df  Sum Sq Mean Sq F value    Pr(>F)    
+species_number   1  3.2792  3.2792  27.829 4.276e-07 ***
+Residuals      159 18.7358  0.1178                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
 
 :::
 :::
+
+
 
 
 
@@ -960,11 +953,15 @@ This supports the biodiversity-stability hypothesis: more diverse plant communit
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1d-1.png)
 :::
 :::
+
+
 
 
 
@@ -1061,11 +1058,15 @@ Let's check these assumptions for the lion regression model:
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1e-1.png)
 :::
 :::
+
+
 
 
 
@@ -1095,6 +1096,8 @@ Let's check these assumptions for the lion regression model:
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -1118,6 +1121,8 @@ Let's check these assumptions for the lion regression model:
 
 
 
+
+
 :::
 :::::
 
@@ -1147,6 +1152,8 @@ Let's check these assumptions for the lion regression model:
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -1161,6 +1168,8 @@ W = 0.93879, p-value = 0.0692
 
 :::
 :::
+
+
 
 
 
@@ -1199,11 +1208,15 @@ If assumptions are violated: 1. Transform the data (Section 17.6) 2. Use weighte
 
 
 
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1h-1.png)
 :::
 :::
+
+
 
 
 
