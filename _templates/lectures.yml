@@ -62,8 +62,8 @@ format:
     toc: false
     number-sections: false
     embed-resources: true
-    fig-width: 3
-    fig-height: 3
+    fig-width: 4
+    fig-height: 4
     fig-dpi: 300
     margin: 
       x: 0.75in

@@ -32,6 +32,11 @@ format:
 
 
 
+
+
+
+
+
 # **Lecture 4: Probability and Statistical Inference**
 
 ::::: columns
@@ -44,6 +49,11 @@ format:
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -71,6 +81,11 @@ format:
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -79,7 +94,13 @@ format:
 ::: callout-tip
 ## Practice Exercise 1: Exploring the Grayling Dataset
 
-Let's explore the Arctic grayling data from lakes I3 and I8. Use the `grayling_df` data frame to create basic summary statistics.
+Let's explore the Arctic grayling data from lakes I3 and I8. Use the
+`grayling_df` data frame to create basic summary statistics.
+
+
+
+
+
 
 
 
@@ -162,6 +183,11 @@ summary(grayling_df)
 
 
 
+
+
+
+
+
 :::
 
 # **Lecture 4:** Probability Distributions
@@ -170,13 +196,20 @@ summary(grayling_df)
 ::: {.column width="60%"}
 ## Probability Distribution Functions
 
--   A **probability distribution** describes the probability of different outcomes in an experiment
+-   A **probability distribution** describes the probability of
+    different outcomes in an experiment
 -   We've seen histograms of observed data
--   Theoretical distributions help us model and understand real-world data
+-   Theoretical distributions help us model and understand real-world
+    data
 -   We will focus on a standard normal distribution and a t distribution
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -204,6 +237,11 @@ summary(grayling_df)
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -211,7 +249,8 @@ summary(grayling_df)
 
 ::::: columns
 ::: {.column width="60%"}
-The standard normal distribution is crucial for understanding statistical inference:
+The standard normal distribution is crucial for understanding
+statistical inference:
 
 -   Has mean (μ) = 0 and standard deviation (σ) = 1
 -   Symmetrical bell-shaped curve
@@ -221,10 +260,16 @@ The standard normal distribution is crucial for understanding statistical infere
     -   **95% of data within ±2σ of the mean - really 1.96σ**
     -   99.7% of data within ±3σ of the mean
 
-Z-scores allow us to convert any normal distribution to the standard normal distribution.
+Z-scores allow us to convert any normal distribution to the standard
+normal distribution.
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -252,6 +297,11 @@ Z-scores allow us to convert any normal distribution to the standard normal dist
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -260,7 +310,13 @@ Z-scores allow us to convert any normal distribution to the standard normal dist
 ::: callout-tip
 ## Practice Exercise 2: Calculating Z-scores
 
-Let's practice converting raw values to Z-scores using the Arctic grayling data.
+Let's practice converting raw values to Z-scores using the Arctic
+grayling data.
+
+
+
+
+
 
 
 
@@ -316,9 +372,19 @@ head(grayling_df)
 
 
 
+
+
+
+
+
 :::
 
 # Z-score Results
+
+
+
+
+
 
 
 
@@ -360,6 +426,11 @@ Proportion within 1 SD: 64.3 %
 
 
 
+
+
+
+
+
 # Lecture 4: Standard normal distribution - Fish Data
 
 ::::: columns
@@ -374,6 +445,11 @@ You want to know things about this population like
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -402,6 +478,11 @@ You want to know things about this population like
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-8-1.png)
 :::
 :::
+
+
+
+
+
 
 
 
@@ -445,11 +526,21 @@ Standard Normal Distribution
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-9-1.png)
 :::
 :::
+
+
+
+
+
 
 
 
@@ -490,11 +581,21 @@ Areas under curve of Standard Normal Distribution
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-10-1.png)
 :::
 :::
+
+
+
+
+
 
 
 
@@ -524,12 +625,18 @@ Done by converting original data points to z-scores
 -   µ = mean of data distribution
 -   σ = SD of data distribution
 
-So lets do this for a fish that is 300mm long and guess the probability of catching something larger
+So lets do this for a fish that is 300mm long and guess the probability
+of catching something larger
 
 z = (300 - 265.61)/28.3 = 1.215194
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -580,6 +687,11 @@ i3_stats
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -598,7 +710,8 @@ Done by converting original data points to z-scores
 -   µ = mean of data distribution
 -   σ = SD of data distribution
 
-So lets do this for a fish that is 320mm long and guess the probability of catching something larger
+So lets do this for a fish that is 320mm long and guess the probability
+of catching something larger
 
 z = (320 - 265.61)/28.3 = 1.92
 
@@ -616,7 +729,8 @@ or .9726 in table or 97.3% is the area left of the curve and
 
 ::::: columns
 ::: {.column width="60%"}
-The **standard error of the mean (SEM)** tells us how precise our sample mean is as an estimate of the population mean.
+The **standard error of the mean (SEM)** tells us how precise our sample
+mean is as an estimate of the population mean.
 
 Standard Error Formula: $$ SE_{\bar{Y}} = \frac{s}{\sqrt{n}} $$
 
@@ -644,11 +758,21 @@ Where:
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-12-1.png)
 :::
 :::
+
+
+
+
+
 
 
 
@@ -668,7 +792,13 @@ Where:
 ::: callout-tip
 ## Practice Exercise 5: Sampling Distributions
 
-Let's explore how sample size affects our estimates by taking samples of different sizes:
+Let's explore how sample size affects our estimates by taking samples of
+different sizes:
+
+
+
+
+
 
 
 
@@ -737,7 +867,13 @@ results
 
 
 
-What do you observe about the standard error as sample size increases? Why does this happen?
+
+
+
+
+
+What do you observe about the standard error as sample size increases?
+Why does this happen?
 :::
 
 # **Lecture 4:** Estimating µ - population mean
@@ -752,12 +888,19 @@ What do you observe about the standard error as sample size increases? Why does 
 
 ## 3 important properties:
 
--   Sampling distribution of means (SDM) from normal population will be normal
--   Large Sampling distribution of means from any population will be normal (Central Limit Theorem)
+-   Sampling distribution of means (SDM) from normal population will be
+    normal
+-   Large Sampling distribution of means from any population will be
+    normal (Central Limit Theorem)
 -   The mean of Sampling distribution of means will equal µ or the mean
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -785,6 +928,11 @@ What do you observe about the standard error as sample size increases? Why does 
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -798,14 +946,22 @@ What do you observe about the standard error as sample size increases? Why does 
 
 -   "Standard error of sample mean"
 
--   How good is your estimate of population mean? (based on the sample collected)
+-   How good is your estimate of population mean? (based on the sample
+    collected)
 
--   quantifies how much the sample means are expected to vary from samples
+-   quantifies how much the sample means are expected to vary from
+    samples
 
--   gives an estimate of the error associated with using $\bar{y}$ to estimate $\mu$...
+-   gives an estimate of the error associated with using $\bar{y}$ to
+    estimate $\mu$...
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -833,6 +989,11 @@ What do you observe about the standard error as sample size increases? Why does 
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -840,14 +1001,21 @@ What do you observe about the standard error as sample size increases? Why does 
 
 ::::: columns
 ::: {.column width="60%"}
-Notice: - $s_{\bar{y}}$ depends on - sample s (standard deviation) - sample n - ($s_{\bar{y}} = \frac{s}{\sqrt{n}}$)
+Notice: - $s_{\bar{y}}$ depends on - sample s (standard deviation) -
+sample n - ($s_{\bar{y}} = \frac{s}{\sqrt{n}}$)
 
-How and why? - Decreases with sample n - number - increases with sample s - standard deviation
+How and why? - Decreases with sample n - number - increases with sample
+s - standard deviation
 
 -   Large sample, low s = greater confidence in estimate of $\mu$
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -875,6 +1043,11 @@ How and why? - Decreases with sample n - number - increases with sample s - stan
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -882,7 +1055,8 @@ How and why? - Decreases with sample n - number - increases with sample s - stan
 
 ::::: columns
 ::: {.column width="60%"}
-The **standard error of the mean (SEM)** tells us how precise our sample mean is as an estimate of the population mean.
+The **standard error of the mean (SEM)** tells us how precise our sample
+mean is as an estimate of the population mean.
 
 Standard Error Formula: $$ SE_{\bar{Y}} = \frac{s}{\sqrt{n}} $$
 
@@ -910,11 +1084,21 @@ Where:
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-17-1.png)
 :::
 :::
+
+
+
+
+
 
 
 
@@ -933,9 +1117,11 @@ Where:
 
 ::::: columns
 ::: {.column width="60%"}
-A **confidence interval** is a range of values that is likely to contain the true population parameter.
+A **confidence interval** is a range of values that is likely to contain
+the true population parameter.
 
-95% Confidence Interval Formula: $$\text{95% CI} = \bar{y} \pm z \cdot \frac{\sigma}{\sqrt{n}}$$
+95% Confidence Interval Formula:
+$$\text{95% CI} = \bar{y} \pm z \cdot \frac{\sigma}{\sqrt{n}}$$
 
 Where:
 
@@ -954,14 +1140,19 @@ Where:
 
 ::::: columns
 ::: {.column width="60%"}
-A **confidence interval** is a range of values that is likely to contain the true population parameter.
+A **confidence interval** is a range of values that is likely to contain
+the true population parameter.
 
-**Interpretation:** If we were to take many samples and calculate the 95% CI for each, about 95% of these intervals would contain the true population mean.
+**Interpretation:** If we were to take many samples and calculate the
+95% CI for each, about 95% of these intervals would contain the true
+population mean.
 
-**Common misinterpretation:** "There is a 95% probability that the true mean is in this interval."
+**Common misinterpretation:** "There is a 95% probability that the true
+mean is in this interval."
 
 -   Interpret 95% CI to mean:
-    -   Range of values that contains µ (population mean) with 95% probability
+    -   Range of values that contains µ (population mean) with 95%
+        probability
 -   More correctly:
     -   If we took 100 samples from population
     -   calculate a CI from each
@@ -980,11 +1171,21 @@ A **confidence interval** is a range of values that is likely to contain the tru
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-18-1.png)
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1018,11 +1219,21 @@ Lets compare what the two plots look like near each other
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-19-1.png)
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1042,7 +1253,13 @@ Lets compare what the two plots look like near each other
 ::: callout-tip
 ## Practice Exercise 3: Calculating Standard Error and Confidence Intervals
 
-Calculate the standard error and 95% confidence interval for the mean length of Arctic grayling in each lake.
+Calculate the standard error and 95% confidence interval for the mean
+length of Arctic grayling in each lake.
+
+
+
+
+
 
 
 
@@ -1101,7 +1318,13 @@ ci_results
 
 
 
-What do these confidence intervals tell us about the difference between lakes?
+
+
+
+
+
+What do these confidence intervals tell us about the difference between
+lakes?
 :::
 
 # **Lecture 4:** When Population σ is Unknown
@@ -1124,7 +1347,8 @@ In the more typical case DON'T know the population σ
 
 ::::: columns
 ::: {.column width="60%"}
-When sample sizes are small, the **t-distribution** is more appropriate than the normal distribution.
+When sample sizes are small, the **t-distribution** is more appropriate
+than the normal distribution.
 
 -   Similar to normal distribution but with heavier tails
 -   Shape depends on **degrees of freedom** (df = n-1)
@@ -1137,6 +1361,11 @@ When sample sizes are small, the **t-distribution** is more appropriate than the
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -1164,6 +1393,11 @@ When sample sizes are small, the **t-distribution** is more appropriate than the
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -1172,7 +1406,13 @@ When sample sizes are small, the **t-distribution** is more appropriate than the
 ::: callout-tip
 ## Practice Exercise 4: Using the t-distribution
 
-Let's compare confidence intervals using the normal approximation (z) versus the t-distribution for our fish data.
+Let's compare confidence intervals using the normal approximation (z)
+versus the t-distribution for our fish data.
+
+
+
+
+
 
 
 
@@ -1297,6 +1537,11 @@ t critical value: 2.262 vs z critical value: 1.96
 
 
 
+
+
+
+
+
 :::
 
 # Student's t-distribution Formula
@@ -1342,7 +1587,8 @@ Here is a t-table
 
 ::::: columns
 ::: {.column width="60%"}
-One-tailed questions: area of distribution left or (right) of a certain value
+One-tailed questions: area of distribution left or (right) of a certain
+value
 
 -   n=20 (df=19) - 90% of the observations found left
 -   t= 1.328 (10% are outside)
@@ -1394,24 +1640,33 @@ Use two-sided test
 
 ::::: columns
 ::: {.column width="60%"}
-Hypothesis testing is a systematic way to evaluate research questions using data.
+Hypothesis testing is a systematic way to evaluate research questions
+using data.
 
 **Key components:**
 
-1.  **Null hypothesis (H₀)**: Typically assumes "no effect" or "no difference"
+1.  **Null hypothesis (H₀)**: Typically assumes "no effect" or "no
+    difference"
 
 2.  **Alternative hypothesis (Hₐ)**: The claim we're trying to support
 
 3.  **Statistical test**: Method for evaluating evidence against H₀
 
-4.  **P-value**: Probability of observing our results (or more extreme) if H₀ is true
+4.  **P-value**: Probability of observing our results (or more extreme)
+    if H₀ is true
 
-5.  **Significance level (α)**: Threshold for rejecting H₀, typically 0.05
+5.  **Significance level (α)**: Threshold for rejecting H₀, typically
+    0.05
 
 **Decision rule**: Reject H₀ if p-value \< α
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -1439,6 +1694,11 @@ Hypothesis testing is a systematic way to evaluate research questions using data
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -1446,24 +1706,33 @@ Hypothesis testing is a systematic way to evaluate research questions using data
 
 ::::: columns
 ::: {.column width="60%"}
-Hypothesis testing is a systematic way to evaluate research questions using data.
+Hypothesis testing is a systematic way to evaluate research questions
+using data.
 
 **Key components:**
 
-1.  **Null hypothesis (H₀)**: Typically assumes "no effect" or "no difference"
+1.  **Null hypothesis (H₀)**: Typically assumes "no effect" or "no
+    difference"
 
 2.  **Alternative hypothesis (Hₐ)**: The claim we're trying to support
 
 3.  **Statistical test**: Method for evaluating evidence against H₀
 
-4.  **P-value**: Probability of observing our results (or more extreme) if H₀ is true
+4.  **P-value**: Probability of observing our results (or more extreme)
+    if H₀ is true
 
-5.  **Significance level (α)**: Threshold for rejecting H₀, typically 0.05
+5.  **Significance level (α)**: Threshold for rejecting H₀, typically
+    0.05
 
 **Decision rule**: Reject H₀ if p-value \< α
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -1491,6 +1760,11 @@ Hypothesis testing is a systematic way to evaluate research questions using data
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -1499,7 +1773,13 @@ Hypothesis testing is a systematic way to evaluate research questions using data
 ::: callout-tip
 ## Practice Exercise 5: Lets practice a One-Sample t-Test
 
-Let's perform a one-sample t-test to determine if the mean fish length in Toolik Lake differs from 50 mm:
+Let's perform a one-sample t-test to determine if the mean fish length
+in Toolik Lake differs from 50 mm:
+
+
+
+
+
 
 
 
@@ -1571,13 +1851,19 @@ mean of x
 
 
 
+
+
+
+
+
 Interpret this test result by answering these questions:
 
 1.  What was the null hypothesis?
 2.  What was the alternative hypothesis?
 3.  What does the p-value tell us?
 4.  Should we reject or fail to reject the null hypothesis at α = 0.05?
-5.  What is the practical interpretation of this result for fish biologists?
+5.  What is the practical interpretation of this result for fish
+    biologists?
 :::
 
 # Practice Exercise 6: Formulating Hypotheses
@@ -1585,11 +1871,18 @@ Interpret this test result by answering these questions:
 ::: callout-tip
 ## Practice Exercise 6: Formulating Hypotheses
 
-For the following research questions about Arctic grayling, write the null and alternative hypotheses:
+For the following research questions about Arctic grayling, write the
+null and alternative hypotheses:
 
 1.  Are fish in Lake I8 longer than fish in Lake I3?
-2.  Is the mean length of Arctic grayling in these lakes different from 300 mm?
+2.  Is the mean length of Arctic grayling in these lakes different from
+    300 mm?
 3.  Is there a relationship between fish length and mass?
+
+
+
+
+
 
 
 
@@ -1646,21 +1939,37 @@ mean in group I3 mean in group I8
 
 
 
-Based on this t-test, what can we conclude about the difference in fish length between the two lakes?
+
+
+
+
+
+Based on this t-test, what can we conclude about the difference in fish
+length between the two lakes?
 :::
 
 # **Lecture 4:** Understanding P-values
 
 ::::: columns
 ::: {.column width="60%"}
-A **p-value** is the probability of observing the sample result (or something more extreme) if the null hypothesis is true.
+A **p-value** is the probability of observing the sample result (or
+something more extreme) if the null hypothesis is true.
 
-**Common interpretations:** - p \< 0.05: Strong evidence against H₀ - 0.05 ≤ p \< 0.10: Moderate evidence against H₀ - p ≥ 0.10: Insufficient evidence against H₀
+**Common interpretations:** - p \< 0.05: Strong evidence against H₀ -
+0.05 ≤ p \< 0.10: Moderate evidence against H₀ - p ≥ 0.10: Insufficient
+evidence against H₀
 
-**Common misinterpretations:** - p-value is NOT the probability that H₀ is true - p-value is NOT the probability that results occurred by chance - Statistical significance ≠ practical significance
+**Common misinterpretations:** - p-value is NOT the probability that H₀
+is true - p-value is NOT the probability that results occurred by
+chance - Statistical significance ≠ practical significance
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -1688,6 +1997,11 @@ A **p-value** is the probability of observing the sample result (or something mo
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -1695,16 +2009,27 @@ A **p-value** is the probability of observing the sample result (or something mo
 
 ::::: columns
 ::: {.column width="60%"}
-When making decisions based on hypothesis tests, two types of errors can occur:
+When making decisions based on hypothesis tests, two types of errors can
+occur:
 
-**Type I Error (False Positive)** - Rejecting H₀ when it's actually true - Probability = α (significance level) - "Finding an effect that isn't real"
+**Type I Error (False Positive)** - Rejecting H₀ when it's actually
+true - Probability = α (significance level) - "Finding an effect that
+isn't real"
 
-**Type II Error (False Negative)** - Failing to reject H₀ when it's actually false - Probability = β - "Missing an effect that is real"
+**Type II Error (False Negative)** - Failing to reject H₀ when it's
+actually false - Probability = β - "Missing an effect that is real"
 
-**Statistical Power = 1 - β** - Probability of correctly rejecting a false H₀ - Increases with: - Larger sample size - Larger effect size - Lower variability - Higher α level
+**Statistical Power = 1 - β** - Probability of correctly rejecting a
+false H₀ - Increases with: - Larger sample size - Larger effect size -
+Lower variability - Higher α level
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -1732,6 +2057,11 @@ When making decisions based on hypothesis tests, two types of errors can occur:
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -1740,13 +2070,22 @@ When making decisions based on hypothesis tests, two types of errors can occur:
 ::: callout-tip
 ## Practice Exercise 6: Interpreting P-values and Errors
 
-Given the following scenarios, identify whether a Type I or Type II error might have occurred:
+Given the following scenarios, identify whether a Type I or Type II
+error might have occurred:
 
-1.  A researcher concludes that a new fishing regulation increased grayling size, when in fact it had no effect.
+1.  A researcher concludes that a new fishing regulation increased
+    grayling size, when in fact it had no effect.
 
-2.  A study fails to detect a real decline in grayling population due to warming water, concluding there was no effect.
+2.  A study fails to detect a real decline in grayling population due to
+    warming water, concluding there was no effect.
 
-3.  Let's calculate the power of our t-test to detect a 30 mm difference in length between lakes:
+3.  Let's calculate the power of our t-test to detect a 30 mm difference
+    in length between lakes:
+
+
+
+
+
 
 
 
@@ -1818,6 +2157,11 @@ NOTE: n is number in *each* group
 
 
 
+
+
+
+
+
 :::
 
 # **Lecture 4:** Summary
@@ -1853,11 +2197,21 @@ NOTE: n is number in *each* group
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-30-1.png)
 :::
 :::
+
+
+
+
+
 
 
 
