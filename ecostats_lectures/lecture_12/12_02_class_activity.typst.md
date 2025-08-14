@@ -7,8 +7,12 @@ format:
   html:
     output-file: "12_02_class_activity.html"
   typst:
-    output-file: "12_02_class_activity.pdf"
+    output-file: "12_02_class_activity.pdf"  
+  docx:
+    output-file: "12_02_class_activity.docx"
 ---
+
+
 
 
 
@@ -19,6 +23,8 @@ format:
 # Lecture 12: Factorial ANOVA
 
 The set up and data overview
+
+
 
 
 
@@ -114,17 +120,22 @@ l_df %>%
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
 
 ## ANOVA Assumptions
 
-Before conducting the factorial ANOVA, we need to check several assumptions:
+Before conducting the factorial ANOVA, we need to check several
+assumptions:
 
 1.  Independence of observations
 2.  Normality of residuals
 3.  Homogeneity of variances
 
 Fit the model
+
+
 
 
 
@@ -205,9 +216,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
 
 ## ASSUMPTIONS
+
+
 
 
 
@@ -236,7 +251,11 @@ par(mfrow = c(1, 1))
 
 
 
+
+
 ## Check for Normality of Residuals
+
+
 
 
 
@@ -268,9 +287,13 @@ ggplot(l_resid, aes(sample = .resid)) +
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
 
 ## Check for Normality of Residuals
+
+
 
 
 
@@ -298,9 +321,13 @@ ggplot(l_resid, aes(x = .resid)) +
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
 
 ## Check for Normality of Residuals
+
+
 
 
 
@@ -351,7 +378,11 @@ W = 0.97373, p-value = 0.7587
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
+
+
 
 
 
@@ -383,9 +414,13 @@ group  7  0.3337 0.9268
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
 
 ## Check for homogeneity of variances
+
+
 
 
 
@@ -411,9 +446,13 @@ ggplot(l_resid, aes(x = .fitted, y = .resid)) +
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
 
 ## Check for homogeneity of variances
+
+
 
 
 
@@ -443,9 +482,13 @@ ggplot(l_df, aes(x = interaction(density, season), y = residuals)) +
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
 
 ## Estimated Marginal Means and Effects
+
+
 
 
 
@@ -505,7 +548,11 @@ P value adjustment: tukey method for comparing a family of 4 estimates
 
 
 
+
+
 ## Estimated Marginal Means and Effects
+
+
 
 
 
@@ -528,9 +575,13 @@ plot(density_emm)
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
 
 ## Estimated Marginal Means and Effects
+
+
 
 
 
@@ -602,9 +653,13 @@ Results are averaged over the levels of: density
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
 
 ## Estimated Marginal Means and Effects
+
+
 
 
 
@@ -632,9 +687,13 @@ plot(season_emm)
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
 
 ## Estimated Marginal Means and Effects
+
+
 
 
 
@@ -734,9 +793,13 @@ l_df %>%
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
 
 ## Estimated Marginal Means and Effects
+
+
 
 
 
@@ -771,9 +834,13 @@ emmip(l_model, season ~ density, CIs = TRUE)
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
 
 ## Estimated Marginal Means and Effects
+
+
 
 
 
@@ -818,9 +885,13 @@ Confidence level used: 0.95
 
 
 
+
+
 # Lecture 12: Factorial ANOVA
 
 ## This is a plot you might produce for publication
+
+
 
 
 
@@ -868,35 +939,59 @@ pub_plot
 
 
 
+
+
 # Lecture 12: Results Interpretation for Linear Model Approach
 
-The factorial ANOVA was conducted using a linear model approach, which provides additional insights beyond the traditional ANOVA table.
+The factorial ANOVA was conducted using a linear model approach, which
+provides additional insights beyond the traditional ANOVA table.
 
 Key findings from the linear model analysis:
 
-1.  **Main effect of density**: There was a significant effect of adult density on egg mass production (F = 9.67, df = 3, 16, p = 0.001). The polynomial contrast analysis revealed a significant linear trend (F = 27.58, df = 1, 16, p = 0.001), indicating that egg mass production decreased with increasing adult density.
+1.  **Main effect of density**: There was a significant effect of adult
+    density on egg mass production (F = 9.67, df = 3, 16, p = 0.001).
+    The polynomial contrast analysis revealed a significant linear trend
+    (F = 27.58, df = 1, 16, p = 0.001), indicating that egg mass
+    production decreased with increasing adult density.
 
-2.  **Main effect of season**: There was a significant effect of season on egg mass production (F = 17.84, df = 1, 16, p = 0.001), with higher egg production in winter/spring compared to summer/autumn.
+2.  **Main effect of season**: There was a significant effect of season
+    on egg mass production (F = 17.84, df = 1, 16, p = 0.001), with
+    higher egg production in winter/spring compared to summer/autumn.
 
-3.  **Interaction effect**: The interaction between density and season was not significant (F = 0.30, df = 3, 16, p = 0.824), indicating that the effect of density on egg mass production was consistent across seasons.
+3.  **Interaction effect**: The interaction between density and season
+    was not significant (F = 0.30, df = 3, 16, p = 0.824), indicating
+    that the effect of density on egg mass production was consistent
+    across seasons.
 
 4.  **Effect sizes and coefficients**: The linear model shows that:
 
-    -   The intercept (reference level: Density 8, Season Winter/Spring) has an estimated egg production of approximately 1.90 eggs per limpet
+    -   The intercept (reference level: Density 8, Season Winter/Spring)
+        has an estimated egg production of approximately 1.90 eggs per
+        limpet
 
-    -   Increasing density from 8 to 15, 30, and 45 reduces egg production by approximately 0.28, 0.74, and 0.91 eggs per limpet, respectively
+    -   Increasing density from 8 to 15, 30, and 45 reduces egg
+        production by approximately 0.28, 0.74, and 0.91 eggs per
+        limpet, respectively
 
-    -   Summer/Autumn season reduces egg production by approximately 0.75 eggs per limpet compared to Winter/Spring
+    -   Summer/Autumn season reduces egg production by approximately
+        0.75 eggs per limpet compared to Winter/Spring
 
-    -   The non-significant interaction terms indicate that the density effect is not significantly different between seasons
+    -   The non-significant interaction terms indicate that the density
+        effect is not significantly different between seasons
 
-5.  **Polynomial contrasts**: The significant linear contrast (p = 0.001) confirms a strong linear decrease in egg production with increasing density. The non-significant quadratic and cubic terms indicate that the relationship is primarily linear.
+5.  **Polynomial contrasts**: The significant linear contrast (p =
+    0.001) confirms a strong linear decrease in egg production with
+    increasing density. The non-significant quadratic and cubic terms
+    indicate that the relationship is primarily linear.
 
-6.  **Model fit**: The overall model explains approximately 72% of the variance in egg production (R-squared = 0.72), indicating a good fit to the data.
+6.  **Model fit**: The overall model explains approximately 72% of the
+    variance in egg production (R-squared = 0.72), indicating a good fit
+    to the data.
 
 # Lecture 12: Writing the Results for a Scientific Paper
 
-Here's how you might write up these results using the linear model approach for a scientific paper:
+Here's how you might write up these results using the linear model
+approach for a scientific paper:
 
 ```         
 Results
@@ -910,4 +1005,5 @@ Polynomial contrast analysis confirmed a significant negative linear relationshi
 Post-hoc pairwise comparisons using estimated marginal means showed significant differences between the lowest density (8) and the two highest densities (30 and 45), while the difference between densities 8 and 15 was not statistically significant after adjustment for multiple comparisons.
 ```
 
-Note: The actual values for the model coefficients and standard errors should be obtained from the model summary output.
+Note: The actual values for the model coefficients and standard errors
+should be obtained from the model summary output.

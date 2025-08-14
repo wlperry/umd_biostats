@@ -7,8 +7,12 @@ format:
   html:
     output-file: "10_02_class_activity.html"
   typst:
-    output-file: "10_02_class_activity.pdf"
+    output-file: "10_02_class_activity.pdf"  
+  docx:
+    output-file: "10_02_class_activity.docx"
 ---
+
+
 
 
 
@@ -43,7 +47,13 @@ This analysis examines the relationships between Net Primary Production (npp) an
 
 
 
+
+
+
+
 ## Load Required Packages
+
+
 
 
 
@@ -69,7 +79,11 @@ library(see)          # For better diagnostic plots
 
 
 
+
+
 ## Load and Explore the Data
+
+
 
 
 
@@ -109,6 +123,8 @@ head(forest_df)
 
 
 
+
+
 ## Data Preparation
 
 Following the original analysis, we'll focus on the key variables from a cleaned dataframe
@@ -116,6 +132,8 @@ Following the original analysis, we'll focus on the key variables from a cleaned
 ## 1. Initial Exploration: Variable Relationships and Multicollinearity
 
 ### Correlation Matrix and Visualization
+
+
 
 
 
@@ -179,7 +197,11 @@ corrplot(cor_matrix, method = "color", type = "upper",
 
 
 
+
+
 ### Pairs Plot for Visual Inspection
+
+
 
 
 
@@ -210,9 +232,13 @@ forest_df %>%
 
 
 
+
+
 ## 2. Initial Multiple Regression Model
 
 Let's start with a full model including all predictors:
+
+
 
 
 
@@ -269,7 +295,11 @@ F-statistic: 309.8 on 7 and 1212 DF,  p-value: < 2.2e-16
 
 
 
+
+
 ### Check for Multicollinearity
+
+
 
 
 
@@ -332,9 +362,13 @@ ggplot(vif_df, aes(x = reorder(Variable, VIF), y = VIF)) +
 
 
 
+
+
 ### Address Multicollinearity by Removing Growing Season
 
 Based on the original analysis, season and Temperature are highly correlated. Let's remove season:
+
+
 
 
 
@@ -409,9 +443,13 @@ vif_values2
 
 
 
+
+
 ## 3. Exploring Variable Transformations
 
 ### Check the Shape of Relationships with Partial Regression Plots
+
+
 
 
 
@@ -443,9 +481,13 @@ par(mfrow = c(1, 1))
 
 
 
+
+
 ### Apply Log Transformation to age
 
 The original analysis found that age showed a curvy relationship. Let's try log transformation: REally what you should do is log transform of the response variable first..
+
+
 
 
 
@@ -523,7 +565,11 @@ par(mfrow = c(1, 1))
 
 
 
+
+
 ## 4. Model Diagnostics and Assumption Checking
+
+
 
 
 
@@ -552,7 +598,11 @@ par(mfrow = c(1, 1))
 
 
 
+
+
 ## Residuals - its the upper left above
+
+
 
 
 
@@ -592,9 +642,13 @@ ggplot(residuals_data, aes(x = Fitted, y = Residuals)) +
 
 
 
+
+
 ### Try Response Variable Transformation
 
 Following the original analysis, let's try a cube root transformation of npp:
+
+
 
 
 
@@ -669,9 +723,13 @@ par(mfrow = c(1, 1))
 
 
 
+
+
 ## 5. Model Simplification and Comparison
 
 ### Remove Non-significant Variables
+
+
 
 
 
@@ -751,7 +809,11 @@ model_comparison
 
 
 
+
+
 ### Model Performance and Interpretation
+
+
 
 
 
@@ -802,7 +864,11 @@ F-statistic: 513.9 on 5 and 1214 DF,  p-value: < 2.2e-16
 
 
 
+
+
 ## using the sensemaker package
+
+
 
 
 
@@ -925,9 +991,13 @@ print(results_table)
 
 
 
+
+
 ## 6. Alternative Approach: Standardized Variables
 
 Following the original analysis, let's also try the standardized approach:
+
+
 
 
 
@@ -995,6 +1065,8 @@ F-statistic: 341.5 on 6 and 1213 DF,  p-value: < 2.2e-16
 
 
 
+
+
 ## 7. Key Findings and Conclusions
 
 1.  MULTICOLLINEARITY:
@@ -1032,6 +1104,8 @@ This analysis is based on:
 3.  **Model Diagnostics**: Always check residual plots and assumption violations
 4.  **Model Comparison**: Use AIC and other criteria for model selection
 5.  **Interpretation**: Focus on biologically meaningful relationships
+
+
 
 
 

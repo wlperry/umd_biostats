@@ -1,46 +1,15 @@
 ---
 title: "Lecture 09 - Class Activity - Correlation Linear Regression"
-author: "Your Name"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: true
-  warning: true
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+author: "bill perry"
+metadata-files:
+  - ../../_templates/activities.yml
 format:
   html:
     output-file: "09_02_class_activity.html"
-    default: true
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch  # Limits line length to approximately 80 characters
-    css: ../../css/activity.css
-  docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    embed-resources: true
   typst:
-    margin: 
-      x: 0.5in
-      y: 0.5in
-    fig-width: 4
-    fig-height: 4
-    fig-dpi: 300
-    number-sections: false
-    toc: false
-    output-file: "09_02_class_activity.pdf"
-editor: visual  
+    output-file: "09_02_class_activity.pdf"   
+  docx:
+    output-file: "09_02_class_activity.docx"
 ---
 
 
@@ -55,8 +24,7 @@ editor: visual
 
 ## Introduction
 
-This document demonstrates key concepts in correlation and regression
-analysis using ecological examples, focusing on:
+This document demonstrates key concepts in correlation and regression analysis using ecological examples, focusing on:
 
 1.  **Understanding correlation vs. regression**
 2.  **Calculating and interpreting correlation coefficients**
@@ -140,8 +108,7 @@ p_df <- tibble(
 **Data Types Required:**
 
 -   **X variable**: Continuous numerical
--   **Y variable**: Continuous numerical - Both variables should be
-    measured (not manipulated)
+-   **Y variable**: Continuous numerical - Both variables should be measured (not manipulated)
 
 **Assumptions for Pearson Correlation:**
 
@@ -255,7 +222,7 @@ booby_plot
 ```
 
 ::: {.cell-output-display}
-![](09_02_class_activity_files/figure-docx/booby_plot-1.png)
+![](09_02_class_activity_files/figure-docx/booby_plot-1.jpeg)
 :::
 :::
 
@@ -271,22 +238,14 @@ booby_plot
 
 Based on the output above, answer these questions:
 
-1.  **Direction**: Is the correlation positive or negative? What does
-    this mean biologically?
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-2.  **Strength**: How would you classify this correlation (weak,
-    moderate, strong)?
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-3.  **Significance**: Is the correlation statistically significant? What
-    is the p-value?
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-4.  **Variance explained**: What percentage of variance in adult
-    aggression is explained by nestling visits?
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+1.  **Direction**: Is the correlation positive or negative? What does this mean biologically?
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+2.  **Strength**: How would you classify this correlation (weak, moderate, strong)?
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+3.  **Significance**: Is the correlation statistically significant? What is the p-value?
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+4.  **Variance explained**: What percentage of variance in adult aggression is explained by nestling visits?
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 :::
 
 ## Testing Correlation Assumptions
@@ -367,7 +326,7 @@ p4 <- ggplot(b_df, aes(sample = future_aggression)) +
 ```
 
 ::: {.cell-output-display}
-![](09_02_class_activity_files/figure-docx/test_correlation_assumptions-1.png)
+![](09_02_class_activity_files/figure-docx/test_correlation_assumptions-1.jpeg)
 :::
 :::
 
@@ -381,8 +340,7 @@ p4 <- ggplot(b_df, aes(sample = future_aggression)) +
 ::: callout-warning
 ## When Assumptions Are Violated
 
-If normality assumptions are violated (p \< 0.05 in Shapiro-Wilk test),
-consider:
+If normality assumptions are violated (p \< 0.05 in Shapiro-Wilk test), consider:
 
 1.  **Spearman's rank correlation** (non-parametric alternative)
 2.  **Data transformation** (log, square root, etc.)
@@ -483,8 +441,7 @@ Now let's move from correlation to regression using the lion nose data.
 **Data Types Required:**
 
 -   **X variable (predictor)**: Continuous numerical
--   **Y variable (response)**: Continuous numerical - X can be
-    fixed/controlled, Y is the outcome of interest
+-   **Y variable (response)**: Continuous numerical - X can be fixed/controlled, Y is the outcome of interest
 
 **Assumptions for Linear Regression:**
 
@@ -557,24 +514,14 @@ F-statistic: 49.75 on 1 and 30 DF,  p-value: 7.677e-08
 
 From the regression output above:
 
-1.  **Regression equation**: Write the equation in the form: age =
-    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ +
-    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ ×
-    proportion_black
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-2.  **Slope interpretation**: What does the slope value mean in
-    biological terms?
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-3.  **R-squared**: What percentage of variation in age is explained by
-    nose blackness?
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-4.  **Significance**: Is the relationship statistically significant? How
-    do you know?
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+1.  **Regression equation**: Write the equation in the form: age = \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ + \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ × proportion_black
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+2.  **Slope interpretation**: What does the slope value mean in biological terms?
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+3.  **R-squared**: What percentage of variation in age is explained by nose blackness?
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+4.  **Significance**: Is the relationship statistically significant? How do you know?
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 :::
 
 ## Visualizing the Regression
@@ -607,7 +554,7 @@ lion_plot
 :::
 
 ::: {.cell-output-display}
-![](09_02_class_activity_files/figure-docx/lion_regression_plot-1.png)
+![](09_02_class_activity_files/figure-docx/lion_regression_plot-1.jpeg)
 :::
 :::
 
@@ -621,10 +568,8 @@ lion_plot
 ::: callout-tip
 ## Confidence vs. Prediction Intervals
 
--   **Confidence Interval**: Range for the mean age of ALL lions with
-    that nose blackness
--   **Prediction Interval**: Range for an INDIVIDUAL lion with that nose
-    blackness
+-   **Confidence Interval**: Range for the mean age of ALL lions with that nose blackness
+-   **Prediction Interval**: Range for an INDIVIDUAL lion with that nose blackness
 -   Prediction intervals are always wider than confidence intervals
 :::
 
@@ -648,7 +593,7 @@ plot(lion_model)
 ```
 
 ::: {.cell-output-display}
-![](09_02_class_activity_files/figure-docx/regression_diagnostics-1.png)
+![](09_02_class_activity_files/figure-docx/regression_diagnostics-1.jpeg)
 :::
 
 ```{.r .cell-code}
@@ -781,22 +726,14 @@ BP = 6.8946, df = 1, p-value = 0.008646
 
 Based on the diagnostic plots and tests:
 
-1.  **Linearity**: Does the relationship appear linear? (Check Residuals
-    vs Fitted plot)
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-2.  **Normality**: Are the residuals normally distributed? (Check Q-Q
-    plot and Shapiro test)
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-3.  **Homoscedasticity**: Is the variance constant? (Check
-    Scale-Location plot and BP test)
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-4.  **Influential points**: Are there any concerning influential
-    observations?
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+1.  **Linearity**: Does the relationship appear linear? (Check Residuals vs Fitted plot)
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+2.  **Normality**: Are the residuals normally distributed? (Check Q-Q plot and Shapiro test)
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+3.  **Homoscedasticity**: Is the variance constant? (Check Scale-Location plot and BP test)
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+4.  **Influential points**: Are there any concerning influential observations?
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 :::
 
 # **Part 5:** ANOVA for Regression
@@ -969,7 +906,7 @@ variance_plot
 ```
 
 ::: {.cell-output-display}
-![](09_02_class_activity_files/figure-docx/variance_visualization-1.png)
+![](09_02_class_activity_files/figure-docx/variance_visualization-1.jpeg)
 :::
 :::
 
@@ -1049,7 +986,7 @@ prairie_plot
 :::
 
 ::: {.cell-output-display}
-![](09_02_class_activity_files/figure-docx/unnamed-chunk-3-1.png)
+![](09_02_class_activity_files/figure-docx/unnamed-chunk-3-1.jpeg)
 :::
 :::
 
@@ -1066,16 +1003,11 @@ prairie_plot
 Compare the lion and prairie regression models:
 
 1.  **Which model explains more variance?** (Compare R² values)
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-2.  **Which has a stronger relationship?** (Compare standardized slopes
-    or correlation)
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-3.  **Which has more precise estimates?** (Compare standard errors
-    relative to estimates)
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+2.  **Which has a stronger relationship?** (Compare standardized slopes or correlation)
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+3.  **Which has more precise estimates?** (Compare standard errors relative to estimates)
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 :::
 
 # **Summary and Key Takeaways**
@@ -1107,8 +1039,7 @@ Compare the lion and prairie regression models:
 3.  **Extrapolating beyond the range of data**
 4.  **Confusing confidence and prediction intervals**
 5.  **Over-interpreting R² values**
-6.  **Forgetting about biological significance vs. statistical
-    significance**
+6.  **Forgetting about biological significance vs. statistical significance**
 :::
 
 ## Additional Resources
@@ -1116,5 +1047,4 @@ Compare the lion and prairie regression models:
 -   Whitlock & Schluter Chapter 16 (Correlation)
 -   Whitlock & Schluter Chapter 17 (Regression)
 -   R for Data Science: <https://r4ds.had.co.nz/>
--   Quick-R Regression:
-    <https://www.statmethods.net/stats/regression.html>
+-   Quick-R Regression: <https://www.statmethods.net/stats/regression.html>

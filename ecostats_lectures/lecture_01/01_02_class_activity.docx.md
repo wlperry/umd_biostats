@@ -1,53 +1,16 @@
 ---
 title: "01_Class_Activity"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: true
-  warning: true
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+metadata-files:
+  - ../../_templates/activities.yml
 format:
   html:
     output-file: "01_2_class_activity_html.html"
-    css: ../../css/activity.css
-    code-overflow: scroll
-    toc: false
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch
-    fig-width: 7
-    fig-height: 5
-  docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    embed-resources: true
   typst:
-    margin: 
-      x: 0.5in
-      y: 0.5in
-    fig-width: 4
-    fig-height: 4
-    fig-dpi: 300
-    number-sections: false
-    toc: false
     output-file: "01_02_class_activity.pdf"
-editor: visual
+  docx:
+    output-file: "01_02_class_activity.docx"
 ---
-
-
-
 
 
 
@@ -314,9 +277,6 @@ comment and allows you to write whatever you want and it won' run
 
 
 
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -331,14 +291,8 @@ comment and allows you to write whatever you want and it won' run
 
 
 
-
-
-
 Each script you run from then on you will load the libraries from within
 the package.
-
-
-
 
 
 
@@ -354,28 +308,7 @@ the package.
 library(readxl) # allows to read in excel files
 library(tidyverse) # provides utilities seen in console
 ```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
-
-
 :::
-:::
-
-
-
 
 
 
@@ -390,23 +323,37 @@ from a CSV file or excel file
 
 
 
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
+#| # load file -----
 # this file is in the  data sub directory
 # below put cursor between "" and click tab
 # allows to to select the directory 
 # tab again and select the file
 p_df <- read_csv("data/pine_needles.csv")
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+Rows: 48 Columns: 6
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (4): date, group, n_s, wind
+dbl (2): tree_no, length_mm
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+
+:::
+
+```{.r .cell-code}
 # dataframe stored by "<-" reading in csv file in quotes
 ```
 :::
-
-
-
 
 
 
@@ -418,15 +365,13 @@ This will import the excel file
 
 
 
-
-
-
 ::: {.cell}
 
+```{.r .cell-code}
+# this will allow you to read in the excel file
+p_xl_df <- read_excel("data/pine_needles.xlsx")
+```
 :::
-
-
-
 
 
 
@@ -447,17 +392,16 @@ data
 
 
 
-
-
-
 ::: {.cell}
+
+```{.r .cell-code}
+ggplot(data = p_df, aes(x=wind, y=length_mm))
+```
+
 ::: {.cell-output-display}
-![](01_02_class_activity_files/figure-docx/unnamed-chunk-5-1.png)
+![](01_02_class_activity_files/figure-docx/unnamed-chunk-5-1.jpeg)
 :::
 :::
-
-
-
 
 
 
@@ -471,17 +415,17 @@ notice the points are layered on top but some overlap
 
 
 
-
-
-
 ::: {.cell}
+
+```{.r .cell-code}
+ggplot(data = p_df, aes(x=wind, y=length_mm)) + 
+  geom_point() 
+```
+
 ::: {.cell-output-display}
-![](01_02_class_activity_files/figure-docx/unnamed-chunk-6-1.png)
+![](01_02_class_activity_files/figure-docx/unnamed-chunk-6-1.jpeg)
 :::
 :::
-
-
-
 
 
 
@@ -493,17 +437,21 @@ notice the points are layered on top but some overlap
 
 
 
-
-
-
 ::: {.cell}
+
+```{.r .cell-code}
+ggplot(data = p_df, aes(x=wind, y=length_mm)) + 
+  geom_point(position = position_dodge2(width=0.2) )
+```
+
 ::: {.cell-output-display}
-![](01_02_class_activity_files/figure-docx/unnamed-chunk-7-1.png)
+![](01_02_class_activity_files/figure-docx/unnamed-chunk-7-1.jpeg)
 :::
+
+```{.r .cell-code}
+# this dodges the points # position_dodge2 or can use position_dodge depending on grouping
+```
 :::
-
-
-
 
 
 
@@ -517,17 +465,26 @@ What are the other ways to display the data?
 
 
 
-
-
-
 ::: {.cell}
+
+```{.r .cell-code}
+ggplot(data = p_df, aes(x=length_mm)) + 
+  geom_histogram()
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+
+:::
+
 ::: {.cell-output-display}
-![](01_02_class_activity_files/figure-docx/unnamed-chunk-8-1.png)
+![](01_02_class_activity_files/figure-docx/unnamed-chunk-8-1.jpeg)
 :::
 :::
-
-
-
 
 
 
@@ -543,17 +500,25 @@ We can map the wind aesthetic to a fill in the histogram
 
 
 
-
-
-
 ::: {.cell}
+
+```{.r .cell-code}
+ggplot(data = p_df, aes(x=length_mm, fill = wind)) + geom_histogram( position = position_dodge2(width = 0.5))
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+
+:::
+
 ::: {.cell-output-display}
-![](01_02_class_activity_files/figure-docx/unnamed-chunk-9-1.png)
+![](01_02_class_activity_files/figure-docx/unnamed-chunk-9-1.jpeg)
 :::
 :::
-
-
-
 
 
 
@@ -565,12 +530,17 @@ We can map the wind aesthetic to a fill in the histogram
 
 
 
-
-
-
 ::: {.cell}
+
+```{.r .cell-code}
+ggplot(data = p_df, aes(x=length_mm, fill = wind)) +
+  geom_histogram( binwidth = 2, 
+# sets the width in units of the bins - try different nubmers
+   position = position_dodge2(width = 0.5))
+```
+
 ::: {.cell-output-display}
-![](01_02_class_activity_files/figure-docx/unnamed-chunk-10-1.png)
+![](01_02_class_activity_files/figure-docx/unnamed-chunk-10-1.jpeg)
 :::
 :::
 
@@ -578,10 +548,7 @@ We can map the wind aesthetic to a fill in the histogram
 
 
 
-
-
-
-## Other Plots if time
+## Other Plots if time in class
 
 ## Box and Whisker Plots
 
@@ -589,11 +556,13 @@ We can map the wind aesthetic to a fill in the histogram
 
 
 
-
-
-
 ::: {.cell}
+
+```{.r .cell-code}
+ggplot(data = p_df, aes(x=wind, y=length_mm, fill = wind)) + geom_boxplot()
+```
+
 ::: {.cell-output-display}
-![](01_02_class_activity_files/figure-docx/unnamed-chunk-11-1.png)
+![](01_02_class_activity_files/figure-docx/unnamed-chunk-11-1.jpeg)
 :::
 :::

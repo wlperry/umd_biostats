@@ -7,7 +7,9 @@ format:
   html:
     output-file: "16_02_class_activity.html"
   typst:
-    output-file: "16_02_class_activity.pdf" 
+    output-file: "16_02_class_activity.pdf"   
+  docx:
+    output-file: "16_02_class_activity.docx"
 ---
 
 
@@ -31,6 +33,8 @@ library(tidyverse)    # For data manipulation and visualization
 # options(scipen = 999)
 ```
 :::
+
+
 
 
 
@@ -70,6 +74,8 @@ We'll analyze morphological measurements of three iris species: - *Iris setosa* 
 - *Iris virginica*
 
 We have four measurements: sepal length, sepal width, petal length, and petal width. MANOVA will test whether species differ across all four measurements simultaneously.
+
+
 
 
 
@@ -172,9 +178,11 @@ iris_boxplot
 ```
 
 ::: {.cell-output-display}
-![](16_02_class_activity_files/figure-html/iris_visualization-1.png){width=672}
+![](16_02_class_activity_files/figure-html/iris_visualization-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -184,6 +192,8 @@ iris_boxplot
 ## Step 1: Visualize Relationships Between Variables
 
 Before running MANOVA, let's examine the correlations between our response variables.
+
+
 
 
 
@@ -220,9 +230,11 @@ iris_centroid_plot
 ```
 
 ::: {.cell-output-display}
-![](16_02_class_activity_files/figure-html/iris_correlations-1.png){width=672}
+![](16_02_class_activity_files/figure-html/iris_correlations-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -232,6 +244,8 @@ iris_centroid_plot
 ## Step 2: Test Assumptions
 
 ### Multivariate Normality
+
+
 
 
 
@@ -269,9 +283,13 @@ W = 0.97935, p-value = 0.02342
 
 
 
+
+
 **Interpretation**: If p \< 0.05, the assumption of multivariate normality is violated. MANOVA is fairly robust to moderate violations with large sample sizes.
 
 ### Homogeneity of Covariance Matrices
+
+
 
 
 
@@ -309,9 +327,13 @@ Chi-Sq (approx.) = 140.94, df = 20, p-value < 2.2e-16
 
 
 
+
+
 **Interpretation**: If p \< 0.05, covariance matrices differ between groups. MANOVA is robust to this violation with equal sample sizes.
 
 ### Visual Assessment of Normality
+
+
 
 
 
@@ -334,9 +356,11 @@ iris_qq_plot
 ```
 
 ::: {.cell-output-display}
-![](16_02_class_activity_files/figure-html/iris_qq_plots-1.png){width=672}
+![](16_02_class_activity_files/figure-html/iris_qq_plots-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -344,6 +368,8 @@ iris_qq_plot
 
 
 ## Step 3: Fit MANOVA Model
+
+
 
 
 
@@ -380,9 +406,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
 **Interpretation**: - Pillai's trace is the default test statistic (most robust) - Large F-value and small p-value indicate significant group differences - The null hypothesis (all species have same multivariate means) is rejected
 
 ## Step 4: Alternative Test Statistics
+
+
 
 
 
@@ -451,9 +481,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
 ## Step 5: Follow-up Univariate ANOVAs
 
 Since MANOVA is significant, we examine which variables contribute to group differences.
+
+
 
 
 
@@ -508,7 +542,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
 ## Step 6: Post-hoc Comparisons
+
+
 
 
 
@@ -688,9 +726,13 @@ P value adjustment: tukey method for comparing a family of 3 estimates
 
 
 
+
+
 ## Step 7: Canonical Discriminant Analysis
 
 To understand how the groups differ in multivariate space, we perform canonical discriminant analysis.
+
+
 
 
 
@@ -777,7 +819,11 @@ cumsum(prop_variance)
 
 
 
+
+
 ## Step 8: Linear Discriminant Analysis
+
+
 
 
 
@@ -843,7 +889,11 @@ lda_scores_df <- data.frame(
 
 
 
+
+
 ## Step 9: Visualize Canonical Space
+
+
 
 
 
@@ -880,9 +930,11 @@ canonical_plot
 ```
 
 ::: {.cell-output-display}
-![](16_02_class_activity_files/figure-html/iris_canonical_plot-1.png){width=672}
+![](16_02_class_activity_files/figure-html/iris_canonical_plot-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -890,6 +942,8 @@ canonical_plot
 
 
 ## Step 10: Effect Size
+
+
 
 
 
@@ -929,6 +983,8 @@ partial_eta_squared
 
 :::
 :::
+
+
 
 
 

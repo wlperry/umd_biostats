@@ -7,8 +7,12 @@ format:
   html:
     output-file: "06_02_class_activity.html"
   typst:
-      output-file: "06_02_class_activity.pdf"  
+      output-file: "06_02_class_activity.pdf"    
+  docx:
+    output-file: "06_02_class_activity.docx"
 ---
+
+
 
 
 
@@ -42,6 +46,8 @@ format:
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -54,49 +60,11 @@ format:
 # Load libraries
 library(patchwork)
 library(car)          # For diagnostic tests
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Loading required package: carData
-```
-
-
-:::
-
-```{.r .cell-code}
 library(tidyverse)    # For data manipulation and visualization
 ```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-```
-
-
 :::
 
-::: {.cell-output .cell-output-stderr}
 
-```
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-✖ dplyr::recode() masks car::recode()
-✖ purrr::some()   masks car::some()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
-
-
-:::
-:::
 
 
 
@@ -105,6 +73,8 @@ library(tidyverse)    # For data manipulation and visualization
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -161,6 +131,8 @@ head(pine_data)
 
 
 
+
+
 :::
 :::::
 
@@ -171,6 +143,8 @@ Before conducting hypothesis tests, we should always explore our data to underst
 Let's calculate summary statistics and create visualizations.
 
 **Activity: Calculate basic summary statistics for pine needle length**
+
+
 
 
 
@@ -223,6 +197,8 @@ print(pine_summary)
 
 
 
+
+
 # **Part 1:** Visualizing the Data
 
 ::::: columns
@@ -243,6 +219,8 @@ Effective data visualization helps us understand:
 :::::
 
 # Your Task
+
+
 
 
 
@@ -286,7 +264,11 @@ ggplot(pine_data, aes(x = length_mm)) +
 
 
 
+
+
 # Can you plot the density distributions for the two samples
+
+
 
 
 
@@ -319,12 +301,16 @@ pine_data %>%
 
 
 
+
+
 # what is the Effect size or difference in means?
 
 ::: callout-tip
 ## Practice Exercise: Calculate Effect size
 
 We could also look at the difference in means... some cool code here
+
+
 
 
 
@@ -351,6 +337,8 @@ pine_summary %>%
 
 :::
 :::
+
+
 
 
 
@@ -395,6 +383,8 @@ If assumptions are violated:
 -   Non-parametric alternatives (Mann-Whitney U test)
 
 # Your task
+
+
 
 
 
@@ -467,7 +457,11 @@ W = 0.95477, p-value = 0.3425
 
 
 
+
+
 # windward group
+
+
 
 
 
@@ -487,7 +481,11 @@ W = 0.95477, p-value = 0.3425
 
 
 
+
+
 # Remember you can always do it in one go
+
+
 
 
 
@@ -531,7 +529,11 @@ print(normality_results)
 
 
 
+
+
 # Conduct a Levene's Test
+
+
 
 
 
@@ -586,6 +588,8 @@ group  1  1.2004 0.2789
 
 
 
+
+
 # **Part 2:** Conducting the Two-Sample T-Test
 
 **Activity: Conduct a two-sample t-test**
@@ -602,6 +606,8 @@ Deciding between:
 -   Welch's t-test (unequal variances)
 
 # Based on our Levene's test result.
+
+
 
 
 
@@ -662,6 +668,8 @@ sample estimates:
 
 
 
+
+
 # **Part 2:** Interpreting and Reporting Two-Sample T-Test Results
 
 ::::: columns
@@ -691,6 +699,8 @@ A power analysis like this is typically done for one of these purposes:
 3.  To determine the minimum detectable effect size with the given sample
 
 With 97% power, this test has excellent ability to detect the specified effect size. Generally, **80% power is considered acceptable**, so 97% indicates a very well-powered study for detecting a difference of 30mm between the groups.
+
+
 
 
 
@@ -752,11 +762,15 @@ NOTE: n is number in *each* group
 
 
 
+
+
 # Now to make a final plot
 
 Typically we will make a plot that has the mean and standard error on it to represent the data
 
 ## your Task is to make this plot
+
+
 
 
 
@@ -778,6 +792,8 @@ pine_mean_se
 ![](06_02_class_activity_files/figure-typst/unnamed-chunk-9-1.svg)
 :::
 :::
+
+
 
 
 

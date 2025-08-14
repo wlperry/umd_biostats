@@ -1,46 +1,15 @@
 ---
 title: "Lecture 14 - Class Activity Multifactor ANOVA"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: true
-  warning: true
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+metadata-files:
+  - ../../_templates/activities.yml
 format:
   html:
     output-file: "14_02_class_activity.html"
-    default: true
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch  # Limits line length to approximately 80 characters
-    css: ../../css/activity.css
-  docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    embed-resources: true
   typst:
-    margin: 
-      x: 0.5in
-      y: 0.5in
-    fig-width: 4
-    fig-height: 4
-    fig-dpi: 300
-    number-sections: false
-    toc: false
-    output-file: "14_02_class_activity.pdf"
-editor: visual  
+    output-file: "14_02_class_activity.pdf"   
+  docx:
+    output-file: "14_02_class_activity.docx"
 ---
 
 
@@ -55,30 +24,23 @@ editor: visual
 
 # Lecture 14: Generalized Linear Models Overview
 
-Generalized Linear Models (GLMs) extend linear models to handle
-different types of response variables:
+Generalized Linear Models (GLMs) extend linear models to handle different types of response variables:
 
--   **Normal distribution**: Continuous data (like regular
-    ANOVA/regression)
+-   **Normal distribution**: Continuous data (like regular ANOVA/regression)
 -   **Poisson distribution**: Count data
--   **Binomial distribution**: Binary data (presence/absence,
-    success/failure)
+-   **Binomial distribution**: Binary data (presence/absence, success/failure)
 -   **Gamma distribution**: Positive continuous data
 -   **Negative binomial**: Overdispersed count data
 
 ## The Three Components of GLMs
 
-1.  **Random component**: The response variable and its probability
-    distribution
-2.  **Systematic component**: The predictor variables (continuous or
-    categorical)
-3.  **Link function**: Connects expected value of Y to predictor
-    variables
+1.  **Random component**: The response variable and its probability distribution
+2.  **Systematic component**: The predictor variables (continuous or categorical)
+3.  **Link function**: Connects expected value of Y to predictor variables
 
 # Part 1: Gaussian GLM (equivalent to normal ANOVA)
 
-Let's start with a familiar example using the mtcars dataset to show
-that Gaussian GLMs are equivalent to regular linear models.
+Let's start with a familiar example using the mtcars dataset to show that Gaussian GLMs are equivalent to regular linear models.
 
 
 
@@ -99,7 +61,7 @@ mtcars %>% ggplot(aes(cyl, mpg))+
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-docx/gaussian-setup-1.png)
+![](14_02_class_activity_files/figure-docx/gaussian-setup-1.jpeg)
 :::
 :::
 
@@ -252,7 +214,7 @@ ggplot() +
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-docx/gaussian-visualization-1.png)
+![](14_02_class_activity_files/figure-docx/gaussian-visualization-1.jpeg)
 :::
 :::
 
@@ -265,8 +227,7 @@ ggplot() +
 
 # Part 2: Poisson GLM for Count Data
 
-Poisson GLMs are used for count data where the response variable
-consists of non-negative integers.
+Poisson GLMs are used for count data where the response variable consists of non-negative integers.
 
 
 
@@ -359,7 +320,7 @@ plot(sim_residuals, main = "Poisson Model Diagnostics")
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-docx/poisson-diagnostics-1.png)
+![](14_02_class_activity_files/figure-docx/poisson-diagnostics-1.jpeg)
 :::
 :::
 
@@ -390,7 +351,7 @@ ggplot() +
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-docx/poisson-visualization-1.png)
+![](14_02_class_activity_files/figure-docx/poisson-visualization-1.jpeg)
 :::
 :::
 
@@ -403,8 +364,7 @@ ggplot() +
 
 # Part 3: Negative Binomial for Overdispersed Count Data
 
-When count data shows overdispersion (variance \> mean), use negative
-binomial instead of Poisson.
+When count data shows overdispersion (variance \> mean), use negative binomial instead of Poisson.
 
 
 
@@ -520,8 +480,7 @@ Lower AIC indicates better model fit
 
 # Part 4: Logistic Regression for Binary Data
 
-Logistic regression models the probability of a binary outcome (0/1,
-absent/present, failure/success).
+Logistic regression models the probability of a binary outcome (0/1, absent/present, failure/success).
 
 
 
@@ -714,7 +673,7 @@ ggplot() +
 ::: {.cell-output .cell-output-stderr}
 
 ```
-Warning: Removed 14 rows containing missing values or values outside the scale range
+Warning: Removed 19 rows containing missing values or values outside the scale range
 (`geom_point()`).
 ```
 
@@ -722,7 +681,7 @@ Warning: Removed 14 rows containing missing values or values outside the scale r
 :::
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-docx/logistic-visualization-1.png)
+![](14_02_class_activity_files/figure-docx/logistic-visualization-1.jpeg)
 :::
 :::
 
@@ -809,7 +768,7 @@ abline(h = 0, lty = 2)
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-docx/assumption_checking_1-1.png)
+![](14_02_class_activity_files/figure-docx/assumption_checking_1-1.jpeg)
 :::
 :::
 
@@ -825,7 +784,7 @@ abline(h = 0, lty = 2)
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-docx/assumption_checking_2-1.png)
+![](14_02_class_activity_files/figure-docx/assumption_checking_2-1.jpeg)
 :::
 :::
 
@@ -840,7 +799,7 @@ abline(h = 4/length(cook), lty = 2, col = "red")
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-docx/assumption_checking_3-1.png)
+![](14_02_class_activity_files/figure-docx/assumption_checking_3-1.jpeg)
 :::
 
 ```{.r .cell-code}
@@ -852,7 +811,7 @@ plot(predicted_probs, mtcars_binary$high_mpg,
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-docx/assumption_checking_3-2.png)
+![](14_02_class_activity_files/figure-docx/assumption_checking_3-2.jpeg)
 :::
 :::
 
@@ -867,7 +826,7 @@ plot(predicted_probs, mtcars_binary$high_mpg,
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-docx/assumption_checking_4-1.png)
+![](14_02_class_activity_files/figure-docx/assumption_checking_4-1.jpeg)
 :::
 :::
 
@@ -883,24 +842,16 @@ plot(predicted_probs, mtcars_binary$high_mpg,
 ::: {.callout-important appearance="simple"}
 ## Key Points from GLM Analysis
 
-1.  **Gaussian GLMs** with identity link are equivalent to standard
-    linear models/ANOVA
-2.  **Poisson GLMs** are appropriate for count data, but check for
-    overdispersion
-3.  **Negative binomial** models handle overdispersed count data better
-    than Poisson
-4.  **Logistic regression** models binary outcomes using the logit link
-    function
+1.  **Gaussian GLMs** with identity link are equivalent to standard linear models/ANOVA
+2.  **Poisson GLMs** are appropriate for count data, but check for overdispersion
+3.  **Negative binomial** models handle overdispersed count data better than Poisson
+4.  **Logistic regression** models binary outcomes using the logit link function
 5.  **Model comparison** using AIC helps select the best model
 6.  **Diagnostic plots** are essential for checking model assumptions
-7.  **Odds ratios** in logistic regression show multiplicative effects
-    on odds
+7.  **Odds ratios** in logistic regression show multiplicative effects on odds
 
-Choose the appropriate GLM family based on your response variable: -
-Normal/continuous → Gaussian - Counts → Poisson (or negative binomial if
-overdispersed)\
+Choose the appropriate GLM family based on your response variable: - Normal/continuous → Gaussian - Counts → Poisson (or negative binomial if overdispersed)\
 - Binary → Binomial (logistic regression)
 :::
 
-Remember: GLMs provide a unified framework for many different types of
-analyses you might encounter in biological research!
+Remember: GLMs provide a unified framework for many different types of analyses you might encounter in biological research!

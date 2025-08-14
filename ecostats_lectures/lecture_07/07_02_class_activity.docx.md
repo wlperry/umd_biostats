@@ -1,46 +1,15 @@
 ---
 title: "06_Class_Activity"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: true
-  warning: true
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+metadata-files:
+  - ../../_templates/activities.yml
 format:
   html:
     output-file: "07_02_class_activity.html"
-    default: true
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch  # Limits line length to approximately 80 characters
-    css: ../../css/activity.css
-  docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    embed-resources: true
   typst:
-    margin: 
-      x: 0.5in
-      y: 0.5in
-    fig-width: 4
-    fig-height: 4
-    fig-dpi: 300
-    number-sections: false
-    toc: false
-    output-file: "07_02_class_activity.pdf"
-editor: visual  
+    output-file: "07_02_class_activity.pdf"   
+  docx:
+    output-file: "07_02_class_activity.docx"
 ---
 
 
@@ -55,8 +24,7 @@ editor: visual
 
 ## Introduction
 
-This document demonstrates statistical analysis of lake trout mass data
-from Island Lake and NE 12, focusing on:
+This document demonstrates statistical analysis of lake trout mass data from Island Lake and NE 12, focusing on:
 
 1.  Testing assumptions for parametric tests
 2.  Transforming data when assumptions aren't met
@@ -75,17 +43,14 @@ from Island Lake and NE 12, focusing on:
 -   power
 -   making plots of mean and standard error
 
-Lets start by ecploring onluy lake NE 12 as if you were doing a single
-sample T test.\
-We will test the assumptions and then do the a T Test on NE 12 compared
-to Island Lake.
+Lets start by ecploring onluy lake NE 12 as if you were doing a single sample T test.\
+We will test the assumptions and then do the a T Test on NE 12 compared to Island Lake.
 
 # **Part 1:** Single Sample T-Test
 
 ::::: columns
 ::: {.column width="60%"}
-We want to test if the mass of lake trout differ in NE 12 from a mean of
-500g.
+We want to test if the mass of lake trout differ in NE 12 from a mean of 500g.
 
 **Activity: Define hypotheses and identify assumptions**
 
@@ -106,8 +71,7 @@ We want to test if the mass of lake trout differ in NE 12 from a mean of
 
 # **Part 1:** Load Data and Test Assumptions
 
-First we need to load the data for all the lakes and we can look at what
-we have...
+First we need to load the data for all the lakes and we can look at what we have...
 
 How may lakes are there?
 
@@ -131,7 +95,50 @@ How may lakes are there?
 
 # Load required packages
 library(tidyverse)  # For data manipulation and visualization
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+```
+
+
+:::
+
+```{.r .cell-code}
 library(car)        # For statistical tests
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+Loading required package: carData
+
+Attaching package: 'car'
+
+The following object is masked from 'package:dplyr':
+
+    recode
+
+The following object is masked from 'package:purrr':
+
+    some
+```
+
+
+:::
+
+```{.r .cell-code}
 library(patchwork)  # For combining plots
 library(perm)       # For permutation tests
 ```
@@ -212,8 +219,7 @@ head(lt_df)
 
 # **Part 1:** Exploratory Data Analysis
 
-Before conducting hypothesis tests, we should always explore our data to
-understand its characteristics.
+Before conducting hypothesis tests, we should always explore our data to understand its characteristics.
 
 Let's calculate summary statistics and create visualizations.
 
@@ -300,8 +306,7 @@ ne12_df <- lt_df %>%
 
 ::::: columns
 ::: {.column width="60%"}
-Before conducting our t-test, we need to verify that our data meets the
-necessary assumptions.
+Before conducting our t-test, we need to verify that our data meets the necessary assumptions.
 
 **Activity: Test the normality assumption**
 :::
@@ -324,8 +329,7 @@ Methods to test normality:
 ::: {.column width="60%"}
 **Activity: Create visualizations of lake trout mass**
 
-Create a histogram and a boxplot to visualize the distribution of lake
-trout massvalues.
+Create a histogram and a boxplot to visualize the distribution of lake trout massvalues.
 :::
 
 ::: {.column width="40%"}
@@ -363,7 +367,7 @@ ne12_histo_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/visualize-1.png)
+![](07_02_class_activity_files/figure-docx/visualize-1.jpeg)
 :::
 
 ```{.r .cell-code}
@@ -401,7 +405,7 @@ ne12_dot_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-2-1.png)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-2-1.jpeg)
 :::
 :::
 
@@ -417,7 +421,7 @@ ne12_box_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-3-1.png)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-3-1.jpeg)
 :::
 :::
 
@@ -434,7 +438,7 @@ ne12_qq_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-4-1.png)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-4-1.jpeg)
 :::
 :::
 
@@ -469,7 +473,7 @@ combined_stats_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-5-1.png)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-5-1.jpeg)
 :::
 :::
 
@@ -658,7 +662,7 @@ hist_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-9-1.png)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-9-1.jpeg)
 :::
 :::
 
@@ -679,8 +683,7 @@ hist_plot
 
 Always do a qq plot
 
-In a QQ plot, points that follow the line indicate data that follows a
-normal distribution. Deviations from the line suggest non-normality.
+In a QQ plot, points that follow the line indicate data that follows a normal distribution. Deviations from the line suggest non-normality.
 
 
 
@@ -708,7 +711,7 @@ qq_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-10-1.png)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-10-1.jpeg)
 :::
 :::
 
@@ -727,8 +730,7 @@ qq_plot
 
 We can do a formal test for a p value
 
-Note island looks non normal in the qqplot but its really close with the
-Shapiro-Wilk test...
+Note island looks non normal in the qqplot but its really close with the Shapiro-Wilk test...
 
 
 
@@ -834,11 +836,9 @@ W = 0.84102, p-value = 0.04538
 
 Again we want the P value not significant
 
-The Levene's test has the following null hypothesis: - H₀: The variances
-are equal across groups - H₁: The variances are not equal across groups
+The Levene's test has the following null hypothesis: - H₀: The variances are equal across groups - H₁: The variances are not equal across groups
 
-If the p-value is less than 0.05, we reject the null hypothesis and
-conclude the variances are not equal.
+If the p-value is less than 0.05, we reject the null hypothesis and conclude the variances are not equal.
 
 
 
@@ -974,7 +974,7 @@ log_hist_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-14-1.png)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-14-1.jpeg)
 :::
 :::
 
@@ -1019,7 +1019,7 @@ log_qq_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-15-1.png)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-15-1.jpeg)
 :::
 :::
 
@@ -1302,15 +1302,10 @@ mean in group Island Lake       mean in group NE 12
 
 When analyzing log-transformed data:
 
-1.  The mean of log-transformed data, when back-transformed, gives the
-    geometric mean (not the arithmetic mean)
-2.  The back-transformed confidence intervals represent the confidence
-    interval for the geometric mean
-3.  Report results like: "The geometric mean mass of lake trout in NE 12
-    was X g (95% CI: Y-Z)"
-4.  Note you can't take the 10\^SE to get the standard errors but rather
-    you need to get the mean - seand the mean + se and then
-    backtransform...
+1.  The mean of log-transformed data, when back-transformed, gives the geometric mean (not the arithmetic mean)
+2.  The back-transformed confidence intervals represent the confidence interval for the geometric mean
+3.  Report results like: "The geometric mean mass of lake trout in NE 12 was X g (95% CI: Y-Z)"
+4.  Note you can't take the 10\^SE to get the standard errors but rather you need to get the mean - seand the mean + se and then backtransform...
 
 
 
@@ -1410,7 +1405,7 @@ geo_mean_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-21-1.png)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-21-1.jpeg)
 :::
 :::
 
@@ -1627,8 +1622,7 @@ Permutation tests are useful when:
 
 -   \- Sample sizes are small
 -   \- Data doesn't meet the assumptions for parametric tests
--   \- You want a robust test that makes minimal assumptions about the
-    data
+-   \- You want a robust test that makes minimal assumptions about the data
 -   \- They can test any statistic, not just means
 :::
 
@@ -1719,7 +1713,7 @@ combined_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-26-1.png)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-26-1.jpeg)
 :::
 :::
 
@@ -1764,29 +1758,20 @@ Permutation testing (10,000 iterations) revealed significant differences in lake
 
 # Conclusion
 
-This analysis demonstrates several approaches to comparing mass between
-lake trout populations. The choice of statistical test depends on
-whether your data meets the assumptions of parametric tests. When
-assumptions are violated:
+This analysis demonstrates several approaches to comparing mass between lake trout populations. The choice of statistical test depends on whether your data meets the assumptions of parametric tests. When assumptions are violated:
 
 1.  Try transforming the data (e.g., log transformation)
 2.  Use Welch's t-test if variances are unequal
-3.  Use non-parametric tests (Mann-Whitney or permutation tests) if data
-    remains non-normal
+3.  Use non-parametric tests (Mann-Whitney or permutation tests) if data remains non-normal
 
-All methods have their strengths and limitations, and the consistency of
-results across methods can strengthen your conclusions.
+All methods have their strengths and limitations, and the consistency of results across methods can strengthen your conclusions.
 
 ::: callout-tip
 ## When to Use Each Test
 
--   **Standard t-test**: When data is normally distributed with equal
-    variances
--   **Log-transformed t-test**: When raw data is skewed but
-    log-transformation achieves normality
+-   **Standard t-test**: When data is normally distributed with equal variances
+-   **Log-transformed t-test**: When raw data is skewed but log-transformation achieves normality
 -   **Welch's t-test**: When variances are unequal
--   **Mann-Whitney Wilcoxon test**: When data is not normal and cannot
-    be transformed to normality
--   **Permutation test**: When sample sizes are small or assumptions
-    cannot be met
+-   **Mann-Whitney Wilcoxon test**: When data is not normal and cannot be transformed to normality
+-   **Permutation test**: When sample sizes are small or assumptions cannot be met
 :::

@@ -7,7 +7,9 @@ format:
   html:
       output-file: "11_02_class_activity.html"
   typst:
-    output-file: "11_02_class_activity.pdf" 
+    output-file: "11_02_class_activity.pdf"   
+  docx:
+    output-file: "11_02_class_activity.docx"
 ---
 
 
@@ -83,13 +85,17 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
 # ANOVA-Assumptions and Diagnostics
 
-ANOVA has the same assumptions as the two-sample t-test, but applied to all k groups:
+ANOVA has the same assumptions as the two-sample t-test, but applied to
+all k groups:
 
 1.  **Random samples** from corresponding populations\
 2.  **Normality**: Y values are normally distributed in each population\
-3.  **Homogeneity of variance**: variance is the same in all populations\
+3.  **Homogeneity of variance**: variance is the same in all
+    populations\
 4.  **Independence**: observations are independent
 
 **Checking assumptions**:
@@ -107,11 +113,26 @@ This is the default output of base R
 
 
 
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# Create diagnostic plots
+par(mfrow = c(2, 2))
+plot(model_aov)
+```
+
 ::: {.cell-output-display}
 ![](11_02_class_activity_files/figure-typst/unnamed-chunk-4-1.svg)
 :::
+
+```{.r .cell-code}
+par(mfrow = c(1, 1))
+```
 :::
+
+
 
 
 
@@ -124,6 +145,8 @@ Levene's test of homogeneity of variance
 
 -   Null Hypothesis is that they are homogeneous
 -   So you want a non significant result here
+
+
 
 
 
@@ -149,12 +172,16 @@ group  2  0.1586 0.8545
 
 
 
+
+
 # **Lecture 12:** ANOVA Diagnostics
 
 Shapiro-Wilk Normality Test
 
 -   Null Hypothesis is that they are normally distributed\
 -   So you want a **non significant** result here
+
+
 
 
 
@@ -181,11 +208,16 @@ W = 0.95893, p-value = 0.468
 
 
 
+
+
 # **Lecture 12:** ANOVA Post-Hoc Testing
 
 When ANOVA rejects H₀, we need to determine which groups differ.
 
-**Example**: Using Tukey's HSD to compare all pairs of treatments in the circadian rhythm data.
+**Example**: Using Tukey's HSD to compare all pairs of treatments in the
+circadian rhythm data.
+
+
 
 
 
@@ -286,7 +318,11 @@ NOTE: If two or more means share the same grouping symbol,
 
 
 
+
+
 ## Can do in one go as well
+
+
 
 
 
@@ -320,7 +356,11 @@ NOTE: If two or more means share the same grouping symbol,
 
 
 
+
+
 # **Lecture 12:** ANOVA Post-Hoc Testing
+
+
 
 
 
@@ -338,7 +378,11 @@ NOTE: If two or more means share the same grouping symbol,
 
 
 
+
+
 # **Lecture 12:** ANOVA Post-Hoc Testing
+
+
 
 
 
@@ -356,8 +400,19 @@ NOTE: If two or more means share the same grouping symbol,
 
 
 
+
+
 # **Lecture 12:** ANOVA Reporting results
 
 **Formal scientific writing example:**
 
-"The effect of light treatment on circadian rhythm phase shift was analyzed using a one-way ANOVA. There was a significant effect of treatment on phase shift (F(2, 19) = 7.29, p = 0.004, η² = 0.43). Post-hoc comparisons using Tukey's HSD test indicated that the mean phase shift for the Eyes treatment (M = -1.55 h, SD = 0.71) was significantly different from both the Control treatment (M = -0.31 h, SD = 0.62) and the Knees treatment (M = -0.34 h, SD = 0.79). However, the Control and Knees treatments did not significantly differ from each other. These results suggest that light exposure to the eyes, but not to the knees, impacts circadian rhythm phase shifts."
+"The effect of light treatment on circadian rhythm phase shift was
+analyzed using a one-way ANOVA. There was a significant effect of
+treatment on phase shift (F(2, 19) = 7.29, p = 0.004, η² = 0.43).
+Post-hoc comparisons using Tukey's HSD test indicated that the mean
+phase shift for the Eyes treatment (M = -1.55 h, SD = 0.71) was
+significantly different from both the Control treatment (M = -0.31 h, SD
+= 0.62) and the Knees treatment (M = -0.34 h, SD = 0.79). However, the
+Control and Knees treatments did not significantly differ from each
+other. These results suggest that light exposure to the eyes, but not to
+the knees, impacts circadian rhythm phase shifts."

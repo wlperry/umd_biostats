@@ -7,8 +7,12 @@ format:
   html:
     output-file: "18_02_class_activity_nmds_permanova.html"
   typst:
-    output-file: "18_02_class_activity_nmds_permanova.pdf"
+    output-file: "18_02_class_activity_nmds_permanova.pdf"  
+  docx:
+    output-file: "18_02_class_activity_nmds_permanova.docx"
 ---
+
+
 
 
 
@@ -47,6 +51,8 @@ Always check your stress value! Stress \< 0.1 is excellent, 0.1-0.2 is good, \> 
 ## Load and Prepare Data
 
 We'll use the iris dataset for this analysis, treating it as if the measurements represent abundances of different "species" at different "sites".
+
+
 
 
 
@@ -134,7 +140,11 @@ tibble [150 × 4] (S3: tbl_df/tbl/data.frame)
 
 
 
+
+
 ## Visualize the Data
+
+
 
 
 
@@ -151,9 +161,11 @@ iris_pairs_plot <- iris_df %>%
 ```
 
 ::: {.cell-output-display}
-![](18_02_class_activity_files/figure-html/initial_plot-1.png){width=672}
+![](18_02_class_activity_files/figure-html/initial_plot-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -163,6 +175,8 @@ iris_pairs_plot <- iris_df %>%
 # Part 2: Running NMDS
 
 ## Step 1: Calculate Distance Matrix
+
+
 
 
 
@@ -195,7 +209,11 @@ iris_dist[1:5]
 
 
 
+
+
 ## Step 2: Run NMDS
+
+
 
 
 
@@ -285,9 +303,13 @@ Species: expanded scores based on 'iris_numeric_df'
 
 
 
+
+
 **Interpretation**: - Stress value: 0.025 - This is excellent representation
 
 ## Step 3: Extract NMDS Scores
+
+
 
 
 
@@ -327,7 +349,11 @@ head(nmds_scores_df)
 
 
 
+
+
 ## Step 4: Create NMDS Plot
+
+
 
 
 
@@ -351,9 +377,11 @@ nmds_basic_plot
 ```
 
 ::: {.cell-output-display}
-![](18_02_class_activity_files/figure-html/nmds_plot-1.png){width=672}
+![](18_02_class_activity_files/figure-html/nmds_plot-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -361,6 +389,8 @@ nmds_basic_plot
 
 
 ## Step 5: Add Confidence Ellipses
+
+
 
 
 
@@ -397,9 +427,11 @@ nmds_ellipse_plot
 ```
 
 ::: {.cell-output-display}
-![](18_02_class_activity_files/figure-html/nmds_ellipse_plot-1.png){width=672}
+![](18_02_class_activity_files/figure-html/nmds_ellipse_plot-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -407,6 +439,8 @@ nmds_ellipse_plot
 
 
 ## Step 6: Stress Plot (Shepard Diagram)
+
+
 
 
 
@@ -421,9 +455,11 @@ stressplot(iris_nmds_model, main = "Shepard Diagram: Ordination vs Original Dist
 ```
 
 ::: {.cell-output-display}
-![](18_02_class_activity_files/figure-html/stress_plot-1.png){width=672}
+![](18_02_class_activity_files/figure-html/stress_plot-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -437,6 +473,8 @@ stressplot(iris_nmds_model, main = "Shepard Diagram: Ordination vs Original Dist
 PERMANOVA (Permutational Multivariate Analysis of Variance) tests whether groups have different multivariate centroids using permutation tests.
 
 ## Step 1: Run PERMANOVA
+
+
 
 
 
@@ -482,11 +520,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
 **Interpretation**: - F-statistic: 487.33 - R² (variance explained): 0.869 - p-value: 0.001
 
 ## Step 2: Check Homogeneity of Dispersions
 
 Before interpreting PERMANOVA, we need to check if groups have similar multivariate spread.
+
+
 
 
 
@@ -527,7 +569,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
 ## Step 3: Visualize Dispersions
+
+
 
 
 
@@ -542,9 +588,11 @@ plot(dispersion_model, main = "Multivariate Dispersion by Species")
 ```
 
 ::: {.cell-output-display}
-![](18_02_class_activity_files/figure-html/dispersion_plot-1.png){width=672}
+![](18_02_class_activity_files/figure-html/dispersion_plot-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -552,6 +600,8 @@ plot(dispersion_model, main = "Multivariate Dispersion by Species")
 
 
 ## Step 4: Pairwise PERMANOVA
+
+
 
 
 
@@ -630,6 +680,8 @@ pairwise_results_df
 
 
 
+
+
 # Part 4: ANOSIM Analysis
 
 ## What is ANOSIM?
@@ -637,6 +689,8 @@ pairwise_results_df
 ANOSIM (Analysis of Similarities) tests whether there is a significant difference between groups using rank dissimilarities.
 
 ## Step 1: Run ANOSIM
+
+
 
 
 
@@ -678,9 +732,13 @@ Number of permutations: 999
 
 
 
+
+
 **Interpretation**: - R statistic: 0.879 - p-value: 0.001 - R close to 1 indicates strong separation between groups
 
 ## Step 2: Plot ANOSIM Results
+
+
 
 
 
@@ -695,9 +753,11 @@ plot(iris_anosim_model, main = "ANOSIM Results: Distribution of Permuted R Stati
 ```
 
 ::: {.cell-output-display}
-![](18_02_class_activity_files/figure-html/anosim_plot-1.png){width=672}
+![](18_02_class_activity_files/figure-html/anosim_plot-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -707,6 +767,8 @@ plot(iris_anosim_model, main = "ANOSIM Results: Distribution of Permuted R Stati
 # Part 5: Environmental Fitting (Optional)
 
 If we had environmental variables, we could fit them to the ordination.
+
+
 
 
 
@@ -747,7 +809,11 @@ Number of permutations: 999
 
 
 
+
+
 ## Visualize Environmental Vectors
+
+
 
 
 
@@ -783,9 +849,11 @@ nmds_env_plot
 ```
 
 ::: {.cell-output-display}
-![](18_02_class_activity_files/figure-html/nmds_envfit_plot-1.png){width=672}
+![](18_02_class_activity_files/figure-html/nmds_envfit_plot-1.png){width=336}
 :::
 :::
+
+
 
 
 

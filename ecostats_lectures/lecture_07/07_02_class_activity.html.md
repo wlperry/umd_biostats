@@ -7,8 +7,12 @@ format:
   html:
     output-file: "07_02_class_activity.html"
   typst:
-    output-file: "07_02_class_activity.pdf" 
+    output-file: "07_02_class_activity.pdf"   
+  docx:
+    output-file: "07_02_class_activity.docx"
 ---
+
+
 
 
 
@@ -78,6 +82,8 @@ How may lakes are there?
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -89,50 +95,7 @@ How may lakes are there?
 
 # Load required packages
 library(tidyverse)  # For data manipulation and visualization
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
-
-
-:::
-
-```{.r .cell-code}
 library(car)        # For statistical tests
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Loading required package: carData
-
-Attaching package: 'car'
-
-The following object is masked from 'package:dplyr':
-
-    recode
-
-The following object is masked from 'package:purrr':
-
-    some
-```
-
-
-:::
-
-```{.r .cell-code}
 library(patchwork)  # For combining plots
 library(perm)       # For permutation tests
 ```
@@ -142,9 +105,13 @@ library(perm)       # For permutation tests
 
 
 
+
+
 :::
 
 ::: {.column width="40%"}
+
+
 
 
 
@@ -202,6 +169,8 @@ head(lt_df)
 
 
 
+
+
 :::
 :::::
 
@@ -212,6 +181,8 @@ Before conducting hypothesis tests, we should always explore our data to underst
 Let's calculate summary statistics and create visualizations.
 
 **Activity: Calculate basic summary statistics for lake trout mass**
+
+
 
 
 
@@ -260,7 +231,11 @@ print(df_summary)
 
 
 
+
+
 # Create a New dataframe of lake NE12 only
+
+
 
 
 
@@ -276,6 +251,8 @@ ne12_df <- lt_df %>%
   filter(!is.na(mass_g))  # Remove any NA values
 ```
 :::
+
+
 
 
 
@@ -329,6 +306,8 @@ Effective data visualization helps us understand:
 
 
 
+
+
 ::: {.cell exercise='true'}
 
 ```{.r .cell-code}
@@ -345,7 +324,7 @@ ne12_histo_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-html/visualize-1.png){width=672}
+![](07_02_class_activity_files/figure-html/visualize-1.png){width=336}
 :::
 
 ```{.r .cell-code}
@@ -361,7 +340,11 @@ ne12_histo_plot
 
 
 
+
+
 Now to make the various plots we talk about only for lake `NE 12`
+
+
 
 
 
@@ -379,7 +362,7 @@ ne12_dot_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-html/unnamed-chunk-2-1.png){width=672}
+![](07_02_class_activity_files/figure-html/unnamed-chunk-2-1.png){width=336}
 :::
 :::
 
@@ -395,7 +378,7 @@ ne12_box_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-html/unnamed-chunk-3-1.png){width=672}
+![](07_02_class_activity_files/figure-html/unnamed-chunk-3-1.png){width=336}
 :::
 :::
 
@@ -412,9 +395,11 @@ ne12_qq_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-html/unnamed-chunk-4-1.png){width=672}
+![](07_02_class_activity_files/figure-html/unnamed-chunk-4-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -422,6 +407,8 @@ ne12_qq_plot
 
 
 ## Use Patchwork to combine the plots
+
+
 
 
 
@@ -443,9 +430,11 @@ combined_stats_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=672}
+![](07_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -455,6 +444,8 @@ combined_stats_plot
 ## Shapiro-Wilk's Test
 
 Really want to do this on residuals
+
+
 
 
 
@@ -488,6 +479,8 @@ W = 0.85148, p-value < 2.2e-16
 
 
 
+
+
 # Now that we show how mass of lake NE 12 fails what do we do next?
 
 Lets explore a comparison of NE 12 and Island Lake mass_g
@@ -496,6 +489,8 @@ Lets explore a comparison of NE 12 and Island Lake mass_g
 ## Exercise: Create a island_ne12_df dataframe from
 
 We could also look at the difference in means... some cool code here
+
+
 
 
 
@@ -537,12 +532,16 @@ head(island_ne12_df)
 
 
 
+
+
 :::
 
 ::: callout-tip
 ## Get summary stats for lake trout mass in NE12 and Island lakes
 
 # Get a summary of the data by lake
+
+
 
 
 
@@ -586,12 +585,16 @@ summary_by_lake
 
 
 
+
+
 :::
 
 # Visualize data by lake
 
 ::: callout-tip
 ## Make a histogram of both Island and NE 12 lakes
+
+
 
 
 
@@ -616,9 +619,11 @@ hist_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-html/unnamed-chunk-9-1.png){width=672}
+![](07_02_class_activity_files/figure-html/unnamed-chunk-9-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -636,6 +641,8 @@ hist_plot
 Always do a qq plot
 
 In a QQ plot, points that follow the line indicate data that follows a normal distribution. Deviations from the line suggest non-normality.
+
+
 
 
 
@@ -661,9 +668,11 @@ qq_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-html/unnamed-chunk-10-1.png){width=672}
+![](07_02_class_activity_files/figure-html/unnamed-chunk-10-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -679,6 +688,8 @@ qq_plot
 We can do a formal test for a p value
 
 Note island looks non normal in the qqplot but its really close with the Shapiro-Wilk test...
+
+
 
 
 
@@ -771,6 +782,8 @@ W = 0.84102, p-value = 0.04538
 
 
 
+
+
 :::
 
 ## Equality of variance test - Levene's Test
@@ -783,6 +796,8 @@ Again we want the P value not significant
 The Levene's test has the following null hypothesis: - H₀: The variances are equal across groups - H₁: The variances are not equal across groups
 
 If the p-value is less than 0.05, we reject the null hypothesis and conclude the variances are not equal.
+
+
 
 
 
@@ -829,6 +844,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
 :::
 
 # Transformations
@@ -839,6 +856,8 @@ Commonly a log10 transformation works well.
 ## Exercise: do a log transformation of Log 10
 
 We could also look at the difference in means... some cool code here
+
+
 
 
 
@@ -876,6 +895,8 @@ head(island_ne12_df)
 
 
 
+
+
 :::
 
 ## Now look at histograms of logged data
@@ -884,6 +905,8 @@ head(island_ne12_df)
 ## Exercise: histogram of transformed data
 
 We need to see if it worked
+
+
 
 
 
@@ -908,9 +931,11 @@ log_hist_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-html/unnamed-chunk-14-1.png){width=672}
+![](07_02_class_activity_files/figure-html/unnamed-chunk-14-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -924,6 +949,8 @@ log_hist_plot
 ## Exercise: do a qqplot of transformed data
 
 We could also look at the difference in means... some cool code here
+
+
 
 
 
@@ -949,9 +976,11 @@ log_qq_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-html/unnamed-chunk-15-1.png){width=672}
+![](07_02_class_activity_files/figure-html/unnamed-chunk-15-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -961,6 +990,8 @@ log_qq_plot
 
 ::: callout-tip
 ## Exercise: Shapiro-Wilk test
+
+
 
 
 
@@ -1051,10 +1082,14 @@ W = 0.93396, p-value = 0.4879
 
 
 
+
+
 :::
 
 ::: callout-tip
 ## Exercise: Levenes test
+
+
 
 
 
@@ -1101,6 +1136,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
 :::
 
 # Transformation fails! What next
@@ -1111,6 +1148,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## Exercise: Two sample T Test on regular data
 
 Try a t test
+
+
 
 
 
@@ -1156,12 +1195,16 @@ mean in group Island Lake       mean in group NE 12
 
 
 
+
+
 :::
 
 ::: callout-tip
 ## Exercise: Two sample T Test on transformed data
 
 Try a t test
+
+
 
 
 
@@ -1207,6 +1250,8 @@ mean in group Island Lake       mean in group NE 12
 
 
 
+
+
 :::
 
 ::: callout-tip
@@ -1218,6 +1263,8 @@ When analyzing log-transformed data:
 2.  The back-transformed confidence intervals represent the confidence interval for the geometric mean
 3.  Report results like: "The geometric mean mass of lake trout in NE 12 was X g (95% CI: Y-Z)"
 4.  Note you can't take the 10\^SE to get the standard errors but rather you need to get the mean - seand the mean + se and then backtransform...
+
+
 
 
 
@@ -1269,6 +1316,8 @@ print(back_transformed)
 
 
 
+
+
 :::
 
 ## Now plot the back transformed data
@@ -1279,6 +1328,8 @@ In some cases the error bars are not symmetrical
 ## Exercise:
 
 Try
+
+
 
 
 
@@ -1311,9 +1362,11 @@ geo_mean_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-html/unnamed-chunk-21-1.png){width=672}
+![](07_02_class_activity_files/figure-html/unnamed-chunk-21-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -1322,6 +1375,8 @@ geo_mean_plot
 :::
 
 ## 3. Welch's t-test
+
+
 
 
 
@@ -1368,6 +1423,8 @@ mean in group Island Lake       mean in group NE 12
 
 
 
+
+
 ::: callout-tip
 ## When to Use Welch's t-test
 
@@ -1379,6 +1436,8 @@ Welch's t-test is preferred when:
 :::
 
 ## 4. Mann-Whitney Wilcoxon test
+
+
 
 
 
@@ -1419,6 +1478,8 @@ alternative hypothesis: true location shift is not equal to 0
 
 
 
+
+
 ::: callout-tip
 ## When to Use Mann-Whitney Wilcoxon Test
 
@@ -1431,6 +1492,8 @@ This non-parametric test is preferred when:
 :::
 
 ## 5. Permutation test
+
+
 
 
 
@@ -1507,6 +1570,8 @@ p-value estimated from 10000 Monte Carlo replications
 
 
 
+
+
 ::: callout-tip
 ## When to Use Permutation Tests
 
@@ -1521,6 +1586,8 @@ Permutation tests are useful when:
 # Now lets compare all of the results
 
 Let's compare the results from all tests:
+
+
 
 
 
@@ -1573,7 +1640,11 @@ test_results
 
 
 
+
+
 # Visualizing Results
+
+
 
 
 
@@ -1599,9 +1670,11 @@ combined_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-html/unnamed-chunk-26-1.png){width=672}
+![](07_02_class_activity_files/figure-html/unnamed-chunk-26-1.png){width=336}
 :::
 :::
+
+
 
 
 

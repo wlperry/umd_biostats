@@ -242,7 +242,7 @@
     "href": "ecostats_lectures/lecture_02/02_02_class_activity.html#exercise-1-now-to-load-the-libraries",
     "title": "02 Class Activity",
     "section": "Exercise 1: Now to load the libraries",
-    "text": "Exercise 1: Now to load the libraries\n\n# install packages -----\n# install.packages(\"readxl\")\n# install.packages(\"tidyverse\")\n\n# # we will install a few new libraries\n# install.packages(\"skimr\")\n\nEach script you run from then on you will load the libraries from within the package.\n\n# Load the libraries ----\nlibrary(readxl) # allows to read in excel files\nlibrary(tidyverse) # provides utilities seen in console\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.1.0     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(skimr) # provide summary stats\nlibrary(janitor) # it cleans ; )\n\n\nAttaching package: 'janitor'\n\nThe following objects are masked from 'package:stats':\n\n    chisq.test, fisher.test\n\nlibrary(patchwork)"
+    "text": "Exercise 1: Now to load the libraries\n\n# install packages -----\n# install.packages(\"readxl\")\n# install.packages(\"tidyverse\")\n\n# # we will install a few new libraries\n# install.packages(\"skimr\")\n\nEach script you run from then on you will load the libraries from within the package.\n\n# Load the libraries ----\nlibrary(readxl) # allows to read in excel files\nlibrary(tidyverse) # provides utilities seen in console\nlibrary(skimr) # provide summary stats\nlibrary(janitor) # it cleans ; )\nlibrary(patchwork)"
   },
   {
     "objectID": "ecostats_lectures/lecture_02/02_02_class_activity.html#exercise-2-loading-and-examining-data",
@@ -4715,56 +4715,56 @@
     "href": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#tapestry-plot",
     "title": "01_Class_Activity",
     "section": "Tapestry Plot ——",
-    "text": "Tapestry Plot ——"
+    "text": "Tapestry Plot ——\n\nggplot(data = p_df, aes(x=wind, y=length_mm))"
   },
   {
     "objectID": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#xy-plot",
     "href": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#xy-plot",
     "title": "01_Class_Activity",
     "section": "XY Plot —–",
-    "text": "XY Plot —–\nnotice the points are layered on top but some overlap"
+    "text": "XY Plot —–\nnotice the points are layered on top but some overlap\n\nggplot(data = p_df, aes(x=wind, y=length_mm)) + \n  geom_point()"
   },
   {
     "objectID": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#xy-plot-with-dodged-points",
     "href": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#xy-plot-with-dodged-points",
     "title": "01_Class_Activity",
     "section": "XY Plot with dodged points ——",
-    "text": "XY Plot with dodged points ——\n\n\n\n\n\n\n\n\n\nWhat are the other ways to display the data?"
+    "text": "XY Plot with dodged points ——\n\nggplot(data = p_df, aes(x=wind, y=length_mm)) + \n  geom_point(position = position_dodge2(width=0.2) )\n\n\n\n\n\n\n\n# this dodges the points # position_dodge2 or can use position_dodge depending on grouping\n\nWhat are the other ways to display the data?"
   },
   {
     "objectID": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#histogram",
     "href": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#histogram",
     "title": "01_Class_Activity",
     "section": "Histogram —–",
-    "text": "Histogram —–\n\n\n\n\n\n\n\n\n\nNote we really want to see the histograms colored by wind direction\nWe can map the wind aesthetic to a fill in the histogram"
+    "text": "Histogram —–\n\nggplot(data = p_df, aes(x=length_mm)) + \n  geom_histogram()\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\n\n\n\n\n\n\n\nNote we really want to see the histograms colored by wind direction\nWe can map the wind aesthetic to a fill in the histogram"
   },
   {
     "objectID": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#histogram-colors",
     "href": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#histogram-colors",
     "title": "01_Class_Activity",
     "section": "Histogram Colors —–",
-    "text": "Histogram Colors —–"
+    "text": "Histogram Colors —–\n\nggplot(data = p_df, aes(x=length_mm, fill = wind)) + geom_histogram( position = position_dodge2(width = 0.5))\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`."
   },
   {
     "objectID": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#histogram-bins",
     "href": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#histogram-bins",
     "title": "01_Class_Activity",
     "section": "Histogram Bins —–",
-    "text": "Histogram Bins —–"
+    "text": "Histogram Bins —–\n\nggplot(data = p_df, aes(x=length_mm, fill = wind)) +\n  geom_histogram( binwidth = 2, \n# sets the width in units of the bins - try different nubmers\n   position = position_dodge2(width = 0.5))"
   },
   {
-    "objectID": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#other-plots-if-time",
-    "href": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#other-plots-if-time",
+    "objectID": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#other-plots-if-time-in-class",
+    "href": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#other-plots-if-time-in-class",
     "title": "01_Class_Activity",
-    "section": "Other Plots if time",
-    "text": "Other Plots if time"
+    "section": "Other Plots if time in class",
+    "text": "Other Plots if time in class"
   },
   {
     "objectID": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#box-and-whisker-plots",
     "href": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#box-and-whisker-plots",
     "title": "01_Class_Activity",
     "section": "Box and Whisker Plots",
-    "text": "Box and Whisker Plots"
+    "text": "Box and Whisker Plots\n\nggplot(data = p_df, aes(x=wind, y=length_mm, fill = wind)) + geom_boxplot()"
   },
   {
     "objectID": "ecostats_lectures/lecture_07/07_01_lecture_powerpoint_slides.html#testing-assumptions-of-parametric-tests",
@@ -4883,7 +4883,7 @@
     "href": "ecostats_lectures/lecture_09/09_02_class_activity.html#formal-tests-of-assumptions",
     "title": "Lecture 09 - Class Activity - Correlation Linear Regression",
     "section": "Formal Tests of Assumptions",
-    "text": "Formal Tests of Assumptions\n\n# Test for normality of residuals\nshapiro_residuals &lt;- shapiro.test(residuals(lion_model))\nshapiro_residuals\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(lion_model)\nW = 0.93879, p-value = 0.0692\n\n\n\n# Test for homoscedasticity (Breusch-Pagan test)\nlibrary(lmtest)\n\nLoading required package: zoo\n\n\n\nAttaching package: 'zoo'\n\n\nThe following objects are masked from 'package:base':\n\n    as.Date, as.Date.numeric\n\nbp_test &lt;- bptest(lion_model)\nbp_test\n\n\n    studentized Breusch-Pagan test\n\ndata:  lion_model\nBP = 6.8946, df = 1, p-value = 0.008646\n\n\n\n\n\n\n\n\nActivity 3: Assess Assumption Violations\n\n\n\nBased on the diagnostic plots and tests:\n\nLinearity: Does the relationship appear linear? (Check Residuals vs Fitted plot)\n\nYour answer: __________________________\n\nNormality: Are the residuals normally distributed? (Check Q-Q plot and Shapiro test)\n\nYour answer: __________________________\n\nHomoscedasticity: Is the variance constant? (Check Scale-Location plot and BP test)\n\nYour answer: __________________________\n\nInfluential points: Are there any concerning influential observations?\n\nYour answer: __________________________"
+    "text": "Formal Tests of Assumptions\n\n# Test for normality of residuals\nshapiro_residuals &lt;- shapiro.test(residuals(lion_model))\nshapiro_residuals\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(lion_model)\nW = 0.93879, p-value = 0.0692\n\n\n\n# Test for homoscedasticity (Breusch-Pagan test)\nlibrary(lmtest)\nbp_test &lt;- bptest(lion_model)\nbp_test\n\n\n    studentized Breusch-Pagan test\n\ndata:  lion_model\nBP = 6.8946, df = 1, p-value = 0.008646\n\n\n\n\n\n\n\n\nActivity 3: Assess Assumption Violations\n\n\n\nBased on the diagnostic plots and tests:\n\nLinearity: Does the relationship appear linear? (Check Residuals vs Fitted plot)\n\nYour answer: __________________________\n\nNormality: Are the residuals normally distributed? (Check Q-Q plot and Shapiro test)\n\nYour answer: __________________________\n\nHomoscedasticity: Is the variance constant? (Check Scale-Location plot and BP test)\n\nYour answer: __________________________\n\nInfluential points: Are there any concerning influential observations?\n\nYour answer: __________________________"
   },
   {
     "objectID": "ecostats_lectures/lecture_09/09_02_class_activity.html#understanding-variance-partitioning",

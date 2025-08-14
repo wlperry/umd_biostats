@@ -7,9 +7,13 @@ format:
   html:
     output-file: "17_02_class_activity_PCA.html"
   typst:
-    output-file: "17_02_class_activity_PCA.pdf"
+    output-file: "17_02_class_activity_PCA.pdf"  
+  docx:
+    output-file: "17_02_class_activity_PCA.docx"
 editor: visual  
 ---
+
+
 
 
 
@@ -50,6 +54,8 @@ Always **standardize your data** when variables are measured on different scales
 We'll analyze the famous iris dataset with measurements from three species: - *Iris setosa* - *Iris versicolor* - *Iris virginica*
 
 Each flower has 4 measurements: sepal length, sepal width, petal length, and petal width.
+
+
 
 
 
@@ -129,9 +135,13 @@ overview_plot
 
 
 
+
+
 ## Step 1: Check PCA Assumptions
 
 ### Check Correlations
+
+
 
 
 
@@ -182,7 +192,11 @@ corrplot(cor_matrix, method = "color", type = "upper",
 
 
 
+
+
 ### Check for Outliers
+
+
 
 
 
@@ -216,9 +230,13 @@ outlier_plot
 
 
 
+
+
 ## Step 2: Standardize the Data
 
 Since our variables have different scales (e.g., petal width ranges 0.1-2.5 while sepal length ranges 4-8), we need to standardize.
+
+
 
 
 
@@ -268,7 +286,11 @@ sepal_length  sepal_width petal_length  petal_width
 
 
 
+
+
 ## Step 3: Perform PCA
+
+
 
 
 
@@ -304,9 +326,13 @@ Cumulative Proportion  0.7296 0.9581 0.99482 1.00000
 
 
 
+
+
 ## Step 4: Extract and Understand Results
 
 ### Eigenvalues and Variance Explained
+
+
 
 
 
@@ -351,7 +377,11 @@ pca_summary_df
 
 
 
+
+
 ### Component Loadings
+
+
 
 
 
@@ -392,9 +422,13 @@ petal_width   petal_width  0.5648565 -0.06694199 -0.6342727  0.5235971
 
 
 
+
+
 ## Step 5: Determine Number of Components
 
 ### Scree Plot
+
+
 
 
 
@@ -444,7 +478,11 @@ scree_plot
 
 
 
+
+
 ### Apply Decision Rules
+
+
 
 
 
@@ -489,7 +527,11 @@ components_80_percent
 
 
 
+
+
 ## Step 6: Create PCA Scores
+
+
 
 
 
@@ -530,9 +572,13 @@ head(pca_scores_df)
 
 
 
+
+
 ## Step 7: Visualize Results
 
 ### PCA Scores Plot
+
+
 
 
 
@@ -568,7 +614,11 @@ scores_plot
 
 
 
+
+
 ### Loading Plot
+
+
 
 
 
@@ -619,7 +669,11 @@ Warning: Removed 1 row containing missing values or values outside the scale ran
 
 
 
+
+
 ### Combined Biplot
+
+
 
 
 
@@ -672,7 +726,11 @@ biplot_plot
 
 
 
+
+
 ## Step 8: Interpret Results
+
+
 
 
 
@@ -728,6 +786,8 @@ total_variance_2pc
 
 :::
 :::
+
+
 
 
 

@@ -35,23 +35,17 @@ format:
 
 ## **What is Logistic Regression?**
 
-Logistic regression is used when: - The response variable is **binary**
-(yes/no, 1/0, present/absent) - Data follows a **binomial distribution**
-(not normal) - We want to model the **probability** of an outcome
+Logistic regression is used when: - The response variable is **binary** (yes/no, 1/0, present/absent) - Data follows a **binomial distribution** (not normal) - We want to model the **probability** of an outcome
 
 ## **Today's Example: Lizard Sexual Maturity**
 
-We'll explore the relationship between body length and sexual maturity
-in female lizards - **Response variable**: Sexual maturity (mature: 1 =
-yes, 0 = no) - **Predictor variable**: Body length in cm - **Question**:
-Can we predict the probability of sexual maturity from body size?
+We'll explore the relationship between body length and sexual maturity in female lizards - **Response variable**: Sexual maturity (mature: 1 = yes, 0 = no) - **Predictor variable**: Body length in cm - **Question**: Can we predict the probability of sexual maturity from body size?
 
 ## **Key Difference from Linear Regression**
 
 -   Linear regression: Models the actual values of Y
 -   Logistic regression: Models the probability of Y = 1
--   Uses Generalized Linear Models (GLM) instead of General Linear
-    Models
+-   Uses Generalized Linear Models (GLM) instead of General Linear Models
 
 # Step 1: Load and Explore the Data
 
@@ -108,8 +102,7 @@ head(lizards_df)
 
 ## **Creating a Boxplot**
 
-Let's visualize how body length differs between sexually mature and
-immature lizards:
+Let's visualize how body length differs between sexually mature and immature lizards:
 
 
 
@@ -163,8 +156,7 @@ maturity_boxplot
 
 ## **Using glm() for Logistic Regression**
 
-The `glm()` function is similar to `lm()` but requires specifying the
-distribution family:
+The `glm()` function is similar to `lm()` but requires specifying the distribution family:
 
 
 
@@ -233,8 +225,7 @@ Number of Fisher Scoring iterations: 6
 ### **Coefficients:**
 
 -   **Intercept (β₀)**: -5.5847 - The log-odds when length = 0
--   **Slope (β₁)**: 0.2503 - Change in log-odds for each 1 cm increase
-    in length
+-   **Slope (β₁)**: 0.2503 - Change in log-odds for each 1 cm increase in length
 
 ### **P-values:**
 
@@ -244,9 +235,7 @@ Number of Fisher Scoring iterations: 6
 
 ### **Understanding the Slope:**
 
-The positive slope (0.2503) indicates: - Longer lizards are more likely
-to be sexually mature - For each 1 cm increase in length, the log-odds
-of maturity increase by 0.2503
+The positive slope (0.2503) indicates: - Longer lizards are more likely to be sexually mature - For each 1 cm increase in length, the log-odds of maturity increase by 0.2503
 
 # Step 4: Convert Log-Odds to Odds
 
@@ -384,8 +373,7 @@ logistic_plot
 
 ## **Using the Model for Prediction**
 
-Let's predict the probability of sexual maturity for specific lizard
-sizes:
+Let's predict the probability of sexual maturity for specific lizard sizes:
 
 
 
@@ -476,8 +464,7 @@ prob_40cm
 
 ## **Calculating Pseudo-R2 Values**
 
-Unlike linear regression, logistic regression doesn't have a traditional
-R². We use pseudo-R² instead:
+Unlike linear regression, logistic regression doesn't have a traditional R². We use pseudo-R² instead:
 
 
 
@@ -540,8 +527,7 @@ The last three values are the pseudo-R² statistics:
 -   **r2ML**: Maximum likelihood based R²
 -   **r2CU**: Cragg-Uhler (Nagelkerke) R²
 
-Values around 0.4-0.5 indicate moderate to good fit. Our model explains
-approximately 40-50% of the variation in sexual maturity status.
+Values around 0.4-0.5 indicate moderate to good fit. Our model explains approximately 40-50% of the variation in sexual maturity status.
 
 # Step 8: Additional Diagnostics
 
@@ -609,8 +595,7 @@ diagnostic_plot
 
 ## **Our Results:**
 
--   Significant positive relationship between body length and sexual
-    maturity
+-   Significant positive relationship between body length and sexual maturity
 -   Each 1 cm increase in length increases odds of maturity by \~28%
 -   Model explains \~40-50% of variation in maturity status
 -   Can predict probability of maturity for any given length

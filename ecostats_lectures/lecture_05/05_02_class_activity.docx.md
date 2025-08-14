@@ -1,46 +1,15 @@
 ---
 title: "05_Class_Activity"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: true
-  warning: true
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+metadata-files:
+  - ../../_templates/activities.yml
 format:
   html:
     output-file: "05_02_class_activity.html"
-    default: true
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch  # Limits line length to approximately 80 characters
-    css: ../../css/activity.css
-  docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    embed-resources: true
   typst:
-    margin: 
-      x: 0.5in
-      y: 0.5in
-    fig-width: 4
-    fig-height: 4
-    fig-dpi: 300
-    number-sections: false
-    toc: false
-    output-file: "05_02_class_activity.pdf"
-editor: visual  
+    output-file: "05_02_class_activity.pdf"    
+  docx:
+    output-file: "05_02_class_activity.docx"
 ---
 
 
@@ -88,9 +57,51 @@ First, let's load the packages and data we'll be using:
 ```{.r .cell-code}
 # Load required packages
 library(tidyverse)  # For data manipulation and visualization
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+```
+
+
+:::
+
+```{.r .cell-code}
 library(patchwork)  # For combining plots
 library(car)        # For diagnostic tests (QQ plots)
+```
 
+::: {.cell-output .cell-output-stderr}
+
+```
+Loading required package: carData
+
+Attaching package: 'car'
+
+The following object is masked from 'package:dplyr':
+
+    recode
+
+The following object is masked from 'package:purrr':
+
+    some
+```
+
+
+:::
+
+```{.r .cell-code}
 # Read in the data files
 g_df <- read_csv("data/gray_I3_I8.csv") 
 ```
@@ -184,14 +195,12 @@ head(p_df)
 
 # Part 1: Exploring the Data
 
-Before conducting statistical tests, it's important to understand your
-data.
+Before conducting statistical tests, it's important to understand your data.
 
 ::: callout-tip
 ## Practice Exercise 1: Creating Histograms
 
-Let's create histograms of fish lengths from each lake to visualize
-their distributions.
+Let's create histograms of fish lengths from each lake to visualize their distributions.
 
 
 
@@ -226,7 +235,7 @@ i3_hist + i8_hist
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-docx/histograms-1.png)
+![](05_02_class_activity_files/figure-docx/histograms-1.jpeg)
 :::
 
 ```{.r .cell-code}
@@ -292,13 +301,11 @@ grayling_summary
 
 # Part 3: Testing Assumptions
 
-Before conducting a t-test, we need to check if our data meets the
-necessary assumptions:
+Before conducting a t-test, we need to check if our data meets the necessary assumptions:
 
 1.  **Normality**: The data should be approximately normally distributed
 2.  **Independence**: Observations should be independent
-3.  **No extreme outliers**: Outliers can heavily influence t-test
-    results
+3.  **No extreme outliers**: Outliers can heavily influence t-test results
 
 Let's check the normality assumption for Lake I3 fish lengths:
 
@@ -327,7 +334,7 @@ qqPlot(i3_df$length_mm,
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-docx/check_normality-1.png)
+![](05_02_class_activity_files/figure-docx/check_normality-1.jpeg)
 :::
 
 ::: {.cell-output .cell-output-stdout}
@@ -391,7 +398,7 @@ i3_df %>%
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-docx/unnamed-chunk-2-1.png)
+![](05_02_class_activity_files/figure-docx/unnamed-chunk-2-1.jpeg)
 :::
 :::
 
@@ -405,10 +412,8 @@ i3_df %>%
 ::: callout-tip
 How to interpret these results:
 
--   The QQ plot: Points should follow the straight line if data is
-    normally distributed
--   Shapiro-Wilk test: If p \> 0.05, we don't reject the assumption of
-    normality
+-   The QQ plot: Points should follow the straight line if data is normally distributed
+-   Shapiro-Wilk test: If p \> 0.05, we don't reject the assumption of normality
 -   Boxplot: Look for points beyond the whiskers as potential outliers
 :::
 
@@ -513,7 +518,7 @@ i3_df %>%
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-docx/unnamed-chunk-4-1.png)
+![](05_02_class_activity_files/figure-docx/unnamed-chunk-4-1.jpeg)
 :::
 :::
 
@@ -540,16 +545,13 @@ Interpret the results:
 
 # Part 5: Confidence Intervals
 
-A confidence interval gives us a range of plausible values for the
-population mean.
+A confidence interval gives us a range of plausible values for the population mean.
 
 For a 95% confidence interval using the t-distribution:
 
 $$ 95\% \text{ CI} = \bar{x} \pm t_{\alpha/2, n-1} \times \frac{s}{\sqrt{n}} $$
 
-Where: - $\bar{x}$ is the sample mean - $s$ is the sample standard
-deviation - $n$ is the sample size - $t_{\alpha/2, n-1}$ is the critical
-t-value with n-1 degrees of freedom
+Where: - $\bar{x}$ is the sample mean - $s$ is the sample standard deviation - $n$ is the sample size - $t_{\alpha/2, n-1}$ is the critical t-value with n-1 degrees of freedom
 
 ::: callout-tip
 ## Practice Exercise 4: Calculating Confidence Intervals
@@ -657,7 +659,7 @@ ggplot() +
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-docx/unnamed-chunk-5-1.png)
+![](05_02_class_activity_files/figure-docx/unnamed-chunk-5-1.jpeg)
 :::
 :::
 
@@ -671,11 +673,9 @@ ggplot() +
 ::: callout-tip
 Interpretation:
 
--   We are 95% confident that the true population mean fish length in
-    Lake I3 falls within this interval
+-   We are 95% confident that the true population mean fish length in Lake I3 falls within this interval
 
--   Note the small difference between using the t-distribution vs.
-    normal approximation
+-   Note the small difference between using the t-distribution vs. normal approximation
 :::
 
 # Part 6: Two-Sample t-Test
@@ -754,7 +754,7 @@ p_df %>%
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-docx/unnamed-chunk-6-1.png)
+![](05_02_class_activity_files/figure-docx/unnamed-chunk-6-1.jpeg)
 :::
 :::
 
@@ -790,7 +790,7 @@ qqPlot(windward_data$length_mm, main = "QQ Plot: Windward Needles")
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-docx/two_sample_assumptions-1.png)
+![](05_02_class_activity_files/figure-docx/two_sample_assumptions-1.jpeg)
 :::
 
 ::: {.cell-output .cell-output-stdout}
@@ -810,7 +810,7 @@ qqPlot(leeward_data$length_mm, main = "QQ Plot: Leeward Needles")
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-docx/unnamed-chunk-7-1.png)
+![](05_02_class_activity_files/figure-docx/unnamed-chunk-7-1.jpeg)
 :::
 
 ::: {.cell-output .cell-output-stdout}
@@ -885,8 +885,7 @@ Interpreting the assumption checks:
 
 -   QQ plots: Do points approximately follow the line for both groups?
 
--   Levene's test: If p \> 0.05, we don't reject the assumption of equal
-    variances
+-   Levene's test: If p \> 0.05, we don't reject the assumption of equal variances
 :::
 
 ## Now let's conduct the two-sample t-test:
@@ -975,7 +974,7 @@ ggplot(pine_summary, aes(x = wind, y = mean_length, fill = wind)) +
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-docx/unnamed-chunk-10-1.png)
+![](05_02_class_activity_files/figure-docx/unnamed-chunk-10-1.jpeg)
 :::
 :::
 
@@ -1001,8 +1000,7 @@ Interpret the results:
 
 # Part 7: Comparing Fish Lengths Between Lakes
 
-Let's apply what we've learned to compare fish lengths between Lakes I3
-and I8:
+Let's apply what we've learned to compare fish lengths between Lakes I3 and I8:
 
 ::: callout-tip
 ## Practice Exercise 7: Comparing Lakes
@@ -1109,7 +1107,7 @@ ggplot(g_df, aes(x = lake, y = length_mm, fill = lake)) +
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-docx/unnamed-chunk-12-1.png)
+![](05_02_class_activity_files/figure-docx/unnamed-chunk-12-1.jpeg)
 :::
 :::
 
@@ -1131,48 +1129,30 @@ Write your interpretation of the results:
 
 # Part 8: Communicating Statistical Results
 
-In scientific writing, it's important to report statistical results
-clearly and consistently.
+In scientific writing, it's important to report statistical results clearly and consistently.
 
 Here's a standard format for reporting t-test results:
 
-For a one-sample t-test: "A one-sample t-test showed that the mean fish
-length in Lake I3 (M = \[mean\], SD = \[sd\]) was \[significantly/not
-significantly\] different from 240 mm, t(\[df\]) = \[t-value\], p =
-\[p-value\]."
+For a one-sample t-test: "A one-sample t-test showed that the mean fish length in Lake I3 (M = \[mean\], SD = \[sd\]) was \[significantly/not significantly\] different from 240 mm, t(\[df\]) = \[t-value\], p = \[p-value\]."
 
-For a two-sample t-test: "A two-sample t-test revealed that pine needle
-lengths on the leeward side (M = \[mean1\], SD = \[sd1\]) were
-\[significantly/not significantly\] \[longer/shorter\] than on the
-windward side (M = \[mean2\], SD = \[sd2\]), t(\[df\]) = \[t-value\], p
-= \[p-value\]."
+For a two-sample t-test: "A two-sample t-test revealed that pine needle lengths on the leeward side (M = \[mean1\], SD = \[sd1\]) were \[significantly/not significantly\] \[longer/shorter\] than on the windward side (M = \[mean2\], SD = \[sd2\]), t(\[df\]) = \[t-value\], p = \[p-value\]."
 
 ::: callout-tip
 ## Practice Exercise 8: Writing Statistical Results
 
-Write properly formatted statements reporting the results of: 1. The
-one-sample t-test comparing Lake I3 fish to 240mm 2. The two-sample
-t-test comparing pine needle lengths 3. The two-sample t-test comparing
-fish lengths between lakes
+Write properly formatted statements reporting the results of: 1. The one-sample t-test comparing Lake I3 fish to 240mm 2. The two-sample t-test comparing pine needle lengths 3. The two-sample t-test comparing fish lengths between lakes
 
-Remember to include: - Means and standard deviations for each group -
-The t-value with degrees of freedom - The p-value and whether the result
-is significant
+Remember to include: - Means and standard deviations for each group - The t-value with degrees of freedom - The p-value and whether the result is significant
 :::
 
 # Reflection Questions
 
-1.  How does the t-distribution differ from the normal distribution, and
-    why does this matter for small samples?
+1.  How does the t-distribution differ from the normal distribution, and why does this matter for small samples?
 
-2.  What assumptions must be met to use a t-test, and what alternatives
-    exist if these assumptions are violated?
+2.  What assumptions must be met to use a t-test, and what alternatives exist if these assumptions are violated?
 
-3.  What is the difference between statistical significance and
-    practical importance?
+3.  What is the difference between statistical significance and practical importance?
 
-4.  How would the confidence interval change if we used a 99% confidence
-    level instead of 95%?
+4.  How would the confidence interval change if we used a 99% confidence level instead of 95%?
 
-5.  How would you explain the concept of a p-value to someone with no
-    statistical background?
+5.  How would you explain the concept of a p-value to someone with no statistical background?

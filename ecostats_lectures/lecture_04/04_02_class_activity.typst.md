@@ -7,8 +7,12 @@ format:
   html:
     output-file: "04_02_class_activity.html"
   typst:
-    output-file: "04_02_class_activity.pdf" 
+    output-file: "04_02_class_activity.pdf"   
+  docx:
+    output-file: "04_02_class_activity.docx"
 ---
+
+
 
 
 
@@ -43,24 +47,23 @@ p_df %>%
 
     ![](images/clipboard-1074788880.png){width="455"}
 
--   What questions do you have and what is unclear - what did not work
-    so far when you started the homework?
+-   What questions do you have and what is unclear - what did not work so far when you started the homework?
 
 # Introduction
 
-In this active learning module, we'll explore real data from fish
-populations in Alaska. We'll focus on understanding:
+In this active learning module, we'll explore real data from fish populations in Alaska. We'll focus on understanding:
 
 -   How to create and interpret frequency distributions
 -   How sample size affects our view of a population
 -   How distributions differ among lakes
 
-We'll use the `tidyverse` package for data manipulation and
-visualization.
+We'll use the `tidyverse` package for data manipulation and visualization.
 
 ## Setup
 
 First, let's load the packages we need and the dataset:
+
+
 
 
 
@@ -108,9 +111,13 @@ head(s_df)
 
 
 
+
+
 ## Basic Data Summary
 
 Let's first check what lakes are in our dataframe:
+
+
 
 
 
@@ -139,7 +146,11 @@ unique(s_df$lake)
 
 
 
+
+
 How many fish do we have from each lake?
+
+
 
 
 
@@ -207,14 +218,17 @@ s_df %>%
 
 
 
+
+
 # Part 1: Creating Frequency Distributions
 
 ## Basic Histograms
 
-A histogram shows how many observations fall into certain ranges (or
-"bins").
+A histogram shows how many observations fall into certain ranges (or "bins").
 
 Let's create a simple histogram of fish lengths from Lake E 01 :
+
+
 
 
 
@@ -251,11 +265,14 @@ Warning: Removed 189 rows containing non-finite outside the scale range
 
 
 
+
+
 ::: callout-tip
 ## Activity 1
 
-Try changing the `binwidth` parameter to 5 and then to 1. How does the
-appearance of the histogram change?
+Try changing the `binwidth` parameter to 5 and then to 1. How does the appearance of the histogram change?
+
+
 
 
 
@@ -273,11 +290,15 @@ appearance of the histogram change?
 
 
 
+
+
 :::
 
 ## Comparing Lakes
 
 Now let's compare two lakes
+
+
 
 
 
@@ -341,7 +362,11 @@ Warning: Removed 268 rows containing non-finite outside the scale range
 
 
 
+
+
 Now let's compare two lakes side by side:
+
+
 
 
 
@@ -380,11 +405,12 @@ Warning: Removed 268 rows containing non-finite outside the scale range
 
 
 
+
+
 ::: callout-tip
 ## Activity 2
 
-Choose two new lakes to compare. What differences do you notice in their
-distributions?
+Choose two new lakes to compare. What differences do you notice in their distributions?
 
 Add notes here
 :::
@@ -396,6 +422,8 @@ Let's explore how the sample size affects what we see.
 ## Small vs. Large Samples
 
 We'll randomly select different sample sizes from Toolik Lake:
+
+
 
 
 
@@ -472,13 +500,16 @@ Warning: Removed 25 rows containing non-finite outside the scale range
 
 
 
+
+
 ::: callout-tip
 ## Activity 3
 
-Try changing the sample sizes. What happens when you use very small
-samples (n=5)? What about larger samples (n=150)?
+Try changing the sample sizes. What happens when you use very small samples (n=5)? What about larger samples (n=150)?
 
 add code here
+
+
 
 
 
@@ -554,11 +585,15 @@ Warning: Removed 25 rows containing non-finite outside the scale range
 
 
 
+
+
 :::
 
 # Part 3: From Histograms to Density Plots
 
 Density plots give us a smoothed version of the histogram:
+
+
 
 
 
@@ -585,7 +620,11 @@ s_df %>%
 
 
 
+
+
 We can overlay the histogram and the density plot:
+
+
 
 
 
@@ -614,13 +653,16 @@ s_df %>%
 
 
 
+
+
 ::: callout-tip
 ## Activity 4
 
-Create a density plot comparing multiple lakes. Which lakes have similar
-distributions? Which ones are different?
+Create a density plot comparing multiple lakes. Which lakes have similar distributions? Which ones are different?
 
 Try code here using patchwork or facet_grid
+
+
 
 
 
@@ -639,8 +681,12 @@ Try code here using patchwork or facet_grid
 
 
 
+
+
 # 
 :::
+
+
 
 
 
@@ -695,10 +741,13 @@ s_df %>%
 
 
 
+
+
 This can be adapted to calculate the area of a subset of the plot
 
-I don't expect you to know or be able to do all of this but is here to
-play with the code
+I don't expect you to know or be able to do all of this but is here to play with the code
+
+
 
 
 
@@ -815,9 +864,13 @@ ggplot(toolik_fish, aes(x = length_mm)) +
 
 
 
+
+
 # Part 4: Summary Statistics - descriptive statistics
 
 Let's calculate basic summary statistics for each lake:
+
+
 
 
 
@@ -863,12 +916,15 @@ s_df %>%
 
 
 
+
+
 ## WOAH - what happened there - there are NA values in the data
 
-you need to either remove missing values or you can do that in the
-formulas
+you need to either remove missing values or you can do that in the formulas
 
 *What is the advantage to manually removing or doing it in formulas?*
+
+
 
 
 
@@ -916,7 +972,11 @@ sculpin_stats_df
 
 
 
+
+
 Now let's visualize these statistics:
+
+
 
 
 
@@ -950,7 +1010,11 @@ s_df %>%
 
 
 
+
+
 We could also do this from the dataframe we just made
+
+
 
 
 
@@ -982,8 +1046,11 @@ sculpin_stats_df %>%
 
 
 
-The power of the pipe command is you can do this without hving to make a
-new dataframe
+
+
+The power of the pipe command is you can do this without hving to make a new dataframe
+
+
 
 
 
@@ -1021,30 +1088,29 @@ s_df %>%
 
 
 
+
+
 ::: callout-tip
 ## Activity 5
 
-Based on the mean plot and what you've seen in the distributions, what
-can you say about fish sizes in different lakes? Are there lakes with
-particularly large or small fish?
+Based on the mean plot and what you've seen in the distributions, what can you say about fish sizes in different lakes? Are there lakes with particularly large or small fish?
 
 We will start to ask how different are they and is it by chance?
 
-Where would you want to fish and why? What is the chance of catching a
-fish greater than X size?
+Where would you want to fish and why? What is the chance of catching a fish greater than X size?
 
 This is the inductive phase of doing research.
 :::
 
 # Part 5: Guided Challenges
 
-Now it's your turn to explore the data! Work with your partner to
-complete these challenges:
+Now it's your turn to explore the data! Work with your partner to complete these challenges:
 
-1.  Find the lake with the widest range of fish lengths (hint: use the
-    `range()` function)
+1.  Find the lake with the widest range of fish lengths (hint: use the `range()` function)
 
 2.  Create box and whisker plots to compare fish lengths across lakes:
+
+
 
 
 
@@ -1072,7 +1138,11 @@ s_df %>%
 
 
 
+
+
 3.  Explore if there's a relationship between fish length and mass:
+
+
 
 
 
@@ -1099,8 +1169,11 @@ s_df %>%
 
 
 
-4.  Try creating a density plot that shows all lakes in different
-    colors:
+
+
+4.  Try creating a density plot that shows all lakes in different colors:
+
+
 
 
 
@@ -1127,18 +1200,16 @@ s_df %>%
 
 
 
+
+
 # Reflection Questions
 
-After completing the activities, discuss these questions with your
-group:
+After completing the activities, discuss these questions with your group:
 
-1.  How does sample size affect our view of a population's
-    characteristics?
+1.  How does sample size affect our view of a population's characteristics?
 
 2.  Why might fish lengths be different in different lakes?
 
-3.  What are the advantages and disadvantages of histograms versus
-    density plots?
+3.  What are the advantages and disadvantages of histograms versus density plots?
 
-4.  What additional data would help you better understand these fish
-    populations?
+4.  What additional data would help you better understand these fish populations?

@@ -6,7 +6,7 @@ execute:
   message: true
   warning: true
   fig-height: 4
-  fig-width: 6
+  fig-width: 5
   paged-print: false
 format:
   html:
@@ -16,25 +16,26 @@ format:
     embed-resources: true
     self-contained: true
     max-width: 80ch
-    fig-width: 7
-    fig-height: 5
+    fig-width: 3.5
+    fig-height: 3.5
   docx:
     default: true
+    fig-format: "jpeg"
     toc: false
     toc-depth: 3
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
+    fig-width: 3      # Smaller figures for better document layout
+    fig-height: 3     # Better proportions for printing
+    fig-dpi: 72        # High resolution for crisp printing
     number-sections: false
     highlight-style: github
     reference-doc: ../../ms_templates/custom-reference.docx
     embed-resources: true
   typst:
     margin: 
-      x: 0.5in
+      x: 0.75in
       y: 0.5in
-    fig-width: 4
-    fig-height: 4
+    fig-width: 3
+    fig-height: 3
     fig-dpi: 300
     number-sections: false
     toc: false

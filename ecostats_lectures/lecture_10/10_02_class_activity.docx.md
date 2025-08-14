@@ -1,46 +1,15 @@
 ---
 title: "Lecture 10 - Class Activity: Multiple Regression"
-author: "Your Name"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: true
-  warning: true
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+author: "Bill Perry"
+metadata-files:
+  - ../../_templates/activities.yml
 format:
   html:
     output-file: "10_02_class_activity.html"
-    default: true
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch  # Limits line length to approximately 80 characters
-    css: ../../css/activity.css
-  docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    embed-resources: true
   typst:
-    margin: 
-      x: 0.5in
-      y: 0.5in
-    fig-width: 4
-    fig-height: 4
-    fig-dpi: 300
-    number-sections: false
-    toc: false
-    output-file: "10_02_class_activity.pdf"
-editor: visual  
+    output-file: "10_02_class_activity.pdf"  
+  docx:
+    output-file: "10_02_class_activity.docx"
 ---
 
 
@@ -57,10 +26,7 @@ editor: visual
 
 ## Introduction
 
-This analysis examines the relationships between Net Primary Production
-(npp) and various climate and forest characteristics across global
-forest sites. We'll explore multicollinearity, model selection, and
-variable transformations.
+This analysis examines the relationships between Net Primary Production (npp) and various climate and forest characteristics across global forest sites. We'll explore multicollinearity, model selection, and variable transformations.
 
 **Key Learning Objectives:**
 
@@ -129,25 +95,7 @@ library(see)          # For better diagnostic plots
 ```{.r .cell-code}
 # Load the forest npp data
 forest_df <- read_csv("data/michaletz_etal_2014_clean.csv")
-```
 
-::: {.cell-output .cell-output-stderr}
-
-```
-Rows: 1220 Columns: 8
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): leaf
-dbl (7): npp, age, biomass, season, temp, precip, teb
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-```
-
-
-:::
-
-```{.r .cell-code}
 # Display top lines
 head(forest_df)
 ```
@@ -179,8 +127,7 @@ head(forest_df)
 
 ## Data Preparation
 
-Following the original analysis, we'll focus on the key variables from a
-cleaned dataframe
+Following the original analysis, we'll focus on the key variables from a cleaned dataframe
 
 ## 1. Initial Exploration: Variable Relationships and Multicollinearity
 
@@ -241,7 +188,7 @@ corrplot(cor_matrix, method = "color", type = "upper",
 ```
 
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-docx/visual_corr-1.png)
+![](10_02_class_activity_files/figure-docx/visual_corr-1.jpeg)
 :::
 :::
 
@@ -276,7 +223,7 @@ forest_df %>%
 ```
 
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-docx/pairs-plot-1.png)
+![](10_02_class_activity_files/figure-docx/pairs-plot-1.jpeg)
 :::
 :::
 
@@ -406,7 +353,7 @@ ggplot(vif_df, aes(x = reorder(Variable, VIF), y = VIF)) +
 ```
 
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-docx/unnamed-chunk-1-1.png)
+![](10_02_class_activity_files/figure-docx/unnamed-chunk-1-1.jpeg)
 :::
 :::
 
@@ -419,8 +366,7 @@ ggplot(vif_df, aes(x = reorder(Variable, VIF), y = VIF)) +
 
 ### Address Multicollinearity by Removing Growing Season
 
-Based on the original analysis, season and Temperature are highly
-correlated. Let's remove season:
+Based on the original analysis, season and Temperature are highly correlated. Let's remove season:
 
 
 
@@ -522,7 +468,7 @@ avPlots(model_2, main = "Partial Regression Plots")
 ```
 
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-docx/partial-plots-1.png)
+![](10_02_class_activity_files/figure-docx/partial-plots-1.jpeg)
 :::
 
 ```{.r .cell-code}
@@ -539,9 +485,7 @@ par(mfrow = c(1, 1))
 
 ### Apply Log Transformation to age
 
-The original analysis found that age showed a curvy relationship. Let's
-try log transformation: REally what you should do is log transform of
-the response variable first..
+The original analysis found that age showed a curvy relationship. Let's try log transformation: REally what you should do is log transform of the response variable first..
 
 
 
@@ -608,7 +552,7 @@ avPlots(model_3, main = "Partial Regression Plots (Log age)")
 ```
 
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-docx/unnamed-chunk-3-1.png)
+![](10_02_class_activity_files/figure-docx/unnamed-chunk-3-1.jpeg)
 :::
 
 ```{.r .cell-code}
@@ -641,7 +585,7 @@ plot(model_3, main = "Model Diagnostics")
 ```
 
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-docx/diagnostics-1.png)
+![](10_02_class_activity_files/figure-docx/diagnostics-1.jpeg)
 :::
 
 ```{.r .cell-code}
@@ -688,17 +632,8 @@ ggplot(residuals_data, aes(x = Fitted, y = Residuals)) +
   theme_minimal()
 ```
 
-::: {.cell-output .cell-output-stderr}
-
-```
-`geom_smooth()` using formula = 'y ~ x'
-```
-
-
-:::
-
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-docx/unnamed-chunk-4-1.png)
+![](10_02_class_activity_files/figure-docx/unnamed-chunk-4-1.jpeg)
 :::
 :::
 
@@ -711,8 +646,7 @@ ggplot(residuals_data, aes(x = Fitted, y = Residuals)) +
 
 ### Try Response Variable Transformation
 
-Following the original analysis, let's try a cube root transformation of
-npp:
+Following the original analysis, let's try a cube root transformation of npp:
 
 
 
@@ -776,7 +710,7 @@ plot(model_4, main = "Model Diagnostics (Cube Root npp)")
 ```
 
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-docx/unnamed-chunk-5-1.png)
+![](10_02_class_activity_files/figure-docx/unnamed-chunk-5-1.jpeg)
 :::
 
 ```{.r .cell-code}
@@ -1061,8 +995,7 @@ print(results_table)
 
 ## 6. Alternative Approach: Standardized Variables
 
-Following the original analysis, let's also try the standardized
-approach:
+Following the original analysis, let's also try the standardized approach:
 
 
 
@@ -1148,8 +1081,7 @@ F-statistic: 341.5 on 6 and 1213 DF,  p-value: < 2.2e-16
 
 3.  FINAL MODEL RESULTS:
 
-    -   Significant predictors: age (negative), biomass (positive), temp
-        (positive)
+    -   Significant predictors: age (negative), biomass (positive), temp (positive)
     -   teb had negative effect, Leaf type differences were significant
 
 4.  BIOLOGICAL INTERPRETATION:
@@ -1163,18 +1095,13 @@ F-statistic: 341.5 on 6 and 1213 DF,  p-value: < 2.2e-16
 
 This analysis is based on:
 
--   **Michaletz, S.T., Cheng, D., Kerkhoff, A.J. & Enquist, B.J.**
-    (2014). Convergence of terrestrial plant production across global
-    climate gradients. *Nature*, 512, 39-43.
+-   **Michaletz, S.T., Cheng, D., Kerkhoff, A.J. & Enquist, B.J.** (2014). Convergence of terrestrial plant production across global climate gradients. *Nature*, 512, 39-43.
 
 **Key Learning Points:**
 
-1.  **Multicollinearity Detection**: Use VIF values and correlation
-    matrices
-2.  **Variable Transformations**: Log and power transformations can
-    improve model fit
-3.  **Model Diagnostics**: Always check residual plots and assumption
-    violations
+1.  **Multicollinearity Detection**: Use VIF values and correlation matrices
+2.  **Variable Transformations**: Log and power transformations can improve model fit
+3.  **Model Diagnostics**: Always check residual plots and assumption violations
 4.  **Model Comparison**: Use AIC and other criteria for model selection
 5.  **Interpretation**: Focus on biologically meaningful relationships
 

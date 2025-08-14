@@ -1,46 +1,15 @@
 ---
 title: "03_Class_Activity"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: true
-  warning: true
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+metadata-files:
+  - ../../_templates/activities.yml
 format:
   html:
     output-file: "03_02_class_activity.html"
-    default: true
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch  # Limits line length to approximately 80 characters
-    css: ../../css/activity.css
-  docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    embed-resources: true
   typst:
-    margin: 
-      x: 0.5in
-      y: 0.5in
-    fig-width: 4
-    fig-height: 4
-    fig-dpi: 300
-    number-sections: false
-    toc: false
-    output-file: "03_Class_Activity.pdf"
-editor: visual  
+    output-file: "03_Class_Activity_pdf.pdf"  
+  docx:
+    output-file: "03_02_class_activity.docx"
 ---
 
 
@@ -118,7 +87,28 @@ library(moments)      # For calculating skewness and kurtosis
 library(skimr)        # for summary stats
 library(flextable)    # for tables if you want - now tinytable
 library(tidyverse)    # For data wrangling and visualization
+```
 
+::: {.cell-output .cell-output-stderr}
+
+```
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ purrr::compose() masks flextable::compose()
+✖ dplyr::filter()  masks stats::filter()
+✖ dplyr::lag()     masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+```
+
+
+:::
+
+```{.r .cell-code}
 # Set a consistent theme for our plots
 theme_set(theme_minimal(base_size = 12))
 ```
@@ -136,8 +126,7 @@ theme_set(theme_minimal(base_size = 12))
 ::: callout-tip
 ## Practice Exercise 1: Loading and Examining the Grayling Data
 
-We'll be working with data on arctic grayling fish from two different
-lakes (I3 and I8).
+We'll be working with data on arctic grayling fish from two different lakes (I3 and I8).
 
 
 
@@ -312,8 +301,7 @@ g_df %>%
 ::: callout-tip
 ## Practice Exercise 2: Measures of Central Tendency
 
-Let's recreate the basic histogram of fish lengths from our last class.
-Use the `sculpin_df` data frame that's already loaded.
+Let's recreate the basic histogram of fish lengths from our last class. Use the `sculpin_df` data frame that's already loaded.
 
 
 
@@ -404,11 +392,9 @@ g_df %>%
 
 ## Summarizing data - two ways
 
-lets say we want to summarize the data and need to get n, means,
-standard deviation, standard error
+lets say we want to summarize the data and need to get n, means, standard deviation, standard error
 
-We could do the following - if we had missing cells the code below would
-give an error
+We could do the following - if we had missing cells the code below would give an error
 
 
 
@@ -474,15 +460,13 @@ length(g_df$length_mm)
 
 -   **the length counts missing and non-missing data**
 
--   however this would get old if we had to do this for everything and
-    then to do it for the different groupings - lee and windward...
+-   however this would get old if we had to do this for everything and then to do it for the different groupings - lee and windward...
 
 ## We need to learn to pipe
 
 ### passes things from the dataframe to a command and so on...
 
--   the dataframe –\> pipe command that feed the dataframe into –\> next
-    command
+-   the dataframe –\> pipe command that feed the dataframe into –\> next command
 
 
 
@@ -720,7 +704,7 @@ g_df %>%
 ```
 
 ::: {.cell-output-display}
-![](03_02_class_activity_files/figure-docx/boxplot-1.png)
+![](03_02_class_activity_files/figure-docx/boxplot-1.jpeg)
 :::
 :::
 
@@ -734,8 +718,7 @@ g_df %>%
 ::: callout-tip
 ### Exercise 5: Calculate the Coefficient of Variation
 
-The coefficient of variation (CV) is the standard deviation expressed as
-a percentage of the mean:
+The coefficient of variation (CV) is the standard deviation expressed as a percentage of the mean:
 
 $$CV = \frac{s}{\bar{Y}} \times 100\%$$
 
@@ -814,22 +797,18 @@ g_df %>%
 
 ### Questions to Consider:
 
-1.  How do the means and medians compare within each lake? What might
-    this tell you about the distribution?
+1.  How do the means and medians compare within each lake? What might this tell you about the distribution?
 2.  Which lake has more variable fish lengths? How can you tell?
-3.  Why might the coefficient of variation be useful when comparing
-    variability between different measurements (e.g., length vs. mass)?
+3.  Why might the coefficient of variation be useful when comparing variability between different measurements (e.g., length vs. mass)?
 
 ## Part 3: Visualizing Distributions
 
-Visualizations can help us better understand the descriptive statistics
-we've calculated.
+Visualizations can help us better understand the descriptive statistics we've calculated.
 
 ::: callout-tip
 ### Exercise 6: Creating Histograms
 
-One of the best ways to look at data is a histogram - and we will do it
-again
+One of the best ways to look at data is a histogram - and we will do it again
 
 
 
@@ -847,7 +826,7 @@ g_df %>% ggplot(aes(x = length_mm)) +
 ```
 
 ::: {.cell-output-display}
-![](03_02_class_activity_files/figure-docx/histograms-1.png)
+![](03_02_class_activity_files/figure-docx/histograms-1.jpeg)
 :::
 :::
 
@@ -877,7 +856,7 @@ g_df  %>% ggplot(aes(x = length_mm, fill = lake)) +
 ```
 
 ::: {.cell-output-display}
-![](03_02_class_activity_files/figure-docx/unnamed-chunk-12-1.png)
+![](03_02_class_activity_files/figure-docx/unnamed-chunk-12-1.jpeg)
 :::
 :::
 
@@ -910,7 +889,7 @@ g_df  %>%  ggplot( aes(x = lake, y = length_mm, fill = lake)) +
 ```
 
 ::: {.cell-output-display}
-![](03_02_class_activity_files/figure-docx/boxplots-1.png)
+![](03_02_class_activity_files/figure-docx/boxplots-1.jpeg)
 :::
 :::
 
@@ -945,7 +924,7 @@ g_df  %>%  ggplot(aes(x = length_mm, fill = lake)) +
 ```
 
 ::: {.cell-output-display}
-![](03_02_class_activity_files/figure-docx/density-plots-1.png)
+![](03_02_class_activity_files/figure-docx/density-plots-1.jpeg)
 :::
 :::
 
@@ -961,48 +940,34 @@ g_df  %>%  ggplot(aes(x = length_mm, fill = lake)) +
 
 ### Questions to Consider:
 
-1.  Which visualization best shows the differences in fish lengths
-    between lakes?
-2.  What can you learn from the violin plots that might not be apparent
-    from the box plots?
+1.  Which visualization best shows the differences in fish lengths between lakes?
+2.  What can you learn from the violin plots that might not be apparent from the box plots?
 3.  How would you interpret the cumulative frequency distribution?
-4.  What patterns or insights can you identify from these
-    visualizations?
+4.  What patterns or insights can you identify from these visualizations?
 
 ## Part 4: Interpreting the Results
 
 Based on our analysis, we can make the following observations:
 
-1.  **Lake Differences**: Fish from Lake I8 are generally larger than
-    those from Lake I3, both in length and mass.
+1.  **Lake Differences**: Fish from Lake I8 are generally larger than those from Lake I3, both in length and mass.
 
-2.  **Variability**: Lake I8 shows greater variability in fish lengths
-    and masses than Lake I3, as indicated by higher standard deviations
-    and IQRs.
+2.  **Variability**: Lake I8 shows greater variability in fish lengths and masses than Lake I3, as indicated by higher standard deviations and IQRs.
 
 3.  **Distribution Shape**:
 
     -   Lake I3 fish lengths are more symmetrically distributed.
-    -   Lake I8 fish lengths show a slight negative skew, suggesting a
-        few smaller fish pulling the distribution to the left.
+    -   Lake I8 fish lengths show a slight negative skew, suggesting a few smaller fish pulling the distribution to the left.
 
-4.  **Length-Mass Relationship**: Both lakes show a strong positive
-    correlation between fish length and mass, following an approximately
-    cubic relationship (mass increases with the cube of length).
+4.  **Length-Mass Relationship**: Both lakes show a strong positive correlation between fish length and mass, following an approximately cubic relationship (mass increases with the cube of length).
 
 ## Guided Questions for Deeper Understanding of descriptive statistics
 
-1.  **Biological Interpretation**: What ecological factors might explain
-    the differences in fish size between the two lakes?
+1.  **Biological Interpretation**: What ecological factors might explain the differences in fish size between the two lakes?
 
-2.  **Statistical Reasoning**: Why might we prefer to use the median and
-    IQR instead of the mean and standard deviation in some cases?
+2.  **Statistical Reasoning**: Why might we prefer to use the median and IQR instead of the mean and standard deviation in some cases?
 
-3.  **Data Visualization**: Which visualization method was most
-    effective for comparing the two lakes? Why?
+3.  **Data Visualization**: Which visualization method was most effective for comparing the two lakes? Why?
 
-4.  **Scientific Communication**: How would you concisely summarize
-    these findings in a scientific paper?
+4.  **Scientific Communication**: How would you concisely summarize these findings in a scientific paper?
 
-5.  **Further Analysis**: What additional analyses might be useful to
-    better understand this dataset?
+5.  **Further Analysis**: What additional analyses might be useful to better understand this dataset?

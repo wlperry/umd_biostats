@@ -7,8 +7,12 @@ format:
   html:
     output-file: "14_02_class_activity.html"
   typst:
-    output-file: "14_02_class_activity.pdf" 
+    output-file: "14_02_class_activity.pdf"   
+  docx:
+    output-file: "14_02_class_activity.docx"
 ---
+
+
 
 
 
@@ -37,6 +41,8 @@ Generalized Linear Models (GLMs) extend linear models to handle different types 
 # Part 1: Gaussian GLM (equivalent to normal ANOVA)
 
 Let's start with a familiar example using the mtcars dataset to show that Gaussian GLMs are equivalent to regular linear models.
+
+
 
 
 
@@ -217,9 +223,13 @@ ggplot() +
 
 
 
+
+
 # Part 2: Poisson GLM for Count Data
 
 Poisson GLMs are used for count data where the response variable consists of non-negative integers.
+
+
 
 
 
@@ -350,9 +360,13 @@ ggplot() +
 
 
 
+
+
 # Part 3: Negative Binomial for Overdispersed Count Data
 
 When count data shows overdispersion (variance \> mean), use negative binomial instead of Poisson.
+
+
 
 
 
@@ -462,9 +476,13 @@ Lower AIC indicates better model fit
 
 
 
+
+
 # Part 4: Logistic Regression for Binary Data
 
 Logistic regression models the probability of a binary outcome (0/1, absent/present, failure/success).
+
+
 
 
 
@@ -655,7 +673,7 @@ ggplot() +
 ::: {.cell-output .cell-output-stderr}
 
 ```
-Warning: Removed 17 rows containing missing values or values outside the scale range
+Warning: Removed 14 rows containing missing values or values outside the scale range
 (`geom_point()`).
 ```
 
@@ -672,7 +690,11 @@ Warning: Removed 17 rows containing missing values or values outside the scale r
 
 
 
+
+
 # Part 5: Model Comparison and Selection
+
+
 
 
 
@@ -724,7 +746,11 @@ NegBin     NegBin 162.61596     3.45          3
 
 
 
+
+
 # Part 6: Assumption Checking
+
+
 
 
 
@@ -803,6 +829,8 @@ plot(predicted_probs, mtcars_binary$high_mpg,
 ![](14_02_class_activity_files/figure-typst/assumption_checking_4-1.svg)
 :::
 :::
+
+
 
 
 

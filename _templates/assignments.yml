@@ -16,7 +16,7 @@ format:
     self-contained: true
     max-width: 80ch
     css: ../../css/activity.css
-    fig-width: 7
+    fig-width: 5
     fig-height: 5
   docx:
     docx:
@@ -26,12 +26,12 @@ format:
     number-sections: false
     highlight-style: github
     reference-doc: .././ms_templates/custom-reference.docx
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
+    fig-width: 3      # Smaller figures for better document layout
+    fig-height: 3     # Better proportions for printing
+    fig-dpi: 72        # High resolution for crisp printing
   typst:
     margin: 
-      x: 0.5in
+      x: 0.75in
       y: 0.5in
     fig-width: 4
     fig-height: 4

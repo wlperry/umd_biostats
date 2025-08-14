@@ -7,7 +7,9 @@ format:
   html:
     output-file: "13_02_class_activity.html"
   typst:
-    output-file: "13_02_class_activity.pdf"
+    output-file: "13_02_class_activity.pdf"  
+  docx:
+    output-file: "13_02_class_activity.docx"
 ---
 
 
@@ -535,7 +537,7 @@ qq_plot + hist_plot + resid_plot + plot_layout(ncol = 3)
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=672}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=336}
 :::
 :::
 
@@ -627,7 +629,7 @@ print(ggplot_boxplot)
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/unnamed-chunk-7-1.png){width=672}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-7-1.png){width=336}
 :::
 :::
 
@@ -675,7 +677,7 @@ print(means_plot)
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/unnamed-chunk-8-1.png){width=672}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-8-1.png){width=336}
 :::
 :::
 
@@ -834,7 +836,7 @@ qqline(resid(mixed_model))
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/normality-1.png){width=672}
+![](13_02_class_activity_files/figure-html/normality-1.png){width=336}
 :::
 
 ```{.r .cell-code}
@@ -844,7 +846,7 @@ hist(resid(mixed_model), main = "Histogram of Residuals",
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/normality-2.png){width=672}
+![](13_02_class_activity_files/figure-html/normality-2.png){width=336}
 :::
 
 ```{.r .cell-code}
@@ -854,7 +856,7 @@ plot(sim_residuals)
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/normality-3.png){width=672}
+![](13_02_class_activity_files/figure-html/normality-3.png){width=336}
 :::
 :::
 
@@ -885,7 +887,7 @@ abline(h = 0, lty = 2, col = "red")
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/homogeneity-1.png){width=672}
+![](13_02_class_activity_files/figure-html/homogeneity-1.png){width=336}
 :::
 :::
 
@@ -1079,7 +1081,7 @@ ggplot_boxplot
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/unnamed-chunk-12-1.png){width=672}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-12-1.png){width=336}
 :::
 :::
 
@@ -1090,7 +1092,7 @@ means_plot
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/unnamed-chunk-13-1.png){width=672}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-13-1.png){width=336}
 :::
 :::
 

@@ -855,10 +855,6 @@ null device
 library(performance)
 check_model(circ_model)
 ```
-
-::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-13-1.png)
-:::
 :::
 
 

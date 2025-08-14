@@ -5,8 +5,8 @@ execute:
   keep-md: true
   message: false
   warning: false
-  fig-height: 4
-  fig-width: 6
+  fig-height: 5
+  fig-width: 5
   paged-print: false
 
 format:
@@ -17,7 +17,7 @@ format:
     self-contained: true
     max-width: 80ch
     css: ../../css/lecture.css
-    fig-width: 7
+    fig-width: 5
     fig-height: 5
 
 
@@ -34,7 +34,7 @@ format:
     margin: 0.1
     min-scale: 0.2
     max-scale: 2.0
-    fig-width: 8
+    fig-width: 5
     fig-height: 5
 
 
@@ -46,9 +46,9 @@ format:
     highlight-style: github
     reference-doc: ../../ms_templates/custom-reference.docx
     embed-resources: true
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
+    fig-width: 3      # Smaller figures for better document layout
+    fig-height: 3     # Better proportions for printing
+    fig-dpi: 72        # High resolution for crisp printing
 
   pptx:
     reference-doc: ../../ms_templates/lecture_template.pptx 
@@ -62,8 +62,11 @@ format:
     toc: false
     number-sections: false
     embed-resources: true
-    fig-width: 6
-    fig-height: 4
+    fig-width: 3
+    fig-height: 3
     fig-dpi: 300
+    margin: 
+      x: 0.75in
+      y: 0.5in
     
 editor: visual

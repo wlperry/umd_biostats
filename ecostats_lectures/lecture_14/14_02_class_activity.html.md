@@ -7,7 +7,9 @@ format:
   html:
     output-file: "14_02_class_activity.html"
   typst:
-    output-file: "14_02_class_activity.pdf" 
+    output-file: "14_02_class_activity.pdf"   
+  docx:
+    output-file: "14_02_class_activity.docx"
 ---
 
 
@@ -59,7 +61,7 @@ mtcars %>% ggplot(aes(cyl, mpg))+
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/gaussian-setup-1.png){width=672}
+![](14_02_class_activity_files/figure-html/gaussian-setup-1.png){width=336}
 :::
 :::
 
@@ -212,7 +214,7 @@ ggplot() +
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/gaussian-visualization-1.png){width=672}
+![](14_02_class_activity_files/figure-html/gaussian-visualization-1.png){width=336}
 :::
 :::
 
@@ -318,7 +320,7 @@ plot(sim_residuals, main = "Poisson Model Diagnostics")
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/poisson-diagnostics-1.png){width=672}
+![](14_02_class_activity_files/figure-html/poisson-diagnostics-1.png){width=336}
 :::
 :::
 
@@ -349,7 +351,7 @@ ggplot() +
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/poisson-visualization-1.png){width=672}
+![](14_02_class_activity_files/figure-html/poisson-visualization-1.png){width=336}
 :::
 :::
 
@@ -671,7 +673,7 @@ ggplot() +
 ::: {.cell-output .cell-output-stderr}
 
 ```
-Warning: Removed 16 rows containing missing values or values outside the scale range
+Warning: Removed 19 rows containing missing values or values outside the scale range
 (`geom_point()`).
 ```
 
@@ -679,7 +681,7 @@ Warning: Removed 16 rows containing missing values or values outside the scale r
 :::
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/logistic-visualization-1.png){width=672}
+![](14_02_class_activity_files/figure-html/logistic-visualization-1.png){width=336}
 :::
 :::
 
@@ -766,7 +768,7 @@ abline(h = 0, lty = 2)
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/assumption_checking_1-1.png){width=672}
+![](14_02_class_activity_files/figure-html/assumption_checking_1-1.png){width=336}
 :::
 :::
 
@@ -782,7 +784,7 @@ abline(h = 0, lty = 2)
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/assumption_checking_2-1.png){width=672}
+![](14_02_class_activity_files/figure-html/assumption_checking_2-1.png){width=336}
 :::
 :::
 
@@ -797,7 +799,7 @@ abline(h = 4/length(cook), lty = 2, col = "red")
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/assumption_checking_3-1.png){width=672}
+![](14_02_class_activity_files/figure-html/assumption_checking_3-1.png){width=336}
 :::
 
 ```{.r .cell-code}
@@ -809,7 +811,7 @@ plot(predicted_probs, mtcars_binary$high_mpg,
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/assumption_checking_3-2.png){width=672}
+![](14_02_class_activity_files/figure-html/assumption_checking_3-2.png){width=336}
 :::
 :::
 
@@ -824,7 +826,7 @@ plot(predicted_probs, mtcars_binary$high_mpg,
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/assumption_checking_4-1.png){width=672}
+![](14_02_class_activity_files/figure-html/assumption_checking_4-1.png){width=336}
 :::
 :::
 

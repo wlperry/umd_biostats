@@ -1,46 +1,15 @@
 ---
 title: "Lecture 15 - Class Activity ANCOVA"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: true
-  warning: true
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+metadata-files:
+  - ../../_templates/activities.yml
 format:
   html:
     output-file: "15_02_class_activity.html"
-    default: true
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch  # Limits line length to approximately 80 characters
-    css: ../../css/activity.css
-  docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    embed-resources: true
   typst:
-    margin: 
-      x: 0.5in
-      y: 0.5in
-    fig-width: 4
-    fig-height: 4
-    fig-dpi: 300
-    number-sections: false
-    toc: false
-    output-file: "15_02_class_activity.pdf"
-editor: visual  
+    output-file: "15_02_class_activity.pdf"  
+  docx:
+    output-file: "15_02_class_activity.docx"
 ---
 
 
@@ -154,7 +123,7 @@ ggplot(cricket_data, aes(x = temp, y = chirp_rate, color = species)) +
 :::
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-docx/cricket-visualization-1.png)
+![](15_02_class_activity_files/figure-docx/cricket-visualization-1.jpeg)
 :::
 :::
 
@@ -316,7 +285,7 @@ plot(cricket_ancova, main = "ANCOVA Diagnostic Plots")
 ```
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-docx/cricket-assumptions-1.png)
+![](15_02_class_activity_files/figure-docx/cricket-assumptions-1.jpeg)
 :::
 
 ```{.r .cell-code}
@@ -426,7 +395,7 @@ plot(cricket_adjusted_means, comparisons = TRUE)
 ```
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-docx/cricket-results-plot-1.png)
+![](15_02_class_activity_files/figure-docx/cricket-results-plot-1.jpeg)
 :::
 :::
 
@@ -447,7 +416,7 @@ ggplot(cricket_adj_means_df, aes(x = species, y = emmean, fill = species)) +
 ```
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-docx/cricket_ggplot-1.png)
+![](15_02_class_activity_files/figure-docx/cricket_ggplot-1.jpeg)
 :::
 :::
 
@@ -539,7 +508,7 @@ ggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) +
 :::
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-docx/partridge-visualization-1.png)
+![](15_02_class_activity_files/figure-docx/partridge-visualization-1.jpeg)
 :::
 :::
 
@@ -703,7 +672,7 @@ plot(ancova_model)
 ```
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-docx/partridge-assumptions-1.png)
+![](15_02_class_activity_files/figure-docx/partridge-assumptions-1.jpeg)
 :::
 :::
 
@@ -809,7 +778,7 @@ plot(adjusted_means, comparisons = TRUE)
 ```
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-docx/partridge-comparisons-1.png)
+![](15_02_class_activity_files/figure-docx/partridge-comparisons-1.jpeg)
 :::
 :::
 
@@ -881,7 +850,7 @@ ggplot(urchin_data, aes(x = volume, y = suture_width, color = treatment)) +
 :::
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-docx/urchin-data-1.png)
+![](15_02_class_activity_files/figure-docx/urchin-data-1.jpeg)
 :::
 :::
 

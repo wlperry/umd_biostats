@@ -7,8 +7,12 @@ format:
   html:
     output-file: "03_02_class_activity.html"
   typst:
-    output-file: "03_Class_Activity_pdf.pdf"
+    output-file: "03_Class_Activity_pdf.pdf"  
+  docx:
+    output-file: "03_02_class_activity.docx"
 ---
+
+
 
 
 
@@ -71,6 +75,8 @@ First, let's load the necessary packages and import our data:
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -81,32 +87,13 @@ library(moments)      # For calculating skewness and kurtosis
 library(skimr)        # for summary stats
 library(flextable)    # for tables if you want - now tinytable
 library(tidyverse)    # For data wrangling and visualization
-```
 
-::: {.cell-output .cell-output-stderr}
-
-```
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ purrr::compose() masks flextable::compose()
-✖ dplyr::filter()  masks stats::filter()
-✖ dplyr::lag()     masks stats::lag()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
-
-
-:::
-
-```{.r .cell-code}
 # Set a consistent theme for our plots
 theme_set(theme_minimal(base_size = 12))
 ```
 :::
+
+
 
 
 
@@ -118,8 +105,9 @@ theme_set(theme_minimal(base_size = 12))
 ::: callout-tip
 ## Practice Exercise 1: Loading and Examining the Grayling Data
 
-We'll be working with data on arctic grayling fish from two different
-lakes (I3 and I8).
+We'll be working with data on arctic grayling fish from two different lakes (I3 and I8).
+
+
 
 
 
@@ -179,7 +167,11 @@ head(g_df)
 
 
 
+
+
 :::
+
+
 
 
 
@@ -269,6 +261,8 @@ g_df %>%
 
 
 
+
+
 # Questions to Consider:
 
 1.  What variables are in our dataset?
@@ -286,8 +280,9 @@ g_df %>%
 ::: callout-tip
 ## Practice Exercise 2: Measures of Central Tendency
 
-Let's recreate the basic histogram of fish lengths from our last class.
-Use the `sculpin_df` data frame that's already loaded.
+Let's recreate the basic histogram of fish lengths from our last class. Use the `sculpin_df` data frame that's already loaded.
+
+
 
 
 
@@ -330,7 +325,11 @@ median(g_df$length_mm)
 
 
 
+
+
 :::
+
+
 
 
 
@@ -368,13 +367,15 @@ g_df %>%
 
 
 
+
+
 ## Summarizing data - two ways
 
-lets say we want to summarize the data and need to get n, means,
-standard deviation, standard error
+lets say we want to summarize the data and need to get n, means, standard deviation, standard error
 
-We could do the following - if we had missing cells the code below would
-give an error
+We could do the following - if we had missing cells the code below would give an error
+
+
 
 
 
@@ -434,17 +435,19 @@ length(g_df$length_mm)
 
 
 
+
+
 -   **the length counts missing and non-missing data**
 
--   however this would get old if we had to do this for everything and
-    then to do it for the different groupings - lee and windward...
+-   however this would get old if we had to do this for everything and then to do it for the different groupings - lee and windward...
 
 ## We need to learn to pipe
 
 ### passes things from the dataframe to a command and so on...
 
--   the dataframe –\> pipe command that feed the dataframe into –\> next
-    command
+-   the dataframe –\> pipe command that feed the dataframe into –\> next command
+
+
 
 
 
@@ -475,7 +478,11 @@ g_df %>% summarize(mean_length = mean(length_mm, na.rm = TRUE))
 
 
 
+
+
 ## What is cool is we can do a lot of different things now
+
+
 
 
 
@@ -510,7 +517,11 @@ g_df %>%
 
 
 
+
+
 ## Super cool code in case there are missing values
+
+
 
 
 
@@ -545,10 +556,14 @@ g_df %>%
 
 
 
+
+
 # Now for Spread...
 
 ::: callout-tip
 ## Practice Exercise 3: Measures of Spread
+
+
 
 
 
@@ -593,10 +608,14 @@ var_length
 
 
 
+
+
 :::
 
 ::: callout-tip
 ## Exercise 4: Calculate Quartiles and Percentiles
+
+
 
 
 
@@ -642,9 +661,13 @@ data.frame(
 
 
 
+
+
 :::
 
 ### Note you could add a box plot by lake to see this if you wanted
+
+
 
 
 
@@ -669,13 +692,16 @@ g_df %>%
 
 
 
+
+
 ::: callout-tip
 ### Exercise 5: Calculate the Coefficient of Variation
 
-The coefficient of variation (CV) is the standard deviation expressed as
-a percentage of the mean:
+The coefficient of variation (CV) is the standard deviation expressed as a percentage of the mean:
 
 $$CV = \frac{s}{\bar{Y}} \times 100\%$$
+
+
 
 
 
@@ -703,7 +729,11 @@ sd_length / mean_length * 100
 
 
 
+
+
 :::
+
+
 
 
 
@@ -728,7 +758,7 @@ g_df %>%
 
 
 ```{=html}
-<div class="tabwid"><style>.cl-7ba7060e{}.cl-7ba3ad9c{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-7ba51c2c{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-7ba51c2d{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-7ba528fc{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ba528fd{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ba528fe{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ba528ff{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ba52906{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-7ba52907{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-7ba7060e'><thead><tr style="overflow-wrap:break-word;"><th class="cl-7ba528fc"><p class="cl-7ba51c2c"><span class="cl-7ba3ad9c">lake</span></p></th><th class="cl-7ba528fd"><p class="cl-7ba51c2d"><span class="cl-7ba3ad9c">mean_length</span></p></th><th class="cl-7ba528fd"><p class="cl-7ba51c2d"><span class="cl-7ba3ad9c">sd_length</span></p></th><th class="cl-7ba528fd"><p class="cl-7ba51c2d"><span class="cl-7ba3ad9c">cv_length</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-7ba528fe"><p class="cl-7ba51c2c"><span class="cl-7ba3ad9c">I3</span></p></td><td class="cl-7ba528ff"><p class="cl-7ba51c2d"><span class="cl-7ba3ad9c">265.6061</span></p></td><td class="cl-7ba528ff"><p class="cl-7ba51c2d"><span class="cl-7ba3ad9c">28.30378</span></p></td><td class="cl-7ba528ff"><p class="cl-7ba51c2d"><span class="cl-7ba3ad9c">10.65630</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-7ba52906"><p class="cl-7ba51c2c"><span class="cl-7ba3ad9c">I8</span></p></td><td class="cl-7ba52907"><p class="cl-7ba51c2d"><span class="cl-7ba3ad9c">362.5980</span></p></td><td class="cl-7ba52907"><p class="cl-7ba51c2d"><span class="cl-7ba3ad9c">52.33901</span></p></td><td class="cl-7ba52907"><p class="cl-7ba51c2d"><span class="cl-7ba3ad9c">14.43444</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-2e4b6fa6{}.cl-2e47db5c{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-2e49491a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-2e494924{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-2e495630{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2e495631{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2e49563a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2e49563b{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2e49563c{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2e495644{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-2e4b6fa6'><thead><tr style="overflow-wrap:break-word;"><th class="cl-2e495630"><p class="cl-2e49491a"><span class="cl-2e47db5c">lake</span></p></th><th class="cl-2e495631"><p class="cl-2e494924"><span class="cl-2e47db5c">mean_length</span></p></th><th class="cl-2e495631"><p class="cl-2e494924"><span class="cl-2e47db5c">sd_length</span></p></th><th class="cl-2e495631"><p class="cl-2e494924"><span class="cl-2e47db5c">cv_length</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-2e49563a"><p class="cl-2e49491a"><span class="cl-2e47db5c">I3</span></p></td><td class="cl-2e49563b"><p class="cl-2e494924"><span class="cl-2e47db5c">265.6061</span></p></td><td class="cl-2e49563b"><p class="cl-2e494924"><span class="cl-2e47db5c">28.30378</span></p></td><td class="cl-2e49563b"><p class="cl-2e494924"><span class="cl-2e47db5c">10.65630</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-2e49563c"><p class="cl-2e49491a"><span class="cl-2e47db5c">I8</span></p></td><td class="cl-2e495644"><p class="cl-2e494924"><span class="cl-2e47db5c">362.5980</span></p></td><td class="cl-2e495644"><p class="cl-2e494924"><span class="cl-2e47db5c">52.33901</span></p></td><td class="cl-2e495644"><p class="cl-2e494924"><span class="cl-2e47db5c">14.43444</span></p></td></tr></tbody></table></div>
 ```
 
 
@@ -740,24 +770,24 @@ g_df %>%
 
 
 
+
+
 ### Questions to Consider:
 
-1.  How do the means and medians compare within each lake? What might
-    this tell you about the distribution?
+1.  How do the means and medians compare within each lake? What might this tell you about the distribution?
 2.  Which lake has more variable fish lengths? How can you tell?
-3.  Why might the coefficient of variation be useful when comparing
-    variability between different measurements (e.g., length vs. mass)?
+3.  Why might the coefficient of variation be useful when comparing variability between different measurements (e.g., length vs. mass)?
 
 ## Part 3: Visualizing Distributions
 
-Visualizations can help us better understand the descriptive statistics
-we've calculated.
+Visualizations can help us better understand the descriptive statistics we've calculated.
 
 ::: callout-tip
 ### Exercise 6: Creating Histograms
 
-One of the best ways to look at data is a histogram - and we will do it
-again
+One of the best ways to look at data is a histogram - and we will do it again
+
+
 
 
 
@@ -781,9 +811,13 @@ g_df %>% ggplot(aes(x = length_mm)) +
 
 
 
+
+
 :::
 
 ### 
+
+
 
 
 
@@ -799,9 +833,11 @@ g_df  %>% ggplot(aes(x = length_mm, fill = lake)) +
 ```
 
 ::: {.cell-output-display}
-![](03_02_class_activity_files/figure-html/unnamed-chunk-12-1.png){width=672}
+![](03_02_class_activity_files/figure-html/unnamed-chunk-12-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -812,6 +848,8 @@ g_df  %>% ggplot(aes(x = length_mm, fill = lake)) +
 ### Exercise 7: Creating Box Plots
 
 Personally I like box plots
+
+
 
 
 
@@ -836,6 +874,8 @@ g_df  %>%  ggplot( aes(x = lake, y = length_mm, fill = lake)) +
 
 
 
+
+
 :::
 
 ### 
@@ -844,6 +884,8 @@ g_df  %>%  ggplot( aes(x = lake, y = length_mm, fill = lake)) +
 ### Exercise 9: Creating Density Plots
 
 Now these will be really important later on
+
+
 
 
 
@@ -867,54 +909,42 @@ g_df  %>%  ggplot(aes(x = length_mm, fill = lake)) +
 
 
 
+
+
 :::
 
 ### 
 
 ### Questions to Consider:
 
-1.  Which visualization best shows the differences in fish lengths
-    between lakes?
-2.  What can you learn from the violin plots that might not be apparent
-    from the box plots?
+1.  Which visualization best shows the differences in fish lengths between lakes?
+2.  What can you learn from the violin plots that might not be apparent from the box plots?
 3.  How would you interpret the cumulative frequency distribution?
-4.  What patterns or insights can you identify from these
-    visualizations?
+4.  What patterns or insights can you identify from these visualizations?
 
 ## Part 4: Interpreting the Results
 
 Based on our analysis, we can make the following observations:
 
-1.  **Lake Differences**: Fish from Lake I8 are generally larger than
-    those from Lake I3, both in length and mass.
+1.  **Lake Differences**: Fish from Lake I8 are generally larger than those from Lake I3, both in length and mass.
 
-2.  **Variability**: Lake I8 shows greater variability in fish lengths
-    and masses than Lake I3, as indicated by higher standard deviations
-    and IQRs.
+2.  **Variability**: Lake I8 shows greater variability in fish lengths and masses than Lake I3, as indicated by higher standard deviations and IQRs.
 
 3.  **Distribution Shape**:
 
     -   Lake I3 fish lengths are more symmetrically distributed.
-    -   Lake I8 fish lengths show a slight negative skew, suggesting a
-        few smaller fish pulling the distribution to the left.
+    -   Lake I8 fish lengths show a slight negative skew, suggesting a few smaller fish pulling the distribution to the left.
 
-4.  **Length-Mass Relationship**: Both lakes show a strong positive
-    correlation between fish length and mass, following an approximately
-    cubic relationship (mass increases with the cube of length).
+4.  **Length-Mass Relationship**: Both lakes show a strong positive correlation between fish length and mass, following an approximately cubic relationship (mass increases with the cube of length).
 
 ## Guided Questions for Deeper Understanding of descriptive statistics
 
-1.  **Biological Interpretation**: What ecological factors might explain
-    the differences in fish size between the two lakes?
+1.  **Biological Interpretation**: What ecological factors might explain the differences in fish size between the two lakes?
 
-2.  **Statistical Reasoning**: Why might we prefer to use the median and
-    IQR instead of the mean and standard deviation in some cases?
+2.  **Statistical Reasoning**: Why might we prefer to use the median and IQR instead of the mean and standard deviation in some cases?
 
-3.  **Data Visualization**: Which visualization method was most
-    effective for comparing the two lakes? Why?
+3.  **Data Visualization**: Which visualization method was most effective for comparing the two lakes? Why?
 
-4.  **Scientific Communication**: How would you concisely summarize
-    these findings in a scientific paper?
+4.  **Scientific Communication**: How would you concisely summarize these findings in a scientific paper?
 
-5.  **Further Analysis**: What additional analyses might be useful to
-    better understand this dataset?
+5.  **Further Analysis**: What additional analyses might be useful to better understand this dataset?

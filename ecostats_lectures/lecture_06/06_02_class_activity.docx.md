@@ -1,46 +1,15 @@
 ---
 title: "06_Class_Activity"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: true
-  warning: true
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+metadata-files:
+  - ../../_templates/activities.yml
 format:
   html:
-    output-file: "05_02_class_activity.html"
-    default: true
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch  # Limits line length to approximately 80 characters
-    css: ../../css/activity.css
-  docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    embed-resources: true
+    output-file: "06_02_class_activity.html"
   typst:
-    margin: 
-      x: 0.5in
-      y: 0.5in
-    fig-width: 4
-    fig-height: 4
-    fig-dpi: 300
-    number-sections: false
-    toc: false
-    output-file: "06_02_class_activity.pdf"
-editor: visual  
+      output-file: "06_02_class_activity.pdf"    
+  docx:
+    output-file: "06_02_class_activity.docx"
 ---
 
 
@@ -91,8 +60,48 @@ editor: visual
 # Load libraries
 library(patchwork)
 library(car)          # For diagnostic tests
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+Loading required package: carData
+```
+
+
+:::
+
+```{.r .cell-code}
 library(tidyverse)    # For data manipulation and visualization
 ```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+✖ dplyr::recode() masks car::recode()
+✖ purrr::some()   masks car::some()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+```
+
+
+:::
 :::
 
 
@@ -169,8 +178,7 @@ head(pine_data)
 
 # **Part 1:** Exploratory Data Analysis
 
-Before conducting hypothesis tests, we should always explore our data to
-understand its characteristics.
+Before conducting hypothesis tests, we should always explore our data to understand its characteristics.
 
 Let's calculate summary statistics and create visualizations.
 
@@ -237,8 +245,7 @@ print(pine_summary)
 ::: {.column width="60%"}
 **Activity: Create visualizations of pine needle length**
 
-Create a histogram and a boxplot to visualize the distribution of pine
-needle length values.
+Create a histogram and a boxplot to visualize the distribution of pine needle length values.
 :::
 
 ::: {.column width="40%"}
@@ -276,7 +283,7 @@ ggplot(pine_data, aes(x = length_mm)) +
 ```
 
 ::: {.cell-output-display}
-![](06_02_class_activity_files/figure-docx/visualize-1.png)
+![](06_02_class_activity_files/figure-docx/visualize-1.jpeg)
 :::
 
 ```{.r .cell-code}
@@ -325,7 +332,7 @@ pine_data %>%
 ```
 
 ::: {.cell-output-display}
-![](06_02_class_activity_files/figure-docx/density_dist-1.png)
+![](06_02_class_activity_files/figure-docx/density_dist-1.jpeg)
 :::
 :::
 
@@ -381,11 +388,9 @@ pine_summary %>%
 
 # **Part 1:** Two Sample T-Test
 
-Now, let's compare pine needle lengths between windward and leeward
-sides of trees.
+Now, let's compare pine needle lengths between windward and leeward sides of trees.
 
-Question: **Is there a significant difference in needle length between
-the windward and leeward sides?**
+Question: **Is there a significant difference in needle length between the windward and leeward sides?**
 
 This requires a two-sample t-test.
 
@@ -395,11 +400,8 @@ Two-sample t-test compares means from two independent groups.
 
 where:
 
--   x̄₁ and x̄₂: These represent the sample means of the two groups you're
-    comparing 
--   s²ₚ: This is the pooled variance, calculated as: s²ₚ = \[(n₁ -
-    1)s₁² + (n₂ - 1)s₂²\] / (n₁ + n₂ - 2), where s₁² and s₂² are the
-    sample variances of the two groups.
+-   x̄₁ and x̄₂: These represent the sample means of the two groups you're comparing 
+-   s²ₚ: This is the pooled variance, calculated as: s²ₚ = \[(n₁ - 1)s₁² + (n₂ - 1)s₂²\] / (n₁ + n₂ - 2), where s₁² and s₂² are the sample variances of the two groups.
 -   **n₁ and n₂:** These are the sample sizes of the two groups.
 -   **√(1/n₁ + 1/n₂):** This represents the pooled standard error.
 
@@ -440,7 +442,7 @@ qqPlot(pine_data$length_mm,
 ```
 
 ::: {.cell-output-display}
-![](06_02_class_activity_files/figure-docx/unnamed-chunk-3-1.png)
+![](06_02_class_activity_files/figure-docx/unnamed-chunk-3-1.jpeg)
 :::
 
 ::: {.cell-output .cell-output-stdout}
@@ -632,8 +634,7 @@ group  1  1.2004 0.2789
 
 **Activity: Conduct a two-sample t-test**
 
-Now we can compare the mean pine needle lengths between windward and
-leeward sides.
+Now we can compare the mean pine needle lengths between windward and leeward sides.
 
 H₀: μ₁ = μ₂ (The mean needle lengths are equal)
 
@@ -715,15 +716,11 @@ sample estimates:
 ::: {.column width="60%"}
 **Activity: Interpret the results of the two-sample t-test**
 
-What can we conclude about the needle lengths on windward vs. leeward
-sides?
+What can we conclude about the needle lengths on windward vs. leeward sides?
 
 **How to report this result in a scientific paper:**
 
-"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no
-significant\] difference in needle length between windward (M = ..., SD
-= ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) =
-..., p = ...."
+"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no significant\] difference in needle length between windward (M = ..., SD = ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) = ..., p = ...."
 :::
 
 ::: {.column width="40%"}
@@ -733,23 +730,15 @@ significant\] difference in needle length between windward (M = ..., SD
 
 # What is Power
 
-Statistical power represents the probability of detecting a true effect
-(rejecting the null hypothesis when it is false). In this case, with a
-power of 97%, there's a 97% chance of detecting a true difference of 30
-units between the means of the two groups if such a difference actually
-exists.
+Statistical power represents the probability of detecting a true effect (rejecting the null hypothesis when it is false). In this case, with a power of 97%, there's a 97% chance of detecting a true difference of 30 units between the means of the two groups if such a difference actually exists.
 
 A power analysis like this is typically done for one of these purposes:
 
 1.  Before data collection to determine required sample size
 2.  After a study to evaluate if the sample size was adequate
-3.  To determine the minimum detectable effect size with the given
-    sample
+3.  To determine the minimum detectable effect size with the given sample
 
-With 97% power, this test has excellent ability to detect the specified
-effect size. Generally, **80% power is considered acceptable**, so 97%
-indicates a very well-powered study for detecting a difference of 30mm
-between the groups.
+With 97% power, this test has excellent ability to detect the specified effect size. Generally, **80% power is considered acceptable**, so 97% indicates a very well-powered study for detecting a difference of 30mm between the groups.
 
 
 
@@ -817,8 +806,7 @@ NOTE: n is number in *each* group
 
 # Now to make a final plot
 
-Typically we will make a plot that has the mean and standard error on it
-to represent the data
+Typically we will make a plot that has the mean and standard error on it to represent the data
 
 ## your Task is to make this plot
 
@@ -841,7 +829,7 @@ pine_mean_se
 ```
 
 ::: {.cell-output-display}
-![](06_02_class_activity_files/figure-docx/unnamed-chunk-9-1.png)
+![](06_02_class_activity_files/figure-docx/unnamed-chunk-9-1.jpeg)
 :::
 :::
 
@@ -871,15 +859,10 @@ In this activity, we've:
 
 # Reflection Questions
 
-After completing the activities, discuss these questions with your
-group:
+After completing the activities, discuss these questions with your group:
 
-1.  How does sample size affect our confidence in estimating the
-    population mean?
-2.  Why is the t-distribution more appropriate than the normal
-    distribution when working with small samples?
-3.  When comparing two populations, what can we learn from looking at
-    confidence intervals versus performing a t-test?
-4.  How would you explain the concept of statistical significance to
-    someone who has never taken a statistics course?
+1.  How does sample size affect our confidence in estimating the population mean?
+2.  Why is the t-distribution more appropriate than the normal distribution when working with small samples?
+3.  When comparing two populations, what can we learn from looking at confidence intervals versus performing a t-test?
+4.  How would you explain the concept of statistical significance to someone who has never taken a statistics course?
 5.  What do we do if assumptions FAIL!!!

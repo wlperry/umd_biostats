@@ -7,8 +7,12 @@ format:
   html:
     output-file: "08_02_class_activity_html.html"
   typst:
-    output-file: "08_02_class_activity.pdf" 
+    output-file: "08_02_class_activity.pdf"   
+  docx:
+    output-file: "08_02_class_activity.docx"
 ---
+
+
 
 
 
@@ -40,32 +44,13 @@ Let's start by exploring these concepts with hands-on examples!
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Load required packages
 library(tidyverse)  # For data manipulation and visualization
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
-
-
-:::
-
-```{.r .cell-code}
 library(patchwork)  # For combining plots
 library(pwr)        # For power analysis
 
@@ -73,6 +58,8 @@ library(pwr)        # For power analysis
 set.seed(42)
 ```
 :::
+
+
 
 
 
@@ -122,6 +109,8 @@ Think about pine trees on campus. Write down 2-3 specific research questions abo
 Let's simulate data for different types of studies to understand their strengths and limitations.
 
 ## Natural Experiment: Wind Exposure Study
+
+
 
 
 
@@ -197,6 +186,8 @@ natural_plot
 
 
 
+
+
 ::: callout-note
 ## Natural Experiments: Pros and Cons
 
@@ -208,6 +199,8 @@ natural_plot
 :::
 
 ## Manipulative Experiment: Controlled Wind Study
+
+
 
 
 
@@ -261,6 +254,8 @@ manipulative_plot
 
 
 
+
+
 ::: callout-tip
 ## Manipulative Experiments: Key Features
 
@@ -274,6 +269,8 @@ manipulative_plot
 # **Part 4:** Identifying Proper Replication
 
 One of the most common mistakes in ecological studies is pseudoreplication. Let's practice identifying true replication vs. pseudoreplication.
+
+
 
 
 
@@ -337,6 +334,8 @@ pseudo_plot + true_plot
 
 
 
+
+
 ::: callout-warning
 ## Pseudoreplication Alert!
 
@@ -390,6 +389,8 @@ For each scenario, identify if there's proper replication or pseudoreplication:
 Power analysis helps us determine how many samples we need to detect an effect if it really exists.
 
 ## A Priori Power Analysis (Before Data Collection)
+
+
 
 
 
@@ -497,6 +498,8 @@ We need 24 trees per group for 80% power
 
 
 
+
+
 ::: callout-tip
 ## Understanding Effect Size (Cohen's d)
 
@@ -508,6 +511,8 @@ We need 24 trees per group for 80% power
 :::
 
 ## Visualizing Power Curves
+
+
 
 
 
@@ -572,7 +577,11 @@ power_curve_plot
 
 
 
+
+
 ## Post Hoc Power Analysis (After Data Collection)
+
+
 
 
 
@@ -654,6 +663,8 @@ This study was underpowered! A non-significant result might be due to insufficie
 
 
 
+
+
 ::: callout-important
 ## Activity 3: Power Analysis Practice
 
@@ -663,6 +674,8 @@ This study was underpowered! A non-significant result might be due to insufficie
 -   \- Drought-stressed trees: mean = 75mm, SD = 10mm
 
 **Calculate the following:**
+
+
 
 
 
@@ -710,6 +723,8 @@ print(paste("Power with n=12:", round(limited_power$power * 100, 1), "%"))
 
 
 
+
+
 **Questions:** 1. What is the effect size for this drought study? 2. How many trees do you need per group for 80% power? 3. If you can only sample 12 trees per group, what power will you have?
 :::
 
@@ -718,6 +733,8 @@ print(paste("Power with n=12:", round(limited_power$power * 100, 1), "%"))
 Different research questions require different sampling approaches. Let's explore the main types.
 
 ## Simple Random Sampling
+
+
 
 
 
@@ -762,7 +779,11 @@ campus_plot
 
 
 
+
+
 ## Stratified Sampling
+
+
 
 
 
@@ -817,7 +838,11 @@ stratified_plot
 
 
 
+
+
 ## Systematic Sampling
+
+
 
 
 
@@ -860,6 +885,8 @@ systematic_plot
 ![](08_02_class_activity_files/figure-typst/systematic_sampling-1.svg)
 :::
 :::
+
+
 
 
 
@@ -910,6 +937,8 @@ systematic_plot
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -936,6 +965,8 @@ print(power_result)
 
 
 
+
+
 3.  **Controls:** What controls will you include? Consider both positive and negative controls.
     -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 4.  **Randomization:** How will you randomize tree assignment to treatments?
@@ -952,6 +983,8 @@ print(power_result)
 # **Part 8:** Analyzing Your Designed Study
 
 Let's simulate data from the study you designed and analyze it:
+
+
 
 
 
@@ -1098,6 +1131,8 @@ Observed effect size (Cohen's d): 0.99
 
 :::
 :::
+
+
 
 
 

@@ -1,46 +1,15 @@
 ---
 title: "08_Class_Activity"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: true
-  warning: true
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+metadata-files:
+  - ../../_templates/activities.yml
 format:
   html:
     output-file: "08_02_class_activity_html.html"
-    default: true
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch  # Limits line length to approximately 80 characters
-    css: ../../css/activity.css
-  docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    embed-resources: true
   typst:
-    margin: 
-      x: 0.5in
-      y: 0.5in
-    fig-width: 4
-    fig-height: 4
-    fig-dpi: 300
-    number-sections: false
-    toc: false
-    output-file: "08_02_class_activity.pdf"
-editor: visual  
+    output-file: "08_02_class_activity.pdf"   
+  docx:
+    output-file: "08_02_class_activity.docx"
 ---
 
 
@@ -55,8 +24,7 @@ editor: visual
 
 ## Introduction
 
-This document demonstrates key concepts in experimental design using
-ecological examples, focusing on:
+This document demonstrates key concepts in experimental design using ecological examples, focusing on:
 
 1.  **Formulating research questions**
 2.  **Understanding different study designs**
@@ -83,6 +51,27 @@ Let's start by exploring these concepts with hands-on examples!
 ```{.r .cell-code}
 # Load required packages
 library(tidyverse)  # For data manipulation and visualization
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+```
+
+
+:::
+
+```{.r .cell-code}
 library(patchwork)  # For combining plots
 library(pwr)        # For power analysis
 
@@ -101,22 +90,19 @@ set.seed(42)
 ::: callout-tip
 ## Package Overview
 
--   **tidyverse**: Collection of packages for data science (includes
-    ggplot2, dplyr, etc.)
+-   **tidyverse**: Collection of packages for data science (includes ggplot2, dplyr, etc.)
 -   **patchwork**: Easily combine multiple ggplot2 plots
 -   **pwr**: Functions for power analysis and sample size calculations
 :::
 
 # **Part 2:** Formulating Research Questions
 
-Before we design any study, we need clear research questions. Let's
-practice with pine needle ecology.
+Before we design any study, we need clear research questions. Let's practice with pine needle ecology.
 
 ::: callout-important
 ## Activity 1: Research Question Practice
 
-Think about pine trees on campus. Write down 2-3 specific research
-questions about:
+Think about pine trees on campus. Write down 2-3 specific research questions about:
 
 -   \- Pine needle characteristics (length, density, color)
 
@@ -127,8 +113,7 @@ questions about:
 **Example questions:**
 
 -   \- Does wind exposure affect pine needle length?
--   \- Do pine needles on south-facing branches differ from north-facing
-    branches?
+-   \- Do pine needles on south-facing branches differ from north-facing branches?
 -   \- Does tree size influence needle density?
 
 **Your questions:**
@@ -142,8 +127,7 @@ questions about:
 
 # **Part 3:** Understanding Study Design Types
 
-Let's simulate data for different types of studies to understand their
-strengths and limitations.
+Let's simulate data for different types of studies to understand their strengths and limitations.
 
 ## Natural Experiment: Wind Exposure Study
 
@@ -214,7 +198,7 @@ natural_plot
 ```
 
 ::: {.cell-output-display}
-![](08_02_class_activity_files/figure-docx/unnamed-chunk-1-1.png)
+![](08_02_class_activity_files/figure-docx/unnamed-chunk-1-1.jpeg)
 :::
 :::
 
@@ -228,15 +212,11 @@ natural_plot
 ::: callout-note
 ## Natural Experiments: Pros and Cons
 
--   **Advantages:** - Realistic conditions - Large scale possible -
-    Cost-effective
+-   **Advantages:** - Realistic conditions - Large scale possible - Cost-effective
 
--   **Disadvantages:** - Cannot control confounding variables - Cannot
-    determine causation direction - Many unmeasured factors might
-    influence results
+-   **Disadvantages:** - Cannot control confounding variables - Cannot determine causation direction - Many unmeasured factors might influence results
 
-**Question:** What other factors besides wind might differ between
-"exposed" and "sheltered" locations?
+**Question:** What other factors besides wind might differ between "exposed" and "sheltered" locations?
 :::
 
 ## Manipulative Experiment: Controlled Wind Study
@@ -286,7 +266,7 @@ manipulative_plot
 ```
 
 ::: {.cell-output-display}
-![](08_02_class_activity_files/figure-docx/manipulative_experiment-1.png)
+![](08_02_class_activity_files/figure-docx/manipulative_experiment-1.jpeg)
 :::
 :::
 
@@ -300,21 +280,16 @@ manipulative_plot
 ::: callout-tip
 ## Manipulative Experiments: Key Features
 
-**Advantages:** - Can establish causation - Control confounding
-variables - Random assignment eliminates bias
+**Advantages:** - Can establish causation - Control confounding variables - Random assignment eliminates bias
 
-**Disadvantages:** - Often smaller scale - May not reflect natural
-conditions - Can be expensive and logistically challenging
+**Disadvantages:** - Often smaller scale - May not reflect natural conditions - Can be expensive and logistically challenging
 
-**Key Question:** Which experiment gives stronger evidence for
-causation?
+**Key Question:** Which experiment gives stronger evidence for causation?
 :::
 
 # **Part 4:** Identifying Proper Replication
 
-One of the most common mistakes in ecological studies is
-pseudoreplication. Let's practice identifying true replication vs.
-pseudoreplication.
+One of the most common mistakes in ecological studies is pseudoreplication. Let's practice identifying true replication vs. pseudoreplication.
 
 
 
@@ -371,7 +346,7 @@ pseudo_plot + true_plot
 ```
 
 ::: {.cell-output-display}
-![](08_02_class_activity_files/figure-docx/pseudoreplication_examples-1.png)
+![](08_02_class_activity_files/figure-docx/pseudoreplication_examples-1.jpeg)
 :::
 :::
 
@@ -409,26 +384,21 @@ pseudo_plot + true_plot
 ::: callout-important
 ## Activity 2: Replication Practice
 
-For each scenario, identify if there's proper replication or
-pseudoreplication:
+For each scenario, identify if there's proper replication or pseudoreplication:
 
-**Scenario A:** Testing fertilizer effects by using 1 large pot with
-fertilizer containing 10 pine seedlings, and 1 control pot with 10
-seedlings.
+**Scenario A:** Testing fertilizer effects by using 1 large pot with fertilizer containing 10 pine seedlings, and 1 control pot with 10 seedlings.
 
 \- **Your answer:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 \- **Fix:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-**Scenario B:** Testing altitude effects by measuring needle length on 5
-trees at 1000m elevation and 5 trees at 2000m elevation.
+**Scenario B:** Testing altitude effects by measuring needle length on 5 trees at 1000m elevation and 5 trees at 2000m elevation.
 
 \- **Your answer:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 \- **Fix:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-**Scenario C:** Testing soil pH by measuring 20 needles each from 10
-trees in acidic soil and 10 trees in basic soil.
+**Scenario C:** Testing soil pH by measuring 20 needles each from 10 trees in acidic soil and 10 trees in basic soil.
 
 \- **Your answer:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
@@ -437,8 +407,7 @@ trees in acidic soil and 10 trees in basic soil.
 
 # **Part 5:** Power Analysis - Planning Your Study
 
-Power analysis helps us determine how many samples we need to detect an
-effect if it really exists.
+Power analysis helps us determine how many samples we need to detect an effect if it really exists.
 
 ## A Priori Power Analysis (Before Data Collection)
 
@@ -620,7 +589,7 @@ power_curve_plot
 ```
 
 ::: {.cell-output-display}
-![](08_02_class_activity_files/figure-docx/power_curves-1.png)
+![](08_02_class_activity_files/figure-docx/power_curves-1.jpeg)
 :::
 :::
 
@@ -720,8 +689,7 @@ This study was underpowered! A non-significant result might be due to insufficie
 ::: callout-important
 ## Activity 3: Power Analysis Practice
 
-**Scenario:** You want to study the effect of drought stress on pine
-needle length. Based on literature, you expect:
+**Scenario:** You want to study the effect of drought stress on pine needle length. Based on literature, you expect:
 
 -   \- Control trees: mean = 85mm, SD = 10mm
 -   \- Drought-stressed trees: mean = 75mm, SD = 10mm
@@ -778,15 +746,12 @@ print(paste("Power with n=12:", round(limited_power$power * 100, 1), "%"))
 
 
 
-**Questions:** 1. What is the effect size for this drought study? 2. How
-many trees do you need per group for 80% power? 3. If you can only
-sample 12 trees per group, what power will you have?
+**Questions:** 1. What is the effect size for this drought study? 2. How many trees do you need per group for 80% power? 3. If you can only sample 12 trees per group, what power will you have?
 :::
 
 # **Part 6:** Sampling Design Strategies
 
-Different research questions require different sampling approaches.
-Let's explore the main types.
+Different research questions require different sampling approaches. Let's explore the main types.
 
 ## Simple Random Sampling
 
@@ -826,7 +791,7 @@ campus_plot
 ```
 
 ::: {.cell-output-display}
-![](08_02_class_activity_files/figure-docx/random_sampling-1.png)
+![](08_02_class_activity_files/figure-docx/random_sampling-1.jpeg)
 :::
 :::
 
@@ -885,7 +850,7 @@ stratified_plot
 ```
 
 ::: {.cell-output-display}
-![](08_02_class_activity_files/figure-docx/stratified_sampling-1.png)
+![](08_02_class_activity_files/figure-docx/stratified_sampling-1.jpeg)
 :::
 :::
 
@@ -938,7 +903,7 @@ systematic_plot
 ```
 
 ::: {.cell-output-display}
-![](08_02_class_activity_files/figure-docx/systematic_sampling-1.png)
+![](08_02_class_activity_files/figure-docx/systematic_sampling-1.jpeg)
 :::
 :::
 
@@ -976,17 +941,13 @@ systematic_plot
 ::: callout-important
 ## Activity 4: Complete Study Design
 
-**Research Question:** Does fertilizer application affect pine needle
-length?
+**Research Question:** Does fertilizer application affect pine needle length?
 
 **Design your study by answering these questions:**
 
-1.  **Study Type:** Will this be a natural experiment or manipulative
-    experiment? Why?
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-2.  **Sample Size:** Using the following parameters, calculate required
-    sample size:
+1.  **Study Type:** Will this be a natural experiment or manipulative experiment? Why?
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+2.  **Sample Size:** Using the following parameters, calculate required sample size:
     -   Expected control mean: 80mm
     -   Expected fertilized mean: 88mm\
     -   Expected SD for both groups: 10mm
@@ -1027,28 +988,17 @@ print(power_result)
 
 
 
-3.  **Controls:** What controls will you include? Consider both positive
-    and negative controls.
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-4.  **Randomization:** How will you randomize tree assignment to
-    treatments?
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-5.  **Replication:** How will you ensure proper replication? What would
-    be pseudoreplication?
-    -   Proper replication:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-    -   Pseudoreplication to avoid:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-6.  **Independence:** What factors might violate independence? How will
-    you address them?
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-7.  **Potential Confounds:** What other variables might affect needle
-    length that you need to control for?
-    -   Your answer:
-        \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+3.  **Controls:** What controls will you include? Consider both positive and negative controls.
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+4.  **Randomization:** How will you randomize tree assignment to treatments?
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+5.  **Replication:** How will you ensure proper replication? What would be pseudoreplication?
+    -   Proper replication: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+    -   Pseudoreplication to avoid: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+6.  **Independence:** What factors might violate independence? How will you address them?
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+7.  **Potential Confounds:** What other variables might affect needle length that you need to control for?
+    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 :::
 
 # **Part 8:** Analyzing Your Designed Study
@@ -1128,7 +1078,7 @@ study_plot
 ```
 
 ::: {.cell-output-display}
-![](08_02_class_activity_files/figure-docx/unnamed-chunk-3-1.png)
+![](08_02_class_activity_files/figure-docx/unnamed-chunk-3-1.jpeg)
 :::
 :::
 
@@ -1215,14 +1165,11 @@ Observed effect size (Cohen's d): 0.99
 ::: callout-tip
 ## What We Learned Today
 
-1.  **Study Design Matters:** Statistics cannot fix a poorly designed
-    study
-2.  **Replication:** Must be at the appropriate scale for your research
-    question
+1.  **Study Design Matters:** Statistics cannot fix a poorly designed study
+2.  **Replication:** Must be at the appropriate scale for your research question
 3.  **Controls:** Essential for ruling out alternative explanations
 4.  **Power Analysis:** Plan your sample size before collecting data
-5.  **Sampling Strategy:** Choose the approach that best fits your
-    research question
+5.  **Sampling Strategy:** Choose the approach that best fits your research question
 6.  **Integration:** Good analysis flows naturally from good design
 
 **Remember:**
@@ -1236,14 +1183,10 @@ Observed effect size (Cohen's d): 0.99
 ::: callout-warning
 ## Common Pitfalls to Avoid
 
-1.  **Pseudoreplication:** Taking multiple measurements from the same
-    experimental unit
-2.  **Inadequate Power:** Collecting too few samples to detect
-    meaningful effects
-3.  **Poor Controls:** Not controlling for important confounding
-    variables
-4.  **Non-random Sampling:** Introducing bias through convenience
-    sampling
+1.  **Pseudoreplication:** Taking multiple measurements from the same experimental unit
+2.  **Inadequate Power:** Collecting too few samples to detect meaningful effects
+3.  **Poor Controls:** Not controlling for important confounding variables
+4.  **Non-random Sampling:** Introducing bias through convenience sampling
 5.  **HARKing:** Hypothesizing After Results are Known
 
 **The Golden Rule:** Plan your analysis when you plan your experiment!

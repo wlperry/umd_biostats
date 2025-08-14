@@ -77,8 +77,7 @@ Covered
 -   Data: the raw material of science
 -   Wide variety of formats, sizes, complexity
 -   Data management and curation often under emphasized
--   Good data management: owe it to our funding agencies, colleagues,
-    supervisors, and study systems
+-   Good data management: owe it to our funding agencies, colleagues, supervisors, and study systems
 :::
 
 ::: {.column width="40%"}
@@ -101,8 +100,7 @@ Covered
 7.  **Ensure tidy data principles** from the start
 
 ::: callout-note
-See Hadley Wickham's [Tidy Data
-principles](https://r4ds.hadley.nz/data-tidy.html) for best practices
+See Hadley Wickham's [Tidy Data principles](https://r4ds.hadley.nz/data-tidy.html) for best practices
 :::
 ::::
 
@@ -135,10 +133,7 @@ Create a **Metadata Sheet** that includes:
 ::: callout-tip
 ### Practice Exercise 1: Pine Data Organization
 
-Let's examine our pine needle data: - What naming conventions did you
-choose? - How did you organize the data? - How can you verify data
-formats (numeric vs categorical)? - What's your plan for organizing
-outputs and figures?
+Let's examine our pine needle data: - What naming conventions did you choose? - How did you organize the data? - How can you verify data formats (numeric vs categorical)? - What's your plan for organizing outputs and figures?
 
 
 
@@ -215,8 +210,7 @@ pine_df
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-127112346.png){width="100" height="80"}
-![](images/clipboard-3792512345.png){width="128" height="100"}
+![](images/clipboard-127112346.png){width="100" height="80"} ![](images/clipboard-3792512345.png){width="128" height="100"}
 :::
 :::::
 
@@ -315,8 +309,7 @@ Create a histogram of pine needle lengths to check the distribution:
 :::
 
 ::: {.column width="40%"}
-A good way to organize script files is number them in the order they get
-run.
+A good way to organize script files is number them in the order they get run.
 
 ![](images/clipboard-2204984243.png){width="300" height="250"}
 :::
@@ -335,9 +328,7 @@ run.
 -   What characteristics define a "good" plot?
 -   What common mistakes make plots ineffective?
 
-[Napoleon's Disastrous Invasion of Russia Detailed in an 1869 Data
-Visualization: It's Been Called "the Best Statistical Graphic Ever
-Drawn"](https://www.openculture.com/2019/07/napoleons-disastrous-invasion-of-russia-explained-in-an-1869-data-visualization.html)
+[Napoleon's Disastrous Invasion of Russia Detailed in an 1869 Data Visualization: It's Been Called "the Best Statistical Graphic Ever Drawn"](https://www.openculture.com/2019/07/napoleons-disastrous-invasion-of-russia-explained-in-an-1869-data-visualization.html)
 :::
 
 ::: {.column width="40%"}
@@ -349,8 +340,7 @@ Drawn"](https://www.openculture.com/2019/07/napoleons-disastrous-invasion-of-rus
 
 **How readable are tables?**
 
-We will get to what these number mean and how to make them in the next
-lecture.
+We will get to what these number mean and how to make them in the next lecture.
 
 -   Tables
     -   are they useful in a presentation?
@@ -436,9 +426,7 @@ lecture.
 
 # **Lecture 2:** Principles of Effective Graphics
 
-According to [Tufte
-(2001)](https://www.edwardtufte.com/book/the-visual-display-of-quantitative-information/),
-good scientific graphics:
+According to [Tufte (2001)](https://www.edwardtufte.com/book/the-visual-display-of-quantitative-information/), good scientific graphics:
 
 1.  **Show the data** without distortion
 2.  **Maximize data-ink ratio** (minimize non-data elements)
@@ -491,9 +479,7 @@ good scientific graphics:
 
 ::::: columns
 ::: {.column width="60%"}
-According to [Tufte
-(2001)](https://www.edwardtufte.com/book/the-visual-display-of-quantitative-information/),
-good scientific graphics:
+According to [Tufte (2001)](https://www.edwardtufte.com/book/the-visual-display-of-quantitative-information/), good scientific graphics:
 
 -   To implement these principles:
     -   Focus on the data, not decorative elements
@@ -540,8 +526,7 @@ To make good graphics:
 
 -   Above all, focus on data
 -   Do not distort data
--   Graphical representation of numbers → directly proportional to
-    numbers
+-   Graphical representation of numbers → directly proportional to numbers
 -   Strive for clarity through labeling
 -   Maximize data-ink ratio
     -   Remove non-data ink

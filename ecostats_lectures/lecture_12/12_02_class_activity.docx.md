@@ -1,50 +1,16 @@
 ---
 title: "Lecture 12 - Factorial ANOVA of Limpet Egg Production"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: true
-  warning: true
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+metadata-files:
+  - ../../_templates/activities.yml
 format:
   html:
     output-file: "12_02_class_activity.html"
-    default: true
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch  # Limits line length to approximately 80 characters
-    css: ../../css/activity.css
-  docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    embed-resources: true
   typst:
-    margin: 
-      x: 0.5in
-      y: 0.5in
-    fig-width: 4
-    fig-height: 4
-    fig-dpi: 300
-    number-sections: false
-    toc: false
-    output-file: "12_02_class_activity.pdf"
-editor: visual  
+    output-file: "12_02_class_activity.pdf"  
+  docx:
+    output-file: "12_02_class_activity.docx"
 ---
-
-
-
 
 
 
@@ -54,9 +20,6 @@ editor: visual
 # Lecture 12: Factorial ANOVA
 
 The set up and data overview
-
-
-
 
 
 
@@ -150,9 +113,6 @@ l_df %>%
 
 
 
-
-
-
 # Lecture 12: Factorial ANOVA
 
 ## ANOVA Assumptions
@@ -165,9 +125,6 @@ assumptions:
 3.  Homogeneity of variances
 
 Fit the model
-
-
-
 
 
 
@@ -246,15 +203,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
-
-
-
 # Lecture 12: Factorial ANOVA
 
 ## ASSUMPTIONS
-
-
-
 
 
 
@@ -269,7 +220,7 @@ plot(l_model)
 ```
 
 ::: {.cell-output-display}
-![](12_02_class_activity_files/figure-docx/model_diagnostics-1.png)
+![](12_02_class_activity_files/figure-docx/model_diagnostics-1.jpeg)
 :::
 
 ```{.r .cell-code}
@@ -281,13 +232,7 @@ par(mfrow = c(1, 1))
 
 
 
-
-
-
 ## Check for Normality of Residuals
-
-
-
 
 
 
@@ -309,12 +254,9 @@ ggplot(l_resid, aes(sample = .resid)) +
 ```
 
 ::: {.cell-output-display}
-![](12_02_class_activity_files/figure-docx/normality_1-1.png)
+![](12_02_class_activity_files/figure-docx/normality_1-1.jpeg)
 :::
 :::
-
-
-
 
 
 
@@ -323,9 +265,6 @@ ggplot(l_resid, aes(sample = .resid)) +
 # Lecture 12: Factorial ANOVA
 
 ## Check for Normality of Residuals
-
-
-
 
 
 
@@ -343,12 +282,9 @@ ggplot(l_resid, aes(x = .resid)) +
 ```
 
 ::: {.cell-output-display}
-![](12_02_class_activity_files/figure-docx/normality_2-1.png)
+![](12_02_class_activity_files/figure-docx/normality_2-1.jpeg)
 :::
 :::
-
-
-
 
 
 
@@ -357,9 +293,6 @@ ggplot(l_resid, aes(x = .resid)) +
 # Lecture 12: Factorial ANOVA
 
 ## Check for Normality of Residuals
-
-
-
 
 
 
@@ -408,13 +341,7 @@ W = 0.97373, p-value = 0.7587
 
 
 
-
-
-
 # Lecture 12: Factorial ANOVA
-
-
-
 
 
 
@@ -444,15 +371,9 @@ group  7  0.3337 0.9268
 
 
 
-
-
-
 # Lecture 12: Factorial ANOVA
 
 ## Check for homogeneity of variances
-
-
-
 
 
 
@@ -468,12 +389,9 @@ ggplot(l_resid, aes(x = .fitted, y = .resid)) +
 ```
 
 ::: {.cell-output-display}
-![](12_02_class_activity_files/figure-docx/homogeneity_2-1.png)
+![](12_02_class_activity_files/figure-docx/homogeneity_2-1.jpeg)
 :::
 :::
-
-
-
 
 
 
@@ -482,9 +400,6 @@ ggplot(l_resid, aes(x = .fitted, y = .resid)) +
 # Lecture 12: Factorial ANOVA
 
 ## Check for homogeneity of variances
-
-
-
 
 
 
@@ -504,12 +419,9 @@ ggplot(l_df, aes(x = interaction(density, season), y = residuals)) +
 ```
 
 ::: {.cell-output-display}
-![](12_02_class_activity_files/figure-docx/homogeneity_3-1.png)
+![](12_02_class_activity_files/figure-docx/homogeneity_3-1.jpeg)
 :::
 :::
-
-
-
 
 
 
@@ -518,9 +430,6 @@ ggplot(l_df, aes(x = interaction(density, season), y = residuals)) +
 # Lecture 12: Factorial ANOVA
 
 ## Estimated Marginal Means and Effects
-
-
-
 
 
 
@@ -578,13 +487,7 @@ P value adjustment: tukey method for comparing a family of 4 estimates
 
 
 
-
-
-
 ## Estimated Marginal Means and Effects
-
-
-
 
 
 
@@ -597,12 +500,9 @@ plot(density_emm)
 ```
 
 ::: {.cell-output-display}
-![](12_02_class_activity_files/figure-docx/emmeans_lm_2-1.png)
+![](12_02_class_activity_files/figure-docx/emmeans_lm_2-1.jpeg)
 :::
 :::
-
-
-
 
 
 
@@ -611,9 +511,6 @@ plot(density_emm)
 # Lecture 12: Factorial ANOVA
 
 ## Estimated Marginal Means and Effects
-
-
-
 
 
 
@@ -683,15 +580,9 @@ Results are averaged over the levels of: density
 
 
 
-
-
-
 # Lecture 12: Factorial ANOVA
 
 ## Estimated Marginal Means and Effects
-
-
-
 
 
 
@@ -709,12 +600,9 @@ plot(season_emm)
 ```
 
 ::: {.cell-output-display}
-![](12_02_class_activity_files/figure-docx/emmeans_lm_4-1.png)
+![](12_02_class_activity_files/figure-docx/emmeans_lm_4-1.jpeg)
 :::
 :::
-
-
-
 
 
 
@@ -723,9 +611,6 @@ plot(season_emm)
 # Lecture 12: Factorial ANOVA
 
 ## Estimated Marginal Means and Effects
-
-
-
 
 
 
@@ -823,15 +708,9 @@ l_df %>%
 
 
 
-
-
-
 # Lecture 12: Factorial ANOVA
 
 ## Estimated Marginal Means and Effects
-
-
-
 
 
 
@@ -856,12 +735,9 @@ emmip(l_model, season ~ density, CIs = TRUE)
 ```
 
 ::: {.cell-output-display}
-![](12_02_class_activity_files/figure-docx/emmeans_lm_6-1.png)
+![](12_02_class_activity_files/figure-docx/emmeans_lm_6-1.jpeg)
 :::
 :::
-
-
-
 
 
 
@@ -870,9 +746,6 @@ emmip(l_model, season ~ density, CIs = TRUE)
 # Lecture 12: Factorial ANOVA
 
 ## Estimated Marginal Means and Effects
-
-
-
 
 
 
@@ -915,15 +788,9 @@ Confidence level used: 0.95
 
 
 
-
-
-
 # Lecture 12: Factorial ANOVA
 
 ## This is a plot you might produce for publication
-
-
-
 
 
 
@@ -961,12 +828,9 @@ pub_plot
 ```
 
 ::: {.cell-output-display}
-![](12_02_class_activity_files/figure-docx/pub_plot-1.png)
+![](12_02_class_activity_files/figure-docx/pub_plot-1.jpeg)
 :::
 :::
-
-
-
 
 
 

@@ -7,8 +7,12 @@ format:
   html:
     output-file: "05_02_class_activity.html"
   typst:
-    output-file: "05_02_class_activity.pdf"  
+    output-file: "05_02_class_activity.pdf"    
+  docx:
+    output-file: "05_02_class_activity.docx"
 ---
+
+
 
 
 
@@ -46,56 +50,16 @@ First, let's load the packages and data we'll be using:
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Load required packages
 library(tidyverse)  # For data manipulation and visualization
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
-
-
-:::
-
-```{.r .cell-code}
 library(patchwork)  # For combining plots
 library(car)        # For diagnostic tests (QQ plots)
-```
 
-::: {.cell-output .cell-output-stderr}
-
-```
-Loading required package: carData
-
-Attaching package: 'car'
-
-The following object is masked from 'package:dplyr':
-
-    recode
-
-The following object is masked from 'package:purrr':
-
-    some
-```
-
-
-:::
-
-```{.r .cell-code}
 # Read in the data files
 g_df <- read_csv("data/gray_I3_I8.csv") 
 ```
@@ -185,6 +149,8 @@ head(p_df)
 
 
 
+
+
 # Part 1: Exploring the Data
 
 Before conducting statistical tests, it's important to understand your data.
@@ -193,6 +159,8 @@ Before conducting statistical tests, it's important to understand your data.
 ## Practice Exercise 1: Creating Histograms
 
 Let's create histograms of fish lengths from each lake to visualize their distributions.
+
+
 
 
 
@@ -225,7 +193,7 @@ i3_hist + i8_hist
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/histograms-1.png){width=672}
+![](05_02_class_activity_files/figure-html/histograms-1.png){width=336}
 :::
 
 ```{.r .cell-code}
@@ -237,9 +205,13 @@ i3_hist + i8_hist
 
 
 
+
+
 :::
 
 ## Now, let's calculate summary statistics for each lake:
+
+
 
 
 
@@ -283,6 +255,8 @@ grayling_summary
 
 
 
+
+
 # Part 3: Testing Assumptions
 
 Before conducting a t-test, we need to check if our data meets the necessary assumptions:
@@ -295,6 +269,8 @@ Let's check the normality assumption for Lake I3 fish lengths:
 
 ::: callout-tip
 ## Practice Exercise 2: Checking Normality
+
+
 
 
 
@@ -316,7 +292,7 @@ qqPlot(i3_df$length_mm,
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/check_normality-1.png){width=672}
+![](05_02_class_activity_files/figure-html/check_normality-1.png){width=336}
 :::
 
 ::: {.cell-output .cell-output-stdout}
@@ -333,7 +309,11 @@ qqPlot(i3_df$length_mm,
 
 
 
+
+
 :::
+
+
 
 
 
@@ -376,9 +356,11 @@ i3_df %>%
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/unnamed-chunk-2-1.png){width=672}
+![](05_02_class_activity_files/figure-html/unnamed-chunk-2-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -407,6 +389,8 @@ Let's test if the mean fish length in Lake I3 differs from 240mm:
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -429,7 +413,11 @@ Mean fish length in Lake I3: 265.6 mm
 
 
 
+
+
 :::
+
+
 
 
 
@@ -488,9 +476,11 @@ i3_df %>%
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/unnamed-chunk-4-1.png){width=672}
+![](05_02_class_activity_files/figure-html/unnamed-chunk-4-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -525,6 +515,8 @@ Where: - $\bar{x}$ is the sample mean - $s$ is the sample standard deviation - $
 ## Practice Exercise 4: Calculating Confidence Intervals
 
 Let's calculate the 95% confidence interval for Lake I3 fish lengths:
+
+
 
 
 
@@ -597,7 +589,11 @@ cat("95% CI using normal approximation:",
 
 
 
+
+
 :::
+
+
 
 
 
@@ -621,9 +617,11 @@ ggplot() +
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=672}
+![](05_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -643,6 +641,8 @@ Interpretation:
 A two-sample t-test compares means from two independent groups.
 
 Let's compare pine needle lengths between windward and leeward sides:
+
+
 
 
 
@@ -685,7 +685,11 @@ print(pine_summary)
 
 
 
+
+
 ## Look a the plot of pine needles
+
+
 
 
 
@@ -708,9 +712,11 @@ p_df %>%
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/unnamed-chunk-6-1.png){width=672}
+![](05_02_class_activity_files/figure-html/unnamed-chunk-6-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -721,6 +727,8 @@ Before conducting the t-test, we should check the assumptions:
 
 ::: callout-tip
 ## Practice Exercise 5: Check Assumptions for Two-Sample t-Test
+
+
 
 
 
@@ -740,7 +748,7 @@ qqPlot(windward_data$length_mm, main = "QQ Plot: Windward Needles")
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/two_sample_assumptions-1.png){width=672}
+![](05_02_class_activity_files/figure-html/two_sample_assumptions-1.png){width=336}
 :::
 
 ::: {.cell-output .cell-output-stdout}
@@ -760,7 +768,7 @@ qqPlot(leeward_data$length_mm, main = "QQ Plot: Leeward Needles")
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/unnamed-chunk-7-1.png){width=672}
+![](05_02_class_activity_files/figure-html/unnamed-chunk-7-1.png){width=336}
 :::
 
 ::: {.cell-output .cell-output-stdout}
@@ -826,6 +834,8 @@ group  1  1.2004 0.2789
 
 
 
+
+
 :::
 
 ::: callout-tip
@@ -840,6 +850,8 @@ Interpreting the assumption checks:
 
 ::: callout-tip
 ## Practice Exercise 6: Two-Sample t-Test
+
+
 
 
 
@@ -920,9 +932,11 @@ ggplot(pine_summary, aes(x = wind, y = mean_length, fill = wind)) +
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/unnamed-chunk-10-1.png){width=672}
+![](05_02_class_activity_files/figure-html/unnamed-chunk-10-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -948,6 +962,8 @@ Let's apply what we've learned to compare fish lengths between Lakes I3 and I8:
 
 ::: callout-tip
 ## Practice Exercise 7: Comparing Lakes
+
+
 
 
 
@@ -1049,9 +1065,11 @@ ggplot(g_df, aes(x = lake, y = length_mm, fill = lake)) +
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/unnamed-chunk-12-1.png){width=672}
+![](05_02_class_activity_files/figure-html/unnamed-chunk-12-1.png){width=336}
 :::
 :::
+
+
 
 
 

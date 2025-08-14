@@ -7,8 +7,12 @@ format:
   html:
     output-file: "09_02_class_activity.html"
   typst:
-    output-file: "09_02_class_activity.pdf" 
+    output-file: "09_02_class_activity.pdf"   
+  docx:
+    output-file: "09_02_class_activity.docx"
 ---
+
+
 
 
 
@@ -32,6 +36,8 @@ This document demonstrates key concepts in correlation and regression analysis u
 We'll work with real ecological datasets to practice these concepts.
 
 # **Part 1:** Load Required Packages and Data
+
+
 
 
 
@@ -83,6 +89,8 @@ p_df <- tibble(
 
 
 
+
+
 ::: callout-tip
 ## Package Overview
 
@@ -113,6 +121,8 @@ p_df <- tibble(
 ## Calculating Correlation Coefficients
 
 Let's start with the Nazca booby data to explore correlation:
+
+
 
 
 
@@ -189,7 +199,11 @@ r_squared
 
 
 
+
+
 ## Visualizing the Correlation
+
+
 
 
 
@@ -208,9 +222,11 @@ booby_plot
 ```
 
 ::: {.cell-output-display}
-![](09_02_class_activity_files/figure-html/booby_plot-1.png){width=672}
+![](09_02_class_activity_files/figure-html/booby_plot-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -233,6 +249,8 @@ Based on the output above, answer these questions:
 :::
 
 ## Testing Correlation Assumptions
+
+
 
 
 
@@ -308,9 +326,11 @@ p4 <- ggplot(b_df, aes(sample = future_aggression)) +
 ```
 
 ::: {.cell-output-display}
-![](09_02_class_activity_files/figure-html/test_correlation_assumptions-1.png){width=672}
+![](09_02_class_activity_files/figure-html/test_correlation_assumptions-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -328,6 +348,8 @@ If normality assumptions are violated (p \< 0.05 in Shapiro-Wilk test), consider
 
 Let's try Spearman's correlation:
 :::
+
+
 
 
 
@@ -407,6 +429,8 @@ print(paste("Spearman rho:", round(spearman_test$estimate, 3)))
 
 
 
+
+
 # **Part 3:** Simple Linear Regression
 
 Now let's move from correlation to regression using the lion nose data.
@@ -433,6 +457,8 @@ Now let's move from correlation to regression using the lion nose data.
 :::
 
 ## Fitting a Linear Regression Model
+
+
 
 
 
@@ -481,6 +507,8 @@ F-statistic: 49.75 on 1 and 30 DF,  p-value: 7.677e-08
 
 
 
+
+
 ::: callout-important
 ## Activity 2: Interpret the Regression Output
 
@@ -497,6 +525,8 @@ From the regression output above:
 :::
 
 ## Visualizing the Regression
+
+
 
 
 
@@ -524,9 +554,11 @@ lion_plot
 :::
 
 ::: {.cell-output-display}
-![](09_02_class_activity_files/figure-html/lion_regression_plot-1.png){width=672}
+![](09_02_class_activity_files/figure-html/lion_regression_plot-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -544,6 +576,8 @@ lion_plot
 # **Part 4:** Testing Regression Assumptions
 
 ## Diagnostic Plots
+
+
 
 
 
@@ -572,6 +606,8 @@ par(mfrow = c(1, 1))
 
 
 
+
+
 ## Interpreting Diagnostic Plots
 
 ::: callout-note
@@ -592,6 +628,8 @@ par(mfrow = c(1, 1))
 :::
 
 ## Formal Tests of Assumptions
+
+
 
 
 
@@ -625,39 +663,6 @@ W = 0.93879, p-value = 0.0692
 ```{.r .cell-code}
 # Test for homoscedasticity (Breusch-Pagan test)
 library(lmtest)
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Loading required package: zoo
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-
-Attaching package: 'zoo'
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-The following objects are masked from 'package:base':
-
-    as.Date, as.Date.numeric
-```
-
-
-:::
-
-```{.r .cell-code}
 bp_test <- bptest(lion_model)
 bp_test
 ```
@@ -675,6 +680,8 @@ BP = 6.8946, df = 1, p-value = 0.008646
 
 :::
 :::
+
+
 
 
 
@@ -699,6 +706,8 @@ Based on the diagnostic plots and tests:
 # **Part 5:** ANOVA for Regression
 
 ## Understanding Variance Partitioning
+
+
 
 
 
@@ -808,7 +817,11 @@ print(paste("SS Regression + SS Residual:", round(ss_regression + ss_residual, 2
 
 
 
+
+
 ## Visualizing Variance Components
+
+
 
 
 
@@ -860,9 +873,11 @@ variance_plot
 ```
 
 ::: {.cell-output-display}
-![](09_02_class_activity_files/figure-html/variance_visualization-1.png){width=672}
+![](09_02_class_activity_files/figure-html/variance_visualization-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -872,6 +887,8 @@ variance_plot
 # **Part 6:** Comparing Multiple Datasets
 
 Let's practice regression with the prairie biodiversity data:
+
+
 
 
 
@@ -936,9 +953,11 @@ prairie_plot
 :::
 
 ::: {.cell-output-display}
-![](09_02_class_activity_files/figure-html/unnamed-chunk-3-1.png){width=672}
+![](09_02_class_activity_files/figure-html/unnamed-chunk-3-1.png){width=336}
 :::
 :::
+
+
 
 
 

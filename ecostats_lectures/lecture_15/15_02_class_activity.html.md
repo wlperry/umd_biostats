@@ -7,8 +7,12 @@ format:
   html:
     output-file: "15_02_class_activity.html"
   typst:
-    output-file: "15_02_class_activity.pdf"
+    output-file: "15_02_class_activity.pdf"  
+  docx:
+    output-file: "15_02_class_activity.docx"
 ---
+
+
 
 
 
@@ -22,11 +26,16 @@ format:
 
 ## What is ANCOVA?
 
-ANCOVA (Analysis of Covariance) combines regression and ANOVA to: - Compare group means while adjusting for a continuous covariate - Increase statistical power by reducing residual error - Control for confounding variables
+ANCOVA (Analysis of Covariance) combines regression and ANOVA to: -
+Compare group means while adjusting for a continuous covariate -
+Increase statistical power by reducing residual error - Control for
+confounding variables
 
 ## When to Use ANCOVA
 
-Use ANCOVA when you have: - **Response variable**: Continuous - **Predictor variable**: Categorical (factor/groups) - **Covariate**: Continuous variable that affects the response
+Use ANCOVA when you have: - **Response variable**: Continuous -
+**Predictor variable**: Categorical (factor/groups) - **Covariate**:
+Continuous variable that affects the response
 
 ## Key Assumptions of ANCOVA
 
@@ -34,21 +43,29 @@ Use ANCOVA when you have: - **Response variable**: Continuous - **Predictor vari
 2.  **Normality** of residuals
 3.  **Homogeneity of variances** across groups
 4.  **Linearity** between response and covariate within each group
-5.  **Homogeneity of slopes** (most critical!) - regression slopes must be equal across all groups
+5.  **Homogeneity of slopes** (most critical!) - regression slopes must
+    be equal across all groups
 
 ::: {.callout-important appearance="simple"}
 ## Critical First Step
 
-Always test for **homogeneity of slopes** before proceeding with ANCOVA. If slopes differ significantly between groups, standard ANCOVA is inappropriate.
+Always test for **homogeneity of slopes** before proceeding with ANCOVA.
+If slopes differ significantly between groups, standard ANCOVA is
+inappropriate.
 :::
 
 # Part 1: Cricket Chirping Analysis
 
 ## Data Overview
 
-We want to compare chirping rate of two cricket species: - *Oecanthus exclamationis* - *Oecanthus niveus*
+We want to compare chirping rate of two cricket species: - *Oecanthus
+exclamationis* - *Oecanthus niveus*
 
-But we measured rates at different temperatures, and there's a relationship between pulse rate and temperature. ANCOVA lets us adjust for temperature effect to get a more powerful test!
+But we measured rates at different temperatures, and there's a
+relationship between pulse rate and temperature. ANCOVA lets us adjust
+for temperature effect to get a more powerful test!
+
+
 
 
 
@@ -106,9 +123,11 @@ ggplot(cricket_data, aes(x = temp, y = chirp_rate, color = species)) +
 :::
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-html/cricket-visualization-1.png){width=672}
+![](15_02_class_activity_files/figure-html/cricket-visualization-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -117,7 +136,10 @@ ggplot(cricket_data, aes(x = temp, y = chirp_rate, color = species)) +
 
 ## Step 1: Test Homogeneity of Slopes
 
-This is the most critical assumption! We test if the regression slopes are equal across all groups.
+This is the most critical assumption! We test if the regression slopes
+are equal across all groups.
+
+
 
 
 
@@ -157,11 +179,18 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
-**Interpretation**: If p \> 0.05, slopes are homogeneous and we can proceed with ANCOVA. If p \< 0.05, slopes differ and standard ANCOVA is inappropriate.
+
+
+**Interpretation**: If p \> 0.05, slopes are homogeneous and we can
+proceed with ANCOVA. If p \< 0.05, slopes differ and standard ANCOVA is
+inappropriate.
 
 ## Step 2: Fit ANCOVA Model
 
-Since slopes are homogeneous (p \> 0.05), we can fit the ANCOVA model without the interaction term.
+Since slopes are homogeneous (p \> 0.05), we can fit the ANCOVA model
+without the interaction term.
+
+
 
 
 
@@ -236,7 +265,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
 ## Step 3: Check Model Assumptions
+
+
 
 
 
@@ -252,7 +285,7 @@ plot(cricket_ancova, main = "ANCOVA Diagnostic Plots")
 ```
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-html/cricket-assumptions-1.png){width=672}
+![](15_02_class_activity_files/figure-html/cricket-assumptions-1.png){width=480}
 :::
 
 ```{.r .cell-code}
@@ -265,9 +298,14 @@ par(mfrow = c(1, 1))
 
 
 
+
+
 ## Step 4: Calculate Adjusted Means
 
-ANCOVA compares adjusted means - what each group's mean would be at the overall mean of the covariate.
+ANCOVA compares adjusted means - what each group's mean would be at the
+overall mean of the covariate.
+
+
 
 
 
@@ -304,7 +342,11 @@ Confidence level used: 0.95
 
 
 
+
+
 ## Step 5: Pairwise Comparisons
+
+
 
 
 
@@ -334,7 +376,11 @@ pairs(cricket_adjusted_means, adjust = "sidak")
 
 
 
+
+
 ## Step 6: Visualize Results
+
+
 
 
 
@@ -349,7 +395,7 @@ plot(cricket_adjusted_means, comparisons = TRUE)
 ```
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-html/cricket-results-plot-1.png){width=672}
+![](15_02_class_activity_files/figure-html/cricket-results-plot-1.png){width=336}
 :::
 :::
 
@@ -370,9 +416,11 @@ ggplot(cricket_adj_means_df, aes(x = species, y = emmean, fill = species)) +
 ```
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-html/cricket_ggplot-1.png){width=672}
+![](15_02_class_activity_files/figure-html/cricket_ggplot-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -383,7 +431,10 @@ ggplot(cricket_adj_means_df, aes(x = species, y = emmean, fill = species)) +
 
 ## Data Overview
 
-We'll analyze the effect of mating strategy on male fruitfly longevity, using thorax length as a covariate.
+We'll analyze the effect of mating strategy on male fruitfly longevity,
+using thorax length as a covariate.
+
+
 
 
 
@@ -457,9 +508,11 @@ ggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) +
 :::
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-html/partridge-visualization-1.png){width=672}
+![](15_02_class_activity_files/figure-html/partridge-visualization-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -467,6 +520,8 @@ ggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) +
 
 
 ## Step 1: Test Homogeneity of Slopes
+
+
 
 
 
@@ -506,7 +561,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
 ## Step 2: Fit ANCOVA Model
+
+
 
 
 
@@ -593,7 +652,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
+
+
 ## Step 3: Check Assumptions
+
+
 
 
 
@@ -609,9 +672,11 @@ plot(ancova_model)
 ```
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-html/partridge-assumptions-1.png){width=672}
+![](15_02_class_activity_files/figure-html/partridge-assumptions-1.png){width=480}
 :::
 :::
+
+
 
 
 
@@ -619,6 +684,8 @@ plot(ancova_model)
 
 
 ## Step 4: Calculate Adjusted Means
+
+
 
 
 
@@ -655,7 +722,11 @@ Confidence level used: 0.95
 
 
 
+
+
 ## Step 5: Pairwise Comparisons
+
+
 
 
 
@@ -707,9 +778,11 @@ plot(adjusted_means, comparisons = TRUE)
 ```
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-html/partridge-comparisons-1.png){width=672}
+![](15_02_class_activity_files/figure-html/partridge-comparisons-1.png){width=480}
 :::
 :::
+
+
 
 
 
@@ -718,7 +791,10 @@ plot(adjusted_means, comparisons = TRUE)
 
 # Part 3: Example with Heterogeneous Slopes
 
-Let's look at an example where slopes are NOT homogeneous using sea urchin data.
+Let's look at an example where slopes are NOT homogeneous using sea
+urchin data.
+
+
 
 
 
@@ -774,9 +850,11 @@ ggplot(urchin_data, aes(x = volume, y = suture_width, color = treatment)) +
 :::
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-html/urchin-data-1.png){width=672}
+![](15_02_class_activity_files/figure-html/urchin-data-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -784,6 +862,8 @@ ggplot(urchin_data, aes(x = volume, y = suture_width, color = treatment)) +
 
 
 ## Test for Homogeneity of Slopes
+
+
 
 
 
@@ -823,11 +903,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 
-**Result**: With p \< 0.05, we have heterogeneous slopes! Standard ANCOVA would be inappropriate here.
+
+
+**Result**: With p \< 0.05, we have heterogeneous slopes! Standard
+ANCOVA would be inappropriate here.
 
 ## What to do with Heterogeneous Slopes
 
 When slopes are not homogeneous, you have several options:
+
+
 
 
 
@@ -908,6 +993,8 @@ Coefficients:
 
 
 
+
+
 # Summary Checklist for ANCOVA
 
 When conducting ANCOVA, always follow these steps:
@@ -915,7 +1002,8 @@ When conducting ANCOVA, always follow these steps:
 ::: {.callout-tip appearance="simple"}
 ## ANCOVA Checklist
 
-1.  **Visualize your data** - plot response vs covariate, colored by groups
+1.  **Visualize your data** - plot response vs covariate, colored by
+    groups
 2.  **Test homogeneity of slopes** - fit model with interaction term
     -   If p \> 0.05: proceed with ANCOVA
     -   If p \< 0.05: use alternative approaches
@@ -923,7 +1011,8 @@ When conducting ANCOVA, always follow these steps:
 4.  **Check assumptions** - use diagnostic plots
 5.  **Interpret results** - focus on adjusted means, not raw means
 6.  **Conduct post-hoc tests** - pairwise comparisons if needed
-7.  **Visualize results** - show adjusted means with confidence intervals
+7.  **Visualize results** - show adjusted means with confidence
+    intervals
 :::
 
 ## Key Points to Remember
@@ -932,18 +1021,26 @@ When conducting ANCOVA, always follow these steps:
 -   **Adjusted means** are what we compare, not raw group means
 -   **Homogeneity of slopes** is the most critical assumption
 -   **Parallel lines** in your plot suggest homogeneous slopes
--   **Non-parallel lines** indicate heterogeneous slopes - use alternative methods
+-   **Non-parallel lines** indicate heterogeneous slopes - use
+    alternative methods
 
 ::: {.callout-important appearance="simple"}
 ## Key Points from ANCOVA Analysis
 
-1.  **Test homogeneity of slopes first** - this is the most critical assumption
-2.  **ANCOVA compares adjusted means** at the mean value of the covariate
-3.  **Increases statistical power** by removing variation due to the covariate
-4.  **Choose appropriate methods** based on whether slopes are homogeneous
-5.  **Visualize your results** clearly showing the relationship between variables
+1.  **Test homogeneity of slopes first** - this is the most critical
+    assumption
+2.  **ANCOVA compares adjusted means** at the mean value of the
+    covariate
+3.  **Increases statistical power** by removing variation due to the
+    covariate
+4.  **Choose appropriate methods** based on whether slopes are
+    homogeneous
+5.  **Visualize your results** clearly showing the relationship between
+    variables
 6.  **Check all assumptions** using diagnostic plots
-7.  **Interpret in biological context** - what do the adjusted means tell us?
+7.  **Interpret in biological context** - what do the adjusted means
+    tell us?
 
-Remember: The covariate should be measured independently of the treatment and should not be affected by the treatment itself!
+Remember: The covariate should be measured independently of the
+treatment and should not be affected by the treatment itself!
 :::

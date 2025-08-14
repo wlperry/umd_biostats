@@ -24,6 +24,11 @@ format:
 
 
 
+
+
+
+
+
 # Review of Lecture 1
 
 ::::: columns
@@ -72,8 +77,7 @@ Covered
 -   Data: the raw material of science
 -   Wide variety of formats, sizes, complexity
 -   Data management and curation often under emphasized
--   Good data management: owe it to our funding agencies, colleagues,
-    supervisors, and study systems
+-   Good data management: owe it to our funding agencies, colleagues, supervisors, and study systems
 :::
 
 ::: {.column width="40%"}
@@ -96,8 +100,7 @@ Covered
 7.  **Ensure tidy data principles** from the start
 
 ::: callout-note
-See Hadley Wickham's [Tidy Data
-principles](https://r4ds.hadley.nz/data-tidy.html) for best practices
+See Hadley Wickham's [Tidy Data principles](https://r4ds.hadley.nz/data-tidy.html) for best practices
 :::
 ::::
 
@@ -130,10 +133,12 @@ Create a **Metadata Sheet** that includes:
 ::: callout-tip
 ### Practice Exercise 1: Pine Data Organization
 
-Let's examine our pine needle data: - What naming conventions did you
-choose? - How did you organize the data? - How can you verify data
-formats (numeric vs categorical)? - What's your plan for organizing
-outputs and figures?
+Let's examine our pine needle data: - What naming conventions did you choose? - How did you organize the data? - How can you verify data formats (numeric vs categorical)? - What's your plan for organizing outputs and figures?
+
+
+
+
+
 
 
 
@@ -181,6 +186,11 @@ pine_df
 
 
 
+
+
+
+
+
 :::
 
 # **Lecture 2:** Data Management: Step 3
@@ -200,8 +210,7 @@ pine_df
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-127112346.png){width="100" height="80"}
-![](images/clipboard-3792512345.png){width="128" height="100"}
+![](images/clipboard-127112346.png){width="100" height="80"} ![](images/clipboard-3792512345.png){width="128" height="100"}
 :::
 :::::
 
@@ -244,6 +253,11 @@ Create a histogram of pine needle lengths to check the distribution:
 
 
 
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -251,6 +265,11 @@ Create a histogram of pine needle lengths to check the distribution:
 # How do you examine the data - what are the ways you think and lets try it!
 ```
 :::
+
+
+
+
+
 
 
 
@@ -290,8 +309,7 @@ Create a histogram of pine needle lengths to check the distribution:
 :::
 
 ::: {.column width="40%"}
-A good way to organize script files is number them in the order they get
-run.
+A good way to organize script files is number them in the order they get run.
 
 ![](images/clipboard-2204984243.png){width="300" height="250"}
 :::
@@ -310,9 +328,7 @@ run.
 -   What characteristics define a "good" plot?
 -   What common mistakes make plots ineffective?
 
-[Napoleon's Disastrous Invasion of Russia Detailed in an 1869 Data
-Visualization: It's Been Called "the Best Statistical Graphic Ever
-Drawn"](https://www.openculture.com/2019/07/napoleons-disastrous-invasion-of-russia-explained-in-an-1869-data-visualization.html)
+[Napoleon's Disastrous Invasion of Russia Detailed in an 1869 Data Visualization: It's Been Called "the Best Statistical Graphic Ever Drawn"](https://www.openculture.com/2019/07/napoleons-disastrous-invasion-of-russia-explained-in-an-1869-data-visualization.html)
 :::
 
 ::: {.column width="40%"}
@@ -324,11 +340,15 @@ Drawn"](https://www.openculture.com/2019/07/napoleons-disastrous-invasion-of-rus
 
 **How readable are tables?**
 
-We will get to what these number mean and how to make them in the next
-lecture.
+We will get to what these number mean and how to make them in the next lecture.
 
 -   Tables
     -   are they useful in a presentation?
+
+
+
+
+
 
 
 
@@ -341,12 +361,17 @@ lecture.
 
 
 ```{=html}
-<div class="tabwid"><style>.cl-f338c464{}.cl-f3353c54{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-f336d0d2{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f336d0d3{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-f336ded8{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f336dee2{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f336dee3{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f336dee4{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f336deec{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-f336deed{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-f338c464'><thead><tr style="overflow-wrap:break-word;"><th class="cl-f336ded8"><p class="cl-f336d0d2"><span class="cl-f3353c54">wind</span></p></th><th class="cl-f336dee2"><p class="cl-f336d0d3"><span class="cl-f3353c54">n</span></p></th><th class="cl-f336dee2"><p class="cl-f336d0d3"><span class="cl-f3353c54">mean_mm</span></p></th><th class="cl-f336dee2"><p class="cl-f336d0d3"><span class="cl-f3353c54">sd_mm</span></p></th><th class="cl-f336dee2"><p class="cl-f336d0d3"><span class="cl-f3353c54">min_mms</span></p></th><th class="cl-f336dee2"><p class="cl-f336d0d3"><span class="cl-f3353c54">max_mm</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-f336dee3"><p class="cl-f336d0d2"><span class="cl-f3353c54">lee</span></p></td><td class="cl-f336dee4"><p class="cl-f336d0d3"><span class="cl-f3353c54">24</span></p></td><td class="cl-f336dee4"><p class="cl-f336d0d3"><span class="cl-f3353c54">20</span></p></td><td class="cl-f336dee4"><p class="cl-f336d0d3"><span class="cl-f3353c54">2.45</span></p></td><td class="cl-f336dee4"><p class="cl-f336d0d3"><span class="cl-f3353c54">16</span></p></td><td class="cl-f336dee4"><p class="cl-f336d0d3"><span class="cl-f3353c54">25</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-f336deec"><p class="cl-f336d0d2"><span class="cl-f3353c54">wind</span></p></td><td class="cl-f336deed"><p class="cl-f336d0d3"><span class="cl-f3353c54">24</span></p></td><td class="cl-f336deed"><p class="cl-f336d0d3"><span class="cl-f3353c54">15</span></p></td><td class="cl-f336deed"><p class="cl-f336d0d3"><span class="cl-f3353c54">1.91</span></p></td><td class="cl-f336deed"><p class="cl-f336d0d3"><span class="cl-f3353c54">12</span></p></td><td class="cl-f336deed"><p class="cl-f336d0d3"><span class="cl-f3353c54">19</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-fd6ae7c2{}.cl-fd671782{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-fd687744{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-fd687745{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-fd68868a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fd688694{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fd688695{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fd68869e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fd68869f{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-fd6886bc{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-fd6ae7c2'><thead><tr style="overflow-wrap:break-word;"><th class="cl-fd68868a"><p class="cl-fd687744"><span class="cl-fd671782">wind</span></p></th><th class="cl-fd688694"><p class="cl-fd687745"><span class="cl-fd671782">n</span></p></th><th class="cl-fd688694"><p class="cl-fd687745"><span class="cl-fd671782">mean_mm</span></p></th><th class="cl-fd688694"><p class="cl-fd687745"><span class="cl-fd671782">sd_mm</span></p></th><th class="cl-fd688694"><p class="cl-fd687745"><span class="cl-fd671782">min_mms</span></p></th><th class="cl-fd688694"><p class="cl-fd687745"><span class="cl-fd671782">max_mm</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-fd688695"><p class="cl-fd687744"><span class="cl-fd671782">lee</span></p></td><td class="cl-fd68869e"><p class="cl-fd687745"><span class="cl-fd671782">24</span></p></td><td class="cl-fd68869e"><p class="cl-fd687745"><span class="cl-fd671782">20</span></p></td><td class="cl-fd68869e"><p class="cl-fd687745"><span class="cl-fd671782">2.45</span></p></td><td class="cl-fd68869e"><p class="cl-fd687745"><span class="cl-fd671782">16</span></p></td><td class="cl-fd68869e"><p class="cl-fd687745"><span class="cl-fd671782">25</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-fd68869f"><p class="cl-fd687744"><span class="cl-fd671782">wind</span></p></td><td class="cl-fd6886bc"><p class="cl-fd687745"><span class="cl-fd671782">24</span></p></td><td class="cl-fd6886bc"><p class="cl-fd687745"><span class="cl-fd671782">15</span></p></td><td class="cl-fd6886bc"><p class="cl-fd687745"><span class="cl-fd671782">1.91</span></p></td><td class="cl-fd6886bc"><p class="cl-fd687745"><span class="cl-fd671782">12</span></p></td><td class="cl-fd6886bc"><p class="cl-fd687745"><span class="cl-fd671782">19</span></p></td></tr></tbody></table></div>
 ```
 
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -374,6 +399,11 @@ lecture.
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](02_01_lecture_powerpoint_files/figure-html/unnamed-chunk-3-1.png){width=576}
@@ -385,14 +415,17 @@ lecture.
 
 
 
+
+
+
+
+
 :::
 :::::
 
 # **Lecture 2:** Principles of Effective Graphics
 
-According to [Tufte
-(2001)](https://www.edwardtufte.com/book/the-visual-display-of-quantitative-information/),
-good scientific graphics:
+According to [Tufte (2001)](https://www.edwardtufte.com/book/the-visual-display-of-quantitative-information/), good scientific graphics:
 
 1.  **Show the data** without distortion
 2.  **Maximize data-ink ratio** (minimize non-data elements)
@@ -401,6 +434,11 @@ good scientific graphics:
 5.  **Reveal multiple layers** of information
 6.  **Serve a clear purpose** in telling your story
 7.  **Integrate with statistical methods** appropriately
+
+
+
+
+
 
 
 
@@ -431,13 +469,16 @@ good scientific graphics:
 
 
 
+
+
+
+
+
 # **Lecture 2:** Creating Effective Graphics
 
 ::::: columns
 ::: {.column width="60%"}
-According to [Tufte
-(2001)](https://www.edwardtufte.com/book/the-visual-display-of-quantitative-information/),
-good scientific graphics:
+According to [Tufte (2001)](https://www.edwardtufte.com/book/the-visual-display-of-quantitative-information/), good scientific graphics:
 
 -   To implement these principles:
     -   Focus on the data, not decorative elements
@@ -454,9 +495,19 @@ good scientific graphics:
 
 
 
+
+
+
+
+
 ::: {.cell}
 
 :::
+
+
+
+
+
 
 
 
@@ -474,8 +525,7 @@ To make good graphics:
 
 -   Above all, focus on data
 -   Do not distort data
--   Graphical representation of numbers → directly proportional to
-    numbers
+-   Graphical representation of numbers → directly proportional to numbers
 -   Strive for clarity through labeling
 -   Maximize data-ink ratio
     -   Remove non-data ink
@@ -490,11 +540,21 @@ To make good graphics:
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](02_01_lecture_powerpoint_files/figure-html/good-graphics-2-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -529,11 +589,21 @@ Does this -
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](02_01_lecture_powerpoint_files/figure-html/unnamed-chunk-5-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -570,11 +640,21 @@ What is one of the most common plots you make all the time?
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](02_01_lecture_powerpoint_files/figure-html/unnamed-chunk-6-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -615,11 +695,21 @@ What is one of the most common plots you make all the time?
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](02_01_lecture_powerpoint_files/figure-html/unnamed-chunk-7-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 

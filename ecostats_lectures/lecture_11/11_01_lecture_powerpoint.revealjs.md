@@ -163,7 +163,7 @@ variable
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-html/unnamed-chunk-2-1.png){width=672}
+![](11_01_lecture_powerpoint_files/figure-html/unnamed-chunk-2-1.png){width=480}
 :::
 :::
 
@@ -693,7 +693,7 @@ degrees of freedom.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-html/unnamed-chunk-10-1.png){width=672}
+![](11_01_lecture_powerpoint_files/figure-html/unnamed-chunk-10-1.png){width=480}
 :::
 :::
 
@@ -820,7 +820,7 @@ null device
 :::
 
 ::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-html/unnamed-chunk-12-1.png){width=672}
+![](11_01_lecture_powerpoint_files/figure-html/unnamed-chunk-12-1.png){width=480}
 :::
 :::
 
@@ -857,7 +857,7 @@ check_model(circ_model)
 ```
 
 ::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-html/unnamed-chunk-13-1.png){width=672}
+![](11_01_lecture_powerpoint_files/figure-html/unnamed-chunk-13-1.png){width=480}
 :::
 :::
 
@@ -1124,7 +1124,7 @@ circadian rhythm data.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-html/unnamed-chunk-18-1.png){width=672}
+![](11_01_lecture_powerpoint_files/figure-html/unnamed-chunk-18-1.png){width=480}
 :::
 :::
 
@@ -1173,7 +1173,7 @@ circadian rhythm data.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-html/unnamed-chunk-19-1.png){width=672}
+![](11_01_lecture_powerpoint_files/figure-html/unnamed-chunk-19-1.png){width=480}
 :::
 :::
 

@@ -1,46 +1,15 @@
 ---
 title: "02 Class Activity"
 author: "Bill Perry"
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true
-  message: true
-  warning: true
-  fig-height: 4
-  fig-width: 6
-  paged-print: false
+metadata-files:
+  - ../../_templates/activities.yml
 format:
   html:
     output-file: "02_02_class_activity.html"
-    default: true
-    embed-resources: true
-    self-contained: true
-    max-width: 80ch  # Limits line length to approximately 80 characters
-    css: ../../css/activity.css
-  docx:
-    default: true
-    toc: false
-    toc-depth: 3
-    fig-width: 5.5      # Smaller figures for better document layout
-    fig-height: 3.5     # Better proportions for printing
-    fig-dpi: 300        # High resolution for crisp printing
-    number-sections: false
-    highlight-style: github
-    reference-doc: ../../ms_templates/custom-reference.docx
-    embed-resources: true
   typst:
-    margin: 
-      x: 0.5in
-      y: 0.5in
-    fig-width: 4
-    fig-height: 4
-    fig-dpi: 300
-    number-sections: false
-    toc: false
-    output-file: "02_02_class_activity.pdf"
-editor: visual  
+    output-file: "02_02_class_activity.pdf"  
+  docx:
+    output-file: "02_02_class_activity.docx"
 ---
 
 
@@ -55,10 +24,8 @@ editor: visual
 
 ## Recap from Activity 1
 
--   Collected pine needle samples from windward and leeward sides of
-    trees
--   Identified independent variable (wind exposure) and dependent
-    variable (needle length)
+-   Collected pine needle samples from windward and leeward sides of trees
+-   Identified independent variable (wind exposure) and dependent variable (needle length)
 -   Measured needle lengths and recorded data
 -   Created basic visualizations
 -   Saved our data for further analysis
@@ -97,41 +64,31 @@ editor: visual
 
 ## In RStudio:
 
-1.  click `file` - `open project` and select the
-    `2025_UMD_BioStats_Student_Code.Rproj` file or double click on it in
-    the finder or data explorer.
+1.  click `file` - `open project` and select the `2025_UMD_BioStats_Student_Code.Rproj` file or double click on it in the finder or data explorer.
 2.  your screen will now change as RStudio knows where home is
 
 ![](images/clipboard-2614364443.png){width="434"}
 
-3.  Note that in the upper right you will see
-    `2025_UMD_BioStats_Student_Code` so you know you are in the right
-    spot
+3.  Note that in the upper right you will see `2025_UMD_BioStats_Student_Code` so you know you are in the right spot
 
 4.  Now click File - New File - Quarto File
 
 ![](images/clipboard-3396400631.png){width="414"}
 
-5.  Create a file that starts with `02_` and then something that will
-    help you know what is going on like `02_class_activity_in_class.qmd`
+5.  Create a file that starts with `02_` and then something that will help you know what is going on like `02_class_activity_in_class.qmd`
 
 6.  Now this file thinks this is home.
 
-7.  So I usually copy stuff for the header from another file as its just
-    too hard to remember all this...
+7.  So I usually copy stuff for the header from another file as its just too hard to remember all this...
 
 ``` r
 ---
 title: "Title of your file" # Title of the file
 author: "Your Name" # who you are
-execute:
-  freeze: auto
-  cache: true
-  echo: true
-  keep-md: true # retains the images when you start again
-  fig-height: 3
-  fig-width: 3
-  paged-print: false
+metadata-files:
+  - ../../_templates/lectures.yml
+metadata-files:
+  - _templates/activities.yml
 format:
   html:
     freeze: false
@@ -141,7 +98,6 @@ format:
     embed-resources: true
     self-contained: true
     css: css/activity.css
-  docx:
     default: true
     toc: false
     toc-depth: 3
@@ -181,8 +137,7 @@ format:
 
 
 
-Each script you run from then on you will load the libraries from within
-the package.
+Each script you run from then on you will load the libraries from within the package.
 
 
 
@@ -197,8 +152,46 @@ the package.
 # Load the libraries ----
 library(readxl) # allows to read in excel files
 library(tidyverse) # provides utilities seen in console
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+```
+
+
+:::
+
+```{.r .cell-code}
 library(skimr) # provide summary stats
 library(janitor) # it cleans ; )
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+
+Attaching package: 'janitor'
+
+The following objects are masked from 'package:stats':
+
+    chisq.test, fisher.test
+```
+
+
+:::
+
+```{.r .cell-code}
 library(patchwork)
 ```
 :::
@@ -212,8 +205,7 @@ library(patchwork)
 
 ## Exercise 2: Loading and Examining Data
 
-Now like we did before with x and y we will do this with a spreadsheet
-from a CSV file or excel file
+Now like we did before with x and y we will do this with a spreadsheet from a CSV file or excel file
 
 We are going to work with the same data we did in the last class.
 
@@ -404,7 +396,7 @@ p_df %>%
 ```
 
 ::: {.cell-output-display}
-![](02_02_class_activity_files/figure-docx/basic-histogram-1.png)
+![](02_02_class_activity_files/figure-docx/basic-histogram-1.jpeg)
 :::
 :::
 
@@ -418,7 +410,7 @@ p_df %>%
 ```
 
 ::: {.cell-output-display}
-![](02_02_class_activity_files/figure-docx/unnamed-chunk-4-1.png)
+![](02_02_class_activity_files/figure-docx/unnamed-chunk-4-1.jpeg)
 :::
 :::
 
@@ -431,9 +423,7 @@ p_df %>%
 
 ### Key Insights from Histograms:
 
-The histogram helps us understand: - The overall distribution of needle
-lengths - Potential differences between windward and leeward needles -
-Presence of any unusual values or outliers
+The histogram helps us understand: - The overall distribution of needle lengths - Potential differences between windward and leeward needles - Presence of any unusual values or outliers
 
 ### Exercise 3: Creating Multiple Plot Types
 
@@ -469,7 +459,7 @@ box_plot + violin_plot + dot_plot
 ```
 
 ::: {.cell-output-display}
-![](02_02_class_activity_files/figure-docx/multiple-plot-types-1.png)
+![](02_02_class_activity_files/figure-docx/multiple-plot-types-1.jpeg)
 :::
 :::
 
@@ -488,8 +478,7 @@ box_plot + violin_plot + dot_plot
 
 ## Part 3: Building Complex Visualizations Layer by Layer
 
-Now let's build more sophisticated visualizations by adding layers one
-at a time:
+Now let's build more sophisticated visualizations by adding layers one at a time:
 
 ### Exercise 4: Building a Layered Plot
 
@@ -524,7 +513,7 @@ p4 <- p3 +
 ```
 
 ::: {.cell-output-display}
-![](02_02_class_activity_files/figure-docx/layered-plot-1.png)
+![](02_02_class_activity_files/figure-docx/layered-plot-1.jpeg)
 :::
 :::
 
@@ -538,10 +527,8 @@ p4 <- p3 +
 ### Discussion Points:
 
 -   How does each layer contribute to the story our data is telling?
--   Why might we want to show individual data points alongside summary
-    statistics?
--   How does transparency (alpha) help when overlaying multiple
-    elements?
+-   Why might we want to show individual data points alongside summary statistics?
+-   How does transparency (alpha) help when overlaying multiple elements?
 
 ## Part 4: Customizing Plots for Publication
 
@@ -586,7 +573,7 @@ color_plot
 ```
 
 ::: {.cell-output-display}
-![](02_02_class_activity_files/figure-docx/unnamed-chunk-5-1.png)
+![](02_02_class_activity_files/figure-docx/unnamed-chunk-5-1.jpeg)
 :::
 :::
 
@@ -597,8 +584,7 @@ color_plot
 
 
 
-Let's create a publication-quality figure by customizing colors, labels,
-and themes:
+Let's create a publication-quality figure by customizing colors, labels, and themes:
 
 ### Exercise 6: Creating a Publication-Ready Plot
 
@@ -642,7 +628,7 @@ publication_plot
 ```
 
 ::: {.cell-output-display}
-![](02_02_class_activity_files/figure-docx/publication-plot-1.png)
+![](02_02_class_activity_files/figure-docx/publication-plot-1.jpeg)
 :::
 :::
 
@@ -692,7 +678,7 @@ color_plot +
 ```
 
 ::: {.cell-output-display}
-![](02_02_class_activity_files/figure-docx/multi-panel-1.png)
+![](02_02_class_activity_files/figure-docx/multi-panel-1.jpeg)
 :::
 :::
 
@@ -730,6 +716,5 @@ In this activity, we've learned how to:
 4.  **Minimize chart junk** and maximize data-ink ratio
 5.  **Create clear, informative labels**
 6.  **Use color purposefully** and with accessibility in mind
-7.  **Include both individual data points and summary statistics** when
-    possible
+7.  **Include both individual data points and summary statistics** when possible
 8.  **Consider your audience** when designing visualizations

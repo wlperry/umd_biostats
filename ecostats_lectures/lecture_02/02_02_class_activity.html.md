@@ -8,7 +8,11 @@ format:
     output-file: "02_02_class_activity.html"
   typst:
     output-file: "02_02_class_activity.pdf"  
+  docx:
+    output-file: "02_02_class_activity.docx"
 ---
+
+
 
 
 
@@ -20,10 +24,8 @@ format:
 
 ## Recap from Activity 1
 
--   Collected pine needle samples from windward and leeward sides of
-    trees
--   Identified independent variable (wind exposure) and dependent
-    variable (needle length)
+-   Collected pine needle samples from windward and leeward sides of trees
+-   Identified independent variable (wind exposure) and dependent variable (needle length)
 -   Measured needle lengths and recorded data
 -   Created basic visualizations
 -   Saved our data for further analysis
@@ -62,28 +64,22 @@ format:
 
 ## In RStudio:
 
-1.  click `file` - `open project` and select the
-    `2025_UMD_BioStats_Student_Code.Rproj` file or double click on it in
-    the finder or data explorer.
+1.  click `file` - `open project` and select the `2025_UMD_BioStats_Student_Code.Rproj` file or double click on it in the finder or data explorer.
 2.  your screen will now change as RStudio knows where home is
 
 ![](images/clipboard-2614364443.png){width="434"}
 
-3.  Note that in the upper right you will see
-    `2025_UMD_BioStats_Student_Code` so you know you are in the right
-    spot
+3.  Note that in the upper right you will see `2025_UMD_BioStats_Student_Code` so you know you are in the right spot
 
 4.  Now click File - New File - Quarto File
 
 ![](images/clipboard-3396400631.png){width="414"}
 
-5.  Create a file that starts with `02_` and then something that will
-    help you know what is going on like `02_class_activity_in_class.qmd`
+5.  Create a file that starts with `02_` and then something that will help you know what is going on like `02_class_activity_in_class.qmd`
 
 6.  Now this file thinks this is home.
 
-7.  So I usually copy stuff for the header from another file as its just
-    too hard to remember all this...
+7.  So I usually copy stuff for the header from another file as its just too hard to remember all this...
 
 ``` r
 ---
@@ -120,6 +116,8 @@ format:
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -137,8 +135,11 @@ format:
 
 
 
-Each script you run from then on you will load the libraries from within
-the package.
+
+
+Each script you run from then on you will load the libraries from within the package.
+
+
 
 
 
@@ -151,46 +152,8 @@ the package.
 # Load the libraries ----
 library(readxl) # allows to read in excel files
 library(tidyverse) # provides utilities seen in console
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
-
-
-:::
-
-```{.r .cell-code}
 library(skimr) # provide summary stats
 library(janitor) # it cleans ; )
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-
-Attaching package: 'janitor'
-
-The following objects are masked from 'package:stats':
-
-    chisq.test, fisher.test
-```
-
-
-:::
-
-```{.r .cell-code}
 library(patchwork)
 ```
 :::
@@ -200,12 +163,15 @@ library(patchwork)
 
 
 
+
+
 ## Exercise 2: Loading and Examining Data
 
-Now like we did before with x and y we will do this with a spreadsheet
-from a CSV file or excel file
+Now like we did before with x and y we will do this with a spreadsheet from a CSV file or excel file
 
 We are going to work with the same data we did in the last class.
+
+
 
 
 
@@ -249,7 +215,11 @@ dbl (2): tree_no, length_mm
 
 
 
+
+
 ## Exercise 3: Examining Data
+
+
 
 
 
@@ -355,6 +325,8 @@ summary(p_df)
 
 
 
+
+
 ### Questions to Consider:
 
 1.  What variables are in our dataset?
@@ -374,6 +346,8 @@ Let's create some simple visualizations to explore our data:
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -384,7 +358,7 @@ p_df %>%
 ```
 
 ::: {.cell-output-display}
-![](02_02_class_activity_files/figure-html/basic-histogram-1.png){width=672}
+![](02_02_class_activity_files/figure-html/basic-histogram-1.png){width=336}
 :::
 :::
 
@@ -398,9 +372,11 @@ p_df %>%
 ```
 
 ::: {.cell-output-display}
-![](02_02_class_activity_files/figure-html/unnamed-chunk-4-1.png){width=672}
+![](02_02_class_activity_files/figure-html/unnamed-chunk-4-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -409,13 +385,13 @@ p_df %>%
 
 ### Key Insights from Histograms:
 
-The histogram helps us understand: - The overall distribution of needle
-lengths - Potential differences between windward and leeward needles -
-Presence of any unusual values or outliers
+The histogram helps us understand: - The overall distribution of needle lengths - Potential differences between windward and leeward needles - Presence of any unusual values or outliers
 
 ### Exercise 3: Creating Multiple Plot Types
 
 Let's explore different ways to visualize the same data:
+
+
 
 
 
@@ -445,9 +421,11 @@ box_plot + violin_plot + dot_plot
 ```
 
 ::: {.cell-output-display}
-![](02_02_class_activity_files/figure-html/multiple-plot-types-1.png){width=672}
+![](02_02_class_activity_files/figure-html/multiple-plot-types-1.png){width=336}
 :::
 :::
+
+
 
 
 
@@ -462,10 +440,11 @@ box_plot + violin_plot + dot_plot
 
 ## Part 3: Building Complex Visualizations Layer by Layer
 
-Now let's build more sophisticated visualizations by adding layers one
-at a time:
+Now let's build more sophisticated visualizations by adding layers one at a time:
 
 ### Exercise 4: Building a Layered Plot
+
+
 
 
 
@@ -505,17 +484,19 @@ p4 <- p3 +
 
 
 
+
+
 ### Discussion Points:
 
 -   How does each layer contribute to the story our data is telling?
--   Why might we want to show individual data points alongside summary
-    statistics?
--   How does transparency (alpha) help when overlaying multiple
-    elements?
+-   Why might we want to show individual data points alongside summary statistics?
+-   How does transparency (alpha) help when overlaying multiple elements?
 
 ## Part 4: Customizing Plots for Publication
 
 ### Exercise 5: Adding customization
+
+
 
 
 
@@ -554,7 +535,7 @@ color_plot
 ```
 
 ::: {.cell-output-display}
-![](02_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=672}
+![](02_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=336}
 :::
 :::
 
@@ -563,10 +544,13 @@ color_plot
 
 
 
-Let's create a publication-quality figure by customizing colors, labels,
-and themes:
+
+
+Let's create a publication-quality figure by customizing colors, labels, and themes:
 
 ### Exercise 6: Creating a Publication-Ready Plot
+
+
 
 
 
@@ -615,6 +599,8 @@ publication_plot
 
 
 
+
+
 ### Customization Elements:
 
 1.  **Plot Elements**:
@@ -641,6 +627,8 @@ Finally, let's create a publication-ready multi-panel figure:
 
 
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -655,6 +643,8 @@ color_plot +
 ![](02_02_class_activity_files/figure-html/multi-panel-1.png){width=960}
 :::
 :::
+
+
 
 
 
@@ -688,6 +678,5 @@ In this activity, we've learned how to:
 4.  **Minimize chart junk** and maximize data-ink ratio
 5.  **Create clear, informative labels**
 6.  **Use color purposefully** and with accessibility in mind
-7.  **Include both individual data points and summary statistics** when
-    possible
+7.  **Include both individual data points and summary statistics** when possible
 8.  **Consider your audience** when designing visualizations
