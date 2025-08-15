@@ -1,6 +1,4 @@
 ---
-title: "Lecture 01"
-author: "Bill Perry"
 metadata-files:
   - ../../_templates/lectures.yml
 format:
@@ -16,18 +14,6 @@ format:
   typst:
     output-file: "01_01_lecture_powerpoint.pdf"
 ---
-
-
-
-
-
-
-
-
-
-
-
-
 
 # **Lecture 1: Syllabus**
 
