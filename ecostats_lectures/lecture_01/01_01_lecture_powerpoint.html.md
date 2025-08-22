@@ -15,6 +15,18 @@ format:
     output-file: "01_01_lecture_powerpoint.pdf"
 ---
 
+
+
+
+
+
+
+
+
+
+
+
+
 # **Lecture 1: Syllabus**
 
 -   Please look over the syllabus as it has all the details of the class and how it will run.
@@ -25,8 +37,8 @@ format:
 ::: {.column width="60%"}
 -   Bill Perry
 -   Office is in SSB 13
--   Phone is not available yet ; )
--   Email is wlperry\@d.umn.edu
+-   Phone 218-726-8145
+-   Email is wlperry_at_d.umn.edu
 :::
 
 ::: {.column width="40%"}
