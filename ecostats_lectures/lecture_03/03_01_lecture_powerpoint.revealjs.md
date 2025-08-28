@@ -24,6 +24,11 @@ format:
 
 
 
+
+
+
+
+
 # **Lecture 2: Review of data and graphing**
 
 ::::: columns
@@ -74,7 +79,7 @@ lakes to explore these concepts.. like you did in the homework
 :::
 
 ::: {.column width="40%"}
-![](images/pop_sample_stats.png){width="231" height="247"}
+![](images/pop_sample_stats.png){width="231" height="296"}
 :::
 :::::
 
@@ -114,11 +119,21 @@ world by:
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-html/unnamed-chunk-1-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -142,6 +157,11 @@ Let's recreate the basic histogram of fish lengths using
 
 
 
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -149,6 +169,11 @@ Let's recreate the basic histogram of fish lengths using
 # How do you examine the data - what are the ways you think and lets try it!
 ```
 :::
+
+
+
+
+
 
 
 
@@ -186,7 +211,7 @@ Sampling involves
 :::
 
 ::: {.column width="40%"}
-![](images/pop_sample_stats.png){width="228" height="244"}
+![](images/pop_sample_stats.png){width="212" height="297"}
 :::
 :::::
 
@@ -213,7 +238,7 @@ parameter.
 :::
 
 ::: {.column width="40%"}
-![](images/pop_sample_stats.png){width="199" height="198"}
+![](images/pop_sample_stats.png){width="191" height="279"}
 :::
 :::::
 
@@ -221,8 +246,7 @@ parameter.
 
 ::::: columns
 ::: {.column width="60%"}
-Understanding the type of variable you're working with is essential for
-selecting appropriate statistics:
+### Understanding the type of variable you're working with is essential for selecting appropriate statistics:
 
 ### Measurement or Quantitative Variables
 
@@ -251,7 +275,7 @@ selecting appropriate statistics:
 
 ::::: columns
 ::: {.column width="60%"}
-Derived Variables
+### Derived Variables
 
 -   **Percentages, Proportions**: Ratio of some component to total
 -   **Ratios**: Relation of two variables
@@ -272,6 +296,11 @@ it contains.
 ## Practice Exercise 2: Can you do this for the pine data we have collected?
 
 Let's examine the different data and determine what they are?
+
+
+
+
+
 
 
 
@@ -315,14 +344,19 @@ head(grayling_df)
 
 
 
+
+
+
+
+
 :::
 
 # Lecture 3: Accuracy, Precision, and Bias
 
 ::::: columns
 ::: {.column width="60%"}
-When taking biological measurements, understanding measurement quality
-is essential:
+**When taking biological measurements, understanding measurement quality
+is essential:**
 
 -   **Accuracy**: Closeness of measured value to true value
 -   **Precision**: Closeness of repeated measurements to each other
@@ -338,7 +372,7 @@ bias is usually a more serious problem than low precision because:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-21056328.png){width="246" height="244"}
+![](images/clipboard-21056328.png){width="314" height="322"}
 :::
 :::::
 
@@ -383,6 +417,11 @@ Where:
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -412,6 +451,11 @@ Mean length of all fish: 324.5 mm
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -422,6 +466,11 @@ The Median
 -   The median is the middle value of a sorted dataset.
 -   If there is an even number of observations, it's the average of the
     two middle values.
+
+
+
+
+
 
 
 
@@ -459,6 +508,11 @@ Median length of all fish: 324.5 mm
 
 
 
+
+
+
+
+
 # Lecture 3: Measures of Spread - Variance and Standard Deviation
 
 ::::: columns
@@ -486,20 +540,17 @@ The standard deviation is the square root of variance
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
 ```
 Variance of length: 4225.9 mm²
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Standard deviation of length: 65 mm
+ Standard deviation of length: 65 mm
 ```
 
 
@@ -524,6 +575,11 @@ Standard deviation of length: 65 mm
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -532,7 +588,16 @@ Standard deviation of length: 65 mm
 ::::: columns
 ::: {.column width="60%"}
 The area under the curve of a bell shaped curve within + and - 2
-Standard deviations on each side includes about 95% of the data
+Standard deviations on each side includes about 95% of the data \
+\
+so there is only 2.5% of the data that is outside this range
+
+\- note the similarity to the p \< 0.5
+
+
+
+
+
 
 
 
@@ -545,56 +610,21 @@ Standard deviations on each side includes about 95% of the data
 
 ```
 i3 Lake Fish Length Summary:
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Number of fish: 66 
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Mean length: 265.61 mm
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Standard Deviation: 28.3 mm
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Range for ±2 SD: 209 to 322.21 mm
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Percentage within ±2 SD: 90.91 %
+ Number of fish: 66 
+ Mean length: 265.61 mm
+ Standard Deviation: 28.3 mm
+ Range for ±2 SD: 209 to 322.21 mm
+ Percentage within ±2 SD: 90.91 %
 ```
 
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -610,11 +640,21 @@ Percentage within ±2 SD: 90.91 %
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-html/sd-variance-2-1.png){width=576}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -644,6 +684,11 @@ different units or vastly different scales.
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -654,16 +699,24 @@ Coefficient of variation: 10.7 %
 
 :::
 
-::: {.cell-output-display}
+::: {.cell-output .cell-output-stdout}
 
-
-```{=html}
-<div class="tabwid"><style>.cl-c7dad53a{}.cl-c7d62eea{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-c7d7e866{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c7d7e870{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c7d7f8f6{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7d7f8f7{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7d7f900{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7d7f901{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7d7f902{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7d7f90a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-c7dad53a'><thead><tr style="overflow-wrap:break-word;"><th class="cl-c7d7f8f6"><p class="cl-c7d7e866"><span class="cl-c7d62eea">lake</span></p></th><th class="cl-c7d7f8f7"><p class="cl-c7d7e870"><span class="cl-c7d62eea">cv_length</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-c7d7f900"><p class="cl-c7d7e866"><span class="cl-c7d62eea">I3</span></p></td><td class="cl-c7d7f901"><p class="cl-c7d7e870"><span class="cl-c7d62eea">10.65630</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c7d7f902"><p class="cl-c7d7e866"><span class="cl-c7d62eea">I8</span></p></td><td class="cl-c7d7f90a"><p class="cl-c7d7e870"><span class="cl-c7d62eea">14.43444</span></p></td></tr></tbody></table></div>
+```
+# A tibble: 2 × 2
+  lake  cv_length
+  <chr>     <dbl>
+1 I3         10.7
+2 I8         14.4
 ```
 
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -687,6 +740,11 @@ third quartile (75th percentile).
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -721,16 +779,24 @@ Interquartile range: 106.25 mm
 
 :::
 
-::: {.cell-output-display}
+::: {.cell-output .cell-output-stdout}
 
-
-```{=html}
-<div class="tabwid"><style>.cl-c7e777a4{}.cl-c7e458a8{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-c7e5a014{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c7e5a01e{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c7e5ac12{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7e5ac1c{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7e5ac1d{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7e5ac1e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7e5ac26{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7e5ac27{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-c7e777a4'><thead><tr style="overflow-wrap:break-word;"><th class="cl-c7e5ac12"><p class="cl-c7e5a014"><span class="cl-c7e458a8">lake</span></p></th><th class="cl-c7e5ac1c"><p class="cl-c7e5a01e"><span class="cl-c7e458a8">q1</span></p></th><th class="cl-c7e5ac1c"><p class="cl-c7e5a01e"><span class="cl-c7e458a8">q3</span></p></th><th class="cl-c7e5ac1c"><p class="cl-c7e5a01e"><span class="cl-c7e458a8">iqr</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-c7e5ac1d"><p class="cl-c7e5a014"><span class="cl-c7e458a8">I3</span></p></td><td class="cl-c7e5ac1e"><p class="cl-c7e5a01e"><span class="cl-c7e458a8">256</span></p></td><td class="cl-c7e5ac1e"><p class="cl-c7e5a01e"><span class="cl-c7e458a8">280</span></p></td><td class="cl-c7e5ac1e"><p class="cl-c7e5a01e"><span class="cl-c7e458a8">24</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c7e5ac26"><p class="cl-c7e5a014"><span class="cl-c7e458a8">I8</span></p></td><td class="cl-c7e5ac27"><p class="cl-c7e5a01e"><span class="cl-c7e458a8">340</span></p></td><td class="cl-c7e5ac27"><p class="cl-c7e5a01e"><span class="cl-c7e458a8">401</span></p></td><td class="cl-c7e5ac27"><p class="cl-c7e5a01e"><span class="cl-c7e458a8">61</span></p></td></tr></tbody></table></div>
+```
+# A tibble: 2 × 4
+  lake     q1    q3   iqr
+  <chr> <dbl> <dbl> <dbl>
+1 I3      256   280    24
+2 I8      340   401    61
 ```
 
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -771,29 +837,31 @@ provides a better measure of central tendency than the arithmetic mean.
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
-![](03_01_lecture_powerpoint_files/figure-html/log-transform-1.png){width=576}
+![](03_01_lecture_powerpoint_files/figure-html/log-transform-1.png){width=480}
 :::
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
 Arithmetic mean of original data: 265.6 mm
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Geometric mean (back-transformed mean of logs): NA mm
+ Geometric mean (back-transformed mean of logs): 282.4 mm
 ```
 
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -814,10 +882,13 @@ Geometric mean (back-transformed mean of logs): NA mm
 -   **Inverse transformation**: For strongly right-skewed data
 -   **Arcsine square root transformation**: For proportions or
     percentages (though logistic regression is often preferred now)
+
+In a reflection the parameter **k** is typically chosen to be a value
+that's larger than the maximum value
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3086284529.png){width="300" height="250"}
+![](images/clipboard-2483693250.png){width="576"}
 :::
 :::::
 
@@ -826,6 +897,11 @@ Geometric mean (back-transformed mean of logs): NA mm
 Histograms
 
 Histograms show the frequency distribution of our data.
+
+
+
+
+
 
 
 
@@ -845,6 +921,11 @@ Histograms show the frequency distribution of our data.
 
 
 
+
+
+
+
+
 # Lecture 3: Visualizing Distributions - Box Plots
 
 Box Plots
@@ -857,11 +938,21 @@ Box plots show the median, quartiles, and potential outliers.
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-html/boxplot-1.png){width=768}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -890,6 +981,11 @@ it's skewed or has outliers, they can differ significantly.
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -904,6 +1000,11 @@ it's skewed or has outliers, they can differ significantly.
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -934,11 +1035,21 @@ it's skewed or has outliers, they can differ significantly.
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-html/mean-vs-median-plot-1.png){width=576}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -969,17 +1080,30 @@ deviation.
 
 
 
+
+
+
+
+
 ::: {.cell}
-::: {.cell-output-display}
+::: {.cell-output .cell-output-stdout}
 
-
-```{=html}
-<div class="tabwid"><style>.cl-c8020510{}.cl-c7fed2be{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-c8003262{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c800326c{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c8003eb0{width:0.565in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c8003eb1{width:0.668in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c8003eb2{width:1.083in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c8003eba{width:0.565in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c8003ebb{width:0.668in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c8003ec4{width:1.083in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c8003ec5{width:0.565in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c8003ec6{width:0.668in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c8003ece{width:1.083in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-c8020510'><thead><tr style="overflow-wrap:break-word;"><th class="cl-c8003eb0"><p class="cl-c8003262"><span class="cl-c7fed2be">lake</span></p></th><th class="cl-c8003eb1"><p class="cl-c800326c"><span class="cl-c7fed2be">sd</span></p></th><th class="cl-c8003eb1"><p class="cl-c800326c"><span class="cl-c7fed2be">iqr</span></p></th><th class="cl-c8003eb2"><p class="cl-c800326c"><span class="cl-c7fed2be">ratio_iqr_sd</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-c8003eba"><p class="cl-c8003262"><span class="cl-c7fed2be">I3</span></p></td><td class="cl-c8003ebb"><p class="cl-c800326c"><span class="cl-c7fed2be">28.30</span></p></td><td class="cl-c8003ebb"><p class="cl-c800326c"><span class="cl-c7fed2be">24.00</span></p></td><td class="cl-c8003ec4"><p class="cl-c800326c"><span class="cl-c7fed2be">0.85</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c8003ec5"><p class="cl-c8003262"><span class="cl-c7fed2be">I8</span></p></td><td class="cl-c8003ec6"><p class="cl-c800326c"><span class="cl-c7fed2be">52.34</span></p></td><td class="cl-c8003ec6"><p class="cl-c800326c"><span class="cl-c7fed2be">61.00</span></p></td><td class="cl-c8003ece"><p class="cl-c800326c"><span class="cl-c7fed2be">1.17</span></p></td></tr></tbody></table></div>
+```
+# A tibble: 2 × 4
+  lake     sd   iqr ratio_iqr_sd
+  <chr> <dbl> <dbl>        <dbl>
+1 I3     28.3    24        0.848
+2 I8     52.3    61        1.17 
 ```
 
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1011,17 +1135,19 @@ The IQR is the difference between Q3 and Q1.
 
 
 
+
+
+
+
+
 ::: {.cell}
-::: {.cell-output-display}
-
-
-```{=html}
-<div class="tabwid"><style>.cl-c8138ca4{}.cl-c81067cc{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-c811be60{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c811be61{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c811cab8{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c811cab9{width:0.676in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c811cac2{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c811cac3{width:0.676in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c811cac4{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c811cac5{width:0.676in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c811cacc{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c811cacd{width:0.676in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c811cace{width:1.228in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c811cad6{width:0.676in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-c8138ca4'><thead><tr style="overflow-wrap:break-word;"><th class="cl-c811cab8"><p class="cl-c811be60"><span class="cl-c81067cc">Percentile</span></p></th><th class="cl-c811cab9"><p class="cl-c811be61"><span class="cl-c81067cc">Value</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-c811cac2"><p class="cl-c811be60"><span class="cl-c81067cc">10th</span></p></td><td class="cl-c811cac3"><p class="cl-c811be61"><span class="cl-c81067cc">251.1</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c811cac4"><p class="cl-c811be60"><span class="cl-c81067cc">25th (Q1)</span></p></td><td class="cl-c811cac5"><p class="cl-c811be61"><span class="cl-c81067cc">270.8</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c811cacc"><p class="cl-c811be60"><span class="cl-c81067cc">50th (Median)</span></p></td><td class="cl-c811cacd"><p class="cl-c811be61"><span class="cl-c81067cc">324.5</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c811cac4"><p class="cl-c811be60"><span class="cl-c81067cc">75th (Q3)</span></p></td><td class="cl-c811cac5"><p class="cl-c811be61"><span class="cl-c81067cc">377.0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c811cace"><p class="cl-c811be60"><span class="cl-c81067cc">90th</span></p></td><td class="cl-c811cad6"><p class="cl-c811be61"><span class="cl-c81067cc">408.6</span></p></td></tr></tbody></table></div>
-```
-
 
 :::
-:::
+
+
+
+
+
 
 
 
@@ -1035,6 +1161,11 @@ The IQR is the difference between Q3 and Q1.
 
 Let's examine how missing values affect our descriptive statistics by
 looking at the mass variable, which has some missing data.
+
+
+
+
+
 
 
 
@@ -1056,6 +1187,7 @@ looking at the mass variable, which has some missing data.
 
 ```
 Mean mass without handling NAs: NA g
+ Mean mass with na.rm=TRUE: 351.2289 g
 ```
 
 
@@ -1064,22 +1196,21 @@ Mean mass without handling NAs: NA g
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Mean mass with na.rm=TRUE: 351.2289 g
-```
-
-
-:::
-
-::: {.cell-output-display}
-
-
-```{=html}
-<div class="tabwid"><style>.cl-c8248fb8{}.cl-c8219628{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-c822deca{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c822ded4{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c822eb54{width:0.565in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb55{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb5e{width:1.236in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb5f{width:0.897in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb60{width:0.973in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb68{width:0.565in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb69{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb72{width:1.236in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb73{width:0.897in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb7c{width:0.973in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb7d{width:0.565in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb86{width:1.117in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb87{width:1.236in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb90{width:0.897in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c822eb91{width:0.973in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-c8248fb8'><thead><tr style="overflow-wrap:break-word;"><th class="cl-c822eb54"><p class="cl-c822deca"><span class="cl-c8219628">lake</span></p></th><th class="cl-c822eb55"><p class="cl-c822ded4"><span class="cl-c8219628">mean_mass</span></p></th><th class="cl-c822eb5e"><p class="cl-c822ded4"><span class="cl-c8219628">median_mass</span></p></th><th class="cl-c822eb5f"><p class="cl-c822ded4"><span class="cl-c8219628">sd_mass</span></p></th><th class="cl-c822eb60"><p class="cl-c822ded4"><span class="cl-c8219628">n_missing</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-c822eb68"><p class="cl-c822deca"><span class="cl-c8219628">I3</span></p></td><td class="cl-c822eb69"><p class="cl-c822ded4"><span class="cl-c8219628">150.5</span></p></td><td class="cl-c822eb72"><p class="cl-c822ded4"><span class="cl-c8219628">147.0</span></p></td><td class="cl-c822eb73"><p class="cl-c822ded4"><span class="cl-c8219628">42.2</span></p></td><td class="cl-c822eb7c"><p class="cl-c822ded4"><span class="cl-c8219628">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c822eb7d"><p class="cl-c822deca"><span class="cl-c8219628">I8</span></p></td><td class="cl-c822eb86"><p class="cl-c822ded4"><span class="cl-c8219628">483.7</span></p></td><td class="cl-c822eb87"><p class="cl-c822ded4"><span class="cl-c8219628">490.0</span></p></td><td class="cl-c822eb90"><p class="cl-c822ded4"><span class="cl-c8219628">176.5</span></p></td><td class="cl-c822eb91"><p class="cl-c822ded4"><span class="cl-c8219628">2</span></p></td></tr></tbody></table></div>
+# A tibble: 2 × 5
+  lake  mean_mass median_mass sd_mass n_missing
+  <chr>     <dbl>       <dbl>   <dbl>     <int>
+1 I3         150.         147    42.2         0
+2 I8         484.         490   176.          2
 ```
 
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1091,12 +1222,9 @@ Mean mass with na.rm=TRUE: 351.2289 g
 
 1.  Always check for missing values in your data before calculating
     statistics.
-
 2.  Use na.rm = TRUE when calculating summary statistics to handle
     missing values.
-
 3.  Report the number of missing values along with your statistics.
-
 4.  Consider whether the missing values are random or might introduce
     bias.
 
@@ -1137,6 +1265,11 @@ means vary:
 
 
 
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1168,6 +1301,11 @@ samples_df <- data.frame(
 
 
 
+
+
+
+
+
 # **Plotting Sample Variation**
 
 
@@ -1176,58 +1314,12 @@ samples_df <- data.frame(
 
 
 
+
+
+
+
+
 ::: {.cell}
-
-```{.r .cell-code}
-# Display the sample means
-samples_df
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-   sample_number sample_mean
-1              1    269.9333
-2              2    260.6000
-3              3    255.2000
-4              4    263.4000
-5              5    275.3333
-6              6    279.2667
-7              7    263.7333
-8              8    273.6000
-9              9    264.8000
-10            10    269.8667
-```
-
-
-:::
-
-```{.r .cell-code}
-# Calculate the mean and standard deviation of the sample means
-mean(sample_means)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 267.5733
-```
-
-
-:::
-
-```{.r .cell-code}
-sd(sample_means)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 7.346063
-```
-
-
-:::
 
 ```{.r .cell-code}
 # Plot the different sample means
@@ -1254,6 +1346,11 @@ ggplot(samples_df, aes(x = factor(sample_number), y = sample_mean)) +
 
 
 
+
+
+
+
+
 Notice how each sample's mean differs from the overall mean. This
 demonstrates sampling variation.
 
@@ -1266,24 +1363,38 @@ sample mean as an estimate of the population mean.
 
 Formula: $SE_{\bar{x}} = \frac{s}{\sqrt{n}}$
 
-Where: - s is the sample standard deviation - n is the sample size
+Where:
 
-The standard error tells us: - How much uncertainty is in our estimate -
-How much sample means are expected to vary - How close our sample mean
-is likely to be to the true population mean
+- s is the sample standard deviation
+- n is the sample size
+
+The standard error tells us:
+
+- How much uncertainty is in our estimate
+- How much sample means are expected to vary
+- How close our sample mean is likely to be to the true population
+    mean
 :::
 
 ::: {.column width="40%"}
-**Remember:** - Standard deviation (s) describes the variability in the
-individual data points - Standard error (SE) describes the variability
-in the sample mean itself - As sample size increases, SE decreases (more
-precise estimate)
+**Remember:**
+
+-   Standard deviation (s) describes the variability in the
+    individual data points
+-   Standard error (SE) describes the variability in the sample mean
+    itself
+-   As sample size increases, SE decreases (more precise estimate)
 :::
 :::::
 
 # **Standard Error for Our Grayling Data**
 
 Let's calculate and visualize the standard error for both lakes:
+
+
+
+
+
 
 
 
@@ -1328,7 +1439,17 @@ grayling_stats
 
 
 
+
+
+
+
+
 # **Visualizing Standard Error**
+
+
+
+
+
 
 
 
@@ -1348,10 +1469,14 @@ grayling_stats
 
 
 
+
+
+
+
+
 # **Sampling Distribution of the Mean**
 
-::::: columns
-::: {.column width="60%"}
+
 The **sampling distribution of the mean** is the theoretical
 distribution of all possible sample means of a given sample size from a
 population.
@@ -1365,20 +1490,22 @@ Important properties:
 
 The larger the sample size:
 
--   \- The narrower the sampling distribution
--   \- The smaller the standard error
--   \- The more precise our estimate of the population mean
-:::
+- The narrower the sampling distribution
+- The smaller the standard error
+- The more precise our estimate of the population mean
 
-::: {.column width="40%"}
 Let's simulate the sampling distribution for Lake I3 fish data.
-:::
-:::::
+
 
 # **Simulating the Sampling Distribution**
 
 Let's simulate taking many samples from Lake I3 to visualize the
 sampling distribution:
+
+
+
+
+
 
 
 
@@ -1397,7 +1524,7 @@ num_simulations <- 1000
 sample_size <- 20
 
 # Simulate many samples and calculate means
-set.seed(456) # For reproducibility
+set.seed(46) # For reproducibility
 simulated_means <- replicate(num_simulations, sample_mean(i3_data, sample_size))
 
 # Calculate the mean and standard deviation of the simulated means
@@ -1415,7 +1542,17 @@ simulated_df <- data.frame(sample_mean = simulated_means)
 
 
 
+
+
+
+
+
 # **Plotting Sampling Distribution**
+
+
+
+
+
 
 
 
@@ -1451,12 +1588,15 @@ ggplot(simulated_df, aes(x = sample_mean)) +
 
 
 
+
+
+
+
+
 Notice that the simulated sampling distribution:
 
 1.  Is approximately normally distributed
-
 2.  Is centered around the overall sample mean
-
 3.  Has a spread that is related to the standard error
 
 # **Standard Error and Sample Size**
@@ -1469,9 +1609,19 @@ Let's see how the standard error changes with different sample sizes:
 
 
 
+
+
+
+
+
 ::: {.cell}
 
 :::
+
+
+
+
+
 
 
 
@@ -1487,28 +1637,15 @@ Let's see how the standard error changes with different sample sizes:
 
 
 
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Display the results
-results
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-  sample_size empirical_se theoretical_se
-1           5    12.349407      12.657835
-2          10     8.178270       8.950441
-3          20     5.558957       6.328918
-4          30     3.792177       5.167540
-5          50     2.099744       4.002759
-```
-
-
-:::
-
-```{.r .cell-code}
 # Plot how SE changes with sample size
 results_long <- pivot_longer(results, 
                              cols = c(empirical_se, theoretical_se),
@@ -1538,10 +1675,13 @@ ggplot(results_long, aes(x = sample_size, y = standard_error, color = se_type)) 
 
 
 
+
+
+
+
+
 # **Confidence Intervals**
 
-::::: columns
-::: {.column width="60%"}
 A **confidence interval** is a range of values that is likely to contain
 the true population parameter.
 
@@ -1549,22 +1689,26 @@ The 95% confidence interval for the mean is approximately:
 
 $\bar{x} \pm 2 \times SE_{\bar{x}}$
 
-This "2 SE rule of thumb" means: - The interval extends 2 standard
-errors below and above the sample mean - About 95% of such intervals
-constructed from different samples would contain the true population
-mean
-:::
+This "2 SE rule of thumb" means:
 
-::: {.column width="40%"}
+- The interval extends 2 standard errors below and above the sample
+    mean
+- About 95% of such intervals constructed from different samples
+    would contain the true population mean
+    
 Confidence intervals provide a way to express the precision of our
-estimates.
-:::
-:::::
+estimates.    
+
 
 # **Calculating Confidence Intervals for Grayling Data**
 
 Let's calculate and visualize the 95% confidence intervals for the mean
 fish length in each lake:
+
+
+
+
+
 
 
 
@@ -1611,7 +1755,17 @@ grayling_ci
 
 
 
+
+
+
+
+
 # **Visualizing Confidence Intervals**
+
+
+
+
+
 
 
 
@@ -1645,9 +1799,19 @@ ggplot(grayling_ci, aes(x = lake, y = mean_length, fill = lake)) +
 
 
 
+
+
+
+
+
 # **Different Types of Error Bars**
 
 Let's compare different ways of displaying uncertainty in our estimates:
+
+
+
+
+
 
 
 
@@ -1686,7 +1850,17 @@ error_types <- data.frame(
 
 
 
+
+
+
+
+
 # **Comparing Error Bar Types**
+
+
+
+
+
 
 
 
@@ -1718,6 +1892,11 @@ ggplot() +
 ![](03_01_lecture_powerpoint_files/figure-html/unnamed-chunk-15-1.png){width=672}
 :::
 :::
+
+
+
+
+
 
 
 

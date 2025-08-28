@@ -34,8 +34,8 @@ format:
     margin: 0.1
     min-scale: 0.2
     max-scale: 2.0
-    fig-width: 5
-    fig-height: 5
+    fig-width: 6
+    fig-height: 6
 
 
   docx:
