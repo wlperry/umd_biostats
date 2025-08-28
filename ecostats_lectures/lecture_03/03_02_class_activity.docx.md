@@ -81,36 +81,9 @@ First, let's load the necessary packages and import our data:
 
 ```{.r .cell-code}
 # Load required packages
-
-library(knitr)        # For creating tables
 library(moments)      # For calculating skewness and kurtosis
 library(skimr)        # for summary stats
-library(flextable)    # for tables if you want - now tinytable
 library(tidyverse)    # For data wrangling and visualization
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ purrr::compose() masks flextable::compose()
-✖ dplyr::filter()  masks stats::filter()
-✖ dplyr::lag()     masks stats::lag()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
-
-
-:::
-
-```{.r .cell-code}
-# Set a consistent theme for our plots
-theme_set(theme_minimal(base_size = 12))
 ```
 :::
 
@@ -126,7 +99,8 @@ theme_set(theme_minimal(base_size = 12))
 ::: callout-tip
 ## Practice Exercise 1: Loading and Examining the Grayling Data
 
-We'll be working with data on arctic grayling fish from two different lakes (I3 and I8).
+We'll be working with data on arctic grayling fish from two different
+lakes (I3 and I8).
 
 
 
@@ -192,6 +166,15 @@ head(g_df)
 
 :::
 
+# Questions to Consider:
+
+1.  What variables are in our dataset?
+2.  What are their data types?
+3.  How many fish were sampled from each lake?
+4.  Are there any missing values?
+5.  What is the distribution of data?
+
+### Base R way of getting some summary stats
 
 
 
@@ -199,34 +182,12 @@ head(g_df)
 
 
 
-::: {.cell}
-
-```{.r .cell-code}
-# Examine the data structure
-glimpse(g_df)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Rows: 168
-Columns: 5
-$ site      <dbl> 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, 113, …
-$ lake      <chr> "I3", "I3", "I3", "I3", "I3", "I3", "I3", "I3", "I3", "I3", …
-$ species   <chr> "arctic grayling", "arctic grayling", "arctic grayling", "ar…
-$ length_mm <dbl> 266, 290, 262, 275, 240, 265, 265, 253, 246, 203, 289, 239, …
-$ mass_g    <dbl> 135, 185, 145, 160, 105, 145, 150, 130, 130, 71, 179, 108, 1…
-```
-
-
-:::
-:::
 
 ::: {.cell}
 
 ```{.r .cell-code}
-# Get a statistical summary
-summary(g_df)
+# How many fish do we have from each lake?
+summary(g_df) 
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -254,24 +215,65 @@ summary(g_df)
 :::
 :::
 
+
+
+
+
+
+
+
+### Skimnr way of seeing summary stats
+
+
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
-# How many fish do we have from each lake?
-
-g_df %>%
-  count(lake) 
+g_df %>% 
+  group_by(lake) %>% 
+  skim()
 ```
 
-::: {.cell-output .cell-output-stdout}
+::: {.cell-output-display}
 
-```
-# A tibble: 2 × 2
-  lake      n
-  <chr> <int>
-1 I3       66
-2 I8      102
-```
+Table: Data summary
+
+|                         |           |
+|:------------------------|:----------|
+|Name                     |Piped data |
+|Number of rows           |168        |
+|Number of columns        |5          |
+|_______________________  |           |
+|Column type frequency:   |           |
+|character                |1          |
+|numeric                  |3          |
+|________________________ |           |
+|Group variables          |lake       |
+
+
+**Variable type: character**
+
+|skim_variable |lake | n_missing| complete_rate| min| max| empty| n_unique| whitespace|
+|:-------------|:----|---------:|-------------:|---:|---:|-----:|--------:|----------:|
+|species       |I3   |         0|             1|  15|  15|     0|        1|          0|
+|species       |I8   |         0|             1|  15|  15|     0|        1|          0|
+
+
+**Variable type: numeric**
+
+|skim_variable |lake | n_missing| complete_rate|   mean|     sd|  p0|    p25| p50|   p75| p100|hist  |
+|:-------------|:----|---------:|-------------:|------:|------:|---:|------:|---:|-----:|----:|:-----|
+|site          |I3   |         0|          1.00| 113.00|   0.00| 113| 113.00| 113| 113.0|  113|▁▁▇▁▁ |
+|site          |I8   |         0|          1.00| 118.00|   0.00| 118| 118.00| 118| 118.0|  118|▁▁▇▁▁ |
+|length_mm     |I3   |         0|          1.00| 265.61|  28.30| 191| 256.00| 266| 280.0|  320|▂▁▇▇▂ |
+|length_mm     |I8   |         0|          1.00| 362.60|  52.34| 199| 340.00| 373| 401.0|  440|▁▂▃▇▆ |
+|mass_g        |I3   |         0|          1.00| 150.50|  42.22|  53| 130.75| 147| 177.5|  260|▂▅▇▃▁ |
+|mass_g        |I8   |         2|          0.98| 483.71| 176.48|  68| 369.00| 490| 615.5|  889|▂▃▇▆▂ |
 
 
 :::
@@ -284,13 +286,144 @@ g_df %>%
 
 
 
-# Questions to Consider:
+# Part 2: Visualizing Distributions
 
-1.  What variables are in our dataset?
-2.  What are their data types?
-3.  Are there any missing values?
-4.  What is the range of fish lengths in our dataset?
-5.  How many fish were sampled from each lake?
+Visualizations can help us better understand the descriptive statistics
+we've calculated.
+
+::: callout-tip
+### Exercise 1: Creating Histograms
+
+One of the best ways to look at data is a histogram - and we will do it
+again
+
+
+
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Create a histogram of all fish lengths
+g_df %>% ggplot(aes(x = length_mm)) +
+  geom_histogram(binwidth = 15) 
+```
+
+::: {.cell-output-display}
+![](03_02_class_activity_files/figure-docx/histograms-1.jpeg)
+:::
+:::
+
+
+
+
+
+
+
+:::
+
+### 
+
+
+
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Create histograms by lake
+g_df  %>% ggplot(aes(x = length_mm, fill = lake)) +
+  geom_histogram(binwidth = 15, position = "dodge", alpha = 0.7) 
+```
+
+::: {.cell-output-display}
+![](03_02_class_activity_files/figure-docx/unnamed-chunk-1-1.jpeg)
+:::
+:::
+
+
+
+
+
+
+
+
+::: callout-tip
+### Exercise 2: Creating Box Plots
+
+Personally I like box plots
+
+
+
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Create a box plot comparing fish lengths by lake
+# Create a box plot comparing fish lengths by lake
+g_df  %>%  ggplot( aes(x = lake, y = length_mm, fill = lake)) +
+  geom_boxplot() 
+```
+
+::: {.cell-output-display}
+![](03_02_class_activity_files/figure-docx/boxplots-1.jpeg)
+:::
+:::
+
+
+
+
+
+
+
+:::
+
+### 
+
+::: callout-tip
+### Exercise 3: Creating Density Plots
+
+Now these will be really important later on
+
+
+
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+## Create density plots
+g_df  %>%  ggplot(aes(x = length_mm, fill = lake)) +
+  geom_density(alpha = 0.5)
+```
+
+::: {.cell-output-display}
+![](03_02_class_activity_files/figure-docx/density-plots-1.jpeg)
+:::
+:::
+
+
+
+
+
+
+
+:::
+
+### 
 
 # Part 2: Calculating Descriptive Statistics
 
@@ -299,9 +432,7 @@ g_df %>%
 ## 
 
 ::: callout-tip
-## Practice Exercise 2: Measures of Central Tendency
-
-Let's recreate the basic histogram of fish lengths from our last class. Use the `sculpin_df` data frame that's already loaded.
+## Practice Exercise 4: Measures of Central Tendency
 
 
 
@@ -313,8 +444,6 @@ Let's recreate the basic histogram of fish lengths from our last class. Use the 
 ::: {.cell}
 
 ```{.r .cell-code}
-# Write your code here to read in the file
-# How do you examine the data - what are the ways you think and lets try it!
 # Calculate the mean and median fish length
 mean(g_df$length_mm)
 ```
@@ -392,9 +521,11 @@ g_df %>%
 
 ## Summarizing data - two ways
 
-lets say we want to summarize the data and need to get n, means, standard deviation, standard error
+lets say we want to summarize the data and need to get n, means,
+standard deviation, standard error
 
-We could do the following - if we had missing cells the code below would give an error
+We could do the following - if we had missing cells the code below would
+give an error
 
 
 
@@ -460,13 +591,15 @@ length(g_df$length_mm)
 
 -   **the length counts missing and non-missing data**
 
--   however this would get old if we had to do this for everything and then to do it for the different groupings - lee and windward...
+-   however this would get old if we had to do this for everything and
+    then to do it for the different groupings
 
 ## We need to learn to pipe
 
 ### passes things from the dataframe to a command and so on...
 
--   the dataframe –\> pipe command that feed the dataframe into –\> next command
+-   the dataframe –\> pipe command that feed the dataframe into –\> next
+    command
 
 
 
@@ -478,7 +611,8 @@ length(g_df$length_mm)
 ::: {.cell}
 
 ```{.r .cell-code}
-g_df %>% summarize(mean_length = mean(length_mm, na.rm = TRUE))
+g_df %>% 
+  summarize(mean_length = mean(length_mm, na.rm = TRUE))
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -582,7 +716,7 @@ g_df %>%
 # Now for Spread...
 
 ::: callout-tip
-## Practice Exercise 3: Measures of Spread
+## Practice Exercise 5: Measures of Spread
 
 
 
@@ -599,6 +733,19 @@ g_df %>%
 mean_length <- mean(g_df$length_mm, na.rm=TRUE)
 sd_length <- sd(g_df$length_mm)
 var_length <- var(g_df$length_mm)
+mean_length
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 324.494
+```
+
+
+:::
+
+```{.r .cell-code}
 sd_length
 ```
 
@@ -634,7 +781,7 @@ var_length
 :::
 
 ::: callout-tip
-## Exercise 4: Calculate Quartiles and Percentiles
+## Exercise 6: Calculate Quartiles and Percentiles
 
 
 
@@ -648,30 +795,31 @@ var_length
 ```{.r .cell-code}
 # Calculate quartiles for overall data
 quartiles <- quantile(g_df$length_mm, probs = c(0.25, 0.5, 0.75))
-# cat("First quartile (Q1):", quartiles[1], "mm\n")
-# cat("Second quartile (Median):", quartiles[2], "mm\n")
-# cat("Third quartile (Q3):", quartiles[3], "mm\n")
-
-# Calculate a more comprehensive set of percentiles
-percentiles <- quantile(g_df$length_mm, 
-                        probs = c(0.1, 0.25, 0.5, 0.75, 0.9))
-
-# Display the percentiles using flextable
-data.frame(
-  Percentile = c("10th", "25th (Q1)", "50th (Median)", "75th (Q3)", "90th"),
-  Value = percentiles
-) 
+quartiles
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-       Percentile  Value
-10%          10th 251.10
-25%     25th (Q1) 270.75
-50% 50th (Median) 324.50
-75%     75th (Q3) 377.00
-90%          90th 408.60
+   25%    50%    75% 
+270.75 324.50 377.00 
+```
+
+
+:::
+
+```{.r .cell-code}
+# Calculate a more comprehensive set of percentiles
+percentiles <- quantile(g_df$length_mm, 
+                        probs = c(0.1, 0.25, 0.5, 0.75, 0.9))
+percentiles
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+   10%    25%    50%    75%    90% 
+251.10 270.75 324.50 377.00 408.60 
 ```
 
 
@@ -688,37 +836,11 @@ data.frame(
 
 ### Note you could add a box plot by lake to see this if you wanted
 
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-g_df %>% 
-  ggplot(aes(lake, length_mm, color= lake))+
-  geom_boxplot()
-```
-
-::: {.cell-output-display}
-![](03_02_class_activity_files/figure-docx/boxplot-1.jpeg)
-:::
-:::
-
-
-
-
-
-
-
-
 ::: callout-tip
-### Exercise 5: Calculate the Coefficient of Variation
+### Exercise 7: Calculate the Coefficient of Variation
 
-The coefficient of variation (CV) is the standard deviation expressed as a percentage of the mean:
+The coefficient of variation (CV) is the standard deviation expressed as
+a percentage of the mean:
 
 $$CV = \frac{s}{\bar{Y}} \times 100\%$$
 
@@ -771,18 +893,18 @@ g_df %>%
     mean_length = mean(length_mm),
     sd_length = sd(length_mm),
     cv_length = sd_length / mean_length * 100
-  ) %>%
-  flextable()
+  ) 
 ```
 
-::: {.cell-output-display}
+::: {.cell-output .cell-output-stdout}
 
-
-``````{=openxml}
-
-<w:tbl xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><w:tblPr><w:tblLayout w:type="fixed"/><w:jc w:val="center"/><w:tblLook w:firstRow="1" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/></w:tblPr><w:tblGrid><w:gridCol w:w="1080"/><w:gridCol w:w="1080"/><w:gridCol w:w="1080"/><w:gridCol w:w="1080"/></w:tblGrid><w:tr><w:trPr><w:trHeight w:val="360" w:hRule="auto"/><w:tblHeader/></w:trPr>header1<w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="left"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="100" w:before="100" w:line="240"/><w:ind w:left="100" w:right="100" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">lake</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="100" w:before="100" w:line="240"/><w:ind w:left="100" w:right="100" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">mean_length</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="100" w:before="100" w:line="240"/><w:ind w:left="100" w:right="100" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">sd_length</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="100" w:before="100" w:line="240"/><w:ind w:left="100" w:right="100" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">cv_length</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:trHeight w:val="360" w:hRule="auto"/></w:trPr>body1<w:tc><w:tcPr><w:tcBorders><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="left"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="100" w:before="100" w:line="240"/><w:ind w:left="100" w:right="100" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">I3</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="100" w:before="100" w:line="240"/><w:ind w:left="100" w:right="100" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">265.6061</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="100" w:before="100" w:line="240"/><w:ind w:left="100" w:right="100" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">28.30378</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="100" w:before="100" w:line="240"/><w:ind w:left="100" w:right="100" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">10.65630</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:trHeight w:val="360" w:hRule="auto"/></w:trPr>body2<w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="left"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="100" w:before="100" w:line="240"/><w:ind w:left="100" w:right="100" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">I8</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="100" w:before="100" w:line="240"/><w:ind w:left="100" w:right="100" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">362.5980</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="100" w:before="100" w:line="240"/><w:ind w:left="100" w:right="100" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">52.33901</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="100" w:before="100" w:line="240"/><w:ind w:left="100" w:right="100" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:sz w:val="22"/><w:szCs w:val="22"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">14.43444</w:t></w:r></w:p></w:tc></w:tr></w:tbl>
-``````
-
+```
+# A tibble: 2 × 4
+  lake  mean_length sd_length cv_length
+  <chr>       <dbl>     <dbl>     <dbl>
+1 I3           266.      28.3      10.7
+2 I8           363.      52.3      14.4
+```
 
 
 :::
@@ -797,177 +919,36 @@ g_df %>%
 
 ### Questions to Consider:
 
-1.  How do the means and medians compare within each lake? What might this tell you about the distribution?
+1.  How do the means and medians compare within each lake? What might
+    this tell you about the distribution?
 2.  Which lake has more variable fish lengths? How can you tell?
-3.  Why might the coefficient of variation be useful when comparing variability between different measurements (e.g., length vs. mass)?
-
-## Part 3: Visualizing Distributions
-
-Visualizations can help us better understand the descriptive statistics we've calculated.
-
-::: callout-tip
-### Exercise 6: Creating Histograms
-
-One of the best ways to look at data is a histogram - and we will do it again
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Create a histogram of all fish lengths
-g_df %>% ggplot(aes(x = length_mm)) +
-  geom_histogram(bins = 15) 
-```
-
-::: {.cell-output-display}
-![](03_02_class_activity_files/figure-docx/histograms-1.jpeg)
-:::
-:::
-
-
-
-
-
-
-
-:::
-
-### 
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Create histograms by lake
-g_df  %>% ggplot(aes(x = length_mm, fill = lake)) +
-  geom_histogram(bins = 15, position = "dodge", alpha = 0.7) 
-```
-
-::: {.cell-output-display}
-![](03_02_class_activity_files/figure-docx/unnamed-chunk-12-1.jpeg)
-:::
-:::
-
-
-
-
-
-
-
-
-::: callout-tip
-### Exercise 7: Creating Box Plots
-
-Personally I like box plots
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Create a box plot comparing fish lengths by lake
-# Create a box plot comparing fish lengths by lake
-g_df  %>%  ggplot( aes(x = lake, y = length_mm, fill = lake)) +
-  geom_boxplot() 
-```
-
-::: {.cell-output-display}
-![](03_02_class_activity_files/figure-docx/boxplots-1.jpeg)
-:::
-:::
-
-
-
-
-
-
-
-:::
-
-### 
-
-::: callout-tip
-### Exercise 9: Creating Density Plots
-
-Now these will be really important later on
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-## Create density plots
-g_df  %>%  ggplot(aes(x = length_mm, fill = lake)) +
-  geom_density(alpha = 0.5)
-```
-
-::: {.cell-output-display}
-![](03_02_class_activity_files/figure-docx/density-plots-1.jpeg)
-:::
-:::
-
-
-
-
-
-
-
-:::
-
-### 
+3.  Why might the coefficient of variation be useful when comparing
+    variability between different measurements (e.g., length vs. mass)?
 
 ### Questions to Consider:
 
-1.  Which visualization best shows the differences in fish lengths between lakes?
-2.  What can you learn from the violin plots that might not be apparent from the box plots?
+1.  Which visualization best shows the differences in fish lengths
+    between lakes?
+2.  What can you learn from the violin plots that might not be apparent
+    from the box plots?
 3.  How would you interpret the cumulative frequency distribution?
-4.  What patterns or insights can you identify from these visualizations?
+4.  What patterns or insights can you identify from these
+    visualizations?
 
 ## Part 4: Interpreting the Results
 
 Based on our analysis, we can make the following observations:
 
-1.  **Lake Differences**: Fish from Lake I8 are generally larger than those from Lake I3, both in length and mass.
+1.  **Lake Differences**: Fish from Lake I8 are generally larger than
+    those from Lake I3, both in length and mass.
 
-2.  **Variability**: Lake I8 shows greater variability in fish lengths and masses than Lake I3, as indicated by higher standard deviations and IQRs.
+2.  **Variability**: Lake I8 shows greater variability in fish lengths
+    and masses than Lake I3, as indicated by higher standard deviations
+    and IQRs.
 
 3.  **Distribution Shape**:
 
     -   Lake I3 fish lengths are more symmetrically distributed.
-    -   Lake I8 fish lengths show a slight negative skew, suggesting a few smaller fish pulling the distribution to the left.
 
-4.  **Length-Mass Relationship**: Both lakes show a strong positive correlation between fish length and mass, following an approximately cubic relationship (mass increases with the cube of length).
-
-## Guided Questions for Deeper Understanding of descriptive statistics
-
-1.  **Biological Interpretation**: What ecological factors might explain the differences in fish size between the two lakes?
-
-2.  **Statistical Reasoning**: Why might we prefer to use the median and IQR instead of the mean and standard deviation in some cases?
-
-3.  **Data Visualization**: Which visualization method was most effective for comparing the two lakes? Why?
-
-4.  **Scientific Communication**: How would you concisely summarize these findings in a scientific paper?
-
-5.  **Further Analysis**: What additional analyses might be useful to better understand this dataset?
+    -   Lake I8 fish lengths show a slight negative skew, suggesting a
+        few smaller fish pulling the distribution to the left.
