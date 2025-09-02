@@ -211,7 +211,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>data, scripts, output, figures, documents</li>
 </ul></li>
 <li><p>Create a quarto markdown file and open it</p></li>
-<li><p>Put this in the top in place of what is there and add your info</p>
+<li><p>Put this in the top in place of what is there and add your info</p></li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>title<span class="sc">:</span> <span class="st">"Grayling in Lake I-8"</span> <span class="co"># Title of the file</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>author<span class="sc">:</span> <span class="st">"YOUR NAME"</span> <span class="co"># who you are</span></span>
@@ -226,18 +227,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  html<span class="sc">:</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    toc<span class="sc">:</span> false</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">-</span>file<span class="sc">:</span> <span class="st">"01_03_homework_html.html"</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    embed<span class="sc">-</span>resources<span class="sc">:</span> true</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">-</span>contained<span class="sc">:</span> true</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    css<span class="sc">:</span> ..<span class="sc">/</span>..<span class="sc">/</span>css<span class="sc">/</span>activity.css</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    toc<span class="sc">:</span> false</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    toc<span class="sc">-</span>depth<span class="sc">:</span> <span class="dv">3</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    number<span class="sc">-</span>sections<span class="sc">:</span> false</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    highlight<span class="sc">-</span>style<span class="sc">:</span> github</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    reference<span class="sc">-</span>doc<span class="sc">:</span> ..<span class="sc">/</span>..<span class="sc">/</span>ms_templates<span class="sc">/</span>custom<span class="sc">-</span>reference.docx</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    css<span class="sc">:</span> ..<span class="sc">/</span>..<span class="sc">/</span>msword.css</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    embed<span class="sc">-</span>resources<span class="sc">:</span> true</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    self<span class="sc">-</span>contained<span class="sc">:</span> true</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    number<span class="sc">-</span>sections<span class="sc">:</span> false</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    embed<span class="sc">-</span>resources<span class="sc">:</span> true</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
 <ul>
 <li>Load the libraries</li>
@@ -246,8 +239,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co"># allows to read in excel files</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># provides utilities seen in console</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Read in the file <code>grayling_lakes_I3_I8.csv</code> as a dataframe</li>
-<li>Read in the file <code>grayling_lakes_I3_I8.xlsx</code> as a separate dataframe</li>
+<li>Read in the file <code>gray_I3_I8.csv</code> as a dataframe</li>
+<li>Read in the file <code>gray_I3_I8``.xlsx</code> as a separate dataframe</li>
 <li>Annotate your code in the code block as what what is going on and why</li>
 <li>Annotate the HTML code as you see fit.</li>
 <li>Visualize the data as the lengths of fish in lakes I_3 and I_8 as points
@@ -255,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>remember <code>position = position_dodge2(width=0.2)</code></li>
 </ul></li>
 <li>Visualize the data as box and whisker plots</li>
-<li>Provide summary statistics grouped by lake
+<li>Provide summary statistics grouped by lake- can use skimr if you want
 <ul>
 <li>n, mean, standard deviation, standard error</li>
 </ul></li>
@@ -271,8 +264,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="what-to-turn-in--" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-turn-in--">What to turn in -</h2>
 <ol type="1">
-<li><p>a quarto markdown file and dataframe. Note that your code should be able to run with what you turn in.</p></li>
-<li><p>a self-contained word and html file showing the code and output</p></li>
+<li><p>a quarto markdown file. Note that your code should be able to run with what you turn in.</p></li>
+<li><p>a self-contained word or html file showing the code and output</p></li>
 <li><p>annotations in the quarto file that shows or tells what is being done in the r code chunks describing what you are trying to do - credit will be given even if it does not work as long as you detail what you are doing. As we start to move into more statistics you will be expected to interpret the results.</p></li>
 </ol>
 </section>

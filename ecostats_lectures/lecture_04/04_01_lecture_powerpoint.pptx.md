@@ -32,11 +32,6 @@ format:
 
 
 
-
-
-
-
-
 # **Lecture 4: Probability and Statistical Inference**
 
 ::::: columns
@@ -49,11 +44,6 @@ format:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
 
 
 
@@ -81,11 +71,6 @@ format:
 
 
 
-
-
-
-
-
 :::
 :::::
 
@@ -96,11 +81,6 @@ format:
 
 Let's explore the Arctic grayling data from lakes I3 and I8. Use the
 `grayling_df` data frame to create basic summary statistics.
-
-
-
-
-
 
 
 
@@ -183,11 +163,6 @@ summary(grayling_df)
 
 
 
-
-
-
-
-
 :::
 
 # **Lecture 4:** Probability Distributions
@@ -216,21 +191,11 @@ summary(grayling_df)
 
 
 
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-4-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -276,11 +241,6 @@ normal distribution.
 
 
 
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-5-1.png)
@@ -297,15 +257,10 @@ normal distribution.
 
 
 
-
-
-
-
-
 :::
 :::::
 
-# Practice Exercise 2: Calculating Z-scores
+# Practice Exercise 2: Calculating Z-scores of lake I3
 
 ::: callout-tip
 ## Practice Exercise 2: Calculating Z-scores
@@ -313,10 +268,7 @@ normal distribution.
 Let's practice converting raw values to Z-scores using the Arctic
 grayling data.
 
-
-
-
-
+Z Score = (length - mean) / standard deviation
 
 
 
@@ -333,15 +285,15 @@ grayling data.
 
 ```{.r .cell-code}
 # Calculate the mean and standard deviation of fish lengths
-mean_length <- mean(grayling_df$length_mm, na.rm = TRUE)
-sd_length <- sd(grayling_df$length_mm, na.rm = TRUE)
+mean_length <- mean(i3_df$length_mm, na.rm = TRUE)
+sd_length <- sd(i3_df$length_mm, na.rm = TRUE)
 
 # Calculate Z-scores for fish lengths
-grayling_df <- grayling_df %>%
+i3_df <- i3_df %>%
   mutate(z_score = (length_mm - mean_length) / sd_length)
 
 # View the first few rows with Z-scores
-head(grayling_df)
+head(i3_df)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -350,22 +302,17 @@ head(grayling_df)
 # A tibble: 6 × 6
    site lake  species         length_mm mass_g z_score
   <dbl> <chr> <chr>               <dbl>  <dbl>   <dbl>
-1   113 I3    arctic grayling       266    135  -0.900
-2   113 I3    arctic grayling       290    185  -0.531
-3   113 I3    arctic grayling       262    145  -0.961
-4   113 I3    arctic grayling       275    160  -0.761
-5   113 I3    arctic grayling       240    105  -1.30 
-6   113 I3    arctic grayling       265    145  -0.915
+1   113 I3    arctic grayling       266    135  0.0139
+2   113 I3    arctic grayling       290    185  0.862 
+3   113 I3    arctic grayling       262    145 -0.127 
+4   113 I3    arctic grayling       275    160  0.332 
+5   113 I3    arctic grayling       240    105 -0.905 
+6   113 I3    arctic grayling       265    145 -0.0214
 ```
 
 
 :::
 :::
-
-
-
-
-
 
 
 
@@ -381,10 +328,11 @@ head(grayling_df)
 
 # Z-score Results
 
+proportion within 1 standard deviation = sum of absolute values of Z
+Scores that are less than or equal to 1 divided by the number in the
+sample...
 
-
-
-
+Remember in a true normal distribution it is 68% within 1 std dev.
 
 
 
@@ -401,24 +349,19 @@ head(grayling_df)
 
 ```{.r .cell-code}
 # What proportion of fish are within 1 standard deviation of the mean?
-within_1sd <- sum(abs(grayling_df$z_score) <= 1, na.rm = TRUE) / sum(!is.na(grayling_df$z_score))
+within_1sd <- sum(abs(i3_df$z_score) <= 1, na.rm = TRUE) / sum(!is.na(i3_df$z_score))
 cat("Proportion within 1 SD:", round(within_1sd * 100, 1), "%\n")
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Proportion within 1 SD: 64.3 %
+Proportion within 1 SD: 81.8 %
 ```
 
 
 :::
 :::
-
-
-
-
-
 
 
 
@@ -438,18 +381,14 @@ Proportion within 1 SD: 64.3 %
 You want to know things about this population like
 
 -   probability of a fish having a certain length (e.g., \> 300 mm)
--   Can solve this by integrating under curve
+-   Can solve this by integrating the area under curve
 -   But it is tedious to do every time
 -   Instead
     -   we can use the *standard normal distribution* (SND)
+    -   and can use the proportions from the density curve
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
 
 
 
@@ -478,11 +417,6 @@ You want to know things about this population like
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-8-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -526,21 +460,11 @@ Standard Normal Distribution
 
 
 
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-9-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -581,21 +505,11 @@ Areas under curve of Standard Normal Distribution
 
 
 
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-10-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -618,7 +532,7 @@ Done by converting original data points to z-scores
 
 -   Z-scores calculated as:
 
-## $\text{Z = }\frac{X_i-\mu}{\sigma}$
+## $\text{Z = }\frac{x_i-\mu}{\sigma}$
 
 -   z = z-score for observation
 -   xi = original observation
@@ -643,15 +557,10 @@ z = (300 - 265.61)/28.3 = 1.215194
 
 
 
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
-i3_stats <- gray_i3_df %>%
+i3_stats <- i3_df %>%
   summarize(
     mean_length = round(mean(length_mm, na.rm = TRUE), 2),
     sd_length = sd(length_mm, na.rm = TRUE),
@@ -687,11 +596,6 @@ i3_stats
 
 
 
-
-
-
-
-
 :::
 :::::
 
@@ -710,18 +614,22 @@ Done by converting original data points to z-scores
 -   µ = mean of data distribution
 -   σ = SD of data distribution
 
-So lets do this for a fish that is 320mm long and guess the probability
+So lets do this for a fish that is 300mm long and guess the probability
 of catching something larger
 
-z = (320 - 265.61)/28.3 = 1.92
+z = (300 - 265.61)/28.3 = 1.22
 
-or .9726 in table or 97.3% is the area left of the curve and
+or 0.8888 in table or 88.9% is the area left of the curve and
 
-100 - 97.3 = 2.7% or 2.7% of fish are expected to be longer
+100 - 88.9 = 11.27% or 11.2% of fish are expected to be longer
+
+So do you think you can catch something larger than 300 mm?
+
+At what point do you think its not likely?
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1995791111.png){width="300" height="250"}
+![](images/clipboard-1995791111.png){width="443" height="404"}
 :::
 :::::
 
@@ -742,16 +650,11 @@ Where:
 **Key properties:**
 
 -   SEM decreases as sample size increases
--   SEM is used to construct confidence intervals
--   SEM measures the precision of the sample mean
+-   **SEM is used to construct confidence intervals**
+-   **SEM measures the precision of the sample mean**
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
 
 
 
@@ -768,11 +671,6 @@ Where:
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-12-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -806,11 +704,6 @@ different sizes:
 
 
 
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -818,23 +711,23 @@ different sizes:
 set.seed(456)
 
 # Create samples of different sizes
-small_sample <- grayling_df %>% sample_n(5)
+small_sample <- grayling_df %>% sample_n(3)
 medium_sample <- grayling_df %>% sample_n(30)
-large_sample <- grayling_df %>% sample_n(125)
+large_sample <- grayling_df %>% sample_n(60)
 
 # Calculate mean and standard error for each sample
-small_mean <- mean(small_sample$length_mm, na.rm = TRUE)
-small_se <- sd(small_sample$length_mm, na.rm = TRUE) / sqrt(10)
+small_mean <- round(mean(small_sample$length_mm, na.rm = TRUE),2)
+small_se <- round(sd(small_sample$length_mm, na.rm = TRUE) / sqrt(30),4)
 
-medium_mean <- mean(medium_sample$length_mm, na.rm = TRUE)
-medium_se <- sd(medium_sample$length_mm, na.rm = TRUE) / sqrt(30)
+medium_mean <- round(mean(medium_sample$length_mm, na.rm = TRUE),2)
+medium_se <- round(sd(medium_sample$length_mm, na.rm = TRUE) / sqrt(30),4)
 
-large_mean <- mean(large_sample$length_mm, na.rm = TRUE)
-large_se <- sd(large_sample$length_mm, na.rm = TRUE) / sqrt(100)
+large_mean <- round(mean(large_sample$length_mm, na.rm = TRUE),2)
+large_se <- round(sd(large_sample$length_mm, na.rm = TRUE) / sqrt(60),4)
 
 # Create a data frame with the results
 results <- data.frame(
-  Sample_Size = c(10, 30, 100),
+  Sample_Size = c(3, 30, 60),
   Mean = c(small_mean, medium_mean, large_mean),
   SE = c(small_se, medium_se, large_se)
 )
@@ -846,20 +739,15 @@ results
 ::: {.cell-output .cell-output-stdout}
 
 ```
-  Sample_Size    Mean        SE
-1          10 302.000 26.607330
-2          30 319.200 12.082989
-3         100 323.328  6.478149
+  Sample_Size   Mean      SE
+1           3 278.33 16.6096
+2          30 321.07 12.0926
+3          60 311.78  8.3944
 ```
 
 
 :::
 :::
-
-
-
-
-
 
 
 
@@ -907,21 +795,11 @@ Why does this happen?
 
 
 
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-14-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -968,21 +846,11 @@ Why does this happen?
 
 
 
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-15-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -1001,21 +869,19 @@ Why does this happen?
 
 ::::: columns
 ::: {.column width="60%"}
-Notice: - $s_{\bar{y}}$ depends on - sample s (standard deviation) -
-sample n - ($s_{\bar{y}} = \frac{s}{\sqrt{n}}$)
+Notice: - $s_{\bar{y}}$ depends on
 
-How and why? - Decreases with sample n - number - increases with sample
-s - standard deviation
+-   \- sample s (standard deviation)
+-   \- sample n - ($s_{\bar{y}} = \frac{s}{\sqrt{n}}$)
 
+How and why?
+
+-   Decreases with sample n - number - increases with sample s -
+    standard deviation
 -   Large sample, low s = greater confidence in estimate of $\mu$
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
 
 
 
@@ -1032,11 +898,6 @@ s - standard deviation
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-16-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -1084,21 +945,11 @@ Where:
 
 
 
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-17-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -1132,7 +983,7 @@ Where:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-2045535544.png){width="300" height="250"}
+![](images/clipboard-2045535544.png){width="382" height="302"}
 :::
 :::::
 
@@ -1171,21 +1022,11 @@ mean is in this interval."
 
 
 
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-18-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -1219,21 +1060,11 @@ Lets compare what the two plots look like near each other
 
 
 
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-19-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -1255,11 +1086,6 @@ Lets compare what the two plots look like near each other
 
 Calculate the standard error and 95% confidence interval for the mean
 length of Arctic grayling in each lake.
-
-
-
-
-
 
 
 
@@ -1318,11 +1144,6 @@ ci_results
 
 
 
-
-
-
-
-
 What do these confidence intervals tell us about the difference between
 lakes?
 :::
@@ -1355,17 +1176,15 @@ than the normal distribution.
 -   With large df (\>30), approaches the normal distribution
 -   Used for:
     -   Small sample sizes
+
     -   When population standard deviation is unknown
+
     -   Calculating confidence intervals
+
     -   Conducting t-tests
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
 
 
 
@@ -1393,11 +1212,6 @@ than the normal distribution.
 
 
 
-
-
-
-
-
 :::
 :::::
 
@@ -1408,11 +1222,6 @@ than the normal distribution.
 
 Let's compare confidence intervals using the normal approximation (z)
 versus the t-distribution for our fish data.
-
-
-
-
-
 
 
 
@@ -1537,11 +1346,6 @@ t critical value: 2.262 vs z critical value: 1.96
 
 
 
-
-
-
-
-
 :::
 
 # Student's t-distribution Formula
@@ -1562,7 +1366,7 @@ Where:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3203878802.png){width="300" height="250"}
+![](images/clipboard-3203878802.png){width="500" height="392"}
 :::
 :::::
 
@@ -1579,7 +1383,7 @@ Here is a t-table
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3203878802.png){width="300" height="250"}
+![](images/clipboard-3203878802.png){width="500" height="410"}
 :::
 :::::
 
@@ -1597,7 +1401,7 @@ value
 ::: {.column width="40%"}
 ![](images/clipboard-1822465473.png){width="180" height="150"}
 
-![](images/clipboard-641796945.png){width="280" height="200"}
+![](images/clipboard-641796945.png){width="412" height="309"}
 :::
 :::::
 
@@ -1614,7 +1418,7 @@ Two-tailed questions refer to area between certain values
 ::: {.column width="40%"}
 ![](images/clipboard-2234740159.png){width="200" height="150"}
 
-![](images/clipboard-1734806681.png){width="350" height="200"}
+![](images/clipboard-1734806681.png){width="443" height="298"}
 :::
 :::::
 
@@ -1632,7 +1436,7 @@ Use two-sided test
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-721472248.png){width="350" height="280"}
+![](images/clipboard-721472248.png){width="500" height="364"}
 :::
 :::::
 
@@ -1673,21 +1477,11 @@ using data.
 
 
 
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-23-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -1713,14 +1507,10 @@ using data.
 
 1.  **Null hypothesis (H₀)**: Typically assumes "no effect" or "no
     difference"
-
 2.  **Alternative hypothesis (Hₐ)**: The claim we're trying to support
-
 3.  **Statistical test**: Method for evaluating evidence against H₀
-
 4.  **P-value**: Probability of observing our results (or more extreme)
     if H₀ is true
-
 5.  **Significance level (α)**: Threshold for rejecting H₀, typically
     0.05
 
@@ -1728,11 +1518,6 @@ using data.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
 
 
 
@@ -1760,11 +1545,6 @@ using data.
 
 
 
-
-
-
-
-
 :::
 :::::
 
@@ -1774,12 +1554,7 @@ using data.
 ## Practice Exercise 5: Lets practice a One-Sample t-Test
 
 Let's perform a one-sample t-test to determine if the mean fish length
-in Toolik Lake differs from 50 mm:
-
-
-
-
-
+in Lake I3 differs from 260 mm:
 
 
 
@@ -1851,11 +1626,6 @@ mean of x
 
 
 
-
-
-
-
-
 Interpret this test result by answering these questions:
 
 1.  What was the null hypothesis?
@@ -1878,11 +1648,6 @@ null and alternative hypotheses:
 2.  Is the mean length of Arctic grayling in these lakes different from
     300 mm?
 3.  Is there a relationship between fish length and mass?
-
-
-
-
-
 
 
 
@@ -1939,11 +1704,6 @@ mean in group I3 mean in group I8
 
 
 
-
-
-
-
-
 Based on this t-test, what can we conclude about the difference in fish
 length between the two lakes?
 :::
@@ -1955,21 +1715,20 @@ length between the two lakes?
 A **p-value** is the probability of observing the sample result (or
 something more extreme) if the null hypothesis is true.
 
-**Common interpretations:** - p \< 0.05: Strong evidence against H₀ -
-0.05 ≤ p \< 0.10: Moderate evidence against H₀ - p ≥ 0.10: Insufficient
-evidence against H₀
+**Common interpretations:**
 
-**Common misinterpretations:** - p-value is NOT the probability that H₀
-is true - p-value is NOT the probability that results occurred by
-chance - Statistical significance ≠ practical significance
+-   \- p \< 0.05: Strong evidence against H₀
+-   \- 0.05 ≤ p \< 0.10: Moderate evidence against H₀
+-   \- p ≥ 0.10: Insufficient evidence against H₀
+
+**Common misinterpretations:**
+
+-   \- p-value is NOT the probability that H₀ is true
+-   \- p-value is NOT the probability that results occurred by chance
+-   \- Statistical significance ≠ practical significance
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
 
 
 
@@ -1986,11 +1745,6 @@ chance - Statistical significance ≠ practical significance
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-27-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -2036,21 +1790,11 @@ Lower variability - Higher α level
 
 
 
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-28-1.png)
 :::
 :::
-
-
-
-
-
 
 
 
@@ -2081,11 +1825,6 @@ error might have occurred:
 
 3.  Let's calculate the power of our t-test to detect a 30 mm difference
     in length between lakes:
-
-
-
-
-
 
 
 
@@ -2157,11 +1896,6 @@ NOTE: n is number in *each* group
 
 
 
-
-
-
-
-
 :::
 
 # **Lecture 4:** Summary
@@ -2197,21 +1931,11 @@ NOTE: n is number in *each* group
 
 
 
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-30-1.png)
 :::
 :::
-
-
-
-
-
 
 
 

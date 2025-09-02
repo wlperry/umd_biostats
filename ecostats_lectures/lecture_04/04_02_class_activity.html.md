@@ -85,24 +85,26 @@ library(tidyverse)
 
 
 # Read in the data file
-s_df <- read_csv("data/sculpin.csv")
+g_df <- read_csv("data/gray_I3_I8.csv") 
+
+i3_df <- g_df %>% filter(lake =="I3")
 
 # Look at the first few rows
-head(s_df)
+head(g_df)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
 # A tibble: 6 × 5
-   site lake  species       length_mm mass_g
-  <dbl> <chr> <chr>             <dbl>  <dbl>
-1   146 E 01  slimy sculpin        53   1.25
-2   146 E 01  slimy sculpin        61   1.9 
-3   146 E 01  slimy sculpin        53   1.75
-4   146 E 01  slimy sculpin        77   4.25
-5   146 E 01  slimy sculpin        45   0.9 
-6   146 E 01  slimy sculpin        48   0.9 
+   site lake  species         length_mm mass_g
+  <dbl> <chr> <chr>               <dbl>  <dbl>
+1   113 I3    arctic grayling       266    135
+2   113 I3    arctic grayling       290    185
+3   113 I3    arctic grayling       262    145
+4   113 I3    arctic grayling       275    160
+5   113 I3    arctic grayling       240    105
+6   113 I3    arctic grayling       265    145
 ```
 
 
@@ -131,13 +133,13 @@ Let's first check what lakes are in our dataframe:
 
 ```{.r .cell-code}
 # Get a list of unique lakes
-unique(s_df$lake)
+unique(g_df$lake)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "E 01"   "E 05"   "NE 12"  "NE 14"  "S 06"   "S 07"   "Toolik"
+[1] "I3" "I8"
 ```
 
 
@@ -164,24 +166,19 @@ How many fish do we have from each lake?
 
 ```{.r .cell-code}
 # Count observations by lake
-s_df %>%
+g_df %>%
   group_by(lake) %>% 
-  summarize(sculpin_n = n())
+  summarize(fish_n = n())
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 7 × 2
-  lake   sculpin_n
-  <chr>      <int>
-1 E 01         268
-2 E 05          75
-3 NE 12        180
-4 NE 14         37
-5 S 06         132
-6 S 07          73
-7 Toolik       287
+# A tibble: 2 × 2
+  lake  fish_n
+  <chr>  <int>
+1 I3        66
+2 I8       102
 ```
 
 
@@ -192,24 +189,19 @@ s_df %>%
 
 ```{.r .cell-code}
 # Count observations by lake
-s_df %>%
+g_df %>%
   group_by(lake) %>% 
-  summarize(sculpin_n = sum(!is.na(length_mm)))
+  summarize(fish_n = sum(!is.na(mass_g)))
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 7 × 2
-  lake   sculpin_n
-  <chr>      <int>
-1 E 01          79
-2 E 05          14
-3 NE 12        180
-4 NE 14         37
-5 S 06         132
-6 S 07          73
-7 Toolik       208
+# A tibble: 2 × 2
+  lake  fish_n
+  <chr>  <int>
+1 I3        66
+2 I8       100
 ```
 
 
@@ -230,7 +222,7 @@ s_df %>%
 A histogram shows how many observations fall into certain ranges (or
 "bins").
 
-Let's create a simple histogram of fish lengths from Lake E 01 :
+Let's create a simple histogram of fish lengths from I3 :
 
 
 
@@ -243,21 +235,11 @@ Let's create a simple histogram of fish lengths from Lake E 01 :
 
 ```{.r .cell-code}
 # Filter for Toolik Lake and create a histogram
-s_df %>%
-  filter(lake == "E 01") %>%
+g_df %>%
+  filter(lake == "I3") %>%
   ggplot(aes(x = length_mm)) +
-  geom_histogram(binwidth = 2, fill = "blue", alpha = 0.7) 
+  geom_histogram(binwidth = 2) 
 ```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning: Removed 189 rows containing non-finite outside the scale range
-(`stat_bin()`).
-```
-
-
-:::
 
 ::: {.cell-output-display}
 ![](04_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=336}
@@ -313,52 +295,14 @@ Now let's compare two lakes
 ::: {.cell}
 
 ```{.r .cell-code}
-# Compare histograms from Toolik and E 01 lakes
-s_df %>%
-  filter(lake %in% c("Toolik", "E 01")) %>%
+# Compare histograms from I3 I8 lakes
+g_df %>%
   ggplot(aes(x = length_mm, fill = lake)) +
-  geom_histogram(binwidth = 2, alpha = 0.7, 
-                 position = "identity") 
+  geom_histogram(binwidth = 2) 
 ```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning: Removed 268 rows containing non-finite outside the scale range
-(`stat_bin()`).
-```
-
-
-:::
 
 ::: {.cell-output-display}
 ![](04_02_class_activity_files/figure-html/unnamed-chunk-7-1.png){width=336}
-:::
-:::
-
-::: {.cell}
-
-```{.r .cell-code}
-# Compare histograms from Toolik and E 01 lakes
-s_df %>%
-  filter(lake %in% c("Toolik", "E 01")) %>%
-  ggplot(aes(x = length_mm, fill = lake)) +
-  geom_histogram(binwidth = 2, alpha = 0.7, 
-                 position = position_dodge2(width=1)) 
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning: Removed 268 rows containing non-finite outside the scale range
-(`stat_bin()`).
-```
-
-
-:::
-
-::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-8-1.png){width=336}
 :::
 :::
 
@@ -382,26 +326,14 @@ Now let's compare two lakes side by side:
 
 ```{.r .cell-code}
 # Compare histograms from Toolik and E 01 lakes
-s_df %>%
-  filter(lake %in% c("Toolik", "E 01")) %>%
+g_df %>%
   ggplot(aes(x = length_mm, fill = lake)) +
-  geom_histogram(binwidth = 2, alpha = 0.7, position = "identity") +
-  # facet_wrap(~lake, ncol = 1) +
-  facet_grid(lake~.)
+  geom_histogram(binwidth = 5) +
+  facet_wrap("lake")
 ```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning: Removed 268 rows containing non-finite outside the scale range
-(`stat_bin()`).
-```
-
-
-:::
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-9-1.png){width=336}
+![](04_02_class_activity_files/figure-html/unnamed-chunk-8-1.png){width=336}
 :::
 :::
 
@@ -411,15 +343,6 @@ Warning: Removed 268 rows containing non-finite outside the scale range
 
 
 
-
-::: callout-tip
-## Activity 2
-
-Choose two new lakes to compare. What differences do you notice in their
-distributions?
-
-Add notes here
-:::
 
 # Part 2: Sample Size Effects
 
@@ -427,7 +350,7 @@ Let's explore how the sample size affects what we see.
 
 ## Small vs. Large Samples
 
-We'll randomly select different sample sizes from Toolik Lake:
+We'll randomly select different sample sizes from I8 Lake:
 
 
 
@@ -443,29 +366,26 @@ We'll randomly select different sample sizes from Toolik Lake:
 set.seed(123)
 
 # Create small sample (15 fish)
-small_sample <- s_df %>%
-  filter(lake == "Toolik") %>%
+small_sample <- i3_df %>%
   sample_n(10)
 
 # Create larger sample (50 fish)
-larger_sample <- s_df %>%
-  filter(lake == "Toolik") %>%
-  sample_n(100)
+larger_sample <- i3_df %>%
+  sample_n(25)
 
 # Plot both samples
 p1 <- small_sample %>%
   ggplot(aes(x = length_mm)) +
   geom_histogram(binwidth = 2, fill = "red", alpha = 0.7) +
-  # coord_cartesian(xlim = c(20,80)) +
+  coord_cartesian(xlim = c(150,300)) +
   labs(title = "Small Sample (n=15)",
        x = "Length (mm)",
-       y = "Count") +
-  coord_cartesian(xlim = c(20,80))
+       y = "Count") 
 
 p2 <- larger_sample %>%
   ggplot(aes(x = length_mm)) +
   geom_histogram(binwidth = 2, fill = "blue", alpha = 0.7) +
-  # coord_cartesian(xlim = c(20,80)) +
+  coord_cartesian(xlim = c(150,300)) +
   labs(title = "Larger Sample (n=50)",
        x = "Length (mm)",
        y = "Count")
@@ -476,28 +396,8 @@ p1 + p2 +
   plot_layout(ncol = 1)
 ```
 
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning: Removed 3 rows containing non-finite outside the scale range
-(`stat_bin()`).
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning: Removed 25 rows containing non-finite outside the scale range
-(`stat_bin()`).
-```
-
-
-:::
-
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-10-1.png){width=336}
+![](04_02_class_activity_files/figure-html/unnamed-chunk-9-1.png){width=336}
 :::
 :::
 
@@ -512,7 +412,7 @@ Warning: Removed 25 rows containing non-finite outside the scale range
 ## Activity 3
 
 Try changing the sample sizes. What happens when you use very small
-samples (n=5)? What about larger samples (n=150)?
+samples (n=5)? What about larger samples (n=60)?
 
 add code here
 
@@ -530,29 +430,26 @@ add code here
 set.seed(123)
 
 # Create small sample (15 fish)
-small_sample <- s_df %>%
-  filter(lake == "Toolik") %>%
-  sample_n(10) # CHANGE NUMBERS HERE -------------------------------
+small_sample <- i3_df %>%
+  sample_n(3)
 
 # Create larger sample (50 fish)
-larger_sample <- s_df %>%
-  filter(lake == "Toolik") %>%
-  sample_n(100) # CHANGE NUMBERS HERE -------------------------------
+larger_sample <- i3_df %>%
+  sample_n(6)
 
 # Plot both samples
 p1 <- small_sample %>%
   ggplot(aes(x = length_mm)) +
   geom_histogram(binwidth = 2, fill = "red", alpha = 0.7) +
-  # coord_cartesian(xlim = c(20,80)) +
+  coord_cartesian(xlim = c(150,300)) +
   labs(title = "Small Sample (n=15)",
        x = "Length (mm)",
-       y = "Count") +
-  coord_cartesian(xlim = c(20,80))
+       y = "Count") 
 
 p2 <- larger_sample %>%
   ggplot(aes(x = length_mm)) +
   geom_histogram(binwidth = 2, fill = "blue", alpha = 0.7) +
-  # coord_cartesian(xlim = c(20,80)) +
+  coord_cartesian(xlim = c(150,300)) +
   labs(title = "Larger Sample (n=50)",
        x = "Length (mm)",
        y = "Count")
@@ -563,28 +460,8 @@ p1 + p2 +
   plot_layout(ncol = 1)
 ```
 
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning: Removed 3 rows containing non-finite outside the scale range
-(`stat_bin()`).
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning: Removed 25 rows containing non-finite outside the scale range
-(`stat_bin()`).
-```
-
-
-:::
-
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-11-1.png){width=336}
+![](04_02_class_activity_files/figure-html/unnamed-chunk-10-1.png){width=336}
 :::
 :::
 
@@ -611,14 +488,13 @@ Density plots give us a smoothed version of the histogram:
 
 ```{.r .cell-code}
 # Create a density plot
-s_df %>%
-  filter(lake == "Toolik") %>%
+i3_df %>%
   ggplot(aes(x = length_mm)) +
   geom_density(fill = "blue", alpha = 0.5) 
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-12-1.png){width=336}
+![](04_02_class_activity_files/figure-html/unnamed-chunk-11-1.png){width=336}
 :::
 :::
 
@@ -642,8 +518,7 @@ We can overlay the histogram and the density plot:
 
 ```{.r .cell-code}
 # Combine histogram and density plot
-s_df %>%
-  filter(lake == "Toolik") %>%
+i3_df %>%
   ggplot(aes(x = length_mm)) +
   geom_histogram(aes(y = after_stat(density)), binwidth = 2, 
                  fill = "lightblue", alpha = 0.7) +
@@ -651,7 +526,7 @@ s_df %>%
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-13-1.png){width=336}
+![](04_02_class_activity_files/figure-html/unnamed-chunk-12-1.png){width=336}
 :::
 :::
 
@@ -665,8 +540,8 @@ s_df %>%
 ::: callout-tip
 ## Activity 4
 
-Create a density plot comparing multiple lakes. Which lakes have similar
-distributions? Which ones are different?
+Create a density plot comparing multiple lakes I3 to I8. Which lakes
+have similar distributions? Which ones are different?
 
 Try code here using patchwork or facet_grid
 
@@ -721,15 +596,13 @@ calculate_density_area <- function(data_vector) {
 }
 
 # Apply to Toolik lake data
-toolik_data <- s_df %>% 
-  filter(lake == "Toolik") %>% 
+i3_data <- i3_df %>% 
   pull(length_mm)
 
-area_value <- calculate_density_area(toolik_data)
+area_value <- calculate_density_area(i3_data)
 
 # Create plot with calculated area
-s_df %>%
-  filter(lake == "Toolik") %>%
+i3_df %>%
   ggplot(aes(x = length_mm)) +
   geom_density(fill = "blue", alpha = 0.4) +
   geom_area(stat = "density", fill = "red", alpha = 0.3) +
@@ -740,7 +613,7 @@ s_df %>%
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-15-1.png){width=336}
+![](04_02_class_activity_files/figure-html/unnamed-chunk-14-1.png){width=336}
 :::
 :::
 
@@ -769,13 +642,12 @@ play with the code
 # ------- PART 3: SET  INPUT VALUES -------
 # change these values to calculate different probabilities
 # For this example, let's calculate the probability of fish between 40mm and 60mm
-lower_bound <- 80  # change this value
-upper_bound <- 90  # change this value
+lower_bound <- 320  # change this value
+upper_bound <- 350  # change this value
 
 # ------- PART 1: PREPARE THE DATA -------
 # Filter data for just one lake to keep it simple for students
-toolik_fish <- s_df %>%
-  filter(lake == "Toolik") %>%
+i3_fish <- i3_df %>%
   filter(!is.na(length_mm))  # Remove any missing values
 
 # ------- PART 2: CREATE A FUNCTION TO CALCULATE PROBABILITY -------
@@ -809,16 +681,16 @@ calculate_probability <- function(data_vector, lower_bound, upper_bound) {
 
 # ------- PART 4: CALCULATE THE PROBABILITY -------
 # Calculate the probability for the specified range
-probability <- calculate_probability(toolik_fish$length_mm, lower_bound, upper_bound)
+probability <- calculate_probability(i3_fish$length_mm, lower_bound, upper_bound)
 
 # Calculate the total area to show that the complete distribution sums to approximately 1
-total_area <- calculate_probability(toolik_fish$length_mm, 
-                                   min(toolik_fish$length_mm),
-                                   max(toolik_fish$length_mm))
+total_area <- calculate_probability(i3_fish$length_mm, 
+                                   min(i3_fish$length_mm),
+                                   max(i3_fish$length_mm))
 
 # ------- PART 5: CREATE THE VISUALIZATION -------
 # Create density data for the highlighting
-density_data <- density(toolik_fish$length_mm)
+density_data <- density(i3_fish$length_mm)
 density_df <- data.frame(x = density_data$x, y = density_data$y)
 
 # Create a subset for the area of interest
@@ -826,7 +698,7 @@ highlight_df <- density_df %>%
   filter(x >= lower_bound & x <= upper_bound)
 
 # Create the plot
-ggplot(toolik_fish, aes(x = length_mm)) +
+ggplot(i3_fish, aes(x = length_mm)) +
   # First, plot the overall density curve in light blue
   geom_density(fill = "lightblue", alpha = 0.5) +
   
@@ -851,7 +723,7 @@ ggplot(toolik_fish, aes(x = length_mm)) +
   
   # Add text annotations to explain the areas
   annotate("text", x = (lower_bound + upper_bound)/2, 
-           y = max(density(toolik_fish$length_mm)$y) * 0.7,
+           y = max(density(i3_fish$length_mm)$y) * 0.7,
            label = paste0("Area = ", round(probability, 3)),
            color = "white", size = 4) +
   
@@ -864,7 +736,7 @@ ggplot(toolik_fish, aes(x = length_mm)) +
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-16-1.png){width=336}
+![](04_02_class_activity_files/figure-html/unnamed-chunk-15-1.png){width=336}
 :::
 :::
 
@@ -877,7 +749,7 @@ ggplot(toolik_fish, aes(x = length_mm)) +
 
 # Part 4: Summary Statistics - descriptive statistics
 
-Let's calculate basic summary statistics for each lake:
+Let's calculate basic summary statistics for each lake for mass:
 
 
 
@@ -890,11 +762,11 @@ Let's calculate basic summary statistics for each lake:
 
 ```{.r .cell-code}
 # Calculate mean, standard deviation, and sample size by lake
-s_df %>%
+g_df %>%
   group_by(lake) %>%
   summarize(
-    mean_length = mean(length_mm),
-    sd_length = sd(length_mm),
+    mean_length = mean(mass_g),
+    sd_length = sd(mass_g),
     count = n(),
     .groups = "drop"
   ) %>%
@@ -904,16 +776,11 @@ s_df %>%
 ::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 7 × 4
-  lake   mean_length sd_length count
-  <chr>        <dbl>     <dbl> <int>
-1 Toolik        NA        NA     287
-2 E 01          NA        NA     268
-3 NE 12         49.8      15.2   180
-4 S 06          54.0      10.9   132
-5 E 05          NA        NA      75
-6 S 07          55.6      12.7    73
-7 NE 14         47.3      10.5    37
+# A tibble: 2 × 4
+  lake  mean_length sd_length count
+  <chr>       <dbl>     <dbl> <int>
+1 I8            NA       NA     102
+2 I3           150.      42.2    66
 ```
 
 
@@ -945,7 +812,7 @@ formulas
 
 ```{.r .cell-code}
 # Calculate mean, standard deviation, and sample size by lake
-sculpin_stats_df <- s_df %>%
+stats_df <- g_df %>%
   group_by(lake) %>%
   summarize(
     mean_length = mean(length_mm, na.rm = TRUE),
@@ -955,22 +822,17 @@ sculpin_stats_df <- s_df %>%
     .groups = "drop"
   ) %>%
   arrange(desc(count))
-sculpin_stats_df
+stats_df
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 7 × 5
-  lake   mean_length sd_length se_length count
-  <chr>        <dbl>     <dbl>     <dbl> <int>
-1 Toolik        51.7      12.0     0.834   208
-2 NE 12         49.8      15.2     1.13    180
-3 S 06          54.0      10.9     0.949   132
-4 E 01          58.2      15.3     1.72     79
-5 S 07          55.6      12.7     1.48     73
-6 NE 14         47.3      10.5     1.72     37
-7 E 05          47.1      10.8     2.88     14
+# A tibble: 2 × 5
+  lake  mean_length sd_length se_length count
+  <chr>       <dbl>     <dbl>     <dbl> <int>
+1 I8           363.      52.3      5.18   102
+2 I3           266.      28.3      3.48    66
 ```
 
 
@@ -997,21 +859,17 @@ Now let's visualize these statistics:
 
 ```{.r .cell-code}
 # Create a bar plot of mean lengths with error bars
-s_df %>%  
+g_df %>%  
   ggplot(aes(lake, length_mm)) +
   stat_summary(
-    fun = mean, na.rm = TRUE, 
-    geom = "bar",
-    fill = "skyblue"
+    fun = mean, na.rm = TRUE, geom = "bar"
     ) +
   stat_summary(
-    fun.data = mean_se, na.rm = TRUE, 
-    geom = "errorbar", 
-    width = 0.2) 
+    fun.data = mean_se, na.rm = TRUE, geom = "errorbar", width = 0.2) 
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-19-1.png){width=336}
+![](04_02_class_activity_files/figure-html/unnamed-chunk-18-1.png){width=336}
 :::
 :::
 
@@ -1035,19 +893,17 @@ We could also do this from the dataframe we just made
 
 ```{.r .cell-code}
 # Create a bar plot of mean lengths with error bars
-sculpin_stats_df %>%  
+stats_df %>%  
   ggplot(aes(x = reorder(lake, mean_length), y = mean_length)) +
-  geom_bar(stat = "identity", 
-           fill = "skyblue") +
+  geom_bar(stat = "identity") +
   geom_errorbar(aes(
     ymin = mean_length - se_length, 
     ymax = mean_length + se_length),
-    width = 0.2
-    ) 
+    width = 0.2) 
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-20-1.png){width=336}
+![](04_02_class_activity_files/figure-html/unnamed-chunk-19-1.png){width=336}
 :::
 :::
 
@@ -1058,8 +914,8 @@ sculpin_stats_df %>%
 
 
 
-The power of the pipe command is you can do this without hving to make a
-new dataframe
+The power of the pipe command is you can do this without having to make
+a new dataframe
 
 
 
@@ -1072,7 +928,7 @@ new dataframe
 
 ```{.r .cell-code}
 # Create a bar plot of mean lengths with error bars
-s_df %>%
+g_df %>%
   group_by(lake) %>%
   summarize(
     mean_length = mean(length_mm, na.rm = TRUE),
@@ -1081,16 +937,15 @@ s_df %>%
     count = n(),
     .groups = "drop"
   ) %>%
-  filter(count >= 250) %>%  # Only include lakes with sufficient sample size
   ggplot(aes(x = reorder(lake, mean_length), y = mean_length)) +
-  geom_bar(stat = "identity", fill = "skyblue") +
+  geom_bar(stat = "identity") +
   geom_errorbar(aes(ymin = mean_length - se_length, 
                     ymax = mean_length + se_length),
                 width = 0.2) 
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-21-1.png){width=336}
+![](04_02_class_activity_files/figure-html/unnamed-chunk-20-1.png){width=336}
 :::
 :::
 
@@ -1116,121 +971,4 @@ fish greater than X size?
 This is the inductive phase of doing research.
 :::
 
-# Part 5: Guided Challenges
-
-Now it's your turn to explore the data! Work with your partner to
-complete these challenges:
-
-1.  Find the lake with the widest range of fish lengths (hint: use the
-    `range()` function)
-
-2.  Create box and whisker plots to compare fish lengths across lakes:
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Example boxplot code to get you started
-s_df %>%
-  filter(!is.na(length_mm)) %>%
-  ggplot(aes(x = lake, y = length_mm)) +
-  geom_boxplot() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
-```
-
-::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-22-1.png){width=336}
-:::
-:::
-
-
-
-
-
-
-
-
-3.  Explore if there's a relationship between fish length and mass:
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Starting code for length-mass relationship
-s_df %>%
-  filter(!is.na(length_mm), !is.na(mass_g)) %>%
-  ggplot(aes(x = length_mm, y = mass_g)) +
-  geom_point()
-```
-
-::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-23-1.png){width=336}
-:::
-:::
-
-
-
-
-
-
-
-
-4.  Try creating a density plot that shows all lakes in different
-    colors:
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Starting code for multi-lake density plot
-s_df %>%
-  filter(!is.na(length_mm)) %>%
-  ggplot(aes(x = length_mm, fill = lake)) +
-  geom_density(alpha = 0.3)
-```
-
-::: {.cell-output-display}
-![](04_02_class_activity_files/figure-html/unnamed-chunk-24-1.png){width=336}
-:::
-:::
-
-
-
-
-
-
-
-
-# Reflection Questions
-
-After completing the activities, discuss these questions with your
-group:
-
-1.  How does sample size affect our view of a population's
-    characteristics?
-
-2.  Why might fish lengths be different in different lakes?
-
-3.  What are the advantages and disadvantages of histograms versus
-    density plots?
-
-4.  What additional data would help you better understand these fish
-    populations?
+# 
