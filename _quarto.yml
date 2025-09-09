@@ -29,7 +29,7 @@ format:
     css: styles.css        # Reference your custom CSS file
     toc: true              # Enable a table of contents if your pages are long
     toc-title: "On this page"
-
+    downloads: [docx, pptx, html, typst]  # Add this line
 
 editor: visual
 

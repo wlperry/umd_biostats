@@ -234,7 +234,7 @@ Let's create a simple histogram of fish lengths from I3 :
 ::: {.cell}
 
 ```{.r .cell-code}
-# Filter for Toolik Lake and create a histogram
+# Filter for I3 and create a histogram
 g_df %>%
   filter(lake == "I3") %>%
   ggplot(aes(x = length_mm)) +
@@ -325,7 +325,7 @@ Now let's compare two lakes side by side:
 ::: {.cell}
 
 ```{.r .cell-code}
-# Compare histograms from Toolik and E 01 lakes
+# Compare histograms from lake I3 I8 
 g_df %>%
   ggplot(aes(x = length_mm, fill = lake)) +
   geom_histogram(binwidth = 5) +
@@ -957,7 +957,7 @@ g_df %>%
 
 
 ::: callout-tip
-## Activity 5
+## Activity 4
 
 Based on the mean plot and what you've seen in the distributions, what
 can you say about fish sizes in different lakes? Are there lakes with
@@ -967,8 +967,6 @@ We will start to ask how different are they and is it by chance?
 
 Where would you want to fish and why? What is the chance of catching a
 fish greater than X size?
-
-This is the inductive phase of doing research.
 :::
 
 # 

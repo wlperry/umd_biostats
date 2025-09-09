@@ -19,7 +19,7 @@ format:
     css: ../../css/lecture.css
     fig-width: 5
     fig-height: 5
-
+    downloads: [docx, pptx, html, typst]  # Add this line
 
   revealjs:
     self-contained: true

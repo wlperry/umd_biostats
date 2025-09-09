@@ -6,7 +6,7 @@ metadata-files:
 format:
   html:
     output-file: "03_01_lecture_powerpoint_html.html"
-    downloads: [docx, pptx, typst]  # This creates download links for all three
+    downloads: [docx, pptx, typst, html]  # This creates download links for all three
   revealjs:
     output-file: "03_01_lecture_powerpoint_slides.html"
   docx:
@@ -16,6 +16,11 @@ format:
   typst:
     output-file: "03_01_lecture_powerpoint.pdf"
 ---
+
+
+
+
+
 
 
 
@@ -46,12 +51,10 @@ format:
 ::: {.column width="40%"}
 These are variables - do you know what they mean?
 
-TGW - yep its a thing
-
-ODO - what do you think it is?
-
-NO3 - what is it? Are you sure? Why might you get in legal trouble if
-you used this?
+-   TGW - yep its a thing
+-   ODO - what do you think it is?
+-   NO3 - what is it? Are you sure? Why might you get in legal trouble
+    if you used this?
 
 ![](images/clipboard-3544614084.png){width="300" height="250"}
 :::
@@ -72,16 +75,105 @@ you used this?
 -   Visualize descriptive statistics for our data
 -   Learn how to handle uncertainty in our data
 
-We'll use a dataset on grayling - `gray_I3_I8.csv`\` from two different
+We'll use a dataset on grayling - `gray_I3_I8.csv` from two different
 lakes to explore these concepts.. like you did in the homework
 
 ![](images/grayling.jpeg){width="274"}
 :::
 
 ::: {.column width="40%"}
-![](images/pop_sample_stats.png){width="231" height="296"}
+![](images/pop_sample_stats.png){width="309" height="439"}
 :::
 :::::
+
+# Lecture 3: Populations and Samples
+
+::::: columns
+::: {.column width="60%"}
+Before we dive into descriptive statistics, let's clarify some
+fundamental concepts:
+
+-   **Population**: entire group of things under consideration
+-   **Sample**: A subset of the population that is actually measured
+-   **Sample unit**: The individual thing drawn from the population
+
+Types of populations:
+
+-   **Observational population**: **group whose characteristics are
+    studied passively** (e.g., head width of all corn earworms in a
+    field)
+-   **Experimental population**: **actively manipulate variables to
+    observe effects and establish cause-and-effect relationships
+    (e.g.,** manipulate temperature and monitor head width)
+
+Sampling involves
+
+-   **inference** - generalizing from what is observed in the sample to
+    what is present in the population.
+-   Valid inference requires **random sampling**.
+:::
+
+::: {.column width="40%"}
+![](images/pop_sample_stats.png){width="324" height="432"}
+:::
+:::::
+
+# Lecture 3: Parameters vs. Statistics
+
+::::: columns
+::: {.column width="60%"}
+It's important to distinguish between:
+
+-   **Parameters**: True numerical values for a population (usually
+    denoted by Greek letters)
+-   **Statistics**: Estimates of parameters based on samples (usually
+    denoted by Roman letters)
+
+For example:
+
+-   Population mean (μ) is estimated by sample mean (Y̅)
+-   Population standard deviation (σ) is estimated by sample standard
+    deviation (s)
+:::
+
+::: {.column width="40%"}
+![](images/pop_sample_stats.png){width="310" height="411"}
+:::
+:::::
+
+# Lecture 3: Kinds of Biological Variables
+
+### Understanding the type of variable you're working with is essential for selecting appropriate statistics:
+
+### Measurement or Quantitative Variables
+
+-   **Continuous**: Any value between extremes of scale is possible
+    (e.g., mass, length)
+-   **Discrete (meristic)**: Only fixed values (usually integers)
+    between extremes are possible (e.g., bristle number, egg count)
+
+### Rank Variables (Ordinal)
+
+-   Assign only order, not quantity - student rank - 1 2 3
+-   Nothing implied about relative distance between values
+
+### Categorical Variables (Qualitative)
+
+-   No quantitative information (e.g., male/female, living/dead)
+-   Some are simplifications of quantitative variables (e.g., color
+    instead of wavelength)
+
+# Lecture 3: Derived Variables
+
+### Derived Variables
+
+-   **Percentages, Proportions**: Ratio of some component to total
+-   **Ratios**: Relation of two variables
+-   **Rates**: Quantity per unit (time, mass, etc.)
+-   **Indices**: More complex derived variables (e.g., condition index)
+
+Let's explore our grayling dataset and identify the types of variables
+it contains.
 
 # Lecture 3: Why Statistics is Vital in Biology
 
@@ -92,8 +184,8 @@ that:
 
 -   Most biological phenomena are **probabilistic** rather than
     **deterministic**
-    -   Responses occur with some characteristic probability, not with
-        certainty
+    -   Responses occur with some characteristic probability, **not with
+        certainty**
 -   All biological material varies, which is essential for evolution
     (recall Darwin's postulates):
     -   Variation exists within populations
@@ -124,11 +216,21 @@ world by:
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-1-1.png)
 :::
 :::
+
+
+
+
+
 
 
 
@@ -146,10 +248,18 @@ world by:
 # Practice Exercise 1: Fish Data
 
 ::: callout-tip
-## Practice Exercise 1: Can you open the fish data `gray_I3_I8.csv` and look at the structure and make a histogram?- see activity
+## Practice Exercise 1: Can you open the fish data `gray_I3_I8.csv` and look at the structure and make a histogram?
+
+Note the variation around the mean... some could be due to measurement
+error
 
 Let's recreate the basic histogram of fish lengths using
 `gray_I3_I8.csv`
+
+
+
+
+
 
 
 
@@ -180,115 +290,12 @@ Let's recreate the basic histogram of fish lengths using
 
 
 
+
+
+
+
+
 :::
-
-# Lecture 3: Populations and Samples
-
-::::: columns
-::: {.column width="60%"}
-Before we dive into descriptive statistics, let's clarify some
-fundamental concepts:
-
--   **Population**: The entire group of things under consideration; the
-    group for which answers obtained from measurements and statistical
-    analysis are pertinent.
--   **Sample**: A subset of the population that is actually measured.
--   **Sample unit**: The individual thing drawn from the population.
-
-Types of populations:
-
--   **Observational population**: Usually finite but may be very large
-    (e.g., head width of all corn earworms in a field)
--   **Experimental population**: Often conceptually infinite (e.g., all
-    possible goldenrod plants that could receive a specific fertilizer
-    treatment)
-
-Sampling involves
-
--   **inference** - generalizing from what is observed in the sample to
-    what is present in the population.
--   Valid inference requires **random sampling**.
-:::
-
-::: {.column width="40%"}
-![](images/pop_sample_stats.png){width="212" height="297"}
-:::
-:::::
-
-# Lecture 3: Parameters vs. Statistics
-
-::::: columns
-::: {.column width="60%"}
-It's important to distinguish between:
-
--   **Parameters**: True numerical values for a population (usually
-    denoted by Greek letters)
--   **Statistics**: Estimates of parameters based on samples (usually
-    denoted by Roman letters)
-
-For example:
-
--   Population mean (μ) is estimated by sample mean (Y̅)
--   Population standard deviation (σ) is estimated by sample standard
-    deviation (s)
-
-The standard deviation formula above includes n-1 in the denominator
-(rather than n) to provide an unbiased estimate of the population
-parameter.
-:::
-
-::: {.column width="40%"}
-![](images/pop_sample_stats.png){width="191" height="279"}
-:::
-:::::
-
-# Lecture 3: Kinds of Biological Variables
-
-::::: columns
-::: {.column width="60%"}
-### Understanding the type of variable you're working with is essential for selecting appropriate statistics:
-
-### Measurement or Quantitative Variables
-
--   **Continuous**: Any value between extremes of scale is possible
-    (e.g., mass, length)
--   **Discrete (meristic)**: Only fixed values (usually integers)
-    between extremes are possible (e.g., bristle number, egg count)
-
-### Rank Variables (Ordinal)
-
--   Assign only order, not quantity
--   Nothing implied about relative distance between values
-
-### Categorical Variables (Qualitative)
-
--   No quantitative information (e.g., male/female, living/dead)
--   Some are simplifications of quantitative variables (e.g., color
-    instead of wavelength)
-:::
-
-::: {.column width="40%"}
-:::
-:::::
-
-# Lecture 3: Derived Variables
-
-::::: columns
-::: {.column width="60%"}
-### Derived Variables
-
--   **Percentages, Proportions**: Ratio of some component to total
--   **Ratios**: Relation of two variables
--   **Rates**: Quantity per unit (time, mass, etc.)
--   **Indices**: More complex derived variables (e.g., condition index)
-
-Let's explore our grayling dataset and identify the types of variables
-it contains.
-:::
-
-::: {.column width="40%"}
-:::
-:::::
 
 # Practice Exercise 2: Examining Grayling Data
 
@@ -296,6 +303,11 @@ it contains.
 ## Practice Exercise 2: Can you do this for the pine data we have collected?
 
 Let's examine the different data and determine what they are?
+
+
+
+
+
 
 
 
@@ -349,6 +361,11 @@ head(grayling_df)
 
 
 
+
+
+
+
+
 :::
 
 # Lecture 3: Accuracy, Precision, and Bias
@@ -363,11 +380,12 @@ is essential:**
     (repeatability)
 -   **Bias**: Systematic departure from the true value
 
-Accuracy is a function of both precision and bias. For statisticians,
-bias is usually a more serious problem than low precision because:
+**Accuracy** is a **function** of **both precision and bias**.
+
+For statisticians, **BIAS is usually a more serious problem than low
+precision because**:
 
 -   It's harder to detect (true value usually unknown)
-
 -   Low precision can be compensated for by increased sample size
 :::
 
@@ -379,7 +397,7 @@ bias is usually a more serious problem than low precision because:
 # Practice Exercise: Sources of Error
 
 ::: callout-tip
-## Practice Exercise 1: What are potential sources of error in pine needles or fish?
+## Practice Exercise 1: What are potential sources of error in fish data?
 
 For our grayling data, potential sources of measurement error might
 include:
@@ -422,15 +440,33 @@ Where:
 
 
 
+
+
+
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# Calculate mean length of all fish
+mean(grayling_df$length_mm)
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Mean length of all fish: 324.5 mm
+[1] 324.494
 ```
 
 
 :::
+
+```{.r .cell-code}
+# Calculate mean by lake
+grayling_df %>%
+  group_by(lake) %>%
+  summarise(mean_length = mean(length_mm, na.rm=TRUE)) 
+```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -445,6 +481,11 @@ Mean length of all fish: 324.5 mm
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -478,15 +519,33 @@ The Median
 
 
 
+
+
+
+
+
 ::: {.cell}
+
+```{.r .cell-code}
+# Calculate median length of all fish
+median(grayling_df$length_mm)
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Median length of all fish: 324.5 mm
+[1] 324.5
 ```
 
 
 :::
+
+```{.r .cell-code}
+# Calculate median by lake
+grayling_df %>%
+  group_by(lake) %>%
+  summarise(median_length = median(length_mm)) 
+```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -501,6 +560,11 @@ Median length of all fish: 324.5 mm
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -545,16 +609,25 @@ The standard deviation is the square root of variance
 
 
 
+
+
+
+
+
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
+```{.r .cell-code}
+# Calculate standard deviation of fish length
+var_length <- var(grayling_df$length_mm)
+sd_length <- sd(grayling_df$length_mm)
+
+# Calculate by lake
+grayling_df %>%
+  group_by(lake) %>%
+  summarise(
+     var_length = var(length_mm), 
+     sd_length = sd(length_mm) ) 
 ```
-Variance of length: 4225.9 mm²
- Standard deviation of length: 65 mm
-```
-
-
-:::
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -580,6 +653,11 @@ Variance of length: 4225.9 mm²
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -588,11 +666,17 @@ Variance of length: 4225.9 mm²
 ::::: columns
 ::: {.column width="60%"}
 The area under the curve of a bell shaped curve within + and - 2
-Standard deviations on each side includes about 95% of the data \
+standard deviations on each side includes about 95% of the data\
 \
 so there is only 2.5% of the data that is outside this range
 
-\- note the similarity to the p \< 0.5
+-   note the similarity to the p \< 0.5
+-   note that it is 90.91% and that is because the curve is not normal
+
+
+
+
+
 
 
 
@@ -631,9 +715,19 @@ i3 Lake Fish Length Summary:
 
 
 
+
+
+
+
+
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -650,6 +744,11 @@ i3 Lake Fish Length Summary:
 ![](03_01_lecture_powerpoint_files/figure-docx/sd-variance-2-1.png)
 :::
 :::
+
+
+
+
+
 
 
 
@@ -678,6 +777,11 @@ different units or vastly different scales.
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -723,6 +827,11 @@ Coefficient of variation: 10.7 %
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -740,6 +849,11 @@ third quartile (75th percentile).
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -803,6 +917,11 @@ Interquartile range: 106.25 mm
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -842,6 +961,11 @@ provides a better measure of central tendency than the arithmetic mean.
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-docx/log-transform-1.png)
@@ -868,6 +992,11 @@ Arithmetic mean of original data: 265.6 mm
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -875,6 +1004,9 @@ Arithmetic mean of original data: 265.6 mm
 
 ::::: columns
 ::: {.column width="60%"}
+To tranform data to a "normal" distribution we can use the following
+transformations...
+
 -   **Log transformation**: When data are right-skewed or follow
     multiplicative rather than additive processes
 -   **Square root transformation**: For count data or data where
@@ -909,11 +1041,21 @@ Histograms show the frequency distribution of our data.
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-docx/histogram-1.png)
 :::
 :::
+
+
+
+
+
 
 
 
@@ -943,11 +1085,21 @@ Box plots show the median, quartiles, and potential outliers.
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-docx/boxplot-1.png)
 :::
 :::
+
+
+
+
+
 
 
 
@@ -986,6 +1138,11 @@ it's skewed or has outliers, they can differ significantly.
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -1000,6 +1157,11 @@ it's skewed or has outliers, they can differ significantly.
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1040,11 +1202,21 @@ it's skewed or has outliers, they can differ significantly.
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-docx/mean-vs-median-plot-1.png)
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1085,6 +1257,11 @@ deviation.
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -1099,6 +1276,11 @@ deviation.
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1140,9 +1322,19 @@ The IQR is the difference between Q3 and Q1.
 
 
 
+
+
+
+
+
 ::: {.cell}
 
 :::
+
+
+
+
+
 
 
 
@@ -1161,6 +1353,11 @@ The IQR is the difference between Q3 and Q1.
 
 Let's examine how missing values affect our descriptive statistics by
 looking at the mass variable, which has some missing data.
+
+
+
+
+
 
 
 
@@ -1206,6 +1403,11 @@ Mean mass without handling NAs: NA g
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1270,26 +1472,29 @@ means vary:
 
 
 
+
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Filter for Lake I3
 i3_data <- grayling_df %>% filter(lake == "I3")
-
 # Function to take a random sample and calculate the mean
 sample_mean <- function(data, sample_size) {
   sample_data <- sample_n(data, sample_size)
   return(mean(sample_data$length_mm))
 }
-
 # Take 10 different samples of size 15 from Lake I3
 set.seed(123) # For reproducibility
 sample_size <- 15
-sample_means <- replicate(10, sample_mean(i3_data, sample_size))
-
+sample_means <- replicate(50, sample_mean(i3_data, sample_size))
 # Create a data frame with sample numbers and means
 samples_df <- data.frame(
-  sample_number = 1:10,
+  sample_number = 1:50,
   sample_mean = sample_means
 )
 ```
@@ -1306,7 +1511,19 @@ samples_df <- data.frame(
 
 
 
+
+
+
+
+
+
 # **Plotting Sample Variation**
+
+
+
+
+
+
 
 
 
@@ -1351,6 +1568,12 @@ ggplot(samples_df, aes(x = factor(sample_number), y = sample_mean)) +
 
 
 
+
+
+
+
+
+
 Notice how each sample's mean differs from the overall mean. This
 demonstrates sampling variation.
 
@@ -1365,22 +1588,22 @@ Formula: $SE_{\bar{x}} = \frac{s}{\sqrt{n}}$
 
 Where:
 
-- s is the sample standard deviation
-- n is the sample size
+-   s is the sample standard deviation
+-   n is the sample size
 
 The standard error tells us:
 
-- How much uncertainty is in our estimate
-- How much sample means are expected to vary
-- How close our sample mean is likely to be to the true population
+-   How much uncertainty is in our estimate
+-   How much sample means are expected to vary
+-   How close our sample mean is likely to be to the true population
     mean
 :::
 
 ::: {.column width="40%"}
 **Remember:**
 
--   Standard deviation (s) describes the variability in the
-    individual data points
+-   Standard deviation (s) describes the variability in the individual
+    data points
 -   Standard error (SE) describes the variability in the sample mean
     itself
 -   As sample size increases, SE decreases (more precise estimate)
@@ -1390,6 +1613,11 @@ The standard error tells us:
 # **Standard Error for Our Grayling Data**
 
 Let's calculate and visualize the standard error for both lakes:
+
+
+
+
+
 
 
 
@@ -1444,7 +1672,17 @@ grayling_stats
 
 
 
+
+
+
+
+
 # **Visualizing Standard Error**
+
+
+
+
+
 
 
 
@@ -1474,8 +1712,12 @@ grayling_stats
 
 
 
-# **Sampling Distribution of the Mean**
 
+
+
+
+
+# **Sampling Distribution of the Mean**
 
 The **sampling distribution of the mean** is the theoretical
 distribution of all possible sample means of a given sample size from a
@@ -1490,17 +1732,21 @@ Important properties:
 
 The larger the sample size:
 
-- The narrower the sampling distribution
-- The smaller the standard error
-- The more precise our estimate of the population mean
+-   The narrower the sampling distribution
+-   The smaller the standard error
+-   The more precise our estimate of the population mean
 
 Let's simulate the sampling distribution for Lake I3 fish data.
-
 
 # **Simulating the Sampling Distribution**
 
 Let's simulate taking many samples from Lake I3 to visualize the
 sampling distribution:
+
+
+
+
+
 
 
 
@@ -1547,7 +1793,17 @@ simulated_df <- data.frame(sample_mean = simulated_means)
 
 
 
+
+
+
+
+
 # **Plotting Sampling Distribution**
+
+
+
+
+
 
 
 
@@ -1593,6 +1849,11 @@ ggplot(simulated_df, aes(x = sample_mean)) +
 
 
 
+
+
+
+
+
 Notice that the simulated sampling distribution:
 
 1.  Is approximately normally distributed
@@ -1602,6 +1863,11 @@ Notice that the simulated sampling distribution:
 # **Standard Error and Sample Size**
 
 Let's see how the standard error changes with different sample sizes:
+
+
+
+
+
 
 
 
@@ -1629,7 +1895,17 @@ Let's see how the standard error changes with different sample sizes:
 
 
 
+
+
+
+
+
 # **Sample Size vs. Standard Error**
+
+
+
+
+
 
 
 
@@ -1680,6 +1956,11 @@ ggplot(results_long, aes(x = sample_size, y = standard_error, color = se_type)) 
 
 
 
+
+
+
+
+
 # **Confidence Intervals**
 
 A **confidence interval** is a range of values that is likely to contain
@@ -1691,19 +1972,23 @@ $\bar{x} \pm 2 \times SE_{\bar{x}}$
 
 This "2 SE rule of thumb" means:
 
-- The interval extends 2 standard errors below and above the sample
+-   The interval extends 2 standard errors below and above the sample
     mean
-- About 95% of such intervals constructed from different samples
-    would contain the true population mean
-    
-Confidence intervals provide a way to express the precision of our
-estimates.    
+-   About 95% of such intervals constructed from different samples would
+    contain the true population mean
 
+Confidence intervals provide a way to express the precision of our
+estimates.
 
 # **Calculating Confidence Intervals for Grayling Data**
 
 Let's calculate and visualize the 95% confidence intervals for the mean
 fish length in each lake:
+
+
+
+
+
 
 
 
@@ -1760,7 +2045,17 @@ grayling_ci
 
 
 
+
+
+
+
+
 # **Visualizing Confidence Intervals**
+
+
+
+
+
 
 
 
@@ -1804,9 +2099,19 @@ ggplot(grayling_ci, aes(x = lake, y = mean_length, fill = lake)) +
 
 
 
+
+
+
+
+
 # **Different Types of Error Bars**
 
 Let's compare different ways of displaying uncertainty in our estimates:
+
+
+
+
+
 
 
 
@@ -1855,7 +2160,17 @@ error_types <- data.frame(
 
 
 
+
+
+
+
+
 # **Comparing Error Bar Types**
+
+
+
+
+
 
 
 
@@ -1892,6 +2207,11 @@ ggplot() +
 ![](03_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-15-1.png)
 :::
 :::
+
+
+
+
+
 
 
 

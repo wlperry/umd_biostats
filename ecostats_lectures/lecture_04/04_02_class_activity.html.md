@@ -13,13 +13,6 @@ format:
 ---
 
 
-
-
-
-
-
-
-
 # In class activity 4:
 
 ## What did we do last time in activity 3?
@@ -66,13 +59,6 @@ visualization.
 
 First, let's load the packages we need and the dataset:
 
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -111,23 +97,9 @@ head(g_df)
 :::
 :::
 
-
-
-
-
-
-
-
 ## Basic Data Summary
 
 Let's first check what lakes are in our dataframe:
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -146,21 +118,7 @@ unique(g_df$lake)
 :::
 :::
 
-
-
-
-
-
-
-
 How many fish do we have from each lake?
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -208,13 +166,6 @@ g_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 1: Creating Frequency Distributions
 
 ## Basic Histograms
@@ -225,16 +176,10 @@ A histogram shows how many observations fall into certain ranges (or
 Let's create a simple histogram of fish lengths from I3 :
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
-# Filter for Toolik Lake and create a histogram
+# Filter for I3 and create a histogram
 g_df %>%
   filter(lake == "I3") %>%
   ggplot(aes(x = length_mm)) +
@@ -247,24 +192,11 @@ g_df %>%
 :::
 
 
-
-
-
-
-
-
 ::: callout-tip
 ## Activity 1
 
 Try changing the `binwidth` parameter to 5 and then to 1. How does the
 appearance of the histogram change?
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -272,25 +204,11 @@ appearance of the histogram change?
 # Try it here
 ```
 :::
-
-
-
-
-
-
-
 :::
 
 ## Comparing Lakes
 
 Now let's compare two lakes
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -306,26 +224,13 @@ g_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 Now let's compare two lakes side by side:
-
-
-
-
-
-
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-# Compare histograms from Toolik and E 01 lakes
+# Compare histograms from lake I3 I8 
 g_df %>%
   ggplot(aes(x = length_mm, fill = lake)) +
   geom_histogram(binwidth = 5) +
@@ -338,12 +243,6 @@ g_df %>%
 :::
 
 
-
-
-
-
-
-
 # Part 2: Sample Size Effects
 
 Let's explore how the sample size affects what we see.
@@ -351,13 +250,6 @@ Let's explore how the sample size affects what we see.
 ## Small vs. Large Samples
 
 We'll randomly select different sample sizes from I8 Lake:
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -401,13 +293,6 @@ p1 + p2 +
 :::
 :::
 
-
-
-
-
-
-
-
 ::: callout-tip
 ## Activity 3
 
@@ -415,13 +300,6 @@ Try changing the sample sizes. What happens when you use very small
 samples (n=5)? What about larger samples (n=60)?
 
 add code here
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -464,25 +342,11 @@ p1 + p2 +
 ![](04_02_class_activity_files/figure-html/unnamed-chunk-10-1.png){width=336}
 :::
 :::
-
-
-
-
-
-
-
 :::
 
 # Part 3: From Histograms to Density Plots
 
 Density plots give us a smoothed version of the histogram:
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -498,21 +362,7 @@ i3_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 We can overlay the histogram and the density plot:
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -530,13 +380,6 @@ i3_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 ::: callout-tip
 ## Activity 4
 
@@ -545,13 +388,6 @@ have similar distributions? Which ones are different?
 
 Try code here using patchwork or facet_grid
 
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -559,22 +395,8 @@ Try code here using patchwork or facet_grid
 ```
 :::
 
-
-
-
-
-
-
-
 # 
 :::
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -617,24 +439,10 @@ i3_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 This can be adapted to calculate the area of a subset of the plot
 
 I don't expect you to know or be able to do all of this but is here to
 play with the code
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -740,23 +548,9 @@ ggplot(i3_fish, aes(x = length_mm)) +
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 4: Summary Statistics - descriptive statistics
 
 Let's calculate basic summary statistics for each lake for mass:
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -787,26 +581,12 @@ g_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 ## WOAH - what happened there - there are NA values in the data
 
 you need to either remove missing values or you can do that in the
 formulas
 
 *What is the advantage to manually removing or doing it in formulas?*
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -839,21 +619,7 @@ stats_df
 :::
 :::
 
-
-
-
-
-
-
-
 Now let's visualize these statistics:
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -873,21 +639,7 @@ g_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 We could also do this from the dataframe we just made
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -907,22 +659,8 @@ stats_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 The power of the pipe command is you can do this without having to make
 a new dataframe
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -949,15 +687,8 @@ g_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 ::: callout-tip
-## Activity 5
+## Activity 4
 
 Based on the mean plot and what you've seen in the distributions, what
 can you say about fish sizes in different lakes? Are there lakes with
@@ -967,8 +698,6 @@ We will start to ask how different are they and is it by chance?
 
 Where would you want to fish and why? What is the chance of catching a
 fish greater than X size?
-
-This is the inductive phase of doing research.
 :::
 
 # 

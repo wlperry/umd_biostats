@@ -5445,7 +5445,7 @@ padding: 6px !important;
 <p>A histogram shows how many observations fall into certain ranges (or “bins”).</p>
 <p>Let’s create a simple histogram of fish lengths from I3 :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for Toolik Lake and create a histogram</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for I3 and create a histogram</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>g_df <span class="sc">%&gt;%</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lake <span class="sc">==</span> <span class="st">&quot;I3&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> length_mm)) <span class="sc">+</span></span>
@@ -5493,7 +5493,7 @@ Activity 1
 </div>
 <p>Now let’s compare two lakes side by side:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare histograms from Toolik and E 01 lakes</span></span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare histograms from lake I3 I8 </span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>g_df <span class="sc">%&gt;%</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> length_mm, <span class="at">fill =</span> lake)) <span class="sc">+</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
@@ -5924,14 +5924,13 @@ Activity 4
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Activity 5
+Activity 4
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Based on the mean plot and what you’ve seen in the distributions, what can you say about fish sizes in different lakes? Are there lakes with particularly large or small fish?</p>
 <p>We will start to ask how different are they and is it by chance?</p>
 <p>Where would you want to fish and why? What is the chance of catching a fish greater than X size?</p>
-<p>This is the inductive phase of doing research.</p>
 </div>
 </div>
 </section>
