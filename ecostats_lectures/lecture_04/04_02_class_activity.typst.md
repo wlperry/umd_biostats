@@ -117,10 +117,7 @@ head(g_df)
 
 
 
-
-## Basic Data Summary
-
-Let's first check what lakes are in our dataframe:
+# Part 1: Summary Statistics - descriptive statistics
 
 
 
@@ -132,14 +129,28 @@ Let's first check what lakes are in our dataframe:
 ::: {.cell}
 
 ```{.r .cell-code}
-# Get a list of unique lakes
-unique(g_df$lake)
+# Calculate mean, standard deviation, and sample size by lake
+stats_df <- g_df %>%
+  group_by(lake) %>%
+  summarize(
+    mean_length = mean(length_mm, na.rm = TRUE),
+    sd_length = sd(length_mm, na.rm = TRUE),
+    se_length = sd(length_mm, na.rm = TRUE)/ sum(!is.na(length_mm))^.5,
+    count = sum(!is.na(length_mm)),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(count))
+stats_df
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "I3" "I8"
+# A tibble: 2 × 5
+  lake  mean_length sd_length se_length count
+  <chr>       <dbl>     <dbl>     <dbl> <int>
+1 I8           363.      52.3      5.18   102
+2 I3           266.      28.3      3.48    66
 ```
 
 
@@ -153,69 +164,9 @@ unique(g_df$lake)
 
 
 
-How many fish do we have from each lake?
 
 
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Count observations by lake
-g_df %>%
-  group_by(lake) %>% 
-  summarize(fish_n = n())
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 2 × 2
-  lake  fish_n
-  <chr>  <int>
-1 I3        66
-2 I8       102
-```
-
-
-:::
-:::
-
-::: {.cell}
-
-```{.r .cell-code}
-# Count observations by lake
-g_df %>%
-  group_by(lake) %>% 
-  summarize(fish_n = sum(!is.na(mass_g)))
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 2 × 2
-  lake  fish_n
-  <chr>  <int>
-1 I3        66
-2 I8       100
-```
-
-
-:::
-:::
-
-
-
-
-
-
-
-
-# Part 1: Creating Frequency Distributions
+# Part 2: Creating Frequency Distributions
 
 ## Basic Histograms
 
@@ -235,14 +186,13 @@ Let's create a simple histogram of fish lengths from I3 :
 
 ```{.r .cell-code}
 # Filter for I3 and create a histogram
-g_df %>%
-  filter(lake == "I3") %>%
+i3_df %>%
   ggplot(aes(x = length_mm)) +
-  geom_histogram(binwidth = 2) 
+  geom_histogram(binwidth = 10) 
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-typst/unnamed-chunk-5-1.svg)
+![](04_02_class_activity_files/figure-typst/unnamed-chunk-3-1.svg)
 :::
 :::
 
@@ -269,7 +219,7 @@ appearance of the histogram change?
 ::: {.cell}
 
 ```{.r .cell-code}
-# Try it here
+# Try it here or above...
 ```
 :::
 
@@ -298,11 +248,11 @@ Now let's compare two lakes
 # Compare histograms from I3 I8 lakes
 g_df %>%
   ggplot(aes(x = length_mm, fill = lake)) +
-  geom_histogram(binwidth = 2) 
+  geom_histogram(binwidth = 10, position = position_dodge2(width = 0.9)) 
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-typst/unnamed-chunk-7-1.svg)
+![](04_02_class_activity_files/figure-typst/unnamed-chunk-5-1.svg)
 :::
 :::
 
@@ -328,12 +278,12 @@ Now let's compare two lakes side by side:
 # Compare histograms from lake I3 I8 
 g_df %>%
   ggplot(aes(x = length_mm, fill = lake)) +
-  geom_histogram(binwidth = 5) +
+  geom_histogram(binwidth = 10) +
   facet_wrap("lake")
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-typst/unnamed-chunk-8-1.svg)
+![](04_02_class_activity_files/figure-typst/unnamed-chunk-6-1.svg)
 :::
 :::
 
@@ -344,138 +294,11 @@ g_df %>%
 
 
 
-# Part 2: Sample Size Effects
+# Part 2: From Histograms to Density Plots
 
-Let's explore how the sample size affects what we see.
-
-## Small vs. Large Samples
-
-We'll randomly select different sample sizes from I8 Lake:
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Set a seed for reproducibility
-set.seed(123)
-
-# Create small sample (15 fish)
-small_sample <- i3_df %>%
-  sample_n(10)
-
-# Create larger sample (50 fish)
-larger_sample <- i3_df %>%
-  sample_n(25)
-
-# Plot both samples
-p1 <- small_sample %>%
-  ggplot(aes(x = length_mm)) +
-  geom_histogram(binwidth = 2, fill = "red", alpha = 0.7) +
-  coord_cartesian(xlim = c(150,300)) +
-  labs(title = "Small Sample (n=15)",
-       x = "Length (mm)",
-       y = "Count") 
-
-p2 <- larger_sample %>%
-  ggplot(aes(x = length_mm)) +
-  geom_histogram(binwidth = 2, fill = "blue", alpha = 0.7) +
-  coord_cartesian(xlim = c(150,300)) +
-  labs(title = "Larger Sample (n=50)",
-       x = "Length (mm)",
-       y = "Count")
-
-
-# Display the plots side by side
-p1 + p2 +
-  plot_layout(ncol = 1)
-```
-
-::: {.cell-output-display}
-![](04_02_class_activity_files/figure-typst/unnamed-chunk-9-1.svg)
-:::
-:::
-
-
-
-
-
-
-
-
-::: callout-tip
-## Activity 3
-
-Try changing the sample sizes. What happens when you use very small
-samples (n=5)? What about larger samples (n=60)?
-
-add code here
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Set a seed for reproducibility
-set.seed(123)
-
-# Create small sample (15 fish)
-small_sample <- i3_df %>%
-  sample_n(3)
-
-# Create larger sample (50 fish)
-larger_sample <- i3_df %>%
-  sample_n(6)
-
-# Plot both samples
-p1 <- small_sample %>%
-  ggplot(aes(x = length_mm)) +
-  geom_histogram(binwidth = 2, fill = "red", alpha = 0.7) +
-  coord_cartesian(xlim = c(150,300)) +
-  labs(title = "Small Sample (n=15)",
-       x = "Length (mm)",
-       y = "Count") 
-
-p2 <- larger_sample %>%
-  ggplot(aes(x = length_mm)) +
-  geom_histogram(binwidth = 2, fill = "blue", alpha = 0.7) +
-  coord_cartesian(xlim = c(150,300)) +
-  labs(title = "Larger Sample (n=50)",
-       x = "Length (mm)",
-       y = "Count")
-
-
-# Display the plots side by side
-p1 + p2 +
-  plot_layout(ncol = 1)
-```
-
-::: {.cell-output-display}
-![](04_02_class_activity_files/figure-typst/unnamed-chunk-10-1.svg)
-:::
-:::
-
-
-
-
-
-
-
-:::
-
-# Part 3: From Histograms to Density Plots
-
-Density plots give us a smoothed version of the histogram:
+Density plots give us a smoothed version of the histogram
+It has the proportion of the data under each part of the curve
+This sums to 1
 
 
 
@@ -494,7 +317,7 @@ i3_df %>%
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-typst/unnamed-chunk-11-1.svg)
+![](04_02_class_activity_files/figure-typst/unnamed-chunk-7-1.svg)
 :::
 :::
 
@@ -505,7 +328,7 @@ i3_df %>%
 
 
 
-We can overlay the histogram and the density plot:
+We can overlay the density plot on the histogram :
 
 
 
@@ -526,7 +349,7 @@ i3_df %>%
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-typst/unnamed-chunk-12-1.svg)
+![](04_02_class_activity_files/figure-typst/unnamed-chunk-8-1.svg)
 :::
 :::
 
@@ -537,37 +360,11 @@ i3_df %>%
 
 
 
-::: callout-tip
-## Activity 4
 
-Create a density plot comparing multiple lakes I3 to I8. Which lakes
-have similar distributions? Which ones are different?
+# Part 3 - area under the density curve
 
-Try code here using patchwork or facet_grid
+We could show this if we really wanted...
 
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
- #Enter code here#
-```
-:::
-
-
-
-
-
-
-
-
-# 
-:::
 
 
 
@@ -595,7 +392,7 @@ calculate_density_area <- function(data_vector) {
   return(area)
 }
 
-# Apply to Toolik lake data
+# Apply to i3 lake data
 i3_data <- i3_df %>% 
   pull(length_mm)
 
@@ -613,7 +410,7 @@ i3_df %>%
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-typst/unnamed-chunk-14-1.svg)
+![](04_02_class_activity_files/figure-typst/unnamed-chunk-9-1.svg)
 :::
 :::
 
@@ -624,6 +421,7 @@ i3_df %>%
 
 
 
+## looking at particular areas...
 This can be adapted to calculate the area of a subset of the plot
 
 I don't expect you to know or be able to do all of this but is here to
@@ -644,6 +442,13 @@ play with the code
 # For this example, let's calculate the probability of fish between 40mm and 60mm
 lower_bound <- 320  # change this value
 upper_bound <- 350  # change this value
+
+
+
+
+
+
+
 
 # ------- PART 1: PREPARE THE DATA -------
 # Filter data for just one lake to keep it simple for students
@@ -736,7 +541,7 @@ ggplot(i3_fish, aes(x = length_mm)) +
 ```
 
 ::: {.cell-output-display}
-![](04_02_class_activity_files/figure-typst/unnamed-chunk-15-1.svg)
+![](04_02_class_activity_files/figure-typst/unnamed-chunk-10-1.svg)
 :::
 :::
 
@@ -747,9 +552,9 @@ ggplot(i3_fish, aes(x = length_mm)) +
 
 
 
-# Part 4: Summary Statistics - descriptive statistics
+# Part 4: this is great but integrating area each time is a pain
 
-Let's calculate basic summary statistics for each lake for mass:
+Converting data to Z scores 
 
 
 
@@ -761,26 +566,30 @@ Let's calculate basic summary statistics for each lake for mass:
 ::: {.cell}
 
 ```{.r .cell-code}
-# Calculate mean, standard deviation, and sample size by lake
-g_df %>%
-  group_by(lake) %>%
-  summarize(
-    mean_length = mean(mass_g),
-    sd_length = sd(mass_g),
-    count = n(),
-    .groups = "drop"
-  ) %>%
-  arrange(desc(count))
+# Calculate the mean and standard deviation of fish lengths
+mean_length <- mean(i3_df$length_mm, na.rm = TRUE)
+sd_length <- sd(i3_df$length_mm, na.rm = TRUE)
+
+# Calculate Z-scores for fish lengths
+i3_df <- i3_df %>%
+  mutate(z_score = (length_mm - mean_length) / sd_length)
+
+# View the first few rows with Z-scores
+head(i3_df)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 2 × 4
-  lake  mean_length sd_length count
-  <chr>       <dbl>     <dbl> <int>
-1 I8            NA       NA     102
-2 I3           150.      42.2    66
+# A tibble: 6 × 6
+   site lake  species         length_mm mass_g z_score
+  <dbl> <chr> <chr>               <dbl>  <dbl>   <dbl>
+1   113 I3    arctic grayling       266    135  0.0139
+2   113 I3    arctic grayling       290    185  0.862 
+3   113 I3    arctic grayling       262    145 -0.127 
+4   113 I3    arctic grayling       275    160  0.332 
+5   113 I3    arctic grayling       240    105 -0.905 
+6   113 I3    arctic grayling       265    145 -0.0214
 ```
 
 
@@ -794,12 +603,8 @@ g_df %>%
 
 
 
-## WOAH - what happened there - there are NA values in the data
 
-you need to either remove missing values or you can do that in the
-formulas
-
-*What is the advantage to manually removing or doing it in formulas?*
+## Now plot the Z Scores as a histogram
 
 
 
@@ -811,28 +616,66 @@ formulas
 ::: {.cell}
 
 ```{.r .cell-code}
-# Calculate mean, standard deviation, and sample size by lake
-stats_df <- g_df %>%
-  group_by(lake) %>%
-  summarize(
-    mean_length = mean(length_mm, na.rm = TRUE),
-    sd_length = sd(length_mm, na.rm = TRUE),
-    se_length = sd(length_mm, na.rm = TRUE)/ sum(!is.na(length_mm))^.5,
-    count = sum(!is.na(length_mm)),
-    .groups = "drop"
-  ) %>%
-  arrange(desc(count))
-stats_df
+z_fish_plot <- i3_df %>% 
+  ggplot(aes(x=z_score)) +
+  geom_histogram()
+z_fish_plot
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+
+:::
+
+::: {.cell-output-display}
+![](04_02_class_activity_files/figure-typst/unnamed-chunk-12-1.svg)
+:::
+:::
+
+
+
+
+
+
+
+
+# we can use this now to get the area the same way as above but easier...
+Proportion within 1 standard deviation = sum of absolute values of Z Scores that are less than or equal to 1 divided by the number in the sample...
+
+Remember in a true normal distribution it is 68% within 1 std dev.
+
+should be approximately (varies if distribution is not normal):
+
+- 68% of data within ±1σ of the mean
+
+- 95% of data within ±2σ of the mean - really 1.96σ
+
+- 99.7% of data within ±3σ of the mean
+
+
+
+
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# What proportion of fish are within 1 standard deviation of the mean?
+within_1sd <- sum(abs(i3_df$z_score) <= 1, na.rm = TRUE) / sum(!is.na(i3_df$z_score))
+cat("Proportion within 1 SD:", round(within_1sd * 100, 1), "%\n")
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 2 × 5
-  lake  mean_length sd_length se_length count
-  <chr>       <dbl>     <dbl>     <dbl> <int>
-1 I8           363.      52.3      5.18   102
-2 I3           266.      28.3      3.48    66
+Proportion within 1 SD: 81.8 %
 ```
 
 
@@ -846,7 +689,169 @@ stats_df
 
 
 
-Now let's visualize these statistics:
+
+
+## Z-score example calculation in r
+
+::::: columns
+::: {.column width="60%"}
+We can use R to get these values easier...
+
+\# For standard normal distribution (mean=0, sd=1):
+
+-   pnorm(z) \# gives cumulative probability (area to the left)
+-   qnorm(p) \# gives z-value for a given probability
+-   dnorm(z) \# gives probability density
+:::
+
+::: {.column width="40%"}
+
+
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Examples:
+z_value <-  1.22
+prob_left <- pnorm(z_value)          # 0.975 (97.5% to the left)
+prob_right <- 1 - pnorm(z_value)     # 0.025 (2.5% to the right)
+prob_between <- pnorm(2) - pnorm(-2)  # 0.95 (95% between ±1.96)
+
+# To find z-value for a given probability:
+z_for_95_percent <- qnorm(0.888)     # 1.96
+
+print(prob_left)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 0.8887676
+```
+
+
+:::
+
+```{.r .cell-code}
+print(prob_right)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 0.1112324
+```
+
+
+:::
+
+```{.r .cell-code}
+print(prob_between)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 0.9544997
+```
+
+
+:::
+
+```{.r .cell-code}
+print(z_for_95_percent)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 1.21596
+```
+
+
+:::
+:::
+
+
+
+
+
+
+
+
+
+We can now use this for fun in the fish
+
+::::: columns
+::: {.column width="60%"}
+Lets say we are interested in knowing at what point from I3 it is not
+likely to catch a larger fish?
+
+Maybe we expect 95% of the time to catch a fish that is "common" but the
+5% is the unlikely portion....
+:::
+
+::: {.column width="40%"}
+
+
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Examples:
+# What fish length corresponds to the top 5% (unlikely)?
+top_5_percent_z <- qnorm(0.95)  # z-score for 95th percentile
+unlikely_length <- mean_length + (top_5_percent_z * sd_length)
+
+cat("Only 5% of fish are longer than:", round(unlikely_length, 1), "mm\n")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Only 5% of fish are longer than: 312.2 mm
+```
+
+
+:::
+
+```{.r .cell-code}
+cat("This corresponds to z-score:", round(top_5_percent_z, 3), "\n")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+This corresponds to z-score: 1.645 
+```
+
+
+:::
+:::
+
+
+
+
+
+
+
+
+
+# Part 5: Comparing a sampe mean to an expected mean....
+Did the smaple come from that lake?
+
+Lets practice a One-Sample t-Test
+
+Let's perform a one-sample t-test to determine if the mean fish length
+in Lake I3 differs from 260 mm:
 
 
 
@@ -858,18 +863,48 @@ Now let's visualize these statistics:
 ::: {.cell}
 
 ```{.r .cell-code}
-# Create a bar plot of mean lengths with error bars
-g_df %>%  
-  ggplot(aes(lake, length_mm)) +
-  stat_summary(
-    fun = mean, na.rm = TRUE, geom = "bar"
-    ) +
-  stat_summary(
-    fun.data = mean_se, na.rm = TRUE, geom = "errorbar", width = 0.2) 
+# get only lake I3
+i3_df <- g_df %>% filter(lake=="I3")
+
+# what is the mean
+i3_mean <- mean(i3_df$length_mm, na.rm=TRUE)
+cat("Mean:", round(i3_mean, 1), "mm\n")
 ```
 
-::: {.cell-output-display}
-![](04_02_class_activity_files/figure-typst/unnamed-chunk-18-1.svg)
+::: {.cell-output .cell-output-stdout}
+
+```
+Mean: 265.6 mm
+```
+
+
+:::
+
+```{.r .cell-code}
+# Perform a one-sample t-test
+t_test_result <- t.test(i3_df$length_mm, mu = 260)
+
+# View the test results
+t_test_result
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	One Sample t-test
+
+data:  i3_df$length_mm
+t = 1.6091, df = 65, p-value = 0.1124
+alternative hypothesis: true mean is not equal to 260
+95 percent confidence interval:
+ 258.6481 272.5640
+sample estimates:
+mean of x 
+ 265.6061 
+```
+
+
 :::
 :::
 
@@ -880,7 +915,16 @@ g_df %>%
 
 
 
-We could also do this from the dataframe we just made
+
+
+
+# Part 6: Comparing two means
+Formulating Hypotheses
+
+For the following research questions about Arctic grayling, write the
+null and alternative hypotheses:
+
+1.  Are fish in Lake I8 longer than fish in Lake I3?
 
 
 
@@ -892,81 +936,32 @@ We could also do this from the dataframe we just made
 ::: {.cell}
 
 ```{.r .cell-code}
-# Create a bar plot of mean lengths with error bars
-stats_df %>%  
-  ggplot(aes(x = reorder(lake, mean_length), y = mean_length)) +
-  geom_bar(stat = "identity") +
-  geom_errorbar(aes(
-    ymin = mean_length - se_length, 
-    ymax = mean_length + se_length),
-    width = 0.2) 
+# Let's test one of these hypotheses: Are fish in Lake I8 longer than fish in Lake I3?
+
+# Perform an independent t-test
+t_test_result <- t.test(length_mm ~ lake, data = g_df, 
+                       alternative = "less")  # H₀: μ_I3 ≥ μ_I8, H₁: μ_I3 < μ_I8
+
+# Display the results
+t_test_result
 ```
 
-::: {.cell-output-display}
-![](04_02_class_activity_files/figure-typst/unnamed-chunk-19-1.svg)
-:::
-:::
+::: {.cell-output .cell-output-stdout}
 
-
-
-
-
-
-
-
-The power of the pipe command is you can do this without having to make
-a new dataframe
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Create a bar plot of mean lengths with error bars
-g_df %>%
-  group_by(lake) %>%
-  summarize(
-    mean_length = mean(length_mm, na.rm = TRUE),
-    sd_length = sd(length_mm, na.rm = TRUE),
-    se_length = sd_length / sqrt(n()),
-    count = n(),
-    .groups = "drop"
-  ) %>%
-  ggplot(aes(x = reorder(lake, mean_length), y = mean_length)) +
-  geom_bar(stat = "identity") +
-  geom_errorbar(aes(ymin = mean_length - se_length, 
-                    ymax = mean_length + se_length),
-                width = 0.2) 
 ```
 
-::: {.cell-output-display}
-![](04_02_class_activity_files/figure-typst/unnamed-chunk-20-1.svg)
+	Welch Two Sample t-test
+
+data:  length_mm by lake
+t = -15.532, df = 161.63, p-value < 2.2e-16
+alternative hypothesis: true difference in means between group I3 and group I8 is less than 0
+95 percent confidence interval:
+      -Inf -86.66138
+sample estimates:
+mean in group I3 mean in group I8 
+        265.6061         362.5980 
+```
+
+
 :::
 :::
-
-
-
-
-
-
-
-
-::: callout-tip
-## Activity 4
-
-Based on the mean plot and what you've seen in the distributions, what
-can you say about fish sizes in different lakes? Are there lakes with
-particularly large or small fish?
-
-We will start to ask how different are they and is it by chance?
-
-Where would you want to fish and why? What is the chance of catching a
-fish greater than X size?
-:::
-
-# 

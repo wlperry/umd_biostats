@@ -7,7 +7,7 @@ metadata-files:
 format:
   html:
     output-file: "04_01_lecture_powerpoint_html.html"
-    downloads: [docx, pptx, typst]  # This creates download links for all three
+    downloads: [html, docx, pptx, typst]  # This creates download links for all three
   revealjs:
     output-file: "04_01_lecture_powerpoint_slides.html"
   docx:
@@ -98,55 +98,32 @@ Let's explore the Arctic grayling data from lakes I3 and I8. Use the
 ```{.r .cell-code}
 # Write your code here to explore the basic structure of the data
 # also note plottig a box plot is really useful
-str(grayling_df)
+
+
+grayling_df <- read_csv("data/gray_I3_I8.csv") 
+
+i3_df <- grayling_df %>% filter(lake =="I3")
+
+# Calculate summary statistics
+grayling_summary <- grayling_df %>% 
+  group_by(lake) %>%
+  summarize(
+    mean_length = mean(length_mm, na.rm = TRUE),
+    sd_length = sd(length_mm, na.rm = TRUE),
+    se_length = sd_length/sqrt(sum(!is.na(length_mm))),
+    count = sum(!is.na(length_mm)),
+    .groups = "drop")
+grayling_summary
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-spc_tbl_ [168 × 5] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
- $ site     : num [1:168] 113 113 113 113 113 113 113 113 113 113 ...
- $ lake     : chr [1:168] "I3" "I3" "I3" "I3" ...
- $ species  : chr [1:168] "arctic grayling" "arctic grayling" "arctic grayling" "arctic grayling" ...
- $ length_mm: num [1:168] 266 290 262 275 240 265 265 253 246 203 ...
- $ mass_g   : num [1:168] 135 185 145 160 105 145 150 130 130 71 ...
- - attr(*, "spec")=
-  .. cols(
-  ..   site = col_double(),
-  ..   lake = col_character(),
-  ..   species = col_character(),
-  ..   length_mm = col_double(),
-  ..   mass_g = col_double()
-  .. )
- - attr(*, "problems")=<externalptr> 
-```
-
-
-:::
-
-```{.r .cell-code}
-summary(grayling_df)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-      site         lake             species            length_mm    
- Min.   :113   Length:168         Length:168         Min.   :191.0  
- 1st Qu.:113   Class :character   Class :character   1st Qu.:270.8  
- Median :118   Mode  :character   Mode  :character   Median :324.5  
- Mean   :116                                         Mean   :324.5  
- 3rd Qu.:118                                         3rd Qu.:377.0  
- Max.   :118                                         Max.   :440.0  
-                                                                    
-     mass_g     
- Min.   : 53.0  
- 1st Qu.:151.2  
- Median :340.0  
- Mean   :351.2  
- 3rd Qu.:519.5  
- Max.   :889.0  
- NA's   :2      
+# A tibble: 2 × 5
+  lake  mean_length sd_length se_length count
+  <chr>       <dbl>     <dbl>     <dbl> <int>
+1 I3           266.      28.3      3.48    66
+2 I8           363.      52.3      5.18   102
 ```
 
 
@@ -176,7 +153,8 @@ summary(grayling_df)
 -   We've seen histograms of observed data
 -   Theoretical distributions help us model and understand real-world
     data
--   We will focus on a standard normal distribution and a t distribution
+-   We will focus on a **standard normal distribution** and a
+    **students** **t distribution**
 :::
 
 ::: {.column width="40%"}
@@ -220,13 +198,13 @@ statistical inference:
 -   Has mean (μ) = 0 and standard deviation (σ) = 1
 -   Symmetrical bell-shaped curve
 -   Area under the curve = 1 (total probability)
--   Approximately:
+-   **Approximately**:
     -   68% of data within ±1σ of the mean
     -   **95% of data within ±2σ of the mean - really 1.96σ**
     -   99.7% of data within ±3σ of the mean
 
-Z-scores allow us to convert any normal distribution to the standard
-normal distribution.
+Z-scores allow us to convert any **normal distribution** to the
+**standard normal distribution.**
 :::
 
 ::: {.column width="40%"}
@@ -268,7 +246,7 @@ normal distribution.
 Let's practice converting raw values to Z-scores using the Arctic
 grayling data.
 
-Z Score = (length - mean) / standard deviation
+**Z Score = (length - mean) / standard deviation**
 
 
 
@@ -326,13 +304,60 @@ head(i3_df)
 
 :::
 
+# **Lecture 4:** The fish data as a z score
+
+::::: columns
+::: {.column width="60%"}
+So if we plot this data what does it look like in a standard normal
+distributon?
+:::
+
+::: {.column width="40%"}
+
+
+
+
+
+
+
+
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-7-1.png)
+:::
+:::
+
+
+
+
+
+
+
+
+
+
+
+:::
+:::::
+
 # Z-score Results
 
-proportion within 1 standard deviation = sum of absolute values of Z
+### How to get area under 1 STD DEV?
+
+Proportion within 1 standard deviation = sum of absolute values of Z
 Scores that are less than or equal to 1 divided by the number in the
 sample...
 
 Remember in a true normal distribution it is 68% within 1 std dev.
+
+should be **approximately (varies if distribution is not normal)**:
+
+-   68% of data within ±1σ of the mean
+-   **95% of data within ±2σ of the mean - really 1.96σ**
+-   99.7% of data within ±3σ of the mean
 
 
 
@@ -414,7 +439,7 @@ You want to know things about this population like
 :::
 
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-8-1.png)
+![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-9-1.png)
 :::
 :::
 
@@ -462,7 +487,7 @@ Standard Normal Distribution
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-9-1.png)
+![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-10-1.png)
 :::
 :::
 
@@ -490,6 +515,7 @@ Areas under curve of Standard Normal Distribution
 -   No need to integrate
 -   Any normally distributed data can be standardized
     -   transformed into the standard normal distribution
+
     -   a value can be looked up in a table
 :::
 
@@ -507,7 +533,7 @@ Areas under curve of Standard Normal Distribution
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-10-1.png)
+![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-11-1.png)
 :::
 :::
 
@@ -558,115 +584,6 @@ z = (300 - 265.61)/28.3 = 1.215194
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-i3_stats <- i3_df %>%
-  summarize(
-    mean_length = round(mean(length_mm, na.rm = TRUE), 2),
-    sd_length = sd(length_mm, na.rm = TRUE),
-    n = sum(!is.na(length_mm)),
-    se_length = round(sd_length / sqrt(sum(!is.na(length_mm))), 2),
-    .groups = "drop"
-  )
-
-# Display the results
-i3_stats
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 1 × 4
-  mean_length sd_length     n se_length
-        <dbl>     <dbl> <int>     <dbl>
-1        266.      28.3    66      3.48
-```
-
-
-:::
-:::
-
-
-
-
-
-
-
-
-
-
-
-:::
-:::::
-
-# Lecture 4: Z-score Example
-
-::::: columns
-::: {.column width="60%"}
-Done by converting original data points to z-scores
-
--   Z-scores calculated as:
-
-## $\text{Z = }\frac{X_i-\mu}{\sigma}$
-
--   z = z-score for observation
--   xi = original observation
--   µ = mean of data distribution
--   σ = SD of data distribution
-
-So lets do this for a fish that is 300mm long and guess the probability
-of catching something larger
-
-z = (300 - 265.61)/28.3 = 1.22
-
-or 0.8888 in table or 88.9% is the area left of the curve and
-
-100 - 88.9 = 11.27% or 11.2% of fish are expected to be longer
-
-So do you think you can catch something larger than 300 mm?
-
-At what point do you think its not likely?
-:::
-
-::: {.column width="40%"}
-![](images/clipboard-1995791111.png){width="443" height="404"}
-:::
-:::::
-
-# **Lecture 4:** Sampling a population - Std Error
-
-::::: columns
-::: {.column width="60%"}
-The **standard error of the mean (SEM)** tells us how precise our sample
-mean is as an estimate of the population mean.
-
-Standard Error Formula: $$ SE_{\bar{Y}} = \frac{s}{\sqrt{n}} $$
-
-Where:
-
--   $s$ is the sample standard deviation
--   $n$ is the sample size
-
-**Key properties:**
-
--   SEM decreases as sample size increases
--   **SEM is used to construct confidence intervals**
--   **SEM measures the precision of the sample mean**
-:::
-
-::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-12-1.png)
 :::
@@ -685,14 +602,54 @@ Where:
 :::
 :::::
 
-# Practice Exercise 5: Sampling Distributions
+# Lecture 4: Z-score example from table
 
-::: callout-tip
-## Practice Exercise 5: Sampling Distributions
+::::: columns
+::: {.column width="60%"}
+Done by converting original data points to z-scores
 
-Let's explore how sample size affects our estimates by taking samples of
-different sizes:
+-   Z-scores calculated as:
 
+## $\text{Z = }\frac{X_i-\mu}{\sigma}$
+
+-   z = z-score for observation
+-   xi = original observation
+-   µ = mean of data distribution
+-   σ = SD of data distribution
+
+So lets do this for a fish that is 300mm long and guess the probability
+of catching something larger
+
+-   z = (300 - 265.61)/28.3 = 1.22
+-   look up 1.2 on left and 0.02 on top to get 0.8888 in table
+-   Means 88.9% is the area left of the curve **and**
+-   100 - 88.9 = 11.27% of fish are expected to be longer
+
+**At what point do you think its not likely to catch a larger fish -
+what percentage?**
+
+do this the other way using that percent and why?
+:::
+
+::: {.column width="40%"}
+![](images/clipboard-1995791111.png){width="538" height="519"}
+:::
+:::::
+
+# Lecture 4: Z-score example calculation in r
+
+::::: columns
+::: {.column width="60%"}
+We can use R to get these values easier...
+
+\# For standard normal distribution (mean=0, sd=1):
+
+-   pnorm(z) \# gives cumulative probability (area to the left)
+-   qnorm(p) \# gives z-value for a given probability
+-   dnorm(z) \# gives probability density
+:::
+
+::: {.column width="40%"}
 
 
 
@@ -707,42 +664,61 @@ different sizes:
 ::: {.cell}
 
 ```{.r .cell-code}
-# Set seed for reproducibility
-set.seed(456)
+# Examples:
+z_value <-  1.22
+prob_left <- pnorm(z_value)          # 0.975 (97.5% to the left)
+prob_right <- 1 - pnorm(z_value)     # 0.025 (2.5% to the right)
+prob_between <- pnorm(2) - pnorm(-2)  # 0.95 (95% between ±1.96)
 
-# Create samples of different sizes
-small_sample <- grayling_df %>% sample_n(3)
-medium_sample <- grayling_df %>% sample_n(30)
-large_sample <- grayling_df %>% sample_n(60)
+# To find z-value for a given probability:
+z_for_95_percent <- qnorm(0.888)     # 1.96
 
-# Calculate mean and standard error for each sample
-small_mean <- round(mean(small_sample$length_mm, na.rm = TRUE),2)
-small_se <- round(sd(small_sample$length_mm, na.rm = TRUE) / sqrt(30),4)
-
-medium_mean <- round(mean(medium_sample$length_mm, na.rm = TRUE),2)
-medium_se <- round(sd(medium_sample$length_mm, na.rm = TRUE) / sqrt(30),4)
-
-large_mean <- round(mean(large_sample$length_mm, na.rm = TRUE),2)
-large_se <- round(sd(large_sample$length_mm, na.rm = TRUE) / sqrt(60),4)
-
-# Create a data frame with the results
-results <- data.frame(
-  Sample_Size = c(3, 30, 60),
-  Mean = c(small_mean, medium_mean, large_mean),
-  SE = c(small_se, medium_se, large_se)
-)
-
-# Display the results
-results
+print(prob_left)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-  Sample_Size   Mean      SE
-1           3 278.33 16.6096
-2          30 321.07 12.0926
-3          60 311.78  8.3944
+[1] 0.8887676
+```
+
+
+:::
+
+```{.r .cell-code}
+print(prob_right)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 0.1112324
+```
+
+
+:::
+
+```{.r .cell-code}
+print(prob_between)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 0.9544997
+```
+
+
+:::
+
+```{.r .cell-code}
+print(z_for_95_percent)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 1.21596
 ```
 
 
@@ -759,334 +735,21 @@ results
 
 
 
-
-What do you observe about the standard error as sample size increases?
-Why does this happen?
-:::
-
-# **Lecture 4:** Estimating µ - population mean
-
-::::: columns
-::: {.column width="60%"}
-## Every sample gives slightly different estimate of µ
-
--   Can take many samples and calculate means
--   Plot the frequency distribution of means
--   Get the "sampling distribution of means"
-
-## 3 important properties:
-
--   Sampling distribution of means (SDM) from normal population will be
-    normal
--   Large Sampling distribution of means from any population will be
-    normal (Central Limit Theorem)
--   The mean of Sampling distribution of means will equal µ or the mean
-:::
-
-::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-14-1.png)
-:::
-:::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
-# **Lecture 4:** Standard Error Properties
+# Lecture 4: We can now use this for fun in the fish
 
 ::::: columns
 ::: {.column width="60%"}
-## Given above
+Lets say we are interested in knowing at what point from I3 it is not
+likely to catch a larger fish?
 
--   can estimate the standard deviation of sample means
-
--   "Standard error of sample mean"
-
--   How good is your estimate of population mean? (based on the sample
-    collected)
-
--   quantifies how much the sample means are expected to vary from
-    samples
-
--   gives an estimate of the error associated with using $\bar{y}$ to
-    estimate $\mu$...
+Maybe we expect 95% of the time to catch a fish that is "common" but the
+5% is the unlikely portion....
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-15-1.png)
-:::
-:::
-
-
-
-
-
-
-
-
-
-
-
-:::
-:::::
-
-# **Lecture 4:** Standard Error and Sample Size
-
-::::: columns
-::: {.column width="60%"}
-Notice: - $s_{\bar{y}}$ depends on
-
--   \- sample s (standard deviation)
--   \- sample n - ($s_{\bar{y}} = \frac{s}{\sqrt{n}}$)
-
-How and why?
-
--   Decreases with sample n - number - increases with sample s -
-    standard deviation
--   Large sample, low s = greater confidence in estimate of $\mu$
-:::
-
-::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-16-1.png)
-:::
-:::
-
-
-
-
-
-
-
-
-
-
-
-:::
-:::::
-
-# **Lecture 4:** Standard Error of the Mean
-
-::::: columns
-::: {.column width="60%"}
-The **standard error of the mean (SEM)** tells us how precise our sample
-mean is as an estimate of the population mean.
-
-Standard Error Formula: $$ SE_{\bar{Y}} = \frac{s}{\sqrt{n}} $$
-
-Where:
-
--   $s$ is the sample standard deviation
--   $n$ is the sample size
-
-**Key properties:**
-
--   SEM decreases as sample size increases
--   SEM is used to construct confidence intervals
--   SEM measures the precision of the sample mean
-:::
-
-::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-17-1.png)
-:::
-:::
-
-
-
-
-
-
-
-
-
-
-
-:::
-:::::
-
-# **Lecture 4:** Confidence Intervals - Basic Formula
-
-::::: columns
-::: {.column width="60%"}
-A **confidence interval** is a range of values that is likely to contain
-the true population parameter.
-
-95% Confidence Interval Formula:
-$$\text{95% CI} = \bar{y} \pm z \cdot \frac{\sigma}{\sqrt{n}}$$
-
-Where:
-
--   ȳ is the sample mean
--   𝑛 is the sample size
--   σ is the population standard deviation
--   z is the z-value corresponding the probability of the CI
-:::
-
-::: {.column width="40%"}
-![](images/clipboard-2045535544.png){width="382" height="302"}
-:::
-:::::
-
-# **Lecture 4:** Confidence Intervals - Interpretation
-
-::::: columns
-::: {.column width="60%"}
-A **confidence interval** is a range of values that is likely to contain
-the true population parameter.
-
-**Interpretation:** If we were to take many samples and calculate the
-95% CI for each, about 95% of these intervals would contain the true
-population mean.
-
-**Common misinterpretation:** "There is a 95% probability that the true
-mean is in this interval."
-
--   Interpret 95% CI to mean:
-    -   Range of values that contains µ (population mean) with 95%
-        probability
--   More correctly:
-    -   If we took 100 samples from population
-    -   calculate a CI from each
-    -   95 of the 100 CIs will contain the true population mean - µ
-:::
-
-::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-18-1.png)
-:::
-:::
-
-
-
-
-
-
-
-
-
-
-
-:::
-:::::
-
-# **Lecture 4:** Compare the SE and CI plots
-
-::::: columns
-::: {.column width="60%"}
-Lets compare what the two plots look like near each other
-:::
-
-::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-19-1.png)
-:::
-:::
-
-
-
-
-
-
-
-
-
-
-
-:::
-:::::
-
-# Practice Exercise 3: Standard Error and CI
-
-::: callout-tip
-## Practice Exercise 3: Calculating Standard Error and Confidence Intervals
-
-Calculate the standard error and 95% confidence interval for the mean
-length of Arctic grayling in each lake.
-
 
 
 
@@ -1101,32 +764,31 @@ length of Arctic grayling in each lake.
 ::: {.cell}
 
 ```{.r .cell-code}
-# Calculate the standard error and confidence intervals by lake
-ci_results <- grayling_df %>%
-  group_by(lake) %>%
-  summarize(
-    mean_length = round(mean(length_mm, na.rm = TRUE), 2),
-    sd_length = sd(length_mm, na.rm = TRUE),
-    n = sum(!is.na(length_mm)),
-    se_length = round(sd_length / sqrt(n), 2),
-    ci = round(1.96 * se_length, 2),
-    ci_lower = round(mean_length - 1.96 * se_length, 2),
-    ci_upper = round(mean_length + 1.96 * se_length, 2),
-    .groups = "drop"
-  )
+# Examples:
+# What fish length corresponds to the top 5% (unlikely)?
+top_5_percent_z <- qnorm(0.95)  # z-score for 95th percentile
+unlikely_length <- mean_length + (top_5_percent_z * sd_length)
 
-# Display the results
-ci_results
+cat("Only 5% of fish are longer than:", round(unlikely_length, 1), "mm\n")
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 2 × 8
-  lake  mean_length sd_length     n se_length    ci ci_lower ci_upper
-  <chr>       <dbl>     <dbl> <int>     <dbl> <dbl>    <dbl>    <dbl>
-1 I3           266.      28.3    66      3.48  6.82     259.     272.
-2 I8           363.      52.3   102      5.18 10.2      352.     373.
+Only 5% of fish are longer than: 312.2 mm
+```
+
+
+:::
+
+```{.r .cell-code}
+cat("This corresponds to z-score:", round(top_5_percent_z, 3), "\n")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+This corresponds to z-score: 1.645 
 ```
 
 
@@ -1143,25 +805,50 @@ ci_results
 
 
 
-
-What do these confidence intervals tell us about the difference between
-lakes?
 :::
+:::::
+
+# Lecture 4: What this means
+
+Given that we can: transform data to z-scores from standard normal
+distribution...
+
+...figure out area under the curve (probability) associated with range
+of z-scores...
+
+...can therefore figure out probability associated with a range of
+original data
+
+# Lecture 4: So what is next...
+
+We can look at Standard normal distributions and know probability of a
+value being in a range under the standard normal curve...
+
+Previously we had calculated Standard Error and Confidence Intervals -
+
+-   Now can assess our confidence that the population mean is within a
+    certain range\
+-   Can use t distribution to ask questions like:
+    -   “What is probability of getting sample with mean = ȳ from
+        population with mean = µ?“ (1 sample t-test)\
+    -   “What is the probability that two samples came from same
+        population?” (2 sample t-test)
 
 # **Lecture 4:** When Population σ is Unknown
 
 :::: columns
 ::: {.column width="60%"}
-In the more typical case DON'T know the population σ
+When calculating confidence intervals we usually DON'T know the
+population σ (standard deviation)
 
 -   estimate it from the samples when don't know the population σ
--   and when sample size is \<\~30)
+-   and when sample size is small \< \~30
 -   can't use the standard normal (z) distribution
 
 *Instead, we use Student's t distribution*
 :::
 
-![](images/clipboard-1052237789.png){width="300" height="250"}
+![](images/clipboard-1052237789.png){width="239" height="307"}
 ::::
 
 # **Lecture 4:** Understanding t-distribution
@@ -1198,7 +885,7 @@ than the normal distribution.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-21-1.png)
+![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-13-1.png)
 :::
 :::
 
@@ -1214,139 +901,6 @@ than the normal distribution.
 
 :::
 :::::
-
-# Practice Exercise 4: Using the t-distribution
-
-::: callout-tip
-## Practice Exercise 4: Using the t-distribution
-
-Let's compare confidence intervals using the normal approximation (z)
-versus the t-distribution for our fish data.
-
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Calculate CI using both z and t distributions for a smaller subset
-small_sample <- grayling_df %>% 
-  filter(lake == "I3") %>% 
-  slice_sample(n = 10)
-
-# Calculate statistics
-sample_mean <- mean(small_sample$length_mm)
-sample_sd <- sd(small_sample$length_mm)
-sample_n <- nrow(small_sample)
-sample_se <- sample_sd / sqrt(sample_n)
-
-# Calculate confidence intervals
-z_ci_lower <- sample_mean - 1.96 * sample_se
-z_ci_upper <- sample_mean + 1.96 * sample_se
-
-# For t-distribution, get critical value for 95% CI with df = n-1
-t_crit <- qt(0.975, df = sample_n - 1)
-t_ci_lower <- sample_mean - t_crit * sample_se
-t_ci_upper <- sample_mean + t_crit * sample_se
-
-# Display results
-cat("Mean:", round(sample_mean, 1), "mm\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Mean: 255.3 mm
-```
-
-
-:::
-
-```{.r .cell-code}
-cat("Standard deviation:", round(sample_sd, 2), "mm\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Standard deviation: 26.26 mm
-```
-
-
-:::
-
-```{.r .cell-code}
-cat("Standard error:", round(sample_se, 2), "mm\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Standard error: 8.31 mm
-```
-
-
-:::
-
-```{.r .cell-code}
-cat("95% CI using z:", round(z_ci_lower, 1), "to", round(z_ci_upper, 1), "mm\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-95% CI using z: 239 to 271.6 mm
-```
-
-
-:::
-
-```{.r .cell-code}
-cat("95% CI using t:", round(t_ci_lower, 1), "to", round(t_ci_upper, 1), "mm\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-95% CI using t: 236.5 to 274.1 mm
-```
-
-
-:::
-
-```{.r .cell-code}
-cat("t critical value:", round(t_crit, 3), "vs z critical value: 1.96\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-t critical value: 2.262 vs z critical value: 1.96
-```
-
-
-:::
-:::
-
-
-
-
-
-
-
-
-
-
-
-:::
 
 # Student's t-distribution Formula
 
@@ -1396,12 +950,12 @@ value
 
 -   n=20 (df=19) - 90% of the observations found left
 -   t= 1.328 (10% are outside)
+
+![](images/clipboard-1822465473.png){width="180" height="150"}
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1822465473.png){width="180" height="150"}
-
-![](images/clipboard-641796945.png){width="412" height="309"}
+![](images/clipboard-641796945.png){width="508" height="541"}
 :::
 :::::
 
@@ -1413,12 +967,12 @@ Two-tailed questions refer to area between certain values
 
 -   n= 20 (df=19), 90% of the observations are between
 -   t=-1.729 and t=1.729 (10% are outside)
+
+![](images/clipboard-2234740159.png){width="276" height="200"}
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-2234740159.png){width="200" height="150"}
-
-![](images/clipboard-1734806681.png){width="443" height="298"}
+![](images/clipboard-1734806681.png){width="421" height="514"}
 :::
 :::::
 
@@ -1430,17 +984,160 @@ Let's calculate CIs again:
 
 Use two-sided test
 
--   95% CI Sample A: = 272.8 ± 2.262 \* (37.81/(9\^0.5)) = 1.650788
--   The 95% CI is between 244.3 and 301.3
--   "The 95% CI for the population mean from sample A is 272.8 ± 28.5"
+## $\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
+
+-   95% CI Sample A: = 272.8 ± 2.306 \* (37.81/(9\^0.5))
+-   mean = 272.8, N = 20, and s = 37.81 - t is ?
+-   CI = 29.06
+-   The 95% CI is between 243.7 and 301.9
+-   "The 95% CI for the population mean from sample A is 272.8 ± 29.06
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-721472248.png){width="500" height="364"}
+![](images/clipboard-3959630930.png)
 :::
 :::::
 
-# **Lecture 4:** Intro to Hypothesis Testing
+# Practice Exercise 4: Using the t-distribution
+
+::: callout-tip
+## Practice Exercise 4: Using the t-distribution
+
+Let's compare confidence intervals using the normal approximation (z)
+versus the t-distribution for our fish data.
+
+I3 data and 10 fish
+
+Mean is 266.7 - sd is 17.12 - se is 5.41
+
+## $\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
+
+
+
+
+
+
+
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Calculate CI using both z and t distributions for a smaller subset
+small_sample <- grayling_df %>% 
+  filter(lake == "I3") %>% 
+  slice_sample(n = 10)
+
+# Calculate statistics
+sample_mean <- mean(small_sample$length_mm)
+sample_sd <- sd(small_sample$length_mm)
+sample_n <- nrow(small_sample)
+sample_se <- sample_sd / sqrt(sample_n)
+
+# Calculate confidence intervals
+z_ci_lower <- sample_mean - 1.96 * sample_se
+z_ci_upper <- sample_mean + 1.96 * sample_se
+
+# For t-distribution, get critical value for 95% CI with df = n-1
+t_crit <- qt(0.975, df = sample_n - 1)
+t_ci_lower <- sample_mean - t_crit * sample_se
+t_ci_upper <- sample_mean + t_crit * sample_se
+
+# Display results
+cat("Mean:", round(sample_mean, 1), "mm\n")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Mean: 274.1 mm
+```
+
+
+:::
+
+```{.r .cell-code}
+cat("Standard deviation:", round(sample_sd, 2), "mm\n")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Standard deviation: 14.56 mm
+```
+
+
+:::
+
+```{.r .cell-code}
+cat("Standard error:", round(sample_se, 2), "mm\n")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Standard error: 4.61 mm
+```
+
+
+:::
+
+```{.r .cell-code}
+cat("95% CI using z:", round(z_ci_lower, 1), "to", round(z_ci_upper, 1), "mm\n")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+95% CI using z: 265.1 to 283.1 mm
+```
+
+
+:::
+
+```{.r .cell-code}
+cat("95% CI using t:", round(t_ci_lower, 1), "to", round(t_ci_upper, 1), "mm\n")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+95% CI using t: 263.7 to 284.5 mm
+```
+
+
+:::
+
+```{.r .cell-code}
+cat("t critical value:", round(t_crit, 3), "vs z critical value: 1.96\n")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+t critical value: 2.262 vs z critical value: 1.96
+```
+
+
+:::
+:::
+
+
+
+
+
+
+
+
+
+
+
+:::
+
+# **Lecture 4:** Intro to Hypothesis Testing one tailed
 
 ::::: columns
 ::: {.column width="60%"}
@@ -1462,7 +1159,11 @@ using data.
 5.  **Significance level (α)**: Threshold for rejecting H₀, typically
     0.05
 
-**Decision rule**: Reject H₀ if p-value \< α
+**Decision rule**: Reject H₀ if p-value \< α\
+\
+lets test if our sample mean of 320 is larger than 270 or not?
+Essentially we are looking at the confidence intervals!!! But we are
+only interested if it is larger
 :::
 
 ::: {.column width="40%"}
@@ -1479,7 +1180,97 @@ using data.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-23-1.png)
+![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-15-1.png)
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Summary of One-Tailed Hypothesis Test:
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Sample mean: 320 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Hypothesized mean: 285 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Sample size: 12 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Standard deviation: 42.15 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Standard error: 12.168 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+t-statistic: 2.876 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Critical t-value (one-tailed): 1.796 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Critical value: 306.85 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Decision: Reject Ho (sample mean falls in upper rejection region)
+```
+
+
 :::
 :::
 
@@ -1496,7 +1287,7 @@ using data.
 :::
 :::::
 
-# **Lecture 4:** Hypothesis Testing in Original Scale
+# **Lecture 4:** Hypothesis Testing two tailed
 
 ::::: columns
 ::: {.column width="60%"}
@@ -1515,6 +1306,9 @@ using data.
     0.05
 
 **Decision rule**: Reject H₀ if p-value \< α
+
+lets test if our sample mean of 320 is equal to 270 or not? Essentially
+we are looking at the confidence intervals!!!\
 :::
 
 ::: {.column width="40%"}
@@ -1531,7 +1325,79 @@ using data.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-24-1.png)
+![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-16-1.png)
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Summary of Hypothesis Test:
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Sample mean: 320 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Hypothesized mean: 270 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Standard error: 12.603 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+t-statistic: 3.967 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Critical t-value (±): 2.306 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Critical values: 240.94 to 299.06 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Decision: Reject Ho (sample mean falls in rejection region)
+```
+
+
 :::
 :::
 
@@ -1645,9 +1511,7 @@ For the following research questions about Arctic grayling, write the
 null and alternative hypotheses:
 
 1.  Are fish in Lake I8 longer than fish in Lake I3?
-2.  Is the mean length of Arctic grayling in these lakes different from
-    300 mm?
-3.  Is there a relationship between fish length and mass?
+
 
 
 
@@ -1726,6 +1590,8 @@ something more extreme) if the null hypothesis is true.
 -   \- p-value is NOT the probability that H₀ is true
 -   \- p-value is NOT the probability that results occurred by chance
 -   \- Statistical significance ≠ practical significance
+-   the smaller the p value does not necessarily mean much... use \<
+    0.05 even if is is 10\^-16
 :::
 
 ::: {.column width="40%"}
@@ -1742,7 +1608,7 @@ something more extreme) if the null hypothesis is true.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-27-1.png)
+![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-19-1.png)
 :::
 :::
 
@@ -1766,16 +1632,28 @@ something more extreme) if the null hypothesis is true.
 When making decisions based on hypothesis tests, two types of errors can
 occur:
 
-**Type I Error (False Positive)** - Rejecting H₀ when it's actually
-true - Probability = α (significance level) - "Finding an effect that
-isn't real"
+**Type I Error (False Positive)**
 
-**Type II Error (False Negative)** - Failing to reject H₀ when it's
-actually false - Probability = β - "Missing an effect that is real"
+-   \- Rejecting H₀ when it's actually true
+-   \- Probability = α (significance level)
+-   \- "Finding an effect that isn't real"
 
-**Statistical Power = 1 - β** - Probability of correctly rejecting a
-false H₀ - Increases with: - Larger sample size - Larger effect size -
-Lower variability - Higher α level
+**Type II Error (False Negative)**
+
+-   \- Failing to reject H₀ when it's actually false
+-   \- Probability = β - "Missing an effect that is real"
+
+**Statistical Power = 1 - β**
+
+-   \- Probability of correctly rejecting a false H₀
+-   \- Increases with:
+    -   \- Larger sample size
+
+    -   \- Larger effect size
+
+    -   \- Lower variability
+
+    -   \- Higher α level
 :::
 
 ::: {.column width="40%"}
@@ -1792,7 +1670,7 @@ Lower variability - Higher α level
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-28-1.png)
+![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-20-1.png)
 :::
 :::
 
@@ -1808,6 +1686,68 @@ Lower variability - Higher α level
 
 :::
 :::::
+
+# **Lecture 4:** Type I and Type II Errors
+
+::::: columns
+::: {.column width="60%"}
+-   What does it mean...
+    -   Black curve (Null Distribution): distribution of test statistics
+        when Ho is true
+
+    -   Green curve (Alternative Distribution): distribution when Ha is
+        true (is an effect)
+-   Red shaded area (Type I Error): probability of rejecting Ho when
+    it's actually tru
+    -   area under the null distribution (black curve) to the right α
+        (p=0.05)
+-   Blue shaded area (Type II Error): probability of failing to reject
+    Ho when alternative is actually true
+    -   area under alternative distribution (green curve) left of α
+        (depends on effect size, sample size, etc.)
+
+The Key Insight fundamental trade-off in hypothesis testing:
+
+-   as α value moves left or right, change balance between Type I and
+    Type II errors
+-   Moving left reduces Type II errors increases Type I errors, and vice
+    versa
+-   power (1 - β) area under the green curve RIGHT of dashed line
+-   the probability of correctly detecting a real effect.
+:::
+
+::: {.column width="40%"}
+
+
+
+
+
+
+
+
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-21-1.png)
+:::
+:::
+
+
+
+
+
+
+
+
+
+
+
+:::
+:::::
+
+# 
 
 # Practice Exercise 7: Interpreting Errors and Power
 
@@ -1933,7 +1873,7 @@ NOTE: n is number in *each* group
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-30-1.png)
+![](04_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-23-1.png)
 :::
 :::
 
