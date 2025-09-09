@@ -4,7 +4,7 @@
     "href": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_html.html",
     "title": "Lecture 03",
     "section": "",
-    "text": "We covered\n\nHow to design a well-organized project structure\nHow to implement good naming conventions\n\nControlled vocabulary\nIncluding units in names\n\nCreate and use metadata effectively\nBuild tidy, well-structured spreadsheets\nCreate visualizations with ggplot2\n\n\n\nThese are variables - do you know what they mean?\n\nTGW - yep its a thing\nODO - what do you think it is?\nNO3 - what is it? Are you sure? Why might you get in legal trouble if you used this?"
+    "text": "Download this lecture\n\n\n\n📄 Download HTML | 📝 Download Word | 📊 Download PowerPoint | 📄 Download PDF"
   },
   {
     "objectID": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_html.html#the-objectives",
@@ -37,6 +37,48 @@
   {
     "objectID": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_html.html#cv-fracsbary-times-100",
     "href": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_html.html#cv-fracsbary-times-100",
+    "title": "Lecture 03",
+    "section": "\\[CV = \\frac{s}{\\bar{Y}} \\times 100\\%\\]",
+    "text": "\\[CV = \\frac{s}{\\bar{Y}} \\times 100\\%\\]\nThis is useful for comparing the variability of measurements with different units or vastly different scales."
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_standalone.html",
+    "href": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_standalone.html",
+    "title": "Lecture 03",
+    "section": "",
+    "text": "Download this lecture\n\n\n\n📄 Download HTML | 📝 Download Word | 📊 Download PowerPoint | 📄 Download PDF"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_standalone.html#the-objectives",
+    "href": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_standalone.html#the-objectives",
+    "title": "Lecture 03",
+    "section": "The objectives:",
+    "text": "The objectives:\n\nUnderstand why statistics is vital in biology\nCalculate and interpret measures of central tendency (mean, median, geometric mean)\nCalculate and interpret measures of spread (standard deviation, variance, IQR)\nUnderstand data transformations for skewed distributions\nVisualize descriptive statistics for our data\nLearn how to handle uncertainty in our data\n\nWe’ll use a dataset on grayling - gray_I3_I8.csv from two different lakes to explore these concepts.. like you did in the homework"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_standalone.html#bary-fracsum_i1n-y_in",
+    "href": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_standalone.html#bary-fracsum_i1n-y_in",
+    "title": "Lecture 03",
+    "section": "\\[\\bar{Y} = \\frac{\\sum_{i=1}^{n} Y_i}{n}\\]",
+    "text": "\\[\\bar{Y} = \\frac{\\sum_{i=1}^{n} Y_i}{n}\\]\nWhere:\n\n\\(Y_i\\) represents each individual measurement\n\\(n\\) is the total number of observations"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_standalone.html#s2-fracsum_i1n-y_i---bary2n-1",
+    "href": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_standalone.html#s2-fracsum_i1n-y_i---bary2n-1",
+    "title": "Lecture 03",
+    "section": "\\[s^2 = {\\frac{\\sum_{i=1}^{n} (Y_i - \\bar{Y})^2}{n-1}}\\]",
+    "text": "\\[s^2 = {\\frac{\\sum_{i=1}^{n} (Y_i - \\bar{Y})^2}{n-1}}\\]\nThe standard deviation is the square root of variance\n\nmeasures how far observations typically are from the mean and are in the units of the mean:"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_standalone.html#s-sqrtfracsum_i1n-y_i---bary2n-1",
+    "href": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_standalone.html#s-sqrtfracsum_i1n-y_i---bary2n-1",
+    "title": "Lecture 03",
+    "section": "\\[s = \\sqrt{\\frac{\\sum_{i=1}^{n} (Y_i - \\bar{Y})^2}{n-1}}\\]",
+    "text": "\\[s = \\sqrt{\\frac{\\sum_{i=1}^{n} (Y_i - \\bar{Y})^2}{n-1}}\\]"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_standalone.html#cv-fracsbary-times-100",
+    "href": "ecostats_lectures/lecture_03/03_01_lecture_powerpoint_standalone.html#cv-fracsbary-times-100",
     "title": "Lecture 03",
     "section": "\\[CV = \\frac{s}{\\bar{Y}} \\times 100\\%\\]",
     "text": "\\[CV = \\frac{s}{\\bar{Y}} \\times 100\\%\\]\nThis is useful for comparing the variability of measurements with different units or vastly different scales."

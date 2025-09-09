@@ -4,17 +4,20 @@ author: "Bill Perry"
 metadata-files:
   - ../../_templates/lectures.yml
 format:
-  html:
+  html: 
     output-file: "03_01_lecture_powerpoint_html.html"
-    downloads: [docx, pptx, typst, html]  # This creates download links for all three
-  revealjs:
+    downloads: [docx, html-download, pptx, typst]
+  html-download: 
+    output-file: "03_01_lecture_powerpoint_standalone.html"
+  revealjs: 
     output-file: "03_01_lecture_powerpoint_slides.html"
-  docx:
+  docx: 
     output-file: "03_01_lecture_powerpoint.docx"
-  pptx:
+  pptx: 
     output-file: "03_01_lecture_powerpoint.pptx"
-  typst:
+  typst: 
     output-file: "03_01_lecture_powerpoint.pdf"
+
 ---
 
 
@@ -24,10 +27,13 @@ format:
 
 
 
-
-
-
-
+::: {.callout-note appearance="simple"}
+## Download this lecture
+[📄 Download HTML](03_01_lecture_powerpoint_standalone.html) | 
+[📝 Download Word](03_01_lecture_powerpoint.docx) | 
+[📊 Download PowerPoint](03_01_lecture_powerpoint.pptx) | 
+[📄 Download PDF](03_01_lecture_powerpoint.pdf)
+:::
 
 # **Lecture 2: Review of data and graphing**
 
@@ -207,19 +213,11 @@ world by:
 
 
 
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-html/unnamed-chunk-1-1.png){width=480}
 :::
 :::
-
-
-
-
 
 
 
@@ -248,10 +246,6 @@ Let's recreate the basic histogram of fish lengths using
 
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -259,10 +253,6 @@ Let's recreate the basic histogram of fish lengths using
 # How do you examine the data - what are the ways you think and lets try it!
 ```
 :::
-
-
-
-
 
 
 
@@ -278,10 +268,6 @@ Let's recreate the basic histogram of fish lengths using
 ## Practice Exercise 2: Can you do this for the pine data we have collected?
 
 Let's examine the different data and determine what they are?
-
-
-
-
 
 
 
@@ -320,10 +306,6 @@ head(grayling_df)
 
 :::
 :::
-
-
-
-
 
 
 
@@ -401,10 +383,6 @@ Where:
 
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -448,10 +426,6 @@ grayling_df %>%
 
 
 
-
-
-
-
 :::
 :::::
 
@@ -462,10 +436,6 @@ The Median
 -   The median is the middle value of a sorted dataset.
 -   If there is an even number of observations, it's the average of the
     two middle values.
-
-
-
-
 
 
 
@@ -518,10 +488,6 @@ grayling_df %>%
 
 
 
-
-
-
-
 # Lecture 3: Measures of Spread - Variance and Standard Deviation
 
 ::::: columns
@@ -543,10 +509,6 @@ The standard deviation is the square root of variance
 :::
 
 ::: {.column width="40%"}
-
-
-
-
 
 
 
@@ -589,10 +551,6 @@ grayling_df %>%
 
 
 
-
-
-
-
 :::
 :::::
 
@@ -607,10 +565,6 @@ so there is only 2.5% of the data that is outside this range
 
 -   note the similarity to the p \< 0.5
 -   note that it is 90.91% and that is because the curve is not normal
-
-
-
-
 
 
 
@@ -641,17 +595,9 @@ i3 Lake Fish Length Summary:
 
 
 
-
-
-
-
 :::
 
 ::: {.column width="40%"}
-
-
-
-
 
 
 
@@ -664,10 +610,6 @@ i3 Lake Fish Length Summary:
 ![](03_01_lecture_powerpoint_files/figure-html/sd-variance-2-1.png){width=576}
 :::
 :::
-
-
-
-
 
 
 
@@ -692,10 +634,6 @@ different units or vastly different scales.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
 
 
 
@@ -733,10 +671,6 @@ Coefficient of variation: 10.7 %
 
 
 
-
-
-
-
 :::
 :::::
 
@@ -754,10 +688,6 @@ third quartile (75th percentile).
 :::
 
 ::: {.column width="40%"}
-
-
-
-
 
 
 
@@ -813,6 +743,88 @@ Interquartile range: 106.25 mm
 
 
 
+:::
+:::::
+
+# Lecture 3: Understanding Percentiles 
+
+### - it is the same as quartiles but more finely divided and will come into play later on
+
+::::: columns
+::: {.column width="60%"}
+Percentiles are values that divide a dataset into 100 equal parts.
+
+-   The 25th percentile is the first quartile (Q1)
+-   The 50th percentile is the median
+-   The 75th percentile is the third quartile (Q3)
+-   The IQR is the difference between Q3 and Q1.
+:::
+
+::: {.column width="40%"}
+
+
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Calculate percentiles
+percentiles <- quantile(grayling_df$length_mm, 
+                       probs = c(0.1, 0.25, 0.5, 0.75, 0.9))
+```
+:::
+
+
+
+
+
+
+
+:::
+:::::
+
+# Lecture 3: Standard Deviation vs. Interquartile Range
+
+::::: columns
+::: {.column width="60%"}
+The standard deviation and interquartile range both measure spread, but:
+
+**Standard deviation**: Sensitive to outliers
+
+**Interquartile range**: Robust against outliers
+
+When the data is approximately normal, the IQR ≈ 1.35 × standard
+deviation.
+:::
+
+::: {.column width="40%"}
+
+
+
+
+
+
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 2 × 4
+  lake     sd   iqr ratio_iqr_sd
+  <chr> <dbl> <dbl>        <dbl>
+1 I3     28.3    24        0.848
+2 I8     52.3    61        1.17 
+```
+
+
+:::
+:::
+
+
+
 
 
 
@@ -839,16 +851,40 @@ provides a better measure of central tendency than the arithmetic mean.
 -   But there are issues and it might not be good...
 
     -   detecting differences in geometric means, not arithmetic means
+
         -   geometric is all values multiplied taken to the nth root
+
     -   Can't handle zeros without adding arbitrary constants (log(x+1)
         transformations), which can bias results\
+
+
+
+
+
+
+
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+Arithmetic mean of original data: 265.6 mm
+ Geometric mean (back-transformed mean of logs): NA mm
+```
+
+
+:::
+:::
+
+
+
+
+
+
+
 :::
 
 ::: {.column width="40%"}
-
-
-
-
 
 
 
@@ -860,21 +896,7 @@ provides a better measure of central tendency than the arithmetic mean.
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-html/log-transform-1.png){width=480}
 :::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Arithmetic mean of original data: 265.6 mm
- Geometric mean (back-transformed mean of logs): 282.4 mm
-```
-
-
 :::
-:::
-
-
-
-
 
 
 
@@ -911,14 +933,14 @@ that's larger than the maximum value
 
 # Lecture 3: Visualizing Distributions - Histograms
 
+::::: columns
+::: {.column width="60%"}
 Histograms
 
 Histograms show the frequency distribution of our data.
+:::
 
-
-
-
-
+::: {.column width="40%"}
 
 
 
@@ -938,21 +960,19 @@ Histograms show the frequency distribution of our data.
 
 
 
-
-
-
-
+:::
+:::::
 
 # Lecture 3: Visualizing Distributions - Box Plots
 
+::::: columns
+::: {.column width="60%"}
 Box Plots
 
 Box plots show the median, quartiles, and potential outliers.
+:::
 
-
-
-
-
+::: {.column width="40%"}
 
 
 
@@ -972,10 +992,8 @@ Box plots show the median, quartiles, and potential outliers.
 
 
 
-
-
-
-
+:::
+:::::
 
 # Lecture 3: Comparing Mean vs. Median
 
@@ -992,10 +1010,6 @@ it's skewed or has outliers, they can differ significantly.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
 
 
 
@@ -1024,14 +1038,10 @@ it's skewed or has outliers, they can differ significantly.
 
 
 
-
-
-
-
 :::
 :::::
 
-# Lecture 3: Density Plot - Mean vs. Median
+# Lecture 3: Histogram Plot - Mean vs. Median
 
 ::::: columns
 ::: {.column width="60%"}
@@ -1053,117 +1063,11 @@ it's skewed or has outliers, they can differ significantly.
 
 
 
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-html/mean-vs-median-plot-1.png){width=576}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-:::
-:::::
-
-# Lecture 3: Standard Deviation vs. Interquartile Range
-
-::::: columns
-::: {.column width="60%"}
-The standard deviation and interquartile range both measure spread, but:
-
-**Standard deviation**: Sensitive to outliers
-
-**Interquartile range**: Robust against outliers
-
-When the data is approximately normal, the IQR ≈ 1.35 × standard
-deviation.
-:::
-
-::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 2 × 4
-  lake     sd   iqr ratio_iqr_sd
-  <chr> <dbl> <dbl>        <dbl>
-1 I3     28.3    24        0.848
-2 I8     52.3    61        1.17 
-```
-
-
-:::
-:::
-
-
-
-
-
-
-
-
-
-
-
-:::
-:::::
-
-# Lecture 3: Understanding Percentiles
-
-::::: columns
-::: {.column width="60%"}
-Percentiles are values that divide a dataset into 100 equal parts.
-
-The 25th percentile is the first quartile (Q1)
-
-The 50th percentile is the median
-
-The 75th percentile is the third quartile (Q3)
-
-The IQR is the difference between Q3 and Q1.
-:::
-
-::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-
-:::
-
-
-
-
 
 
 
@@ -1178,10 +1082,6 @@ The IQR is the difference between Q3 and Q1.
 
 Let's examine how missing values affect our descriptive statistics by
 looking at the mass variable, which has some missing data.
-
-
-
-
 
 
 
@@ -1231,10 +1131,6 @@ Mean mass without handling NAs: NA g
 
 
 
-
-
-
-
 # Lecture 3: Best Practices for Missing Values
 
 1.  Always check for missing values in your data before calculating
@@ -1250,8 +1146,6 @@ Mean mass without handling NAs: NA g
 Now that we have estimates of the sample we need to relate that to the
 population
 
-::::: columns
-::: {.column width="60%"}
 In reality, we rarely know the true population parameters. When studying
 fish in lakes I3 and I8:
 
@@ -1263,23 +1157,15 @@ fish in lakes I3 and I8:
 
 Let's demonstrate how different samples from the same population can
 give different estimates.
-:::
 
-::: {.column width="40%"}
 If we could sample all fish in the lake, we would know the true mean
 length. But that's usually impossible in ecology!
-:::
-:::::
+
 
 # **Demonstrating Sampling Variation**
 
 Let's take several random samples from Lake I3 and see how the sample
 means vary:
-
-
-
-
-
 
 
 
@@ -1298,6 +1184,7 @@ sample_mean <- function(data, sample_size) {
   sample_data <- sample_n(data, sample_size)
   return(mean(sample_data$length_mm))
 }
+
 # Take 10 different samples of size 15 from Lake I3
 set.seed(123) # For reproducibility
 sample_size <- 15
@@ -1317,11 +1204,6 @@ samples_df <- data.frame(
 
 
 
-
-
-
-
-
 # **Plotting Sample Variation**
 
 
@@ -1331,36 +1213,11 @@ samples_df <- data.frame(
 
 
 
-
-
-
-
-
 ::: {.cell}
-
-```{.r .cell-code}
-# Plot the different sample means
-ggplot(samples_df, aes(x = factor(sample_number), y = sample_mean)) +
-  geom_point(size = 3, color = "blue") +
-  geom_hline(yintercept = mean(i3_data$length_mm), 
-             linetype = "dashed", color = "red") +
-  annotate("text", x = 5, y = mean(i3_data$length_mm) + 2, 
-           label = "Overall sample mean", color = "red") +
-  labs(title = "Means of 10 Random Samples from Lake I3",
-       x = "Sample Number",
-       y = "Sample Mean (mm)") +
-  theme_minimal()
-```
-
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-html/unnamed-chunk-5-1.png){width=480}
 :::
 :::
-
-
-
-
-
 
 
 
@@ -1392,9 +1249,7 @@ The standard error tells us:
 -   How much sample means are expected to vary
 -   How close our sample mean is likely to be to the true population
     mean
-:::
 
-::: {.column width="40%"}
 **Remember:**
 
 -   Standard deviation (s) describes the variability in the individual
@@ -1403,16 +1258,8 @@ The standard error tells us:
     itself
 -   As sample size increases, SE decreases (more precise estimate)
 :::
-:::::
 
-# **Standard Error for Our Grayling Data**
-
-Let's calculate and visualize the standard error for both lakes:
-
-
-
-
-
+::: {.column width="40%"}
 
 
 
@@ -1430,7 +1277,7 @@ grayling_stats <- grayling_df %>%
     mean_length = mean(length_mm),
     sd_length = sd(length_mm),
     n = n(),
-    se_length = sd_length / sqrt(n)
+    se_length = sd_length / sum(!is.na(length_mm))
   )
 
 # Display the statistics
@@ -1443,8 +1290,8 @@ grayling_stats
 # A tibble: 2 × 5
   lake  mean_length sd_length     n se_length
   <chr>       <dbl>     <dbl> <int>     <dbl>
-1 I3           266.      28.3    66      3.48
-2 I8           363.      52.3   102      5.18
+1 I3           266.      28.3    66     0.429
+2 I8           363.      52.3   102     0.513
 ```
 
 
@@ -1457,40 +1304,8 @@ grayling_stats
 
 
 
-
-
-
-
-
-# **Visualizing Standard Error**
-
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-::: {.cell-output-display}
-![](03_01_lecture_powerpoint_files/figure-html/unnamed-chunk-7-1.png){width=576}
 :::
-:::
-
-
-
-
-
-
-
-
-
-
-
+:::::
 
 # **Sampling Distribution of the Mean**
 
@@ -1525,10 +1340,6 @@ sampling distribution:
 
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1537,7 +1348,7 @@ i3_data <- grayling_df %>% filter(lake == "I3")
 
 # Number of samples to simulate
 num_simulations <- 1000
-sample_size <- 20
+sample_size <- 20 # change the number and examine the range of values 
 
 # Simulate many samples and calculate means
 set.seed(46) # For reproducibility
@@ -1549,36 +1360,7 @@ sd_of_means <- sd(simulated_means)
 
 # Create a data frame with the simulated means
 simulated_df <- data.frame(sample_mean = simulated_means)
-```
-:::
 
-
-
-
-
-
-
-
-
-
-
-
-# **Plotting Sampling Distribution**
-
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
 # Plot the sampling distribution
 ggplot(simulated_df, aes(x = sample_mean)) +
   geom_histogram(bins = 30, fill = "blue", alpha = 0.7) +
@@ -1594,13 +1376,9 @@ ggplot(simulated_df, aes(x = sample_mean)) +
 ```
 
 ::: {.cell-output-display}
-![](03_01_lecture_powerpoint_files/figure-html/unnamed-chunk-9-1.png){width=672}
+![](03_01_lecture_powerpoint_files/figure-html/unnamed-chunk-6-1.png){width=672}
 :::
 :::
-
-
-
-
 
 
 
@@ -1626,10 +1404,6 @@ Let's see how the standard error changes with different sample sizes:
 
 
 
-
-
-
-
 ::: {.cell}
 
 :::
@@ -1641,15 +1415,7 @@ Let's see how the standard error changes with different sample sizes:
 
 
 
-
-
-
-
 # **Sample Size vs. Standard Error**
-
-
-
-
 
 
 
@@ -1681,13 +1447,9 @@ ggplot(results_long, aes(x = sample_size, y = standard_error, color = se_type)) 
 ```
 
 ::: {.cell-output-display}
-![](03_01_lecture_powerpoint_files/figure-html/unnamed-chunk-11-1.png){width=672}
+![](03_01_lecture_powerpoint_files/figure-html/unnamed-chunk-8-1.png){width=672}
 :::
 :::
-
-
-
-
 
 
 
@@ -1719,10 +1481,6 @@ estimates.
 
 Let's calculate and visualize the 95% confidence intervals for the mean
 fish length in each lake:
-
-
-
-
 
 
 
@@ -1771,15 +1529,7 @@ grayling_ci
 
 
 
-
-
-
-
 # **Visualizing Confidence Intervals**
-
-
-
-
 
 
 
@@ -1804,13 +1554,9 @@ ggplot(grayling_ci, aes(x = lake, y = mean_length, fill = lake)) +
 ```
 
 ::: {.cell-output-display}
-![](03_01_lecture_powerpoint_files/figure-html/unnamed-chunk-13-1.png){width=576}
+![](03_01_lecture_powerpoint_files/figure-html/unnamed-chunk-10-1.png){width=576}
 :::
 :::
-
-
-
-
 
 
 
@@ -1822,10 +1568,6 @@ ggplot(grayling_ci, aes(x = lake, y = mean_length, fill = lake)) +
 # **Different Types of Error Bars**
 
 Let's compare different ways of displaying uncertainty in our estimates:
-
-
-
-
 
 
 
@@ -1866,15 +1608,7 @@ error_types <- data.frame(
 
 
 
-
-
-
-
 # **Comparing Error Bar Types**
-
-
-
-
 
 
 
@@ -1904,13 +1638,9 @@ ggplot() +
 ```
 
 ::: {.cell-output-display}
-![](03_01_lecture_powerpoint_files/figure-html/unnamed-chunk-15-1.png){width=672}
+![](03_01_lecture_powerpoint_files/figure-html/unnamed-chunk-12-1.png){width=672}
 :::
 :::
-
-
-
-
 
 
 

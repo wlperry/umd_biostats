@@ -19,8 +19,19 @@ format:
     css: ../../css/lecture.css
     fig-width: 5
     fig-height: 5
-    downloads: [docx, pptx, html, typst]  # Add this line
-
+    downloads: [docx, pptx, typst, html-standalone]
+    
+  html-download:
+    embed-resources: true
+    self-contained: true
+    standalone: true
+    code-overflow: scroll
+    toc: false
+    max-width: 80ch
+    css: ../../css/lecture.css
+    fig-width: 5
+    fig-height: 5
+    
   revealjs:
     self-contained: true
     css: ../../css/lecture.css
