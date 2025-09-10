@@ -153,12 +153,14 @@ head(p_df)
 
 # Part 1: Exploring the Data
 
-Before conducting statistical tests, it's important to understand your data.
+Before conducting statistical tests, it's important to understand your
+data.
 
 ::: callout-tip
 ## Practice Exercise 1: Creating Histograms
 
-Let's create histograms of fish lengths from each lake to visualize their distributions.
+Let's create histograms of fish lengths from each lake to visualize
+their distributions.
 
 
 
@@ -259,11 +261,13 @@ grayling_summary
 
 # Part 3: Testing Assumptions
 
-Before conducting a t-test, we need to check if our data meets the necessary assumptions:
+Before conducting a t-test, we need to check if our data meets the
+necessary assumptions:
 
 1.  **Normality**: The data should be approximately normally distributed
 2.  **Independence**: Observations should be independent
-3.  **No extreme outliers**: Outliers can heavily influence t-test results
+3.  **No extreme outliers**: Outliers can heavily influence t-test
+    results
 
 Let's check the normality assumption for Lake I3 fish lengths:
 
@@ -370,8 +374,10 @@ i3_df %>%
 ::: callout-tip
 How to interpret these results:
 
--   The QQ plot: Points should follow the straight line if data is normally distributed
--   Shapiro-Wilk test: If p \> 0.05, we don't reject the assumption of normality
+-   The QQ plot: Points should follow the straight line if data is
+    normally distributed
+-   Shapiro-Wilk test: If p \> 0.05, we don't reject the assumption of
+    normality
 -   Boxplot: Look for points beyond the whiskers as potential outliers
 :::
 
@@ -503,13 +509,16 @@ Interpret the results:
 
 # Part 5: Confidence Intervals
 
-A confidence interval gives us a range of plausible values for the population mean.
+A confidence interval gives us a range of plausible values for the
+population mean.
 
 For a 95% confidence interval using the t-distribution:
 
 $$ 95\% \text{ CI} = \bar{x} \pm t_{\alpha/2, n-1} \times \frac{s}{\sqrt{n}} $$
 
-Where: - $\bar{x}$ is the sample mean - $s$ is the sample standard deviation - $n$ is the sample size - $t_{\alpha/2, n-1}$ is the critical t-value with n-1 degrees of freedom
+Where: - $\bar{x}$ is the sample mean - $s$ is the sample standard
+deviation - $n$ is the sample size - $t_{\alpha/2, n-1}$ is the critical
+t-value with n-1 degrees of freedom
 
 ::: callout-tip
 ## Practice Exercise 4: Calculating Confidence Intervals
@@ -631,16 +640,18 @@ ggplot() +
 ::: callout-tip
 Interpretation:
 
--   We are 95% confident that the true population mean fish length in Lake I3 falls within this interval
+-   We are 95% confident that the true population mean fish length in
+    Lake I3 falls within this interval
 
--   Note the small difference between using the t-distribution vs. normal approximation
+-   Note the small difference between using the t-distribution vs.
+    normal approximation
 :::
 
 # Part 6: Two-Sample t-Test
 
 A two-sample t-test compares means from two independent groups.
 
-Let's compare pine needle lengths between windward and leeward sides:
+Let's compare fish lengths between i3 and i8
 
 
 
@@ -653,8 +664,8 @@ Let's compare pine needle lengths between windward and leeward sides:
 
 ```{.r .cell-code}
 # Summarize pine needle data by wind exposure
-pine_summary <- p_df %>%
-  group_by(wind) %>%
+g_summary <- g_df %>%
+  group_by(lake) %>%
   summarize(
     mean_length = mean(length_mm),
     sd_length = sd(length_mm),
@@ -663,17 +674,17 @@ pine_summary <- p_df %>%
   )
 
 # Display the summary statistics
-print(pine_summary)
+print(g_summary)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
 # A tibble: 2 × 5
-  wind  mean_length sd_length     n se_length
+  lake  mean_length sd_length     n se_length
   <chr>       <dbl>     <dbl> <int>     <dbl>
-1 lee          20.4      2.45    24     0.500
-2 wind         14.9      1.91    24     0.390
+1 I3           266.      28.3    66      3.48
+2 I8           363.      52.3   102      5.18
 ```
 
 
@@ -687,7 +698,7 @@ print(pine_summary)
 
 
 
-## Look a the plot of pine needles
+## Look a the plot of fish length
 
 
 
@@ -700,15 +711,12 @@ print(pine_summary)
 
 ```{.r .cell-code}
 # Create a boxplot to visualize the data
-p_df %>%
-  ggplot(aes(x = wind, y = length_mm, fill = wind)) +
+g_df %>%
+  ggplot(aes(x = lake, y = length_mm, fill = lake)) +
   geom_boxplot() +
-  labs(title = "Pine Needle Lengths by Wind Exposure",
-       x = "Position",
-       y = "Length (mm)",
-       fill = "Wind Position") +
-  scale_fill_manual(values = c("lee" = "forestgreen", "wind" = "skyblue"),
-                   labels = c("lee" = "Leeward", "wind" = "Windward"))
+  labs(
+       x = "Lake",
+       y = "Length (mm)") 
 ```
 
 ::: {.cell-output-display}
@@ -723,7 +731,7 @@ p_df %>%
 
 
 
-Before conducting the t-test, we should check the assumptions:
+# Before conducting the t-test, we should check the assumptions:
 
 ::: callout-tip
 ## Practice Exercise 5: Check Assumptions for Two-Sample t-Test
@@ -739,12 +747,15 @@ Before conducting the t-test, we should check the assumptions:
 
 ```{.r .cell-code}
 # Separate data by groups
-windward_data <- p_df %>% filter(wind == "wind")
-leeward_data <- p_df %>% filter(wind == "lee")
+# Separate data by groups
+i3_data <- g_df %>% filter(lake == "I3")
+i8_data <- g_df %>% filter(lake == "I8")
 
 # 1. Check for normality in each group using QQ plots
 
-qqPlot(windward_data$length_mm, main = "QQ Plot: Windward Needles")
+qqPlot(i8_data$length_mm, 
+       main = "QQ Plot for I8 fish length",
+       ylab = "Sample Quantiles")
 ```
 
 ::: {.cell-output-display}
@@ -754,7 +765,7 @@ qqPlot(windward_data$length_mm, main = "QQ Plot: Windward Needles")
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] 21 22
+[1] 79 62
 ```
 
 
@@ -764,7 +775,9 @@ qqPlot(windward_data$length_mm, main = "QQ Plot: Windward Needles")
 ::: {.cell}
 
 ```{.r .cell-code}
-qqPlot(leeward_data$length_mm, main = "QQ Plot: Leeward Needles")
+qqPlot(i3_data$length_mm, 
+       main = "QQ Plot for I3 fish length",
+       ylab = "Sample Quantiles")
 ```
 
 ::: {.cell-output-display}
@@ -774,7 +787,7 @@ qqPlot(leeward_data$length_mm, main = "QQ Plot: Leeward Needles")
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1]  4 16
+[1] 53 35
 ```
 
 
@@ -787,7 +800,7 @@ qqPlot(leeward_data$length_mm, main = "QQ Plot: Leeward Needles")
 # 2. Check for equal variances using Levene's test
 # H0: Variances are equal
 # H1: Variances are not equal
-levene_result <- leveneTest(length_mm ~ wind, data = p_df)
+levene_result <- leveneTest(length_mm ~ lake, data = g_df)
 ```
 
 ::: {.cell-output .cell-output-stderr}
@@ -821,9 +834,11 @@ print(levene_result)
 
 ```
 Levene's Test for Homogeneity of Variance (center = median)
-      Df F value Pr(>F)
-group  1  1.2004 0.2789
-      46               
+       Df F value    Pr(>F)    
+group   1  13.705 0.0002907 ***
+      166                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
@@ -843,7 +858,8 @@ Interpreting the assumption checks:
 
 -   QQ plots: Do points approximately follow the line for both groups?
 
--   Levene's test: If p \> 0.05, we don't reject the assumption of equal variances
+-   Levene's test: If p \> 0.05, we don't reject the assumption of equal
+    variances
 :::
 
 ## Now let's conduct the two-sample t-test:
@@ -867,7 +883,7 @@ Interpreting the assumption checks:
 
 # var.equal=TRUE uses the standard t-test (pooled variance)
 # var.equal=FALSE uses Welch's t-test (for unequal variances)
-t_test_result <- t.test(length_mm ~ wind, data = p_df, var.equal = TRUE)
+t_test_result <- t.test(length_mm ~ lake, data = g_df, var.equal = TRUE)
 
 # Display the test results
 print(t_test_result)
@@ -879,14 +895,14 @@ print(t_test_result)
 
 	Two Sample t-test
 
-data:  length_mm by wind
-t = 8.6792, df = 46, p-value = 3.01e-11
-alternative hypothesis: true difference in means between group lee and group wind is not equal to 0
+data:  length_mm by lake
+t = -13.797, df = 166, p-value < 2.2e-16
+alternative hypothesis: true difference in means between group I3 and group I8 is not equal to 0
 95 percent confidence interval:
- 4.224437 6.775563
+ -110.87187  -83.11208
 sample estimates:
- mean in group lee mean in group wind 
-          20.41667           14.91667 
+mean in group I3 mean in group I8 
+        265.6061         362.5980 
 ```
 
 
@@ -897,15 +913,17 @@ sample estimates:
 
 ```{.r .cell-code}
 # Calculate the mean difference
-mean_diff <- pine_summary$mean_length[pine_summary$wind == "lee"] - 
-             pine_summary$mean_length[pine_summary$wind == "wind"]
-cat("Mean difference (lee - wind):", round(mean_diff, 2), "mm\n")
+g_summary %>%
+  summarize(difference = mean_length[lake == "I8"] - mean_length[lake == "I3"])
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Mean difference (lee - wind): 5.5 mm
+# A tibble: 1 × 1
+  difference
+       <dbl>
+1       97.0
 ```
 
 
@@ -916,19 +934,11 @@ Mean difference (lee - wind): 5.5 mm
 
 ```{.r .cell-code}
 # Visualize the results with a mean and error bar plot
-ggplot(pine_summary, aes(x = wind, y = mean_length, fill = wind)) +
+ggplot(g_summary, aes(x = lake, y = mean_length, fill = lake)) +
   geom_bar(stat = "identity", alpha = 0.7) +
   geom_errorbar(aes(ymin = mean_length - se_length, 
                    ymax = mean_length + se_length),
-               width = 0.2) +
-  scale_fill_manual(values = c("lee" = "forestgreen", "wind" = "skyblue"),
-                   labels = c("lee" = "Leeward", "wind" = "Windward")) +
-  labs(title = "Pine Needle Lengths by Wind Exposure",
-       subtitle = paste("t =", round(t_test_result$statistic, 2), 
-                      ", p =", format.pval(t_test_result$p.value, digits = 3)),
-       x = "Position",
-       y = "Mean Length (mm)",
-       fill = "Wind Position")
+               width = 0.2) 
 ```
 
 ::: {.cell-output-display}
@@ -956,161 +966,50 @@ Interpret the results:
 5.  What is the practical interpretation for botanists?
 :::
 
-# Part 7: Comparing Fish Lengths Between Lakes
-
-Let's apply what we've learned to compare fish lengths between Lakes I3 and I8:
-
-::: callout-tip
-## Practice Exercise 7: Comparing Lakes
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Perform a two-sample t-test comparing I3 and I8
-# First check assumptions (variances)
-levene_lakes <- leveneTest(length_mm ~ lake, data = g_df)
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning in leveneTest.default(y = y, group = group, ...): group coerced to
-factor.
-```
-
-
-:::
-
-```{.r .cell-code}
-print("Levene's Test for Lakes:")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Levene's Test for Lakes:"
-```
-
-
-:::
-
-```{.r .cell-code}
-print(levene_lakes)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Levene's Test for Homogeneity of Variance (center = median)
-       Df F value    Pr(>F)    
-group   1  13.705 0.0002907 ***
-      166                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
-:::
-:::
-
-::: {.cell}
-
-```{.r .cell-code}
-# Perform the t-test with appropriate variance setting
-lakes_t_test <- t.test(length_mm ~ lake, data = g_df, 
-                      var.equal = (levene_lakes$`Pr(>F)`[1] > 0.05))
-
-# Display the results
-print(lakes_t_test)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Welch Two Sample t-test
-
-data:  length_mm by lake
-t = -15.532, df = 161.63, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group I3 and group I8 is not equal to 0
-95 percent confidence interval:
- -109.32342  -84.66053
-sample estimates:
-mean in group I3 mean in group I8 
-        265.6061         362.5980 
-```
-
-
-:::
-:::
-
-::: {.cell}
-
-```{.r .cell-code}
-# Create a visualization
-ggplot(g_df, aes(x = lake, y = length_mm, fill = lake)) +
-  geom_boxplot(alpha = 0.7) +
-  labs(title = "Comparison of Fish Lengths Between Lakes",
-       subtitle = paste("t =", round(lakes_t_test$statistic, 2), 
-                      ", p =", format.pval(lakes_t_test$p.value, digits = 3)),
-       x = "Lake",
-       y = "Length (mm)")
-```
-
-::: {.cell-output-display}
-![](05_02_class_activity_files/figure-typst/unnamed-chunk-12-1.svg)
-:::
-:::
-
-
-
-
-
-
-
-
-Write your interpretation of the results:
-
-1.  Is there a significant difference in fish lengths between lakes?
-
-2.  Which lake has longer fish on average?
-
-3.  How would you report this result in a scientific paper?
-:::
-
 # Part 8: Communicating Statistical Results
 
-In scientific writing, it's important to report statistical results clearly and consistently.
+In scientific writing, it's important to report statistical results
+clearly and consistently.
 
 Here's a standard format for reporting t-test results:
 
-For a one-sample t-test: "A one-sample t-test showed that the mean fish length in Lake I3 (M = \[mean\], SD = \[sd\]) was \[significantly/not significantly\] different from 240 mm, t(\[df\]) = \[t-value\], p = \[p-value\]."
+For a one-sample t-test: "A one-sample t-test showed that the mean fish
+length in Lake I3 (M = \[mean\], SD = \[sd\]) was \[significantly/not
+significantly\] different from 240 mm, t(\[df\]) = \[t-value\], p =
+\[p-value\]."
 
-For a two-sample t-test: "A two-sample t-test revealed that pine needle lengths on the leeward side (M = \[mean1\], SD = \[sd1\]) were \[significantly/not significantly\] \[longer/shorter\] than on the windward side (M = \[mean2\], SD = \[sd2\]), t(\[df\]) = \[t-value\], p = \[p-value\]."
+For a two-sample t-test: "A two-sample t-test revealed that pine needle
+lengths on the leeward side (M = \[mean1\], SD = \[sd1\]) were
+\[significantly/not significantly\] \[longer/shorter\] than on the
+windward side (M = \[mean2\], SD = \[sd2\]), t(\[df\]) = \[t-value\], p
+= \[p-value\]."
 
 ::: callout-tip
 ## Practice Exercise 8: Writing Statistical Results
 
-Write properly formatted statements reporting the results of: 1. The one-sample t-test comparing Lake I3 fish to 240mm 2. The two-sample t-test comparing pine needle lengths 3. The two-sample t-test comparing fish lengths between lakes
+Write properly formatted statements reporting the results of: 1. The
+one-sample t-test comparing Lake I3 fish to 240mm 2. The two-sample
+t-test comparing pine needle lengths 3. The two-sample t-test comparing
+fish lengths between lakes
 
-Remember to include: - Means and standard deviations for each group - The t-value with degrees of freedom - The p-value and whether the result is significant
+Remember to include: - Means and standard deviations for each group -
+The t-value with degrees of freedom - The p-value and whether the result
+is significant
 :::
 
 # Reflection Questions
 
-1.  How does the t-distribution differ from the normal distribution, and why does this matter for small samples?
+1.  How does the t-distribution differ from the normal distribution, and
+    why does this matter for small samples?
 
-2.  What assumptions must be met to use a t-test, and what alternatives exist if these assumptions are violated?
+2.  What assumptions must be met to use a t-test, and what alternatives
+    exist if these assumptions are violated?
 
-3.  What is the difference between statistical significance and practical importance?
+3.  What is the difference between statistical significance and
+    practical importance?
 
-4.  How would the confidence interval change if we used a 99% confidence level instead of 95%?
+4.  How would the confidence interval change if we used a 99% confidence
+    level instead of 95%?
 
-5.  How would you explain the concept of a p-value to someone with no statistical background?
+5.  How would you explain the concept of a p-value to someone with no
+    statistical background?

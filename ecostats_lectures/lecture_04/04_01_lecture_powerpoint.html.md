@@ -100,10 +100,6 @@ Let's explore the Arctic grayling data from lakes I3 and I8. Use the
 # also note plottig a box plot is really useful
 
 
-grayling_df <- read_csv("data/gray_I3_I8.csv") 
-
-i3_df <- grayling_df %>% filter(lake =="I3")
-
 # Calculate summary statistics
 grayling_summary <- grayling_df %>% 
   group_by(lake) %>%
@@ -838,10 +834,9 @@ Previously we had calculated Standard Error and Confidence Intervals -
 
 :::: columns
 ::: {.column width="60%"}
-When calculating confidence intervals we usually DON'T know the
-population σ (standard deviation)
+### When calculating confidence intervals we usually DON'T know the population σ (standard deviation) or 𝝁 population mean
 
--   estimate it from the samples when don't know the population σ
+-   estimate it from the samples when don't know the population σ or 𝝁
 -   and when sample size is small \< \~30
 -   can't use the standard normal (z) distribution
 
@@ -855,8 +850,7 @@ population σ (standard deviation)
 
 ::::: columns
 ::: {.column width="60%"}
-When sample sizes are small, the **t-distribution** is more appropriate
-than the normal distribution.
+### When sample sizes are small, the **t-distribution** is more appropriate than the normal distribution.
 
 -   Similar to normal distribution but with heavier tails
 -   Shape depends on **degrees of freedom** (df = n-1)
@@ -906,7 +900,7 @@ than the normal distribution.
 
 ::::: columns
 ::: {.column width="60%"}
-To calculate CI for sample from "unknown" population:
+### To calculate CI for sample from "unknown" population:
 
 ## $\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
 
@@ -928,7 +922,7 @@ Where:
 
 ::::: columns
 ::: {.column width="60%"}
-Here is a t-table
+### Here is a t-table
 
 -   Values of t that correspond to probabilities
 -   Probabilities listed along top
@@ -945,8 +939,7 @@ Here is a t-table
 
 ::::: columns
 ::: {.column width="60%"}
-One-tailed questions: area of distribution left or (right) of a certain
-value
+### One-tailed questions: area of distribution left or (right) of a certain value
 
 -   n=20 (df=19) - 90% of the observations found left
 -   t= 1.328 (10% are outside)
@@ -1004,13 +997,9 @@ Use two-sided test
 ## Practice Exercise 4: Using the t-distribution
 
 Let's compare confidence intervals using the normal approximation (z)
-versus the t-distribution for our fish data.
-
-I3 data and 10 fish
-
-Mean is 266.7 - sd is 17.12 - se is 5.41
-
-## $\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
+versus the t-distribution for our fish data. I3 data and 10 fish Mean is
+266.7 - sd is 17.12 - se is 5.41 \##
+$\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
 
 
 
@@ -1026,26 +1015,16 @@ Mean is 266.7 - sd is 17.12 - se is 5.41
 ::: {.cell}
 
 ```{.r .cell-code}
-# Calculate CI using both z and t distributions for a smaller subset
-small_sample <- grayling_df %>% 
-  filter(lake == "I3") %>% 
-  slice_sample(n = 10)
-
-# Calculate statistics
+small_sample <- grayling_df %>% filter(lake == "I3") %>% slice_sample(n = 10)
 sample_mean <- mean(small_sample$length_mm)
 sample_sd <- sd(small_sample$length_mm)
 sample_n <- nrow(small_sample)
 sample_se <- sample_sd / sqrt(sample_n)
-
-# Calculate confidence intervals
 z_ci_lower <- sample_mean - 1.96 * sample_se
 z_ci_upper <- sample_mean + 1.96 * sample_se
-
-# For t-distribution, get critical value for 95% CI with df = n-1
 t_crit <- qt(0.975, df = sample_n - 1)
 t_ci_lower <- sample_mean - t_crit * sample_se
 t_ci_upper <- sample_mean + t_crit * sample_se
-
 # Display results
 cat("Mean:", round(sample_mean, 1), "mm\n")
 ```
@@ -1053,7 +1032,7 @@ cat("Mean:", round(sample_mean, 1), "mm\n")
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Mean: 263.6 mm
+Mean: 273.8 mm
 ```
 
 
@@ -1066,7 +1045,7 @@ cat("Standard deviation:", round(sample_sd, 2), "mm\n")
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Standard deviation: 30.73 mm
+Standard deviation: 17.13 mm
 ```
 
 
@@ -1079,7 +1058,7 @@ cat("Standard error:", round(sample_se, 2), "mm\n")
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Standard error: 9.72 mm
+Standard error: 5.42 mm
 ```
 
 
@@ -1092,7 +1071,7 @@ cat("95% CI using z:", round(z_ci_lower, 1), "to", round(z_ci_upper, 1), "mm\n")
 ::: {.cell-output .cell-output-stdout}
 
 ```
-95% CI using z: 244.6 to 282.6 mm
+95% CI using z: 263.2 to 284.4 mm
 ```
 
 
@@ -1105,7 +1084,7 @@ cat("95% CI using t:", round(t_ci_lower, 1), "to", round(t_ci_upper, 1), "mm\n")
 ::: {.cell-output .cell-output-stdout}
 
 ```
-95% CI using t: 241.6 to 285.6 mm
+95% CI using t: 261.5 to 286.1 mm
 ```
 
 
@@ -1179,10 +1158,6 @@ only interested if it is larger
 
 
 ::: {.cell}
-::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-15-1.png){width=480}
-:::
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1287,6 +1262,68 @@ Decision: Reject Ho (sample mean falls in upper rejection region)
 :::
 :::::
 
+# **Lecture 4:** Intro to Hypothesis Testing one tailed
+
+::::: columns
+::: {.column width="60%"}
+Hypothesis testing is a systematic way to evaluate research questions
+using data.
+
+**Key components:**
+
+1.  **Null hypothesis (H₀)**: Typically assumes "no effect" or "no
+    difference"
+
+2.  **Alternative hypothesis (Hₐ)**: The claim we're trying to support
+
+3.  **Statistical test**: Method for evaluating evidence against H₀
+
+4.  **P-value**: Probability of observing our results (or more extreme)
+    if H₀ is true
+
+5.  **Significance level (α)**: Threshold for rejecting H₀, typically
+    0.05
+
+**Decision rule**: Reject H₀ if p-value \< α\
+\
+lets test if our sample mean of 320 is larger than 270 or not?
+Essentially we are looking at the confidence intervals!!! But we are
+only interested if it is larger
+:::
+
+::: {.column width="40%"}
+
+
+
+
+
+
+
+
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-16-1.png){width=480}
+:::
+:::
+
+
+
+
+
+
+
+
+
+
+
+:::
+:::::
+
+# 
+
 # **Lecture 4:** Hypothesis Testing two tailed
 
 ::::: columns
@@ -1324,10 +1361,6 @@ we are looking at the confidence intervals!!!\
 
 
 ::: {.cell}
-::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-16-1.png){width=480}
-:::
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1398,6 +1431,61 @@ Decision: Reject Ho (sample mean falls in rejection region)
 ```
 
 
+:::
+:::
+
+
+
+
+
+
+
+
+
+
+
+:::
+:::::
+
+# **Lecture 4:** Hypothesis Testing two tailed
+
+::::: columns
+::: {.column width="60%"}
+Hypothesis testing is a systematic way to evaluate research questions
+using data.
+
+**Key components:**
+
+1.  **Null hypothesis (H₀)**: Typically assumes "no effect" or "no
+    difference"
+2.  **Alternative hypothesis (Hₐ)**: The claim we're trying to support
+3.  **Statistical test**: Method for evaluating evidence against H₀
+4.  **P-value**: Probability of observing our results (or more extreme)
+    if H₀ is true
+5.  **Significance level (α)**: Threshold for rejecting H₀, typically
+    0.05
+
+**Decision rule**: Reject H₀ if p-value \< α
+
+lets test if our sample mean of 320 is equal to 270 or not? Essentially
+we are looking at the confidence intervals!!!
+:::
+
+::: {.column width="40%"}
+
+
+
+
+
+
+
+
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-18-1.png){width=480}
 :::
 :::
 
@@ -1523,7 +1611,6 @@ null and alternative hypotheses:
 
 
 
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1608,7 +1695,7 @@ something more extreme) if the null hypothesis is true.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-19-1.png){width=480}
+![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-21-1.png){width=480}
 :::
 :::
 
@@ -1670,7 +1757,7 @@ occur:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-20-1.png){width=480}
+![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-22-1.png){width=480}
 :::
 :::
 
@@ -1730,7 +1817,7 @@ The Key Insight fundamental trade-off in hypothesis testing:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-21-1.png){width=480}
+![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-23-1.png){width=480}
 :::
 :::
 
@@ -1873,7 +1960,7 @@ NOTE: n is number in *each* group
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-23-1.png){width=480}
+![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-25-1.png){width=480}
 :::
 :::
 
