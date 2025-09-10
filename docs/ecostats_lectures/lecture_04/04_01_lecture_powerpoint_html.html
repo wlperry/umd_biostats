@@ -6002,11 +6002,9 @@ Practice Exercise 2: Calculating Z-scores
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>prob_left <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(z_value)          <span class="co"># 0.975 (97.5% to the left)</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>prob_right <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(z_value)     <span class="co"># 0.025 (2.5% to the right)</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>prob_between <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="dv">2</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">2</span>)  <span class="co"># 0.95 (95% between ±1.96)</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># To find z-value for a given probability:</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>z_for_95_percent <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.888</span>)     <span class="co"># 1.96</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(prob_left)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To find z-value for a given probability:</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>z_for_95_percent <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.888</span>)     <span class="co"># 1.96</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(prob_left)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8887676</code></pre>
 </div>
@@ -6226,38 +6224,43 @@ Practice Exercise 4: Using the t-distribution
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Let’s compare confidence intervals using the normal approximation (z) versus the t-distribution for our fish data. I3 data and 10 fish Mean is 266.7 - sd is 17.12 - se is 5.41 ## <span class="math inline">\(\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}\)</span></p>
+<p>Let’s compare confidence intervals using the normal approximation (z) versus the t-distribution for our fish data. I3 data and 10 fish Mean is 266.7 - sd is 17.12 - se is 5.41</p>
+<p>## <span class="math inline">\(\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practice Exercise 4: Using the t-distribution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let’s compare confidence intervals using the normal approximation (z) versus the t-distribution for our fish data. I3 data and 10 fish Mean is 266.7 - sd is 17.12 - se is 5.41</p>
+<p>## <span class="math inline">\(\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}\)</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>small_sample <span class="ot">&lt;-</span> grayling_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(lake <span class="sc">==</span> <span class="st">&quot;I3&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>sample_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(small_sample<span class="sc">$</span>length_mm)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>sample_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(small_sample<span class="sc">$</span>length_mm)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>sample_n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(small_sample)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>sample_se <span class="ot">&lt;-</span> sample_sd <span class="sc">/</span> <span class="fu">sqrt</span>(sample_n)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>z_ci_lower <span class="ot">&lt;-</span> sample_mean <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> sample_se</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>z_ci_upper <span class="ot">&lt;-</span> sample_mean <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> sample_se</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>t_crit <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> sample_n <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>t_ci_lower <span class="ot">&lt;-</span> sample_mean <span class="sc">-</span> t_crit <span class="sc">*</span> sample_se</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>t_ci_upper <span class="ot">&lt;-</span> sample_mean <span class="sc">+</span> t_crit <span class="sc">*</span> sample_se</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Display results</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Mean:&quot;</span>, <span class="fu">round</span>(sample_mean, <span class="dv">1</span>), <span class="st">&quot;mm</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display results</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Mean:&quot;</span>, <span class="fu">round</span>(sample_mean, <span class="dv">1</span>), <span class="st">&quot;mm</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Mean: 273.8 mm</code></pre>
+<pre><code>Mean: 276.3 mm</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Standard deviation:&quot;</span>, <span class="fu">round</span>(sample_sd, <span class="dv">2</span>), <span class="st">&quot;mm</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Standard deviation: 17.13 mm</code></pre>
+<pre><code>Standard deviation: 26.73 mm</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Standard error:&quot;</span>, <span class="fu">round</span>(sample_se, <span class="dv">2</span>), <span class="st">&quot;mm</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Standard error: 5.42 mm</code></pre>
+<pre><code>Standard error: 8.45 mm</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;95% CI using z:&quot;</span>, <span class="fu">round</span>(z_ci_lower, <span class="dv">1</span>), <span class="st">&quot;to&quot;</span>, <span class="fu">round</span>(z_ci_upper, <span class="dv">1</span>), <span class="st">&quot;mm</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% CI using z: 263.2 to 284.4 mm</code></pre>
+<pre><code>95% CI using z: 259.7 to 292.9 mm</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;95% CI using t:&quot;</span>, <span class="fu">round</span>(t_ci_lower, <span class="dv">1</span>), <span class="st">&quot;to&quot;</span>, <span class="fu">round</span>(t_ci_upper, <span class="dv">1</span>), <span class="st">&quot;mm</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>95% CI using t: 261.5 to 286.1 mm</code></pre>
+<pre><code>95% CI using t: 257.2 to 295.4 mm</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;t critical value:&quot;</span>, <span class="fu">round</span>(t_crit, <span class="dv">3</span>), <span class="st">&quot;vs z critical value: 1.96</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

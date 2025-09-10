@@ -665,10 +665,8 @@ z_value <-  1.22
 prob_left <- pnorm(z_value)          # 0.975 (97.5% to the left)
 prob_right <- 1 - pnorm(z_value)     # 0.025 (2.5% to the right)
 prob_between <- pnorm(2) - pnorm(-2)  # 0.95 (95% between ±1.96)
-
 # To find z-value for a given probability:
 z_for_95_percent <- qnorm(0.888)     # 1.96
-
 print(prob_left)
 ```
 
@@ -998,9 +996,44 @@ Use two-sided test
 
 Let's compare confidence intervals using the normal approximation (z)
 versus the t-distribution for our fish data. I3 data and 10 fish Mean is
-266.7 - sd is 17.12 - se is 5.41 \##
-$\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
+266.7 - sd is 17.12 - se is 5.41
 
+\## $\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:::
+
+::: callout-tip
+
+## Practice Exercise 4: Using the t-distribution
+
+Let's compare confidence intervals using the normal approximation (z)
+versus the t-distribution for our fish data. I3 data and 10 fish Mean is
+266.7 - sd is 17.12 - se is 5.41
+
+\## $\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
 
 
 
@@ -1015,16 +1048,6 @@ $\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
 ::: {.cell}
 
 ```{.r .cell-code}
-small_sample <- grayling_df %>% filter(lake == "I3") %>% slice_sample(n = 10)
-sample_mean <- mean(small_sample$length_mm)
-sample_sd <- sd(small_sample$length_mm)
-sample_n <- nrow(small_sample)
-sample_se <- sample_sd / sqrt(sample_n)
-z_ci_lower <- sample_mean - 1.96 * sample_se
-z_ci_upper <- sample_mean + 1.96 * sample_se
-t_crit <- qt(0.975, df = sample_n - 1)
-t_ci_lower <- sample_mean - t_crit * sample_se
-t_ci_upper <- sample_mean + t_crit * sample_se
 # Display results
 cat("Mean:", round(sample_mean, 1), "mm\n")
 ```
@@ -1032,7 +1055,7 @@ cat("Mean:", round(sample_mean, 1), "mm\n")
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Mean: 280 mm
+Mean: 245.6 mm
 ```
 
 
@@ -1045,7 +1068,7 @@ cat("Standard deviation:", round(sample_sd, 2), "mm\n")
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Standard deviation: 19.56 mm
+Standard deviation: 37.3 mm
 ```
 
 
@@ -1058,7 +1081,7 @@ cat("Standard error:", round(sample_se, 2), "mm\n")
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Standard error: 6.18 mm
+Standard error: 11.79 mm
 ```
 
 
@@ -1071,7 +1094,7 @@ cat("95% CI using z:", round(z_ci_lower, 1), "to", round(z_ci_upper, 1), "mm\n")
 ::: {.cell-output .cell-output-stdout}
 
 ```
-95% CI using z: 267.9 to 292.1 mm
+95% CI using z: 222.5 to 268.7 mm
 ```
 
 
@@ -1084,7 +1107,7 @@ cat("95% CI using t:", round(t_ci_lower, 1), "to", round(t_ci_upper, 1), "mm\n")
 ::: {.cell-output .cell-output-stdout}
 
 ```
-95% CI using t: 266 to 294 mm
+95% CI using t: 218.9 to 272.3 mm
 ```
 
 
@@ -1305,7 +1328,7 @@ only interested if it is larger
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-16-1.png)
+![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-17-1.png)
 :::
 :::
 
@@ -1485,7 +1508,7 @@ we are looking at the confidence intervals!!!
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-18-1.png)
+![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-19-1.png)
 :::
 :::
 
@@ -1695,7 +1718,7 @@ something more extreme) if the null hypothesis is true.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-21-1.png)
+![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-22-1.png)
 :::
 :::
 
@@ -1757,7 +1780,7 @@ occur:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-22-1.png)
+![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-23-1.png)
 :::
 :::
 
@@ -1817,7 +1840,7 @@ The Key Insight fundamental trade-off in hypothesis testing:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-23-1.png)
+![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-24-1.png)
 :::
 :::
 
@@ -1960,7 +1983,7 @@ NOTE: n is number in *each* group
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-25-1.png)
+![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-26-1.png)
 :::
 :::
 
