@@ -1026,7 +1026,6 @@ versus the t-distribution for our fish data. I3 data and 10 fish Mean is
 :::
 
 ::: callout-tip
-
 ## Practice Exercise 4: Using the t-distribution
 
 Let's compare confidence intervals using the normal approximation (z)
@@ -1034,6 +1033,7 @@ versus the t-distribution for our fish data. I3 data and 10 fish Mean is
 266.7 - sd is 17.12 - se is 5.41
 
 \## $\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
+
 
 
 

@@ -17,7 +17,6 @@ format:
     output-file: "03_01_lecture_powerpoint.pptx"
   typst: 
     output-file: "03_01_lecture_powerpoint.pdf"
-
 ---
 
 
@@ -34,23 +33,14 @@ format:
 
 
 
+::: {.callout-note appearance="simple"}
+## Download this lecture
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[📄 Download HTML](03_01_lecture_powerpoint_standalone.html) \| [📝
+Download Word](03_01_lecture_powerpoint.docx) \| [📊 Download
+PowerPoint](03_01_lecture_powerpoint.pptx) \| [📄 Download
+PDF](03_01_lecture_powerpoint.pdf)
+:::
 
 # **Lecture 2: Review of data and graphing**
 
@@ -236,47 +226,11 @@ world by:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-1-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -317,24 +271,6 @@ Let's recreate the basic histogram of fish lengths using
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -342,24 +278,6 @@ Let's recreate the basic histogram of fish lengths using
 # How do you examine the data - what are the ways you think and lets try it!
 ```
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -381,24 +299,6 @@ Let's recreate the basic histogram of fish lengths using
 ## Practice Exercise 2: Can you do this for the pine data we have collected?
 
 Let's examine the different data and determine what they are?
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -443,24 +343,6 @@ head(grayling_df)
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -550,24 +432,6 @@ Where:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -617,24 +481,6 @@ grayling_df %>%
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -645,24 +491,6 @@ The Median
 -   The median is the middle value of a sorted dataset.
 -   If there is an even number of observations, it's the average of the
     two middle values.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -727,24 +555,6 @@ grayling_df %>%
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Lecture 3: Measures of Spread - Variance and Standard Deviation
 
 ::::: columns
@@ -766,24 +576,6 @@ The standard deviation is the square root of variance
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -838,24 +630,6 @@ grayling_df %>%
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -870,24 +644,6 @@ so there is only 2.5% of the data that is outside this range
 
 -   note the similarity to the p \< 0.5
 -   note that it is 90.91% and that is because the curve is not normal
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -930,45 +686,9 @@ i3 Lake Fish Length Summary:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1000,24 +720,6 @@ i3 Lake Fish Length Summary:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1035,24 +737,6 @@ different units or vastly different scales.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1102,24 +786,6 @@ Coefficient of variation: 10.7 %
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1137,24 +803,6 @@ third quartile (75th percentile).
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1222,28 +870,10 @@ Interquartile range: 106.25 mm
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
-# Lecture 3: Understanding Percentiles 
+# Lecture 3: Understanding Percentiles
 
 ### - it is the same as quartiles but more finely divided and will come into play later on
 
@@ -1271,24 +901,6 @@ Percentiles are values that divide a dataset into 100 equal parts.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1297,24 +909,6 @@ percentiles <- quantile(grayling_df$length_mm,
                        probs = c(0.1, 0.25, 0.5, 0.75, 0.9))
 ```
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1359,24 +953,6 @@ deviation.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -1391,24 +967,6 @@ deviation.
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1463,24 +1021,6 @@ provides a better measure of central tendency than the arithmetic mean.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -1492,24 +1032,6 @@ Arithmetic mean of original data: 265.6 mm
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1539,47 +1061,11 @@ Arithmetic mean of original data: 265.6 mm
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-docx/log-transform-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1643,47 +1129,11 @@ Histograms show the frequency distribution of our data.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-docx/histogram-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1723,47 +1173,11 @@ Box plots show the median, quartiles, and potential outliers.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-docx/boxplot-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1808,24 +1222,6 @@ it's skewed or has outliers, they can differ significantly.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -1840,24 +1236,6 @@ it's skewed or has outliers, they can differ significantly.
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1902,47 +1280,11 @@ it's skewed or has outliers, they can differ significantly.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](03_01_lecture_powerpoint_files/figure-docx/mean-vs-median-plot-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1963,24 +1305,6 @@ it's skewed or has outliers, they can differ significantly.
 
 Let's examine how missing values affect our descriptive statistics by
 looking at the mass variable, which has some missing data.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2042,24 +1366,6 @@ Mean mass without handling NAs: NA g
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Lecture 3: Best Practices for Missing Values
 
 1.  Always check for missing values in your data before calculating
@@ -2090,29 +1396,10 @@ give different estimates.
 If we could sample all fish in the lake, we would know the true mean
 length. But that's usually impossible in ecology!
 
-
 # **Demonstrating Sampling Variation**
 
 Let's take several random samples from Lake I3 and see how the sample
 means vary:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2163,43 +1450,7 @@ samples_df <- data.frame(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # **Plotting Sample Variation**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2219,24 +1470,6 @@ samples_df <- data.frame(
 ![](03_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-5-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2298,24 +1531,6 @@ The standard error tells us:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -2359,24 +1574,6 @@ grayling_stats
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -2405,24 +1602,6 @@ Let's simulate the sampling distribution for Lake I3 fish data.
 
 Let's simulate taking many samples from Lake I3 to visualize the
 sampling distribution:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2490,24 +1669,6 @@ ggplot(simulated_df, aes(x = sample_mean)) +
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Notice that the simulated sampling distribution:
 
 1.  Is approximately normally distributed
@@ -2517,24 +1678,6 @@ Notice that the simulated sampling distribution:
 # **Standard Error and Sample Size**
 
 Let's see how the standard error changes with different sample sizes:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2566,43 +1709,7 @@ Let's see how the standard error changes with different sample sizes:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # **Sample Size vs. Standard Error**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2657,24 +1764,6 @@ ggplot(results_long, aes(x = sample_size, y = standard_error, color = se_type)) 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # **Confidence Intervals**
 
 A **confidence interval** is a range of values that is likely to contain
@@ -2698,24 +1787,6 @@ estimates.
 
 Let's calculate and visualize the 95% confidence intervals for the mean
 fish length in each lake:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2776,43 +1847,7 @@ grayling_ci
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # **Visualizing Confidence Intervals**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2860,45 +1895,9 @@ ggplot(grayling_ci, aes(x = lake, y = mean_length, fill = lake)) +
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # **Different Types of Error Bars**
 
 Let's compare different ways of displaying uncertainty in our estimates:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2951,43 +1950,7 @@ error_types <- data.frame(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # **Comparing Error Bar Types**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -3026,24 +1989,6 @@ ggplot() +
 ![](03_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-12-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

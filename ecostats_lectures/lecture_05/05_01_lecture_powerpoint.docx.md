@@ -37,10 +37,10 @@ format:
 -   Probability Distribution Functions (PDF)
 -   Descriptive Statistics
     -   Center - mean, median, mode
-
     -   Spread - range, variance, standard deviation
 -   Tests of means using T-Tests
     -   one sample
+
     -   two sample
 :::
 
@@ -65,7 +65,9 @@ format:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3257239263.png){width="350" height="250"}
+![](images/clipboard-3257239263.png){width="426" height="303"}
+
+xx
 :::
 :::::
 
@@ -77,9 +79,12 @@ format:
     -   Center - mean, median, mode
     -   Spread - range, variance, standard deviation
 -   Tests of means using T-Tests
-    -   one sample - is the sample mean different from a hypothesized mean?
+    -   one sample - is the sample mean different from a hypothesized
+        mean?
 
-    -   two sample - are the sample means from two samples the same or different?
+    -   two sample - are the sample means from two samples the same or
+        different?
+-   for two sample T tests the df = n1+ n2 -2 = 8+8-2=14
 
 
 
@@ -97,10 +102,10 @@ format:
 
 ```
 # A tibble: 2 × 5
-  lake  mean_length sd_length se_length count
+  side  mean_length sd_length se_length count
   <chr>       <dbl>     <dbl>     <dbl> <int>
-1 I3           266.      28.3      3.48    66
-2 I8           363.      52.3      5.18   102
+1 shady        17.6      2.51     0.886     8
+2 sunny        16.2      2.64     0.934     8
 ```
 
 
@@ -122,7 +127,7 @@ format:
 
 ::::: columns
 ::: {.column width="60%"}
-The goals for today
+### **The goals for today**
 
 -   Statistical inference fundamentals
 -   Hypothesis testing principles
@@ -162,20 +167,47 @@ The goals for today
 :::
 :::::
 
-# **Lecture 5:** Student's t-distribution Table
+# **Lecture 5: Probability and Statistical Inference**
 
 ::::: columns
 ::: {.column width="60%"}
-Here is a t-table
+The goals for today
 
--   Values of t that correspond to probabilities
--   Probabilities listed along top
--   Sample dfs are listed in the left-most column
--   Probabilities are given for one-tailed and two-tailed "questions"
+-   Statistical inference fundamentals
+-   Hypothesis testing principles
+-   T Distributions
+-   One sample T Tests
+-   Two sample T Test
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3203878802.png){width="465" height="410"}
+
+
+
+
+
+
+
+
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-3-1.png)
+:::
+:::
+
+
+
+
+
+
+
+
+
+
+
 :::
 :::::
 
@@ -183,16 +215,17 @@ Here is a t-table
 
 ::::: columns
 ::: {.column width="60%"}
-One-tailed questions: area of distribution left or (right) of a certain value
+One-tailed questions: area of distribution left or (right) of a certain
+value for a one sample test
 
--   n=20 (df=19) - 90% of the observations found left
--   t= 1.328 (10% are outside)
+-   n=8 (df=7) - 95% of the observations found left
+-   t= 1.761 (5% are outside)
 
 ![](images/clipboard-1822465473.png){width="267" height="198"}
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-641796945.png){width="491" height="349"}
+![](images/clipboard-4103165911.png){width="609"} xxxx
 :::
 :::::
 
@@ -209,7 +242,9 @@ Two-tailed questions refer to area between certain values
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1734806681.png){width="350" height="200"}
+![](images/clipboard-1746531278.png){width="675"}
+
+xxxxx
 :::
 :::::
 
@@ -222,13 +257,13 @@ Let's calculate CIs again:
 Use two-sided test
 
 -   $\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
--   95% CI Sample A: = 272.8 ± 2.262 \* (37.81/(10\^0.5)) = 27.05
--   The 95% CI is between 245.8 and 299.8
--   "The 95% CI for the population mean from sample A is 272.8 ± 27.05
+-   95% CI Sample A: = 17.6 ± 2.365 \* (2.51/(8\^0.5)) = +/- 2.098746
+-   The 95% CI is between 15.50 and 19.70
+-   "The 95% CI for the population mean from sample A is 17.6 ± 2.1
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3203878802.png){width="518" height="405"}
+![](images/clipboard-1746531278.png){width="675"}
 :::
 :::::
 
@@ -238,8 +273,10 @@ So:
 
 -   Can assess confidence that population mean is within a certain range
 -   Can use t distribution to ask questions like:
-    -   "What is probability of getting sample with mean = ȳ from population with mean = µ?" (1 sample t-test)
-    -   "What is the probability that two samples came from same population?" (2 sample t-test)
+    -   "What is probability of getting sample with mean = ȳ from
+        population with mean = µ?" (1 sample t-test)
+    -   "What is the probability that two samples came from same
+        population?" (2 sample t-test)
 
 # **Lecture 5:** Single Sample T-Test
 
@@ -247,9 +284,9 @@ We want to test if the mean fish length in I3 differs from 240mm.
 
 **Activity: Define hypotheses and identify assumptions**
 
-H₀: μ = 240 (The mean fish length in I3 is 240mm)
+H₀: μ = 15 (The mean needle length on shade side is 15mm)
 
-H₁: μ ≠ 240 (The mean fish length in I3 is not 240mm)
+H₁: μ ≠ 15 (The mean needle length on shade side is not 240mm)
 
 ## Assumptions for t-test:
 
@@ -277,8 +314,8 @@ H₁: μ ≠ 240 (The mean fish length in I3 is not 240mm)
 
 # YOUR TASK: Test normality of windward pine needle lengths
 # QQ Plot
-qqPlot(i3_df$length_mm, 
-       main = "QQ Plot for length of Grayling",
+qqPlot(ps_df$length_mm, 
+       main = "QQ Plot for length of pine needles",
        ylab = "Sample Quantiles")
 ```
 
@@ -289,7 +326,7 @@ qqPlot(i3_df$length_mm,
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] 53 35
+[1]  8 11
 ```
 
 
@@ -326,7 +363,7 @@ qqPlot(i3_df$length_mm,
 
 ```{.r .cell-code}
 # Shapiro-Wilk test
-shapiro.test(i3_df$length_mm)
+shapiro.test(ps_df$length_mm)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -335,8 +372,8 @@ shapiro.test(i3_df$length_mm)
 
 	Shapiro-Wilk normality test
 
-data:  i3_df$length_mm
-W = 0.91051, p-value = 0.0001623
+data:  ps_df$length_mm
+W = 0.92754, p-value = 0.2228
 ```
 
 
@@ -372,11 +409,11 @@ W = 0.91051, p-value = 0.0001623
 ```{.r .cell-code}
 # Check for outliers using boxplot
 # YOUR CODE HERE
-i3_df %>% ggplot(aes(lake, length_mm))+geom_boxplot()
+ps_df %>% ggplot(aes(side, length_mm))+geom_boxplot()
 ```
 
 ::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-4-1.png)
+![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-5-1.png)
 :::
 :::
 
@@ -396,7 +433,8 @@ i3_df %>% ggplot(aes(lake, length_mm))+geom_boxplot()
 ::: callout-tip
 ## Practice Exercise 1: One-Sample t-Test
 
-Let's perform a one-sample t-test to determine if the mean fish length in I3 Lake differs from 240 mm:
+Let's perform a one-sample t-test to determine if the mean fish length
+in I3 Lake differs from 15 mm:
 
 
 
@@ -413,14 +451,15 @@ Let's perform a one-sample t-test to determine if the mean fish length in I3 Lak
 
 ```{.r .cell-code}
 # what is the mean
-i3_mean <- mean(i3_df$length_mm, na.rm=TRUE)
-cat("Mean:", round(i3_mean, 1), "mm\n")
+
+ps_shade_mean <- mean(ps_shady_df$length_mm, na.rm = TRUE)
+cat("Mean:", round(ps_shade_mean, 1), "mm\n")
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Mean: 265.6 mm
+Mean: 17.6 mm
 ```
 
 
@@ -428,7 +467,7 @@ Mean: 265.6 mm
 
 ```{.r .cell-code}
 # Perform a one-sample t-test
-t_test_result <- t.test(i3_df$length_mm, mu = 240)
+t_test_result <- t.test(ps_shady_df$length_mm, mu = 15)
 
 # View the test results
 t_test_result
@@ -440,14 +479,14 @@ t_test_result
 
 	One Sample t-test
 
-data:  i3_df$length_mm
-t = 7.3497, df = 65, p-value = 4.17e-10
-alternative hypothesis: true mean is not equal to 240
+data:  ps_shady_df$length_mm
+t = 2.9414, df = 7, p-value = 0.02167
+alternative hypothesis: true mean is not equal to 15
 95 percent confidence interval:
- 258.6481 272.5640
+ 15.51092 19.70030
 sample estimates:
 mean of x 
- 265.6061 
+ 17.60561 
 ```
 
 
@@ -471,76 +510,30 @@ Interpret this test result by answering these questions:
 2.  What was the alternative hypothesis?
 3.  What does the p-value tell us?
 4.  Should we reject or fail to reject the null hypothesis at α = 0.05?
-5.  What is the practical interpretation of this result for fish biologists?
+5.  What is the practical interpretation of this result for fish
+    biologists?
 :::
 
 # **Lecture 5:** Hypothesis Testing Framework
 
 ::::: columns
 ::: {.column width="60%"}
-Hypothesis testing is a systematic way to evaluate research questions using data.
+Hypothesis testing is a systematic way to evaluate research questions
+using data.
 
 **Key components:**
 
-1.  **Null hypothesis (Ho)**: Typically assumes "no effect" or "no difference"
+1.  **Null hypothesis (Ho)**: Typically assumes "no effect" or "no
+    difference"
 2.  **Alternative hypothesis (Ha)**: The claim we're trying to support
 3.  **Statistical test**: Method for evaluating evidence against H₀
-4.  **P-value**: Probability of observing our results (or more extreme) if H₀ is true
-5.  **Significance level (α)**: Threshold for rejecting H₀, typically 0.05
+4.  **P-value**: Probability of observing our results (or more extreme)
+    if H₀ is true
+5.  **Significance level (α)**: Threshold for rejecting H₀, typically
+    0.05
 
-**Decision rule**: Reject Ho if p-value less than α or shorthand p \< 0.05
-:::
-
-::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-6-1.png)
-:::
-:::
-
-
-
-
-
-
-
-
-
-
-
-:::
-:::::
-
-# **Lecture 5:** Hypothesis Testing
-
-::::: columns
-::: {.column width="60%"}
-Hypothesis testing is a systematic way to evaluate research questions using data.
-
-**Key components:**
-
-1.  **Null hypothesis (H₀)**: Typically assumes "no effect" or "no difference"
-
-2.  **Alternative hypothesis (Hₐ)**: The claim we're trying to support
-
-3.  **Statistical test**: Method for evaluating evidence against H₀
-
-4.  **P-value**: Probability of observing our results (or more extreme) if H₀ is true
-
-5.  **Significance level (α)**: Threshold for rejecting H₀, typically 0.05
-
-**Decision rule**: Reject H₀ if p-value \< α
+**Decision rule**: Reject Ho if p-value less than α or shorthand p \<
+0.05
 :::
 
 ::: {.column width="40%"}
@@ -574,6 +567,62 @@ Hypothesis testing is a systematic way to evaluate research questions using data
 :::
 :::::
 
+# **Lecture 5:** Hypothesis Testing
+
+::::: columns
+::: {.column width="60%"}
+Hypothesis testing is a systematic way to evaluate research questions
+using data.
+
+**Key components:**
+
+1.  **Null hypothesis (H₀)**: Typically assumes "no effect" or "no
+    difference"
+
+2.  **Alternative hypothesis (Hₐ)**: The claim we're trying to support
+
+3.  **Statistical test**: Method for evaluating evidence against H₀
+
+4.  **P-value**: Probability of observing our results (or more extreme)
+    if H₀ is true
+
+5.  **Significance level (α)**: Threshold for rejecting H₀, typically
+    0.05
+
+**Decision rule**: Reject H₀ if p-value \< α
+:::
+
+::: {.column width="40%"}
+
+
+
+
+
+
+
+
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-8-1.png)
+:::
+:::
+
+
+
+
+
+
+
+
+
+
+
+:::
+:::::
+
 # Lecture 5: Interpreting One-Sample T-Test Results
 
 **Activity: Interpret the t-test results**
@@ -583,7 +632,9 @@ Hypothesis testing is a systematic way to evaluate research questions using data
 
 **How to report this result in a scientific paper:**
 
-"A one-sample t-test at α=0.05 showed that the mean fish length (... mm, SD = ...) \[was/was not\] significantly different from the expected 240 mm, t(...) = ..., p = ..."
+"A one-sample t-test at α=0.05 showed that the mean needle length (...
+mm, SD = ...) \[was/was not\] significantly different from the expected
+15 mm, t(...) = ..., p = ..."
 
 # **Lecture 5:** Two Sample T-Tests Introduction
 
@@ -599,7 +650,7 @@ This is what we will do with the fish length again...
 :::
 
 ::: {.column width="40%"}
-![](images/slimy_sculpin_cottus_cognatus.jpg)
+xxxxx ![](images/two_branches.jpg){width="204"} xxx
 :::
 :::::
 
@@ -633,18 +684,18 @@ How would you assess this question using what we learned?
 
 
 # Create a boxplot comparing the two lakes
-i3_i8_plot <- grayling_df %>%
-  ggplot(aes(x = lake, y = length_mm, fill = lake)) +
+shady_sunny_plot <- ps_df %>%
+  ggplot(aes(x = side, y = length_mm, fill = side)) +
   geom_boxplot() +
   labs(
-       x = "lake",
+       x = "side",
        y = "Length (mm)",
-       fill = "Lake") 
-i3_i8_plot
+       fill = "side") 
+shady_sunny_plot
 ```
 
 ::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-8-1.png)
+![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-9-1.png)
 :::
 
 ```{.r .cell-code}
@@ -672,9 +723,10 @@ i3_i8_plot
 ::: callout-tip
 ## Practice Exercise 2: Formulating Hypotheses
 
-For the following research questions about fish lenghts write the null and alternative hypotheses:
+For the following research questions about fish lengths write the null
+and alternative hypotheses:
 
-1.  Are fish lengths in lake I3 and I8 different?
+1.  Are needle lengths ion shady and sunny sides different?
 
 What are the hypotheses?
 
@@ -685,9 +737,10 @@ Ha =
 
 # **Lecture 5:** Two-Sample T-Test Framework
 
-Now, let's compare fish lengths from the two lakes
+Now, let's compare needles lengths from the two sides
 
-Question: **Is there a significant difference in fish length between the lakes?**
+Question: **Is there a significant difference in neele length between
+the sides?**
 
 This requires a two-sample t-test.
 
@@ -697,8 +750,11 @@ Two-sample t-test compares means from two independent groups.
 
 where:
 
--   x̄₁ and x̄₂: These represent the sample means of the two groups you're comparing
--   s²ₚ: This is the pooled variance, calculated as: s²ₚ = \[(n₁ - 1)s₁² + (n₂ - 1)s₂²\] / (n₁ + n₂ - 2), where s₁² and s₂² are the sample variances of the two groups.
+-   x̄₁ and x̄₂: These represent the sample means of the two groups you're
+    comparing
+-   s²ₚ: This is the pooled variance, calculated as: s²ₚ = \[(n₁ -
+    1)s₁² + (n₂ - 1)s₂²\] / (n₁ + n₂ - 2), where s₁² and s₂² are the
+    sample variances of the two groups.
 -   **n₁ and n₂:** These are the sample sizes of the two groups.
 -   **√(1/n₁ + 1/n₂):** This represents the pooled standard error.
 
@@ -709,7 +765,8 @@ where:
 ::: callout-tip
 ## Practice Exercise 3: **Calculate summary statistics grouped by lake**
 
-Before conducting the test, we need to understand the data for each group.
+Before conducting the test, we need to understand the data for each
+group.
 
 1.  You need this and the graph to see what is going on ....
 
@@ -727,8 +784,8 @@ Before conducting the test, we need to understand the data for each group.
     ::: {.cell}
     
     ```{.r .cell-code}
-    group_summary <- grayling_df %>%
-      group_by(lake) %>%
+    group_summary <- ps_df %>%
+      group_by(side) %>%
       summarize(
         mean_length = mean(length_mm),
         sd_length = sd(length_mm),
@@ -743,10 +800,10 @@ Before conducting the test, we need to understand the data for each group.
     
     ```
     # A tibble: 2 × 5
-      lake  mean_length sd_length     n se_length
+      side  mean_length sd_length     n se_length
       <chr>       <dbl>     <dbl> <int>     <dbl>
-    1 I3           266.      28.3    66      3.48
-    2 I8           363.      52.3   102      5.18
+    1 shady        17.6      2.51     8     0.886
+    2 sunny        16.2      2.64     8     0.934
     ```
     
     
@@ -782,11 +839,11 @@ Before conducting the test, we need to understand the data for each group.
 
 ```{.r .cell-code}
 # Create a boxplot comparing the two sides
-i3_i8_plot
+shady_sunny_plot
 ```
 
 ::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-10-1.png)
+![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-11-1.png)
 :::
 :::
 
@@ -824,7 +881,7 @@ We could also look at the difference in means... some cool code here
 ```{.r .cell-code}
 # Assuming your dataframe is called df
 group_summary %>%
-  summarize(difference = mean_length[lake == "I8"] - mean_length[lake == "I3"])
+  summarize(difference = mean_length[side == "shady"] - mean_length[side == "sunny"])
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -833,7 +890,7 @@ group_summary %>%
 # A tibble: 1 × 1
   difference
        <dbl>
-1       97.0
+1       1.45
 ```
 
 
@@ -857,7 +914,8 @@ group_summary %>%
 ::: callout-tip
 ## Practice Exercise 5: Using GGPLOT to get summary stats
 
-GGplot also has code to make the mean and standard error plots we are interested in along with a lot of others
+GGplot also has code to make the mean and standard error plots we are
+interested in along with a lot of others
 
 
 
@@ -874,18 +932,18 @@ GGplot also has code to make the mean and standard error plots we are interested
 
 ```{.r .cell-code}
 # Assuming your dataframe is called df
-fish_mean_se_plot <- ggplot(grayling_df, aes(x = lake, y = length_mm, color = lake)) +
+neelde_mean_se_plot <- ggplot(ps_df, aes(x = side, y = length_mm, color = side)) +
   stat_summary(fun = mean, geom = "point") +
   stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
   labs(
-       x = "lake",
+       x = "side",
        y = "Mean Length (mm)") +
   theme_classic()
-fish_mean_se_plot
+neelde_mean_se_plot
 ```
 
 ::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-12-1.png)
+![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-13-1.png)
 :::
 :::
 
@@ -938,11 +996,11 @@ Note you need to test each groups separately...
 
 ```{.r .cell-code}
 # Assuming your dataframe is called df
-fish_mean_se_plot
+neelde_mean_se_plot
 ```
 
 ::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-13-1.png)
+![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-14-1.png)
 :::
 :::
 
@@ -983,23 +1041,44 @@ Note you need to test each groups separately...
 ```{.r .cell-code}
 # how do you make separate dataframes to do this on?
 # Separate data by groups
-i3_data <- grayling_df %>% filter(lake == "I3")
-i8_data <- grayling_df %>% filter(lake == "I8")
-head(i8_data)
+head(ps_shady_df)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
 # A tibble: 6 × 5
-   site lake  species         length_mm mass_g
-  <dbl> <chr> <chr>               <dbl>  <dbl>
-1   118 I8    arctic grayling       345    375
-2   118 I8    arctic grayling       376    485
-3   118 I8    arctic grayling       417    600
-4   118 I8    arctic grayling       369    445
-5   118 I8    arctic grayling       419    625
-6   118 I8    arctic grayling       365    430
+# Groups:   group, tree_no, tree_char [6]
+  group                      tree_no tree_char side  length_mm
+  <chr>                        <dbl> <chr>     <chr>     <dbl>
+1 big_fat_fecund_female_fish       2 tree_2    shady      15.4
+2 bill                             3 tree_3    shady      16.7
+3 ciabatta                         5 tree_5    shady      19.1
+4 fake_data                        8 tree_8    shady      17.4
+5 five                             1 tree_1    shady      20.3
+6 moose_walkin                     7 tree_7    shady      20.7
+```
+
+
+:::
+
+```{.r .cell-code}
+head(ps_sunny_df)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 6 × 5
+# Groups:   group, tree_no, tree_char [6]
+  group                      tree_no tree_char side  length_mm
+  <chr>                        <dbl> <chr>     <chr>     <dbl>
+1 big_fat_fecund_female_fish       2 tree_2    sunny      13.2
+2 bill                             3 tree_3    sunny      16.0
+3 ciabatta                         5 tree_5    sunny      17.7
+4 fake_data                        8 tree_8    sunny      13.0
+5 five                             1 tree_1    sunny      19.9
+6 moose_walkin                     7 tree_7    sunny      18.4
 ```
 
 
@@ -1018,7 +1097,7 @@ head(i8_data)
 
 :::
 
-# Practice Exercise 8: QQ Plot for Windward Data
+# Practice Exercise 8: QQ Plot for Sunny Data
 
 ::: callout-tip
 ## Practice Exercise 8: Test normality of windward pine needle lengths
@@ -1042,19 +1121,19 @@ Note you need to test each groups separately...
 
 ```{.r .cell-code}
 # QQ Plot for windward group
-qqPlot(i8_data$length_mm, 
-       main = "QQ Plot for I8 fish length",
+qqPlot(ps_sunny_df$length_mm, 
+       main = "QQ Plot for sunny needle length",
        ylab = "Sample Quantiles")
 ```
 
 ::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-15-1.png)
+![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-16-1.png)
 :::
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] 79 62
+[1] 5 4
 ```
 
 
@@ -1097,7 +1176,7 @@ Note you need to test each groups separately...
 
 ```{.r .cell-code}
 # Shapiro-Wilk test for windward group
-shapiro.test(i8_data$length_mm)
+shapiro.test(ps_sunny_df$length_mm)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -1106,8 +1185,8 @@ shapiro.test(i8_data$length_mm)
 
 	Shapiro-Wilk normality test
 
-data:  i8_data$length_mm
-W = 0.91962, p-value = 1.119e-05
+data:  ps_sunny_df$length_mm
+W = 0.89994, p-value = 0.2886
 ```
 
 
@@ -1126,10 +1205,10 @@ W = 0.91962, p-value = 1.119e-05
 
 :::
 
-# Practice Exercise 10: QQ Plot for I3
+# Practice Exercise 10: QQ Plot for Shady
 
 ::: callout-tip
-## Practice Exercise 10: Test normality of I3 lengths
+## Practice Exercise 10: Test normality of shady lengths
 
 qqplots
 
@@ -1151,19 +1230,19 @@ Note you need to test each groups separately...
 ```{.r .cell-code}
 # You can also test the i3
 # QQ Plot for leeward group
-qqPlot(i3_data$length_mm, 
-       main = "QQ Plot for I3",
+qqPlot(ps_shady_df$length_mm, 
+       main = "QQ Plot for shady needle length",
        ylab = "Sample Quantiles")
 ```
 
 ::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-17-1.png)
+![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-18-1.png)
 :::
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] 53 35
+[1] 7 6
 ```
 
 
@@ -1182,10 +1261,10 @@ qqPlot(i3_data$length_mm,
 
 :::
 
-# Practice Exercise 11: Shapiro-Wilk for i3
+# Practice Exercise 11: Shapiro-Wilk for Shady
 
 ::: callout-tip
-## Practice Exercise 11: Test normality of i3 lengths
+## Practice Exercise 11: Test normality of shady lengths
 
 Shapiro-Wilk test
 
@@ -1206,7 +1285,7 @@ Note you need to test each groups separately...
 
 ```{.r .cell-code}
 # Shapiro-Wilk test for leeward group
- shapiro.test(i3_data$length_mm)
+ shapiro.test(ps_shady_df$length_mm)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -1215,8 +1294,8 @@ Note you need to test each groups separately...
 
 	Shapiro-Wilk normality test
 
-data:  i3_data$length_mm
-W = 0.91051, p-value = 0.0001623
+data:  ps_shady_df$length_mm
+W = 0.96639, p-value = 0.8683
 ```
 
 
@@ -1259,8 +1338,8 @@ There are always a lot of ways to do this in R
 # there are always two ways
 # Test for normality using Shapiro-Wilk test for each wind group
 # All in one pipeline using tidyverse approach
-normality_results <- grayling_df %>%
-  group_by(lake) %>%
+normality_results <- ps_df %>%
+  group_by(side) %>%
   summarize(
     shapiro_stat = shapiro.test(length_mm)$statistic,
     shapiro_p_value = shapiro.test(length_mm)$p.value,
@@ -1275,10 +1354,10 @@ print(normality_results)
 
 ```
 # A tibble: 2 × 4
-  lake  shapiro_stat shapiro_p_value normal_distribution
+  side  shapiro_stat shapiro_p_value normal_distribution
   <chr>        <dbl>           <dbl> <chr>              
-1 I3           0.911       0.000162  Non-normal         
-2 I8           0.920       0.0000112 Non-normal         
+1 shady        0.966           0.868 Normal             
+2 sunny        0.900           0.289 Normal             
 ```
 
 
@@ -1320,7 +1399,7 @@ Levenes test can be done on the original dataframe
 ```{.r .cell-code}
 # Method 1: Using car package's leveneTest
 # This is often preferred as it's more robust to departures from normality
-levene_result <- leveneTest(length_mm ~ lake, data = grayling_df)
+levene_result <- leveneTest(length_mm ~ side, data = ps_df)
 print("Levene's Test for Homogeneity of Variance:")
 ```
 
@@ -1341,11 +1420,9 @@ print(levene_result)
 
 ```
 Levene's Test for Homogeneity of Variance (center = median)
-       Df F value    Pr(>F)    
-group   1  13.705 0.0002907 ***
-      166                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+      Df F value Pr(>F)
+group  1  0.2062 0.6567
+      14               
 ```
 
 
@@ -1368,11 +1445,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ::::: columns
 ::: {.column width="60%"}
-Now we can compare the mean fish lengths between i3 and i8.
+Now we can compare the mean fish lengths between shady and sunny sides.
 
-Ho: μ₁ = μ₂ (The fish lengths do not differ)
+Ho: μ₁ = μ₂ (The needle lengths do not differ)
 
-Ha: μ₁ ≠ μ₂ (The mean fish lengths differ - direction is not specified)
+Ha: μ₁ ≠ μ₂ (The mean needle lengths differ - direction is not
+specified)
 
 Deciding between:
 
@@ -1380,7 +1458,8 @@ Deciding between:
 
 -   Welch's t-test (unequal variances)
 
-**Note the Levenes Test should be NOT SIGNIFICANT - What is the null hypothesis**
+**Note the Levenes Test should be NOT SIGNIFICANT - What is the null
+hypothesis**
 :::
 
 ::: {.column width="40%"}
@@ -1400,11 +1479,9 @@ Deciding between:
 
 ```
 Levene's Test for Homogeneity of Variance (center = median)
-       Df F value    Pr(>F)    
-group   1  13.705 0.0002907 ***
-      166                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+      Df F value Pr(>F)
+group  1  0.2062 0.6567
+      14               
 ```
 
 
@@ -1434,48 +1511,6 @@ YOUR CODE HERE:
 
 t = (mean1 - mean2) / sqrt((s1\^2/n1) + (s2\^2/n2))
 
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-grayling_summary
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 2 × 5
-  lake  mean_length sd_length se_length count
-  <chr>       <dbl>     <dbl>     <dbl> <int>
-1 I3           266.      28.3      3.48    66
-2 I8           363.      52.3      5.18   102
-```
-
-
-:::
-:::
-
-
-
-
-
-
-
-
-
-
-
-
 ::: callout-tip
 
 
@@ -1495,7 +1530,7 @@ grayling_summary
 # Use var.equal=TRUE for standard t-test or var.equal=FALSE for Welch's t-test
 
 # Standard t-test (if variances are equal)
-t_test_result <- t.test(length_mm ~ lake, data = grayling_df, var.equal = TRUE)
+t_test_result <- t.test(length_mm ~ side, data = ps_df, var.equal = TRUE)
 print("Standard two-sample t-test:")
 ```
 
@@ -1518,14 +1553,97 @@ print(t_test_result)
 
 	Two Sample t-test
 
-data:  length_mm by lake
-t = -13.797, df = 166, p-value < 2.2e-16
-alternative hypothesis: true difference in means between group I3 and group I8 is not equal to 0
+data:  length_mm by side
+t = 1.1279, df = 14, p-value = 0.2783
+alternative hypothesis: true difference in means between group shady and group sunny is not equal to 0
 95 percent confidence interval:
- -110.87187  -83.11208
+ -1.309330  4.214005
 sample estimates:
-mean in group I3 mean in group I8 
-        265.6061         362.5980 
+mean in group shady mean in group sunny 
+           17.60561            16.15328 
+```
+
+
+:::
+
+```{.r .cell-code}
+# Welch's t-test (if variances are unequal)
+# YOUR CODE HERE
+```
+:::
+
+
+
+
+
+
+
+
+
+
+
+:::
+
+# **Lecture 5:** Running the Two-Sample T-Test
+
+Now we can do a two sample TTEST
+
+Calculate t-statistic manually (optional)
+
+YOUR CODE HERE:
+
+t = (mean1 - mean2) / sqrt((s1\^2/n1) + (s2\^2/n2))
+
+::: callout-tip
+
+
+
+
+
+
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# YOUR TASK: Conduct a two-sample t-test
+# Use var.equal=TRUE for standard t-test or var.equal=FALSE for Welch's t-test
+
+# Standard t-test (if variances are equal)
+t_test_result <- t.test(length_mm ~ side, data = ps_df, var.equal = FALSE)
+print("Standard two-sample t-test:")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] "Standard two-sample t-test:"
+```
+
+
+:::
+
+```{.r .cell-code}
+print(t_test_result)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Welch Two Sample t-test
+
+data:  length_mm by side
+t = 1.1279, df = 13.96, p-value = 0.2784
+alternative hypothesis: true difference in means between group shady and group sunny is not equal to 0
+95 percent confidence interval:
+ -1.310069  4.214743
+sample estimates:
+mean in group shady mean in group sunny 
+           17.60561            16.15328 
 ```
 
 
@@ -1554,17 +1672,22 @@ mean in group I3 mean in group I8
 ## Standard t-test (Student's t-test)
 
 -   **Assumes equal variances** between the two groups being compared
--   Uses a **pooled variance estimate** that combines data from both group
--   Has **higher statistical power** when the equal variance assumption is met
+-   Uses a **pooled variance estimate** that combines data from both
+    group
+-   Has **higher statistical power** when the equal variance assumption
+    is met
 -   **Degrees of freedom** = n₁ + n₂ - 2
 
 ## Welch's t-test
 
--   **Does not assume equal variances** between groups (also called the "unequal variances t-test")
+-   **Does not assume equal variances** between groups (also called the
+    "unequal variances t-test")
 -   Uses **separate variance estimates** for each group
 -   More **robust** when group variances are different
--   Uses a more complex **degrees of freedom calculation** (Welch-Satterthwaite equation)
--   **Degrees of freedom** are typically non-integer and usually smaller than the standard t-test
+-   Uses a more complex **degrees of freedom calculation**
+    (**Welch-Satterthwaite equation**) and decimal!!!
+-   **Degrees of freedom** are typically non-integer and usually smaller
+    than the standard t-test
 
 # **Lecture 5:** Interpreting Two-Sample T-Test Results
 
@@ -1572,11 +1695,14 @@ mean in group I3 mean in group I8
 ::: {.column width="60%"}
 **Interpret the results of the two-sample t-test**
 
-What can we conclude about the needle lengths on windward vs. leeward sides?
+What can we conclude about the needle lengths on sunny vs shady sides?
 
 **How to report this result in a scientific paper:**
 
-"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no significant\] difference in needle length between windward (M = ..., SD = ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) = ..., p = ...."
+"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no
+significant\] difference in needle length between windward (M = ..., SD
+= ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) =
+..., p = ...."
 :::
 
 ::: {.column width="40%"}
@@ -1616,11 +1742,14 @@ What can we conclude about the needle lengths on windward vs. leeward sides?
 ::: {.column width="60%"}
 **Interpret the results of the two-sample t-test**
 
-What can we conclude about the needle lengths on windward vs. leeward sides?
+What can we conclude about the needle lengths on sunny vs shady sides?
 
 **How to report this result in a scientific paper:**
 
-"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no significant\] difference in needle length between windward (M = ..., SD = ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) = ..., p = ...."
+"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no
+significant\] difference in needle length between windward (M = ..., SD
+= ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) =
+..., p = ...."
 :::
 
 ::: {.column width="40%"}
@@ -1654,6 +1783,126 @@ What can we conclude about the needle lengths on windward vs. leeward sides?
 :::
 :::::
 
+# **Lecture 5:** Now what does a paired T test tell us
+
+Why do a paired T test
+
+
+
+
+
+
+
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# YOUR TASK: Conduct a two-sample t-test
+# Use var.equal=TRUE for standard t-test or var.equal=FALSE for Welch's t-test
+
+ps_wide_df <- ps_df %>%
+  pivot_wider(
+    names_from = "side",
+    values_from = length_mm
+  )
+
+
+# Standard t-test (if variances are equal)
+paired_t_test_result <- t.test(ps_wide_df$sunny, ps_wide_df$shady, paired = TRUE)
+print("Standard two-sample t-test:")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] "Standard two-sample t-test:"
+```
+
+
+:::
+
+```{.r .cell-code}
+print(paired_t_test_result)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Paired t-test
+
+data:  ps_wide_df$sunny and ps_wide_df$shady
+t = -2.7818, df = 7, p-value = 0.02723
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -2.6868652 -0.2178092
+sample estimates:
+mean difference 
+      -1.452337 
+```
+
+
+:::
+
+```{.r .cell-code}
+# Welch's t-test (if variances are unequal)
+# YOUR CODE HERE
+```
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+# Lecture 5: What is going on??
+
+Note that thee is a lot of variation within trees but the trend is the
+same
+
+
+
+
+
+
+
+
+
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+ps_plot
+```
+
+::: {.cell-output-display}
+![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-26-1.png)
+:::
+:::
+
+
+
+
+
+
+
+
+
+
+
+
 # **Lecture 5:** Assumptions of Parametric Tests
 
 **Common assumptions for t-tests:**
@@ -1686,4 +1935,5 @@ In this activity, we've:
 -   Always check assumptions before conducting tests
 -   Visualize your data to understand patterns
 -   Report results comprehensively
--   Consider alternatives when assumptions are violated - non parametric tests...
+-   Consider alternatives when assumptions are violated - non parametric
+    tests...

@@ -17,9 +17,6 @@ format:
 
 
 
-
-
-
 # In class activity 4:
 
 ## What did we do last time in activity 3?
@@ -70,9 +67,6 @@ First, let's load the packages we need and the dataset:
 
 
 
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -115,12 +109,7 @@ head(g_df)
 
 
 
-
-
 # Part 1: Summary Statistics - descriptive statistics
-
-
-
 
 
 
@@ -161,11 +150,6 @@ stats_df
 
 
 
-
-
-
-
-
 # Part 2: Creating Frequency Distributions
 
 ## Basic Histograms
@@ -174,9 +158,6 @@ A histogram shows how many observations fall into certain ranges (or
 "bins").
 
 Let's create a simple histogram of fish lengths from I3 :
-
-
-
 
 
 
@@ -200,17 +181,11 @@ i3_df %>%
 
 
 
-
-
-
 ::: callout-tip
 ## Activity 1
 
 Try changing the `binwidth` parameter to 5 and then to 1. How does the
 appearance of the histogram change?
-
-
-
 
 
 
@@ -226,17 +201,11 @@ appearance of the histogram change?
 
 
 
-
-
-
 :::
 
 ## Comparing Lakes
 
 Now let's compare two lakes
-
-
-
 
 
 
@@ -260,13 +229,7 @@ g_df %>%
 
 
 
-
-
-
 Now let's compare two lakes side by side:
-
-
-
 
 
 
@@ -291,17 +254,10 @@ g_df %>%
 
 
 
-
-
-
 # Part 2: From Histograms to Density Plots
 
-Density plots give us a smoothed version of the histogram
-It has the proportion of the data under each part of the curve
-This sums to 1
-
-
-
+Density plots give us a smoothed version of the histogram It has the
+proportion of the data under each part of the curve This sums to 1
 
 
 
@@ -325,13 +281,7 @@ i3_df %>%
 
 
 
-
-
-
 We can overlay the density plot on the histogram :
-
-
-
 
 
 
@@ -357,17 +307,9 @@ i3_df %>%
 
 
 
-
-
-
-
 # Part 3 - area under the density curve
 
 We could show this if we really wanted...
-
-
-
-
 
 
 
@@ -418,17 +360,12 @@ i3_df %>%
 
 
 
-
-
-
 ## looking at particular areas...
+
 This can be adapted to calculate the area of a subset of the plot
 
 I don't expect you to know or be able to do all of this but is here to
 play with the code
-
-
-
 
 
 
@@ -442,11 +379,6 @@ play with the code
 # For this example, let's calculate the probability of fish between 40mm and 60mm
 lower_bound <- 320  # change this value
 upper_bound <- 350  # change this value
-
-
-
-
-
 
 
 
@@ -549,15 +481,9 @@ ggplot(i3_fish, aes(x = length_mm)) +
 
 
 
-
-
-
 # Part 4: this is great but integrating area each time is a pain
 
-Converting data to Z scores 
-
-
-
+Converting data to Z scores
 
 
 
@@ -600,14 +526,7 @@ head(i3_df)
 
 
 
-
-
-
-
 ## Now plot the Z Scores as a histogram
-
-
-
 
 
 
@@ -640,25 +559,21 @@ z_fish_plot
 
 
 
-
-
-
 # we can use this now to get the area the same way as above but easier...
-Proportion within 1 standard deviation = sum of absolute values of Z Scores that are less than or equal to 1 divided by the number in the sample...
+
+Proportion within 1 standard deviation = sum of absolute values of Z
+Scores that are less than or equal to 1 divided by the number in the
+sample...
 
 Remember in a true normal distribution it is 68% within 1 std dev.
 
 should be approximately (varies if distribution is not normal):
 
-- 68% of data within ±1σ of the mean
+-   68% of data within ±1σ of the mean
 
-- 95% of data within ±2σ of the mean - really 1.96σ
+-   95% of data within ±2σ of the mean - really 1.96σ
 
-- 99.7% of data within ±3σ of the mean
-
-
-
-
+-   99.7% of data within ±3σ of the mean
 
 
 
@@ -686,14 +601,9 @@ Proportion within 1 SD: 81.8 %
 
 
 
-
-
-
-
-
 ## Z-score example calculation in r
 
-::::: columns
+:::::::: columns
 ::: {.column width="60%"}
 We can use R to get these values easier...
 
@@ -704,10 +614,7 @@ We can use R to get these values easier...
 -   dnorm(z) \# gives probability density
 :::
 
-::: {.column width="40%"}
-
-
-
+:::::: {.column width="40%"}
 
 
 
@@ -779,12 +686,10 @@ print(z_for_95_percent)
 
 
 
+:::
+::::
 
-
-
-
-
-We can now use this for fun in the fish
+# We can now use this for fun in the fish
 
 ::::: columns
 ::: {.column width="60%"}
@@ -796,9 +701,6 @@ Maybe we expect 95% of the time to catch a fish that is "common" but the
 :::
 
 ::: {.column width="40%"}
-
-
-
 
 
 
@@ -840,21 +742,17 @@ This corresponds to z-score: 1.645
 
 
 
-
-
-
-
+:::
+::::: 
 
 # Part 5: Comparing a sampe mean to an expected mean....
+
 Did the smaple come from that lake?
 
 Lets practice a One-Sample t-Test
 
 Let's perform a one-sample t-test to determine if the mean fish length
 in Lake I3 differs from 260 mm:
-
-
-
 
 
 
@@ -912,22 +810,14 @@ mean of x
 
 
 
-
-
-
-
-
-
 # Part 6: Comparing two means
+
 Formulating Hypotheses
 
 For the following research questions about Arctic grayling, write the
 null and alternative hypotheses:
 
 1.  Are fish in Lake I8 longer than fish in Lake I3?
-
-
-
 
 
 

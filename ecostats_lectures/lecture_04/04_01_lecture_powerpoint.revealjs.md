@@ -32,6 +32,11 @@ format:
 
 
 
+
+
+
+
+
 # **Lecture 4: Probability and Statistical Inference**
 
 ::::: columns
@@ -44,6 +49,11 @@ format:
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -71,6 +81,11 @@ format:
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -81,6 +96,11 @@ format:
 
 Let's explore the Arctic grayling data from lakes I3 and I8. Use the
 `grayling_df` data frame to create basic summary statistics.
+
+
+
+
+
 
 
 
@@ -136,6 +156,11 @@ grayling_summary
 
 
 
+
+
+
+
+
 :::
 
 # **Lecture 4:** Probability Distributions
@@ -165,11 +190,21 @@ grayling_summary
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-4-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -215,11 +250,21 @@ Z-scores allow us to convert any **normal distribution** to the
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-5-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -243,6 +288,11 @@ Let's practice converting raw values to Z-scores using the Arctic
 grayling data.
 
 **Z Score = (length - mean) / standard deviation**
+
+
+
+
+
 
 
 
@@ -298,6 +348,11 @@ head(i3_df)
 
 
 
+
+
+
+
+
 :::
 
 # **Lecture 4:** The fish data as a z score
@@ -320,11 +375,21 @@ distributon?
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-7-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -366,6 +431,11 @@ should be **approximately (varies if distribution is not normal)**:
 
 
 
+
+
+
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -383,6 +453,11 @@ Proportion within 1 SD: 81.8 %
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -421,6 +496,11 @@ You want to know things about this population like
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -438,6 +518,11 @@ You want to know things about this population like
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-9-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -481,11 +566,21 @@ Standard Normal Distribution
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-10-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -527,11 +622,21 @@ Areas under curve of Standard Normal Distribution
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-11-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -579,11 +684,21 @@ z = (300 - 265.61)/28.3 = 1.215194
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-12-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -646,6 +761,11 @@ We can use R to get these values easier...
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -729,6 +849,11 @@ print(z_for_95_percent)
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -744,6 +869,11 @@ Maybe we expect 95% of the time to catch a fish that is "common" but the
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -788,6 +918,11 @@ This corresponds to z-score: 1.645
 
 :::
 :::
+
+
+
+
+
 
 
 
@@ -875,11 +1010,21 @@ Previously we had calculated Standard Error and Confidence Intervals -
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-13-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1023,10 +1168,19 @@ versus the t-distribution for our fish data. I3 data and 10 fish Mean is
 
 
 
+
+
+
+
+
+
+
+
+
+
 :::
 
 ::: callout-tip
-
 ## Practice Exercise 4: Using the t-distribution
 
 Let's compare confidence intervals using the normal approximation (z)
@@ -1034,6 +1188,12 @@ versus the t-distribution for our fish data. I3 data and 10 fish Mean is
 266.7 - sd is 17.12 - se is 5.41
 
 \## $\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
+
+
+
+
+
+
 
 
 
@@ -1137,6 +1297,11 @@ t critical value: 2.262 vs z critical value: 1.96
 
 
 
+
+
+
+
+
 :::
 
 # **Lecture 4:** Intro to Hypothesis Testing one tailed
@@ -1169,6 +1334,11 @@ only interested if it is larger
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -1282,6 +1452,11 @@ Decision: Reject Ho (sample mean falls in upper rejection region)
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -1326,11 +1501,21 @@ only interested if it is larger
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-17-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1372,6 +1557,11 @@ we are looking at the confidence intervals!!!\
 :::
 
 ::: {.column width="40%"}
+
+
+
+
+
 
 
 
@@ -1467,6 +1657,11 @@ Decision: Reject Ho (sample mean falls in rejection region)
 
 
 
+
+
+
+
+
 :::
 :::::
 
@@ -1506,11 +1701,21 @@ we are looking at the confidence intervals!!!
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-19-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1532,6 +1737,11 @@ we are looking at the confidence intervals!!!
 
 Let's perform a one-sample t-test to determine if the mean fish length
 in Lake I3 differs from 260 mm:
+
+
+
+
+
 
 
 
@@ -1603,6 +1813,11 @@ mean of x
 
 
 
+
+
+
+
+
 Interpret this test result by answering these questions:
 
 1.  What was the null hypothesis?
@@ -1622,6 +1837,11 @@ For the following research questions about Arctic grayling, write the
 null and alternative hypotheses:
 
 1.  Are fish in Lake I8 longer than fish in Lake I3?
+
+
+
+
+
 
 
 
@@ -1678,6 +1898,11 @@ mean in group I3 mean in group I8
 
 
 
+
+
+
+
+
 Based on this t-test, what can we conclude about the difference in fish
 length between the two lakes?
 :::
@@ -1716,11 +1941,21 @@ something more extreme) if the null hypothesis is true.
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-22-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1778,11 +2013,21 @@ occur:
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-23-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1838,11 +2083,21 @@ The Key Insight fundamental trade-off in hypothesis testing:
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-24-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
@@ -1875,6 +2130,11 @@ error might have occurred:
 
 3.  Let's calculate the power of our t-test to detect a 30 mm difference
     in length between lakes:
+
+
+
+
+
 
 
 
@@ -1946,6 +2206,11 @@ NOTE: n is number in *each* group
 
 
 
+
+
+
+
+
 :::
 
 # **Lecture 4:** Summary
@@ -1981,11 +2246,21 @@ NOTE: n is number in *each* group
 
 
 
+
+
+
+
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-html/unnamed-chunk-26-1.png){width=480}
 :::
 :::
+
+
+
+
+
 
 
 
