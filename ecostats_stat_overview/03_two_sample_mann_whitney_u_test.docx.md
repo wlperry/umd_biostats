@@ -28,7 +28,6 @@ format:
 
 
 
-
 # Introduction to Mann-Whitney-Wilcoxon Test
 
 ## Background and Theory

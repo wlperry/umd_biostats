@@ -10,7 +10,6 @@ format:
     output-file: "09_homework_lmm_anova.pdf"
 ---
 
-
 ::: {.cell}
 
 ```{.r .cell-code}

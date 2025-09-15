@@ -16,7 +16,6 @@ format:
 
 
 
-
 # Lecture 12: Factorial ANOVA
 
 The set up and data overview

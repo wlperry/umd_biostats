@@ -25,7 +25,6 @@ format:
 
 
 
-
 # In class activity 4:
 
 ## What did we do last time in activity 3?

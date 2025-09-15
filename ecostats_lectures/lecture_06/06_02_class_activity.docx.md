@@ -12,14 +12,6 @@ format:
     output-file: "06_02_class_activity.docx"
 ---
 
-
-
-
-
-
-
-
-
 # In class activity 6:
 
 ## What did we do last time in activity 5?
@@ -41,13 +33,6 @@ format:
 
 ::::: columns
 ::: {.column width="60%"}
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -89,23 +74,9 @@ head(pine_switch_df)
 
 :::
 :::
-
-
-
-
-
-
-
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -153,13 +124,6 @@ head(ps_df)
 
 :::
 :::
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -171,13 +135,6 @@ understand its characteristics.
 Let's calculate summary statistics and create visualizations.
 
 **Activity: Calculate basic summary statistics for pine needle length**
-
-
-
-
-
-
-
 
 ::: {.cell exercise='true'}
 
@@ -220,13 +177,6 @@ print(pine_summary)
 ```
 :::
 
-
-
-
-
-
-
-
 # **Part 1:** Visualizing the Data
 
 ::::: columns
@@ -248,13 +198,6 @@ Effective data visualization helps us understand:
 :::::
 
 # Your Task
-
-
-
-
-
-
-
 
 ::: {.cell exercise='true'}
 
@@ -288,26 +231,12 @@ ggplot(ps_df, aes(x = length_mm)) +
 ```
 :::
 
-
-
-
-
-
-
-
 # what is the Effect size or difference in means?
 
 ::: callout-tip
 ## Practice Exercise: Calculate Effect size
 
 We could also look at the difference in means... some cool code here
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -329,13 +258,6 @@ pine_summary %>%
 
 :::
 :::
-
-
-
-
-
-
-
 :::
 
 # **Part 1:** Two Sample T-Test
@@ -380,13 +302,6 @@ If assumptions are violated:
 -   Non-parametric alternatives (Mann-Whitney U test)
 
 # Your task
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -437,21 +352,7 @@ W = 0.89994, p-value = 0.2886
 :::
 :::
 
-
-
-
-
-
-
-
 # shady group
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -479,21 +380,7 @@ W = 0.96639, p-value = 0.8683
 :::
 :::
 
-
-
-
-
-
-
-
 # Remember you can always do it in one go
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -527,21 +414,7 @@ print(normality_results_both)
 :::
 :::
 
-
-
-
-
-
-
-
 # Conduct a Levene's Test
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -578,19 +451,12 @@ group  1  0.2062 0.6567
 :::
 :::
 
-
-
-
-
-
-
-
 # **Part 2:** Conducting the Two-Sample T-Test
 
 **Activity: Conduct a two-sample t-test**
 
-Now we can compare the mean pine needle lengths between sunny and
-shady sides.
+Now we can compare the mean pine needle lengths between sunny and shady
+sides.
 
 H₀: μ₁ = μ₂ (The mean needle lengths are equal)
 
@@ -602,13 +468,6 @@ Deciding between:
 -   Welch's t-test (unequal variances)
 
 # Based on our Levene's test result.
-
-
-
-
-
-
-
 
 ::: {.cell exercise='true'}
 
@@ -659,13 +518,6 @@ mean in group shady mean in group sunny
 ```
 :::
 
-
-
-
-
-
-
-
 # **Part 2:** Interpreting and Reporting Two-Sample T-Test Results
 
 ::::: columns
@@ -707,13 +559,6 @@ With 97% power, this test has excellent ability to detect the specified
 effect size. Generally, **80% power is considered acceptable**, so 97%
 indicates a very well-powered study for detecting a difference of 30mm
 between the groups.
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -849,26 +694,12 @@ NOTE: n is number in *each* group
 :::
 :::
 
-
-
-
-
-
-
-
 # Now to make a final plot
 
 Typically we will make a plot that has the mean and standard error on it
 to represent the data
 
 ## your Task is to make this plot
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -885,13 +716,6 @@ pine_mean_se
 ![](06_02_class_activity_files/figure-docx/unnamed-chunk-8-1.jpeg)
 :::
 :::
-
-
-
-
-
-
-
 
 # **Summary and Conclusions**
 

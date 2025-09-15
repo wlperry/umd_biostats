@@ -23,12 +23,6 @@ format:
     embed-resources: true
 ---
 
-
-
-
-
-
-
 # Introduction to Correlations
 
 ## 

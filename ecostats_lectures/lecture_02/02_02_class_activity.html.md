@@ -19,7 +19,6 @@ format:
 
 
 
-
 # In-class Activity 2: Data Visualization
 
 ## Recap from Activity 1

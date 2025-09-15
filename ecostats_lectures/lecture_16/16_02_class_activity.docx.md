@@ -12,7 +12,6 @@ format:
     output-file: "16_02_class_activity.docx"
 ---
 
-
 ::: {.cell}
 
 ```{.r .cell-code}

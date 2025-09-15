@@ -15,7 +15,6 @@ format:
 
 
 
-
 # Homework Week 2
 
 This is an assignment for you to practice coding and redo the work we do

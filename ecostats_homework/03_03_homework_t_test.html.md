@@ -15,7 +15,6 @@ format:
 
 
 
-
 # Homework Week 3
 
 The goal of this assignment is to begin doing statistical tests and we

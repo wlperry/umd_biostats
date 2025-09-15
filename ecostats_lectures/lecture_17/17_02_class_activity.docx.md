@@ -22,7 +22,6 @@ editor: visual
 
 
 
-
 # Lecture 17: Principal Component Analysis (PCA)
 
 ## What is PCA?

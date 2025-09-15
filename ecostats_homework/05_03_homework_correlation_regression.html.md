@@ -17,7 +17,6 @@ format:
 
 
 
-
 # Assignment Overview
 
 This homework assignment will test your understanding of correlation and regression analysis using real forest inventory data from European beech (*Fagus sylvatica*) trees. You will apply the statistical concepts from Lectures 9 and 10 to analyze relationships between tree measurements.

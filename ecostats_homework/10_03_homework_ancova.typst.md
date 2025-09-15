@@ -10,7 +10,6 @@ format:
     output-file: "10_homework_ANCOVA.pdf"
 ---
 
-
 ::: {.cell}
 
 ```{.r .cell-code}

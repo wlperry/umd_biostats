@@ -19,7 +19,6 @@ format:
 
 
 
-
 # In class activity 9: Correlation and Linear Regression
 
 ## Introduction

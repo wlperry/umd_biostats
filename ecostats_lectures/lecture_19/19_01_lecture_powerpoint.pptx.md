@@ -30,7 +30,6 @@ format:
 
 
 
-
 # Lecture 19: Introduction to Logistic Regression
 
 ## **What is Logistic Regression?**

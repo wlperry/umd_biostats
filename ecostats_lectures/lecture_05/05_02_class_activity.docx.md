@@ -19,7 +19,6 @@ format:
 
 
 
-
 # In-Class Activity 5: Probability and Statistical Inference
 
 ## What did we do last time?

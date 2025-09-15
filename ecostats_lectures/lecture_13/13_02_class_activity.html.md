@@ -21,7 +21,6 @@ format:
 
 
 
-
 # Lecture 13: Data Overview
 
 The dataframe contains r nrow(urchin_df) observations with the following variables:

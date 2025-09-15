@@ -44,12 +44,6 @@ format:
     embed-resources: true
 ---
 
-
-
-
-
-
-
 # Common Statistical Tests Reference Guide
 
 **Author:** Bill Perry

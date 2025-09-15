@@ -28,7 +28,6 @@ format:
 
 
 
-
 # Introduction to One-Way Analysis of Variance
 
 ## Background and Theory

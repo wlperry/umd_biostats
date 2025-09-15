@@ -11,12 +11,6 @@ format:
 editor: visual
 ---
 
-
-
-
-
-
-
 # Ecological Statistics Assignment 03
 
 The goal of this assignment is to test whether crayfish chelae (claw)

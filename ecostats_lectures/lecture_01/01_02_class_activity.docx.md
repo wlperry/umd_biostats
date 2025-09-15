@@ -17,7 +17,6 @@ format:
 
 
 
-
 # In class activity 1:
 
 # Objectives and goals

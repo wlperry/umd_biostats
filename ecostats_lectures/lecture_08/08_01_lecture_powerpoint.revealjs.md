@@ -30,7 +30,6 @@ format:
 
 
 
-
 # Lecture 7 Review
 
 ::::: columns

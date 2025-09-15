@@ -26,7 +26,6 @@ format:
 
 
 
-
 # Introduction to Two-Sample t-Test
 
 ## Background and Theory
@@ -338,7 +337,6 @@ gt_table
 ```
 
 ::: {.cell-output-display}
-
 
 ```{=html}
 <div id="teygqlemge" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -821,7 +819,6 @@ gt_table
 </table>
 </div>
 ```
-
 
 :::
 :::

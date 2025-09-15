@@ -182,20 +182,6 @@
     "text": "Introduction to histograms or frequency distributions\nProbability Distribution Functions (PDF)\nDescriptive Statistics\n\nCenter - mean, median, mode\nSpread - range, variance, standard deviation\n\nTests of means using T-Tests\n\none sample\ntwo sample"
   },
   {
-    "objectID": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_html.html#assumptions-for-t-test",
-    "href": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_html.html#assumptions-for-t-test",
-    "title": "Lecture 05: Probability and Statistical Inference",
-    "section": "Assumptions for t-test:",
-    "text": "Assumptions for t-test:\n\nData is normally distributed\nObservations are independent\nNo significant outliers"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_html.html#shapiro-wilk-test",
-    "href": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_html.html#shapiro-wilk-test",
-    "title": "Lecture 05: Probability and Statistical Inference",
-    "section": "Shapiro-Wilk test",
-    "text": "Shapiro-Wilk test\n\n# Shapiro-Wilk test\nshapiro.test(ps_df$length_mm)\n\n\n    Shapiro-Wilk normality test\n\ndata:  ps_df$length_mm\nW = 0.92754, p-value = 0.2228"
-  },
-  {
     "objectID": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_html.html#t-fracbarx_1---barx_2s_psqrtfrac1n_1-frac1n_2",
     "href": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_html.html#t-fracbarx_1---barx_2s_psqrtfrac1n_1-frac1n_2",
     "title": "Lecture 05: Probability and Statistical Inference",
@@ -222,20 +208,6 @@
     "title": "Lecture 05: Probability and Statistical Inference",
     "section": "Welch’s t-test",
     "text": "Welch’s t-test\n\nDoes not assume equal variances between groups (also called the “unequal variances t-test”)\nUses separate variance estimates for each group\nMore robust when group variances are different\nUses a more complex degrees of freedom calculation (Welch-Satterthwaite equation) and decimal!!!\nDegrees of freedom are typically non-integer and usually smaller than the standard t-test"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_slides.html#assumptions-for-t-test",
-    "href": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_slides.html#assumptions-for-t-test",
-    "title": "Lecture 05: Probability and Statistical Inference",
-    "section": "Assumptions for t-test:",
-    "text": "Assumptions for t-test:\n\nData is normally distributed\nObservations are independent\nNo significant outliers"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_slides.html#shapiro-wilk-test",
-    "href": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_slides.html#shapiro-wilk-test",
-    "title": "Lecture 05: Probability and Statistical Inference",
-    "section": "Shapiro-Wilk test",
-    "text": "Shapiro-Wilk test\n\n# Shapiro-Wilk test\nshapiro.test(ps_df$length_mm)\n\n\n    Shapiro-Wilk normality test\n\ndata:  ps_df$length_mm\nW = 0.92754, p-value = 0.2228"
   },
   {
     "objectID": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_slides.html#t-fracbarx_1---barx_2s_psqrtfrac1n_1-frac1n_2",

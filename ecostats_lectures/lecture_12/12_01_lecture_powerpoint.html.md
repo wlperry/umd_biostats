@@ -29,7 +29,6 @@ format:
 
 
 
-
 # Lecture 12: Review
 
 ::::: columns

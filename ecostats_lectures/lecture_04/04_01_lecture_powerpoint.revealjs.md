@@ -36,7 +36,6 @@ format:
 
 
 
-
 # **Lecture 4: Probability and Statistical Inference**
 
 ::::: columns

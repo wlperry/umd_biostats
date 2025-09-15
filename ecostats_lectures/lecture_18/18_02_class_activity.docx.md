@@ -21,7 +21,6 @@ format:
 
 
 
-
 # Lecture 18: Non-metric Multidimensional Scaling (NMDS) and PERMANOVA
 
 ## What is NMDS?

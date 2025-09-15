@@ -28,7 +28,6 @@ format:
 
 
 
-
 # Lecture 6 - A Brief review
 
 ::::: columns

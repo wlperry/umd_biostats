@@ -10,7 +10,6 @@ format:
     output-file: "08_homework_factorial_anova.pdf"
 ---
 
-
 ::: {.cell}
 
 ```{.r .cell-code}

@@ -19,7 +19,6 @@ format:
 
 
 
-
 # In class activity 3:
 
 # ![](images/grayling.jpeg)

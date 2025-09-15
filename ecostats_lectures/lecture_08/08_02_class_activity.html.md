@@ -19,7 +19,6 @@ format:
 
 
 
-
 # In class activity 8: Study Design and Power Analysis
 
 ## Introduction

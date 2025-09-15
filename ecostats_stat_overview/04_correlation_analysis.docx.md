@@ -28,7 +28,6 @@ format:
 
 
 
-
 # Introduction to Correlation Analysis
 
 ## Background and Theory

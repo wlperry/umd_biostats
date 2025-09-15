@@ -31,7 +31,6 @@ format:
 
 
 
-
 # **Lecture 18:** Multivariate Community Analysis
 
 ::::: columns

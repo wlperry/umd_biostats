@@ -10,7 +10,6 @@ format:
     output-file: "06_homework_multiple_regression.pdf"
 ---
 
-
 ::: {.cell}
 
 ```{.r .cell-code}

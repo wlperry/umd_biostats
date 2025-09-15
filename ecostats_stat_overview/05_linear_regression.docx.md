@@ -28,7 +28,6 @@ format:
 
 
 
-
 # Introduction to Linear Regression Analysis
 
 ## Background and Theory

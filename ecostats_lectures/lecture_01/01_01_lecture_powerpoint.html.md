@@ -15,18 +15,6 @@ format:
     output-file: "01_01_lecture_powerpoint.pdf"
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
 # **Lecture 1: Syllabus**
 
 -   Please look over the syllabus as it has all the details of the class and how it will run.

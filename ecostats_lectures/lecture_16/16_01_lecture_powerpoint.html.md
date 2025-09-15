@@ -31,7 +31,6 @@ format:
 
 
 
-
 # Introduction to Multivariate Statistics
 
 ::::: columns

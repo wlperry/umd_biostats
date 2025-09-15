@@ -11,10 +11,6 @@ format:
 editor: visual
 ---
 
-
-
-
-
 # Ecological Statistics Assignment 02
 
 In this assignment you will analyze a dataframe of various limnological parameters from 594 lakes in Iowa, Wisconsin and Michigan. This dataframe is a trimmed version of the full dataframe used by Cheruvelil et al. 2013 in a study of the interactions between landscape parameters and limnological variables. The full dataframe is available online: [Dryad Full Dataframe](https://datadryad.org/dataset/doi:10.5061/dryad.75s9s)

@@ -10,7 +10,6 @@ format:
     output-file: "07_homework_one_way_anova.pdf"
 ---
 
-
 ::: {.cell}
 
 ```{.r .cell-code}

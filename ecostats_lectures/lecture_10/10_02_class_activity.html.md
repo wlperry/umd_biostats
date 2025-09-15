@@ -19,7 +19,6 @@ format:
 
 
 
-
 # Analysis of Net Primary Production in Forests: A Modern Tidyverse Approach
 
 *Based on Michaletz et al. (2014) data*

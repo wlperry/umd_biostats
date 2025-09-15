@@ -11,7 +11,6 @@ format:
     output-file: "13_05_nested_anovat_visual_slides.html"
 ---
 
-
 ::: {.cell}
 
 ```{.r .cell-code}

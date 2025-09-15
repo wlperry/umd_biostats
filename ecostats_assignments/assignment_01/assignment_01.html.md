@@ -10,10 +10,6 @@ format:
     output-file: "assignment_01.pdf"
 ---
 
-
-
-
-
 # Ecological Statistics Assignment 01
 
 In this assignment you will be doing 2-sample tests on a dataframe describing phosphorus concentrations and phytoplankton biomass from 26 lakes. The data (chl_p_data_assignment_01.csv and chl_p_data_assignment_wide_01b.csv) comes in part from a data synthesis project (Ecology Under Lake Ice) and in part from sampling conducted by Ted Ozersky et al.  Two samples have been collected in each lake in the dataframe: one in winter and one in summer.

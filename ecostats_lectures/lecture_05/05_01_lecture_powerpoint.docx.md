@@ -17,18 +17,6 @@ format:
     output-file: "05_01_lecture_powerpoint.pdf"
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
 # **Lecture 4: Review**
 
 ::::: columns
@@ -53,11 +41,9 @@ format:
 
 ::::: columns
 ::: {.column width="60%"}
--   Introduction to histograms or frequency distributions
 -   Probability Distribution Functions (PDF)
--   Descriptive Statistics
-    -   Center - mean, median, mode
-    -   Spread - range, variance, standard deviation
+    -   Z scores and T scores
+-   Hypothesis testing
 -   Tests of means using T-Tests
     -   one sample
 
@@ -73,29 +59,12 @@ xx
 
 # **Lecture 4: Review - Summary Statistics**
 
--   Introduction to histograms or frequency distributions
--   Probability Distribution Functions (PDF)
--   Descriptive Statistics
-    -   Center - mean, median, mode
-    -   Spread - range, variance, standard deviation
 -   Tests of means using T-Tests
     -   one sample - is the sample mean different from a hypothesized
         mean?
-
     -   two sample - are the sample means from two samples the same or
         different?
 -   for two sample T tests the df = n1+ n2 -2 = 8+8-2=14
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -112,17 +81,6 @@ xx
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # **Lecture 5: Probability and Statistical Inference**
 
 ::::: columns
@@ -134,36 +92,15 @@ xx
 -   T Distributions
 -   One sample T Tests
 -   Two sample T Test
+-   Assumption tests
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-2-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -181,33 +118,11 @@ The goals for today
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-3-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -219,7 +134,7 @@ One-tailed questions: area of distribution left or (right) of a certain
 value for a one sample test
 
 -   n=8 (df=7) - 95% of the observations found left
--   t= 1.761 (5% are outside)
+-   t= 1.895 (5% are outside)
 
 ![](images/clipboard-1822465473.png){width="267" height="198"}
 :::
@@ -235,8 +150,9 @@ value for a one sample test
 ::: {.column width="60%"}
 Two-tailed questions refer to area between certain values
 
--   n= 20 (df=19), 90% of the observations are between
--   t=-1.729 and t=1.729 (10% are outside)
+-   n= 8 (df=7), 95% of the observations are between
+-   t=-2.365 and t=2.365 (2.5% are outside on each side)
+-   One tailed was t= 1.895 (5% are outside)
 
 ![](images/clipboard-2234740159.png){width="200" height="150"}
 :::
@@ -273,39 +189,28 @@ So:
 
 -   Can assess confidence that population mean is within a certain range
 -   Can use t distribution to ask questions like:
-    -   "What is probability of getting sample with mean = ȳ from
-        population with mean = µ?" (1 sample t-test)
-    -   "What is the probability that two samples came from same
-        population?" (2 sample t-test)
+    -   "What is probability of getting sample with mean = ȳ\
+        from population with mean = µ?" (1 sample t-test)
+    -   "What is the probability that two samples came from\
+        the same population?" (2 sample t-test)
 
 # **Lecture 5:** Single Sample T-Test
 
 We want to test if the mean fish length in I3 differs from 240mm.
 
-**Activity: Define hypotheses and identify assumptions**
+### **Activity: Define hypotheses and identify assumptions**
 
 H₀: μ = 15 (The mean needle length on shade side is 15mm)
 
 H₁: μ ≠ 15 (The mean needle length on shade side is not 240mm)
 
-## Assumptions for t-test:
+### Assumptions for t-test:
 
 1.  Data is normally distributed
 2.  Observations are independent
 3.  No significant outliers
 
 # Assumptions in R - qqplots from car
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell exercise='true'}
 
@@ -333,31 +238,9 @@ qqPlot(ps_df$length_mm,
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Statistical Test of Normality
 
-## Shapiro-Wilk test
-
-
-
-
-
-
-
-
-
-
-
+### Shapiro-Wilk test
 
 ::: {.cell}
 
@@ -380,29 +263,7 @@ W = 0.92754, p-value = 0.2228
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Checking for Outliers
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -417,17 +278,6 @@ ps_df %>% ggplot(aes(side, length_mm))+geom_boxplot()
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Practice Exercise 1: One-Sample t-Test
 
 ::: callout-tip
@@ -437,21 +287,10 @@ Let's perform a one-sample t-test to determine if the mean fish length
 in I3 Lake differs from 15 mm:
 
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # what is the mean
-
 ps_shade_mean <- mean(ps_shady_df$length_mm, na.rm = TRUE)
 cat("Mean:", round(ps_shade_mean, 1), "mm\n")
 ```
@@ -468,8 +307,6 @@ Mean: 17.6 mm
 ```{.r .cell-code}
 # Perform a one-sample t-test
 t_test_result <- t.test(ps_shady_df$length_mm, mu = 15)
-
-# View the test results
 t_test_result
 ```
 
@@ -492,16 +329,6 @@ mean of x
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 
 Interpret this test result by answering these questions:
@@ -537,33 +364,11 @@ using data.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-7-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -593,33 +398,11 @@ using data.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-8-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -650,7 +433,7 @@ This is what we will do with the fish length again...
 :::
 
 ::: {.column width="40%"}
-xxxxx ![](images/two_branches.jpg){width="204"} xxx
+![](images/two_branches.jpg){width="204"} xxx
 :::
 :::::
 
@@ -666,17 +449,6 @@ How would you assess this question using what we learned?
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -704,17 +476,6 @@ shady_sunny_plot
 # what can you conclude about the fish populations in these two lakes?
 ```
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -770,17 +531,6 @@ group.
 
 1.  You need this and the graph to see what is going on ....
 
-
-
-
-
-
-
-
-
-
-
-
     ::: {.cell}
     
     ```{.r .cell-code}
@@ -809,31 +559,9 @@ group.
     
     :::
     :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # Visualizing Group Differences
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -847,34 +575,12 @@ shady_sunny_plot
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Practice Exercise 4: Effect Size
 
 ::: callout-tip
 ## Practice Exercise 4: Effect size
 
 We could also look at the difference in means... some cool code here
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -896,17 +602,6 @@ group_summary %>%
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # Practice Exercise 5: ggplot Summary Statistics
@@ -916,17 +611,6 @@ group_summary %>%
 
 GGplot also has code to make the mean and standard error plots we are
 interested in along with a lot of others
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -946,17 +630,6 @@ neelde_mean_se_plot
 ![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-13-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # **Lecture 5:** Testing Assumptions for Two-Sample T-Test
@@ -981,17 +654,6 @@ qqplots
 
 Note you need to test each groups separately...
 
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1003,17 +665,6 @@ neelde_mean_se_plot
 ![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-14-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # Practice Exercise 7: Separate Group Data
@@ -1024,17 +675,6 @@ neelde_mean_se_plot
 qqplots
 
 Note you need to test each groups separately...
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1084,17 +724,6 @@ head(ps_sunny_df)
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # Practice Exercise 8: QQ Plot for Sunny Data
@@ -1105,17 +734,6 @@ head(ps_sunny_df)
 qqplots
 
 Note you need to test each groups separately...
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1139,17 +757,6 @@ qqPlot(ps_sunny_df$length_mm,
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # Practice Exercise 9: Shapiro-Wilk Test
@@ -1160,17 +767,6 @@ qqPlot(ps_sunny_df$length_mm,
 Shapiro-Wilk test
 
 Note you need to test each groups separately...
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1192,17 +788,6 @@ W = 0.89994, p-value = 0.2886
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # Practice Exercise 10: QQ Plot for Shady
@@ -1213,17 +798,6 @@ W = 0.89994, p-value = 0.2886
 qqplots
 
 Note you need to test each groups separately...
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1248,17 +822,6 @@ qqPlot(ps_shady_df$length_mm,
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # Practice Exercise 11: Shapiro-Wilk for Shady
@@ -1269,17 +832,6 @@ qqPlot(ps_shady_df$length_mm,
 Shapiro-Wilk test
 
 Note you need to test each groups separately...
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1301,17 +853,6 @@ W = 0.96639, p-value = 0.8683
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # Practice Exercise 12: Combined Normality Test
@@ -1320,17 +861,6 @@ W = 0.96639, p-value = 0.8683
 ## Practice Exercise 12: Test Normality at one time
 
 There are always a lot of ways to do this in R
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1363,17 +893,6 @@ print(normality_results)
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # Practice Exercise 13: Test Equal Variances
@@ -1382,17 +901,6 @@ print(normality_results)
 ## Practice Exercise 13: Test equal variances
 
 Levenes test can be done on the original dataframe
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1428,17 +936,6 @@ group  1  0.2062 0.6567
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # **Lecture 5:** Conducting the Two-Sample T-Test
@@ -1463,17 +960,6 @@ hypothesis**
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -1487,17 +973,6 @@ group  1  0.2062 0.6567
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1512,17 +987,6 @@ YOUR CODE HERE:
 t = (mean1 - mean2) / sqrt((s1\^2/n1) + (s2\^2/n2))
 
 ::: callout-tip
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1571,17 +1035,6 @@ mean in group shady mean in group sunny
 # YOUR CODE HERE
 ```
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # **Lecture 5:** Running the Two-Sample T-Test
@@ -1595,17 +1048,6 @@ YOUR CODE HERE:
 t = (mean1 - mean2) / sqrt((s1\^2/n1) + (s2\^2/n2))
 
 ::: callout-tip
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1654,17 +1096,6 @@ mean in group shady mean in group sunny
 # YOUR CODE HERE
 ```
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # **Lecture 5:** Difference between a Two-Sample T and Welch's T Test
@@ -1706,33 +1137,11 @@ significant\] difference in needle length between windward (M = ..., SD
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-23-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1753,50 +1162,17 @@ significant\] difference in needle length between windward (M = ..., SD
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-24-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 # **Lecture 5:** Now what does a paired T test tell us
 
 Why do a paired T test
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1854,32 +1230,10 @@ mean difference
 ```
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Lecture 5: What is going on??
 
 Note that thee is a lot of variation within trees but the trend is the
 same
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1891,17 +1245,6 @@ ps_plot
 ![](05_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-26-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 
 # **Lecture 5:** Assumptions of Parametric Tests
 

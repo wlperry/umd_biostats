@@ -26,7 +26,6 @@ format:
 
 
 
-
 # Introduction to Multiple Linear Regression Analysis
 
 ## Background and Theory

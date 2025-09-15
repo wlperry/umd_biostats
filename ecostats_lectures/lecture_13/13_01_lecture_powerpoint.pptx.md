@@ -30,7 +30,6 @@ format:
 
 
 
-
 # Lecture 13: Review
 
 ::::: columns

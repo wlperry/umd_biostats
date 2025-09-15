@@ -28,7 +28,6 @@ format:
 
 
 
-
 # Introduction to Two-Sample t-Test
 
 ## Background and Theory
@@ -354,7 +353,6 @@ gt_table
 ```
 
 ::: {.cell-output-display}
-
 ```{=openxml}
 <w:p>
   <w:pPr>
@@ -603,7 +601,6 @@ gt_table
   </w:r>
 </w:p></w:tc></w:tr></w:tbl>
 ```
-
 
 
 :::

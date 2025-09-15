@@ -21,7 +21,6 @@ format:
 
 
 
-
 # Lecture 15: Analysis of Covariance (ANCOVA)
 
 ## What is ANCOVA?

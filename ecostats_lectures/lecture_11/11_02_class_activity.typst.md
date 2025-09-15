@@ -14,7 +14,6 @@ format:
 
 
 
-
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 

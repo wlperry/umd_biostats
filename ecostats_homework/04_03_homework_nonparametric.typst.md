@@ -15,7 +15,6 @@ format:
 
 
 
-
 # Background
 
 This assignment is based on Graham & Angilletta (2022) *"Distinguishing between unreliability and dishonesty: A comparative study of aggressive communication in crayfish"* published in Functional Ecology.

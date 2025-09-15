@@ -15,7 +15,6 @@ format:
 
 
 
-
 # Lecture 13: Introduction to a nested design the hard way
 
 This analysis examines the effects of varying sea urchin densities on the percentage cover of filamentous algae. The experiment was designed with four urchin density treatments (control, 66% of original density, 33% of original density, and all urchins removed) nested within four random patches. Five replicate quadrats were measured within each treatment-patch combination.

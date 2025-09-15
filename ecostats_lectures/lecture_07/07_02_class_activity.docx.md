@@ -19,7 +19,6 @@ format:
 
 
 
-
 # In class activity 7:
 
 ## Introduction

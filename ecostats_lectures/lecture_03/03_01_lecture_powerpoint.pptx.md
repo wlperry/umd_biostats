@@ -32,7 +32,6 @@ format:
 
 
 
-
 ::: {.callout-note appearance="simple"}
 ## Download this lecture
 

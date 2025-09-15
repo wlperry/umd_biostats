@@ -28,7 +28,6 @@ format:
 
 
 
-
 # Lecture 5: Review
 
 :::: columns

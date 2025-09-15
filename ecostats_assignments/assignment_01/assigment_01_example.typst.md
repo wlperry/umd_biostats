@@ -15,7 +15,6 @@ format:
 
 
 
-
 # Ecological Statistics Assignment 01
 
 The goal of this assignment is to analyze data from Ted Ozersky using

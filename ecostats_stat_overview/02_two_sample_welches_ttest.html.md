@@ -26,7 +26,6 @@ format:
 
 
 
-
 # Introduction to Welch's t-Test
 
 ## Background and Theory

@@ -21,7 +21,6 @@ format:
 
 
 
-
 # Lecture 14: Generalized Linear Models Overview
 
 Generalized Linear Models (GLMs) extend linear models to handle different types of response variables:
