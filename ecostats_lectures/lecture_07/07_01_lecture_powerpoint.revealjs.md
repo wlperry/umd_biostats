@@ -58,13 +58,15 @@ What we will cover today:
 :::
 
 ::: {.column width="40%"}
-Lets work with the Lake Trout data as the weights are pretty cool and the assumptions may or may not hold
+Lets work with the Lake Trout data as the weights are pretty cool and
+the assumptions may or may not hold
 
-This is easily translated into any of the other dataframes you might want to use
+This is easily translated into any of the other dataframes you might
+want to use
 
 lake trout
 
-![](images/lake_trout.jpg){width="300" height="200"}
+![](images/lake_trout.jpg){width="423" height="132"}
 :::
 :::::
 
@@ -169,7 +171,8 @@ head(lt_df)
 T-tests are **parametric** tests
 
 -   Parametric tests:
-    -   specify/assume probability distribution from which parameters came
+    -   specify/assume probability distribution from which parameters
+        came
     -   Basic assumptions of parametric t-tests:
         -   Random sampling
 
@@ -193,7 +196,8 @@ T-tests are **parametric** tests
 ::: {.column width="60%"}
 -   If assumptions of parametric test violated, test becomes unreliable
 -   This is because test statistic may no longer follow distribution
--   Most parametric tests robust to mild/moderate violations of below assumptions
+-   Most parametric tests robust to mild/moderate violations of below
+    assumptions
 :::
 
 ::: {.column width="40%"}
@@ -217,7 +221,8 @@ T-tests are **parametric** tests
 
 -   Random sampling:
 
-    -   samples are randomly collected from populations; part of experimental design
+    -   samples are randomly collected from populations; part of
+        experimental design
 
     -   Necessary for sample -\> population inference
 :::
@@ -241,9 +246,11 @@ Basic assumptions of parametric t-tests:
 
 -   no outliers
 
--   Lets do the above for one lake - `NE 12` as if we were going to do a one sample T Test
+-   Lets do the above for one lake - `NE 12` as if we were going to do a
+    one sample T Test
 
-    -   we need to make a new dataframe with NE 12 data only called `ne12_data`
+    -   we need to make a new dataframe with NE 12 data only called
+        `ne12_data`
     -   how do you do this?
 
 -   Normality: Samples from normally distributed population
@@ -297,9 +304,11 @@ Basic assumptions of parametric t-tests:
 
 -   no outliers
 
--   Lets do the above for one lake - `NE 12` as if we were going to do a one sample T Test
+-   Lets do the above for one lake - `NE 12` as if we were going to do a
+    one sample T Test
 
-    -   we need to make a new dataframe with NE 12 data only called `ne12_data`
+    -   we need to make a new dataframe with NE 12 data only called
+        `ne12_data`
     -   how do you do this?
 
 -   Normality: Samples from normally distributed population
@@ -370,7 +379,8 @@ Basic assumptions of parametric t-tests:
 -   random sampling
 -   no outliers
 
-Equal variance: samples are from populations with similar degree of variability
+Equal variance: samples are from populations with similar degree of
+variability
 
 -   Graphical tests: boxplots
 -   "Formal" tests: F-ratio test
@@ -419,7 +429,8 @@ Equal variance: samples are from populations with similar degree of variability
     -   equal variance
     -   random sampling
     -   no outliers
--   No outliers: no "extreme" values that are very different from rest of sample
+-   No outliers: no "extreme" values that are very different from rest
+    of sample
     -   Graphical tests: boxplots, histograms
     -   "Formal tests": Grubb's test - no one really does this
     -   **Note: outliers a problem for non-parametric tests as well**
@@ -464,8 +475,12 @@ Equal variance: samples are from populations with similar degree of variability
 -   Alternative tests, with more relaxed assumptions, are available
 -   In which case would you use the following tests?
     -   Welch's t-test: *when distribution normal but variance unequal*
-    -   Mann-Whitney-Wilcoxon test: *when distribution not normal and/or outliers are present (but both groups should still have similar distributions and \~equal variance)*
-    -   Permutation test for two samples: *when distribution not normal (but both groups should still have similar distributions and \~equal variance)*
+    -   Mann-Whitney-Wilcoxon test: *when distribution not normal and/or
+        outliers are present (but both groups should still have similar
+        distributions and \~equal variance)*
+    -   Permutation test for two samples: *when distribution not normal
+        (but both groups should still have similar distributions and
+        \~equal variance)*
 :::
 
 ::: {.column width="40%"}
@@ -506,7 +521,8 @@ Equal variance: samples are from populations with similar degree of variability
 -   QQ-plots: tool for assessing normality
     -   On x- theoretical quantiles from SND
     -   On y- ordered sample values
-    -   Deviation from normal can be detected as deviation from straight line
+    -   Deviation from normal can be detected as deviation from straight
+        line
 :::
 
 ::: {.column width="40%"}
@@ -544,7 +560,8 @@ Equal variance: samples are from populations with similar degree of variability
 
 ::::: columns
 ::: {.column width="60%"}
--   In some cases, data can be mathematically "transformed" to meet assumptions of parametric tests
+-   In some cases, data can be mathematically "transformed" to meet
+    assumptions of parametric tests
 -   this can be done in r and usually involves
     -   log10 transformations
     -   square root transformations
@@ -564,9 +581,11 @@ Equal variance: samples are from populations with similar degree of variability
 ::: {.column width="60%"}
 -   **Welch's t-test**
     -   common "robust" test for means of two populations
-    -   Robust to violation of equal variance assumption, deals better with unequal sample size
+    -   Robust to violation of equal variance assumption, deals better
+        with unequal sample size
     -   Parametric test (assumes normal distribution)
-    -   Calculates a t statistic but recalculates df based on samples sizes and s
+    -   Calculates a t statistic but recalculates df based on samples
+        sizes and s
 :::
 
 ::: {.column width="40%"}
@@ -693,9 +712,11 @@ mean in group Island Lake       mean in group NE 12
 
 Rank-based tests: no assumptions about distribution (non-parametric)
 
--   Ranks of data: observations assigned ranks, sums (and signs for paired tests) of ranks for groups compared
+-   Ranks of data: observations assigned ranks, sums (and signs for
+    paired tests) of ranks for groups compared
 
--   **Mann-Whitney U test** common alternative to independent samples t-test
+-   **Mann-Whitney U test** common alternative to independent samples
+    t-test
 
 -   **Wilcoxon signed-rank** test is alternative to paired t-test
 
@@ -703,7 +724,8 @@ Rank-based tests: no assumptions about distribution (non-parametric)
 
 -   Less power than parametric tests
 
--   Best when normality assumption can not be met by transformation (weird distribution) or large outliers
+-   Best when normality assumption can not be met by transformation
+    (weird distribution) or large outliers
 
 # Mann-Whitney U Test Results
 
@@ -760,9 +782,11 @@ alternative hypothesis: true location shift is not equal to 0
 ::: {.column width="60%"}
 -   Permutation tests based on resampling: reshuffling of original data
 
--   Resampling allows parameter estimation when distribution unknown, including SEs and CIs of statistics (means, medians)
+-   Resampling allows parameter estimation when distribution unknown,
+    including SEs and CIs of statistics (means, medians)
 
--   Common approach is bootstrap: resample sample with replacement many times, recalculate sample stats
+-   Common approach is bootstrap: resample sample with replacement many
+    times, recalculate sample stats
 
 -   Use the `perm` package
 
@@ -808,10 +832,12 @@ alternative hypothesis: true location shift is not equal to 0
 
 ::::: columns
 ::: {.column width="60%"}
--   Randomly reshuffle observations between groups (keeping n\~NE 12\~=323 and n~Island~=10), calculate ∆
+-   Randomly reshuffle observations between groups (keeping n\~NE
+    12\~=323 and n~Island~=10), calculate ∆
 -   Repeat \>1,000 times
 -   Record proportion of the different means i
--   This is equivalent to p-value and can be used in "traditional" H test framework
+-   This is equivalent to p-value and can be used in "traditional" H
+    test framework
 -   For a graphical explanation:
     -   [Graphical Explanation](https://www.jwilber.me/permutationtest/)
 :::
@@ -905,7 +931,8 @@ p-value estimated from 10000 Monte Carlo replications
 
 -   **Random sampling**: Samples are randomly collected from populations
 -   **Normality**: Data follows a normal distribution
--   **Equal variance**: Samples come from populations with similar variability
+-   **Equal variance**: Samples come from populations with similar
+    variability
 -   **No outliers**: No extreme values that can skew results
 
 ### Assessing Assumptions
@@ -919,10 +946,13 @@ p-value estimated from 10000 Monte Carlo replications
 
 When assumptions aren't met, transformations may help normalize data:
 
--   **Log transformation**: `log10(x)` - Useful for right-skewed data, multiplicative effects
--   **Square root**: `sqrt(x)` - Useful for count data, moderately right-skewed distributions
+-   **Log transformation**: `log10(x)` - Useful for right-skewed data,
+    multiplicative effects
+-   **Square root**: `sqrt(x)` - Useful for count data, moderately
+    right-skewed distributions
 -   **Box-Cox**: More flexible family of power transformations
--   **More specialized transformations** especially for percentages or proportions
+-   **More specialized transformations** especially for percentages or
+    proportions
 
 # Summary - Statistical Test Options
 
@@ -930,30 +960,43 @@ When assumptions aren't met, transformations may help normalize data:
 
 ### 1. Standard T-Test
 
-**Strengths:** - High statistical power when assumptions are met - Well understood and widely accepted
+**Strengths:** - High statistical power when assumptions are met - Well
+understood and widely accepted
 
-**Weaknesses:** - Sensitive to violations of normality, equal variance - Heavily influenced by outliers
+**Weaknesses:** - Sensitive to violations of normality, equal variance -
+Heavily influenced by outliers
 
 ### 2. Welch's T-Test
 
-**Strengths:** - Robust to violations of equal variance assumption - Handles unequal sample sizes well - Still parametric (assumes normality)
+**Strengths:** - Robust to violations of equal variance assumption -
+Handles unequal sample sizes well - Still parametric (assumes normality)
 
-**Weaknesses:** - Slightly less powerful than standard t-test when variances are equal - Still assumes normal distribution
+**Weaknesses:** - Slightly less powerful than standard t-test when
+variances are equal - Still assumes normal distribution
 
 # Summary - Non-Parametric Options
 
 ### 3. Mann-Whitney-Wilcoxon Test
 
-**Strengths:** - Non-parametric: doesn't assume normal distribution - Robust against outliers - Works with ordinal data
+**Strengths:** - Non-parametric: doesn't assume normal distribution -
+Robust against outliers - Works with ordinal data
 
-**Weaknesses:** - Less statistical power than parametric tests - Still assumes similar distributions and approximate equal variance - Tests median differences rather than mean differences
+**Weaknesses:** - Less statistical power than parametric tests - Still
+assumes similar distributions and approximate equal variance - Tests
+median differences rather than mean differences
 
 ### 4. Permutation Tests
 
-**Strengths:** - Distribution-free: doesn't assume a specific distribution - Can be applied to many types of test statistics - Handles small sample sizes well - Directly estimates p-values through resampling
+**Strengths:** - Distribution-free: doesn't assume a specific
+distribution - Can be applied to many types of test statistics - Handles
+small sample sizes well - Directly estimates p-values through resampling
 
-**Weaknesses:** - Computationally intensive - Assumes exchangeability under the null hypothesis - Requires similar distributions and equal variance
+**Weaknesses:** - Computationally intensive - Assumes exchangeability
+under the null hypothesis - Requires similar distributions and equal
+variance
 
 # Key Takeaway
 
-Statistical tests have different strengths and assumptions. The choice should be guided by your data characteristics, not just convenience. Always visualize your data before deciding on the appropriate test.
+Statistical tests have different strengths and assumptions. The choice
+should be guided by your data characteristics, not just convenience.
+Always visualize your data before deciding on the appropriate test.

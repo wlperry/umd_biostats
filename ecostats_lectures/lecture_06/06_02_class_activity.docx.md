@@ -60,44 +60,30 @@ format:
 # Load libraries
 library(patchwork)
 library(car)          # For diagnostic tests
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Loading required package: carData
-```
-
-
-:::
-
-```{.r .cell-code}
 library(tidyverse)    # For data manipulation and visualization
+library(readxl)
+# Load the pine needle data
+# Use here() function to specify the path
+pine_switch_df <- read_excel("data/class_pine needle length switched.xlsx")
+
+
+
+# Examine the first few rows
+head(pine_switch_df)
 ```
 
-::: {.cell-output .cell-output-stderr}
+::: {.cell-output .cell-output-stdout}
 
 ```
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-✖ dplyr::recode() masks car::recode()
-✖ purrr::some()   masks car::some()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+# A tibble: 6 × 5
+  group tree_no tree_char side  length_mm
+  <chr>   <dbl> <chr>     <chr>     <dbl>
+1 five        1 tree_1    sunny      22.7
+2 five        1 tree_1    sunny      21.1
+3 five        1 tree_1    sunny      18.6
+4 five        1 tree_1    sunny      18.6
+5 five        1 tree_1    sunny      21.0
+6 five        1 tree_1    sunny      18.9
 ```
 
 
@@ -123,44 +109,45 @@ library(tidyverse)    # For data manipulation and visualization
 ::: {.cell}
 
 ```{.r .cell-code}
-# Load the pine needle data
-# Use here() function to specify the path
-pine_data <- read_csv("data/pine_needles.csv")
+ps_df <- pine_switch_df %>% 
+  group_by(group, tree_no, tree_char, side) %>% 
+  summarise(length_mm = mean(length_mm, na.rm=TRUE))
 ```
 
 ::: {.cell-output .cell-output-stderr}
 
 ```
-Rows: 48 Columns: 6
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (4): date, group, n_s, wind
-dbl (2): tree_no, length_mm
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+`summarise()` has grouped output by 'group', 'tree_no', 'tree_char'. You can
+override using the `.groups` argument.
 ```
 
 
 :::
 
 ```{.r .cell-code}
-# Examine the first few rows
-head(pine_data)
+ps_shady_df <- ps_df %>% 
+  filter(side == "shady")
+
+ps_sunny_df <- ps_df %>% 
+  filter(side == "sunny")
+
+
+head(ps_df)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 6 × 6
-  date    group       n_s   wind  tree_no length_mm
-  <chr>   <chr>       <chr> <chr>   <dbl>     <dbl>
-1 3/20/25 cephalopods n     lee         1        20
-2 3/20/25 cephalopods n     lee         1        21
-3 3/20/25 cephalopods n     lee         1        23
-4 3/20/25 cephalopods n     lee         1        25
-5 3/20/25 cephalopods n     lee         1        21
-6 3/20/25 cephalopods n     lee         1        16
+# A tibble: 6 × 5
+# Groups:   group, tree_no, tree_char [3]
+  group                      tree_no tree_char side  length_mm
+  <chr>                        <dbl> <chr>     <chr>     <dbl>
+1 big_fat_fecund_female_fish       2 tree_2    shady      15.4
+2 big_fat_fecund_female_fish       2 tree_2    sunny      13.2
+3 bill                             3 tree_3    shady      16.7
+4 bill                             3 tree_3    sunny      16.0
+5 ciabatta                         5 tree_5    shady      19.1
+6 ciabatta                         5 tree_5    sunny      17.7
 ```
 
 
@@ -178,7 +165,8 @@ head(pine_data)
 
 # **Part 1:** Exploratory Data Analysis
 
-Before conducting hypothesis tests, we should always explore our data to understand its characteristics.
+Before conducting hypothesis tests, we should always explore our data to
+understand its characteristics.
 
 Let's calculate summary statistics and create visualizations.
 
@@ -198,8 +186,8 @@ Let's calculate summary statistics and create visualizations.
 # Hint: Use summarize() function to calculate mean, sd, n, etc.
 
 # Create a summary table for all pine needles
-pine_summary <- pine_data %>%
-  group_by(wind) %>% 
+pine_summary <- ps_df %>%
+  group_by(side) %>% 
   summarize(
     mean_length = mean(length_mm, na.rm=TRUE),
     sd_length = sd(length_mm, na.rm=TRUE),
@@ -217,10 +205,10 @@ print(pine_summary)
 
 ```
 # A tibble: 2 × 8
-  wind  mean_length sd_length     n se_length t_critical ci_lower ci_upper
+  side  mean_length sd_length     n se_length t_critical ci_lower ci_upper
   <chr>       <dbl>     <dbl> <int>     <dbl>      <dbl>    <dbl>    <dbl>
-1 lee          20.4      2.45    24     0.500       2.07     19.4     21.5
-2 wind         14.9      1.91    24     0.390       2.07     14.1     15.7
+1 shady        17.6      2.51     8     0.886       2.36     15.5     19.7
+2 sunny        16.2      2.64     8     0.934       2.36     13.9     18.4
 ```
 
 
@@ -245,7 +233,8 @@ print(pine_summary)
 ::: {.column width="60%"}
 **Activity: Create visualizations of pine needle length**
 
-Create a histogram and a boxplot to visualize the distribution of pine needle length values.
+Create a histogram and a boxplot to visualize the distribution of pine
+needle length values.
 :::
 
 ::: {.column width="40%"}
@@ -274,9 +263,9 @@ Effective data visualization helps us understand:
 # Hint: Use ggplot() and geom_histogram()
 
 # Histogram of all pine needle lengths
-ggplot(pine_data, aes(x = length_mm)) +
-  geom_histogram(binwidth = 2, fill = "steelblue", color = "black") +
-  labs(title = "Distribution of Pine Needle Length",
+ggplot(ps_df, aes(x = length_mm)) +
+  geom_histogram(binwidth = 2) +
+  labs(title = "Distribution of Pine Needle Lengths",
        x = "Length (mm)",
        y = "Frequency") +
   theme_minimal()
@@ -287,53 +276,16 @@ ggplot(pine_data, aes(x = length_mm)) +
 :::
 
 ```{.r .cell-code}
-# how can you do this by wind to see both plots
+# how can you do this by side to see both plots
 ```
 :::
 
 ::: {.cell}
 
 ```{.r .cell-code}
-# Boxplot of pine needle length by wind exposure
+# Boxplot of pine needle length by sun exposure
 # YOUR CODE HERE
 ```
-:::
-
-
-
-
-
-
-
-
-# Can you plot the density distributions for the two samples
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Histogram of all pine needle lengths
-pine_data %>% 
-  ggplot(aes(x = length_mm, fill=wind)) +
-  geom_density(color = "black", alpha=0.3, trim = TRUE) +
-  labs(title = "Pine Needle Lengths by Wind Exposure",
-       x = "Position",
-       y = "Length (mm)",
-       fill = "Wind Position") +
-
-  scale_fill_manual(values = c("lee" = "forestgreen", "wind" = "skyblue"),
-                   labels = c("lee" = "Leeward", "wind" = "Windward"))
-```
-
-::: {.cell-output-display}
-![](06_02_class_activity_files/figure-docx/density_dist-1.jpeg)
-:::
 :::
 
 
@@ -362,7 +314,7 @@ We could also look at the difference in means... some cool code here
 ```{.r .cell-code}
 # Assuming your dataframe is called df
 pine_summary %>%
-  summarize(difference =  mean_length[wind == "lee"] -mean_length[wind == "wind"])
+  summarize(difference =  mean_length[side == "sunny"] -mean_length[side == "shady"])
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -371,7 +323,7 @@ pine_summary %>%
 # A tibble: 1 × 1
   difference
        <dbl>
-1        5.5
+1      -1.45
 ```
 
 
@@ -388,9 +340,11 @@ pine_summary %>%
 
 # **Part 1:** Two Sample T-Test
 
-Now, let's compare pine needle lengths between windward and leeward sides of trees.
+Now, let's compare pine needle lengths between windward and leeward
+sides of trees.
 
-Question: **Is there a significant difference in needle length between the windward and leeward sides?**
+Question: **Is there a significant difference in needle length between
+the windward and leeward sides?**
 
 This requires a two-sample t-test.
 
@@ -400,8 +354,11 @@ Two-sample t-test compares means from two independent groups.
 
 where:
 
--   x̄₁ and x̄₂: These represent the sample means of the two groups you're comparing 
--   s²ₚ: This is the pooled variance, calculated as: s²ₚ = \[(n₁ - 1)s₁² + (n₂ - 1)s₂²\] / (n₁ + n₂ - 2), where s₁² and s₂² are the sample variances of the two groups.
+-   x̄₁ and x̄₂: These represent the sample means of the two groups you're
+    comparing 
+-   s²ₚ: This is the pooled variance, calculated as: s²ₚ = \[(n₁ -
+    1)s₁² + (n₂ - 1)s₂²\] / (n₁ + n₂ - 2), where s₁² and s₂² are the
+    sample variances of the two groups.
 -   **n₁ and n₂:** These are the sample sizes of the two groups.
 -   **√(1/n₁ + 1/n₂):** This represents the pooled standard error.
 
@@ -434,9 +391,9 @@ If assumptions are violated:
 ::: {.cell}
 
 ```{.r .cell-code}
-# YOUR TASK: Test normality of windward pine needle lengths
+# YOUR TASK: Test normality of sunny pine needle lengths
 # QQ Plot
-qqPlot(pine_data$length_mm, 
+qqPlot(ps_sunny_df$length_mm, 
        main = "QQ Plot for Windward Pine Needles",
        ylab = "Sample Quantiles")
 ```
@@ -448,7 +405,7 @@ qqPlot(pine_data$length_mm,
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1]  4 28
+[1] 5 4
 ```
 
 
@@ -459,23 +416,11 @@ qqPlot(pine_data$length_mm,
 
 ```{.r .cell-code}
 # Testing normality for each group
-# Leeward group
-lee_data <- pine_data %>% filter(wind == "lee")
-shapiro_lee <- shapiro.test(lee_data$length_mm)
-print("Shapiro-Wilk test for leeward data:")
-```
+# Sunny group
 
-::: {.cell-output .cell-output-stdout}
+shapiro_lee_sunny<- shapiro.test(ps_sunny_df$length_mm)
 
-```
-[1] "Shapiro-Wilk test for leeward data:"
-```
-
-
-:::
-
-```{.r .cell-code}
-print(shapiro_lee)
+print(shapiro_lee_sunny)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -484,8 +429,8 @@ print(shapiro_lee)
 
 	Shapiro-Wilk normality test
 
-data:  lee_data$length_mm
-W = 0.95477, p-value = 0.3425
+data:  ps_sunny_df$length_mm
+W = 0.89994, p-value = 0.2886
 ```
 
 
@@ -499,7 +444,7 @@ W = 0.95477, p-value = 0.3425
 
 
 
-# windward group
+# shady group
 
 
 
@@ -511,9 +456,27 @@ W = 0.95477, p-value = 0.3425
 ::: {.cell}
 
 ```{.r .cell-code}
-# Windward group
-# YOUR CODE HERE for windward group normality test
+# Sunny side group
+# YOUR CODE HERE for shady group normality test
+# Sunny group
+
+shapiro_lee_shady <- shapiro.test(ps_shady_df$length_mm)
+
+print(shapiro_lee_shady)
 ```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  ps_shady_df$length_mm
+W = 0.96639, p-value = 0.8683
+```
+
+
+:::
 :::
 
 
@@ -536,10 +499,10 @@ W = 0.95477, p-value = 0.3425
 
 ```{.r .cell-code}
 # there are always two ways
-# Test for normality using Shapiro-Wilk test for each wind group
+# Test for normality using Shapiro-Wilk test for each side group
 # All in one pipeline using tidyverse approach
-normality_results <- pine_data %>%
-  group_by(wind) %>%
+normality_results_both <- ps_df %>%
+  group_by(side) %>%
   summarize(
     shapiro_stat = shapiro.test(length_mm)$statistic,
     shapiro_p_value = shapiro.test(length_mm)$p.value,
@@ -547,17 +510,17 @@ normality_results <- pine_data %>%
   )
 
 # Print the results
-print(normality_results)
+print(normality_results_both)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
 # A tibble: 2 × 4
-  wind  shapiro_stat shapiro_p_value normal_distribution
+  side  shapiro_stat shapiro_p_value normal_distribution
   <chr>        <dbl>           <dbl> <chr>              
-1 lee          0.955           0.343 Normal             
-2 wind         0.961           0.451 Normal             
+1 shady        0.966           0.868 Normal             
+2 sunny        0.900           0.289 Normal             
 ```
 
 
@@ -585,7 +548,7 @@ print(normality_results)
 ```{.r .cell-code}
 # Test for equal variances
 # YOUR TASK: Conduct Levene's test for equality of variances
-levene_test <- leveneTest(length_mm ~ wind, data = pine_data)
+levene_test <- leveneTest(length_mm ~ side, data = ps_df)
 ```
 
 ::: {.cell-output .cell-output-stderr}
@@ -607,20 +570,12 @@ print(levene_test)
 ```
 Levene's Test for Homogeneity of Variance (center = median)
       Df F value Pr(>F)
-group  1  1.2004 0.2789
-      46               
+group  1  0.2062 0.6567
+      14               
 ```
 
 
 :::
-:::
-
-::: {.cell}
-
-```{.r .cell-code}
-# Visual check for normality with QQ plots
-# YOUR CODE HERE
-```
 :::
 
 
@@ -634,7 +589,8 @@ group  1  1.2004 0.2789
 
 **Activity: Conduct a two-sample t-test**
 
-Now we can compare the mean pine needle lengths between windward and leeward sides.
+Now we can compare the mean pine needle lengths between sunny and
+shady sides.
 
 H₀: μ₁ = μ₂ (The mean needle lengths are equal)
 
@@ -661,7 +617,7 @@ Deciding between:
 # Use var.equal=TRUE for standard t-test or var.equal=FALSE for Welch's t-test
 
 # Standard t-test (if variances are equal)
-t_test_result <- t.test(length_mm ~ wind, data = pine_data, var.equal = TRUE)
+t_test_result <- t.test(length_mm ~ side, data = ps_df, var.equal = TRUE)
 print("Standard two-sample t-test:")
 ```
 
@@ -684,14 +640,14 @@ print(t_test_result)
 
 	Two Sample t-test
 
-data:  length_mm by wind
-t = 8.6792, df = 46, p-value = 3.01e-11
-alternative hypothesis: true difference in means between group lee and group wind is not equal to 0
+data:  length_mm by side
+t = 1.1279, df = 14, p-value = 0.2783
+alternative hypothesis: true difference in means between group shady and group sunny is not equal to 0
 95 percent confidence interval:
- 4.224437 6.775563
+ -1.309330  4.214005
 sample estimates:
- mean in group lee mean in group wind 
-          20.41667           14.91667 
+mean in group shady mean in group sunny 
+           17.60561            16.15328 
 ```
 
 
@@ -716,11 +672,15 @@ sample estimates:
 ::: {.column width="60%"}
 **Activity: Interpret the results of the two-sample t-test**
 
-What can we conclude about the needle lengths on windward vs. leeward sides?
+What can we conclude about the needle lengths on windward vs. leeward
+sides?
 
 **How to report this result in a scientific paper:**
 
-"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no significant\] difference in needle length between windward (M = ..., SD = ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) = ..., p = ...."
+"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no
+significant\] difference in needle length between windward (M = ..., SD
+= ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) =
+..., p = ...."
 :::
 
 ::: {.column width="40%"}
@@ -730,15 +690,23 @@ What can we conclude about the needle lengths on windward vs. leeward sides?
 
 # What is Power
 
-Statistical power represents the probability of detecting a true effect (rejecting the null hypothesis when it is false). In this case, with a power of 97%, there's a 97% chance of detecting a true difference of 30 units between the means of the two groups if such a difference actually exists.
+Statistical power represents the probability of detecting a true effect
+(rejecting the null hypothesis when it is false). In this case, with a
+power of 97%, there's a 97% chance of detecting a true difference of 30
+units between the means of the two groups if such a difference actually
+exists.
 
 A power analysis like this is typically done for one of these purposes:
 
 1.  Before data collection to determine required sample size
 2.  After a study to evaluate if the sample size was adequate
-3.  To determine the minimum detectable effect size with the given sample
+3.  To determine the minimum detectable effect size with the given
+    sample
 
-With 97% power, this test has excellent ability to detect the specified effect size. Generally, **80% power is considered acceptable**, so 97% indicates a very well-powered study for detecting a difference of 30mm between the groups.
+With 97% power, this test has excellent ability to detect the specified
+effect size. Generally, **80% power is considered acceptable**, so 97%
+indicates a very well-powered study for detecting a difference of 30mm
+between the groups.
 
 
 
@@ -750,31 +718,115 @@ With 97% power, this test has excellent ability to detect the specified effect s
 ::: {.cell}
 
 ```{.r .cell-code}
-lee_df <- pine_data %>% filter(wind == "lee")
-wind_df <- pine_data %>% filter(wind == "wind")
 # Calculate power for detecting a 1 mm difference
-wind_diff = 1
+side_diff <- 1
 
-lee_n <- nrow(lee_df)
-wind_n <- nrow(wind_df)
+# Get sample sizes
+sunny_n <- nrow(ps_sunny_df)
+shady_n <- nrow(ps_shady_df)
 
-wind_sd_pooled <- sqrt((var(lee_df$length_mm) * (lee_n-1) + 
-                  var(wind_df$length_mm) * (wind_n-1)) / 
-                  (lee_n + wind_n - 2))
+# Calculate pooled standard deviation (fixed syntax)
+sun_sd_pooled <- sqrt((var(ps_sunny_df$length_mm) * (sunny_n - 1) + 
+                      var(ps_shady_df$length_mm) * (shady_n - 1)) / 
+                      (sunny_n + shady_n - 2))
 
-# Calculate power
-wind_effect_size <- wind_diff / wind_sd_pooled  # Cohen's d
-wind_df <- lee_n + wind_n - 2
-wind_alpha <- 0.05
-wind_power <- power.t.test(n = min(lee_n,wind_n), 
-                     delta = wind_effect_size,
-                     sd = 1,  # Using standardized effect size
-                     sig.level = 0.5,
-                     type = "two.sample",
-                     alternative = "two.sided")
+# Calculate Cohen's d effect size
+sun_effect_size <- side_diff / sun_sd_pooled
+
+# Calculate degrees of freedom
+sun_df <- sunny_n + shady_n - 2
+
+# Set significance level
+sun_alpha <- 0.05
+
+# Calculate power (fixed parameters)
+sun_power <- power.t.test(n = min(sunny_n, shady_n), 
+                         delta = side_diff,  # Raw difference, not effect size
+                         sd = sun_sd_pooled,  # Use pooled SD, not side_diff
+                         sig.level = sun_alpha,  # Use 0.05, not 0.5
+                         type = "two.sample",
+                         alternative = "two.sided")
 
 # Display results
-wind_power
+print("Sample sizes:")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] "Sample sizes:"
+```
+
+
+:::
+
+```{.r .cell-code}
+print(paste("Sunny:", sunny_n, "Shady:", shady_n))
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] "Sunny: 8 Shady: 8"
+```
+
+
+:::
+
+```{.r .cell-code}
+print(paste("Pooled SD:", round(sun_sd_pooled, 3)))
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] "Pooled SD: 2.575"
+```
+
+
+:::
+
+```{.r .cell-code}
+print(paste("Effect size (Cohen's d):", round(sun_effect_size, 3)))
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] "Effect size (Cohen's d): 0.388"
+```
+
+
+:::
+
+```{.r .cell-code}
+print("")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] ""
+```
+
+
+:::
+
+```{.r .cell-code}
+print("Power analysis results:")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] "Power analysis results:"
+```
+
+
+:::
+
+```{.r .cell-code}
+print(sun_power)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -783,11 +835,11 @@ wind_power
 
      Two-sample t test power calculation 
 
-              n = 24
-          delta = 0.4555423
-             sd = 1
-      sig.level = 0.5
-          power = 0.8158402
+              n = 8
+          delta = 1
+             sd = 2.575237
+      sig.level = 0.05
+          power = 0.1083557
     alternative = two.sided
 
 NOTE: n is number in *each* group
@@ -806,7 +858,8 @@ NOTE: n is number in *each* group
 
 # Now to make a final plot
 
-Typically we will make a plot that has the mean and standard error on it to represent the data
+Typically we will make a plot that has the mean and standard error on it
+to represent the data
 
 ## your Task is to make this plot
 
@@ -820,8 +873,8 @@ Typically we will make a plot that has the mean and standard error on it to repr
 ::: {.cell}
 
 ```{.r .cell-code}
-pine_mean_se <- pine_data %>% 
-  ggplot(aes(wind, length_mm, color = wind))+
+pine_mean_se <- ps_df %>% 
+  ggplot(aes(side, length_mm, color = side))+
   stat_summary(fun = "mean", na.rm=TRUE, geom="point", size = 3)+
   stat_summary(fun.data = "mean_se", width = 0.2, geom = "errorbar")
 
@@ -829,7 +882,7 @@ pine_mean_se
 ```
 
 ::: {.cell-output-display}
-![](06_02_class_activity_files/figure-docx/unnamed-chunk-9-1.jpeg)
+![](06_02_class_activity_files/figure-docx/unnamed-chunk-8-1.jpeg)
 :::
 :::
 
@@ -859,10 +912,15 @@ In this activity, we've:
 
 # Reflection Questions
 
-After completing the activities, discuss these questions with your group:
+After completing the activities, discuss these questions with your
+group:
 
-1.  How does sample size affect our confidence in estimating the population mean?
-2.  Why is the t-distribution more appropriate than the normal distribution when working with small samples?
-3.  When comparing two populations, what can we learn from looking at confidence intervals versus performing a t-test?
-4.  How would you explain the concept of statistical significance to someone who has never taken a statistics course?
+1.  How does sample size affect our confidence in estimating the
+    population mean?
+2.  Why is the t-distribution more appropriate than the normal
+    distribution when working with small samples?
+3.  When comparing two populations, what can we learn from looking at
+    confidence intervals versus performing a t-test?
+4.  How would you explain the concept of statistical significance to
+    someone who has never taken a statistics course?
 5.  What do we do if assumptions FAIL!!!

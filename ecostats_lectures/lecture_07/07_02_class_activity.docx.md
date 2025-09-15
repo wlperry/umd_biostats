@@ -24,7 +24,8 @@ format:
 
 ## Introduction
 
-This document demonstrates statistical analysis of lake trout mass data from Island Lake and NE 12, focusing on:
+This document demonstrates statistical analysis of lake trout mass data
+from Island Lake and NE 12, focusing on:
 
 1.  Testing assumptions for parametric tests
 2.  Transforming data when assumptions aren't met
@@ -43,14 +44,17 @@ This document demonstrates statistical analysis of lake trout mass data from Isl
 -   power
 -   making plots of mean and standard error
 
-Lets start by ecploring onluy lake NE 12 as if you were doing a single sample T test.\
-We will test the assumptions and then do the a T Test on NE 12 compared to Island Lake.
+Lets start by ecploring onluy lake NE 12 as if you were doing a single
+sample T test.\
+We will test the assumptions and then do the a T Test on NE 12 compared
+to Island Lake.
 
 # **Part 1:** Single Sample T-Test
 
 ::::: columns
 ::: {.column width="60%"}
-We want to test if the mass of lake trout differ in NE 12 from a mean of 500g.
+We want to test if the mass of lake trout differ in NE 12 from a mean of
+500g.
 
 **Activity: Define hypotheses and identify assumptions**
 
@@ -71,7 +75,8 @@ We want to test if the mass of lake trout differ in NE 12 from a mean of 500g.
 
 # **Part 1:** Load Data and Test Assumptions
 
-First we need to load the data for all the lakes and we can look at what we have...
+First we need to load the data for all the lakes and we can look at what
+we have...
 
 How may lakes are there?
 
@@ -219,7 +224,8 @@ head(lt_df)
 
 # **Part 1:** Exploratory Data Analysis
 
-Before conducting hypothesis tests, we should always explore our data to understand its characteristics.
+Before conducting hypothesis tests, we should always explore our data to
+understand its characteristics.
 
 Let's calculate summary statistics and create visualizations.
 
@@ -306,7 +312,8 @@ ne12_df <- lt_df %>%
 
 ::::: columns
 ::: {.column width="60%"}
-Before conducting our t-test, we need to verify that our data meets the necessary assumptions.
+Before conducting our t-test, we need to verify that our data meets the
+necessary assumptions.
 
 **Activity: Test the normality assumption**
 :::
@@ -329,7 +336,8 @@ Methods to test normality:
 ::: {.column width="60%"}
 **Activity: Create visualizations of lake trout mass**
 
-Create a histogram and a boxplot to visualize the distribution of lake trout massvalues.
+Create a histogram and a boxplot to visualize the distribution of lake
+trout massvalues.
 :::
 
 ::: {.column width="40%"}
@@ -683,7 +691,8 @@ hist_plot
 
 Always do a qq plot
 
-In a QQ plot, points that follow the line indicate data that follows a normal distribution. Deviations from the line suggest non-normality.
+In a QQ plot, points that follow the line indicate data that follows a
+normal distribution. Deviations from the line suggest non-normality.
 
 
 
@@ -730,7 +739,8 @@ qq_plot
 
 We can do a formal test for a p value
 
-Note island looks non normal in the qqplot but its really close with the Shapiro-Wilk test...
+Note island looks non normal in the qqplot but its really close with the
+Shapiro-Wilk test...
 
 
 
@@ -836,9 +846,11 @@ W = 0.84102, p-value = 0.04538
 
 Again we want the P value not significant
 
-The Levene's test has the following null hypothesis: - H₀: The variances are equal across groups - H₁: The variances are not equal across groups
+The Levene's test has the following null hypothesis: - H₀: The variances
+are equal across groups - H₁: The variances are not equal across groups
 
-If the p-value is less than 0.05, we reject the null hypothesis and conclude the variances are not equal.
+If the p-value is less than 0.05, we reject the null hypothesis and
+conclude the variances are not equal.
 
 
 
@@ -1302,10 +1314,15 @@ mean in group Island Lake       mean in group NE 12
 
 When analyzing log-transformed data:
 
-1.  The mean of log-transformed data, when back-transformed, gives the geometric mean (not the arithmetic mean)
-2.  The back-transformed confidence intervals represent the confidence interval for the geometric mean
-3.  Report results like: "The geometric mean mass of lake trout in NE 12 was X g (95% CI: Y-Z)"
-4.  Note you can't take the 10\^SE to get the standard errors but rather you need to get the mean - seand the mean + se and then backtransform...
+1.  The mean of log-transformed data, when back-transformed, gives the
+    geometric mean (not the arithmetic mean)
+2.  The back-transformed confidence intervals represent the confidence
+    interval for the geometric mean
+3.  Report results like: "The geometric mean mass of lake trout in NE 12
+    was X g (95% CI: Y-Z)"
+4.  Note you can't take the 10\^SE to get the standard errors but rather
+    you need to get the mean - seand the mean + se and then
+    backtransform...
 
 
 
@@ -1622,7 +1639,8 @@ Permutation tests are useful when:
 
 -   \- Sample sizes are small
 -   \- Data doesn't meet the assumptions for parametric tests
--   \- You want a robust test that makes minimal assumptions about the data
+-   \- You want a robust test that makes minimal assumptions about the
+    data
 -   \- They can test any statistic, not just means
 :::
 
@@ -1758,20 +1776,29 @@ Permutation testing (10,000 iterations) revealed significant differences in lake
 
 # Conclusion
 
-This analysis demonstrates several approaches to comparing mass between lake trout populations. The choice of statistical test depends on whether your data meets the assumptions of parametric tests. When assumptions are violated:
+This analysis demonstrates several approaches to comparing mass between
+lake trout populations. The choice of statistical test depends on
+whether your data meets the assumptions of parametric tests. When
+assumptions are violated:
 
 1.  Try transforming the data (e.g., log transformation)
 2.  Use Welch's t-test if variances are unequal
-3.  Use non-parametric tests (Mann-Whitney or permutation tests) if data remains non-normal
+3.  Use non-parametric tests (Mann-Whitney or permutation tests) if data
+    remains non-normal
 
-All methods have their strengths and limitations, and the consistency of results across methods can strengthen your conclusions.
+All methods have their strengths and limitations, and the consistency of
+results across methods can strengthen your conclusions.
 
 ::: callout-tip
 ## When to Use Each Test
 
--   **Standard t-test**: When data is normally distributed with equal variances
--   **Log-transformed t-test**: When raw data is skewed but log-transformation achieves normality
+-   **Standard t-test**: When data is normally distributed with equal
+    variances
+-   **Log-transformed t-test**: When raw data is skewed but
+    log-transformation achieves normality
 -   **Welch's t-test**: When variances are unequal
--   **Mann-Whitney Wilcoxon test**: When data is not normal and cannot be transformed to normality
--   **Permutation test**: When sample sizes are small or assumptions cannot be met
+-   **Mann-Whitney Wilcoxon test**: When data is not normal and cannot
+    be transformed to normality
+-   **Permutation test**: When sample sizes are small or assumptions
+    cannot be met
 :::

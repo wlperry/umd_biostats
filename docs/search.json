@@ -1460,7 +1460,7 @@
     "href": "ecostats_lectures/lecture_06/06_02_class_activity.html#your-task-is-to-make-this-plot",
     "title": "06_Class_Activity",
     "section": "your Task is to make this plot",
-    "text": "your Task is to make this plot\n\npine_mean_se &lt;- pine_data %&gt;% \n  ggplot(aes(wind, length_mm, color = wind))+\n  stat_summary(fun = \"mean\", na.rm=TRUE, geom=\"point\", size = 3)+\n  stat_summary(fun.data = \"mean_se\", width = 0.2, geom = \"errorbar\")\n\npine_mean_se"
+    "text": "your Task is to make this plot\n\npine_mean_se &lt;- ps_df %&gt;% \n  ggplot(aes(side, length_mm, color = side))+\n  stat_summary(fun = \"mean\", na.rm=TRUE, geom=\"point\", size = 3)+\n  stat_summary(fun.data = \"mean_se\", width = 0.2, geom = \"errorbar\")\n\npine_mean_se"
   },
   {
     "objectID": "ecostats_lectures/lecture_08/08_02_class_activity_html.html",

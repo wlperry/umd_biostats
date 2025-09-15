@@ -31,7 +31,7 @@ format:
 
 # Lecture 5: Review
 
-::::: columns
+:::: columns
 ::: {.column width="60%"}
 Covered
 
@@ -42,10 +42,8 @@ Covered
 -   Two sample T
 :::
 
-::: {.column width="40%"}
-![](images/clipboard-536528302.png){width="212" height="258"}
-:::
-:::::
+![](images/clipboard-536528302.png){width="259" height="315"}
+::::
 
 # **Lecture 6:** Overview
 
