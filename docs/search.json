@@ -179,21 +179,7 @@
     "href": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_html.html",
     "title": "Lecture 05: Probability and Statistical Inference",
     "section": "",
-    "text": "Introduction to histograms or frequency distributions\nProbability Distribution Functions (PDF)\n\nZ scores and T scores\n\nTests of means using T-Tests\n\none sample\ntwo sample"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_html.html#t-fracbarx_1---barx_2s_psqrtfrac1n_1-frac1n_2",
-    "href": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_html.html#t-fracbarx_1---barx_2s_psqrtfrac1n_1-frac1n_2",
-    "title": "Lecture 05: Probability and Statistical Inference",
-    "section": "\\(t = \\frac{\\bar{x}_1 - \\bar{x}_2}{S_p\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}}\\)",
-    "text": "\\(t = \\frac{\\bar{x}_1 - \\bar{x}_2}{S_p\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}}\\)\nwhere:\n\nx̄₁ and x̄₂: These represent the sample means of the two groups you’re comparing\ns²ₚ: This is the pooled variance, calculated as: s²ₚ = [(n₁ - 1)s₁² + (n₂ - 1)s₂²] / (n₁ + n₂ - 2), where s₁² and s₂² are the sample variances of the two groups.\nn₁ and n₂: These are the sample sizes of the two groups.\n√(1/n₁ + 1/n₂): This represents the pooled standard error."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_html.html#t-fracsignalnoise",
-    "href": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_html.html#t-fracsignalnoise",
-    "title": "Lecture 05: Probability and Statistical Inference",
-    "section": "\\(t = \\frac{SIGNAL}{NOISE}\\)",
-    "text": "\\(t = \\frac{SIGNAL}{NOISE}\\)"
+    "text": "Introduction to histograms or frequency distributions\nProbability Distribution Functions (PDF)\n\nZ scores and T scores\n\nTests of means using T-Tests\n\none sample\ntwo sample\n\n\n\n\n\n\n\nTests of means using T-Tests\n\none sample - is the sample mean different from a hypothesized mean?\ntwo sample - are the sample means from two samples the same or different?\n\nfor Two sample T-tests the df = n1+ n2 -2 = 8+8-2=14\n\n\n\n# A tibble: 2 × 5\n  side  mean_length sd_length se_length count\n  &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;\n1 shady        17.6      2.51     0.886     8\n2 sunny        16.2      2.64     0.934     8"
   },
   {
     "objectID": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_html.html#standard-t-test-students-t-test",
@@ -208,20 +194,6 @@
     "title": "Lecture 05: Probability and Statistical Inference",
     "section": "Welch’s t-test",
     "text": "Welch’s t-test\n\nDoes not assume equal variances between groups (also called the “unequal variances t-test”)\nUses separate variance estimates for each group\nMore robust when group variances are different\nUses a more complex degrees of freedom calculation (Welch-Satterthwaite equation) and decimal!!!\nDegrees of freedom are typically non-integer and usually smaller than the standard t-test"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_slides.html#t-fracbarx_1---barx_2s_psqrtfrac1n_1-frac1n_2",
-    "href": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_slides.html#t-fracbarx_1---barx_2s_psqrtfrac1n_1-frac1n_2",
-    "title": "Lecture 05: Probability and Statistical Inference",
-    "section": "\\(t = \\frac{\\bar{x}_1 - \\bar{x}_2}{S_p\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}}\\)",
-    "text": "\\(t = \\frac{\\bar{x}_1 - \\bar{x}_2}{S_p\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}}\\)\nwhere:\n\nx̄₁ and x̄₂: These represent the sample means of the two groups you’re comparing\ns²ₚ: This is the pooled variance, calculated as: s²ₚ = [(n₁ - 1)s₁² + (n₂ - 1)s₂²] / (n₁ + n₂ - 2), where s₁² and s₂² are the sample variances of the two groups.\nn₁ and n₂: These are the sample sizes of the two groups.\n√(1/n₁ + 1/n₂): This represents the pooled standard error."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_slides.html#t-fracsignalnoise",
-    "href": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_slides.html#t-fracsignalnoise",
-    "title": "Lecture 05: Probability and Statistical Inference",
-    "section": "\\(t = \\frac{SIGNAL}{NOISE}\\)",
-    "text": "\\(t = \\frac{SIGNAL}{NOISE}\\)"
   },
   {
     "objectID": "ecostats_lectures/lecture_05/05_01_lecture_powerpoint_slides.html#standard-t-test-students-t-test",
@@ -1288,46 +1260,39 @@
     "text": "Shapiro-Wilk’s Test\nReally want to do this on residuals\n\n# Shapiro-Wilk test\nshapiro_test &lt;- shapiro.test(ne12_df$mass_g)\nprint(shapiro_test)\n\n\n    Shapiro-Wilk normality test\n\ndata:  ne12_df$mass_g\nW = 0.85148, p-value &lt; 2.2e-16"
   },
   {
-    "objectID": "ecostats_lectures/lecture_07/07_02_class_activity.html#informal-normality-test---often-better",
-    "href": "ecostats_lectures/lecture_07/07_02_class_activity.html#informal-normality-test---often-better",
-    "title": "06_Class_Activity",
-    "section": "Informal Normality test - often better",
-    "text": "Informal Normality test - often better\n\n\n\n\n\n\nExercise: check normality\n\n\n\nAlways do a qq plot\nIn a QQ plot, points that follow the line indicate data that follows a normal distribution. Deviations from the line suggest non-normality.\n\n# Create QQ plots for each lake to check normality\nqq_plot &lt;- island_ne12_df %&gt;% \n  ggplot(aes(sample = mass_g, color = lake)) +\n  stat_qq() +\n  stat_qq_line() +\n  labs(title = \"QQ Plot for Normality Check\", \n       x = \"Theoretical Quantiles\", \n       y = \"Sample Quantiles\") +\n  theme_minimal() +\n  facet_wrap(~lake)  # Create separate plots for each lake\n\n# Show the QQ plot\nqq_plot"
-  },
-  {
     "objectID": "ecostats_lectures/lecture_07/07_02_class_activity.html#formal-normality-test",
     "href": "ecostats_lectures/lecture_07/07_02_class_activity.html#formal-normality-test",
     "title": "06_Class_Activity",
     "section": "Formal normality test",
-    "text": "Formal normality test\n\n\n\n\n\n\nExercise: do a Shapiro-Wilk Test\n\n\n\nWe can do a formal test for a p value\nNote island looks non normal in the qqplot but its really close with the Shapiro-Wilk test…\n\n# Formal test for normality: Shapiro-Wilk test\n# We'll do this for each lake separately\n\n# For NE 12\nne12_data &lt;- island_ne12_df %&gt;% \n  filter(lake == \"NE 12\") %&gt;%\n  pull(mass_g)\n\n# For Island Lake\nisland_data &lt;- island_ne12_df %&gt;% \n  filter(lake == \"Island Lake\") %&gt;%\n  pull(mass_g)\n\n# Run Shapiro-Wilk test\nshapiro_ne12 &lt;- shapiro.test(ne12_data)\nshapiro_island &lt;- shapiro.test(island_data)\n\n# Show results\ncat(\"Shapiro-Wilk normality test for NE 12:\\n\")\n\nShapiro-Wilk normality test for NE 12:\n\nprint(shapiro_ne12)\n\n\n    Shapiro-Wilk normality test\n\ndata:  ne12_data\nW = 0.85148, p-value &lt; 2.2e-16\n\ncat(\"\\nShapiro-Wilk normality test for Island Lake:\\n\")\n\n\nShapiro-Wilk normality test for Island Lake:\n\nprint(shapiro_island)\n\n\n    Shapiro-Wilk normality test\n\ndata:  island_data\nW = 0.84102, p-value = 0.04538"
+    "text": "Formal normality test\n\n\n\n\n\n\nExercise: do a Shapiro-Wilk Test\n\n\n\nWe can do a formal test for a p value\nNote island looks non normal in the qqplot but its really close with the Shapiro-Wilk test…\n\n# Formal test for normality: Shapiro-Wilk test\n# We'll do this for each lake separately\n\nnormality_results &lt;- in_df %&gt;%\n  group_by(lake) %&gt;%\n  summarize(\n    shapiro_stat = shapiro.test(mass_g)$statistic,\n    shapiro_p_value = shapiro.test(mass_g)$p.value,\n    normal_distribution = if_else(shapiro_p_value &gt; 0.05, \"Normal\", \"Non-normal\")\n    # above wwe are using an ifelse test which is a great oneliner\n  )\n\n# Print the results\nprint(normality_results)\n\n# A tibble: 2 × 4\n  lake        shapiro_stat shapiro_p_value normal_distribution\n  &lt;chr&gt;              &lt;dbl&gt;           &lt;dbl&gt; &lt;chr&gt;              \n1 Island Lake        0.841        4.54e- 2 Non-normal         \n2 NE 12              0.851        5.94e-17 Non-normal"
   },
   {
     "objectID": "ecostats_lectures/lecture_07/07_02_class_activity.html#equality-of-variance-test---levenes-test",
     "href": "ecostats_lectures/lecture_07/07_02_class_activity.html#equality-of-variance-test---levenes-test",
     "title": "06_Class_Activity",
     "section": "Equality of variance test - Levene’s Test",
-    "text": "Equality of variance test - Levene’s Test\n\n\n\n\n\n\nExercise: test for equal variances\n\n\n\nAgain we want the P value not significant\nThe Levene’s test has the following null hypothesis: - H₀: The variances are equal across groups - H₁: The variances are not equal across groups\nIf the p-value is less than 0.05, we reject the null hypothesis and conclude the variances are not equal.\n\n# Formal test for equal variances: Levene's test\nlevene_result &lt;- leveneTest(mass_g ~ lake, data = island_ne12_df)\n\nWarning in leveneTest.default(y = y, group = group, ...): group coerced to\nfactor.\n\nprint(levene_result)\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value    Pr(&gt;F)    \ngroup   1  25.997 5.775e-07 ***\n      330                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "Equality of variance test - Levene’s Test\n\n\n\n\n\n\nExercise: test for equal variances\n\n\n\nAgain we want the P value not significant\nThe Levene’s test has the following null hypothesis: - H₀: The variances are equal across groups - H₁: The variances are not equal across groups\nIf the p-value is less than 0.05, we reject the null hypothesis and conclude the variances are not equal.\n\n# Formal test for equal variances: Levene's test\nlevene_result &lt;- leveneTest(mass_g ~ lake, data = in_df)\n\nWarning in leveneTest.default(y = y, group = group, ...): group coerced to\nfactor.\n\nprint(levene_result)\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value    Pr(&gt;F)    \ngroup   1  25.997 5.775e-07 ***\n      330                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "ecostats_lectures/lecture_07/07_02_class_activity.html#now-look-at-histograms-of-logged-data",
     "href": "ecostats_lectures/lecture_07/07_02_class_activity.html#now-look-at-histograms-of-logged-data",
     "title": "06_Class_Activity",
     "section": "Now look at histograms of logged data",
-    "text": "Now look at histograms of logged data\n\n\n\n\n\n\nExercise: histogram of transformed data\n\n\n\nWe need to see if it worked\n\n# Create histograms of log-transformed data\nlog_hist_plot &lt;- island_ne12_df %&gt;% \n  ggplot(aes(x = log_mass, fill = lake)) +\n  geom_histogram(bins = 20, alpha = 0.7) +\n  labs(title = \"Distribution of Log-Transformed Lake Trout Mass\", \n       x = \"Log10 Mass\", \n       y = \"Count\") +\n  theme_minimal() +\n  facet_wrap(~lake, scales = \"free_y\")\n\n# Show the log-transformed histogram\nlog_hist_plot"
+    "text": "Now look at histograms of logged data\n\n\n\n\n\n\nExercise: histogram of transformed data\n\n\n\nWe need to see if it worked\n\n# Create histograms of log-transformed data\nlog_hist_plot &lt;- in_df %&gt;% \n  ggplot(aes(x = log_mass, fill = lake)) +\n  geom_histogram(bins = 20, alpha = 0.7) +\n  labs(title = \"Distribution of Log-Transformed Lake Trout Mass\", \n       x = \"Log10 Mass\", \n       y = \"Count\") +\n  theme_minimal() +\n  facet_wrap(~lake, scales = \"free_y\")\n\n# Show the log-transformed histogram\nlog_hist_plot"
   },
   {
     "objectID": "ecostats_lectures/lecture_07/07_02_class_activity.html#now-a-qqplot---we-will-skip-shapiro-wilk-this-time",
     "href": "ecostats_lectures/lecture_07/07_02_class_activity.html#now-a-qqplot---we-will-skip-shapiro-wilk-this-time",
     "title": "06_Class_Activity",
     "section": "Now a qqplot - we will skip Shapiro-Wilk this time ; )",
-    "text": "Now a qqplot - we will skip Shapiro-Wilk this time ; )\n\n\n\n\n\n\nExercise: do a qqplot of transformed data\n\n\n\nWe could also look at the difference in means… some cool code here\n\n# QQ plot for log-transformed data\nlog_qq_plot &lt;- island_ne12_df %&gt;% \n  ggplot(aes(sample = log_mass, color = lake)) +\n  stat_qq() +\n  stat_qq_line() +\n  labs(title = \"QQ Plot for Log-Transformed Data\", \n       x = \"Theoretical Quantiles\", \n       y = \"Sample Quantiles\") +\n  theme_minimal() +\n  facet_wrap(~lake)\n\n# Show the log QQ plot\nlog_qq_plot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nExercise: Shapiro-Wilk test\n\n\n\n\n# Check normality of log-transformed data using Shapiro-Wilk test\n# For NE 12\nlog_ne12 &lt;- island_ne12_df %&gt;% \n  filter(lake == \"NE 12\") %&gt;%\n  pull(log_mass)\n\n# For Island Lake\nlog_island &lt;- island_ne12_df %&gt;% \n  filter(lake == \"Island Lake\") %&gt;%\n  pull(log_mass)\n\n# Run Shapiro-Wilk test on log-transformed data\nshapiro_log_ne12 &lt;- shapiro.test(log_ne12)\nshapiro_log_island &lt;- shapiro.test(log_island)\n\n# Show results\ncat(\"Shapiro-Wilk normality test for log-transformed NE 12 data:\\n\")\n\nShapiro-Wilk normality test for log-transformed NE 12 data:\n\nprint(shapiro_log_ne12)\n\n\n    Shapiro-Wilk normality test\n\ndata:  log_ne12\nW = 0.95384, p-value = 1.583e-08\n\ncat(\"\\nShapiro-Wilk normality test for log-transformed Island Lake data:\\n\")\n\n\nShapiro-Wilk normality test for log-transformed Island Lake data:\n\nprint(shapiro_log_island)\n\n\n    Shapiro-Wilk normality test\n\ndata:  log_island\nW = 0.93396, p-value = 0.4879\n\n\n\n\n\n\n\n\n\n\nExercise: Levenes test\n\n\n\n\n# Check for equal variances in log-transformed data\nlevene_log_result &lt;- leveneTest(log_mass ~ lake, data = island_ne12_df)\n\nWarning in leveneTest.default(y = y, group = group, ...): group coerced to\nfactor.\n\nprint(levene_log_result)\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value    Pr(&gt;F)    \ngroup   1   11.77 0.0006784 ***\n      330                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "Now a qqplot - we will skip Shapiro-Wilk this time ; )\n\n\n\n\n\n\nExercise: do a qqplot of transformed data\n\n\n\nWe could also look at the difference in means… some cool code here\n\n# QQ plot for log-transformed data\nlog_qq_plot &lt;- in_df %&gt;% \n  ggplot(aes(sample = log_mass, color = lake)) +\n  stat_qq() +\n  stat_qq_line() +\n  labs(title = \"QQ Plot for Log-Transformed Data\", \n       x = \"Theoretical Quantiles\", \n       y = \"Sample Quantiles\") +\n  theme_minimal() +\n  facet_wrap(~lake)\n\n# Show the log QQ plot\nlog_qq_plot\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nExercise: Shapiro-Wilk test\n\n\n\n\nlog_normality_results &lt;- in_df %&gt;%\n  group_by(lake) %&gt;%\n  summarize(\n    shapiro_stat = shapiro.test(log10(mass_g))$statistic,\n    shapiro_p_value = shapiro.test(log10(mass_g))$p.value,\n    normal_distribution = if_else(shapiro_p_value &gt; 0.05, \"Normal\", \"Non-normal\")\n    # above wwe are using an ifelse test which is a great oneliner\n  )\n\n# Print the results\nprint(log_normality_results)\n\n# A tibble: 2 × 4\n  lake        shapiro_stat shapiro_p_value normal_distribution\n  &lt;chr&gt;              &lt;dbl&gt;           &lt;dbl&gt; &lt;chr&gt;              \n1 Island Lake        0.934    0.488        Normal             \n2 NE 12              0.954    0.0000000158 Non-normal         \n\n\n\n\n\n\n\n\n\n\nExercise: Levene’s test\n\n\n\n\n# Check for equal variances in log-transformed data\nlevene_log_result &lt;- leveneTest(log_mass ~ lake, data = in_df)\n\nWarning in leveneTest.default(y = y, group = group, ...): group coerced to\nfactor.\n\nprint(levene_log_result)\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value    Pr(&gt;F)    \ngroup   1   11.77 0.0006784 ***\n      330                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "ecostats_lectures/lecture_07/07_02_class_activity.html#for-grins-lets-do-the-two-sample-t-test-anyway",
     "href": "ecostats_lectures/lecture_07/07_02_class_activity.html#for-grins-lets-do-the-two-sample-t-test-anyway",
     "title": "06_Class_Activity",
     "section": "For grins lets do the Two Sample T Test anyway",
-    "text": "For grins lets do the Two Sample T Test anyway\n\n\n\n\n\n\nExercise: Two sample T Test on regular data\n\n\n\nTry a t test\n\n# Run a standard two-sample t-test\nt_test_result &lt;- t.test(\n  mass_g ~ lake, \n  data = island_ne12_df,\n  var.equal = TRUE,  # Assumes equal variances\n  alternative = \"two.sided\"\n)\n\n# Show the results\nprint(t_test_result)\n\n\n    Two Sample t-test\n\ndata:  mass_g by lake\nt = 14.181, df = 330, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means between group Island Lake and group NE 12 is not equal to 0\n95 percent confidence interval:\n 2266.304 2996.360\nsample estimates:\nmean in group Island Lake       mean in group NE 12 \n                3165.0000                  533.6677 \n\n\n\n\n\n\n\n\n\n\nExercise: Two sample T Test on transformed data\n\n\n\nTry a t test\n\n# Run a t-test on log-transformed data\nlog_t_test_result &lt;- t.test(\n  log_mass ~ lake, \n  data = island_ne12_df,\n  var.equal = TRUE,  # Assumes equal variances\n  alternative = \"two.sided\"\n)\n\n# Show the results\nprint(log_t_test_result)\n\n\n    Two Sample t-test\n\ndata:  log_mass by lake\nt = 5.8192, df = 330, p-value = 1.4e-08\nalternative hypothesis: true difference in means between group Island Lake and group NE 12 is not equal to 0\n95 percent confidence interval:\n 0.6614902 1.3371216\nsample estimates:\nmean in group Island Lake       mean in group NE 12 \n                 3.457554                  2.458248 \n\n\n\n\n\n\n\n\n\n\nExercise: Looking at results of log10 data\n\n\n\nWhen analyzing log-transformed data:\n\nThe mean of log-transformed data, when back-transformed, gives the geometric mean (not the arithmetic mean)\nThe back-transformed confidence intervals represent the confidence interval for the geometric mean\nReport results like: “The geometric mean mass of lake trout in NE 12 was X g (95% CI: Y-Z)”\nNote you can’t take the 10^SE to get the standard errors but rather you need to get the mean - seand the mean + se and then backtransform…\n\n\n# Calculate back-transformed means and confidence intervals\n# This converts log values back to original scale\nback_transformed &lt;- island_ne12_df %&gt;%\n  group_by(lake) %&gt;%\n  summarise(\n    n = n(),\n    mean_log = mean(log_mass),\n    sd_log = sd(log_mass),\n    se_log = sd_log / sqrt(n),\n    # Back-transform mean\n    geometric_mean = 10^mean_log,\n    # Back transform SE\n     lower_se = 10^(mean_log -se_log),\n    upper_se = 10^(mean_log + se_log),\n    # Back-transform confidence intervals (approximate method)\n    lower_ci = 10^(mean_log - qt(0.975, n-1) * se_log),\n    upper_ci = 10^(mean_log + qt(0.975, n-1) * se_log)\n  )\n\n# Show back-transformed results\nprint(back_transformed)\n\n# A tibble: 2 × 10\n  lake        n mean_log sd_log se_log geometric_mean lower_se upper_se lower_ci\n  &lt;chr&gt;   &lt;int&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;          &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n1 Island…    10     3.46  0.195 0.0618          2868.    2487.    3307.    2078.\n2 NE 12     322     2.46  0.541 0.0302           287.     268.     308.     251.\n# ℹ 1 more variable: upper_ci &lt;dbl&gt;"
+    "text": "For grins lets do the Two Sample T Test anyway\n\n\n\n\n\n\nExercise: Two sample T Test on regular data\n\n\n\nTry a t test\n\n# Run a standard two-sample t-test\nt_test_result &lt;- t.test(\n  mass_g ~ lake, \n  data = in_df,\n  var.equal = TRUE,  # Assumes equal variances\n  alternative = \"two.sided\"\n)\n\n# Show the results\nprint(t_test_result)\n\n\n    Two Sample t-test\n\ndata:  mass_g by lake\nt = 14.181, df = 330, p-value &lt; 2.2e-16\nalternative hypothesis: true difference in means between group Island Lake and group NE 12 is not equal to 0\n95 percent confidence interval:\n 2266.304 2996.360\nsample estimates:\nmean in group Island Lake       mean in group NE 12 \n                3165.0000                  533.6677 \n\n\n\n\n\n\n\n\n\n\nExercise: Two sample T Test on transformed data\n\n\n\nTry a t test\n\n# Run a t-test on log-transformed data\nlog_t_test_result &lt;- t.test(\n  log_mass ~ lake, \n  data = in_df,\n  var.equal = TRUE,  # Assumes equal variances\n  alternative = \"two.sided\"\n)\n\n# Show the results\nprint(log_t_test_result)\n\n\n    Two Sample t-test\n\ndata:  log_mass by lake\nt = 5.8192, df = 330, p-value = 1.4e-08\nalternative hypothesis: true difference in means between group Island Lake and group NE 12 is not equal to 0\n95 percent confidence interval:\n 0.6614902 1.3371216\nsample estimates:\nmean in group Island Lake       mean in group NE 12 \n                 3.457554                  2.458248 \n\n\n\n\n\n\n\n\n\n\nExercise: Looking at results of log10 data\n\n\n\nWhen analyzing log-transformed data:\n\nThe mean of log-transformed data, when back-transformed, gives the geometric mean (not the arithmetic mean)\nThe back-transformed confidence intervals represent the confidence interval for the geometric mean and have to be calculated carefully\nReport results like: “The geometric mean mass of lake trout in NE 12 was X g (95% CI: Y-Z)”\nNote you can’t take the 10^SE to get the standard errors but rather you need to get the mean - se and the mean + se and then back transform…\n\n\n# Calculate back-transformed means and confidence intervals\n# This converts log values back to original scale\nback_transformed &lt;- in_df %&gt;%\n  group_by(lake) %&gt;%\n  summarise(\n    n = n(),\n    mean_log = mean(log_mass),\n    sd_log = sd(log_mass),\n    se_log = sd_log / sqrt(n),\n    # Back-transform mean\n    geometric_mean = 10^mean_log,\n    # Back transform SE\n     lower_se = 10^(mean_log -se_log),\n    upper_se = 10^(mean_log + se_log),\n    arithmetic_mean = mean(mass_g)\n  )\n\n# Show back-transformed results\nback_transformed %&gt;% \n        select(lake, mean_log, geometric_mean, arithmetic_mean)\n\n# A tibble: 2 × 4\n  lake        mean_log geometric_mean arithmetic_mean\n  &lt;chr&gt;          &lt;dbl&gt;          &lt;dbl&gt;           &lt;dbl&gt;\n1 Island Lake     3.46          2868.           3165 \n2 NE 12           2.46           287.            534."
   },
   {
     "objectID": "ecostats_lectures/lecture_07/07_02_class_activity.html#now-plot-the-back-transformed-data",
@@ -1341,21 +1306,21 @@
     "href": "ecostats_lectures/lecture_07/07_02_class_activity.html#welchs-t-test",
     "title": "06_Class_Activity",
     "section": "3. Welch’s t-test",
-    "text": "3. Welch’s t-test\n\n# Run Welch's t-test (doesn't assume equal variances)\nwelch_test_result &lt;- t.test(\n  mass_g ~ lake, \n  data = island_ne12_df,\n  var.equal = FALSE,  # Does NOT assume equal variances\n  alternative = \"two.sided\"\n)\n\n# Show the results\nprint(welch_test_result)\n\n\n    Welch Two Sample t-test\n\ndata:  mass_g by lake\nt = 5.1368, df = 9.0578, p-value = 0.0006016\nalternative hypothesis: true difference in means between group Island Lake and group NE 12 is not equal to 0\n95 percent confidence interval:\n 1473.676 3788.989\nsample estimates:\nmean in group Island Lake       mean in group NE 12 \n                3165.0000                  533.6677 \n\n\n\n\n\n\n\n\nWhen to Use Welch’s t-test\n\n\n\nWelch’s t-test is preferred when:\n\n- Group variances are unequal (as indicated by Levene’s test)\n- Sample sizes are different between groups\n- It’s more robust than the standard t-test in many situations"
+    "text": "3. Welch’s t-test\n\n# Run Welch's t-test (doesn't assume equal variances)\nwelch_test_result &lt;- t.test(\n  mass_g ~ lake, \n  data = in_df,\n  var.equal = FALSE,  # Does NOT assume equal variances\n  alternative = \"two.sided\"\n)\n\n# Show the results\nprint(welch_test_result)\n\n\n    Welch Two Sample t-test\n\ndata:  mass_g by lake\nt = 5.1368, df = 9.0578, p-value = 0.0006016\nalternative hypothesis: true difference in means between group Island Lake and group NE 12 is not equal to 0\n95 percent confidence interval:\n 1473.676 3788.989\nsample estimates:\nmean in group Island Lake       mean in group NE 12 \n                3165.0000                  533.6677 \n\n\n\n\n\n\n\n\nWhen to Use Welch’s t-test\n\n\n\nWelch’s t-test is preferred when:\n\n- Group variances are unequal (as indicated by Levene’s test)\n- Sample sizes are different between groups\n- It’s more robust than the standard t-test in many situations"
   },
   {
     "objectID": "ecostats_lectures/lecture_07/07_02_class_activity.html#mann-whitney-wilcoxon-test",
     "href": "ecostats_lectures/lecture_07/07_02_class_activity.html#mann-whitney-wilcoxon-test",
     "title": "06_Class_Activity",
     "section": "4. Mann-Whitney Wilcoxon test",
-    "text": "4. Mann-Whitney Wilcoxon test\n\n# Run Mann-Whitney U test (non-parametric alternative to t-test)\nwilcox_test_result &lt;- wilcox.test(\n  mass_g ~ lake, \n  data = island_ne12_df,\n  alternative = \"two.sided\"\n)\n\n# Show the results\nprint(wilcox_test_result)\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  mass_g by lake\nW = 3205.5, p-value = 9.506e-08\nalternative hypothesis: true location shift is not equal to 0\n\n\n\n\n\n\n\n\nWhen to Use Mann-Whitney Wilcoxon Test\n\n\n\nThis non-parametric test is preferred when:\n\n- Data is not normally distributed (even after transformation)\n- Comparing medians rather than means\n- Data contains outliers that might affect a t-test\n- It compares the ranks of the values rather than the actual values"
+    "text": "4. Mann-Whitney Wilcoxon test\n\n# Run Mann-Whitney U test (non-parametric alternative to t-test)\nwilcox_test_result &lt;- wilcox.test(\n  mass_g ~ lake, \n  data = in_df,\n  alternative = \"two.sided\"\n)\n\n# Show the results\nprint(wilcox_test_result)\n\n\n    Wilcoxon rank sum test with continuity correction\n\ndata:  mass_g by lake\nW = 3205.5, p-value = 9.506e-08\nalternative hypothesis: true location shift is not equal to 0\n\n\n\n\n\n\n\n\nWhen to Use Mann-Whitney Wilcoxon Test\n\n\n\nThis non-parametric test is preferred when:\n\n- Data is not normally distributed (even after transformation)\n- Comparing medians rather than means\n- Data contains outliers that might affect a t-test\n- It compares the ranks of the values rather than the actual values"
   },
   {
     "objectID": "ecostats_lectures/lecture_07/07_02_class_activity.html#permutation-test",
     "href": "ecostats_lectures/lecture_07/07_02_class_activity.html#permutation-test",
     "title": "06_Class_Activity",
     "section": "5. Permutation test",
-    "text": "5. Permutation test\n\n# First, let's make sure we have balanced samples\n# We'll select a random subset from NE 12 to match Island Lake size\nset.seed(123)  # For reproducibility\n\n# Get the smaller sample size\nisland_size &lt;- sum(island_ne12_df$lake == \"Island Lake\")\n\n# Randomly sample from NE 12 to match Island Lake size\nne12_sample &lt;- island_ne12_df %&gt;%\n  filter(lake == \"NE 12\") %&gt;%\n  slice_sample(n = island_size)\n\n# Combine with Island Lake data\nbalanced_df &lt;- bind_rows(\n  ne12_sample,\n  island_ne12_df %&gt;% filter(lake == \"Island Lake\")\n)\n\n# Extract mass data by lake\nne12_mass &lt;- balanced_df %&gt;%\n  filter(lake == \"NE 12\") %&gt;%\n  pull(mass_g)\n\nisland_mass &lt;- balanced_df %&gt;%\n  filter(lake == \"Island Lake\") %&gt;%\n  pull(mass_g)\n\n# Run permutation test\nperm_test_result &lt;- permTS(\n  x = ne12_mass,\n  y = island_mass,\n  alternative = \"two.sided\",\n  method = \"exact.mc\",  # Monte Carlo method for large samples\n  control = permControl(nmc = 10000)  # Number of Monte Carlo replications\n)\n\n# Show the results\nprint(perm_test_result)\n\n\n    Exact Permutation Test Estimated by Monte Carlo\n\ndata:  ne12_mass and GROUP 2\np-value = 2e-04\nalternative hypothesis: true mean ne12_mass - mean GROUP 2 is not equal to 0\nsample estimates:\nmean ne12_mass - mean GROUP 2 \n                      -2519.9 \n\np-value estimated from 10000 Monte Carlo replications\n99 percent confidence interval on p-value:\n 0.000000000 0.001059383 \n\n\n\n\n\n\n\n\nWhen to Use Permutation Tests\n\n\n\nPermutation tests are useful when:\n\n- Sample sizes are small\n- Data doesn’t meet the assumptions for parametric tests\n- You want a robust test that makes minimal assumptions about the data\n- They can test any statistic, not just means"
+    "text": "5. Permutation test\n\n# First, let's make sure we have balanced samples\n# We'll select a random subset from NE 12 to match Island Lake size\nset.seed(123)  # For reproducibility\n\n# Get the smaller sample size\nisland_size &lt;- sum(in_df$lake == \"Island Lake\")\n\n# Randomly sample from NE 12 to match Island Lake size\nne12_sample &lt;- in_df %&gt;%\n  filter(lake == \"NE 12\") %&gt;%\n  slice_sample(n = island_size)\n\n# Combine with Island Lake data\nbalanced_df &lt;- bind_rows(\n  ne12_sample,\n  in_df %&gt;% filter(lake == \"Island Lake\")\n)\n\n# Extract mass data by lake\nne12_mass &lt;- balanced_df %&gt;%\n  filter(lake == \"NE 12\") %&gt;%\n  pull(mass_g)\n\nisland_mass &lt;- balanced_df %&gt;%\n  filter(lake == \"Island Lake\") %&gt;%\n  pull(mass_g)\n\n# Run permutation test\nperm_test_result &lt;- permTS(\n  x = ne12_mass,\n  y = island_mass,\n  alternative = \"two.sided\",\n  method = \"exact.mc\",  # Monte Carlo method for large samples\n  control = permControl(nmc = 10000)  # Number of Monte Carlo replications\n)\n\n# Show the results\nprint(perm_test_result)\n\n\n    Exact Permutation Test Estimated by Monte Carlo\n\ndata:  ne12_mass and GROUP 2\np-value = 2e-04\nalternative hypothesis: true mean ne12_mass - mean GROUP 2 is not equal to 0\nsample estimates:\nmean ne12_mass - mean GROUP 2 \n                      -2519.9 \n\np-value estimated from 10000 Monte Carlo replications\n99 percent confidence interval on p-value:\n 0.000000000 0.001059383 \n\n\n\n\n\n\n\n\nWhen to Use Permutation Tests\n\n\n\nPermutation tests are useful when:\n\n- Sample sizes are small\n- Data doesn’t meet the assumptions for parametric tests\n- You want a robust test that makes minimal assumptions about the data\n- They can test any statistic, not just means"
   },
   {
     "objectID": "ecostats_lectures/lecture_07/07_02_class_activity.html#for-standard-t-test",
@@ -1404,7 +1369,7 @@
     "href": "ecostats_lectures/lecture_06/06_02_class_activity.html",
     "title": "06_Class_Activity",
     "section": "",
-    "text": "Understanding standard normal distributions and z-scores\nCalculating and interpreting standard error\nCreating confidence intervals\nWorking with the Student’s t-distribution\n\n\n\n\n\nReview more r code\nunderstand α alpha and β beta errors\ndo more\n\n1 sample t tests\n2 sample t tests"
+    "text": "Understanding standard normal distributions and z-scores\nCalculating and interpreting standard error\nCreating confidence intervals\nWorking with the Student’s t-distribution\n\n\n\n\n\nReview more r code\nunderstand α alpha and β beta errors\ndo more\n\n1 sample t tests\n2 sample t tests\n\n\n\n\n\n# Install packages if needed (uncomment if necessary)\n# install.packages(\"readr\")\n# install.packages(\"tidyverse\")\n# install.packages(\"car\")\n# install.packages(\"here\")\n\n# Load libraries\nlibrary(patchwork)\nlibrary(car)          # For diagnostic tests\nlibrary(tidyverse)    # For data manipulation and visualization\nlibrary(readxl)\n# Load the pine needle data\n# Use here() function to specify the path\npine_switch_df &lt;- read_excel(\"data/class_pine needle length switched.xlsx\")\n\n# Examine the first few rows\nhead(pine_switch_df)\n\n# A tibble: 6 × 5\n  group tree_no tree_char side  length_mm\n  &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;\n1 five        1 tree_1    sunny      22.7\n2 five        1 tree_1    sunny      21.1\n3 five        1 tree_1    sunny      18.6\n4 five        1 tree_1    sunny      18.6\n5 five        1 tree_1    sunny      21.0\n6 five        1 tree_1    sunny      18.9\n\n\n\n\nps_df &lt;- pine_switch_df %&gt;% \n  group_by(group, tree_no, tree_char, side) %&gt;% \n  summarise(length_mm = mean(length_mm, na.rm=TRUE))\n\n`summarise()` has grouped output by 'group', 'tree_no', 'tree_char'. You can\noverride using the `.groups` argument.\n\nps_shady_df &lt;- ps_df %&gt;% \n  filter(side == \"shady\")\n\nps_sunny_df &lt;- ps_df %&gt;% \n  filter(side == \"sunny\")\n\nhead(ps_df)\n\n# A tibble: 6 × 5\n# Groups:   group, tree_no, tree_char [3]\n  group                      tree_no tree_char side  length_mm\n  &lt;chr&gt;                        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;\n1 big_fat_fecund_female_fish       2 tree_2    shady      15.4\n2 big_fat_fecund_female_fish       2 tree_2    sunny      13.2\n3 bill                             3 tree_3    shady      16.7\n4 bill                             3 tree_3    sunny      16.0\n5 ciabatta                         5 tree_5    shady      19.1\n6 ciabatta                         5 tree_5    sunny      17.7"
   },
   {
     "objectID": "ecostats_lectures/lecture_06/06_02_class_activity.html#what-did-we-do-last-time-in-activity-5",
@@ -1418,21 +1383,14 @@
     "href": "ecostats_lectures/lecture_06/06_02_class_activity.html#todays-focus",
     "title": "06_Class_Activity",
     "section": "",
-    "text": "Review more r code\nunderstand α alpha and β beta errors\ndo more\n\n1 sample t tests\n2 sample t tests"
+    "text": "Review more r code\nunderstand α alpha and β beta errors\ndo more\n\n1 sample t tests\n2 sample t tests\n\n\n\n\n\n# Install packages if needed (uncomment if necessary)\n# install.packages(\"readr\")\n# install.packages(\"tidyverse\")\n# install.packages(\"car\")\n# install.packages(\"here\")\n\n# Load libraries\nlibrary(patchwork)\nlibrary(car)          # For diagnostic tests\nlibrary(tidyverse)    # For data manipulation and visualization\nlibrary(readxl)\n# Load the pine needle data\n# Use here() function to specify the path\npine_switch_df &lt;- read_excel(\"data/class_pine needle length switched.xlsx\")\n\n# Examine the first few rows\nhead(pine_switch_df)\n\n# A tibble: 6 × 5\n  group tree_no tree_char side  length_mm\n  &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;\n1 five        1 tree_1    sunny      22.7\n2 five        1 tree_1    sunny      21.1\n3 five        1 tree_1    sunny      18.6\n4 five        1 tree_1    sunny      18.6\n5 five        1 tree_1    sunny      21.0\n6 five        1 tree_1    sunny      18.9\n\n\n\n\nps_df &lt;- pine_switch_df %&gt;% \n  group_by(group, tree_no, tree_char, side) %&gt;% \n  summarise(length_mm = mean(length_mm, na.rm=TRUE))\n\n`summarise()` has grouped output by 'group', 'tree_no', 'tree_char'. You can\noverride using the `.groups` argument.\n\nps_shady_df &lt;- ps_df %&gt;% \n  filter(side == \"shady\")\n\nps_sunny_df &lt;- ps_df %&gt;% \n  filter(side == \"sunny\")\n\nhead(ps_df)\n\n# A tibble: 6 × 5\n# Groups:   group, tree_no, tree_char [3]\n  group                      tree_no tree_char side  length_mm\n  &lt;chr&gt;                        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;\n1 big_fat_fecund_female_fish       2 tree_2    shady      15.4\n2 big_fat_fecund_female_fish       2 tree_2    sunny      13.2\n3 bill                             3 tree_3    shady      16.7\n4 bill                             3 tree_3    sunny      16.0\n5 ciabatta                         5 tree_5    shady      19.1\n6 ciabatta                         5 tree_5    sunny      17.7"
   },
   {
-    "objectID": "ecostats_lectures/lecture_06/06_02_class_activity.html#t-fracbarx_1---barx_2s_psqrtfrac1n_1-frac1n_2",
-    "href": "ecostats_lectures/lecture_06/06_02_class_activity.html#t-fracbarx_1---barx_2s_psqrtfrac1n_1-frac1n_2",
+    "objectID": "ecostats_lectures/lecture_06/06_02_class_activity.html#your-task-is-to-make-a-more-publication-quality-final-plot",
+    "href": "ecostats_lectures/lecture_06/06_02_class_activity.html#your-task-is-to-make-a-more-publication-quality-final-plot",
     "title": "06_Class_Activity",
-    "section": "\\(t = \\frac{\\bar{x}_1 - \\bar{x}_2}{S_p\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}}\\)",
-    "text": "\\(t = \\frac{\\bar{x}_1 - \\bar{x}_2}{S_p\\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}}}\\)\nwhere:\n\nx̄₁ and x̄₂: These represent the sample means of the two groups you’re comparing \ns²ₚ: This is the pooled variance, calculated as: s²ₚ = [(n₁ - 1)s₁² + (n₂ - 1)s₂²] / (n₁ + n₂ - 2), where s₁² and s₂² are the sample variances of the two groups.\nn₁ and n₂: These are the sample sizes of the two groups.\n√(1/n₁ + 1/n₂): This represents the pooled standard error."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_06/06_02_class_activity.html#your-task-is-to-make-this-plot",
-    "href": "ecostats_lectures/lecture_06/06_02_class_activity.html#your-task-is-to-make-this-plot",
-    "title": "06_Class_Activity",
-    "section": "your Task is to make this plot",
-    "text": "your Task is to make this plot\n\npine_mean_se &lt;- ps_df %&gt;% \n  ggplot(aes(side, length_mm, color = side))+\n  stat_summary(fun = \"mean\", na.rm=TRUE, geom=\"point\", size = 3)+\n  stat_summary(fun.data = \"mean_se\", width = 0.2, geom = \"errorbar\")\n\npine_mean_se"
+    "section": "Your task is to make a more publication quality final plot",
+    "text": "Your task is to make a more publication quality final plot\n\npine_mean_se &lt;- ps_df %&gt;% \n  ggplot(aes(side, length_mm, color = side))+\n  stat_summary(fun = \"mean\", na.rm=TRUE, geom=\"point\", size = 3)+\n  stat_summary(fun.data = \"mean_se\", width = 0.2, geom = \"errorbar\")\npine_mean_se"
   },
   {
     "objectID": "ecostats_lectures/lecture_08/08_02_class_activity_html.html",
@@ -2321,14 +2279,14 @@
     "href": "index.html#week-2",
     "title": "UMD Biostatistics",
     "section": "Week 2",
-    "text": "Week 2\n\n03 - Descriptive Stats and Wrangling\n\nPowerPoint: PowerPoint\nActivity: Activity\nHomework: Week 2 Homework\n\n\n\n04 - Probability and Inference I - z distributions\n\nPowerPoint: PowerPoint\nActivity: Activity"
+    "text": "Week 2\n\n03 - Descriptive Stats and Wrangling\n\nPowerPoint: PowerPoint\nActivity: Activity\nHomework: Week 2 Homework\n\n\n\n04 - Probability and Inference I - z distributions and t- distributions\n\nPowerPoint: PowerPoint\nActivity: Activity"
   },
   {
     "objectID": "index.html#week-3",
     "href": "index.html#week-3",
     "title": "UMD Biostatistics",
     "section": "Week 3",
-    "text": "Week 3\n\n05 - Probability and Inference II - t distribution\n\nPowerPoint: PowerPoint\nActivity: Activity\nHomework: Week 3 Homework\n\n\n\n06 - T-Tests\n\nPowerPoint: PowerPoint\nActivity: Activity"
+    "text": "Week 3\n\n05 - T-Tests - one - two - paired\n\nPowerPoint: PowerPoint\nActivity: Activity\nHomework: Week 3 Homework\n\n\n\n06 - Power and Type I and II error and alpha and beta\n\nPowerPoint: PowerPoint\nActivity: Activity"
   },
   {
     "objectID": "index.html#week-4",
@@ -4722,21 +4680,21 @@
     "href": "ecostats_lectures/lecture_06/06_01_lecture_powerpoint_slides.html#the-objectives",
     "title": "Lecture 06",
     "section": "The objectives:",
-    "text": "The objectives:\n\np-values\nBrief review\nH test for a single population\n1- and 2-sided tests\nHypothesis tests for two populations\nAssumptions of parametric tests"
+    "text": "The objectives:\n\nBrief review\nHypothesis tests for two populations\nAssumptions of parametric tests\nPower of Parametric Tests\nIntroduction to Non-Parametric Tests"
   },
   {
     "objectID": "ecostats_lectures/lecture_06/06_01_lecture_powerpoint_html.html",
     "href": "ecostats_lectures/lecture_06/06_01_lecture_powerpoint_html.html",
     "title": "Lecture 06",
     "section": "",
-    "text": "Covered\n\nStatistical inference fundamentals\nHypothesis testing principles\nT Distributions\nOne sample T Tests\nTwo sample T"
+    "text": "Covered\n\nStatistical inference fundamentals\nHypothesis testing principles\nT Distributions\nOne sample T Tests\nTwo sample T Tests\nPaired T Tests"
   },
   {
     "objectID": "ecostats_lectures/lecture_06/06_01_lecture_powerpoint_html.html#the-objectives",
     "href": "ecostats_lectures/lecture_06/06_01_lecture_powerpoint_html.html#the-objectives",
     "title": "Lecture 06",
     "section": "The objectives:",
-    "text": "The objectives:\n\np-values\nBrief review\nH test for a single population\n1- and 2-sided tests\nHypothesis tests for two populations\nAssumptions of parametric tests"
+    "text": "The objectives:\n\nBrief review\nHypothesis tests for two populations\nAssumptions of parametric tests\nPower of Parametric Tests\nIntroduction to Non-Parametric Tests"
   },
   {
     "objectID": "ecostats_lectures/lecture_01/01_2_class_activity_html.html#tapestry-plot",
@@ -4809,18 +4767,11 @@
     "text": "Data Transformations\nWhen assumptions aren’t met, transformations may help normalize data:\n\nLog transformation: log10(x) - Useful for right-skewed data, multiplicative effects\nSquare root: sqrt(x) - Useful for count data, moderately right-skewed distributions\nBox-Cox: More flexible family of power transformations\nMore specialized transformations especially for percentages or proportions"
   },
   {
-    "objectID": "ecostats_lectures/lecture_07/07_01_lecture_powerpoint_slides.html#statistical-test-options",
-    "href": "ecostats_lectures/lecture_07/07_01_lecture_powerpoint_slides.html#statistical-test-options",
-    "title": "Lecture 07",
-    "section": "Statistical Test Options",
-    "text": "Statistical Test Options\n1. Standard T-Test\nStrengths: - High statistical power when assumptions are met - Well understood and widely accepted\nWeaknesses: - Sensitive to violations of normality, equal variance - Heavily influenced by outliers\n2. Welch’s T-Test\nStrengths: - Robust to violations of equal variance assumption - Handles unequal sample sizes well - Still parametric (assumes normality)\nWeaknesses: - Slightly less powerful than standard t-test when variances are equal - Still assumes normal distribution"
-  },
-  {
     "objectID": "ecostats_lectures/lecture_07/07_01_lecture_powerpoint_html.html",
     "href": "ecostats_lectures/lecture_07/07_01_lecture_powerpoint_html.html",
     "title": "Lecture 07",
     "section": "",
-    "text": "Hypotheses\n1- and 2-sided T tests\nAssumptions of parametric tests\nWhat next"
+    "text": "Hypotheses\n1- and 2-sided T tests\nPower - what is it and why talk about it.\nAssumptions of parametric tests\nWhat next — WHEN ASSUMPTIONS FAIL!\n\nwe will always cover parametric tests\nthen we will cover non parametric approaches\nlater on we will explore other approaches to use the appropriate underlying distribution that is not normal but Poisson or other"
   },
   {
     "objectID": "ecostats_lectures/lecture_07/07_01_lecture_powerpoint_html.html#testing-assumptions-of-parametric-tests",
@@ -4835,13 +4786,6 @@
     "title": "Lecture 07",
     "section": "Data Transformations",
     "text": "Data Transformations\nWhen assumptions aren’t met, transformations may help normalize data:\n\nLog transformation: log10(x) - Useful for right-skewed data, multiplicative effects\nSquare root: sqrt(x) - Useful for count data, moderately right-skewed distributions\nBox-Cox: More flexible family of power transformations\nMore specialized transformations especially for percentages or proportions"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_07/07_01_lecture_powerpoint_html.html#statistical-test-options",
-    "href": "ecostats_lectures/lecture_07/07_01_lecture_powerpoint_html.html#statistical-test-options",
-    "title": "Lecture 07",
-    "section": "Statistical Test Options",
-    "text": "Statistical Test Options\n\n1. Standard T-Test\nStrengths: - High statistical power when assumptions are met - Well understood and widely accepted\nWeaknesses: - Sensitive to violations of normality, equal variance - Heavily influenced by outliers\n\n\n2. Welch’s T-Test\nStrengths: - Robust to violations of equal variance assumption - Handles unequal sample sizes well - Still parametric (assumes normality)\nWeaknesses: - Slightly less powerful than standard t-test when variances are equal - Still assumes normal distribution"
   },
   {
     "objectID": "ecostats_lectures/lecture_09/09_02_class_activity.html",
@@ -5751,7 +5695,7 @@
     "href": "ecostats_lectures/lecture_05/05_02_class_activity.html#text-ci-barx-pm-t_alpha2-n-1-times-fracssqrtn",
     "title": "05_Class_Activity",
     "section": "\\[ 95\\% \\text{ CI} = \\bar{x} \\pm t_{\\alpha/2, n-1} \\times \\frac{s}{\\sqrt{n}} \\]",
-    "text": "\\[ 95\\% \\text{ CI} = \\bar{x} \\pm t_{\\alpha/2, n-1} \\times \\frac{s}{\\sqrt{n}} \\]\nWhere:\n\n- \\(\\bar{x}\\) is the sample mean\n- \\(s\\) is the sample standard deviation\n- \\(n\\) is the sample size\n- \\(t_{\\alpha/2, n-1}\\) is the critical t-value with n-1 degrees of freedom\n\n\n\n\n\n\n\nPractice Exercise 4: Calculating Confidence Intervals\n\n\n\nLet’s calculate the 95% confidence interval for shady needle lengths:\n\n# Extract sample statistics\nshady_stats &lt;- ps_shady_df \nshady_mean &lt;- mean(ps_shady_df$length_mm, na.rm=TRUE)\nshady_se &lt;- sd(ps_shady_df$length_mm, na.rm=TRUE)/sum(!is.na(ps_shady_df$length_mm))^.5\nshady_n &lt;- sum(!is.na(ps_shady_df$length_mm))\n\n# Find the critical t-value for 95% confidence with n-1 degrees of freedom\n# qt(0.975, df) gives the t-value for a 95% confidence interval (two-tailed)\nt_critical &lt;- qt(0.975, df = shady_n - 1)\ncat(\"Critical t-value for\", shady_n-1, \"degrees of freedom:\", round(t_critical, 3), \"\\n\")\n\nCritical t-value for 7 degrees of freedom: 2.365 \n\n# Calculate the confidence interval\nshady_ci_lower &lt;- shady_mean - t_critical * shady_se\nshady_ci_upper &lt;- shady_mean + t_critical * shady_se\n\n# Display the confidence interval\ncat(\"95% Confidence Interval for Shady needle mean length:\", \n    round(shady_ci_lower, 1), \"to\", round(shady_ci_upper, 1), \"mm\\n\")\n\n95% Confidence Interval for Shady needle mean length: 15.5 to 19.7 mm\n\n# Compare this to a confidence interval using the normal approximation (z = 1.96)\nz_ci_lower &lt;- shady_mean - 1.96 * shady_se\nz_ci_upper &lt;- shady_mean + 1.96 * shady_se\n\ncat(\"95% CI using normal approximation:\", \n    round(z_ci_lower, 1), \"to\", round(z_ci_upper, 1), \"mm\\n\")\n\n95% CI using normal approximation: 15.9 to 19.3 mm\n\n\n\n\n\n# Visualize the confidence interval\nggplot() +\n  geom_errorbar(aes(x = \"Shady Needle\", \n                   ymin = z_ci_lower, \n                   ymax = z_ci_upper),\n               width = 0.2) +\n  geom_point(aes(x = \"Shady Needle\", y = shady_mean), size = 3) +\n  labs(title = \"Mean Needle Length with 95% Confidence Interval\",\n       subtitle = \"Shady Needle\",\n       x = NULL,\n       y = \"Length (mm)\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nInterpretation:\n\n\n\n\nWe are 95% confident that the true population mean needle length on shady side falls within this interval\nNote the small difference between using the t-distribution vs. normal approximation"
+    "text": "\\[ 95\\% \\text{ CI} = \\bar{x} \\pm t_{\\alpha/2, n-1} \\times \\frac{s}{\\sqrt{n}} \\]\nWhere:\n\n- \\(\\bar{x}\\) is the sample mean\n- \\(s\\) is the sample standard deviation\n- \\(n\\) is the sample size\n- \\(t_{\\alpha/2, n-1}\\) is the critical t-value with n-1 degrees of freedom\n\n\n\n\n\n\n\nPractice Exercise 4: Calculating Confidence Intervals\n\n\n\nLet’s calculate the 95% confidence interval for shady needle lengths:\n\n# Extract sample statistics\nshady_stats &lt;- ps_shady_df \nshady_mean &lt;- mean(ps_shady_df$length_mm, na.rm=TRUE)\nshady_se &lt;- sd(ps_shady_df$length_mm, na.rm=TRUE)/sum(!is.na(ps_shady_df$length_mm))^.5\nshady_n &lt;- sum(!is.na(ps_shady_df$length_mm))\n\n# Find the critical t-value for 95% confidence with n-1 degrees of freedom\n# qt(0.975, df) gives the t-value for a 95% confidence interval (two-tailed)\nt_critical &lt;- qt(0.975, df = shady_n - 1)\ncat(\"Critical t-value for\", shady_n-1, \"degrees of freedom:\", round(t_critical, 3), \"\\n\")\n\nCritical t-value for 7 degrees of freedom: 2.365 \n\n# Calculate the confidence interval\nshady_ci_lower &lt;- shady_mean - t_critical * shady_se\nshady_ci_upper &lt;- shady_mean + t_critical * shady_se\n\n# Display the confidence interval\ncat(\"95% Confidence Interval for Shady needle mean length:\", \n    round(shady_ci_lower, 1), \"to\", round(shady_ci_upper, 1), \"mm\\n\")\n\n95% Confidence Interval for Shady needle mean length: 15.5 to 19.7 mm\n\n# Compare this to a confidence interval using the normal approximation (z = 1.96)\nz_ci_lower &lt;- shady_mean - 1.96 * shady_se\nz_ci_upper &lt;- shady_mean + 1.96 * shady_se\n\ncat(\"95% CI using normal approximation:\", \n    round(z_ci_lower, 1), \"to\", round(z_ci_upper, 1), \"mm\\n\")\n\n95% CI using normal approximation: 15.9 to 19.3 mm\n\n\n\n\n\n# Visualize the confidence interval\nggplot() +\n  geom_errorbar(aes(x = \"Shady Needle\", \n                   ymin = z_ci_lower, \n                   ymax = z_ci_upper),\n               width = 0.2) +\n  geom_point(aes(x = \"Shady Needle\", y = shady_mean), size = 3) +\n  labs(title = \"Mean Needle Length with 95% Confidence Interval\",\n       subtitle = \"Shady Needle\",\n       x = NULL,\n       y = \"Length (mm)\")"
   },
   {
     "objectID": "ecostats_lectures/lecture_05/05_02_class_activity.html#look-a-the-plot-of-needle-lengths",
@@ -5759,34 +5703,6 @@
     "title": "05_Class_Activity",
     "section": "Look a the plot of needle lengths",
     "text": "Look a the plot of needle lengths\n\n# Create a boxplot to visualize the data\np_plot"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_05/05_02_class_activity.html#normality-with-qq-plot",
-    "href": "ecostats_lectures/lecture_05/05_02_class_activity.html#normality-with-qq-plot",
-    "title": "05_Class_Activity",
-    "section": "Normality with qq plot",
-    "text": "Normality with qq plot\n\n# 1. Check for normality in each group using QQ plots\n\nggplot(ps_df, aes(sample = length_mm)) +\n  stat_qq() +\n  stat_qq_line(color = \"red\") +\n  facet_wrap(~ side) +\n  labs(title = \"QQ Plots for Needle Length by Side\",\n       x = \"Theoretical Quantiles\",\n       y = \"Sample Quantiles\") +\n  theme_minimal()"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_05/05_02_class_activity.html#normality-with-shapiro-wilk",
-    "href": "ecostats_lectures/lecture_05/05_02_class_activity.html#normality-with-shapiro-wilk",
-    "title": "05_Class_Activity",
-    "section": "Normality with Shapiro-Wilk",
-    "text": "Normality with Shapiro-Wilk\n\n# there are always two ways\n# Test for normality using Shapiro-Wilk test for each wind group\n# All in one pipeline using tidyverse approach\nnormality_results &lt;- ps_df %&gt;%\n  group_by(side) %&gt;%\n  summarize(\n    shapiro_stat = shapiro.test(length_mm)$statistic,\n    shapiro_p_value = shapiro.test(length_mm)$p.value,\n    normal_distribution = if_else(shapiro_p_value &gt; 0.05, \"Normal\", \"Non-normal\")\n    # above we are using an ifelse test which is a great oneliner\n  )\n\n# Print the results\nnormality_results\n\n# A tibble: 2 × 4\n  side  shapiro_stat shapiro_p_value normal_distribution\n  &lt;chr&gt;        &lt;dbl&gt;           &lt;dbl&gt; &lt;chr&gt;              \n1 shady        0.966           0.868 Normal             \n2 sunny        0.900           0.289 Normal"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_05/05_02_class_activity.html#homogeneity-of-variance",
-    "href": "ecostats_lectures/lecture_05/05_02_class_activity.html#homogeneity-of-variance",
-    "title": "05_Class_Activity",
-    "section": "Homogeneity of variance",
-    "text": "Homogeneity of variance\n\n\n\n\n\n\nTip\n\n\n\n\n# 2. Check for equal variances using Levene's test\n# H0: Variances are equal\n# H1: Variances are not equal\nlevene_result &lt;- leveneTest(length_mm ~ side, data = ps_df)\n\nWarning in leveneTest.default(y = y, group = group, ...): group coerced to\nfactor.\n\nlevene_result\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value Pr(&gt;F)\ngroup  1  0.2062 0.6567\n      14               \n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nInterpreting the assumption checks:\n\nQQ plots: Do points approximately follow the line for both groups?\nShapiro - Wilk: is the outcome p&gt;0.05? Then don’t reject Ho that they are normally distributed\nLevene’s test: If p &gt; 0.05, we don’t reject the assumption of equal variances"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_05/05_02_class_activity.html#now-lets-conduct-the-two-sample-t-test",
-    "href": "ecostats_lectures/lecture_05/05_02_class_activity.html#now-lets-conduct-the-two-sample-t-test",
-    "title": "05_Class_Activity",
-    "section": "Now let’s conduct the two-sample t-test:",
-    "text": "Now let’s conduct the two-sample t-test:\n\n\n\n\n\n\nPractice Exercise 6: Two-Sample t-Test\n\n\n\nCalculate the T Test\n\n# Perform a two-sample t-test\n# H0: μ1 = μ2 (The mean needle lengths are equal)\n# H1: μ1 ≠ μ2 (The mean needle lengths are different)\n\n# var.equal=TRUE uses the standard t-test (pooled variance)\n# var.equal=FALSE uses Welch's t-test (for unequal variances)\nt_test_result &lt;- t.test(length_mm ~ side, data = ps_df, var.equal = TRUE)\n\n# Display the test results\nt_test_result\n\n\n    Two Sample t-test\n\ndata:  length_mm by side\nt = 1.1279, df = 14, p-value = 0.2783\nalternative hypothesis: true difference in means between group shady and group sunny is not equal to 0\n95 percent confidence interval:\n -1.309330  4.214005\nsample estimates:\nmean in group shady mean in group sunny \n           17.60561            16.15328"
   },
   {
     "objectID": "ecostats_lectures/lecture_05/05_02_class_activity.html#calculate-the-t-test",
@@ -5810,29 +5726,15 @@
     "text": "Compare to a Paired T Test\n\n# Perform a two-sample t-test\n# H0: μ1 = μ2 (The mean needle lengths are equal)\n# H1: μ1 ≠ μ2 (The mean needle lengths are different)\n\n# var.equal=TRUE uses the standard t-test (pooled variance)\n# var.equal=FALSE uses Welch's t-test (for unequal variances)\npaired_test_result &lt;- t.test(length_mm ~ side, data = ps_df, pair = TRUE)\n\n# Display the test results\npaired_test_result\n\n\n    Paired t-test\n\ndata:  length_mm by side\nt = 2.7818, df = 7, p-value = 0.02723\nalternative hypothesis: true mean difference is not equal to 0\n95 percent confidence interval:\n 0.2178092 2.6868652\nsample estimates:\nmean difference \n       1.452337"
   },
   {
-    "objectID": "ecostats_lectures/lecture_05/05_02_class_activity.html#look-at-effect-size",
-    "href": "ecostats_lectures/lecture_05/05_02_class_activity.html#look-at-effect-size",
-    "title": "05_Class_Activity",
-    "section": "Look at Effect Size",
-    "text": "Look at Effect Size\n\n\n\n\n\n\nTip\n\n\n\n\n# Calculate the mean difference\nstats_df %&gt;%\n  summarize(difference = mean_length[side == \"shady\"] - mean_length[side == \"sunny\"])\n\n# A tibble: 1 × 1\n  difference\n       &lt;dbl&gt;\n1       1.45"
-  },
-  {
     "objectID": "ecostats_lectures/lecture_05/05_02_class_activity.html#visualize-the-plot",
     "href": "ecostats_lectures/lecture_05/05_02_class_activity.html#visualize-the-plot",
     "title": "05_Class_Activity",
     "section": "Visualize the plot",
-    "text": "Visualize the plot\n\n\n\n\n\n\nTip\n\n\n\n\n# Visualize the results with a mean and error bar plot\nggplot(stats_df, aes(x = side, y = mean_length, fill = side)) +\n  geom_bar(stat = \"identity\", alpha = 0.7) +\n  geom_errorbar(aes(ymin = mean_length - se_length, \n                   ymax = mean_length + se_length),\n               width = 0.2)"
+    "text": "Visualize the plot\n\n\n\n\n\n\nTip\n\n\n\n\n# Visualize the results with a mean and error bar plot\nggplot(stats_df, aes(x = side, y = mean_length, color=side, fill = side)) +\n  geom_point(stat = \"identity\", alpha = 0.7) +\n  geom_errorbar(aes(ymin = mean_length - se_length, \n                   ymax = mean_length + se_length),\n               width = 0.2)"
   },
   {
-    "objectID": "ecostats_lectures/lecture_05/05_02_class_activity.html#alternative-plot-method",
-    "href": "ecostats_lectures/lecture_05/05_02_class_activity.html#alternative-plot-method",
-    "title": "05_Class_Activity",
-    "section": "Alternative plot method",
-    "text": "Alternative plot method\n\nggplot(ps_df, aes(x = side, y = length_mm, color = side)) +\n  stat_summary(fun=mean, geom=\"point\")+\n  stat_summary(fun.data = mean_se, geom=\"errorbar\", width = 0.2)"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_05/05_02_class_activity.html#interpretation-1",
-    "href": "ecostats_lectures/lecture_05/05_02_class_activity.html#interpretation-1",
+    "objectID": "ecostats_lectures/lecture_05/05_02_class_activity.html#interpretation",
+    "href": "ecostats_lectures/lecture_05/05_02_class_activity.html#interpretation",
     "title": "05_Class_Activity",
     "section": "Interpretation:",
     "text": "Interpretation:\n\n\n\n\n\n\nTip\n\n\n\nInterpret the results:\n\nWhat was the null hypothesis?\nWhat was the alternative hypothesis?\nWhat does the p-value tell us?\nShould we reject or fail to reject the null hypothesis?\nWhat is the practical interpretation for botanists?"

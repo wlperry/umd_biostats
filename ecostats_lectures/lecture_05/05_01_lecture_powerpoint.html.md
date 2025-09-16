@@ -35,7 +35,6 @@ format:
 :::
 :::::
 
-# **Lecture 4: Review - Summary Statistics**
 
 -   Tests of means using T-Tests
     -   one sample - is the sample mean different from a hypothesized
@@ -92,8 +91,9 @@ The goals for today
 -   Statistical inference fundamentals
 -   Hypothesis testing principles
 -   T Distributions
--   One sample T Tests
+-   One sample T Test
 -   Two sample T Test
+-   Paired T Test
 :::
 
 ::: {.column width="40%"}
@@ -504,6 +504,7 @@ group.
 
 1.  You need this and the graph to see what is going on ....
 
+
     ::: {.cell}
     
     ```{.r .cell-code}
@@ -515,8 +516,7 @@ group.
         n = n(),
         se_length = sd_length / sqrt(n)
       )
-    
-    print(group_summary)
+    group_summary
     ```
     
     ::: {.cell-output .cell-output-stdout}
@@ -532,20 +532,7 @@ group.
     
     :::
     :::
-:::
 
-# Visualizing Group Differences
-
-::: {.cell}
-
-```{.r .cell-code}
-# Create a boxplot comparing the two sides
-shady_sunny_plot
-```
-
-::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-11-1.png){width=576}
-:::
 :::
 
 # Practice Exercise 4: Effect Size
@@ -554,6 +541,7 @@ shady_sunny_plot
 ## Practice Exercise 4: Effect size
 
 We could also look at the difference in means... some cool code here
+
 
 ::: {.cell}
 
@@ -575,12 +563,13 @@ group_summary %>%
 
 :::
 :::
+
 :::
 
 # Practice Exercise 5: ggplot Summary Statistics
 
 ::: callout-tip
-## Practice Exercise 5: Using GGPLOT to get summary stats
+## Practice Exercise 5: Using GGPLOT to get summary plot
 
 GGplot also has code to make the mean and standard error plots we are
 interested in along with a lot of others
@@ -601,7 +590,7 @@ needle_mean_se_plot
 ```
 
 ::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-13-1.png){width=480}
+![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-12-1.png){width=480}
 :::
 :::
 
@@ -620,38 +609,13 @@ If assumptions are violated:
 -   Welch's t-test (unequal variances)
 -   Non-parametric alternatives (Mann-Whitney U test)
 
-# Practice Exercise 6: Creating Group Data
-
-::: callout-tip
-## Practice Exercise 6: Test normality of sunny pine needle lengths
-
-### qqplots
-
-Note you need to test each groups separately...
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Assuming your dataframe is called df
-needle_mean_se_plot
-```
-
-::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-14-1.png){width=480}
-:::
-:::
-
-:::
-
-# Practice Exercise 7: Separate Group Data
+# Practice Exercise 6: Separate Group Data
 
 ::: callout-tip
 ## Practice Exercise 7: Test normality of sunny pine needle lengths
 
-qqplots
-
 Note you need to test each groups separately...
+
 
 ::: {.cell}
 
@@ -701,149 +665,16 @@ head(ps_sunny_df)
 
 :::
 :::
+
 :::
 
-# Practice Exercise 8: QQ Plot for Sunny Data
+# Practice Exercise 8: Combined Normality Test
 
 ::: callout-tip
-## Practice Exercise 8: Test normality of sunny pine needle lengths
-
-qqplots
-
-Note you need to test each groups separately...
-
-::: {.cell}
-
-```{.r .cell-code}
-# QQ Plot for windward group
-qqPlot(ps_sunny_df$length_mm, 
-       main = "QQ Plot for sunny needle length",
-       ylab = "Sample Quantiles")
-```
-
-::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-16-1.png){width=480}
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 5 4
-```
-
-
-:::
-:::
-:::
-
-# Practice Exercise 9: Shapiro-Wilk Test
-
-::: callout-tip
-## Practice Exercise 9: Test normality of I8 lengths
-
-Shapiro-Wilk test
-
-Note you need to test each groups separately...
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Shapiro-Wilk test for sunny group
-shapiro.test(ps_sunny_df$length_mm)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Shapiro-Wilk normality test
-
-data:  ps_sunny_df$length_mm
-W = 0.89994, p-value = 0.2886
-```
-
-
-:::
-:::
-
-:::
-
-# Practice Exercise 10: QQ Plot for Shady
-
-::: callout-tip
-## Practice Exercise 10: Test normality of shady lengths
-
-qqplots
-
-Note you need to test each groups separately...
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# You can also test the i3
-# QQ Plot for shady group
-qqPlot(ps_shady_df$length_mm, 
-       main = "QQ Plot for shady needle length",
-       ylab = "Sample Quantiles")
-```
-
-::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-18-1.png){width=480}
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 7 6
-```
-
-
-:::
-:::
-
-:::
-
-# Practice Exercise 11: Shapiro-Wilk for Shady
-
-::: callout-tip
-## Practice Exercise 11: Test normality of shady lengths
-
-Shapiro-Wilk test
-
-Note you need to test each groups separately...
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Shapiro-Wilk test for shady group
- shapiro.test(ps_shady_df$length_mm)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Shapiro-Wilk normality test
-
-data:  ps_shady_df$length_mm
-W = 0.96639, p-value = 0.8683
-```
-
-
-:::
-:::
-
-:::
-
-# Practice Exercise 12: Combined Normality Test
-
-::: callout-tip
-## Practice Exercise 12: Test Normality at one time
+## Practice Exercise 8: Test Normality at one time
 
 There are always a lot of ways to do this in R
+
 
 ::: {.cell}
 
@@ -856,11 +687,8 @@ normality_results <- ps_df %>%
   summarize(
     shapiro_stat = shapiro.test(length_mm)$statistic,
     shapiro_p_value = shapiro.test(length_mm)$p.value,
-    normal_distribution = if_else(shapiro_p_value > 0.05, "Normal", "Non-normal")
-  )
-
-# Print the results
-print(normality_results)
+    normal_distribution = if_else(shapiro_p_value > 0.05, "Normal", "Non-normal"))
+normality_results
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -876,6 +704,7 @@ print(normality_results)
 
 :::
 :::
+
 :::
 
 # Practice Exercise 13: Test Equal Variances
@@ -884,6 +713,10 @@ print(normality_results)
 ## Practice Exercise 13: Test equal variances
 
 Levenes test can be done on the original dataframe
+
+**Note: the Levenes Test should be NOT SIGNIFICANT - What is the null
+hypothesis**
+
 
 ::: {.cell}
 
@@ -919,6 +752,7 @@ group  1  0.2062 0.6567
 
 :::
 :::
+
 :::
 
 # **Lecture 5:** Conducting the Two-Sample T-Test
@@ -933,44 +767,18 @@ Ho: μ₁ = μ₂ (The needle lengths do not differ)
 Ha: μ₁ ≠ μ₂ (The mean needle lengths differ - direction is not
 specified)
 
-Deciding between:
-
--   Standard t-test (equal variances)
-
--   Welch's t-test (unequal variances)
-
-**Note the Levenes Test should be NOT SIGNIFICANT - What is the null
-hypothesis**
-:::
-
-::: {.column width="40%"}
-::: {.cell}
-::: {.cell-output .cell-output-stdout}
-
-```
-Levene's Test for Homogeneity of Variance (center = median)
-      Df F value Pr(>F)
-group  1  0.2062 0.6567
-      14               
-```
-
-
-:::
-:::
-:::
-:::::
-
-# **Lecture 5:** Running the Two-Sample T-Test
-
-Now we can do a two sample TTEST
-
-Calculate t-statistic manually (optional)
-
-YOUR CODE HERE:
+Calculate t-statistic manually (optional) - YOUR CODE HERE:
 
 t = (mean1 - mean2) / sqrt((s1\^2/n1) + (s2\^2/n2))
 
-::: callout-tip
+Deciding between:
+
+-   **Standard t-test (equal variances)**
+-   Welch's t-test (unequal variances)
+:::
+
+::: {.column width="40%"}
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1013,25 +821,35 @@ mean in group shady mean in group sunny
 
 
 :::
-
-```{.r .cell-code}
-# Welch's t-test (if variances are unequal)
-# YOUR CODE HERE
-```
-:::
 :::
 
-# **Lecture 5:** Running the Two-Sample T-Test
+:::
+:::::
 
-Now we can do a two sample TTEST
+# **Lecture 5:** Conducting the Two-Sample T-Test
 
-Calculate t-statistic manually (optional)
+::::: columns
+::: {.column width="60%"}
+Now we can compare the mean needle lengths between shady and sunny
+sides.
 
-YOUR CODE HERE:
+Ho: μ₁ = μ₂ (The needle lengths do not differ)
+
+Ha: μ₁ ≠ μ₂ (The mean needle lengths differ - direction is not
+specified)
+
+Calculate t-statistic manually (optional) - YOUR CODE HERE:
 
 t = (mean1 - mean2) / sqrt((s1\^2/n1) + (s2\^2/n2))
 
-::: callout-tip
+Deciding between:
+
+-   Standard t-test (equal variances)
+-   **Welches t-test (unequal variances)**
+:::
+
+::: {.column width="40%"}
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1040,13 +858,13 @@ t = (mean1 - mean2) / sqrt((s1\^2/n1) + (s2\^2/n2))
 
 # Standard t-test (if variances are equal)
 t_test_result <- t.test(length_mm ~ side, data = ps_df, var.equal = FALSE)
-print("Standard two-sample t-test:")
+print("Welches two-sample t-test:")
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Standard two-sample t-test:"
+[1] "Welches two-sample t-test:"
 ```
 
 
@@ -1074,13 +892,10 @@ mean in group shady mean in group sunny
 
 
 :::
+:::
 
-```{.r .cell-code}
-# Welch's t-test (if variances are unequal)
-# YOUR CODE HERE
-```
 :::
-:::
+:::::
 
 # **Lecture 5:** Difference between a Two-Sample T and Welch's T Test
 
@@ -1121,42 +936,31 @@ significant\] difference in needle length between sunny (M = ..., SD =
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
 ::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-23-1.png){width=480}
+![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-16-1.png){width=480}
 :::
 :::
-:::
-:::::
 
-# **Lecture 5:** Visualizing the Results
-
-::::: columns
-::: {.column width="60%"}
-**Interpret the results of the two-sample t-test**
-
-What can we conclude about the needle lengths on sunny vs shady sides?
-
-**How to report this result in a scientific paper:**
-
-"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no
-significant\] difference in needle length between sunny (M = ..., SD =
-...) and shady (M = ..., SD = ...) sides of pine trees, t(...) = ..., p
-= ...."
-:::
-
-::: {.column width="40%"}
-::: {.cell}
-::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-24-1.png){width=576}
-:::
-:::
 :::
 :::::
 
 # **Lecture 5:** Now what does a paired T test tell us
 
-Why do a paired T test
+::::: columns
+::: {.column width="60%"}
+Paired t-test:
+
+Compares two measurements from the same subjects or matched pairs Tests
+whether the mean difference between paired observations equals zero
+Examples: before/after measurements on the same people, left vs right
+measurements, matched case-control studies Uses the differences between
+pairs as the data points Generally more powerful because it controls for
+individual variation
+:::
+
+::: {.column width="40%"}
 
 ::: {.cell}
 
@@ -1214,10 +1018,14 @@ mean difference
 ```
 :::
 
+:::
+:::::
+
 # Lecture 5: What is going on??
 
 Note that thee is a lot of variation within trees but the trend is the
 same
+
 
 ::: {.cell}
 
@@ -1226,9 +1034,10 @@ ps_plot
 ```
 
 ::: {.cell-output-display}
-![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-26-1.png){width=480}
+![](05_01_lecture_powerpoint_files/figure-html/unnamed-chunk-18-1.png){width=480}
 :::
 :::
+
 
 # **Lecture 5:** Assumptions of Parametric Tests
 

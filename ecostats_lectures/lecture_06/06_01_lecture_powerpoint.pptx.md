@@ -17,17 +17,6 @@ format:
     output-file: "06_01_lecture_powerpoint.pdf"
 ---
 
-
-
-
-
-
-
-
-
-
-
-
 # Lecture 5: Review
 
 :::: columns
@@ -38,7 +27,8 @@ Covered
 -   Hypothesis testing principles
 -   T Distributions
 -   One sample T Tests
--   Two sample T
+-   Two sample T Tests
+-   Paired T Tests
 :::
 
 ![](images/clipboard-536528302.png){width="259" height="315"}
@@ -50,12 +40,11 @@ Covered
 ::: {.column width="60%"}
 ## The objectives:
 
--   p-values
 -   Brief review
--   H test for a single population
--   1- and 2-sided tests
 -   Hypothesis tests for two populations
 -   Assumptions of parametric tests
+-   Power of Parametric Tests
+-   Introduction to Non-Parametric Tests
 :::
 
 ::: {.column width="40%"}
@@ -238,39 +227,17 @@ something more extreme) if the null hypothesis is true.
     -   p-value is NOT the probability that results occurred by chance
     -   Statistical significance ≠ practical significance
 -   Note that there is a difference in how to state the hypotheses
-    -   one sample TTEST
+    -   one sample T-TEST
 
-    -   two sample TTEST
+    -   two sample T-TEST
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](06_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-1-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -299,7 +266,7 @@ often be astray if we draw a conventional line at .05 …"
 
 ::::: columns
 ::: {.column width="60%"}
--   Even good studies can reach incorrect conclusions
+-   **Even good studies can reach incorrect conclusions**
 -   "Decision errors"
 -   Two types of decision errors
 -   Want to know probability of making these errors
@@ -324,7 +291,7 @@ often be astray if we draw a conventional line at .05 …"
 -   Inverse relationship between type I and type II error - but not
     straightforward
 -   Result of chance - sample not representative of population
--   Which type of error is more dangerous?
+-   **Which type of error is more dangerous?**
 :::
 
 ::: {.column width="40%"}
@@ -341,21 +308,28 @@ the dotted line is the alpha = 0.05
 When making decisions based on hypothesis tests, two types of errors can
 occur:
 
-**Type I Error (False Positive)** - Rejecting H₀ when it's actually
-true - Probability = α (significance level) - "Finding an effect that
-isn't real"
+**Type I Error (False Positive)**
 
-**Type II Error (False Negative)** - Failing to reject H₀ when it's
-actually false - Probability = β - "Missing an effect that is real"
+-   Rejecting H₀ when it's actually true
+-   Probability = α (significance level)
+-   "Finding an effect that isn't real"
 
-**Statistical Power = 1 - β** - Probability of correctly rejecting a
-false H₀ - Increases with: - Larger sample size - Larger effect size -
-Lower variability - Higher α level
+**Type II Error (False Negative)**
 
-The red area represents the power in the experiment
+-   Failing to reject H₀ when it's actually false
+-   Probability = β - "Missing an effect that is real"
 
-The farther apart the means the lower the beta error is... or you have
-higher power.
+**Statistical Power = 1 - β**
+
+-   Probability of correctly rejecting a false H₀
+-   Increases with:
+    -   Larger sample size
+    -   Larger effect size
+    -   Lower variability
+    -   Higher α level
+
+The farther apart the means or lower variance the lower the beta error
+is \~ have higher power. - CLICK TO NEXT AS SAME TEXT
 :::
 
 ::: {.column width="40%"}
@@ -370,51 +344,36 @@ higher power.
 When making decisions based on hypothesis tests, two types of errors can
 occur:
 
-**Type I Error (False Positive)** - Rejecting H₀ when it's actually
-true - Probability = α (significance level) - "Finding an effect that
-isn't real"
+**Type I Error (False Positive)**
 
-**Type II Error (False Negative)** - Failing to reject H₀ when it's
-actually false - Probability = β - "Missing an effect that is real"
+-   Rejecting H₀ when it's actually true
+-   Probability = α (significance level)
+-   "Finding an effect that isn't real"
 
-**Statistical Power = 1 - β** - Probability of correctly rejecting a
-false H₀ - Increases with: - Larger sample size - Larger effect size -
-Lower variability - Higher α level
+**Type II Error (False Negative)**
 
-The red area represents the power in the experiment
+-   Failing to reject H₀ when it's actually false
+-   Probability = β - "Missing an effect that is real"
 
-The farther apart the means the lower the beta error is... or you have
-higher power.
+**Statistical Power = 1 - β**
+
+-   Probability of correctly rejecting a false H₀
+-   Increases with:
+    -   Larger sample size
+    -   Larger effect size
+    -   Lower variability
+    -   Higher α level
+
+The farther apart the means or lower variance the lower the beta error
+is \~ have higher power.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](06_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-2-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -440,17 +399,6 @@ error might have occurred:
     -   standardized difference between means - here assuming a
         difference of 1 units (g)
     -   `delta = 0.423`: The standardized effect size (Cohen's d)
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -508,31 +456,9 @@ NOTE: n is number in *each* group
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # What if we calculated power for the pine needles you measured?
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -609,17 +535,6 @@ Power for observed 1.45 mm difference: 0.182
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # What is Power
 
 Statistical power represents the probability of detecting a true effect
@@ -666,33 +581,11 @@ When interpreting graphs:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](06_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-5-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -721,86 +614,11 @@ are analyzed as if they were independent.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](06_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-6-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-:::
-:::::
-
-# **Lecture 6:** Practical Applications in Fish Biology
-
-::::: columns
-::: {.column width="60%"}
-The statistical concepts we've covered today are essential for fisheries
-biologists and ecologists:
-
--   **Standard error** quantifies uncertainty in growth rate estimates
--   **Confidence intervals** provide plausible ranges for population
-    parameters
--   **Hypothesis testing** evaluates effects of management practices
--   **P-values** determine significance of environmental impacts
-
-**Real-world applications:**
-
--   Assessing population health and structure
--   Evaluating effectiveness of fishing regulations
--   Quantifying relationships between fish size and habitat variables
--   Predicting impacts of climate change on fish populations
--   Designing effective conservation strategies
-:::
-
-::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-::: {.cell-output-display}
-![](06_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-7-1.png)
-:::
-:::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 

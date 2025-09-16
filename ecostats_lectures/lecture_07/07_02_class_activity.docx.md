@@ -12,13 +12,6 @@ format:
     output-file: "07_02_class_activity.docx"
 ---
 
-
-
-
-
-
-
-
 # In class activity 7:
 
 ## Introduction
@@ -43,7 +36,7 @@ from Island Lake and NE 12, focusing on:
 -   power
 -   making plots of mean and standard error
 
-Lets start by ecploring onluy lake NE 12 as if you were doing a single
+Lets start by exploring only lake NE 12 as if you were doing a single
 sample T test.\
 We will test the assumptions and then do the a T Test on NE 12 compared
 to Island Lake.
@@ -81,13 +74,6 @@ How may lakes are there?
 
 ::::: columns
 ::: {.column width="60%"}
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -147,23 +133,9 @@ library(patchwork)  # For combining plots
 library(perm)       # For permutation tests
 ```
 :::
-
-
-
-
-
-
-
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -211,13 +183,6 @@ head(lt_df)
 
 :::
 :::
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -229,13 +194,6 @@ understand its characteristics.
 Let's calculate summary statistics and create visualizations.
 
 **Activity: Calculate basic summary statistics for lake trout mass**
-
-
-
-
-
-
-
 
 ::: {.cell exercise='true'}
 
@@ -274,20 +232,45 @@ print(df_summary)
 ```
 :::
 
+# Calculating Mode if you wanted to
 
 
+::: {.cell}
+
+```{.r .cell-code}
+# I had accdentally asked you to do mode in HW2 - wiht out telling you how... 
+# here is one approach
+lt_df %>%
+  filter(!is.na(mass_g)) %>%
+  group_by(lake, mass_g) %>%
+  summarise(count = n(), .groups = "drop_last") %>%
+  arrange(desc(count)) %>%
+  slice(1) %>%
+  select(-count) %>%
+  rename(mode_mass = mass_g)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 6 × 2
+# Groups:   lake [6]
+  lake        mode_mass
+  <chr>           <dbl>
+1 I8               1000
+2 Island Lake      2200
+3 N 01             1000
+4 NE 12              90
+5 NE 14            1150
+6 Toolik            340
+```
 
 
-
+:::
+:::
 
 
 # Create a New dataframe of lake NE12 only
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -299,12 +282,6 @@ ne12_df <- lt_df %>%
   filter(!is.na(mass_g))  # Remove any NA values
 ```
 :::
-
-
-
-
-
-
 
 
 # **Part 1:** Testing Assumptions
@@ -321,11 +298,10 @@ necessary assumptions.
 Methods to test normality:
 
 -   Visual methods:
-    -   QQ plots or histograms
 
-    -   Statistical tests: Shapiro
-
-    -   Wilk test
+    -   QQ plots or histograms\
+    -   Statistical tests: Shapiro\
+    -   Wilk test\
 :::
 :::::
 
@@ -351,12 +327,7 @@ Effective data visualization helps us understand:
 
 # Your Task
 
-
-
-
-
-
-
+### Histogram for NE 12
 
 ::: {.cell exercise='true'}
 
@@ -385,20 +356,7 @@ ne12_histo_plot
 ```
 :::
 
-
-
-
-
-
-
-
-Now to make the various plots we talk about only for lake `NE 12`
-
-
-
-
-
-
+### Dot Plot for NE 12
 
 
 ::: {.cell}
@@ -412,9 +370,13 @@ ne12_dot_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-2-1.jpeg)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-3-1.jpeg)
 :::
 :::
+
+
+### Box Plot for NE 12
+
 
 ::: {.cell}
 
@@ -428,9 +390,13 @@ ne12_box_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-3-1.jpeg)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-4-1.jpeg)
 :::
 :::
+
+
+### QQ PLOT NE 12
+
 
 ::: {.cell}
 
@@ -445,24 +411,12 @@ ne12_qq_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-4-1.jpeg)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-5-1.jpeg)
 :::
 :::
-
-
-
-
-
-
 
 
 ## Use Patchwork to combine the plots
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -480,26 +434,14 @@ combined_stats_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-5-1.jpeg)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-6-1.jpeg)
 :::
 :::
-
-
-
-
-
-
 
 
 ## Shapiro-Wilk's Test
 
 Really want to do this on residuals
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -525,26 +467,12 @@ W = 0.85148, p-value < 2.2e-16
 :::
 
 
-
-
-
-
-
-
-# Now that we show how mass of lake NE 12 fails what do we do next?
+# Now that we have shown how mass of lake NE 12 fails what do we do next?
 
 Lets explore a comparison of NE 12 and Island Lake mass_g
 
 ::: callout-tip
-## Exercise: Create a island_ne12_df dataframe from
-
-We could also look at the difference in means... some cool code here
-
-
-
-
-
-
+## Exercise: Create a dataframe from `Island Lake` and `NE 12`
 
 
 ::: {.cell}
@@ -552,12 +480,12 @@ We could also look at the difference in means... some cool code here
 ```{.r .cell-code}
 # Create a dataframe with just Island Lake and NE 12 lakes
 # Filter out any NA values for mass
-island_ne12_df <- lt_df %>% 
+in_df <- lt_df %>% 
   filter(lake %in% c("NE 12", "Island Lake")) %>%
   filter(!is.na(mass_g))  
 
 # Look at the first few rows
-head(island_ne12_df)
+head(in_df)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -578,12 +506,6 @@ head(island_ne12_df)
 :::
 :::
 
-
-
-
-
-
-
 :::
 
 ::: callout-tip
@@ -592,17 +514,11 @@ head(island_ne12_df)
 # Get a summary of the data by lake
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Get a summary of the data by lake
-summary_by_lake <- island_ne12_df %>%
+summary_by_lake <- in_df %>%
   group_by(lake) %>%
   summarise(
     n = n(),                        # Count of observations
@@ -631,12 +547,6 @@ summary_by_lake
 :::
 :::
 
-
-
-
-
-
-
 :::
 
 # Visualize data by lake
@@ -645,17 +555,11 @@ summary_by_lake
 ## Make a histogram of both Island and NE 12 lakes
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create histograms to visualize the distribution
-hist_plot <- island_ne12_df %>% 
+hist_plot <- in_df %>% 
   ggplot(aes(x = mass_g, fill = lake)) +
   geom_histogram(bins = 20, alpha = 0.7) +
   labs(
@@ -669,21 +573,17 @@ hist_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-9-1.jpeg)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-10-1.jpeg)
 :::
 :::
 
-
-
-
-
-
-
 :::
 
-# Practice for later if you choose
+### Practice for later if you choose
 
-## Informal Normality test - often better
+### Informal Normality test - often better
+
+### QQ PLOT FOR BOTH LAKES
 
 ::: callout-tip
 ## Exercise: check normality
@@ -694,17 +594,11 @@ In a QQ plot, points that follow the line indicate data that follows a
 normal distribution. Deviations from the line suggest non-normality.
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create QQ plots for each lake to check normality
-qq_plot <- island_ne12_df %>% 
+qq_plot <- in_df %>% 
   ggplot(aes(sample = mass_g, color = lake)) +
   stat_qq() +
   stat_qq_line() +
@@ -719,15 +613,9 @@ qq_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-10-1.jpeg)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-11-1.jpeg)
 :::
 :::
-
-
-
-
-
-
 
 :::
 
@@ -742,99 +630,38 @@ Note island looks non normal in the qqplot but its really close with the
 Shapiro-Wilk test...
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Formal test for normality: Shapiro-Wilk test
 # We'll do this for each lake separately
 
-# For NE 12
-ne12_data <- island_ne12_df %>% 
-  filter(lake == "NE 12") %>%
-  pull(mass_g)
+normality_results <- in_df %>%
+  group_by(lake) %>%
+  summarize(
+    shapiro_stat = shapiro.test(mass_g)$statistic,
+    shapiro_p_value = shapiro.test(mass_g)$p.value,
+    normal_distribution = if_else(shapiro_p_value > 0.05, "Normal", "Non-normal")
+    # above wwe are using an ifelse test which is a great oneliner
+  )
 
-# For Island Lake
-island_data <- island_ne12_df %>% 
-  filter(lake == "Island Lake") %>%
-  pull(mass_g)
-
-# Run Shapiro-Wilk test
-shapiro_ne12 <- shapiro.test(ne12_data)
-shapiro_island <- shapiro.test(island_data)
-
-# Show results
-cat("Shapiro-Wilk normality test for NE 12:\n")
+# Print the results
+print(normality_results)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Shapiro-Wilk normality test for NE 12:
-```
-
-
-:::
-
-```{.r .cell-code}
-print(shapiro_ne12)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Shapiro-Wilk normality test
-
-data:  ne12_data
-W = 0.85148, p-value < 2.2e-16
-```
-
-
-:::
-
-```{.r .cell-code}
-cat("\nShapiro-Wilk normality test for Island Lake:\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-Shapiro-Wilk normality test for Island Lake:
-```
-
-
-:::
-
-```{.r .cell-code}
-print(shapiro_island)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Shapiro-Wilk normality test
-
-data:  island_data
-W = 0.84102, p-value = 0.04538
+# A tibble: 2 × 4
+  lake        shapiro_stat shapiro_p_value normal_distribution
+  <chr>              <dbl>           <dbl> <chr>              
+1 Island Lake        0.841        4.54e- 2 Non-normal         
+2 NE 12              0.851        5.94e-17 Non-normal         
 ```
 
 
 :::
 :::
-
-
-
-
-
-
 
 :::
 
@@ -852,17 +679,11 @@ If the p-value is less than 0.05, we reject the null hypothesis and
 conclude the variances are not equal.
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Formal test for equal variances: Levene's test
-levene_result <- leveneTest(mass_g ~ lake, data = island_ne12_df)
+levene_result <- leveneTest(mass_g ~ lake, data = in_df)
 ```
 
 ::: {.cell-output .cell-output-stderr}
@@ -894,12 +715,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
 :::
 
 # Transformations
@@ -912,19 +727,13 @@ Commonly a log10 transformation works well.
 We could also look at the difference in means... some cool code here
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Add log-transformed mass variable to our dataset
-island_ne12_df <- island_ne12_df %>%
+in_df <- in_df %>%
   mutate(log_mass = log10(mass_g))  # Create log10 transformed mass
-head(island_ne12_df)
+head(in_df)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -945,12 +754,6 @@ head(island_ne12_df)
 :::
 :::
 
-
-
-
-
-
-
 :::
 
 ## Now look at histograms of logged data
@@ -961,17 +764,11 @@ head(island_ne12_df)
 We need to see if it worked
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create histograms of log-transformed data
-log_hist_plot <- island_ne12_df %>% 
+log_hist_plot <- in_df %>% 
   ggplot(aes(x = log_mass, fill = lake)) +
   geom_histogram(bins = 20, alpha = 0.7) +
   labs(title = "Distribution of Log-Transformed Lake Trout Mass", 
@@ -985,15 +782,9 @@ log_hist_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-14-1.jpeg)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-15-1.jpeg)
 :::
 :::
-
-
-
-
-
-
 
 :::
 
@@ -1005,17 +796,11 @@ log_hist_plot
 We could also look at the difference in means... some cool code here
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # QQ plot for log-transformed data
-log_qq_plot <- island_ne12_df %>% 
+log_qq_plot <- in_df %>% 
   ggplot(aes(sample = log_mass, color = lake)) +
   stat_qq() +
   stat_qq_line() +
@@ -1030,15 +815,9 @@ log_qq_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-15-1.jpeg)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-16-1.jpeg)
 :::
 :::
-
-
-
-
-
-
 
 :::
 
@@ -1046,115 +825,47 @@ log_qq_plot
 ## Exercise: Shapiro-Wilk test
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
-# Check normality of log-transformed data using Shapiro-Wilk test
-# For NE 12
-log_ne12 <- island_ne12_df %>% 
-  filter(lake == "NE 12") %>%
-  pull(log_mass)
+log_normality_results <- in_df %>%
+  group_by(lake) %>%
+  summarize(
+    shapiro_stat = shapiro.test(log10(mass_g))$statistic,
+    shapiro_p_value = shapiro.test(log10(mass_g))$p.value,
+    normal_distribution = if_else(shapiro_p_value > 0.05, "Normal", "Non-normal")
+    # above wwe are using an ifelse test which is a great oneliner
+  )
 
-# For Island Lake
-log_island <- island_ne12_df %>% 
-  filter(lake == "Island Lake") %>%
-  pull(log_mass)
-
-# Run Shapiro-Wilk test on log-transformed data
-shapiro_log_ne12 <- shapiro.test(log_ne12)
-shapiro_log_island <- shapiro.test(log_island)
-
-# Show results
-cat("Shapiro-Wilk normality test for log-transformed NE 12 data:\n")
+# Print the results
+print(log_normality_results)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Shapiro-Wilk normality test for log-transformed NE 12 data:
-```
-
-
-:::
-
-```{.r .cell-code}
-print(shapiro_log_ne12)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Shapiro-Wilk normality test
-
-data:  log_ne12
-W = 0.95384, p-value = 1.583e-08
-```
-
-
-:::
-
-```{.r .cell-code}
-cat("\nShapiro-Wilk normality test for log-transformed Island Lake data:\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-Shapiro-Wilk normality test for log-transformed Island Lake data:
-```
-
-
-:::
-
-```{.r .cell-code}
-print(shapiro_log_island)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Shapiro-Wilk normality test
-
-data:  log_island
-W = 0.93396, p-value = 0.4879
+# A tibble: 2 × 4
+  lake        shapiro_stat shapiro_p_value normal_distribution
+  <chr>              <dbl>           <dbl> <chr>              
+1 Island Lake        0.934    0.488        Normal             
+2 NE 12              0.954    0.0000000158 Non-normal         
 ```
 
 
 :::
 :::
-
-
-
-
-
-
 
 :::
 
 ::: callout-tip
-## Exercise: Levenes test
-
-
-
-
-
-
+## Exercise: Levene's test
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Check for equal variances in log-transformed data
-levene_log_result <- leveneTest(log_mass ~ lake, data = island_ne12_df)
+levene_log_result <- leveneTest(log_mass ~ lake, data = in_df)
 ```
 
 ::: {.cell-output .cell-output-stderr}
@@ -1186,12 +897,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
 :::
 
 # Transformation fails! What next
@@ -1204,19 +909,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Try a t test
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Run a standard two-sample t-test
 t_test_result <- t.test(
   mass_g ~ lake, 
-  data = island_ne12_df,
+  data = in_df,
   var.equal = TRUE,  # Assumes equal variances
   alternative = "two.sided"
 )
@@ -1245,12 +944,6 @@ mean in group Island Lake       mean in group NE 12
 :::
 :::
 
-
-
-
-
-
-
 :::
 
 ::: callout-tip
@@ -1259,19 +952,13 @@ mean in group Island Lake       mean in group NE 12
 Try a t test
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Run a t-test on log-transformed data
 log_t_test_result <- t.test(
   log_mass ~ lake, 
-  data = island_ne12_df,
+  data = in_df,
   var.equal = TRUE,  # Assumes equal variances
   alternative = "two.sided"
 )
@@ -1300,12 +987,6 @@ mean in group Island Lake       mean in group NE 12
 :::
 :::
 
-
-
-
-
-
-
 :::
 
 ::: callout-tip
@@ -1316,18 +997,12 @@ When analyzing log-transformed data:
 1.  The mean of log-transformed data, when back-transformed, gives the
     geometric mean (not the arithmetic mean)
 2.  The back-transformed confidence intervals represent the confidence
-    interval for the geometric mean
+    interval for the geometric mean and have to be calculated carefully
 3.  Report results like: "The geometric mean mass of lake trout in NE 12
     was X g (95% CI: Y-Z)"
 4.  Note you can't take the 10\^SE to get the standard errors but rather
-    you need to get the mean - seand the mean + se and then
-    backtransform...
-
-
-
-
-
-
+    you need to get the mean - se and the mean + se and then back
+    transform...
 
 
 ::: {.cell}
@@ -1335,7 +1010,7 @@ When analyzing log-transformed data:
 ```{.r .cell-code}
 # Calculate back-transformed means and confidence intervals
 # This converts log values back to original scale
-back_transformed <- island_ne12_df %>%
+back_transformed <- in_df %>%
   group_by(lake) %>%
   summarise(
     n = n(),
@@ -1347,35 +1022,27 @@ back_transformed <- island_ne12_df %>%
     # Back transform SE
      lower_se = 10^(mean_log -se_log),
     upper_se = 10^(mean_log + se_log),
-    # Back-transform confidence intervals (approximate method)
-    lower_ci = 10^(mean_log - qt(0.975, n-1) * se_log),
-    upper_ci = 10^(mean_log + qt(0.975, n-1) * se_log)
+    arithmetic_mean = mean(mass_g)
   )
 
 # Show back-transformed results
-print(back_transformed)
+back_transformed %>% 
+        select(lake, mean_log, geometric_mean, arithmetic_mean)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 2 × 10
-  lake        n mean_log sd_log se_log geometric_mean lower_se upper_se lower_ci
-  <chr>   <int>    <dbl>  <dbl>  <dbl>          <dbl>    <dbl>    <dbl>    <dbl>
-1 Island…    10     3.46  0.195 0.0618          2868.    2487.    3307.    2078.
-2 NE 12     322     2.46  0.541 0.0302           287.     268.     308.     251.
-# ℹ 1 more variable: upper_ci <dbl>
+# A tibble: 2 × 4
+  lake        mean_log geometric_mean arithmetic_mean
+  <chr>          <dbl>          <dbl>           <dbl>
+1 Island Lake     3.46          2868.           3165 
+2 NE 12           2.46           287.            534.
 ```
 
 
 :::
 :::
-
-
-
-
-
-
 
 :::
 
@@ -1387,12 +1054,6 @@ In some cases the error bars are not symmetrical
 ## Exercise:
 
 Try
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1421,25 +1082,13 @@ geo_mean_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-21-1.jpeg)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-22-1.jpeg)
 :::
 :::
-
-
-
-
-
-
 
 :::
 
 ## 3. Welch's t-test
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1448,7 +1097,7 @@ geo_mean_plot
 # Run Welch's t-test (doesn't assume equal variances)
 welch_test_result <- t.test(
   mass_g ~ lake, 
-  data = island_ne12_df,
+  data = in_df,
   var.equal = FALSE,  # Does NOT assume equal variances
   alternative = "two.sided"
 )
@@ -1478,12 +1127,6 @@ mean in group Island Lake       mean in group NE 12
 :::
 
 
-
-
-
-
-
-
 ::: callout-tip
 ## When to Use Welch's t-test
 
@@ -1497,19 +1140,13 @@ Welch's t-test is preferred when:
 ## 4. Mann-Whitney Wilcoxon test
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Run Mann-Whitney U test (non-parametric alternative to t-test)
 wilcox_test_result <- wilcox.test(
   mass_g ~ lake, 
-  data = island_ne12_df,
+  data = in_df,
   alternative = "two.sided"
 )
 
@@ -1533,12 +1170,6 @@ alternative hypothesis: true location shift is not equal to 0
 :::
 
 
-
-
-
-
-
-
 ::: callout-tip
 ## When to Use Mann-Whitney Wilcoxon Test
 
@@ -1553,12 +1184,6 @@ This non-parametric test is preferred when:
 ## 5. Permutation test
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1567,17 +1192,17 @@ This non-parametric test is preferred when:
 set.seed(123)  # For reproducibility
 
 # Get the smaller sample size
-island_size <- sum(island_ne12_df$lake == "Island Lake")
+island_size <- sum(in_df$lake == "Island Lake")
 
 # Randomly sample from NE 12 to match Island Lake size
-ne12_sample <- island_ne12_df %>%
+ne12_sample <- in_df %>%
   filter(lake == "NE 12") %>%
   slice_sample(n = island_size)
 
 # Combine with Island Lake data
 balanced_df <- bind_rows(
   ne12_sample,
-  island_ne12_df %>% filter(lake == "Island Lake")
+  in_df %>% filter(lake == "Island Lake")
 )
 
 # Extract mass data by lake
@@ -1625,12 +1250,6 @@ p-value estimated from 10000 Monte Carlo replications
 :::
 
 
-
-
-
-
-
-
 ::: callout-tip
 ## When to Use Permutation Tests
 
@@ -1646,12 +1265,6 @@ Permutation tests are useful when:
 # Now lets compare all of the results
 
 Let's compare the results from all tests:
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1696,26 +1309,14 @@ test_results
 :::
 
 
-
-
-
-
-
-
 # Visualizing Results
-
-
-
-
-
-
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create a combined visualization
-combined_plot <- island_ne12_df %>%
+combined_plot <- in_df %>%
   ggplot(aes(x = lake, y = mass_g, fill = lake)) +
   geom_boxplot(alpha = 0.7, outlier.shape = NA) +  # Hide outliers as we'll plot points
   geom_jitter(width = 0.2, alpha = 0.5, size = 2) +  # Add individual points
@@ -1730,15 +1331,9 @@ combined_plot
 ```
 
 ::: {.cell-output-display}
-![](07_02_class_activity_files/figure-docx/unnamed-chunk-26-1.jpeg)
+![](07_02_class_activity_files/figure-docx/unnamed-chunk-27-1.jpeg)
 :::
 :::
-
-
-
-
-
-
 
 
 When reporting results from statistical tests, include:

@@ -29,10 +29,9 @@ format:
     -   1 sample t tests
     -   2 sample t tests
 
-# Goes with Lecture 6
-
 ::::: columns
 ::: {.column width="60%"}
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -50,8 +49,6 @@ library(readxl)
 # Load the pine needle data
 # Use here() function to specify the path
 pine_switch_df <- read_excel("data/class_pine needle length switched.xlsx")
-
-
 
 # Examine the first few rows
 head(pine_switch_df)
@@ -74,9 +71,11 @@ head(pine_switch_df)
 
 :::
 :::
+
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -102,7 +101,6 @@ ps_shady_df <- ps_df %>%
 ps_sunny_df <- ps_df %>% 
   filter(side == "sunny")
 
-
 head(ps_df)
 ```
 
@@ -124,6 +122,7 @@ head(ps_df)
 
 :::
 :::
+
 :::
 :::::
 
@@ -199,6 +198,7 @@ Effective data visualization helps us understand:
 
 # Your Task
 
+
 ::: {.cell exercise='true'}
 
 ```{.r .cell-code}
@@ -206,12 +206,12 @@ Effective data visualization helps us understand:
 # Hint: Use ggplot() and geom_histogram()
 
 # Histogram of all pine needle lengths
-ggplot(ps_df, aes(x = length_mm)) +
+ggplot(ps_df, aes(x = length_mm, fill = side)) +
   geom_histogram(binwidth = 2) +
   labs(title = "Distribution of Pine Needle Lengths",
        x = "Length (mm)",
        y = "Frequency") +
-  theme_minimal()
+  theme_minimal()+ facet_wrap("side", ncol = 1)
 ```
 
 ::: {.cell-output-display}
@@ -223,20 +223,14 @@ ggplot(ps_df, aes(x = length_mm)) +
 ```
 :::
 
-::: {.cell}
 
-```{.r .cell-code}
-# Boxplot of pine needle length by sun exposure
-# YOUR CODE HERE
-```
-:::
-
-# what is the Effect size or difference in means?
+# What is the Effect size or difference in means?
 
 ::: callout-tip
 ## Practice Exercise: Calculate Effect size
 
 We could also look at the difference in means... some cool code here
+
 
 ::: {.cell}
 
@@ -258,197 +252,7 @@ pine_summary %>%
 
 :::
 :::
-:::
 
-# **Part 1:** Two Sample T-Test
-
-Now, let's compare pine needle lengths between windward and leeward
-sides of trees.
-
-Question: **Is there a significant difference in needle length between
-the windward and leeward sides?**
-
-This requires a two-sample t-test.
-
-Two-sample t-test compares means from two independent groups.
-
-## $t = \frac{\bar{x}_1 - \bar{x}_2}{S_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}$
-
-where:
-
--   x̄₁ and x̄₂: These represent the sample means of the two groups you're
-    comparing 
--   s²ₚ: This is the pooled variance, calculated as: s²ₚ = \[(n₁ -
-    1)s₁² + (n₂ - 1)s₂²\] / (n₁ + n₂ - 2), where s₁² and s₂² are the
-    sample variances of the two groups.
--   **n₁ and n₂:** These are the sample sizes of the two groups.
--   **√(1/n₁ + 1/n₂):** This represents the pooled standard error.
-
-# 
-
-# **Part 1:** Testing Assumptions for Two-Sample T-Test
-
-**Activity: Test assumptions for two-sample t-test**
-
-For a two-sample t-test, we need to check:
-
-1.  Normality within each group
-2.  Equal variances between groups (for standard t-test)
-3.  Independent observations
-
-If assumptions are violated:
-
--   Welch's t-test (unequal variances)
--   Non-parametric alternatives (Mann-Whitney U test)
-
-# Your task
-
-::: {.cell}
-
-```{.r .cell-code}
-# YOUR TASK: Test normality of sunny pine needle lengths
-# QQ Plot
-qqPlot(ps_sunny_df$length_mm, 
-       main = "QQ Plot for Windward Pine Needles",
-       ylab = "Sample Quantiles")
-```
-
-::: {.cell-output-display}
-![](06_02_class_activity_files/figure-html/unnamed-chunk-3-1.png){width=336}
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 5 4
-```
-
-
-:::
-:::
-
-::: {.cell exercise='true'}
-
-```{.r .cell-code}
-# Testing normality for each group
-# Sunny group
-
-shapiro_lee_sunny<- shapiro.test(ps_sunny_df$length_mm)
-
-print(shapiro_lee_sunny)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Shapiro-Wilk normality test
-
-data:  ps_sunny_df$length_mm
-W = 0.89994, p-value = 0.2886
-```
-
-
-:::
-:::
-
-# shady group
-
-::: {.cell}
-
-```{.r .cell-code}
-# Sunny side group
-# YOUR CODE HERE for shady group normality test
-# Sunny group
-
-shapiro_lee_shady <- shapiro.test(ps_shady_df$length_mm)
-
-print(shapiro_lee_shady)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Shapiro-Wilk normality test
-
-data:  ps_shady_df$length_mm
-W = 0.96639, p-value = 0.8683
-```
-
-
-:::
-:::
-
-# Remember you can always do it in one go
-
-::: {.cell}
-
-```{.r .cell-code}
-# there are always two ways
-# Test for normality using Shapiro-Wilk test for each side group
-# All in one pipeline using tidyverse approach
-normality_results_both <- ps_df %>%
-  group_by(side) %>%
-  summarize(
-    shapiro_stat = shapiro.test(length_mm)$statistic,
-    shapiro_p_value = shapiro.test(length_mm)$p.value,
-    normal_distribution = if_else(shapiro_p_value > 0.05, "Normal", "Non-normal")
-  )
-
-# Print the results
-print(normality_results_both)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 2 × 4
-  side  shapiro_stat shapiro_p_value normal_distribution
-  <chr>        <dbl>           <dbl> <chr>              
-1 shady        0.966           0.868 Normal             
-2 sunny        0.900           0.289 Normal             
-```
-
-
-:::
-:::
-
-# Conduct a Levene's Test
-
-::: {.cell}
-
-```{.r .cell-code}
-# Test for equal variances
-# YOUR TASK: Conduct Levene's test for equality of variances
-levene_test <- leveneTest(length_mm ~ side, data = ps_df)
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning in leveneTest.default(y = y, group = group, ...): group coerced to
-factor.
-```
-
-
-:::
-
-```{.r .cell-code}
-print(levene_test)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Levene's Test for Homogeneity of Variance (center = median)
-      Df F value Pr(>F)
-group  1  0.2062 0.6567
-      14               
-```
-
-
-:::
 :::
 
 # **Part 2:** Conducting the Two-Sample T-Test
@@ -468,6 +272,7 @@ Deciding between:
 -   Welch's t-test (unequal variances)
 
 # Based on our Levene's test result.
+
 
 ::: {.cell exercise='true'}
 
@@ -511,34 +316,8 @@ mean in group shady mean in group sunny
 
 
 :::
-
-```{.r .cell-code}
-# Calculate t-statistic manually (optional - uggg - maybe )
-# YOUR CODE HERE: t = (mean1 - mean2) / sqrt((s1^2/n1) + (s2^2/n2))
-```
 :::
 
-# **Part 2:** Interpreting and Reporting Two-Sample T-Test Results
-
-::::: columns
-::: {.column width="60%"}
-**Activity: Interpret the results of the two-sample t-test**
-
-What can we conclude about the needle lengths on windward vs. leeward
-sides?
-
-**How to report this result in a scientific paper:**
-
-"A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no
-significant\] difference in needle length between windward (M = ..., SD
-= ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) =
-..., p = ...."
-:::
-
-::: {.column width="40%"}
-![](images/clipboard-3575593369.png){width="350"}
-:::
-:::::
 
 # What is Power
 
@@ -560,17 +339,20 @@ effect size. Generally, **80% power is considered acceptable**, so 97%
 indicates a very well-powered study for detecting a difference of 30mm
 between the groups.
 
+$$s_p = \sqrt{\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}}$$
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Calculate power for detecting a 1 mm difference
 side_diff <- 1
 
-# Get sample sizes
+# Get sample sizes # note assumes no missing values
 sunny_n <- nrow(ps_sunny_df)
 shady_n <- nrow(ps_shady_df)
 
-# Calculate pooled standard deviation (fixed syntax)
+# Calculate pooled standard deviation
 sun_sd_pooled <- sqrt((var(ps_sunny_df$length_mm) * (sunny_n - 1) + 
                       var(ps_shady_df$length_mm) * (shady_n - 1)) / 
                       (sunny_n + shady_n - 2))
@@ -694,12 +476,14 @@ NOTE: n is number in *each* group
 :::
 :::
 
+
 # Now to make a final plot
 
 Typically we will make a plot that has the mean and standard error on it
 to represent the data
 
-## your Task is to make this plot
+## Your task is to make a more publication quality final plot
+
 
 ::: {.cell}
 
@@ -708,14 +492,123 @@ pine_mean_se <- ps_df %>%
   ggplot(aes(side, length_mm, color = side))+
   stat_summary(fun = "mean", na.rm=TRUE, geom="point", size = 3)+
   stat_summary(fun.data = "mean_se", width = 0.2, geom = "errorbar")
-
 pine_mean_se
 ```
 
 ::: {.cell-output-display}
-![](06_02_class_activity_files/figure-html/unnamed-chunk-8-1.png){width=336}
+![](06_02_class_activity_files/figure-html/unnamed-chunk-3-1.png){width=336}
 :::
 :::
+
+
+# Now make a new theme
+
+This is how you can customize a plot with your own theme
+
+Run this block or ctrl/command + enter on the very start of the code as
+running inside the function fails.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Load your custom theme -----
+theme_class <- function(base_size = 14, base_family = "Sans")
+{theme(
+  # REMOVE PLOT FILL AND GRIDS
+    panel.background=element_rect(fill = "transparent", colour = "transparent"), 
+    plot.background=element_rect(fill="transparent", colour=NA),
+  # removes the grid lines
+    panel.grid.major = element_line(linetype = "blank"),
+    panel.grid.minor = element_line(linetype = "blank"),  
+  # X and Y LABELS APPEARANCE
+    axis.text = element_text(colour = "black"), # this is for the text on ticks and overrides all below if not set
+    axis.title.x=element_text(size=18, face="bold"), # this is for the x title
+    axis.title.y=element_text(size=18, face="bold"), # this is for the y title
+    axis.text.x = element_text(size=16, face="bold", angle=0, vjust = .5, hjust=.5), # for X tick labels
+    axis.text.y = element_text(size=16, face="bold"),# for Y tick labels
+    # plot.title = element_text(hjust = 0.5, colour="black", size=22, face="bold"),
+  # ADD AXES LINES AND SIZE
+    axis.ticks = element_line(colour = "black"),
+    axis.line.x = element_line(color="black", linewidth = 0.5,linetype = "solid" ),
+    axis.line.y = element_line(color="black", linewidth = 0.5, linetype = "solid"),
+  # LEGEND
+    # LEGEND TEXT
+    legend.text = element_text(colour="black", size = 16, face = "bold"),
+    # LEGEND TITLE
+    legend.title = element_text(colour="black", size=18, face="bold"),
+    # LEGEND POSITION AND JUSTIFICATION 
+    # legend.justification=c(0.1,1),
+    legend.position="right",
+    # REMOVE BOX BEHIND LEGEND SYMBOLS
+    legend.key = element_rect(fill = "transparent", colour = "transparent"),
+    # REMOVE LEGEND BOX
+    legend.background = element_rect(fill = "transparent", colour = "transparent"),
+  # ADD PLOT BOX
+    # panel.border = element_rect(color = "black", fill = NA, size=2),
+    # turn off an element element_blank()
+    panel.border = element_blank(),
+    plot.title = element_text(hjust = 0, vjust=2.12),
+    plot.caption = element_text(hjust = 0, vjust=1.12))
+}
+```
+:::
+
+
+# Now apply your theme to the plot above
+
+We can add things to an existing plot as we go.. and it is not over
+writing the plot as we are not using the `<-`
+
+
+::: {.cell}
+
+```{.r .cell-code}
+pine_mean_se +
+  theme_class()
+```
+
+::: {.cell-output-display}
+![](06_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=336}
+:::
+:::
+
+
+# Further modifications
+
+
+::: {.cell}
+
+```{.r .cell-code}
+pine_mean_se <- ps_df %>% 
+  ggplot(aes(side, length_mm, color = side))+
+  stat_summary(fun = "mean", na.rm=TRUE, geom="point", 
+               size = 4)+
+  stat_summary(fun.data = "mean_se", geom = "errorbar",
+               width = 0.1, linewidth = 0.35) +
+  labs(x = "Side of Tree",
+       y = "Mean Length (mm \u00B1 1 SE)")+
+  coord_cartesian(ylim = c(15, 20))+
+  theme_class()+
+  scale_color_manual(
+    name = "Side of tree",
+    labels = c(
+      "shady" = "Shady Side",
+      "sunny" = "Sunny Side"),
+    values = c(
+      "shady" = "darkgreen",
+      "sunny" = "coral")
+  )
+pine_mean_se
+```
+
+::: {.cell-output-display}
+![](06_02_class_activity_files/figure-html/unnamed-chunk-6-1.png){width=336}
+:::
+:::
+
+
+\
 
 # **Summary and Conclusions**
 

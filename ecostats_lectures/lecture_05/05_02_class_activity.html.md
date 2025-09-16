@@ -12,13 +12,6 @@ format:
     output-file: "05_02_class_activity.docx"
 ---
 
-
-
-
-
-
-
-
 # In-Class Activity 5: Probability and Statistical Inference
 
 ## What did we do last time?
@@ -43,13 +36,6 @@ Today we'll focus on:
 # Setup
 
 First, let's load the packages and data we'll be using:
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -84,13 +70,6 @@ head(pine_df)
 :::
 :::
 
-
-
-
-
-
-
-
 # An issue we have is pseudoreplication
 
 What is our sample unit? branches? needles? trees? sides?
@@ -100,13 +79,6 @@ What is our sample unit? branches? needles? trees? sides?
     averages and save the average as length_mm
 -   We will also need to make dataframes of sunny and shady side of the
     data
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -172,13 +144,6 @@ head(ps_shady_df) %>% arrange(tree_no)
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 1: Exploring the Data
 
 Before conducting statistical tests, it's important to understand your
@@ -189,13 +154,6 @@ data.
 
 Let's create summary data of needle lengths from each side to visualize
 their distributions.
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -229,13 +187,6 @@ stats_df
 # CAN YOU THINK OF AN EASIER WAY?
 ```
 :::
-
-
-
-
-
-
-
 :::
 
 # Part 1: Exploring the Data
@@ -248,13 +199,6 @@ data.
 
 Let's create histograms of needle lengths from each lake to visualize
 their distributions.
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -269,13 +213,6 @@ needle_box_plot
 ![](05_02_class_activity_files/figure-html/boxplot-1.png){width=336}
 :::
 :::
-
-
-
-
-
-
-
 :::
 
 # Part 2: Exploring data a different way
@@ -284,18 +221,10 @@ We want to see variation in a different way and how groups measured data
 on sunny and shady sides
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 pd <- position_dodge2(width = 0.2)
-
-
 p_plot <- ps_df %>% 
   ggplot(aes(side, length_mm, fill=side)) + 
   geom_boxplot(alpha = 0.7) +
@@ -313,12 +242,6 @@ p_plot
 :::
 
 
-
-
-
-
-
-
 # Part 3: Testing Assumptions
 
 Before conducting a t-test, we need to check if our data meets the
@@ -333,12 +256,6 @@ Let's check the normality assumption for shady needle lengths:
 
 ::: callout-tip
 ## Practice Exercise 2: Checking Normality of all data but does not do by group!
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -366,12 +283,6 @@ qqPlot(ps_df$length_mm,
 :::
 :::
 
-
-
-
-
-
-
 :::
 
 ## Shapiro-Wilk test on all data
@@ -379,13 +290,6 @@ qqPlot(ps_df$length_mm,
 What do we look at here and how do we interpret?
 
 Hoping for non significant!!!
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -411,13 +315,6 @@ W = 0.92754, p-value = 0.2228
 :::
 :::
 
-
-
-
-
-
-
-
 # QQ Plot for Sunny Data
 
 ::: callout-tip
@@ -428,16 +325,10 @@ qqplots
 Note you need to test each groups separately...
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
-# QQ Plot for windward group
+# QQ Plot for sunny group
 qqPlot(ps_sunny_df$length_mm, 
        main = "QQ Plot for sunny needle length",
        ylab = "Sample Quantiles")
@@ -457,34 +348,22 @@ qqPlot(ps_sunny_df$length_mm,
 :::
 :::
 
-
-
-
-
-
-
 :::
 
 # Shapiro-Wilk Test for Sunny data
 
 ::: callout-tip
-## Practice Exercise 9: Test normality of I8 lengths
+## Practice Exercise 9: Test normality of sunny needle lengths
 
 Shapiro-Wilk test
 
 Note you need to test each groups separately...
 
 
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
-# Shapiro-Wilk test for windward group
+# Shapiro-Wilk test for sunny group
 shapiro.test(ps_sunny_df$length_mm)
 ```
 
@@ -502,106 +381,31 @@ W = 0.89994, p-value = 0.2886
 :::
 :::
 
-
-
-
-
-
-
 :::
 
-# QQ Plot for Shady data
+# Combined QQ plots with GGPLOT
 
-::: callout-tip
-## Practice Exercise 10: Test normality of shady lengths
-
-qqplots
-
-Note you need to test each groups separately...
-
-
-
-
-
-
+We can use ggplot which you are more familiar with to also do qqPlots
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-# You can also test the i3
-# QQ Plot for leeward group
-qqPlot(ps_shady_df$length_mm, 
-       main = "QQ Plot for shady needle length",
-       ylab = "Sample Quantiles")
+ggplot(ps_df, aes(sample = length_mm)) +
+  stat_qq() +
+  stat_qq_line(color = "red") +
+  facet_wrap(~ side) +
+  labs(title = "QQ Plots for Needle Length by Side",
+       x = "Theoretical Quantiles",
+       y = "Sample Quantiles") +
+  theme_minimal()
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/unnamed-chunk-3-1.png){width=336}
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 7 6
-```
-
-
+![](05_02_class_activity_files/figure-html/ggplot_qqplot_combined-1.png){width=336}
 :::
 :::
 
-
-
-
-
-
-
-:::
-
-# Shapiro-Wilk for Shady data
-
-::: callout-tip
-## Practice Exercise 11: Test normality of shady lengths
-
-Shapiro-Wilk test
-
-Note you need to test each groups separately...
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Shapiro-Wilk test for leeward group
- shapiro.test(ps_shady_df$length_mm)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Shapiro-Wilk normality test
-
-data:  ps_shady_df$length_mm
-W = 0.96639, p-value = 0.8683
-```
-
-
-:::
-:::
-
-
-
-
-
-
-
-:::
 
 # Combined Normality Test
 
@@ -610,13 +414,8 @@ Note you can do this a lot easier with piping of the data...
 ::: callout-tip
 ## Practice Exercise 12: Test Normality at one time
 
-There are always a lot of ways to do this in R
-
-
-
-
-
-
+There are always a lot of ways to do everything in R and is sometimes
+frustrating
 
 
 ::: {.cell}
@@ -652,12 +451,6 @@ print(normality_results)
 :::
 :::
 
-
-
-
-
-
-
 :::
 
 # Test for Equal Variances of Sunny and Shady
@@ -666,12 +459,6 @@ print(normality_results)
 ## Practice Exercise 13: Test equal variances
 
 Levene's test can be done on the original dataframe
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -696,21 +483,9 @@ group  1  0.2062 0.6567
 :::
 :::
 
-
-
-
-
-
-
 :::
 
 # Check for outliers
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -721,15 +496,9 @@ needle_box_plot
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/unnamed-chunk-7-1.png){width=336}
+![](05_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=336}
 :::
 :::
-
-
-
-
-
-
 
 
 ::: callout-tip
@@ -746,17 +515,10 @@ How to interpret these results:
 
 A one-sample t-test compares a sample mean to a specific value.
 
-Let's test if the mean needle lenght on the shady side is 15 or not?
+Let's test if the mean needle length on the shady side is 15 or not?
 
 ::: callout-tip
 ## Practice Exercise: One-Sample t-Test
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -819,20 +581,7 @@ mean of x
 
 :::
 :::
-
-
-
-
-
-
-
 :::
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -858,15 +607,9 @@ ps_shady_df %>%
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/unnamed-chunk-8-1.png){width=336}
+![](05_02_class_activity_files/figure-html/unnamed-chunk-6-1.png){width=336}
 :::
 :::
-
-
-
-
-
-
 
 
 ::: callout-tip
@@ -900,13 +643,6 @@ Where:
 ## Practice Exercise 4: Calculating Confidence Intervals
 
 Let's calculate the 95% confidence interval for shady needle lengths:
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -969,20 +705,7 @@ cat("95% CI using normal approximation:",
 
 :::
 :::
-
-
-
-
-
-
-
 :::
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1002,64 +725,33 @@ ggplot() +
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/unnamed-chunk-9-1.png){width=336}
+![](05_02_class_activity_files/figure-html/unnamed-chunk-7-1.png){width=336}
 :::
 :::
 
-
-
-
-
-
-
-
-::: callout-tip
-## Interpretation:
-
--   **We are 95% confident that the true population mean needle length
-    on shady side falls within this interval**
--   **Note the small difference between using the t-distribution vs.
-    normal approximation**
-:::
 
 # Part 6: Two-Sample t-Test
 
 A two-sample t-test compares means from two independent groups.
 
-Let's compare needle lengths betweensunny and shady sides
-
-
-
-
-
-
+Let's compare needle lengths between sunny and shady sides
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Summarize pine needle data by wind exposure
-p_summary <- ps_df %>%
-  group_by(side) %>%
-  summarize(
-    mean_length = mean(length_mm),
-    sd_length = sd(length_mm),
-    n = sum(!is.na(length_mm)),
-    se_length = sd_length / sqrt(n)
-  )
-
-# Display the summary statistics
-print(p_summary)
+stats_df
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
 # A tibble: 2 × 5
-  side  mean_length sd_length     n se_length
-  <chr>       <dbl>     <dbl> <int>     <dbl>
-1 shady        17.6      2.51     8     0.886
-2 sunny        16.2      2.64     8     0.934
+  side  mean_length sd_length se_length count
+  <chr>       <dbl>     <dbl>     <dbl> <int>
+1 shady        17.6      2.51     0.886     8
+2 sunny        16.2      2.64     0.934     8
 ```
 
 
@@ -1067,19 +759,7 @@ print(p_summary)
 :::
 
 
-
-
-
-
-
-
 ## Look a the plot of needle lengths
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1090,185 +770,17 @@ p_plot
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/unnamed-chunk-10-1.png){width=336}
+![](05_02_class_activity_files/figure-html/unnamed-chunk-8-1.png){width=336}
 :::
 :::
 
 
-
-
-
-
-
-
-# Before conducting the t-test, we should check the assumptions:
-
-::: callout-tip
-## Practice Exercise 5: Check Assumptions for Two-Sample t-Test
-
-## Normality with qq plot
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# 1. Check for normality in each group using QQ plots
-
-ggplot(ps_df, aes(sample = length_mm)) +
-  stat_qq() +
-  stat_qq_line(color = "red") +
-  facet_wrap(~ side) +
-  labs(title = "QQ Plots for Needle Length by Side",
-       x = "Theoretical Quantiles",
-       y = "Sample Quantiles") +
-  theme_minimal()
-```
-
-::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/two_sample_assumptions-1.png){width=336}
-:::
-:::
-
-
-
-
-
-
-
-:::
-
-## Normality with Shapiro-Wilk
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# there are always two ways
-# Test for normality using Shapiro-Wilk test for each wind group
-# All in one pipeline using tidyverse approach
-normality_results <- ps_df %>%
-  group_by(side) %>%
-  summarize(
-    shapiro_stat = shapiro.test(length_mm)$statistic,
-    shapiro_p_value = shapiro.test(length_mm)$p.value,
-    normal_distribution = if_else(shapiro_p_value > 0.05, "Normal", "Non-normal")
-    # above we are using an ifelse test which is a great oneliner
-  )
-
-# Print the results
-normality_results
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 2 × 4
-  side  shapiro_stat shapiro_p_value normal_distribution
-  <chr>        <dbl>           <dbl> <chr>              
-1 shady        0.966           0.868 Normal             
-2 sunny        0.900           0.289 Normal             
-```
-
-
-:::
-:::
-
-
-
-
-
-
-
-
-## Homogeneity of variance
-
-::: callout-tip
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# 2. Check for equal variances using Levene's test
-# H0: Variances are equal
-# H1: Variances are not equal
-levene_result <- leveneTest(length_mm ~ side, data = ps_df)
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning in leveneTest.default(y = y, group = group, ...): group coerced to
-factor.
-```
-
-
-:::
-
-```{.r .cell-code}
-levene_result
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Levene's Test for Homogeneity of Variance (center = median)
-      Df F value Pr(>F)
-group  1  0.2062 0.6567
-      14               
-```
-
-
-:::
-:::
-
-
-
-
-
-
-
-:::
-
-::: callout-tip
-Interpreting the assumption checks:
-
--   QQ plots: Do points approximately follow the line for both groups?
--   Shapiro - Wilk: is the outcome p\>0.05? Then don't reject Ho that
-    they are normally distributed
--   Levene's test: If p \> 0.05, we don't reject the assumption of equal
-    variances
-:::
-
-## Now let's conduct the two-sample t-test:
+# Now let's conduct the two-sample t-test:
 
 ::: callout-tip
 ## Practice Exercise 6: Two-Sample t-Test
 
 ## Calculate the T Test
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1304,22 +816,9 @@ mean in group shady mean in group sunny
 
 :::
 :::
-
-
-
-
-
-
-
 :::
 
 ## Compare to a Welch's Two Sample T Test when variance is unequal
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1358,19 +857,7 @@ mean in group shady mean in group sunny
 :::
 
 
-
-
-
-
-
-
 ## Compare to a Paired T Test
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1409,113 +896,27 @@ mean difference
 :::
 
 
-
-
-
-
-
-
-## Look at Effect Size
-
-::: callout-tip
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Calculate the mean difference
-stats_df %>%
-  summarize(difference = mean_length[side == "shady"] - mean_length[side == "sunny"])
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 1 × 1
-  difference
-       <dbl>
-1       1.45
-```
-
-
-:::
-:::
-
-
-
-
-
-
-
-:::
-
 ## Visualize the plot
 
 ::: callout-tip
-
-
-
-
-
-
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Visualize the results with a mean and error bar plot
-ggplot(stats_df, aes(x = side, y = mean_length, fill = side)) +
-  geom_bar(stat = "identity", alpha = 0.7) +
+ggplot(stats_df, aes(x = side, y = mean_length, color=side, fill = side)) +
+  geom_point(stat = "identity", alpha = 0.7) +
   geom_errorbar(aes(ymin = mean_length - se_length, 
                    ymax = mean_length + se_length),
                width = 0.2) 
 ```
 
 ::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/unnamed-chunk-15-1.png){width=336}
+![](05_02_class_activity_files/figure-html/unnamed-chunk-11-1.png){width=336}
 :::
 :::
 
-
-
-
-
-
-
 :::
-
-## Alternative plot method
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-ggplot(ps_df, aes(x = side, y = length_mm, color = side)) +
-  stat_summary(fun=mean, geom="point")+
-  stat_summary(fun.data = mean_se, geom="errorbar", width = 0.2)
-```
-
-::: {.cell-output-display}
-![](05_02_class_activity_files/figure-html/seplot-1.png){width=336}
-:::
-:::
-
-
-
-
-
-
-
 
 ## Interpretation:
 
@@ -1571,15 +972,11 @@ Remember to include:
 
 1.  How does the t-distribution differ from the normal distribution, and
     why does this matter for small samples?
-
 2.  What assumptions must be met to use a t-test, and what alternatives
     exist if these assumptions are violated?
-
 3.  What is the difference between statistical significance and
     practical importance?
-
 4.  How would the confidence interval change if we used a 99% confidence
     level instead of 95%?
-
 5.  How would you explain the concept of a p-value to someone with no
     statistical background?
