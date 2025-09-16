@@ -23,9 +23,7 @@ format:
 ::: {.column width="60%"}
 -   Introduction to histograms or frequency distributions
 -   Probability Distribution Functions (PDF)
--   Descriptive Statistics
-    -   Center - mean, median, mode
-    -   Spread - range, variance, standard deviation
+    -   Z scores and T scores
 -   Tests of means using T-Tests
     -   one sample
 
@@ -37,26 +35,6 @@ format:
 :::
 :::::
 
-# **Lecture 4: Review - Statistical Concepts**
-
-::::: columns
-::: {.column width="60%"}
--   Probability Distribution Functions (PDF)
-    -   Z scores and T scores
--   Hypothesis testing
--   Tests of means using T-Tests
-    -   one sample
-
-    -   two sample
-:::
-
-::: {.column width="40%"}
-![](images/clipboard-3257239263.png){width="426" height="303"}
-
-xx
-:::
-:::::
-
 # **Lecture 4: Review - Summary Statistics**
 
 -   Tests of means using T-Tests
@@ -64,7 +42,7 @@ xx
         mean?
     -   two sample - are the sample means from two samples the same or
         different?
--   for two sample T tests the df = n1+ n2 -2 = 8+8-2=14
+-   for Two sample T-tests the df = n1+ n2 -2 = 8+8-2=14
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -90,8 +68,9 @@ xx
 -   Statistical inference fundamentals
 -   Hypothesis testing principles
 -   T Distributions
--   One sample T Tests
+-   One sample T Test
 -   Two sample T Test
+-   Paired T Test
 -   Assumption tests
 :::
 
@@ -159,8 +138,6 @@ Two-tailed questions refer to area between certain values
 
 ::: {.column width="40%"}
 ![](images/clipboard-1746531278.png){width="675"}
-
-xxxxx
 :::
 :::::
 
@@ -194,9 +171,9 @@ So:
     -   "What is the probability that two samples came from\
         the same population?" (2 sample t-test)
 
-# **Lecture 5:** Single Sample T-Test
+# **Lecture 5:** One Sample T-Test
 
-We want to test if the mean fish length in I3 differs from 240mm.
+We want to test if the mean needle length on one side differs from 15mm.
 
 ### **Activity: Define hypotheses and identify assumptions**
 
@@ -212,12 +189,11 @@ H₁: μ ≠ 15 (The mean needle length on shade side is not 240mm)
 
 # Assumptions in R - qqplots from car
 
+
 ::: {.cell exercise='true'}
 
 ```{.r .cell-code}
-# Filter for just windward side needles
-
-# YOUR TASK: Test normality of windward pine needle lengths
+# YOUR TASK: Test normality of all pine needle lengths
 # QQ Plot
 qqPlot(ps_df$length_mm, 
        main = "QQ Plot for length of pine needles",
@@ -237,6 +213,7 @@ qqPlot(ps_df$length_mm,
 
 :::
 :::
+
 
 # Statistical Test of Normality
 
@@ -265,12 +242,21 @@ W = 0.92754, p-value = 0.2228
 
 # Checking for Outliers
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Check for outliers using boxplot
 # YOUR CODE HERE
-ps_df %>% ggplot(aes(side, length_mm))+geom_boxplot()
+# Create a boxplot comparing the two lakes
+shady_sunny_plot <- ps_df %>%
+  ggplot(aes(x = side, y = length_mm, fill = side)) +
+  geom_boxplot() +
+  labs(
+       x = "side",
+       y = "Length (mm)",
+       fill = "side") 
+shady_sunny_plot
 ```
 
 ::: {.cell-output-display}
@@ -278,13 +264,14 @@ ps_df %>% ggplot(aes(side, length_mm))+geom_boxplot()
 :::
 :::
 
+
 # Practice Exercise 1: One-Sample t-Test
 
 ::: callout-tip
 ## Practice Exercise 1: One-Sample t-Test
 
-Let's perform a one-sample t-test to determine if the mean fish length
-in I3 Lake differs from 15 mm:
+Let's perform a one-sample t-test to determine if the mean needle length
+on the shady side differs from 15 mm:
 
 
 ::: {.cell}
@@ -337,8 +324,7 @@ Interpret this test result by answering these questions:
 2.  What was the alternative hypothesis?
 3.  What does the p-value tell us?
 4.  Should we reject or fail to reject the null hypothesis at α = 0.05?
-5.  What is the practical interpretation of this result for fish
-    biologists?
+5.  What is the practical interpretation of this result for botanists?
 :::
 
 # **Lecture 5:** Hypothesis Testing Framework
@@ -364,11 +350,13 @@ using data.
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-7-1.png)
 :::
 :::
+
 :::
 :::::
 
@@ -383,14 +371,10 @@ using data.
 
 1.  **Null hypothesis (H₀)**: Typically assumes "no effect" or "no
     difference"
-
 2.  **Alternative hypothesis (Hₐ)**: The claim we're trying to support
-
 3.  **Statistical test**: Method for evaluating evidence against H₀
-
 4.  **P-value**: Probability of observing our results (or more extreme)
     if H₀ is true
-
 5.  **Significance level (α)**: Threshold for rejecting H₀, typically
     0.05
 
@@ -426,14 +410,12 @@ mm, SD = ...) \[was/was not\] significantly different from the expected
 For example
 
 -   what is probability that population X is the same as population Y?
-
-How would you assess this question using what we learned?
-
-This is what we will do with the fish length again...
+-   How would you assess this question using what we learned?
+-   This is what we will do with the needle length again...
 :::
 
 ::: {.column width="40%"}
-![](images/two_branches.jpg){width="204"} xxx
+![](images/two_branches.jpg){width="204"}
 :::
 :::::
 
@@ -449,20 +431,10 @@ How would you assess this question using what we learned?
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
 
 ```{.r .cell-code}
-# Now create a boxplot to visualize the difference in fish lengths between these lakes:
-
-
-# Create a boxplot comparing the two lakes
-shady_sunny_plot <- ps_df %>%
-  ggplot(aes(x = side, y = length_mm, fill = side)) +
-  geom_boxplot() +
-  labs(
-       x = "side",
-       y = "Length (mm)",
-       fill = "side") 
 shady_sunny_plot
 ```
 
@@ -473,9 +445,10 @@ shady_sunny_plot
 ```{.r .cell-code}
 # Based on the t-test results and the boxplot
 # 
-# what can you conclude about the fish populations in these two lakes?
+# what can you conclude about the needle lenght on the two sides?
 ```
 :::
+
 :::
 :::::
 
@@ -484,10 +457,10 @@ shady_sunny_plot
 ::: callout-tip
 ## Practice Exercise 2: Formulating Hypotheses
 
-For the following research questions about fish lengths write the null
+For the following research questions about needle lengths write the null
 and alternative hypotheses:
 
-1.  Are needle lengths ion shady and sunny sides different?
+1.  Are needle lengths on shady and sunny sides different?
 
 What are the hypotheses?
 
@@ -500,16 +473,16 @@ Ha =
 
 Now, let's compare needles lengths from the two sides
 
-Question: **Is there a significant difference in neele length between
+Question: **Is there a significant difference in needle length between
 the sides?**
 
 This requires a two-sample t-test.
 
 Two-sample t-test compares means from two independent groups.
 
-## $t = \frac{\bar{x}_1 - \bar{x}_2}{S_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}$
+### $t = \frac{\bar{x}_1 - \bar{x}_2}{S_p\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}$
 
-where:
+### where:
 
 -   x̄₁ and x̄₂: These represent the sample means of the two groups you're
     comparing
@@ -519,7 +492,7 @@ where:
 -   **n₁ and n₂:** These are the sample sizes of the two groups.
 -   **√(1/n₁ + 1/n₂):** This represents the pooled standard error.
 
-## $t = \frac{SIGNAL}{NOISE}$
+### $t = \frac{SIGNAL}{NOISE}$
 
 # Practice Exercise 3: Summary Statistics
 
@@ -612,24 +585,26 @@ group_summary %>%
 GGplot also has code to make the mean and standard error plots we are
 interested in along with a lot of others
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Assuming your dataframe is called df
-neelde_mean_se_plot <- ggplot(ps_df, aes(x = side, y = length_mm, color = side)) +
+needle_mean_se_plot <- ggplot(ps_df, aes(x = side, y = length_mm, color = side)) +
   stat_summary(fun = mean, geom = "point") +
   stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
   labs(
        x = "side",
        y = "Mean Length (mm)") +
   theme_classic()
-neelde_mean_se_plot
+needle_mean_se_plot
 ```
 
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-13-1.png)
 :::
 :::
+
 :::
 
 # **Lecture 5:** Testing Assumptions for Two-Sample T-Test
@@ -648,29 +623,31 @@ If assumptions are violated:
 # Practice Exercise 6: Creating Group Data
 
 ::: callout-tip
-## Practice Exercise 6: Test normality of windward pine needle lengths
+## Practice Exercise 6: Test normality of sunny pine needle lengths
 
-qqplots
+### qqplots
 
 Note you need to test each groups separately...
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Assuming your dataframe is called df
-neelde_mean_se_plot
+needle_mean_se_plot
 ```
 
 ::: {.cell-output-display}
 ![](05_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-14-1.png)
 :::
 :::
+
 :::
 
 # Practice Exercise 7: Separate Group Data
 
 ::: callout-tip
-## Practice Exercise 7: Test normality of windward pine needle lengths
+## Practice Exercise 7: Test normality of sunny pine needle lengths
 
 qqplots
 
@@ -729,7 +706,7 @@ head(ps_sunny_df)
 # Practice Exercise 8: QQ Plot for Sunny Data
 
 ::: callout-tip
-## Practice Exercise 8: Test normality of windward pine needle lengths
+## Practice Exercise 8: Test normality of sunny pine needle lengths
 
 qqplots
 
@@ -768,10 +745,11 @@ Shapiro-Wilk test
 
 Note you need to test each groups separately...
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
-# Shapiro-Wilk test for windward group
+# Shapiro-Wilk test for sunny group
 shapiro.test(ps_sunny_df$length_mm)
 ```
 
@@ -788,6 +766,7 @@ W = 0.89994, p-value = 0.2886
 
 :::
 :::
+
 :::
 
 # Practice Exercise 10: QQ Plot for Shady
@@ -799,11 +778,12 @@ qqplots
 
 Note you need to test each groups separately...
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # You can also test the i3
-# QQ Plot for leeward group
+# QQ Plot for shady group
 qqPlot(ps_shady_df$length_mm, 
        main = "QQ Plot for shady needle length",
        ylab = "Sample Quantiles")
@@ -822,6 +802,7 @@ qqPlot(ps_shady_df$length_mm,
 
 :::
 :::
+
 :::
 
 # Practice Exercise 11: Shapiro-Wilk for Shady
@@ -833,10 +814,11 @@ Shapiro-Wilk test
 
 Note you need to test each groups separately...
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
-# Shapiro-Wilk test for leeward group
+# Shapiro-Wilk test for shady group
  shapiro.test(ps_shady_df$length_mm)
 ```
 
@@ -853,6 +835,7 @@ W = 0.96639, p-value = 0.8683
 
 :::
 :::
+
 :::
 
 # Practice Exercise 12: Combined Normality Test
@@ -942,7 +925,8 @@ group  1  0.2062 0.6567
 
 ::::: columns
 ::: {.column width="60%"}
-Now we can compare the mean fish lengths between shady and sunny sides.
+Now we can compare the mean needle lengths between shady and sunny
+sides.
 
 Ho: μ₁ = μ₂ (The needle lengths do not differ)
 
@@ -1131,9 +1115,9 @@ What can we conclude about the needle lengths on sunny vs shady sides?
 **How to report this result in a scientific paper:**
 
 "A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no
-significant\] difference in needle length between windward (M = ..., SD
-= ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) =
-..., p = ...."
+significant\] difference in needle length between sunny (M = ..., SD =
+...) and shady (M = ..., SD = ...) sides of pine trees, t(...) = ..., p
+= ...."
 :::
 
 ::: {.column width="40%"}
@@ -1156,9 +1140,9 @@ What can we conclude about the needle lengths on sunny vs shady sides?
 **How to report this result in a scientific paper:**
 
 "A two-tailed, two-sample t-test at α=0.05 showed \[a significant/no
-significant\] difference in needle length between windward (M = ..., SD
-= ...) and leeward (M = ..., SD = ...) sides of pine trees, t(...) =
-..., p = ...."
+significant\] difference in needle length between sunny (M = ..., SD =
+...) and shady (M = ..., SD = ...) sides of pine trees, t(...) = ..., p
+= ...."
 :::
 
 ::: {.column width="40%"}
