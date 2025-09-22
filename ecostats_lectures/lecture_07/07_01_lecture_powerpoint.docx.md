@@ -704,7 +704,7 @@ When assumptions aren't met, transformations may help normalize data:
 
 -   **Strengths:**
 
-    -    High statistical power when assumptions are met
+    -   High statistical power when assumptions are met
     -   \- Well understood and widely accepted
 
 -   **Weaknesses:**

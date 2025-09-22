@@ -23,11 +23,6 @@ format:
     embed-resources: true
 ---
 
-
-
-
-
-
 # Introduction to Two-Sample t-Test
 
 ## Background and Theory
@@ -98,11 +93,6 @@ $$df = \frac{(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2}{\frac{(s_1^2/n_1)^2}{n_1
 # Data Analysis
 
 ## Loading Libraries and Data
-
-
-
-
-
 
 ::: {.cell}
 
@@ -215,19 +205,9 @@ head(sculpin_df)
 :::
 :::
 
-
-
-
-
-
 ## Data Overview
 
 Let's first examine the structure of our dataset:
-
-
-
-
-
 
 ::: {.cell}
 
@@ -277,16 +257,7 @@ Table: Data summary
 :::
 :::
 
-
-
-
-
-
 ### Manual Summary Method
-
-
-
-
 
 
 ::: {.cell}
@@ -297,8 +268,8 @@ stats_df <- sculpin_df %>%
   summarize(mean_length_mm = round(mean(length_mm, na.rm=TRUE),2),
             stddev_length_mm = round(sd(length_mm, na.rm=TRUE),2),
             stderr_length_mm = round(sd(length_mm, na.rm=TRUE)/sum(!is.na(length_mm)),2),
-            coef_var_length_mm = round((sd(length_mm, na.rm=TRUE)/mean(length_mm, na.rm=TRUE))*100,2)
-            )
+            coef_var_length_mm = 
+              round((sd(length_mm, na.rm=TRUE)/mean(length_mm, na.rm=TRUE))*100,2))
 stats_df
 ```
 
@@ -317,16 +288,7 @@ stats_df
 :::
 
 
-
-
-
-
 ### Fancy Table with the tidytable package
-
-
-
-
-
 
 ::: {.cell}
 
@@ -606,11 +568,6 @@ gt_table
 :::
 :::
 
-
-
-
-
-
 ## 
 
 ## Data Visualization
@@ -621,15 +578,11 @@ Let's create a box plot with individual data points to visualize the
 distribution of total length in the two lakes:
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create boxplot with individual points
-sculpin_df %>%  
+sculpin_histo_plot <- sculpin_df %>%  
   ggplot(aes(x = lake, y = length_mm, fill = lake)) +
   geom_boxplot(alpha = 0.7, outlier.shape = NA) +
   geom_point(position = position_dodge2(width = 0.3), 
@@ -645,6 +598,7 @@ sculpin_df %>%
     plot.title = element_text(hjust = 0.5, face = "bold"),
     legend.position = "right"
   ) 
+sculpin_histo_plot
 ```
 
 ::: {.cell-output-display}
@@ -653,19 +607,10 @@ sculpin_df %>%
 :::
 
 
-
-
-
-
 ### Mean and Standard Error Plot
 
 Now, let's create a plot showing the mean and standard error for each
 lake, with individual data points in the background:
-
-
-
-
-
 
 ::: {.cell}
 
@@ -697,11 +642,6 @@ ggplot( aes(x = lake, y = length_mm, color = lake)) +
 ![](01_two_sample_ttest_files/figure-docx/unnamed-chunk-5-1.png)
 :::
 :::
-
-
-
-
-
 
 # Testing t-Test Assumptions
 
@@ -737,43 +677,19 @@ We'll check normality using:
 #### Histograms
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
-sculpin_df %>% 
-  ggplot(aes(length_mm, fill = lake))+
-  geom_histogram()+
-  facet_wrap(~lake)
+sculpin_histo_plot
 ```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-```
-
-
-:::
 
 ::: {.cell-output-display}
-![](01_two_sample_ttest_files/figure-docx/unnamed-chunk-6-1.png)
+![](01_two_sample_ttest_files/figure-docx/sculpin_histo_2-1.png)
 :::
 :::
-
-
-
-
 
 
 ### QQ Plots
-
-
-
-
 
 
 ::: {.cell}
@@ -792,20 +708,12 @@ sculpin_df %>%
 ```
 
 ::: {.cell-output-display}
-![](01_two_sample_ttest_files/figure-docx/unnamed-chunk-7-1.png)
+![](01_two_sample_ttest_files/figure-docx/unnamed-chunk-6-1.png)
 :::
 :::
-
-
-
-
 
 
 ### Shapiro-Wilk Test
-
-
-
-
 
 
 ::: {.cell}
@@ -853,15 +761,7 @@ W = 0.9479, p-value = 0.08258
 :::
 
 
-
-
-
-
 ### nicer way #1
-
-
-
-
 
 
 ::: {.cell}
@@ -889,16 +789,37 @@ sculpin_df %>%
 :::
 
 
-
-
-
-
 ### nicer way #2
 
 
+::: {.cell}
+
+```{.r .cell-code}
+normality_results <- sculpin_df %>%
+  group_by(lake) %>%
+  summarize(
+    shapiro_stat = shapiro.test(length_mm)$statistic,
+    shapiro_p_value = shapiro.test(length_mm)$p.value,
+    normal_distribution = if_else(shapiro_p_value > 0.05, "Normal", "Non-normal"))
+normality_results
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 2 × 4
+  lake  shapiro_stat shapiro_p_value normal_distribution
+  <chr>        <dbl>           <dbl> <chr>              
+1 NE 14        0.948          0.0826 Normal             
+2 S 07         0.980          0.313  Normal             
+```
 
 
+:::
+:::
 
+
+### nicer way #3
 
 ::: {.cell}
 
@@ -936,20 +857,12 @@ W = 0.98035, p-value = 0.3125
 :::
 :::
 
-
-
-
-
-
 ### 3. Homogeneity of Variances
 
-We'll check for homogeneity of variances using: - Visual inspection of
-boxplots (already done above) - Levene's test
+We'll check for homogeneity of variances using:
 
-
-
-
-
+-   Visual inspection of boxplots (already done above)
+-   Levene's test
 
 ::: {.cell}
 
@@ -980,11 +893,6 @@ group   1   2.029 0.1572
 
 :::
 :::
-
-
-
-
-
 
 ## Interpretation of Assumption Tests
 
@@ -1022,11 +930,6 @@ Based on the results of our assumption tests:
 
 Now that we've checked the assumptions, we can perform the two-sample
 t-test:
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1096,11 +999,6 @@ mean in group NE 14  mean in group S 07
 :::
 :::
 
-
-
-
-
-
 ## Line-by-Line Interpretation of t-Test Results
 
 Let's break down the t-test output:
@@ -1119,10 +1017,6 @@ Let's break down the t-test output:
 9.  **Sample Estimates**: The means of each group
 
 ## Visual Representation of t-Test Results
-
-
-
-
 
 
 ::: {.cell}
@@ -1146,9 +1040,11 @@ sculpin_df %>%
 ```
 
 ::: {.cell-output-display}
-![](01_two_sample_ttest_files/figure-docx/unnamed-chunk-14-1.png)
+![](01_two_sample_ttest_files/figure-docx/final_histo_plot-1.png)
 :::
 :::
+
+
 
 ::: {.cell}
 
@@ -1173,20 +1069,12 @@ sculpin_df %>%
 ```
 
 ::: {.cell-output-display}
-![](01_two_sample_ttest_files/figure-docx/unnamed-chunk-15-1.png)
+![](01_two_sample_ttest_files/figure-docx/final_mean_se-1.png)
 :::
 :::
-
-
-
-
 
 
 # Conclusion and Scientific Reporting
-
-
-
-
 
 
 ::: {.cell}
@@ -1233,10 +1121,6 @@ percent_diff
 
 :::
 :::
-
-
-
-
 
 
 Based on our analysis, we can conclude:

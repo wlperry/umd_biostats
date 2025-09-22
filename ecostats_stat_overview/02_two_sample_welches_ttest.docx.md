@@ -23,11 +23,6 @@ format:
     embed-resources: true
 ---
 
-
-
-
-
-
 # Introduction to Welch's t-Test
 
 ## Background and Theory
@@ -91,77 +86,20 @@ is why you'll typically see it rounded in reports.
 ## Loading Libraries and Data
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Load required libraries
 
 library(car)  # For Levene's test
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Loading required package: carData
-```
-
-
-:::
-
-```{.r .cell-code}
 # library(ggpubr)  # For adding p-values to plots
 library(coin)  # For permutation tests
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Loading required package: survival
-```
-
-
-:::
-
-```{.r .cell-code}
 library(rcompanion)  # For plotNormalHistogramlibrary(tidyverse)
 library(patchwork)
 library(skimr)
 library(tidyverse)
-```
+library(broom)
 
-::: {.cell-output .cell-output-stderr}
-
-```
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-✖ dplyr::recode() masks car::recode()
-✖ purrr::some()   masks car::some()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
-
-
-:::
-
-```{.r .cell-code}
 # Load the data
 sculpin_df <- read_csv("data/t_test_sculpin_s07_ne14.csv")
 ```
@@ -206,18 +144,9 @@ head(sculpin_df)
 :::
 
 
-
-
-
-
 ## Data Overview
 
 Let's first examine the structure of our dataset:
-
-
-
-
-
 
 ::: {.cell}
 
@@ -266,11 +195,6 @@ Table: Data summary
 :::
 :::
 
-
-
-
-
-
 ## Data Visualization
 
 Let's visualize our data to better understand the distributions and
@@ -279,15 +203,11 @@ differences between the two lakes:
 ### Box Plot with Individual Data Points
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create boxplot with individual points
-ggplot(sculpin_df, aes(x = lake, y = length_mm, fill = lake)) +
+histo_plot<- ggplot(sculpin_df, aes(x = lake, y = length_mm, fill = lake)) +
   geom_boxplot(alpha = 0.7, outlier.shape = NA) +
   geom_point(position = position_dodge2(width = 0.3), 
              alpha = 0.5, size = 2) +
@@ -299,18 +219,14 @@ ggplot(sculpin_df, aes(x = lake, y = length_mm, fill = lake)) +
   theme_minimal() +
   theme(
     plot.title = element_text(hjust = 0.5, face = "bold"),
-    legend.position = "right"
-  ) 
+    legend.position = "right") 
+histo_plot
 ```
 
 ::: {.cell-output-display}
 ![](02_two_sample_welches_ttest_files/figure-docx/unnamed-chunk-3-1.png)
 :::
 :::
-
-
-
-
 
 
 The boxplot shows the distribution of total lengths for each lake. The
@@ -322,14 +238,10 @@ visualize the full distribution of the data.
 ### Mean and SE Individual Data Points
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
-sculpin_df %>% 
+mean_se_plot <- sculpin_df %>% 
 ggplot( aes(x = lake, y = length_mm, color = lake)) +
   # Add individual data points in the background
   geom_point(position = position_dodge2(width = 0.3), 
@@ -347,16 +259,13 @@ ggplot( aes(x = lake, y = length_mm, color = lake)) +
     plot.title = element_text(hjust = 0.5, face = "bold"),
     legend.position = "right"
   ) 
+mean_se_plot
 ```
 
 ::: {.cell-output-display}
 ![](02_two_sample_welches_ttest_files/figure-docx/unnamed-chunk-4-1.png)
 :::
 :::
-
-
-
-
 
 
 # Testing Welch's t-Test Assumptions
@@ -395,17 +304,10 @@ groups.
         #### Histograms
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
-sculpin_df %>% 
-  ggplot(aes(length_mm, fill = lake))+
-  geom_histogram()+
-  facet_wrap(~lake)
+histo_plot
 ```
 
 ::: {.cell-output-display}
@@ -414,16 +316,7 @@ sculpin_df %>%
 :::
 
 
-
-
-
-
 #### QQ Plots
-
-
-
-
-
 
 ::: {.cell}
 
@@ -445,16 +338,32 @@ sculpin_df %>%
 :::
 :::
 
+QQplots in base r
 
 
+::: {.cell}
 
+```{.r .cell-code}
+# you need to isolate the dataframes or spllit them
+s7_df <- sculpin_df %>%
+  filter(lake == "S 07")
+
+ne14_df <- sculpin_df %>%
+  filter(lake == "NE 14")
+
+
+# Basic Q-Q plot
+qqnorm(s7_df$length_mm)
+qqline(s7_df$length_mm)
+```
+
+::: {.cell-output-display}
+![](02_two_sample_welches_ttest_files/figure-docx/unnamed-chunk-7-1.png)
+:::
+:::
 
 
 #### Shapiro-Wilk Test
-
-
-
-
 
 
 ::: {.cell}
@@ -502,15 +411,37 @@ W = 0.9479, p-value = 0.08258
 :::
 
 
-
-
-
-
 Another way
 
 
+::: {.cell}
+
+```{.r .cell-code}
+normality_results <- sculpin_df %>%
+  group_by(lake) %>%
+  summarize(
+    shapiro_stat = shapiro.test(length_mm)$statistic,
+    shapiro_p_value = shapiro.test(length_mm)$p.value,
+    normal_distribution = if_else(shapiro_p_value > 0.05, "Normal", "Non-normal"))
+normality_results
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 2 × 4
+  lake  shapiro_stat shapiro_p_value normal_distribution
+  <chr>        <dbl>           <dbl> <chr>              
+1 NE 14        0.948          0.0826 Normal             
+2 S 07         0.980          0.313  Normal             
+```
 
 
+:::
+:::
+
+
+And yet another way
 
 
 ::: {.cell}
@@ -550,18 +481,37 @@ W = 0.98035, p-value = 0.3125
 :::
 
 
+and even another
 
 
+::: {.cell}
+
+```{.r .cell-code}
+sculpin_df %>%
+  group_by(lake) %>%
+  group_modify(~ broom::tidy(shapiro.test(.x$length_mm)))
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 2 × 4
+# Groups:   lake [2]
+  lake  statistic p.value method                     
+  <chr>     <dbl>   <dbl> <chr>                      
+1 NE 14     0.948  0.0826 Shapiro-Wilk normality test
+2 S 07      0.980  0.313  Shapiro-Wilk normality test
+```
+
+
+:::
+:::
 
 
 ### 3. Homogeneity of Variances
 
 We'll check for homogeneity of variances using: - Visual inspection of
 boxplots (already done above) - Levene's test
-
-
-
-
 
 
 ::: {.cell}
@@ -583,10 +533,6 @@ group   1   2.029 0.1572
 
 :::
 :::
-
-
-
-
 
 
 ## Interpretation of Assumption Tests
@@ -626,10 +572,6 @@ Based on the results of our assumption tests:
 Now that we've examined our assumptions, let's perform Welch's t-test:
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -663,10 +605,6 @@ mean in group NE 14  mean in group S 07
 
 :::
 :::
-
-
-
-
 
 
 ## Line-by-Line Interpretation of Welch's t-Test Results
@@ -707,10 +645,6 @@ Let's break down the output from the Welch's t-test:
 ## Visual Representation of t-Test Results
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -733,13 +667,40 @@ sculpin_df %>%
 ```
 
 ::: {.cell-output-display}
-![](02_two_sample_welches_ttest_files/figure-docx/unnamed-chunk-11-1.png)
+![](02_two_sample_welches_ttest_files/figure-docx/unnamed-chunk-13-1.png)
 :::
 :::
 
 
+A mean and SE plot
 
 
+::: {.cell}
+
+```{.r .cell-code}
+sculpin_df %>% 
+  ggplot(aes(x = lake, y = length_mm, color=lake, shape = lake, fill = lake)) +
+  stat_summary(fun = mean, geom = "point", alpha = 0.7, size=3) +  # bars for means
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +  # error bars for SE
+  labs(
+    x = "Lake",
+    y = "Total Length (mm)",
+    fill = "Lake",
+    color="Lake",
+    shape = "Lake"
+  ) +
+  coord_cartesian(ylim = c(0, 60))+
+  theme_light() +
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    legend.position = "right"
+  ) 
+```
+
+::: {.cell-output-display}
+![](02_two_sample_welches_ttest_files/figure-docx/mean_se_plot-1.png)
+:::
+:::
 
 
 A typical caption for the mean/SE plot would read:
@@ -750,10 +711,6 @@ than those from Lake NE 14 (n = 37) (Welch's t-test: t(`df`) =
 `t_statistic`, p \< 0.001)."
 
 # Conclusion and Scientific Reporting
-
-
-
-
 
 
 ::: {.cell}
@@ -790,10 +747,6 @@ print(mean_se_by_lake)
 percent_diff <- abs(diff(mean_se_by_lake$mean)) / min(mean_se_by_lake$mean) * 100
 ```
 :::
-
-
-
-
 
 
 ## Interpretation of Welch's t-Test Results

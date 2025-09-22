@@ -35,7 +35,6 @@ format:
 :::
 :::::
 
-
 -   Tests of means using T-Tests
     -   one sample - is the sample mean different from a hypothesized
         mean?

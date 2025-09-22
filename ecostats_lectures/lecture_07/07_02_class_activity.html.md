@@ -1,5 +1,5 @@
 ---
-title: "06_Class_Activity"
+title: "07_Class_Activity"
 author: "Bill Perry"
 metadata-files:
   - ../../_templates/activities.yml

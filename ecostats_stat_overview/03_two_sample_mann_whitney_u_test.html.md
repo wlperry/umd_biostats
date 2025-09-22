@@ -23,10 +23,7 @@ format:
     embed-resources: true
 ---
 
-
-
-
-# Introduction to Mann-Whitney-Wilcoxon Test
+# Introduction to Mann-Whitney U Test or  (Wilcoxon Rank-Sum Test)
 
 ## Background and Theory
 
@@ -77,9 +74,6 @@ by chance, we reject the null hypothesis.
 # Data Analysis
 
 ## Loading Libraries and Data
-
-
-
 
 ::: {.cell}
 
@@ -195,15 +189,9 @@ head(sculpin_df)
 :::
 :::
 
-
-
-
 ## Data Overview
 
 Let's first examine the structure of our dataset:
-
-
-
 
 ::: {.cell}
 
@@ -252,18 +240,12 @@ Table: Data summary
 :::
 :::
 
-
-
-
 # Data Visualization
 
 Let's visualize our data to better understand the distributions and
 differences between the two lakes:
 
 ## Box Plot with Individual Data Points
-
-
-
 
 ::: {.cell}
 
@@ -290,9 +272,6 @@ ggplot(sculpin_df, aes(x = lake, y = length_mm, fill = lake)) +
 :::
 :::
 
-
-
-
 The boxplot shows the distribution of total lengths for each lake. The
 box represents the interquartile range (IQR, from the 25th to 75th
 percentile), with the horizontal line inside the box indicating the
@@ -300,9 +279,6 @@ median. The individual points show the actual measurements, helping us
 visualize the full distribution of the data.
 
 ## Mean and SE Individual Data Points
-
-
-
 
 ::: {.cell}
 
@@ -332,173 +308,9 @@ ggplot( aes(x = lake, y = length_mm, color = lake)) +
 :::
 :::
 
-
-
+![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAaCAYAAADFTB7LAAAAcElEQVR4Xu3OwQmAQAxE0bClWYCW5N06tM6V2YPg5CjoF/JhLoHAi6iqn9eOefUbqrYvHY0cQDLyAlKRNyARmYA0ZMLRkAlGQyaU72tkAtlim7r/vJqDUDjlKBROOQyFU2icQuMUGqfQuBEaV1XPOwEx96nYACK8+wAAAABJRU5ErkJggg== "Run Current Chunk")
 
 # Why Use the Mann-Whitney-Wilcoxon Test?
-
-Before proceeding with the Mann-Whitney-Wilcoxon test, let's examine
-whether the data meet the assumptions for parametric tests like the
-t-test:
-
-### 2. Normality Assumption
-
--   We'll check normality using:
-
-    -   Visual methods: Histograms and Q-Q plots
-
-    -   Formal test: Shapiro-Wilk test
-
-        #### Histograms
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-sculpin_df %>% 
-  ggplot(aes(length_mm, fill = lake))+
-  geom_histogram()+
-  facet_wrap(~lake)
-```
-
-::: {.cell-output-display}
-![](03_two_sample_mann_whitney_u_test_files/figure-html/unnamed-chunk-6-1.png){width=480}
-:::
-:::
-
-
-
-
-#### QQ Plots
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# QQ plot for lakes
-sculpin_df %>%  
-  ggplot( aes(sample = length_mm, color=lake)) +
-  stat_qq() +
-  stat_qq_line(color = "red") +
-  facet_wrap(~lake, scales = "free") +
-  labs(title = "Normal Q-Q Plots by Lake",
-       x = "Theoretical Quantiles",
-       y = "Sample Quantiles") +
-  theme_minimal()
-```
-
-::: {.cell-output-display}
-![](03_two_sample_mann_whitney_u_test_files/figure-html/unnamed-chunk-7-1.png){width=480}
-:::
-:::
-
-
-
-
-#### Shapiro-Wilk Test
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Simple approach - just split by lake and run the test
-sculpin_df %>%
-  filter(lake == "S 07") %>%
-  pull(length_mm) %>%
-  shapiro.test()
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Shapiro-Wilk normality test
-
-data:  .
-W = 0.98035, p-value = 0.3125
-```
-
-
-:::
-
-```{.r .cell-code}
-sculpin_df %>%
-  filter(lake == "NE 14") %>%
-  pull(length_mm) %>%
-  shapiro.test()
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Shapiro-Wilk normality test
-
-data:  .
-W = 0.9479, p-value = 0.08258
-```
-
-
-:::
-:::
-
-
-
-
-Another way
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-sculpin_df %>%
-  group_by(lake) %>%
-  group_walk(~ {
-    cat("Shapiro-Wilk test for Lake", .y$lake, ":\n")
-    test_result <- shapiro.test(.x$length_mm)
-    print(test_result)
-    cat("\n")
-  })
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Shapiro-Wilk test for Lake NE 14 :
-
-	Shapiro-Wilk normality test
-
-data:  .x$length_mm
-W = 0.9479, p-value = 0.08258
-
-
-Shapiro-Wilk test for Lake S 07 :
-
-	Shapiro-Wilk normality test
-
-data:  .x$length_mm
-W = 0.98035, p-value = 0.3125
-```
-
-
-:::
-:::
-
-
-
-
-Based on the Q-Q plots and Shapiro-Wilk tests, we can assess whether our
-data follow a normal distribution. The Mann-Whitney-Wilcoxon test is
-appropriate regardless of the outcome because it doesn't assume
-normality.
 
 ## Assumptions of the Mann-Whitney-Wilcoxon Test
 
@@ -515,14 +327,15 @@ The Mann-Whitney-Wilcoxon test has the following assumptions:
     specifically, the shapes of the distributions should be similar
     (though not necessarily normal).
 
+4.  The Mann-Whitney-Wilcoxon test is appropriate regardless of the
+    outcome because it doesn't assume normality.
+
 # Performing the Mann-Whitney-Wilcoxon Test
 
 Now let's perform the Mann-Whitney-Wilcoxon test to compare the total
 lengths between the two lakes:
 
 ## Using Base R's wilcox.test Function
-
-
 
 
 ::: {.cell}
@@ -559,14 +372,10 @@ p_value <- wilcox_test$p.value
 :::
 
 
-
-
 ## Using the coin Package for an Exact Test
 
 For more precise results, especially with smaller samples, we can use
 the `coin` package to perform an exact Mann-Whitney-Wilcoxon test:
-
-
 
 
 ::: {.cell}
@@ -585,10 +394,24 @@ coin_wilcox <- coin::wilcox_test(
 
 # Extract the p-value
 pvalue_coin <- pvalue(coin_wilcox)
+
+coin_wilcox
 ```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Approximative Wilcoxon-Mann-Whitney Test
+
+data:  length_mm by lake_factor (NE 14, S 07)
+Z = -3.0609, p-value = 0.0014
+alternative hypothesis: true mu is not equal to 0
+```
+
+
 :::
-
-
+:::
 
 
 ## Calculating Effect Size
@@ -596,8 +419,6 @@ pvalue_coin <- pvalue(coin_wilcox)
 The Mann-Whitney-Wilcoxon test tells us whether there's a statistically
 significant difference, but it doesn't indicate the magnitude of that
 difference. Let's calculate an effect size measure:
-
-
 
 
 ::: {.cell}
@@ -682,15 +503,11 @@ effect_interpretation
 :::
 
 
-
-
 # Median and Interquartile Range (IQR) Plot with Test Results
 
 Since the Mann-Whitney-Wilcoxon test is primarily concerned with medians
 rather than means, let's create a plot showing the median and IQR for
 each lake:
-
-
 
 
 ::: {.cell}
@@ -721,11 +538,9 @@ ggplot() +
 ```
 
 ::: {.cell-output-display}
-![](03_two_sample_mann_whitney_u_test_files/figure-html/unnamed-chunk-13-1.png){width=960}
+![](03_two_sample_mann_whitney_u_test_files/figure-html/unnamed-chunk-9-1.png){width=960}
 :::
 :::
-
-
 
 
 ## Understanding the Mann-Whitney-Wilcoxon Test Results
@@ -738,9 +553,7 @@ distributions of the two lakes).
 Our analysis shows:
 
 1.  **Observed Difference**: The observed difference in median total
-    length between Lake S 07 and Lake NE 14 is `median_diff`
-
-    mm. 
+    length between Lake S 07 and Lake NE 14 is `median_diff` mm. 
 
 2.  **p-value**: The Mann-Whitney-Wilcoxon test yielded a p-value of
     `p_value )`.
