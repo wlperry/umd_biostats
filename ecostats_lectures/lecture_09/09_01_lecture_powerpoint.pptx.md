@@ -19,17 +19,6 @@ format:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 # Lecture 8: Review
 
 ::::: columns
@@ -46,33 +35,11 @@ Covered
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/review-plot-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -80,7 +47,10 @@ Covered
 
 ### The objectives:
 
-This lecture covers two fundamental statistical techniques in biology: correlation and regression analysis. Based on Chapters 16-17 from Whitlock & Schluter's *The Analysis of Biological Data* (3rd edition), we'll explore:
+This lecture covers two fundamental statistical techniques in biology:
+correlation and regression analysis. Based on Chapters 16-17 from
+Whitlock & Schluter's *The Analysis of Biological Data* (3rd edition),
+we'll explore:
 
 -   Correlation analysis: measuring relationships between variables
 -   The distinction between correlation and regression
@@ -98,8 +68,10 @@ This lecture covers two fundamental statistical techniques in biology: correlati
 ::: {.column width="60%"}
 **Correlation Analysis:**
 
--   Measures the strength and direction of a relationship between two numerical variables
--   Both X and Y are random variables (both measured, neither manipulated)
+-   Measures the strength and direction of a relationship between two
+    numerical variables
+-   Both X and Y are random variables (both measured, neither
+    manipulated)
 -   Variables are typically on equal footing (either could be X or Y)
 -   No cause-effect relationship implied
 -   Quantifies the degree to which variables are related
@@ -116,33 +88,11 @@ This lecture covers two fundamental statistical techniques in biology: correlati
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-1-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -152,7 +102,8 @@ This lecture covers two fundamental statistical techniques in biology: correlati
 ::: {.column width="60%"}
 ### What Is Correlation?
 
-**Correlation analysis** measures the strength and direction of a relationship between two numerical variables:
+**Correlation analysis** measures the strength and direction of a
+relationship between two numerical variables:
 
 -   Ranges from -1 to +1
 -   +1 indicates perfect positive correlation
@@ -171,33 +122,11 @@ Where $s_X$ and $s_Y$ are the standard deviations of X and Y.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1i-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -205,29 +134,22 @@ Where $s_X$ and $s_Y$ are the standard deviations of X and Y.
 
 ### Example 16.1: Flipping the Bird
 
-Nazca boobies (*Sula granti*) - Do aggressive behaviors as a chick predict future aggressive behavior as an adult?
+Nazca boobies (*Sula granti*) - Do aggressive behaviors as a chick
+predict future aggressive behavior as an adult?
 
 -   correlation is r = 0.534 - moderate positive relationship
 -   p-value = 0.007 correlation is statistically significant.
 
 For a Pearson correlation coefficient (r) of 0.53372:
 
--   This is r (not rho as Spearman nonparticipant below), as indicated by "cor" in your output
--   To determine the amount of variation explained, you square this value: r² = 0.53372² = 0.2849 (or approximately 28.49%)
--   means about 28.49% of the variance in one variable can be explained by the other variable
+-   This is r (not rho as Spearman nonparticipant below), as indicated
+    by "cor" in your output
+-   To determine the amount of variation explained, you square this
+    value: r² = 0.53372² = 0.2849 (or approximately 28.49%)
+-   means about 28.49% of the variance in one variable can be explained
+    by the other variable
 
 ### Note $\text{t}=\frac{r}{SE_r}$
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -259,24 +181,17 @@ sample estimates:
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # **Lecture 9:** Correlation Analysis
 
 ::::: columns
 ::: {.column width="60%"}
 ### Example 16.1: Flipping the Bird
 
-**Interpretation:** The correlation coefficient of r = 0.534 suggests that Nazca boobies who experienced more visits from non-parent adults as nestlings tend to display more aggressive behavior as adults. This supports the hypothesis that early experiences influence adult behavior patterns in this species.
+**Interpretation:** The correlation coefficient of r = 0.534 suggests
+that Nazca boobies who experienced more visits from non-parent adults as
+nestlings tend to display more aggressive behavior as adults. This
+supports the hypothesis that early experiences influence adult behavior
+patterns in this species.
 
 **Standard Error:**
 
@@ -288,33 +203,11 @@ Need to be sure relationship is not curved - note below
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1k-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -326,25 +219,18 @@ Need to be sure relationship is not curved - note below
 
 As described in Section 16.3, correlation analysis has key assumptions:
 
-1.  **Random sampling**: Observations should be a random sample from the population
-2.  **Bivariate normality**: Both variables follow a normal distribution, and their joint distribution is bivariate normal
-3.  **Linear relationship**: The relationship between variables is linear, not curved
+1.  **Random sampling**: Observations should be a random sample from the
+    population
+2.  **Bivariate normality**: Both variables follow a normal
+    distribution, and their joint distribution is bivariate normal
+3.  **Linear relationship**: The relationship between variables is
+    linear, not curved
 
-Let's check these assumptions using the lion data from Example 17.1 Lion Noses:
+Let's check these assumptions using the lion data from Example 17.1 Lion
+Noses:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -372,17 +258,6 @@ W = 0.87615, p-value = 0.001615
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -394,41 +269,23 @@ W = 0.87615, p-value = 0.001615
 
 As described in Section 16.3, correlation analysis has key assumptions:
 
-1.  **Random sampling**: Observations should be a random sample from the population
-2.  **Bivariate normality**: Both variables follow a normal distribution, and their joint distribution is bivariate normal
-3.  **Linear relationship**: The relationship between variables is linear, not curved
+1.  **Random sampling**: Observations should be a random sample from the
+    population
+2.  **Bivariate normality**: Both variables follow a normal
+    distribution, and their joint distribution is bivariate normal
+3.  **Linear relationship**: The relationship between variables is
+    linear, not curved
 
-Let's check these assumptions using the lion data from Example 17.1 Lion Noses:
+Let's check these assumptions using the lion data from Example 17.1 Lion
+Noses:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1m-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -438,28 +295,21 @@ Let's check these assumptions using the lion data from Example 17.1 Lion Noses:
 
 Transform one or both variables (log, square root, etc.)
 
-Use non-parametric correlation (**Spearman's rank correlation**) or Kendall's tau 𝛕
+Use non-parametric correlation (**Spearman's rank correlation**) or
+Kendall's tau 𝛕
 
 Examine the data for outliers or influential points
 
-To understand the amount of variation explained, you can square the Spearman's rho value.
+To understand the amount of variation explained, you can square the
+Spearman's rho value.
 
 For your value of 0.74485:
 
 ρ² = 0.74485² = 0.5548
 
-This means approximately 55.48% of the variance in ranks of one variable can be explained by the ranks of the other variable. This is similar to how R² works in linear regression, but specifically for ranked data.
-
-
-
-
-
-
-
-
-
-
-
+This means approximately 55.48% of the variance in ranks of one variable
+can be explained by the ranks of the other variable. This is similar to
+how R² works in linear regression, but specifically for ranked data.
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -480,17 +330,6 @@ sample estimates:
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # **Lecture 9:** Correlation Analysis
 
 ::::: columns
@@ -500,7 +339,8 @@ sample estimates:
 **The correlation coefficient depends on the range**
 
 -   Restricting range of values can reduce the correlation coefficient
--   Comparing correlations between studies requires similar ranges of values
+-   Comparing correlations between studies requires similar ranges of
+    values
 
 **Measurement error affects correlation**
 
@@ -524,33 +364,11 @@ sample estimates:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1o-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -560,9 +378,11 @@ sample estimates:
 ::: {.column width="60%"}
 ### Simple Linear Regression Model
 
-**Simple linear regression** models the relationship between a response variable (Y) and a predictor variable (X).
+**Simple linear regression** models the relationship between a response
+variable (Y) and a predictor variable (X).
 
-The **population** regression model $$Y = \alpha + \beta X + \varepsilon$$
+The **population** regression model
+$$Y = \alpha + \beta X + \varepsilon$$
 
 Where:
 
@@ -582,7 +402,9 @@ Where:
 -   a is the estimate of α (intercept)
 -   b is the estimate of β (slope)
 
-**Method of Least Squares**: The line is chosen to minimize the sum of squared vertical distances (residuals) between observed and predicted Y values.
+**Method of Least Squares**: The line is chosen to minimize the sum of
+squared vertical distances (residuals) between observed and predicted Y
+values.
 :::
 
 ::: {.column width="40%"}
@@ -596,7 +418,8 @@ Where:
 ::: {.column width="60%"}
 ### Simple Linear Regression Model
 
-**Simple linear regression** models the relationship between a response variable (Y) and a predictor variable (X).
+**Simple linear regression** models the relationship between a response
+variable (Y) and a predictor variable (X).
 
 The **population** regression model is:
 
@@ -626,37 +449,17 @@ Where:
 
 -   b is the estimate of β (slope)
 
-**Method of Least Squares**: The line is chosen to minimize the sum of squared vertical distances (residuals) between observed and predicted Y values.
+**Method of Least Squares**: The line is chosen to minimize the sum of
+squared vertical distances (residuals) between observed and predicted Y
+values.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1p-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -664,41 +467,23 @@ Where:
 
 ::::: columns
 ::: {.column width="40%"}
-From Example 17.1 in the textbook the regression line for the lion data is:
+From Example 17.1 in the textbook the regression line for the lion data
+is:
 
 ### $\text{age} = 0.88 + 10.65 \times \text{proportion}_{black}$
 
-This means: - When a lion has no black on its nose (proportion = 0), its predicted age is 0.88 years - For each 0.1 increase in the proportion of black, age increases by 1.065 years - The slope (10.65) indicates that lions with more black on their noses tend to be older
+This means: - When a lion has no black on its nose (proportion = 0), its
+predicted age is 0.88 years - For each 0.1 increase in the proportion of
+black, age increases by 1.065 years - The slope (10.65) indicates that
+lions with more black on their noses tend to be older
 :::
 
 ::: {.column width="60%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1q-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -706,19 +491,9 @@ This means: - When a lion has no black on its nose (proportion = 0), its predict
 
 ### Simple Linear Regression Model
 
--   male lions develop more black pigmentation on their noses as they age.
+-   male lions develop more black pigmentation on their noses as they
+    age.
 -   can be used to estimate the age of lions in the field.
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -748,17 +523,6 @@ F-statistic: 49.75 on 1 and 30 DF,  p-value: 7.677e-08
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # **Lecture 9:** Linear Regression
 
 ::::: columns
@@ -768,11 +532,14 @@ F-statistic: 49.75 on 1 and 30 DF,  p-value: 7.677e-08
 The calculation for slope (b) is:\
 $$b = \frac{\sum_i(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_i(X_i - \bar{X})^2}$$
 
-Given: - $\bar{X} = 0.3222$ - $\bar{Y} = 4.3094$ - $\sum_i(X_i - \bar{X})^2 = 1.2221$ - $\sum_i(X_i - \bar{X})(Y_i - \bar{Y}) = 13.0123$
+Given: - $\bar{X} = 0.3222$ - $\bar{Y} = 4.3094$ -
+$\sum_i(X_i - \bar{X})^2 = 1.2221$ -
+$\sum_i(X_i - \bar{X})(Y_i - \bar{Y}) = 13.0123$
 
 b = 13.0123 / 1.2221 = 10.647
 
-Intercept (a): $a = \bar{Y} - b\bar{X} = 4.3094 - 10.647(0.3222) = 0.879$
+Intercept (a):
+$a = \bar{Y} - b\bar{X} = 4.3094 - 10.647(0.3222) = 0.879$
 
 **Making predictions:**
 
@@ -782,40 +549,21 @@ $$\hat{Y} = 0.88 + 10.65(0.50) = 6.2 \text{ years}$$
 
 **Confidence intervals vs. Prediction intervals:**
 
--   **Confidence interval**: Range for the mean age of all lions with 0.50 black
--   **Prediction interval**: Range for an individual lion with 0.50 black
+-   **Confidence interval**: Range for the mean age of all lions with
+    0.50 black
+-   **Prediction interval**: Range for an individual lion with 0.50
+    black
 
-Both intervals are narrowest near $\bar{X}$ and widen as X moves away from the mean.
+Both intervals are narrowest near $\bar{X}$ and widen as X moves away
+from the mean.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1b-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -824,18 +572,8 @@ Both intervals are narrowest near $\bar{X}$ and widen as X moves away from the m
 ### Example Prairie Home Companion
 
 -   Does biodiversity affect ecosystem stability?
--   Tilman et al. (2006) investigated using experimental plots varying plant species
-
-
-
-
-
-
-
-
-
-
-
+-   Tilman et al. (2006) investigated using experimental plots varying
+    plant species
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -907,17 +645,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # **Lecture 9:** Linear Regression
 
 ::::: columns
@@ -933,43 +660,26 @@ With df = n - 2 = 161 - 2 = 159
 
 **Interpretation:**
 
-The slope estimate is 0.033, indicating that log stability increases by 0.033 units for each additional plant species in the plot.
+The slope estimate is 0.033, indicating that log stability increases by
+0.033 units for each additional plant species in the plot.
 
-The p-value is very small (2.73e-10), providing strong evidence to reject the null hypothesis that species number has no effect on ecosystem stability.
+The p-value is very small (2.73e-10), providing strong evidence to
+reject the null hypothesis that species number has no effect on
+ecosystem stability.
 
-R² = 0.222, meaning that approximately 22.2% of the variation in log stability is explained by the number of plant species.
+R² = 0.222, meaning that approximately 22.2% of the variation in log
+stability is explained by the number of plant species.
 
-This supports the biodiversity-stability hypothesis: more diverse plant communities have more stable biomass production over time.
+This supports the biodiversity-stability hypothesis: more diverse plant
+communities have more stable biomass production over time.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1d-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1017,9 +727,12 @@ linear regression has four key assumptions:
 
 Let's check these assumptions for the lion regression model:\
 \
-Assume that **error 𝞮 i**s - estimated as the residuals: $e_i = y_i - \hat{y}_i$
+Assume that **error 𝞮 i**s - estimated as the residuals:
+$e_i = y_i - \hat{y}_i$
 
--   ordinary lease square estimates a and b or slope and intercept to minimize the sum of the residuals squared or Mean Squared Error (MSE) as
+-   ordinary lease square estimates a and b or slope and intercept to
+    minimize the sum of the residuals squared or Mean Squared Error
+    (MSE) as
 
 ### $\sum_{i=1}^{n} = (y_i - \hat{y}_i)^2$
 :::
@@ -1048,33 +761,11 @@ Let's check these assumptions for the lion regression model:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1e-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1095,33 +786,11 @@ Let's check these assumptions for the lion regression model:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1f-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1142,17 +811,6 @@ Let's check these assumptions for the lion regression model:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -1167,17 +825,6 @@ W = 0.93879, p-value = 0.0692
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1194,37 +841,17 @@ linear regression has four key assumptions:
 3.  **Homoscedasticity**: Equal variance across all values of X
 4.  **Normality**: Residuals are normally distributed
 
-If assumptions are violated: 1. Transform the data (Section 17.6) 2. Use weighted least squares for heteroscedasticity 3. Consider non-linear models (Section 17.8)
+If assumptions are violated: 1. Transform the data (Section 17.6) 2. Use
+weighted least squares for heteroscedasticity 3. Consider non-linear
+models (Section 17.8)
 :::
 
 ::: {.column width="60%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1h-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1232,9 +859,11 @@ If assumptions are violated: 1. Transform the data (Section 17.6) 2. Use weighte
 
 ::::: columns
 ::: {.column width="60%"}
--   Estimates of standard error and confidence intervals for slow and intercept to determine confidence bands
+-   Estimates of standard error and confidence intervals for slow and
+    intercept to determine confidence bands
 
--   the 95% confidence band will contain the true population line 95/100 under repeated sampling
+-   the 95% confidence band will contain the true population line 95/100
+    under repeated sampling
 
 -   this is usually done in R
 :::
@@ -1248,10 +877,12 @@ If assumptions are violated: 1. Transform the data (Section 17.6) 2. Use weighte
 
 ::::: columns
 ::: {.column width="60%"}
-In addition to getting estimates of population parameters (β0 , β1), want to test hypotheses about them
+In addition to getting estimates of population parameters (β0 , β1),
+want to test hypotheses about them
 
 -   This is accomplished by analysis of variance
--   Partition variance in Y: due to variation in X, due to other things (error)
+-   Partition variance in Y: due to variation in X, due to other things
+    (error)
 :::
 
 ::: {.column width="40%"}
@@ -1269,10 +900,12 @@ Total variation in Y is “partitioned” into 3 components:
     -   difference between predicted values (ŷi ) and mean y (ȳ)
     -   dfs= 1 for simple linear (parameters-1)
 -   $SS_{residual}$: variation not explained by regression
-    -   difference between observed ($y_i$) and predicted ($\hat{y}_i$) values
+    -   difference between observed ($y_i$) and predicted ($\hat{y}_i$)
+        values
     -   dfs= n-2
 -   $SS_{total}$: total variation
-    -   sum of squared deviations of each observation ($y_i$) from mean ($\bar{y}$)
+    -   sum of squared deviations of each observation ($y_i$) from mean
+        ($\bar{y}$)
 
     -   dfs = n-1
 :::
@@ -1292,10 +925,12 @@ Total variation in Y is “partitioned” into 3 components:
     -   difference between predicted values (ŷi ) and mean y (ȳ)
     -   dfs= 1 for simple linear (parameters-1)
 -   $SS_{residual}$: variation not explained by regression
-    -   difference between observed ($y_i$) and predicted ($\hat{y}_i$) values
+    -   difference between observed ($y_i$) and predicted ($\hat{y}_i$)
+        values
     -   dfs= n-2
 -   $SS_{total}$: total variation
-    -   sum of squared deviations of each observation ($y_i$) from mean ($\bar{y}$)
+    -   sum of squared deviations of each observation ($y_i$) from mean
+        ($\bar{y}$)
 
     -   dfs = n-1
 :::
@@ -1350,7 +985,8 @@ Sums of Squares converted to Mean Squares
 
 -   Sums of Squares divided by degrees of freedom - does not depend on n
 -   $MS_{residual}$: estimate population variation
--   $MS_{regression}$: estimate pop variation and variation due to X-Y relationship
+-   $MS_{regression}$: estimate pop variation and variation due to X-Y
+    relationship
 -   Mean Squares are not additive
 :::
 

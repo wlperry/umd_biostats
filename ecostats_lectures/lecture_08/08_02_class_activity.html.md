@@ -12,1060 +12,177 @@ format:
     output-file: "08_02_class_activity.docx"
 ---
 
-
-
-
-
-
-
-
 # In class activity 8: Study Design and Power Analysis
 
 ## Introduction
 
-This document demonstrates key concepts in experimental design using ecological examples, focusing on:
+This activity demonstrates key concepts in experimental design using a
+made up fish example:
 
 1.  **Formulating research questions**
-2.  **Understanding different study designs**
+2.  **Understanding study designs**
 3.  **Recognizing proper replication vs. pseudoreplication**
-4.  **Designing appropriate controls**
-5.  **Conducting power analysis** (a priori and post hoc)
-6.  **Planning sampling strategies**
+4.  **Conducting power analysis** (before and after data collection)
+5.  **Planning sampling strategies**
 
-We'll work with simulated pine needle data to practice these concepts.
-
-Let's start by exploring these concepts with hands-on examples!
+We'll study fish mass above and below waterfalls across multiple
+streams.
 
 # **Part 1:** Load Required Packages
-
-
-
-
-
-
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-# Load required packages
-library(tidyverse)  # For data manipulation and visualization
-library(patchwork)  # For combining plots
-library(pwr)        # For power analysis
+library(tidyverse)
+library(pwr)
 
-# Set seed for reproducible results
 set.seed(42)
 ```
 :::
 
 
+# **Part 2:** Research Question
 
+**Main Question:** Do waterfalls affect fish mass in stream ecosystems?
 
+**Hypothesis:** Fish below waterfalls are larger due to better feeding
+opportunities from nutrients and prey from the lake.
 
+# **Part 3:** Study Design - Natural Experiment
 
-
-
-::: callout-tip
-## Package Overview
-
--   **tidyverse**: Collection of packages for data science (includes ggplot2, dplyr, etc.)
--   **patchwork**: Easily combine multiple ggplot2 plots
--   **pwr**: Functions for power analysis and sample size calculations
-:::
-
-# **Part 2:** Formulating Research Questions
-
-Before we design any study, we need clear research questions. Let's practice with pine needle ecology.
-
-::: callout-important
-## Activity 1: Research Question Practice
-
-Think about pine trees on campus. Write down 2-3 specific research questions about:
-
--   \- Pine needle characteristics (length, density, color)
-
--   \- Environmental factors (wind, sunlight, soil)
-
--   \- Tree health or growth
-
-**Example questions:**
-
--   \- Does wind exposure affect pine needle length?
--   \- Do pine needles on south-facing branches differ from north-facing branches?
--   \- Does tree size influence needle density?
-
-**Your questions:**
-
-1.  1\. \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-
-2.  2\. \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-
-3.  3\. \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-:::
-
-# **Part 3:** Understanding Study Design Types
-
-Let's simulate data for different types of studies to understand their strengths and limitations.
-
-## Natural Experiment: Wind Exposure Study
-
-
-
-
-
-
+We'll sample fish above and below waterfalls in 6 different streams.
+This represents a "natural experiment" since we can't manipulate
+waterfall presence.
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-# Simulate pine needle data from naturally exposed and sheltered locations
-# This represents a "natural experiment" - we didn't manipulate wind exposure
+# Create fish data from streams
+# ADJUST THESE VARIABLES TO EXPLORE DIFFERENT SCENARIOS:
 
-# Create data for exposed locations (shorter needles due to wind stress)
-exposed_data <- data.frame(
-  location = rep(paste0("Exposed_", 1:5), each = 8),
-  wind_exposure = "exposed",
-  needle_length_mm = rnorm(40, mean = 75, sd = 10),
-  tree_id = rep(1:5, each = 8)
+n_streams <- 5        # Number of streams to sample
+n_fish_per_site <- 6  # Number of fish per site (above/below)
+waterfall_effect <- 15 # Effect size: how much larger fish are below (in grams)
+
+# Stream characteristics (baseline means will be generated)
+stream_df <- tibble(
+  stream_id = 1:n_streams,
+  stream_mean = rnorm(n_streams, mean = 85, sd = 5)  # Random baseline for each stream
 )
 
-# Create data for sheltered locations (longer needles, less wind stress)
-sheltered_data <- data.frame(
-  location = rep(paste0("Sheltered_", 1:5), each = 8),
-  wind_exposure = "sheltered", 
-  needle_length_mm = rnorm(40, mean = 90, sd = 12),
-  tree_id = rep(6:10, each = 8)
-)
+f_df <- tibble(
+  stream_id = rep(1:n_streams, each = n_fish_per_site * 2),
+  position = rep(c("above", "below"), each = n_fish_per_site, times = n_streams),
+  fish_id = 1:(n_streams * n_fish_per_site * 2)
+) %>%
+  left_join(stream_df, by = "stream_id") %>%
+  mutate(
+    # Above waterfall = stream baseline, below = baseline + effect
+    expected_mass = ifelse(position == "above", stream_mean, stream_mean + waterfall_effect),
+    mass_g = rnorm(n(), mean = expected_mass, sd = 12)
+  ) %>%
+  select(stream_id, position, fish_id, mass_g)
 
-# Combine the datasets
-natural_exp_data <- rbind(exposed_data, sheltered_data)
-
-# Look at the first few rows
-head(natural_exp_data)
+head(f_df, 12)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-   location wind_exposure needle_length_mm tree_id
-1 Exposed_1       exposed         88.70958       1
-2 Exposed_1       exposed         69.35302       1
-3 Exposed_1       exposed         78.63128       1
-4 Exposed_1       exposed         81.32863       1
-5 Exposed_1       exposed         79.04268       1
-6 Exposed_1       exposed         73.93875       1
+# A tibble: 12 × 4
+   stream_id position fish_id mass_g
+       <int> <chr>      <int>  <dbl>
+ 1         1 above          1   90.6
+ 2         1 above          2  110. 
+ 3         1 above          3   90.7
+ 4         1 above          4  116. 
+ 5         1 above          5   91.1
+ 6         1 above          6  108. 
+ 7         1 below          7  134. 
+ 8         1 below          8   90.2
+ 9         1 below          9  104. 
+10         1 below         10  105. 
+11         1 below         11  114. 
+12         1 below         12  103. 
 ```
 
 
 :::
 :::
 
-::: {.cell}
-
-```{.r .cell-code}
-# Visualize the natural experiment data
-natural_plot <- natural_exp_data %>% 
-  ggplot(aes(x = wind_exposure, y = needle_length_mm, fill = wind_exposure)) +
-  geom_boxplot(alpha = 0.7) +
-  geom_jitter(width = 0.2, alpha = 0.5) +
-  labs(
-       x = "Wind Exposure",
-       y = "Needle Length (mm)") 
-natural_plot
-```
-
-::: {.cell-output-display}
-![](08_02_class_activity_files/figure-html/unnamed-chunk-1-1.png){width=336}
-:::
-:::
-
-
-
-
-
-
-
-
-::: callout-note
-## Natural Experiments: Pros and Cons
-
--   **Advantages:** - Realistic conditions - Large scale possible - Cost-effective
-
--   **Disadvantages:** - Cannot control confounding variables - Cannot determine causation direction - Many unmeasured factors might influence results
-
-**Question:** What other factors besides wind might differ between "exposed" and "sheltered" locations?
-:::
-
-## Manipulative Experiment: Controlled Wind Study
-
-
-
-
-
-
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-# Simulate a controlled experiment where we manipulate wind exposure
-# All trees start similar, then we apply treatments
-
-# Create data for control group (normal conditions)
-control_data <- data.frame(
-  treatment = "control",
-  needle_length_mm = rnorm(25, mean = 85, sd = 8),
-  tree_id = 1:25
-)
-
-# Create data for wind treatment (artificial wind exposure)
-wind_treatment_data <- data.frame(
-  treatment = "wind_treatment",
-  needle_length_mm = rnorm(25, mean = 78, sd = 8),
-  tree_id = 26:50
-)
-
-# Combine the datasets
-manipulative_data <- rbind(control_data, wind_treatment_data)
-
-# Visualize the manipulative experiment
-manipulative_plot <- manipulative_data %>% 
-  ggplot(aes(x = treatment, y = needle_length_mm, fill = treatment)) +
-  geom_boxplot(alpha = 0.7) +
-  geom_jitter(width = 0.2, alpha = 0.5) +
-  labs(
-       x = "Treatment",
-       y = "Needle Length (mm)") +
-  theme_minimal() +
-  theme(legend.position = "none")
-
-manipulative_plot
-```
-
-::: {.cell-output-display}
-![](08_02_class_activity_files/figure-html/manipulative_experiment-1.png){width=336}
-:::
-:::
-
-
-
-
-
-
-
-
-::: callout-tip
-## Manipulative Experiments: Key Features
-
-**Advantages:** - Can establish causation - Control confounding variables - Random assignment eliminates bias
-
-**Disadvantages:** - Often smaller scale - May not reflect natural conditions - Can be expensive and logistically challenging
-
-**Key Question:** Which experiment gives stronger evidence for causation?
-:::
-
-# **Part 4:** Identifying Proper Replication
-
-One of the most common mistakes in ecological studies is pseudoreplication. Let's practice identifying true replication vs. pseudoreplication.
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Example 1: Pseudoreplication - multiple measurements from same trees
-pseudo_data <- data.frame(
-  treatment = rep(c("fertilized", "control"), each = 20),
-  tree_id = rep(c("Tree_A", "Tree_B"), each = 20),  # Only 2 trees total!
-  needle_length_mm = c(
-    rnorm(20, mean = 95, sd = 5),  # Tree A (fertilized)
-    rnorm(20, mean = 80, sd = 5)   # Tree B (control)
-  ),
-  measurement = rep(1:20, times = 2)
-)
-
-# Example 2: True replication - multiple trees per treatment
-true_rep_data <- data.frame(
-  treatment = rep(c("fertilized", "control"), each = 20),
-  tree_id = paste0("Tree_", 1:40),  # 40 different trees
-  needle_length_mm = c(
-    rnorm(20, mean = 95, sd = 8),  # 20 fertilized trees
-    rnorm(20, mean = 80, sd = 8)   # 20 control trees
-  )
-)
-
-# Create comparison plots
-pseudo_plot <- pseudo_data %>%
-  ggplot(aes(x = treatment, y = needle_length_mm, fill = treatment)) +
+# Visualize the data
+basic_plot <- f_df %>% 
+  ggplot(aes(x = position, y = mass_g, fill = position)) +
   geom_boxplot() +
-  labs(title = "Pseudoreplication",
-       subtitle = "Multiple needles from only 2 trees",
-       x = "Treatment", y = "Needle Length (mm)") +
-  theme_minimal() +
-  theme(legend.position = "none")
-
-true_plot <- true_rep_data %>%
-  ggplot(aes(x = treatment, y = needle_length_mm, fill = treatment)) +
-  geom_boxplot() +
-  labs(title = "True Replication", 
-       subtitle = "Multiple trees per treatment",
-       x = "Treatment", y = "Needle Length (mm)") +
-  theme_minimal() +
-  theme(legend.position = "none")
-
-# Combine plots
-pseudo_plot + true_plot
-```
-
-::: {.cell-output-display}
-![](08_02_class_activity_files/figure-html/pseudoreplication_examples-1.png){width=336}
-:::
-:::
-
-
-
-
-
-
-
-
-::: callout-warning
-## Pseudoreplication Alert!
-
-**Pseudoreplication occurs when:**
-
--   \- You treat subsamples as independent when they're not
--   \- Multiple measurements from the same experimental unit
--   \- Replication at wrong scale for your hypothesis
-
-**Common examples:**
-
--   \- Multiple leaves from one plant
--   \- Multiple samples from one lake or from one fish
--   \- Multiple plots within one treatment area
-
-**Why it's bad:**
-
--   \- Underestimates variability
--   \- Inflates sample size artificially
--   \- Increases Type I error (false positives)
-:::
-
-## Activity: Identify Replication Issues
-
-::: callout-important
-## Activity 2: Replication Practice
-
-For each scenario, identify if there's proper replication or pseudoreplication:
-
-**Scenario A:** Testing fertilizer effects by using 1 large pot with fertilizer containing 10 pine seedlings, and 1 control pot with 10 seedlings.
-
-\- **Your answer:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-
-\- **Fix:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-
-**Scenario B:** Testing altitude effects by measuring needle length on 5 trees at 1000m elevation and 5 trees at 2000m elevation.
-
-\- **Your answer:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-
-\- **Fix:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-
-**Scenario C:** Testing soil pH by measuring 20 needles each from 10 trees in acidic soil and 10 trees in basic soil.
-
-\- **Your answer:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-
-\- **Fix:** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-:::
-
-# **Part 5:** Power Analysis - Planning Your Study
-
-Power analysis helps us determine how many samples we need to detect an effect if it really exists.
-
-## A Priori Power Analysis (Before Data Collection)
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Scenario: We want to detect a difference in needle length between 
-# fertilized and control trees
-
-# Based on pilot data, we expect:
-control_mean <- 80      # mm
-fertilized_mean <- 90   # mm  
-pooled_sd <- 12         # mm
-
-# Calculate effect size (Cohen's d)
-effect_size <- abs(fertilized_mean - control_mean) / pooled_sd
-cat("Effect size (Cohen's d):", round(effect_size, 2), "\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Effect size (Cohen's d): 0.83 
-```
-
-
-:::
-
-```{.r .cell-code}
-# Interpret effect size
-if(effect_size < 0.2) {
-  interpretation <- "small"
-} else if(effect_size < 0.5) {
-  interpretation <- "small-medium" 
-} else if(effect_size < 0.8) {
-  interpretation <- "medium-large"
-} else {
-  interpretation <- "large"
-}
-cat("This is a", interpretation, "effect size\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-This is a large effect size
-```
-
-
-:::
-:::
-
-::: {.cell}
-
-```{.r .cell-code}
-# Calculate required sample size for 80% power
-power_result <- pwr.t.test(
-  d = effect_size,           # Effect size
-  sig.level = 0.05,         # Alpha level (significance)
-  power = 0.8,              # Desired power (80%)
-  type = "two.sample"       # Two-sample t-test
-)
-
-print(power_result)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-     Two-sample t test power calculation 
-
-              n = 23.60467
-              d = 0.8333333
-      sig.level = 0.05
-          power = 0.8
-    alternative = two.sided
-
-NOTE: n is number in *each* group
-```
-
-
-:::
-
-```{.r .cell-code}
-cat("\nWe need", ceiling(power_result$n), "trees per group for 80% power\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-We need 24 trees per group for 80% power
-```
-
-
-:::
-:::
-
-
-
-
-
-
-
-
-::: callout-tip
-## Understanding Effect Size (Cohen's d)
-
--   **d = 0.2**: Small effect (subtle difference)
--   **d = 0.5**: Medium effect (moderate difference)
--   **d = 0.8**: Large effect (substantial difference)
-
-**Cohen's d formula:** d = (Mean₁ - Mean₂) / Pooled Standard Deviation
-:::
-
-## Visualizing Power Curves
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Create a power curve showing relationship between sample size and power
-sample_sizes <- seq(5, 50, by = 2)
-
-# Calculate power for each sample size
-power_values <- sapply(sample_sizes, function(n) {
-  power_test <- pwr.t.test(n = n, d = effect_size, sig.level = 0.05, type = "two.sample")
-  return(power_test$power)
-})
-
-# Create data frame for plotting
-power_df <- data.frame(
-  sample_size = sample_sizes,
-  power = power_values
-)
-
-# Create power curve plot
-power_curve_plot <- ggplot(power_df, aes(x = sample_size, y = power)) +
-  geom_line(color = "blue", size = 1.2) +
-  geom_hline(yintercept = 0.8, linetype = "dashed", color = "red", size = 1) +
-  geom_vline(xintercept = ceiling(power_result$n), linetype = "dashed", color = "red", size = 1) +
-  annotate("text", x = ceiling(power_result$n) + 5, y = 0.5, 
-           label = paste("n =", ceiling(power_result$n)), color = "red") +
-  annotate("text", x = 35, y = 0.85, label = "80% Power", color = "red") +
-  ylim(0, 1) +
-  labs(title = "Power Analysis: Sample Size vs. Statistical Power",
-       subtitle = paste("Effect size (d) =", round(effect_size, 2)),
-       x = "Sample Size (per group)",
-       y = "Statistical Power") +
-  theme_minimal()
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.
-```
-
-
-:::
-
-```{.r .cell-code}
-power_curve_plot
-```
-
-::: {.cell-output-display}
-![](08_02_class_activity_files/figure-html/power_curves-1.png){width=336}
-:::
-:::
-
-
-
-
-
-
-
-
-## Post Hoc Power Analysis (After Data Collection)
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Imagine we collected data with n = 15 per group but found no significant difference
-# Was our study adequately powered?
-
-observed_n <- 15
-
-# Calculate the power we actually had
-actual_power <- pwr.t.test(
-  n = observed_n,
-  d = effect_size,
-  sig.level = 0.05,
-  type = "two.sample"
-)
-
-print(actual_power)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-     Two-sample t test power calculation 
-
-              n = 15
-              d = 0.8333333
-      sig.level = 0.05
-          power = 0.5962064
-    alternative = two.sided
-
-NOTE: n is number in *each* group
-```
-
-
-:::
-
-```{.r .cell-code}
-cat("\nWith n =", observed_n, "per group, we only had", 
-    round(actual_power$power * 100, 1), "% power\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-With n = 15 per group, we only had 59.6 % power
-```
-
-
-:::
-
-```{.r .cell-code}
-if(actual_power$power < 0.8) {
-  cat("This study was underpowered! A non-significant result might be due to insufficient sample size.\n")
-} else {
-  cat("This study had adequate power. A non-significant result likely reflects no true effect.\n")
-}
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-This study was underpowered! A non-significant result might be due to insufficient sample size.
-```
-
-
-:::
-:::
-
-
-
-
-
-
-
-
-::: callout-important
-## Activity 3: Power Analysis Practice
-
-**Scenario:** You want to study the effect of drought stress on pine needle length. Based on literature, you expect:
-
--   \- Control trees: mean = 85mm, SD = 10mm
--   \- Drought-stressed trees: mean = 75mm, SD = 10mm
-
-**Calculate the following:**
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Your turn! Fill in the values and run the code
-
-# Step 1: Calculate effect size
-control_mean <-     9
-drought_mean <-     99  
-pooled_sd <-        999
-
-effect_size <- abs(control_mean - drought_mean) / pooled_sd
-print(paste("Effect size:", round(effect_size, 2)))
-
-# Step 2: Calculate required sample size for 80% power
-power_result <- pwr.t.test(
-  d = effect_size,
-  sig.level = 0.05,
-  power = 0.8,
-  type = "two.sample"
-)
-
-print(power_result)
-print(paste("Required sample size:", ceiling(power_result$n), "trees per group"))
-
-# Step 3: What if you can only collect 12 trees per group?
-limited_power <- pwr.t.test(
-  n = 12,
-  d = effect_size, 
-  sig.level = 0.05,
-  type = "two.sample"
-)
-
-print(paste("Power with n=12:", round(limited_power$power * 100, 1), "%"))
-```
-:::
-
-
-
-
-
-
-
-
-**Questions:** 1. What is the effect size for this drought study? 2. How many trees do you need per group for 80% power? 3. If you can only sample 12 trees per group, what power will you have?
-:::
-
-# **Part 6:** Sampling Design Strategies
-
-Different research questions require different sampling approaches. Let's explore the main types.
-
-## Simple Random Sampling
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Simulate a campus with pine trees scattered randomly
-set.seed(123)
-campus_trees <- data.frame(
-  tree_id = 1:100,
-  x_coordinate = runif(100, 0, 100),  # Random x positions
-  y_coordinate = runif(100, 0, 100),  # Random y positions
-  needle_length = rnorm(100, mean = 80, sd = 12)
-)
-
-# Simple random sampling: select 20 trees randomly
-random_sample_ids <- sample(1:100, size = 20, replace = FALSE)
-random_sample <- campus_trees[campus_trees$tree_id %in% random_sample_ids, ]
-
-# Visualize sampling design
-campus_plot <- ggplot(campus_trees, aes(x = x_coordinate, y = y_coordinate)) +
-  geom_point(color = "lightgreen", size = 2, alpha = 0.6) +
-  geom_point(data = random_sample, color = "red", size = 3) +
-  labs(title = "Simple Random Sampling",
-       subtitle = "Red points = selected trees",
-       x = "X Coordinate", y = "Y Coordinate") +
-  theme_minimal()
-
-campus_plot
-```
-
-::: {.cell-output-display}
-![](08_02_class_activity_files/figure-html/random_sampling-1.png){width=336}
-:::
-:::
-
-
-
-
-
-
-
-
-## Stratified Sampling
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Simulate campus with different zones (north vs south)
-set.seed(124)
-stratified_trees <- data.frame(
-  tree_id = 1:100,
-  x_coordinate = runif(100, 0, 100),
-  y_coordinate = runif(100, 0, 100),
-  zone = ifelse(runif(100) > 0.5, "North", "South"),
-  needle_length = rnorm(100, mean = 80, sd = 12)
-)
-
-# Add zone effect to needle length
-stratified_trees$needle_length[stratified_trees$zone == "South"] <- 
-  stratified_trees$needle_length[stratified_trees$zone == "South"] + 8
-
-# Stratified sampling: sample equally from each zone
-north_trees <- stratified_trees[stratified_trees$zone == "North", ]
-south_trees <- stratified_trees[stratified_trees$zone == "South", ]
-
-# Sample 10 from each zone
-north_sample <- north_trees[sample(nrow(north_trees), 10), ]
-south_sample <- south_trees[sample(nrow(south_trees), 10), ]
-stratified_sample <- rbind(north_sample, south_sample)
-
-# Visualize stratified sampling
-stratified_plot <- ggplot(stratified_trees, aes(x = x_coordinate, y = y_coordinate, color = zone)) +
-  geom_point(size = 2, alpha = 0.6) +
-  geom_point(data = stratified_sample, size = 4, shape = 21, fill = "yellow", stroke = 2) +
-  labs(title = "Stratified Sampling",
-       subtitle = "Yellow outline = selected trees, equal sampling from each zone",
-       x = "X Coordinate", y = "Y Coordinate", color = "Zone") +
-  theme_minimal()
-
-stratified_plot
-```
-
-::: {.cell-output-display}
-![](08_02_class_activity_files/figure-html/stratified_sampling-1.png){width=336}
-:::
-:::
-
-
-
-
-
-
-
-
-## Systematic Sampling
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Systematic sampling along a transect
-set.seed(125)
-transect_trees <- data.frame(
-  tree_id = 1:50,
-  distance_m = seq(0, 490, by = 10),  # Trees every 10m along transect
-  needle_length = rnorm(50, mean = 80, sd = 10)
-)
-
-# Add distance effect (trees farther from road have longer needles)
-transect_trees$needle_length <- transect_trees$needle_length + 
-  (transect_trees$distance_m * 0.02)
-
-# Systematic sampling: every 5th tree
-systematic_sample <- transect_trees[seq(1, 50, by = 5), ]
-
-# Visualize systematic sampling
-systematic_plot <- ggplot(transect_trees, aes(x = distance_m, y = 1)) +
-  geom_point(size = 3, alpha = 0.6, color = "lightblue") +
-  geom_point(data = systematic_sample, size = 4, color = "red") +
-  labs(title = "Systematic Sampling Along Transect",
-       subtitle = "Red points = selected trees (every 5th tree)",
-       x = "Distance from Road (m)", y = "") +
-  theme_minimal() +
-  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank()) +
-  ylim(0.5, 1.5)
-
-systematic_plot
-```
-
-::: {.cell-output-display}
-![](08_02_class_activity_files/figure-html/systematic_sampling-1.png){width=336}
-:::
-:::
-
-
-
-
-
-
-
-
-::: callout-note
-## Sampling Strategy Comparison
-
-**Simple Random Sampling:**
-
--   \- Best for: General population estimates
--   \- Pros: Unbiased, simple analysis
--   \- Cons: May miss important subgroups
-
-**Stratified Sampling:**
-
--   \- Best for: When you know there are distinct subgroups
--   \- Pros: Ensures representation of all strata
--   \- Cons: Requires prior knowledge of strata
-
-**Systematic Sampling:**
-
--   \- Best for: Studying gradients or patterns
--   \- Pros: Good spatial coverage, easy to implement
--   \- Cons: Risk of bias if there's hidden periodicity
-:::
-
-# **Part 7:** Putting It All Together - Design Your Own Study
-
-::: callout-important
-## Activity 4: Complete Study Design
-
-**Research Question:** Does fertilizer application affect pine needle length?
-
-**Design your study by answering these questions:**
-
-1.  **Study Type:** Will this be a natural experiment or manipulative experiment? Why?
-    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-2.  **Sample Size:** Using the following parameters, calculate required sample size:
-    -   Expected control mean: 80mm
-    -   Expected fertilized mean: 88mm\
-    -   Expected SD for both groups: 10mm
-    -   Desired power: 80%
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Calculate effect size and sample size needed
-control_mean <- 80
-fertilized_mean <- 88
-pooled_sd <- 10
-
-effect_size <- abs(fertilized_mean - control_mean) / pooled_sd
-
-power_result <- pwr.t.test(
-  d = effect_size,
-  sig.level = 0.05,
-  power = 0.8,
-  type = "two.sample"
-)
-
-print(power_result)
-```
-:::
-
-
-
-
-
-
-
-
-3.  **Controls:** What controls will you include? Consider both positive and negative controls.
-    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-4.  **Randomization:** How will you randomize tree assignment to treatments?
-    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-5.  **Replication:** How will you ensure proper replication? What would be pseudoreplication?
-    -   Proper replication: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-    -   Pseudoreplication to avoid: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-6.  **Independence:** What factors might violate independence? How will you address them?
-    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-7.  **Potential Confounds:** What other variables might affect needle length that you need to control for?
-    -   Your answer: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
-:::
-
-# **Part 8:** Analyzing Your Designed Study
-
-Let's simulate data from the study you designed and analyze it:
-
-
-
-
-
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Simulate data based on your study design
-set.seed(200)
-
-# Use the sample size you calculated (or use 20 if you didn't calculate)
-n_per_group <- 20  # Replace with your calculated sample size
-
-# Create the experimental data
-study_data <- data.frame(
-  tree_id = 1:(2 * n_per_group),
-  treatment = rep(c("control", "fertilized"), each = n_per_group),
-  needle_length_mm = c(
-    rnorm(n_per_group, mean = 80, sd = 10),  # Control group
-    rnorm(n_per_group, mean = 88, sd = 10)   # Fertilized group
-  )
-)
-
-# Calculate summary statistics
-summary_stats <- study_data %>%
-  group_by(treatment) %>%
-  summarise(
-    n = n(),
-    mean_length = mean(needle_length_mm),
-    sd_length = sd(needle_length_mm),
-    se_length = sd_length / sqrt(n)
-  )
-
-print(summary_stats)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 2 × 5
-  treatment      n mean_length sd_length se_length
-  <chr>      <int>       <dbl>     <dbl>     <dbl>
-1 control       20        79.3      7.85      1.76
-2 fertilized    20        87.4      8.57      1.92
-```
-
-
-:::
-:::
-
-::: {.cell}
-
-```{.r .cell-code}
-# Create visualization
-study_plot <- study_data %>%
-  ggplot(aes(x = treatment, y = needle_length_mm, fill = treatment)) +
-  geom_boxplot(alpha = 0.7) +
   geom_jitter(width = 0.2, alpha = 0.6) +
-  stat_summary(fun = mean, geom = "point", shape = 23, size = 3, fill = "white") +
-  labs(title = "Fertilizer Effect on Pine Needle Length",
-       subtitle = "White diamonds show group means",
-       x = "Treatment",
-       y = "Needle Length (mm)") +
-  theme_minimal() +
-  theme(legend.position = "none")
+  labs(x = "Position Relative to Waterfall",
+       y = "Fish Mass (g)") +
+  theme_minimal()
 
-study_plot
+basic_plot
 ```
 
 ::: {.cell-output-display}
-![](08_02_class_activity_files/figure-html/unnamed-chunk-3-1.png){width=336}
+![](08_02_class_activity_files/figure-html/basic_plot-1.png){width=336}
 :::
 :::
+
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
-# Conduct statistical test
-t_test_result <- t.test(needle_length_mm ~ treatment, data = study_data)
-print(t_test_result)
+# Show data by individual streams
+stream_plot <- f_df %>%
+  ggplot(aes(x = position, y = mass_g, group = stream_id, color = as.factor(stream_id))) +
+  stat_summary(fun = mean, geom = "point") +
+  stat_summary(fun = mean, geom = "line") +
+ stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.1) +
+  facet_wrap(~stream_id) +
+  labs(x = "Position", y = "Fish Mass (g)", color = "Stream") +
+  theme_minimal()
+stream_plot
+```
+
+::: {.cell-output-display}
+![](08_02_class_activity_files/figure-html/stream_plot-1.png){width=336}
+:::
+:::
+
+
+# **Part 4:** Replication Issues
+
+## What is the experimental unit here?
+
+::: callout-important
+## Activity 1: Identify the Experimental Unit
+
+**Question:** In our fish study, what is the true experimental unit?
+
+A)  Individual fish
+B)  Stream locations (above/below pairs)
+C)  Individual streams
+D)  All fish combined
+:::
+
+## Pseudoreplication Example
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# WRONG analysis: treating all fish as independent
+# This ignores that fish within streams may be similar
+
+pseudo_test <- t.test(mass_g ~ position, data = f_df)
+pseudo_test
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -1074,57 +191,91 @@ print(t_test_result)
 
 	Welch Two Sample t-test
 
-data:  needle_length_mm by treatment
-t = -3.1164, df = 37.715, p-value = 0.003493
-alternative hypothesis: true difference in means between group control and group fertilized is not equal to 0
+data:  mass_g by position
+t = -4.2726, df = 56.515, p-value = 7.488e-05
+alternative hypothesis: true difference in means between group above and group below is not equal to 0
 95 percent confidence interval:
- -13.364541  -2.837295
+ -24.308784  -8.792322
 sample estimates:
-   mean in group control mean in group fertilized 
-                79.33243                 87.43335 
+mean in group above mean in group below 
+           85.88446           102.43501 
 ```
 
 
 :::
+:::
+
+
+
+::: {.cell}
 
 ```{.r .cell-code}
-# Interpret results
-if(t_test_result$p.value < 0.05) {
-  cat("\nResult: Significant difference found!\n")
-  cat("Fertilizer significantly affects needle length (p =", 
-      round(t_test_result$p.value, 4), ")\n")
-} else {
-  cat("\nResult: No significant difference found.\n")
-  cat("No evidence that fertilizer affects needle length (p =", 
-      round(t_test_result$p.value, 4), ")\n")
-}
+# CORRECT analysis: average by stream first, then compare
+stream_means <- f_df %>%
+  group_by(stream_id, position) %>%
+  summarize(mean_mass = mean(mass_g), .groups = "drop")
+
+# Reshape for paired analysis  
+stream_wide <- stream_means %>%
+  pivot_wider(names_from = position, 
+              values_from = mean_mass)
+
+proper_test <- t.test(stream_wide$below, stream_wide$above, paired = TRUE)
+proper_test
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
 
-Result: Significant difference found!
-Fertilizer significantly affects needle length (p = 0.0035 )
+	Paired t-test
+
+data:  stream_wide$below and stream_wide$above
+t = 3.1164, df = 4, p-value = 0.03565
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+  1.805299 31.295806
+sample estimates:
+mean difference 
+       16.55055 
 ```
 
 
 :::
+:::
+
+
+The proper analysis uses **streams as replicates** (n = 6), not
+individual fish (n = 36 per group).
+
+# **Part 5:** Power Analysis - Planning Phase
+
+Let's calculate how many streams we need to detect a meaningful
+difference. The effect size here is called Cohen's D measures the
+difference between two group means in terms of standard deviations. It
+helps to understand the magnitude of a difference beyond statistical
+significance by expressing the distance between means as a standardized
+value. For example, a Cohen's d of 0.2 is considered a small effect, 0.5
+a moderate effect, and 0.8 a large effect
+
+
+::: {.cell}
 
 ```{.r .cell-code}
-# Calculate actual effect size observed
-observed_effect_size <- abs(diff(t_test_result$estimate)) / 
-  sqrt(((n_per_group-1) * var(study_data$needle_length_mm[study_data$treatment == "control"]) + 
-        (n_per_group-1) * var(study_data$needle_length_mm[study_data$treatment == "fertilized"])) / 
-       (2*n_per_group - 2))
+# Expected values based on pilot data
+above_mean <- 85
+below_mean <- 110  
+pooled_sd <- 20
 
-cat("Observed effect size (Cohen's d):", round(observed_effect_size, 2), "\n")
+# Calculate effect size
+effect_val <- abs(below_mean - above_mean) / pooled_sd
+effect_val
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Observed effect size (Cohen's d): 0.99 
+[1] 1.25
 ```
 
 
@@ -1133,39 +284,340 @@ Observed effect size (Cohen's d): 0.99
 
 
 
+::: {.cell}
+
+```{.r .cell-code}
+# Calculate required sample size for 80% power
+power_result <- pwr.t.test(
+  d = effect_val,
+  sig.level = 0.05,
+  power = 0.8,
+  type = "paired"
+)
+
+power_result
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+     Paired t test power calculation 
+
+              n = 7.171657
+              d = 1.25
+      sig.level = 0.05
+          power = 0.8
+    alternative = two.sided
+
+NOTE: n is number of *pairs*
+```
 
 
-
-
-
-# **Summary and Key Takeaways**
-
-::: callout-tip
-## What We Learned Today
-
-1.  **Study Design Matters:** Statistics cannot fix a poorly designed study
-2.  **Replication:** Must be at the appropriate scale for your research question
-3.  **Controls:** Essential for ruling out alternative explanations
-4.  **Power Analysis:** Plan your sample size before collecting data
-5.  **Sampling Strategy:** Choose the approach that best fits your research question
-6.  **Integration:** Good analysis flows naturally from good design
-
-**Remember:**
-
--   \- Design before you collect data
--   \- Consider practical and logistical constraints
--   \- Be transparent about limitations
--   \- Correlation ≠ causation (especially in natural experiments)
+:::
 :::
 
-::: callout-warning
-## Common Pitfalls to Avoid
 
-1.  **Pseudoreplication:** Taking multiple measurements from the same experimental unit
-2.  **Inadequate Power:** Collecting too few samples to detect meaningful effects
-3.  **Poor Controls:** Not controlling for important confounding variables
-4.  **Non-random Sampling:** Introducing bias through convenience sampling
-5.  **HARKing:** Hypothesizing After Results are Known
+We need at least `7` streams for 80% power.
 
-**The Golden Rule:** Plan your analysis when you plan your experiment!
+## Power Curve
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Show how power changes with sample size
+power_curve_df <- tibble(streams = 3:15) %>%
+  rowwise() %>%
+  mutate(power = pwr.t.test(n = streams, 
+                            d = effect_val, 
+                            sig.level = 0.05, 
+                            type = "paired")$power) %>%
+  ungroup()
+
+curve_plot <- ggplot(power_curve_df, aes(x = streams, y = power)) +
+  geom_line(linewidth = 1.2, color = "blue") +
+  geom_hline(yintercept = 0.8, linetype = "dashed", color = "red") +
+  geom_vline(xintercept = ceiling(power_result$n), linetype = "dashed", color = "red") +
+  labs(x = "Number of Streams", y = "Statistical Power") +
+  theme_minimal()
+
+curve_plot
+```
+
+::: {.cell-output-display}
+![](08_02_class_activity_files/figure-html/power_curve-1.png){width=336}
 :::
+:::
+
+
+::: callout-important
+## Activity 2: Power Exploration
+
+Change the values below to see how power changes:
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Experiment with different scenarios
+above_mean <- 85
+below_mean <- 100    # Try changing this
+pooled_sd <- 25     # Try changing this
+
+effect_val <- abs(below_mean - above_mean) / pooled_sd
+
+power_result <- pwr.t.test(
+  d = effect_val,
+  sig.level = 0.05,
+  power = 0.8,
+  type = "paired"
+)
+
+power_result
+```
+:::
+
+
+**Questions:**
+
+1.  What happens to required sample size if the effect is smaller
+    (below_mean = 95)?
+2.  What if variation is higher (pooled_sd = 30)?
+3.  What if we want 90% power instead of 80%?
+:::
+
+# **Part 6:** Post-Hoc Power Analysis
+
+Now let's analyze the power we actually had with our 6 streams.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Calculate observed effect size from our data
+observed_above <- mean(stream_wide$above)
+observed_below <- mean(stream_wide$below)
+observed_diff <- observed_below - observed_above
+observed_sd <- sd(stream_wide$below - stream_wide$above)
+
+observed_effect <- observed_diff / observed_sd
+observed_effect
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 1.393684
+```
+
+
+:::
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# What power did we actually have?
+actual_power <- pwr.t.test(
+  n = 6,
+  d = observed_effect,
+  sig.level = 0.05,
+  type = "paired"
+)
+
+actual_power
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+     Paired t test power calculation 
+
+              n = 6
+              d = 1.393684
+      sig.level = 0.05
+          power = 0.7778318
+    alternative = two.sided
+
+NOTE: n is number of *pairs*
+```
+
+
+:::
+:::
+
+
+With 6 streams, we had `100`% power to detect the effect we observed.
+
+# **Part 7:** Alternative Analysis Approaches
+
+## Unpaired t-test (ignoring pairing)
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# What if we ignored the stream pairing?
+unpaired_test <- t.test(mean_mass ~ position, data = stream_means)
+unpaired_test
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Welch Two Sample t-test
+
+data:  mean_mass by position
+t = -2.7496, df = 7.0247, p-value = 0.02842
+alternative hypothesis: true difference in means between group above and group below is not equal to 0
+95 percent confidence interval:
+ -30.773874  -2.327232
+sample estimates:
+mean in group above mean in group below 
+           85.88446           102.43501 
+```
+
+
+:::
+:::
+
+
+## Summary Statistics
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Calculate summary by position
+summary_df <- f_df %>%
+  group_by(position) %>%
+  summarize(
+    n_fish = n(),
+    mean_mass = mean(mass_g),
+    sd_mass = sd(mass_g),
+    se_mass = sd_mass / sqrt(n_fish)
+  )
+
+summary_df
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 2 × 5
+  position n_fish mean_mass sd_mass se_mass
+  <chr>     <int>     <dbl>   <dbl>   <dbl>
+1 above        30      85.9    16.2    2.95
+2 below        30     102.     13.7    2.51
+```
+
+
+:::
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Summary by stream (proper replication level)
+stream_summary <- stream_means %>%
+  group_by(position) %>%
+  summarize(
+    n_streams = n(),
+    mean_mass = mean(mean_mass),
+    sd_mass = sd(mean_mass),
+    se_mass = sd_mass / sqrt(n_streams)
+  )
+
+stream_summary
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 2 × 5
+  position n_streams mean_mass sd_mass se_mass
+  <chr>        <int>     <dbl>   <dbl>   <dbl>
+1 above            5      85.9      NA      NA
+2 below            5     102.       NA      NA
+```
+
+
+:::
+:::
+
+
+# **Part 8:** Design Your Own Study
+
+::: callout-important
+## Activity 3: Study Design Practice
+
+**Scenario:** You want to study if fish size differs between fast and
+slow water areas.
+
+**Design Questions:**
+
+1.  **What is your experimental unit?**
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+2.  **How many replicates do you need? Use these values:**
+
+    -   Fast water mean: 75g
+    -   Slow water mean: 85g\
+    -   Standard deviation: 15g
+    -   Desired power: 80%
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Calculate your required sample size
+fast_mean <- 75
+slow_mean <- 85
+sd_val <- 15
+
+effect_size <- abs(slow_mean - fast_mean) / sd_val
+
+sample_result <- pwr.t.test(
+  d = effect_size,
+  sig.level = 0.05,
+  power = 0.8,
+  type = "two.sample"  # or "paired" if appropriate
+)
+
+sample_result
+```
+:::
+
+
+3.  **What could cause pseudoreplication in this design?**
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+4.  **How would you avoid it?**
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+:::
+
+# **Summary**
+
+## Key Points:
+
+-   **Experimental unit**: The thing that receives the treatment
+    independently
+-   **Replication**: Must be at the level of the experimental unit
+-   **Power analysis**: Plan sample size before collecting data
+-   **Paired vs unpaired**: Paired tests are more powerful when
+    appropriate
+-   **Effect size**: Larger effects need fewer samples to detect
+
+## Common Mistakes:
+
+-   Treating subsamples as independent replicates
+-   Analyzing data at the wrong level
+-   Collecting data before planning analysis
+-   Ignoring natural pairing in the design
