@@ -35,11 +35,13 @@ Covered
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
 ::: {.cell-output-display}
-![](09_01_lecture_powerpoint_files/figure-html/review-plot-1.png){width=384}
+![](09_01_lecture_powerpoint_files/figure-html/review-plot-1.png){width=480}
 :::
 :::
+
 :::
 :::::
 
@@ -144,14 +146,14 @@ predict future aggressive behavior as an adult?
 
 For a Pearson correlation coefficient (r) of 0.53372:
 
--   This is r (not rho as Spearman nonparticipant below), as indicated
-    by "cor" in your output
+-   This is r (not rho as Spearman nonparametric below), as indicated by
+    "cor" in your output
 -   To determine the amount of variation explained, you square this
     value: r² = 0.53372² = 0.2849 (or approximately 28.49%)
 -   means about 28.49% of the variance in one variable can be explained
     by the other variable
 
-### Note $\text{t}=\frac{r}{SE_r}$
+### Note that it is tested by:  $\text{t}=\frac{r}{SE_r}$
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -228,11 +230,11 @@ As described in Section 16.3, correlation analysis has key assumptions:
 3.  **Linear relationship**: The relationship between variables is
     linear, not curved
 
-Let's check these assumptions using the lion data from Example 17.1 Lion
-Noses:
+Let's check these assumptions booby data:
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -240,8 +242,8 @@ Noses:
 
 	Shapiro-Wilk normality test
 
-data:  lion_data$proportion_black
-W = 0.88895, p-value = 0.003279
+data:  booby_data$visits_as_nestling
+W = 0.95783, p-value = 0.3965
 ```
 
 
@@ -253,13 +255,14 @@ W = 0.88895, p-value = 0.003279
 
 	Shapiro-Wilk normality test
 
-data:  lion_data$age_years
-W = 0.87615, p-value = 0.001615
+data:  booby_data$future_aggression
+W = 0.91575, p-value = 0.04709
 ```
 
 
 :::
 :::
+
 :::
 :::::
 
@@ -278,16 +281,17 @@ As described in Section 16.3, correlation analysis has key assumptions:
 3.  **Linear relationship**: The relationship between variables is
     linear, not curved
 
-Let's check these assumptions using the lion data from Example 17.1 Lion
-Noses:
+Let's check these assumptions using the booby data
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-html/overview-plot-1m-1.png){width=480}
 :::
 :::
+
 :::
 :::::
 
@@ -302,8 +306,63 @@ Kendall's tau 𝛕
 
 Examine the data for outliers or influential points
 
-To understand the amount of variation explained, you can square the
-Spearman's rho value.
+
+::: {.cell}
+
+```{.r .cell-code}
+#| echo: false
+#| fig-height: 5
+#| fig-width: 5
+#| message: false
+#| warning: false
+
+
+p1_lion <- ggplot(lion_data, aes(x = proportion_black)) +
+  geom_histogram(bins = 10, fill = "lightblue", color = "black") +
+  labs(title = "Prop black",
+       x = "Visits",
+       y = "Frequency") +
+  theme_minimal()
+
+p2_lion <- ggplot(lion_data, aes(x = age_years)) +
+  geom_histogram(bins = 10, fill = "lightgreen", color = "black") +
+  labs(title = "Age",
+       x = "Age",
+       y = "Frequency") +
+  theme_minimal()
+
+p3_lion <- ggplot(lion_data, aes(sample = proportion_black)) +
+  geom_qq() +
+  geom_qq_line() +
+  labs(title = "Q-Q Plot Prop Black",
+       x = "Theoretical Quantiles",
+       y = "Sample Quantiles") +
+  theme_minimal()+theme(
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank())
+
+p4_lion <- ggplot(lion_data, aes(sample = age_years)) +
+  geom_qq() +
+  geom_qq_line() +
+  labs(title = "Q-Q Plot for age",
+       x = "Theoretical Quantiles",
+       y = "Sample Quantiles") +
+  theme_minimal()
+
+# Combine the plots
+(p1_lion / p2_lion) | (p3_lion / p4_lion)
+```
+
+::: {.cell-output-display}
+![](09_01_lecture_powerpoint_files/figure-html/overview-plot-2m-1.png){width=480}
+:::
+:::
+
+
+# **Lecture 9:** Correlation Analysis
+
+To understand the amount of variation explained, you can square the non
+parametric Spearman's rho value.
 
 For your value of 0.74485:
 

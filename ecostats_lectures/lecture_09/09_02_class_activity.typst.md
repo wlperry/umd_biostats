@@ -116,8 +116,7 @@ Let's start with the Nazca booby data to explore correlation:
 
 ```{.r .cell-code}
 # Calculate Pearson correlation coefficient
-booby_corr <- cor(b_df$visits, b_df$aggression)
-booby_corr
+cor(b_df$visits, b_df$aggression)
 ```
 
 ::: {.cell-output .cell-output-stdout}

@@ -3,6 +3,8 @@ title: "Lecture 08"
 author: "Bill Perry"
 metadata-files:
   - ../../_templates/lectures.yml
+execute: 
+  paged-print: false
 format:
   html:
     output-file: "08_01_lecture_powerpoint_html.html"
@@ -27,9 +29,12 @@ Covered
 
 -   What are the assumptions again and how do you assess them
 -   What to do when assumptions fail
-    -   Robust tests
-    -   Rank-based tests
+    -   Mann Whitney Wilcoxin Rank Sum test
     -   Permutation tests
+    -   There is a paired Wilcoxin Sign test
+        -   this does if it is a + 0 or - in the pair and uses that info
+            to do the test... possible but not very powerful or widely
+            used
 :::
 
 ::: {.column width="40%"}
@@ -41,7 +46,7 @@ Covered
 
 ::::: columns
 ::: {.column width="60%"}
-Today we'll cover:
+Today we'll cover: Chapter 1 in Whitlock and Schluter
 
 -   Study design
 -   Causality in ecology
@@ -51,7 +56,7 @@ Today we'll cover:
 -   Power analysis: *a priori* and *post hoc*
 -   Study design and analysis
 
-![](images/clipboard-1432414496.png){width="300" height="200"}
+![](images/clipboard-1432414496.png){width="219"}
 :::
 
 ::: {.column width="40%"}
@@ -72,29 +77,22 @@ Lamberti and Resh 1983
 Common scientific questions:
 
 -   Spatial/temporal patterns in variable Y?
+    -   what are the problems with this data?
 -   Effect of factor X on variable Y?
+    -   what should you be worried about and how to fix?
 -   Are values of variable Y consistent with hypothesis H?
--   What is the best estimate of parameter θ?
+-   What is the best estimate of parameter θ (some parameter)?
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-2300334690.png){width="300" height="250"}
+![](images/clipboard-2300334690.png){width="402" height="315"}
+
+What sort of experiment is this design and what are the issues with
+this?
 
 <https://ars.els-cdn.com/content/image/1-s2.0-S0272771416307958-fx1_lrg.jpg>
 :::
 :::::
-
-# Activity 1: Formulating Research Questions
-
-::: callout-important
-## Activity 1: Formulating Research Questions
-
--   Take 5 minutes to write down 2-3 potential research questions about
-    pine trees on our campus.
--   Be as specific as possible about what you would measure.
--   Share with a partner and discuss which questions would be easier to
-    address experimentally.
-:::
 
 # Causality in Ecology - Introduction
 
@@ -103,8 +101,9 @@ Common scientific questions:
 -   Common question: what is the **cause** of Y?
 -   Causality is challenging; modern statistics lacks clear language for
     causality
--   Strength of causal inference varies with study design
--   Key factor: control of confounding variables
+-   Strength of causal inference varies with study design!
+-   Key factor: control of confounding variables, non independence and
+    correlated varaibles
 :::
 
 ::: {.column width="40%"}
@@ -120,11 +119,12 @@ Common scientific questions:
 -   Causality is challenging; modern statistics lacks clear language for
     causality
 -   Strength of causal inference varies with study design
--   Key factor: control of confounding variables
+-   Key factor: control of confounding variables, non independence and
+    correlated varaibles
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-733522902.png){width="300" height="250"}
+![](images/clipboard-733522902.png){width="444" height="367"}
 :::
 :::::
 
@@ -141,7 +141,7 @@ We're interested in causality. How do we get there?
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-260157568.png){width="300" height="200"}
+![](images/clipboard-260157568.png){width="178" height="329"}
 :::
 :::::
 
@@ -176,7 +176,7 @@ We're interested in causality. How do we get there?
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3939861261.png){width="300" height="200"}
+![](images/clipboard-3939861261.png){width="214" height="284"}
 :::
 :::::
 
@@ -185,9 +185,10 @@ We're interested in causality. How do we get there?
 ::: callout-note
 ## Activity 2: Pine Needle Natural Experiment Design
 
-Suppose we want to investigate whether wind exposure affects pine needle
-length across our campus. We decide to pick exposed sheltered locations.
-What sort of design would we conduct?
+Suppose we want to investigate whether wind/sun exposure affects pine
+needle length across our campus. We decide to pick exposed sheltered
+locations. What sort of design would we conduct?
+
 
 ::: {.cell}
 
@@ -195,14 +196,14 @@ What sort of design would we conduct?
 # Let's simulate some pine needle data from exposed and sheltered locations
 exposed_locations <- data.frame(
   location = paste0("E", 1:5),
-  wind = "exposed",
+  sun = "sunny",
   length_mm = rnorm(5*10, mean = 75, sd = 10),
   tree_id = rep(1:5, each = 10)
 )
 
 sheltered_locations <- data.frame(
   location = paste0("S", 1:5),
-  wind = "sheltered",
+  sun = "shady",
   length_mm = rnorm(5*10, mean = 90, sd = 12),
   tree_id = rep(6:10, each = 10)
 )
@@ -210,9 +211,14 @@ sheltered_locations <- data.frame(
 fake_pine_data <- rbind(exposed_locations, sheltered_locations)
 
 # View the data
-fake_pine_data %>% ggplot(aes(wind, length_mm, color = wind)) + geom_boxplot()
+fake_pine_data %>% ggplot(aes(sun, length_mm, color = sun)) + geom_boxplot()
 ```
+
+::: {.cell-output-display}
+![](08_01_lecture_powerpoint_files/figure-html/unnamed-chunk-1-1.png){width=336}
 :::
+:::
+
 
 In small groups, discuss:
 
@@ -236,7 +242,7 @@ Randomized, controlled trials: gold standard
 -   Often restricted to small, short-lived organisms
 -   Often limited to small number of treatments; treatment-replication
     trade-off
--   Still requires **careful control of confounding!**
+-   Still requires **careful control of confounding variables!**
 :::
 
 ::: {.column width="40%"}
@@ -250,7 +256,7 @@ Randomized, controlled trials: gold standard
 
 ::::: columns
 ::: {.column width="60%"}
-Main problem of study design & interpretation: **confounding**
+Main problem of study design & interpretation: **confounding varaibles**
 
 -   Is the result due to X or other factors?
 
@@ -281,11 +287,12 @@ or something else?
 
 Replication must be on the appropriate scale: match scale of replication
 to population of interest, otherwise run into **pseudoreplication**
-(Hurlbert)
+(Hurlbert 1984 - **Pseudoreplication and the Design of Ecological Field
+Experiments**)
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1638932598.png){width="300" height="200"}
+![](images/clipboard-1638932598.png){width="316" height="278"}
 :::
 :::::
 
@@ -293,24 +300,20 @@ to population of interest, otherwise run into **pseudoreplication**
 
 ::::: columns
 ::: {.column width="60%"}
-**Example 1:** Effects of forest fire on soil invertebrate diversity
-
--   Replicate samples from burnt and unburnt parts of *a single* forest
--   What hypothesis is this design addressing?
-
-**Example 2:** Effects of copper on barnacle settling
-
--   2 aquaria (+Cu, control), 5 settling plates in each
--   Are settling plates replicates?
-
-**Example 3:** Effects of sewage discharge on water quality
-
--   10 water samples above discharge, 10 below
--   Are samples replicates?
+-   **Example 1:** Effects of forest fire on soil invertebrate diversity
+    -   Replicate samples from burnt and unburnt parts of *a single*
+        forest
+    -   What hypothesis is this design addressing?
+-   **Example 2:** Effects of copper on barnacle settling
+    -   2 aquaria (+Cu, control), 5 settling plates in each
+    -   Are settling plates replicates?
+-   **Example 3:** Effects of sewage discharge on water quality
+    -   10 water samples above discharge, 10 below
+    -   Are samples replicates?
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-2941152725.png){width="300" height="200"}
+![](images/clipboard-3427337242.png){width="295"}
 :::
 :::::
 
@@ -331,33 +334,14 @@ interest:
 -   Different plants and streams
 :::
 
-![](images/clipboard-1877860945.png){width="300" height="200"}
+![](images/clipboard-1877860945.png){width="394"}
 ::::
-
-# Activity 3: Identifying True Replication
-
-::: callout-tip
-## Activity 3: Identifying True Replication
-
-For each scenario below, identify whether there is true replication or
-pseudoreplication:
-
-1.  Testing soil pH effects on pine seedling growth by using one large
-    pot with acidic soil and one with basic soil, with 10 seedlings in
-    each pot
-2.  Testing the effect of a fertilizer on pine growth by applying it to
-    5 randomly selected trees in a stand, with 5 other trees as controls
-3.  Measuring air pollution effects by sampling needle damage in 3 pine
-    stands near a factory and 3 stands 50km away
-
-Discuss how you would redesign any pseudoreplicated studies.
-:::
 
 # When Replication is Difficult
 
 :::: columns
 ::: {.column width="60%"}
-What if replication is impossible/difficult/expensive?
+### What if replication is impossible/difficult/expensive?
 
 **Example:** Effect of temperature on phytoplankton growth
 
@@ -366,9 +350,10 @@ What if replication is impossible/difficult/expensive?
 
 Possible solutions:
 
--   Rerun the experiment a few times, changing temperature of chambers
+-   Rerun the experiment a few times, changing temperature of chambers -
+    block by time
 -   Try to account for all possible differences between chambers (light
-    levels, humidity, contamination)
+    levels, humidity, contamination) - block by chamber
 :::
 
 ![](images/clipboard-3600266009.png){width="300" height="200"}
@@ -437,11 +422,11 @@ data.frame(
 
 ```
   Treatment Control
-1        18      49
-2        74     100
-3        65      47
-4        24      71
-5        25      89
+1        32      24
+2        66      98
+3        92      25
+4        62      14
+5        61      34
 ```
 
 
@@ -451,12 +436,11 @@ data.frame(
 :::
 :::::
 
-# Controls
+# Controls or reference?
 
 ::::: columns
 ::: {.column width="60%"}
-**Key question:** Is response due to manipulation/hypothesized mechanism
-or external factor?
+### **Key question:** Is response due to manipulation/hypothesized mechanism or external factor?
 
 Controls help address this question:
 
@@ -500,7 +484,7 @@ For each experiment, identify:
 
 # Independence
 
-::::: columns
+:::: columns
 ::: {.column width="60%"}
 Independence of observations: assumption of many statistical methods
 
@@ -519,16 +503,14 @@ of another
 -   Special methods to adjust for autocorrelation
 :::
 
-::: {.column width="40%"}
-![](images/clipboard-1994036977.png){width="300" height="200"}
-:::
-:::::
+![](images/clipboard-1994036977.png){width="300" height="337"}
+::::
 
 # Sampling Design in Field Studies - Simple Random
 
 ::::: columns
 ::: {.column width="60%"}
-**Simple random design:**
+### **Simple random design:**
 
 -   all individuals/sampling units have equal chance of being selected
 -   Assign number to all possible units, select units using random
@@ -546,12 +528,10 @@ of another
 
 ::::: columns
 ::: {.column width="60%"}
-**Stratified designs:** if there are distinct strata (groups) in
-population, may want to sample each independently
+### **Stratified designs:** if there are distinct strata (groups) in population, may want to sample each independently
 
 -   Samples collected from each stratum randomly, n proportional to
     "size" of stratum
-
 -   Means and variances need to be estimated using different procedure;
     strata included in model
 :::
@@ -565,14 +545,11 @@ population, may want to sample each independently
 
 ::::: columns
 ::: {.column width="60%"}
-**Cluster designs:**
+### **Cluster designs:**
 
 -   focuses on sampling subunits nested in larger units
-
 -   Used when other designs impractical (e.g., due to cost)
-
 -   Mean calculation easy, modified procedure for variance
-
 -   Nested ANOVA is often appropriate analytical method
 :::
 
@@ -585,7 +562,7 @@ population, may want to sample each independently
 
 ::::: columns
 ::: {.column width="60%"}
-**Systematic designs:**
+### **Systematic designs:**
 
 -   sampling units evenly dispersed: "transect" sampling common in
     ecology
@@ -604,6 +581,7 @@ population, may want to sample each independently
 ## Activity 5: Field Sampling Pine Trees
 
 Let's consider sampling pine needles across campus:
+
 
 ::: {.cell}
 
@@ -627,76 +605,75 @@ ggplot() +
   theme_minimal() +
   labs(title = "Pine Tree Locations on Campus Grid (North Clustered)")
 ```
+
+::: {.cell-output-display}
+![](08_01_lecture_powerpoint_files/figure-html/unnamed-chunk-3-1.png){width=480}
+:::
 :::
 
-In groups of 3-4, design a sampling strategy to:
 
-1.  Estimate average needle length across campus (simple random
-    sampling)
-2.  Compare needle lengths between north and south campus areas
-    (stratified sampling)
-3.  Study how needle length changes with distance from the main road
-    (systematic sampling)
-
-For each strategy, describe:
-
--   How many samples you would take
--   Where you would take them
--   What additional variables you might measure
+-   In groups of 3-4, design a sampling strategy to:
+    1.  Estimate average needle length across campus (simple random
+        sampling)
+    2.  Compare needle lengths between north and south campus areas
+        (stratified sampling)
+    3.  Study how needle length changes with distance from the main road
+        (systematic sampling)
+-   For each strategy, describe:
+    -   How many samples you would take
+    -   Where you would take them
+    -   What additional variables you might measure
 :::
 
-# Power Analysis Introduction
+# Power Analysis Wrap up 
 
-Power is an important aspect of experimental design:
-
--   Low power → higher likelihood of type II error (1-β)
--   A study's power tells us how likely we are to see an effect if one
-    really exists
-
-Can use power analysis:
-
--   Before experiment (*a priori*): how many samples do we need?
-    -   what effect size can we detect?
--   After experiment (*post hoc*): was finding of no effect due to lack
-    of effect or poor design?
-
-Power is a function of:
-
--   ES - Effect size
--   n - Sample size
--   sigma - standard deviation
--   α (significance level) - 0.05
+-   Power is an important aspect of experimental design:
+    -   Low power → higher likelihood of type II error (1-β)
+    -   A study's power tells us how likely we are to see an effect if
+        one really exists
+-   Can use power analysis:
+    -   Before experiment (*a priori*): how many samples do we need?
+        -   what effect size can we detect?
+    -   After experiment (*post hoc*): was finding of no effect due to
+        lack of effect or poor design?
+-   Power is a function of:
+    -   ES - Effect size
+    -   n - Sample size
+    -   sigma - standard deviation
+    -   α (significance level) - 0.05
 
 ## $$\text{Power} \propto \frac{ES \alpha \sqrt{n}}{\sigma}$$
 
 # A Priori Power Analysis
 
-Using power analysis to plan experiments:
+-   Using power analysis to plan experiments:
 
-**Sample size calculation:** how many samples will be needed?
+-   **Sample size calculation:** how many samples will be needed?
 
-Need to know: desired power, variability, significance level, effect
-size
+-   Need to know: desired power, variability, significance level, effect
+    size
 
-**Effect size calculation:** what kind of effect can we find, given
-particular design?
+-   **Effect size calculation:** what kind of effect can we find, given
+    particular design?
 
-Need to know: desired power, variability, significance level, n
+-   Need to know: desired power, variability, significance level, n
 
-Cohen's d - standardized measure of effect size used in statistical
-analysis, particularly when comparing two means
+-   Cohen's d - standardized measure of effect size used in statistical
+    analysis, particularly when comparing two means
 
--   0.2 = small effect
--   0.5 = medium effect
--   0.8 = large effect
+    -   0.2 = small effect
+    -   0.5 = medium effect
+    -   0.8 = large effect
 
-Helps determine the practical significance of research findings, as
-opposed to just statistical significance (p-values). A Cohen's d of 0.8
-means that the difference between groups is large enough to be
-substantial in practical terms - specifically, it indicates that the
-means differ by 0.8 standard deviations.
+-   Helps determine the practical significance of research findings, as
+    opposed to just statistical significance (p-values). A Cohen's d of
+    0.8 means that the difference between groups is large enough to be
+    substantial in practical terms - specifically, it indicates that the
+    means differ by 0.8 standard deviations.
 
-# A Priori Power Analysis Example
+    # A Priori Power Analysis Example
+
+    How many samples do you need to find this difference
 
 
 ::: {.cell}
@@ -739,21 +716,18 @@ NOTE: n is number in *each* group
 
 # Post Hoc Power Analysis
 
-Imagine you did not reject null hypothesis - still worth publishing
-result?
-
-Is non-significant result due to low power (poor design) or actual
-no-effect situation?
-
--   Have n and estimate of σ
--   Need to define effect size that wanted to detect
--   In return get estimate of experiment's power
-
-Cohen's d is calculated as: d = (Mean1 - Mean2) / SD_pooled Where
-SD_pooled is the pooled standard deviation of both groups.
-
-Can help convince reviewers that you are a good experimenter, but there
-really is no effect... please publish my non-significant finding!
+-   Imagine you did not reject null hypothesis - still worth publishing
+    result?
+-   Is non-significant result due to low power (poor design) or actual
+    no-effect situation?
+    -   Have n and estimate of σ
+    -   Need to define effect size that wanted to detect
+    -   In return get estimate of experiment's power
+-   Cohen's d is calculated as: d = (Mean1 - Mean2) / SD_pooled Where
+    SD_pooled is the pooled standard deviation of both groups.
+-   Can help convince reviewers that you are a good experimenter, but
+    there really is no effect... please publish my non-significant
+    finding!
 
 # Post Hoc Power Analysis Example
 
@@ -804,6 +778,7 @@ NOTE: n is number in *each* group
 Let's design a study to compare needle lengths between exposed and
 sheltered pine trees:
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -815,14 +790,44 @@ pooled_sd <- 12       # mm
 # Calculate Cohen's d effect size
 effect_size <- abs(exposed_mean - sheltered_mean) / pooled_sd
 effect_size
+```
 
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] 0.8333333
+```
+
+
+:::
+
+```{.r .cell-code}
 # A priori power analysis
 pwr.t.test(d = effect_size,
            sig.level = 0.05,
            power = 0.8,
            type = "two.sample")
 ```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+     Two-sample t test power calculation 
+
+              n = 23.60467
+              d = 0.8333333
+      sig.level = 0.05
+          power = 0.8
+    alternative = two.sided
+
+NOTE: n is number in *each* group
+```
+
+
 :::
+:::
+
 :::
 
 # Activity 6: Power Curve Visualization
@@ -832,6 +837,7 @@ pwr.t.test(d = effect_size,
 
 Let's design a study to compare needle lengths between exposed and
 sheltered pine trees:
+
 
 ::: {.cell}
 
@@ -859,90 +865,35 @@ ggplot(power_df, aes(x = sample_size, y = power)) +
        x = "Sample Size (per group)",
        y = "Statistical Power")
 ```
+
+::: {.cell-output-display}
+![](08_01_lecture_powerpoint_files/figure-html/unnamed-chunk-7-1.png){width=384}
 :::
+:::
+
 
 Questions:
 
 1.  How many trees should we sample to achieve 80% power?
-
 2.  If we can only sample 5 trees per group, what is our power?
-
 3.  How would increasing variability (SD) affect our sample size
     requirements?
-:::
-
-# Interactive Power Analysis
-
-::: callout-note
-Power vs. Effect Size Interactive Demonstration
-
-Try adjusting these parameters to see how they affect required sample
-size:
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Adjust these parameters
-mean_difference <- 10   # Difference between groups (mm)
-std_deviation <- 12     # Standard deviation (mm)
-target_power <- 0.8     # Desired statistical power
-
-# Calculate effect size
-effect_size <- mean_difference / std_deviation
-
-# Calculate required sample size
-power_result <- pwr.t.test(d = effect_size,
-                          sig.level = 0.05,
-                          power = target_power,
-                          type = "two.sample")
-
-# Display results
-cat("Effect size (Cohen's d):", round(effect_size, 2), "\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Effect size (Cohen's d): 0.83 
-```
-
-
-:::
-
-```{.r .cell-code}
-cat("Required sample size per group:", ceiling(power_result$n), "trees\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Required sample size per group: 24 trees
-```
-
-
-:::
-:::
-
 :::
 
 # Study Design and Analysis
 
 ::::: columns
 ::: {.column width="60%"}
-Study design is closely linked to statistical analysis
-
-Recall: - Categorical vs. continuous variables - Dependent vs.
-independent variables
-
-Nature of variables dictates analytical approach:
-
--   Match your analysis to your design
--   Cannot "fix" poor design with fancy statistics
+-   Study design is closely linked to statistical analysis
+-   Recall: - Categorical vs. continuous variables - Dependent vs.
+    independent variables
+-   Nature of variables dictates analytical approach:
+    -   Match your analysis to your design
+    -   Cannot "fix" poor design with fancy statistics
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3944907188.png){width="300" height="200"}
+![](images/clipboard-3944907188.png){width="245" height="364"}
 :::
 :::::
 
