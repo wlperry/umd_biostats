@@ -5,6 +5,8 @@ metadata-files:
   - ../../_templates/lectures.yml
 execute: 
   paged-print: false
+  fig-width: 5
+  fig-height: 5
 format:
   html:
     output-file: "08_01_lecture_powerpoint_html.html"
@@ -38,7 +40,7 @@ Covered
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3712542164.png){width="300" height="200"}
+![](images/clipboard-3712542164.png){width="452" height="301"}
 :::
 :::::
 
@@ -56,11 +58,11 @@ Today we'll cover: Chapter 1 in Whitlock and Schluter
 -   Power analysis: *a priori* and *post hoc*
 -   Study design and analysis
 
-![](images/clipboard-1432414496.png){width="219"}
+![](images/clipboard-1432414496.png){width="315"}
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1638932598.png){width="300" height="200"}
+![](images/clipboard-1638932598.png){width="394" height="261"}
 
 Lamberti and Resh 1983
 :::
@@ -85,7 +87,7 @@ Common scientific questions:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-2300334690.png){width="402" height="315"}
+![](images/clipboard-2300334690.png){width="498" height="396"}
 
 What sort of experiment is this design and what are the issues with
 this?
@@ -107,7 +109,7 @@ this?
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-981938461.png){width="300" height="280"}
+![](images/clipboard-981938461.png){width="333" height="425"}
 :::
 :::::
 
@@ -124,7 +126,7 @@ this?
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-733522902.png){width="444" height="367"}
+![](images/clipboard-733522902.png){width="482" height="399"}
 :::
 :::::
 
@@ -138,10 +140,14 @@ this?
 density
 
 We're interested in causality. How do we get there?
+
+### What type of experiment is this? 
+
+### What are the potential problems with testing this hypothesis?
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-260157568.png){width="178" height="329"}
+![](images/clipboard-260157568.png){width="389" height="659"}
 :::
 :::::
 
@@ -160,7 +166,7 @@ We're interested in causality. How do we get there?
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-194557558.png){width="300" height="250"}
+![](images/clipboard-194557558.png){width="384" height="424"}
 :::
 :::::
 
@@ -176,7 +182,7 @@ We're interested in causality. How do we get there?
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3939861261.png){width="214" height="284"}
+![](images/clipboard-3939861261.png){width="308" height="417"}
 :::
 :::::
 
@@ -625,7 +631,7 @@ ggplot() +
     -   What additional variables you might measure
 :::
 
-# Power Analysis Wrap up 
+# Power Analysis Wrap up
 
 -   Power is an important aspect of experimental design:
     -   Low power → higher likelihood of type II error (1-β)
