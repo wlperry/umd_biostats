@@ -534,8 +534,8 @@ F-statistic: 49.75 on 1 and 30 DF,  p-value: 7.677e-08
 ::: {.column width="60%"}
 ### Simple Linear Regression Model
 
-The calculation for slope (b) is:\
-$$b = \frac{\sum_i(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_i(X_i - \bar{X})^2}$$
+The calculation for slope (m) is:\
+$$m = \frac{\sum_i(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_i(X_i - \bar{X})^2}$$
 
 -   Given:
 
@@ -549,8 +549,8 @@ $$b = \frac{\sum_i(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_i(X_i - \bar{X})^2}$$
 
 b = 13.0123 / 1.2221 = 10.647
 
-Intercept (a):
-$a = \bar{Y} - b\bar{X} = 4.3094 - 10.647(0.3222) = 0.879$
+Intercept (b):
+$b = \bar{Y} - m\bar{X} = 4.3094 - 10.647(0.3222) = 0.879$
 :::
 
 ::: {.column width="40%"}
