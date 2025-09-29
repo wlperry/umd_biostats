@@ -68,7 +68,7 @@ we'll explore:
 
 ::::: columns
 ::: {.column width="60%"}
-**Correlation Analysis:**
+### **Correlation Analysis:**
 
 -   Measures the strength and direction of a relationship between two
     numerical variables
@@ -79,14 +79,14 @@ we'll explore:
 -   Quantifies the degree to which variables are related
 -   Expressed as a correlation coefficient (r) from -1 to +1
 
-**Regression Analysis:**
+### **Regression Analysis:**
 
 -   Predicts one variable (Y) from another (X)
 -   X is often fixed or controlled (manipulated)
 -   Y is the response variable of interest
 -   Often implies a cause-effect relationship
--   Produces an equation for prediction
--   Estimates slope and intercept parameters
+-   Produces an equation for prediction with slope and intercept
+    parameters
 :::
 
 ::: {.column width="40%"}
@@ -155,19 +155,10 @@ For a Pearson correlation coefficient (r) of 0.53372:
 -   means about 28.49% of the variance in one variable can be explained
     by the other variable
 
-### Note that it is tested by:  $\text{t}=\frac{r}{SE_r}$
+### Note that it is tested by a t test: $\text{t}=\frac{r}{SE_r}$
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 0.5337225
-```
-
-
-:::
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -314,51 +305,6 @@ Examine the data for outliers or influential points
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-#| echo: false
-#| fig-height: 5
-#| fig-width: 5
-#| message: false
-#| warning: false
-
-
-p1_lion <- ggplot(lion_data, aes(x = proportion_black)) +
-  geom_histogram(bins = 10, fill = "lightblue", color = "black") +
-  labs(title = "Prop black",
-       x = "Visits",
-       y = "Frequency") +
-  theme_minimal()
-
-p2_lion <- ggplot(lion_data, aes(x = age_years)) +
-  geom_histogram(bins = 10, fill = "lightgreen", color = "black") +
-  labs(title = "Age",
-       x = "Age",
-       y = "Frequency") +
-  theme_minimal()
-
-p3_lion <- ggplot(lion_data, aes(sample = proportion_black)) +
-  geom_qq() +
-  geom_qq_line() +
-  labs(title = "Q-Q Plot Prop Black",
-       x = "Theoretical Quantiles",
-       y = "Sample Quantiles") +
-  theme_minimal()+theme(
-    axis.title.x = element_blank(),
-    axis.text.x = element_blank())
-
-p4_lion <- ggplot(lion_data, aes(sample = age_years)) +
-  geom_qq() +
-  geom_qq_line() +
-  labs(title = "Q-Q Plot for age",
-       x = "Theoretical Quantiles",
-       y = "Sample Quantiles") +
-  theme_minimal()
-
-# Combine the plots
-(p1_lion / p2_lion) | (p3_lion / p4_lion)
-```
-
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-docx/overview-plot-2m-1.png)
 :::
@@ -405,31 +351,25 @@ sample estimates:
 ::: {.column width="60%"}
 ### Correlation: Important Considerations
 
-**The correlation coefficient depends on the range**
-
--   Restricting range of values can reduce the correlation coefficient
--   Comparing correlations between studies requires similar ranges of
-    values
-
-**Measurement error affects correlation**
-
--   Measurement error in X or Y tends to weaken observed correlation
--   This bias is called **attenuation**
--   True correlation typically stronger than observed correlation
-
-**Correlation vs. Causation**
-
--   Correlation does not imply causation
--   Three possible explanations for correlation:
-    1.  X causes Y
-    2.  Y causes X
-    3.  Z (a third variable) causes both X and Y
-
-**Correlation significance test**
-
--   H₀: ρ = 0 (no correlation in population)
--   H₁: ρ ≠ 0 (correlation exists in population)
--   **Test statistic: t = r / SE(r) with df = n-2**
+-   **The correlation coefficient depends on the range**
+    -   Restricting range of values can reduce the correlation
+        coefficient
+    -   Comparing correlations between studies requires similar ranges
+        of values
+-   **Measurement error affects correlation**
+    -   Measurement error in X or Y tends to weaken observed correlation
+    -   This bias is called **attenuation**
+    -   True correlation typically stronger than observed correlation
+-   **Correlation vs. Causation**
+    -   Correlation does not imply causation
+    -   Three possible explanations for correlation:
+        1.  X causes Y
+        2.  Y causes X
+        3.  Z (a third variable) causes both X and Y
+-   **Correlation significance test**
+    -   H₀: ρ = 0 (no correlation in population)
+    -   H₁: ρ ≠ 0 (correlation exists in population)
+    -   **Test statistic: t = r / SE(r) with df = n-2**
 :::
 
 ::: {.column width="40%"}
@@ -452,26 +392,21 @@ sample estimates:
 **Simple linear regression** models the relationship between a response
 variable (Y) and a predictor variable (X).
 
-The **population** regression model
-$$Y = \alpha + \beta X + \varepsilon$$
+The **population** regression model $Y = \alpha + \beta X + \varepsilon$
 
-Where:
+-   Where:
+    -   Y is the response variable
+    -   X is the predictor variable
+    -   α (alpha) is the intercept (value of Y when X=0)
+    -   β (beta) is the slope (change in Y per unit change in X)
+    -   ε (epsilon) is the error term (random deviation from the line)
 
--   Y is the response variable
--   X is the predictor variable
--   α (alpha) is the intercept (value of Y when X=0)
--   β (beta) is the slope (change in Y per unit change in X)
--   ε (epsilon) is the error term (random deviation from the line)
+The **sample** regression equation is: $\hat{Y} = a + bX$
 
-The **sample** regression equation is:
-
-$$\hat{Y} = a + bX$$
-
-Where:
-
--   $\hat{Y}$ is the predicted value of Y
--   a is the estimate of α (intercept)
--   b is the estimate of β (slope)
+-   Where:
+    -   $\hat{Y}$ is the predicted value of Y
+    -   a is the estimate of α (intercept)
+    -   b is the estimate of β (slope)
 
 **Method of Least Squares**: The line is chosen to minimize the sum of
 squared vertical distances (residuals) between observed and predicted Y
@@ -479,7 +414,7 @@ values.
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3360244964.png){width="329"}
+![](images/clipboard-3360244964.png){width="238"}
 :::
 :::::
 
@@ -493,32 +428,21 @@ values.
 variable (Y) and a predictor variable (X).
 
 The **population** regression model is:
+$Y = \alpha + \beta X + \varepsilon$
 
-$$Y = \alpha + \beta X + \varepsilon$$
+-   Where:
+    -   Y is the response variable
+    -   X is the predictor variable
+    -   α (alpha) is the intercept (value of Y when X=0)
+    -   β (beta) is the slope (change in Y per unit change in X)
+    -   ε (epsilon) is the error term (random deviation from the line)
 
-Where:
+The **sample** regression equation is: $\hat{Y} = a + bX$
 
--   Y is the response variable
-
--   X is the predictor variable
-
--   α (alpha) is the intercept (value of Y when X=0)
-
--   β (beta) is the slope (change in Y per unit change in X)
-
--   ε (epsilon) is the error term (random deviation from the line)
-
-The **sample** regression equation is:
-
-$$\hat{Y} = a + bX$$
-
-Where:
-
--   $\hat{Y}$ is the predicted value of Y
-
--   a is the estimate of α (intercept)
-
--   b is the estimate of β (slope)
+-   Where:
+    -   $\hat{Y}$ is the predicted value of Y
+    -   a is the estimate of α (intercept)
+    -   b is the estimate of β (slope)
 
 **Method of Least Squares**: The line is chosen to minimize the sum of
 squared vertical distances (residuals) between observed and predicted Y
@@ -545,10 +469,14 @@ is:
 
 ### $\text{age} = 0.88 + 10.65 \times \text{proportion}_{black}$
 
-This means: - When a lion has no black on its nose (proportion = 0), its
-predicted age is 0.88 years - For each 0.1 increase in the proportion of
-black, age increases by 1.065 years - The slope (10.65) indicates that
-lions with more black on their noses tend to be older
+This means:
+
+-   When a lion has no black on its nose (proportion = 0), its predicted
+    age is 0.88 years
+-   For each 0.1 increase in the proportion of black, age increases by
+    1.065 years
+-   The slope (10.65) indicates that lions with more black on their
+    noses tend to be older
 :::
 
 ::: {.column width="60%"}
@@ -609,14 +537,38 @@ F-statistic: 49.75 on 1 and 30 DF,  p-value: 7.677e-08
 The calculation for slope (b) is:\
 $$b = \frac{\sum_i(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_i(X_i - \bar{X})^2}$$
 
-Given: - $\bar{X} = 0.3222$ - $\bar{Y} = 4.3094$ -
-$\sum_i(X_i - \bar{X})^2 = 1.2221$ -
-$\sum_i(X_i - \bar{X})(Y_i - \bar{Y}) = 13.0123$
+-   Given:
+
+    -   \- $\bar{X} = 0.3222$
+
+    -   \- $\bar{Y} = 4.3094$
+
+    -   \- $\sum_i(X_i - \bar{X})^2 = 1.2221$
+
+    -   \- $\sum_i(X_i - \bar{X})(Y_i - \bar{Y}) = 13.0123$
 
 b = 13.0123 / 1.2221 = 10.647
 
 Intercept (a):
 $a = \bar{Y} - b\bar{X} = 4.3094 - 10.647(0.3222) = 0.879$
+:::
+
+::: {.column width="40%"}
+
+::: {.cell}
+::: {.cell-output-display}
+![](09_01_lecture_powerpoint_files/figure-docx/overview-plot-1b-1.png)
+:::
+:::
+
+:::
+:::::
+
+# **Lecture 9:** Linear Regression
+
+::::: columns
+::: {.column width="60%"}
+### Simple Linear Regression Model
 
 **Making predictions:**
 
@@ -639,7 +591,7 @@ from the mean.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](09_01_lecture_powerpoint_files/figure-docx/overview-plot-1b-1.png)
+![](09_01_lecture_powerpoint_files/figure-docx/overview-plot-1bb-1.png)
 :::
 :::
 
@@ -656,23 +608,6 @@ from the mean.
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 6 × 2
-  species_number log_stability
-           <dbl>         <dbl>
-1              1         0.763
-2              1         1.45 
-3              1         1.51 
-4              1         0.747
-5              1         0.983
-6              1         1.12 
-```
-
-
-:::
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -694,15 +629,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Residual standard error: 0.3433 on 159 degrees of freedom
 Multiple R-squared:  0.149,	Adjusted R-squared:  0.1436 
 F-statistic: 27.83 on 1 and 159 DF,  p-value: 4.276e-07
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "rsquared is:  0.148953385305455"
 ```
 
 
@@ -735,9 +661,7 @@ The hypothesis test asks whether the slope equals zero:
 -   H₀: β = 0 (species number does not affect stability)
 -   H₁: β ≠ 0 (species number does affect stability)
 
-### The test statistic is: $t = \frac{b - \beta_0}{SE_b}$
-
-With df = n - 2 = 161 - 2 = 159
+t = estimate/SE
 
 **Interpretation:**
 
@@ -791,7 +715,7 @@ Assume that **error 𝞮 i**s $e_i = y_i - \hat{y}_i$
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-2092034232.png)
+![](images/clipboard-2092034232.png){width="387"}
 :::
 :::::
 
@@ -814,8 +738,7 @@ Assume that **error 𝞮 i**s - estimated as the residuals:
 $e_i = y_i - \hat{y}_i$
 
 -   ordinary lease square estimates a and b or slope and intercept to
-    minimize the sum of the residuals squared or Mean Squared Error
-    (MSE) as
+    minimize the sum of the residuals squared as
 
 ### $\sum_{i=1}^{n} = (y_i - \hat{y}_i)^2$
 :::
@@ -824,8 +747,6 @@ $e_i = y_i - \hat{y}_i$
 ![](images/clipboard-1411052425.png)
 :::
 :::::
-
-# 
 
 # **Lecture 9:** Linear Regression
 
@@ -841,6 +762,8 @@ linear regression has four key assumptions:
 4.  **Normality**: Residuals are normally distributed
 
 Let's check these assumptions for the lion regression model:
+
+Linearity - how does this plot work
 :::
 
 ::: {.column width="40%"}
@@ -1027,7 +950,7 @@ Total variation in Y is “partitioned” into 3 components:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-77063277.png)
+![](images/clipboard-77063277.png){width="498"}
 :::
 :::::
 
@@ -1045,7 +968,7 @@ Total variation in Y is “partitioned” into 3 components:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-217151541.png)
+![](images/clipboard-217151541.png){width="456"}
 :::
 :::::
 
@@ -1064,7 +987,7 @@ $df_{regression}+df_{residual} = df_{total}$
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-2758972276.png)
+![](images/clipboard-2758972276.png){width="541"}
 :::
 :::::
 
@@ -1082,6 +1005,6 @@ Sums of Squares converted to Mean Squares
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-2758972276.png)
+![](images/clipboard-2758972276.png){width="505"}
 :::
 :::::

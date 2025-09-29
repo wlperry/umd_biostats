@@ -16,8 +16,7 @@ format:
 
 ## Introduction
 
-This activity demonstrates key concepts in experimental design using a
-made up fish example:
+This activity demonstrates key concepts in experimental design using a made up fish example:
 
 1.  **Formulating research questions**
 2.  **Understanding study designs**
@@ -25,8 +24,7 @@ made up fish example:
 4.  **Conducting power analysis** (before and after data collection)
 5.  **Planning sampling strategies**
 
-We'll study fish mass above and below waterfalls across multiple
-streams.
+We'll study fish mass above and below waterfalls across multiple streams.
 
 # **Part 1:** Load Required Packages
 
@@ -46,14 +44,11 @@ set.seed(42)
 
 **Main Question:** Do waterfalls affect fish mass in stream ecosystems?
 
-**Hypothesis:** Fish below waterfalls are larger due to better feeding
-opportunities from nutrients and prey from the lake.
+**Hypothesis:** Fish below waterfalls are larger due to better feeding opportunities from nutrients and prey from the lake.
 
 # **Part 3:** Study Design - Natural Experiment
 
-We'll sample fish above and below waterfalls in 6 different streams.
-This represents a "natural experiment" since we can't manipulate
-waterfall presence.
+We'll sample fish above and below waterfalls in 6 different streams. This represents a "natural experiment" since we can't manipulate waterfall presence.
 
 
 ::: {.cell}
@@ -245,18 +240,11 @@ mean difference
 :::
 
 
-The proper analysis uses **streams as replicates** (n = 6), not
-individual fish (n = 36 per group).
+The proper analysis uses **streams as replicates** (n = 6), not individual fish (n = 36 per group).
 
 # **Part 5:** Power Analysis - Planning Phase
 
-Let's calculate how many streams we need to detect a meaningful
-difference. The effect size here is called Cohen's D measures the
-difference between two group means in terms of standard deviations. It
-helps to understand the magnitude of a difference beyond statistical
-significance by expressing the distance between means as a standardized
-value. For example, a Cohen's d of 0.2 is considered a small effect, 0.5
-a moderate effect, and 0.8 a large effect
+Let's calculate how many streams we need to detect a meaningful difference. The effect size here is called Cohen's D measures the difference between two group means in terms of standard deviations. It helps to understand the magnitude of a difference beyond statistical significance by expressing the distance between means as a standardized value. For example, a Cohen's d of 0.2 is considered a small effect, 0.5 a moderate effect, and 0.8 a large effect
 
 
 ::: {.cell}
@@ -381,8 +369,7 @@ power_result
 
 **Questions:**
 
-1.  What happens to required sample size if the effect is smaller
-    (below_mean = 95)?
+1.  What happens to required sample size if the effect is smaller (below_mean = 95)?
 2.  What if variation is higher (pooled_sd = 30)?
 3.  What if we want 90% power instead of 80%?
 :::
@@ -558,13 +545,11 @@ stream_summary
 ::: callout-important
 ## Activity 3: Study Design Practice
 
-**Scenario:** You want to study if fish size differs between fast and
-slow water areas.
+**Scenario:** You want to study if fish size differs between fast and slow water areas.
 
 **Design Questions:**
 
-1.  **What is your experimental unit?**
-    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+1.  **What is your experimental unit?** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 2.  **How many replicates do you need? Use these values:**
 
@@ -596,23 +581,19 @@ sample_result
 :::
 
 
-3.  **What could cause pseudoreplication in this design?**
-    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+3.  **What could cause pseudoreplication in this design?** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-4.  **How would you avoid it?**
-    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+4.  **How would you avoid it?** \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 :::
 
 # **Summary**
 
 ## Key Points:
 
--   **Experimental unit**: The thing that receives the treatment
-    independently
+-   **Experimental unit**: The thing that receives the treatment independently
 -   **Replication**: Must be at the level of the experimental unit
 -   **Power analysis**: Plan sample size before collecting data
--   **Paired vs unpaired**: Paired tests are more powerful when
-    appropriate
+-   **Paired vs unpaired**: Paired tests are more powerful when appropriate
 -   **Effect size**: Larger effects need fewer samples to detect
 
 ## Common Mistakes:

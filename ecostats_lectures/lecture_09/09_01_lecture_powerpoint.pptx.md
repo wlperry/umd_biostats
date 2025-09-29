@@ -68,7 +68,7 @@ we'll explore:
 
 ::::: columns
 ::: {.column width="60%"}
-**Correlation Analysis:**
+### **Correlation Analysis:**
 
 -   Measures the strength and direction of a relationship between two
     numerical variables
@@ -79,22 +79,24 @@ we'll explore:
 -   Quantifies the degree to which variables are related
 -   Expressed as a correlation coefficient (r) from -1 to +1
 
-**Regression Analysis:**
+### **Regression Analysis:**
 
 -   Predicts one variable (Y) from another (X)
 -   X is often fixed or controlled (manipulated)
 -   Y is the response variable of interest
 -   Often implies a cause-effect relationship
--   Produces an equation for prediction
--   Estimates slope and intercept parameters
+-   Produces an equation for prediction with slope and intercept
+    parameters
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-1-1.png)
 :::
 :::
+
 :::
 :::::
 
@@ -124,11 +126,13 @@ Where $s_X$ and $s_Y$ are the standard deviations of X and Y.
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1i-1.png)
 :::
 :::
+
 :::
 :::::
 
@@ -151,18 +155,10 @@ For a Pearson correlation coefficient (r) of 0.53372:
 -   means about 28.49% of the variance in one variable can be explained
     by the other variable
 
-### Note that it is tested by:  $\text{t}=\frac{r}{SE_r}$
+### Note that it is tested by a t test: $\text{t}=\frac{r}{SE_r}$
+
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 0.5337225
-```
-
-
-:::
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -182,6 +178,7 @@ sample estimates:
 
 :::
 :::
+
 
 # **Lecture 9:** Correlation Analysis
 
@@ -205,11 +202,13 @@ Need to be sure relationship is not curved - note below
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1k-1.png)
 :::
 :::
+
 :::
 :::::
 
@@ -306,51 +305,6 @@ Examine the data for outliers or influential points
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-#| echo: false
-#| fig-height: 5
-#| fig-width: 5
-#| message: false
-#| warning: false
-
-
-p1_lion <- ggplot(lion_data, aes(x = proportion_black)) +
-  geom_histogram(bins = 10, fill = "lightblue", color = "black") +
-  labs(title = "Prop black",
-       x = "Visits",
-       y = "Frequency") +
-  theme_minimal()
-
-p2_lion <- ggplot(lion_data, aes(x = age_years)) +
-  geom_histogram(bins = 10, fill = "lightgreen", color = "black") +
-  labs(title = "Age",
-       x = "Age",
-       y = "Frequency") +
-  theme_minimal()
-
-p3_lion <- ggplot(lion_data, aes(sample = proportion_black)) +
-  geom_qq() +
-  geom_qq_line() +
-  labs(title = "Q-Q Plot Prop Black",
-       x = "Theoretical Quantiles",
-       y = "Sample Quantiles") +
-  theme_minimal()+theme(
-    axis.title.x = element_blank(),
-    axis.text.x = element_blank())
-
-p4_lion <- ggplot(lion_data, aes(sample = age_years)) +
-  geom_qq() +
-  geom_qq_line() +
-  labs(title = "Q-Q Plot for age",
-       x = "Theoretical Quantiles",
-       y = "Sample Quantiles") +
-  theme_minimal()
-
-# Combine the plots
-(p1_lion / p2_lion) | (p3_lion / p4_lion)
-```
-
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-2m-1.png)
 :::
@@ -395,39 +349,35 @@ sample estimates:
 ::: {.column width="60%"}
 ### Correlation: Important Considerations
 
-**The correlation coefficient depends on the range**
-
--   Restricting range of values can reduce the correlation coefficient
--   Comparing correlations between studies requires similar ranges of
-    values
-
-**Measurement error affects correlation**
-
--   Measurement error in X or Y tends to weaken observed correlation
--   This bias is called **attenuation**
--   True correlation typically stronger than observed correlation
-
-**Correlation vs. Causation**
-
--   Correlation does not imply causation
--   Three possible explanations for correlation:
-    1.  X causes Y
-    2.  Y causes X
-    3.  Z (a third variable) causes both X and Y
-
-**Correlation significance test**
-
--   H₀: ρ = 0 (no correlation in population)
--   H₁: ρ ≠ 0 (correlation exists in population)
--   **Test statistic: t = r / SE(r) with df = n-2**
+-   **The correlation coefficient depends on the range**
+    -   Restricting range of values can reduce the correlation
+        coefficient
+    -   Comparing correlations between studies requires similar ranges
+        of values
+-   **Measurement error affects correlation**
+    -   Measurement error in X or Y tends to weaken observed correlation
+    -   This bias is called **attenuation**
+    -   True correlation typically stronger than observed correlation
+-   **Correlation vs. Causation**
+    -   Correlation does not imply causation
+    -   Three possible explanations for correlation:
+        1.  X causes Y
+        2.  Y causes X
+        3.  Z (a third variable) causes both X and Y
+-   **Correlation significance test**
+    -   H₀: ρ = 0 (no correlation in population)
+    -   H₁: ρ ≠ 0 (correlation exists in population)
+    -   **Test statistic: t = r / SE(r) with df = n-2**
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1o-1.png)
 :::
 :::
+
 :::
 :::::
 
@@ -440,26 +390,21 @@ sample estimates:
 **Simple linear regression** models the relationship between a response
 variable (Y) and a predictor variable (X).
 
-The **population** regression model
-$$Y = \alpha + \beta X + \varepsilon$$
+The **population** regression model $Y = \alpha + \beta X + \varepsilon$
 
-Where:
+-   Where:
+    -   Y is the response variable
+    -   X is the predictor variable
+    -   α (alpha) is the intercept (value of Y when X=0)
+    -   β (beta) is the slope (change in Y per unit change in X)
+    -   ε (epsilon) is the error term (random deviation from the line)
 
--   Y is the response variable
--   X is the predictor variable
--   α (alpha) is the intercept (value of Y when X=0)
--   β (beta) is the slope (change in Y per unit change in X)
--   ε (epsilon) is the error term (random deviation from the line)
+The **sample** regression equation is: $\hat{Y} = a + bX$
 
-The **sample** regression equation is:
-
-$$\hat{Y} = a + bX$$
-
-Where:
-
--   $\hat{Y}$ is the predicted value of Y
--   a is the estimate of α (intercept)
--   b is the estimate of β (slope)
+-   Where:
+    -   $\hat{Y}$ is the predicted value of Y
+    -   a is the estimate of α (intercept)
+    -   b is the estimate of β (slope)
 
 **Method of Least Squares**: The line is chosen to minimize the sum of
 squared vertical distances (residuals) between observed and predicted Y
@@ -467,7 +412,7 @@ values.
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3360244964.png){width="329"}
+![](images/clipboard-3360244964.png){width="238"}
 :::
 :::::
 
@@ -481,32 +426,21 @@ values.
 variable (Y) and a predictor variable (X).
 
 The **population** regression model is:
+$Y = \alpha + \beta X + \varepsilon$
 
-$$Y = \alpha + \beta X + \varepsilon$$
+-   Where:
+    -   Y is the response variable
+    -   X is the predictor variable
+    -   α (alpha) is the intercept (value of Y when X=0)
+    -   β (beta) is the slope (change in Y per unit change in X)
+    -   ε (epsilon) is the error term (random deviation from the line)
 
-Where:
+The **sample** regression equation is: $\hat{Y} = a + bX$
 
--   Y is the response variable
-
--   X is the predictor variable
-
--   α (alpha) is the intercept (value of Y when X=0)
-
--   β (beta) is the slope (change in Y per unit change in X)
-
--   ε (epsilon) is the error term (random deviation from the line)
-
-The **sample** regression equation is:
-
-$$\hat{Y} = a + bX$$
-
-Where:
-
--   $\hat{Y}$ is the predicted value of Y
-
--   a is the estimate of α (intercept)
-
--   b is the estimate of β (slope)
+-   Where:
+    -   $\hat{Y}$ is the predicted value of Y
+    -   a is the estimate of α (intercept)
+    -   b is the estimate of β (slope)
 
 **Method of Least Squares**: The line is chosen to minimize the sum of
 squared vertical distances (residuals) between observed and predicted Y
@@ -531,18 +465,1411 @@ is:
 
 ### $\text{age} = 0.88 + 10.65 \times \text{proportion}_{black}$
 
-This means: - When a lion has no black on its nose (proportion = 0), its
-predicted age is 0.88 years - For each 0.1 increase in the proportion of
-black, age increases by 1.065 years - The slope (10.65) indicates that
-lions with more black on their noses tend to be older
+This means:
+
+-   When a lion has no black on its nose (proportion = 0), its predicted
+    age is 0.88 years
+-   For each 0.1 increase in the proportion of black, age increases by
+    1.065 years
+-   The slope (10.65) indicates that lions with more black on their
+    noses tend to be older
 :::
 
 ::: {.column width="60%"}
+
 ::: {.cell}
-::: {.cell-output-display}
-![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1q-1.png)
+::: {.cell-output .cell-output-stdout}
+
+```
+$data
+# A tibble: 32 × 2
+   proportion_black age_years
+              <dbl>     <dbl>
+ 1             0.21       1.1
+ 2             0.14       1.5
+ 3             0.11       1.9
+ 4             0.13       2.2
+ 5             0.12       2.6
+ 6             0.13       3.2
+ 7             0.12       3.2
+ 8             0.18       2.9
+ 9             0.23       2.4
+10             0.22       2.1
+# ℹ 22 more rows
+
+$layers
+$layers[[1]]
+geom_point: na.rm = FALSE
+stat_identity: na.rm = FALSE
+position_identity 
+
+$layers[[2]]
+geom_smooth: se = FALSE, na.rm = FALSE, orientation = NA
+stat_smooth: method = lm, formula = NULL, se = FALSE, n = 80, fullrange = TRUE, level = 0.95, na.rm = FALSE, orientation = NA, method.args = list(), span = 0.75, xseq = c(-0.1, 1)
+position_identity 
+
+$layers[[3]]
+mapping: x = ~proportion_black[10], y = ~age_years[10], xend = ~proportion_black[10], yend = ~predict(lion_model)[10] 
+geom_segment: arrow = NULL, arrow.fill = NULL, lineend = butt, linejoin = round, na.rm = FALSE
+stat_identity: na.rm = FALSE
+position_identity 
+
+$layers[[4]]
+mapping: x = ~x, y = ~y 
+geom_text: na.rm = FALSE
+stat_identity: na.rm = FALSE
+position_identity 
+
+$layers[[5]]
+mapping: x = ~x, y = ~y 
+geom_text: na.rm = FALSE
+stat_identity: na.rm = FALSE
+position_identity 
+
+$layers[[6]]
+mapping: x = ~x, y = ~y 
+geom_text: na.rm = FALSE
+stat_identity: na.rm = FALSE
+position_identity 
+
+$layers[[7]]
+mapping: x = ~x, y = ~y 
+geom_text: na.rm = FALSE
+stat_identity: na.rm = FALSE
+position_identity 
+
+
+$scales
+<ggproto object: Class ScalesList, gg>
+    add: function
+    add_defaults: function
+    add_missing: function
+    backtransform_df: function
+    clone: function
+    find: function
+    get_scales: function
+    has_scale: function
+    input: function
+    map_df: function
+    n: function
+    non_position_scales: function
+    scales: list
+    set_palettes: function
+    train_df: function
+    transform_df: function
+    super:  <ggproto object: Class ScalesList, gg>
+
+$guides
+<Guides[0] ggproto object>
+
+<empty>
+
+$mapping
+$x
+<quosure>
+expr: ^proportion_black
+env:  global
+
+$y
+<quosure>
+expr: ^age_years
+env:  global
+
+attr(,"class")
+[1] "uneval"
+
+$theme
+$line
+$colour
+[1] "black"
+
+$linewidth
+[1] 0.5
+
+$linetype
+[1] 1
+
+$lineend
+[1] "butt"
+
+$arrow
+[1] FALSE
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_line" "element"     
+
+$rect
+$fill
+[1] "white"
+
+$colour
+[1] "black"
+
+$linewidth
+[1] 0.5
+
+$linetype
+[1] 1
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_rect" "element"     
+
+$text
+$family
+[1] ""
+
+$face
+[1] "plain"
+
+$colour
+[1] "black"
+
+$size
+[1] 11
+
+$hjust
+[1] 0.5
+
+$vjust
+[1] 0.5
+
+$angle
+[1] 0
+
+$lineheight
+[1] 0.9
+
+$margin
+[1] 0points 0points 0points 0points
+
+$debug
+[1] FALSE
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$title
+NULL
+
+$aspect.ratio
+NULL
+
+$axis.title
+NULL
+
+$axis.title.x
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+NULL
+
+$vjust
+[1] 1
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+[1] 2.75points 0points    0points    0points   
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$axis.title.x.top
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+NULL
+
+$vjust
+[1] 0
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+[1] 0points    0points    2.75points 0points   
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$axis.title.x.bottom
+NULL
+
+$axis.title.y
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+NULL
+
+$vjust
+[1] 1
+
+$angle
+[1] 90
+
+$lineheight
+NULL
+
+$margin
+[1] 0points    2.75points 0points    0points   
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$axis.title.y.left
+NULL
+
+$axis.title.y.right
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+NULL
+
+$vjust
+[1] 1
+
+$angle
+[1] -90
+
+$lineheight
+NULL
+
+$margin
+[1] 0points    0points    0points    2.75points
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$axis.text
+$family
+NULL
+
+$face
+NULL
+
+$colour
+[1] "grey30"
+
+$size
+[1] 0.8 *
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$axis.text.x
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+NULL
+
+$vjust
+[1] 1
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+[1] 2.2points 0points   0points   0points  
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$axis.text.x.top
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+NULL
+
+$vjust
+[1] 0
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+[1] 0points   0points   2.2points 0points  
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$axis.text.x.bottom
+NULL
+
+$axis.text.y
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+[1] 1
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+[1] 0points   2.2points 0points   0points  
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$axis.text.y.left
+NULL
+
+$axis.text.y.right
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+[1] 0
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+[1] 0points   0points   0points   2.2points
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$axis.text.theta
+NULL
+
+$axis.text.r
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+[1] 0.5
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+[1] 0points   2.2points 0points   2.2points
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$axis.ticks
+list()
+attr(,"class")
+[1] "element_blank" "element"      
+
+$axis.ticks.x
+NULL
+
+$axis.ticks.x.top
+NULL
+
+$axis.ticks.x.bottom
+NULL
+
+$axis.ticks.y
+NULL
+
+$axis.ticks.y.left
+NULL
+
+$axis.ticks.y.right
+NULL
+
+$axis.ticks.theta
+NULL
+
+$axis.ticks.r
+NULL
+
+$axis.minor.ticks.x.top
+NULL
+
+$axis.minor.ticks.x.bottom
+NULL
+
+$axis.minor.ticks.y.left
+NULL
+
+$axis.minor.ticks.y.right
+NULL
+
+$axis.minor.ticks.theta
+NULL
+
+$axis.minor.ticks.r
+NULL
+
+$axis.ticks.length
+[1] 2.75points
+
+$axis.ticks.length.x
+NULL
+
+$axis.ticks.length.x.top
+NULL
+
+$axis.ticks.length.x.bottom
+NULL
+
+$axis.ticks.length.y
+NULL
+
+$axis.ticks.length.y.left
+NULL
+
+$axis.ticks.length.y.right
+NULL
+
+$axis.ticks.length.theta
+NULL
+
+$axis.ticks.length.r
+NULL
+
+$axis.minor.ticks.length
+[1] 0.75 *
+
+$axis.minor.ticks.length.x
+NULL
+
+$axis.minor.ticks.length.x.top
+NULL
+
+$axis.minor.ticks.length.x.bottom
+NULL
+
+$axis.minor.ticks.length.y
+NULL
+
+$axis.minor.ticks.length.y.left
+NULL
+
+$axis.minor.ticks.length.y.right
+NULL
+
+$axis.minor.ticks.length.theta
+NULL
+
+$axis.minor.ticks.length.r
+NULL
+
+$axis.line
+list()
+attr(,"class")
+[1] "element_blank" "element"      
+
+$axis.line.x
+NULL
+
+$axis.line.x.top
+NULL
+
+$axis.line.x.bottom
+NULL
+
+$axis.line.y
+NULL
+
+$axis.line.y.left
+NULL
+
+$axis.line.y.right
+NULL
+
+$axis.line.theta
+NULL
+
+$axis.line.r
+NULL
+
+$legend.background
+list()
+attr(,"class")
+[1] "element_blank" "element"      
+
+$legend.margin
+[1] 5.5points 5.5points 5.5points 5.5points
+
+$legend.spacing
+[1] 11points
+
+$legend.spacing.x
+NULL
+
+$legend.spacing.y
+NULL
+
+$legend.key
+list()
+attr(,"class")
+[1] "element_blank" "element"      
+
+$legend.key.size
+[1] 1.2lines
+
+$legend.key.height
+NULL
+
+$legend.key.width
+NULL
+
+$legend.key.spacing
+[1] 5.5points
+
+$legend.key.spacing.x
+NULL
+
+$legend.key.spacing.y
+NULL
+
+$legend.frame
+NULL
+
+$legend.ticks
+NULL
+
+$legend.ticks.length
+[1] 0.2 *
+
+$legend.axis.line
+NULL
+
+$legend.text
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+[1] 0.8 *
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$legend.text.position
+NULL
+
+$legend.title
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+[1] 0
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$legend.title.position
+NULL
+
+$legend.position
+[1] "right"
+
+$legend.position.inside
+NULL
+
+$legend.direction
+NULL
+
+$legend.byrow
+NULL
+
+$legend.justification
+[1] "center"
+
+$legend.justification.top
+NULL
+
+$legend.justification.bottom
+NULL
+
+$legend.justification.left
+NULL
+
+$legend.justification.right
+NULL
+
+$legend.justification.inside
+NULL
+
+$legend.location
+NULL
+
+$legend.box
+NULL
+
+$legend.box.just
+NULL
+
+$legend.box.margin
+[1] 0cm 0cm 0cm 0cm
+
+$legend.box.background
+list()
+attr(,"class")
+[1] "element_blank" "element"      
+
+$legend.box.spacing
+[1] 11points
+
+$panel.background
+list()
+attr(,"class")
+[1] "element_blank" "element"      
+
+$panel.border
+list()
+attr(,"class")
+[1] "element_blank" "element"      
+
+$panel.spacing
+[1] 5.5points
+
+$panel.spacing.x
+NULL
+
+$panel.spacing.y
+NULL
+
+$panel.grid
+$colour
+[1] "grey92"
+
+$linewidth
+NULL
+
+$linetype
+NULL
+
+$lineend
+NULL
+
+$arrow
+[1] FALSE
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_line" "element"     
+
+$panel.grid.major
+NULL
+
+$panel.grid.minor
+$colour
+NULL
+
+$linewidth
+[1] 0.5 *
+
+$linetype
+NULL
+
+$lineend
+NULL
+
+$arrow
+[1] FALSE
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_line" "element"     
+
+$panel.grid.major.x
+NULL
+
+$panel.grid.major.y
+NULL
+
+$panel.grid.minor.x
+NULL
+
+$panel.grid.minor.y
+NULL
+
+$panel.ontop
+[1] FALSE
+
+$plot.background
+list()
+attr(,"class")
+[1] "element_blank" "element"      
+
+$plot.title
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+[1] 1.2 *
+
+$hjust
+[1] 0
+
+$vjust
+[1] 1
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+[1] 0points   0points   5.5points 0points  
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$plot.title.position
+[1] "panel"
+
+$plot.subtitle
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+[1] 0
+
+$vjust
+[1] 1
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+[1] 0points   0points   5.5points 0points  
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$plot.caption
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+[1] 0.8 *
+
+$hjust
+[1] 1
+
+$vjust
+[1] 1
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+[1] 5.5points 0points   0points   0points  
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$plot.caption.position
+[1] "panel"
+
+$plot.tag
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+[1] 1.2 *
+
+$hjust
+[1] 0.5
+
+$vjust
+[1] 0.5
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$plot.tag.position
+[1] "topleft"
+
+$plot.tag.location
+NULL
+
+$plot.margin
+[1] 5.5points 5.5points 5.5points 5.5points
+
+$strip.background
+list()
+attr(,"class")
+[1] "element_blank" "element"      
+
+$strip.background.x
+NULL
+
+$strip.background.y
+NULL
+
+$strip.clip
+[1] "inherit"
+
+$strip.placement
+[1] "inside"
+
+$strip.text
+$family
+NULL
+
+$face
+NULL
+
+$colour
+[1] "grey10"
+
+$size
+[1] 0.8 *
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+NULL
+
+$lineheight
+NULL
+
+$margin
+[1] 4.4points 4.4points 4.4points 4.4points
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$strip.text.x
+NULL
+
+$strip.text.x.bottom
+NULL
+
+$strip.text.x.top
+NULL
+
+$strip.text.y
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+[1] -90
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$strip.text.y.left
+$family
+NULL
+
+$face
+NULL
+
+$colour
+NULL
+
+$size
+NULL
+
+$hjust
+NULL
+
+$vjust
+NULL
+
+$angle
+[1] 90
+
+$lineheight
+NULL
+
+$margin
+NULL
+
+$debug
+NULL
+
+$inherit.blank
+[1] TRUE
+
+attr(,"class")
+[1] "element_text" "element"     
+
+$strip.text.y.right
+NULL
+
+$strip.switch.pad.grid
+[1] 2.75points
+
+$strip.switch.pad.wrap
+[1] 2.75points
+
+attr(,"class")
+[1] "theme" "gg"   
+attr(,"complete")
+[1] TRUE
+attr(,"validate")
+[1] TRUE
+
+$coordinates
+<ggproto object: Class CoordCartesian, Coord, gg>
+    aspect: function
+    backtransform_range: function
+    clip: on
+    default: FALSE
+    distance: function
+    draw_panel: function
+    expand: TRUE
+    is_free: function
+    is_linear: function
+    labels: function
+    limits: list
+    modify_scales: function
+    range: function
+    render_axis_h: function
+    render_axis_v: function
+    render_bg: function
+    render_fg: function
+    reverse: none
+    setup_data: function
+    setup_layout: function
+    setup_panel_guides: function
+    setup_panel_params: function
+    setup_params: function
+    train_panel_guides: function
+    transform: function
+    super:  <ggproto object: Class CoordCartesian, Coord, gg>
+
+$facet
+<ggproto object: Class FacetNull, Facet, gg>
+    attach_axes: function
+    attach_strips: function
+    compute_layout: function
+    draw_back: function
+    draw_front: function
+    draw_labels: function
+    draw_panel_content: function
+    draw_panels: function
+    finish_data: function
+    format_strip_labels: function
+    init_gtable: function
+    init_scales: function
+    map_data: function
+    params: list
+    set_panel_size: function
+    setup_data: function
+    setup_panel_params: function
+    setup_params: function
+    shrink: TRUE
+    train_scales: function
+    vars: function
+    super:  <ggproto object: Class FacetNull, Facet, gg>
+
+$plot_env
+<environment: R_GlobalEnv>
+
+$layout
+<ggproto object: Class Layout, gg>
+    coord: NULL
+    coord_params: list
+    facet: NULL
+    facet_params: list
+    finish_data: function
+    get_scales: function
+    layout: NULL
+    map_position: function
+    panel_params: NULL
+    panel_scales_x: NULL
+    panel_scales_y: NULL
+    render: function
+    render_labels: function
+    reset_scales: function
+    resolve_label: function
+    setup: function
+    setup_panel_guides: function
+    setup_panel_params: function
+    train_position: function
+    super:  <ggproto object: Class Layout, gg>
+
+$labels
+$labels$x
+[1] "Proportion of black on nose"
+
+$labels$y
+[1] "Age (years)"
+
+$labels$title
+[1] "Lion Age vs. Nose Blackness"
+
+$labels$xend
+[1] "proportion_black[10]"
+
+$labels$yend
+[1] "predict(lion_model)[10]"
+
+
+attr(,"class")
+[1] "gg"     "ggplot"
+```
+
+
 :::
 :::
+
 :::
 :::::
 
@@ -553,6 +1880,7 @@ lions with more black on their noses tend to be older
 -   male lions develop more black pigmentation on their noses as they
     age.
 -   can be used to estimate the age of lions in the field.
+
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -582,6 +1910,7 @@ F-statistic: 49.75 on 1 and 30 DF,  p-value: 7.677e-08
 :::
 :::
 
+
 # **Lecture 9:** Linear Regression
 
 ::::: columns
@@ -591,14 +1920,36 @@ F-statistic: 49.75 on 1 and 30 DF,  p-value: 7.677e-08
 The calculation for slope (b) is:\
 $$b = \frac{\sum_i(X_i - \bar{X})(Y_i - \bar{Y})}{\sum_i(X_i - \bar{X})^2}$$
 
-Given: - $\bar{X} = 0.3222$ - $\bar{Y} = 4.3094$ -
-$\sum_i(X_i - \bar{X})^2 = 1.2221$ -
-$\sum_i(X_i - \bar{X})(Y_i - \bar{Y}) = 13.0123$
+-   Given:
+
+    -   \- $\bar{X} = 0.3222$
+
+    -   \- $\bar{Y} = 4.3094$
+
+    -   \- $\sum_i(X_i - \bar{X})^2 = 1.2221$
+
+    -   \- $\sum_i(X_i - \bar{X})(Y_i - \bar{Y}) = 13.0123$
 
 b = 13.0123 / 1.2221 = 10.647
 
 Intercept (a):
 $a = \bar{Y} - b\bar{X} = 4.3094 - 10.647(0.3222) = 0.879$
+:::
+
+::: {.column width="40%"}
+::: {.cell}
+::: {.cell-output-display}
+![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1b-1.png)
+:::
+:::
+:::
+:::::
+
+# **Lecture 9:** Linear Regression
+
+::::: columns
+::: {.column width="60%"}
+### Simple Linear Regression Model
 
 **Making predictions:**
 
@@ -618,11 +1969,13 @@ from the mean.
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
 ::: {.cell-output-display}
-![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1b-1.png)
+![](09_01_lecture_powerpoint_files/figure-pptx/overview-plot-1bb-1.png)
 :::
 :::
+
 :::
 :::::
 
@@ -634,24 +1987,8 @@ from the mean.
 -   Tilman et al. (2006) investigated using experimental plots varying
     plant species
 
+
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 6 × 2
-  species_number log_stability
-           <dbl>         <dbl>
-1              1         0.763
-2              1         1.45 
-3              1         1.51 
-4              1         0.747
-5              1         0.983
-6              1         1.12 
-```
-
-
-:::
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -681,15 +2018,6 @@ F-statistic: 27.83 on 1 and 159 DF,  p-value: 4.276e-07
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "rsquared is:  0.148953385305455"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
 Analysis of Variance Table
 
 Response: log_stability
@@ -704,6 +2032,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
+
 # **Lecture 9:** Linear Regression
 
 ::::: columns
@@ -713,9 +2042,7 @@ The hypothesis test asks whether the slope equals zero:
 -   H₀: β = 0 (species number does not affect stability)
 -   H₁: β ≠ 0 (species number does affect stability)
 
-### The test statistic is: $t = \frac{b - \beta_0}{SE_b}$
-
-With df = n - 2 = 161 - 2 = 159
+t = estimate/SE
 
 **Interpretation:**
 
@@ -767,7 +2094,7 @@ Assume that **error 𝞮 i**s $e_i = y_i - \hat{y}_i$
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-2092034232.png)
+![](images/clipboard-2092034232.png){width="387"}
 :::
 :::::
 
@@ -790,8 +2117,7 @@ Assume that **error 𝞮 i**s - estimated as the residuals:
 $e_i = y_i - \hat{y}_i$
 
 -   ordinary lease square estimates a and b or slope and intercept to
-    minimize the sum of the residuals squared or Mean Squared Error
-    (MSE) as
+    minimize the sum of the residuals squared as
 
 ### $\sum_{i=1}^{n} = (y_i - \hat{y}_i)^2$
 :::
@@ -800,8 +2126,6 @@ $e_i = y_i - \hat{y}_i$
 ![](images/clipboard-1411052425.png)
 :::
 :::::
-
-# 
 
 # **Lecture 9:** Linear Regression
 
@@ -817,6 +2141,8 @@ linear regression has four key assumptions:
 4.  **Normality**: Residuals are normally distributed
 
 Let's check these assumptions for the lion regression model:
+
+Linearity - how does this plot work
 :::
 
 ::: {.column width="40%"}
@@ -995,7 +2321,7 @@ Total variation in Y is “partitioned” into 3 components:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-77063277.png)
+![](images/clipboard-77063277.png){width="498"}
 :::
 :::::
 
@@ -1013,7 +2339,7 @@ Total variation in Y is “partitioned” into 3 components:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-217151541.png)
+![](images/clipboard-217151541.png){width="456"}
 :::
 :::::
 
@@ -1032,7 +2358,7 @@ $df_{regression}+df_{residual} = df_{total}$
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-2758972276.png)
+![](images/clipboard-2758972276.png){width="541"}
 :::
 :::::
 
@@ -1050,6 +2376,6 @@ Sums of Squares converted to Mean Squares
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-2758972276.png)
+![](images/clipboard-2758972276.png){width="505"}
 :::
 :::::

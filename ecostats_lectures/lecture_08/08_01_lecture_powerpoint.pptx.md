@@ -141,13 +141,13 @@ density
 
 We're interested in causality. How do we get there?
 
-### What type of experiment is this? 
+### What type of experiment is this?
 
 ### What are the potential problems with testing this hypothesis?
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-260157568.png){width="389" height="659"}
+![](images/clipboard-260157568.png){width="274" height="470"}
 :::
 :::::
 
@@ -166,7 +166,7 @@ We're interested in causality. How do we get there?
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-194557558.png){width="384" height="424"}
+![](images/clipboard-194557558.png){width="386" height="342"}
 :::
 :::::
 
@@ -185,53 +185,6 @@ We're interested in causality. How do we get there?
 ![](images/clipboard-3939861261.png){width="308" height="417"}
 :::
 :::::
-
-# Activity 2: Pine Needle Natural Experiment Design
-
-::: callout-note
-## Activity 2: Pine Needle Natural Experiment Design
-
-Suppose we want to investigate whether wind/sun exposure affects pine
-needle length across our campus. We decide to pick exposed sheltered
-locations. What sort of design would we conduct?
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Let's simulate some pine needle data from exposed and sheltered locations
-exposed_locations <- data.frame(
-  location = paste0("E", 1:5),
-  sun = "sunny",
-  length_mm = rnorm(5*10, mean = 75, sd = 10),
-  tree_id = rep(1:5, each = 10)
-)
-
-sheltered_locations <- data.frame(
-  location = paste0("S", 1:5),
-  sun = "shady",
-  length_mm = rnorm(5*10, mean = 90, sd = 12),
-  tree_id = rep(6:10, each = 10)
-)
-
-fake_pine_data <- rbind(exposed_locations, sheltered_locations)
-
-# View the data
-fake_pine_data %>% ggplot(aes(sun, length_mm, color = sun)) + geom_boxplot()
-```
-
-::: {.cell-output-display}
-![](08_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-1-1.png)
-:::
-:::
-
-
-In small groups, discuss:
-
-1.  What confounding variables might affect this natural experiment?
-2.  How would you design a study to reduce these confounding effects?
-3.  What data would you collect besides needle length?
-:::
 
 # Manipulative Experiments
 
@@ -252,7 +205,7 @@ Randomized, controlled trials: gold standard
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1608622199.png){width="300" height="250"}
+![](images/clipboard-1608622199.png){width="433" height="398"}
 
 [Cedar Creek Ecosystem Science Reserve](https://www.mnmas.org/about-us)
 :::
@@ -362,85 +315,8 @@ Possible solutions:
     levels, humidity, contamination) - block by chamber
 :::
 
-![](images/clipboard-3600266009.png){width="300" height="200"}
+![](images/clipboard-3600266009.png){width="431"}
 ::::
-
-# Randomization
-
-::::: columns
-::: {.column width="60%"}
-Randomization helps deconfound "lurking" variables:
-
--   Attempts to equalize effects of confounders
-
-**Random sampling from population:**
-
--   Experimental units should represent random sample from population of
-    interest
--   Ensures unbiased population estimates and inference
--   E.g., animals in experiment are random subset of all animals that
-    could have been used
-:::
-
-::: {.column width="40%"}
-![](images/clipboard-425378447.png){width="300" height="200"}
-:::
-:::::
-
-# Randomization in Practice
-
-::::: columns
-::: {.column width="60%"}
-**Allocation of experimental units to treatment/control:**
-
--   Experimental units must have equal chance of being allocated to
-    control or experimental group
--   Properly done by random number generation
-
-Randomization is essential at two levels:
-
--   Random selection from population
--   Random assignment to treatments
-:::
-
-::: {.column width="40%"}
-
-::: {.cell}
-
-```{.r .cell-code}
-# Example of randomization in R
-# Select 10 trees randomly from 100 possible trees
-all_trees <- 1:100
-selected_trees <- sample(all_trees, 10)
-
-# Randomly assign 5 trees to treatment and 5 to control
-treatment_trees <- sample(selected_trees, 5)
-control_trees <- selected_trees[!selected_trees %in% treatment_trees]
-
-# Display results
-data.frame(
-  Treatment = treatment_trees,
-  Control = control_trees
-)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-  Treatment Control
-1        32      24
-2        66      98
-3        92      25
-4        62      14
-5        61      34
-```
-
-
-:::
-:::
-
-:::
-:::::
 
 # Controls or reference?
 
@@ -463,7 +339,7 @@ Controls help address this question:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3685049769.png){width="300" height="200"}
+![](images/clipboard-3685049769.png){width="439" height="318"}
 :::
 :::::
 
@@ -509,8 +385,67 @@ of another
 -   Special methods to adjust for autocorrelation
 :::
 
-![](images/clipboard-1994036977.png){width="300" height="337"}
+![](images/clipboard-1994036977.png){width="316" height="416"}
 ::::
+
+# Randomization
+
+::::: columns
+::: {.column width="60%"}
+Randomization helps deconfound "lurking" variables:
+
+-   Attempts to equalize effects of confounders
+
+**Random sampling from population:**
+
+-   Experimental units should represent random sample from population of
+    interest
+-   Ensures unbiased population estimates and inference
+-   E.g., animals in experiment are random subset of all animals that
+    could have been used
+:::
+
+::: {.column width="40%"}
+![](images/clipboard-425378447.png){width="396" height="278"}
+:::
+:::::
+
+# Randomization in Practice
+
+::::: columns
+::: {.column width="60%"}
+**Allocation of experimental units to treatment/control:**
+
+-   Experimental units must have equal chance of being allocated to
+    control or experimental group
+-   Properly done by random number generation
+
+Randomization is essential at two levels:
+
+-   Random selection from population
+-   Random assignment to treatments
+:::
+
+::: {.column width="40%"}
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+  Treatment Control
+1        18      49
+2        74     100
+3        65      47
+4        24      71
+5        25      89
+```
+
+
+:::
+:::
+
+:::
+:::::
 
 # Sampling Design in Field Studies - Simple Random
 
@@ -526,7 +461,7 @@ of another
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1715765919.png){width="300" height="200"}
+![](images/clipboard-1715765919.png){width="345" height="247"}
 :::
 :::::
 
@@ -560,7 +495,7 @@ of another
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3497374488.png){width="300" height="200"}
+![](images/clipboard-3497374488.png){width="345" height="287"}
 :::
 :::::
 
@@ -577,7 +512,7 @@ of another
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1509791440.png){width="300" height="200"}
+![](images/clipboard-1509791440.png){width="355" height="266"}
 :::
 :::::
 
@@ -590,30 +525,8 @@ Let's consider sampling pine needles across campus:
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Let's create a campus map grid (simplified)
-campus_grid <- expand.grid(x = 1:10, y = 1:10)
-
-# Place "pine trees" clustered toward the north side (higher y values)
-set.seed(46)
-pine_locations <- data.frame(
-  x = sample(1:10, 30, replace = TRUE),
-  # Using rbeta to skew distribution toward higher y values
-  # Alpha=1, Beta=3 creates right-skewed distribution, then scale to 1-10 range
-  y = round(rbeta(30, 3, 1) * 9 + 1)
-)
-
-# Plot the campus and trees
-ggplot() +
-  geom_point(data = campus_grid, aes(x, y), color = "lightgrey", size = 0.5) +
-  geom_point(data = pine_locations, aes(x, y), color = "darkgreen", size = 3) +
-  theme_minimal() +
-  labs(title = "Pine Tree Locations on Campus Grid (North Clustered)")
-```
-
 ::: {.cell-output-display}
-![](08_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-3-1.png)
+![](08_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-2-1.png)
 :::
 :::
 
@@ -648,7 +561,7 @@ ggplot() +
     -   sigma - standard deviation
     -   α (significance level) - 0.05
 
-## $$\text{Power} \propto \frac{ES \alpha \sqrt{n}}{\sigma}$$
+### $$\text{Power} \propto \frac{ES \alpha \sqrt{n}}{\sigma}$$
 
 # A Priori Power Analysis
 
@@ -680,6 +593,7 @@ ggplot() +
     # A Priori Power Analysis Example
 
     How many samples do you need to find this difference
+
 
 ::: {.cell}
 
@@ -718,6 +632,7 @@ NOTE: n is number in *each* group
 :::
 :::
 
+
 # Post Hoc Power Analysis
 
 -   Imagine you did not reject null hypothesis - still worth publishing
@@ -734,6 +649,7 @@ NOTE: n is number in *each* group
     finding!
 
 # Post Hoc Power Analysis Example
+
 
 ::: {.cell}
 
@@ -771,6 +687,7 @@ NOTE: n is number in *each* group
 
 :::
 :::
+
 
 # Activity 6: Power Analysis for Pine Needle Experiment
 
@@ -842,34 +759,8 @@ sheltered pine trees:
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Visualize the power curve
-sample_sizes <- seq(5, 30, by = 1)
-power_values <- sapply(sample_sizes, function(n) {
-  power <- pwr.t.test(n = n,
-                     d = effect_size,
-                     sig.level = 0.05,
-                     type = "two.sample")$power
-  return(power)
-})
-
-power_df <- data.frame(
-  sample_size = sample_sizes,
-  power = power_values
-)
-
-ggplot(power_df, aes(x = sample_size, y = power)) +
-  geom_line(color = "blue", size = 1) +
-  geom_hline(yintercept = 0.8, linetype = "dashed", color = "red") +
-  theme_minimal() +
-  labs(title = "Power Analysis for Pine Needle Study",
-       x = "Sample Size (per group)",
-       y = "Statistical Power")
-```
-
 ::: {.cell-output-display}
-![](08_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-7-1.png)
+![](08_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-6-1.png)
 :::
 :::
 
@@ -895,7 +786,7 @@ Questions:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-3944907188.png){width="245" height="364"}
+![](images/clipboard-3944907188.png){width="308" height="546"}
 :::
 :::::
 
