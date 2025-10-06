@@ -4088,29 +4088,6 @@ F-statistic: 11.82 on 2 and 19 DF,  p-value: 0.000463</code></pre>
 <p>want to know shape of relationship while holding other predictors constant</p>
 </div><div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="co">#| echo: false</span></span>
-<span id="cb4-2"><a></a><span class="co">#| message: false</span></span>
-<span id="cb4-3"><a></a><span class="co">#| warning: false</span></span>
-<span id="cb4-4"><a></a><span class="co">#| paged-print: false</span></span>
-<span id="cb4-5"><a></a><span class="co"># Plot 1: Ant species vs Elevation</span></span>
-<span id="cb4-6"><a></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ant_df, <span class="fu">aes</span>(<span class="at">x =</span> elevation, <span class="at">y =</span> ant_spp)) <span class="sc">+</span></span>
-<span id="cb4-7"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;steelblue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb4-8"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb4-9"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Elevation (m)&quot;</span>, </span>
-<span id="cb4-10"><a></a>       <span class="at">y =</span> <span class="st">&quot;Ant Species Richness&quot;</span>) <span class="sc">+</span></span>
-<span id="cb4-11"><a></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb4-12"><a></a></span>
-<span id="cb4-13"><a></a><span class="co"># Plot 2: Ant species vs Latitude</span></span>
-<span id="cb4-14"><a></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(ant_df, <span class="fu">aes</span>(<span class="at">x =</span> latitude, <span class="at">y =</span> ant_spp)) <span class="sc">+</span></span>
-<span id="cb4-15"><a></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;steelblue&quot;</span>) <span class="sc">+</span></span>
-<span id="cb4-16"><a></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb4-17"><a></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Latitude (degrees)&quot;</span>, </span>
-<span id="cb4-18"><a></a>       <span class="at">y =</span> <span class="st">&quot;Ant Species Richness&quot;</span>) <span class="sc">+</span></span>
-<span id="cb4-19"><a></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb4-20"><a></a></span>
-<span id="cb4-21"><a></a><span class="co"># Display plots top bottom</span></span>
-<span id="cb4-22"><a></a></span>
-<span id="cb4-23"><a></a>p1 <span class="sc">/</span> p2 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure>

@@ -436,33 +436,6 @@ constant
 ::: {.column width="60%"}
 
 ::: {.cell}
-
-```{.r .cell-code}
-#| echo: false
-#| message: false
-#| warning: false
-#| paged-print: false
-# Plot 1: Ant species vs Elevation
-p1 <- ggplot(ant_df, aes(x = elevation, y = ant_spp)) +
-  geom_point(size = 3, color = "steelblue") +
-  geom_smooth(method = "lm", se = TRUE, color = "red") +
-  labs(x = "Elevation (m)", 
-       y = "Ant Species Richness") +
-  theme_minimal()
-
-# Plot 2: Ant species vs Latitude
-p2 <- ggplot(ant_df, aes(x = latitude, y = ant_spp)) +
-  geom_point(size = 3, color = "steelblue") +
-  geom_smooth(method = "lm", se = TRUE, color = "red") +
-  labs(x = "Latitude (degrees)", 
-       y = "Ant Species Richness") +
-  theme_minimal()
-
-# Display plots top bottom
-
-p1 / p2 
-```
-
 ::: {.cell-output-display}
 ![](10_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-5-1.png)
 :::

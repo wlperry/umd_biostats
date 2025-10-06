@@ -12,20 +12,16 @@ format:
     output-file: "10_02_class_activity.docx"
 ---
 
-
-
-
-
-
-
-
 # Analysis of Net Primary Production in Forests: A Modern Tidyverse Approach
 
 *Based on Michaletz et al. (2014) data*
 
 ## Introduction
 
-This analysis examines the relationships between Net Primary Production (npp) and various climate and forest characteristics across global forest sites. We'll explore multicollinearity, model selection, and variable transformations.
+This analysis examines the relationships between Net Primary Production
+(npp) and various climate and forest characteristics across global
+forest sites. We'll explore multicollinearity, model selection, and
+variable transformations.
 
 **Key Learning Objectives:**
 
@@ -36,27 +32,7 @@ This analysis examines the relationships between Net Primary Production (npp) an
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Load Required Packages
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -74,19 +50,7 @@ library(see)          # For better diagnostic plots
 :::
 
 
-
-
-
-
-
-
 ## Load and Explore the Data
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -94,7 +58,25 @@ library(see)          # For better diagnostic plots
 ```{.r .cell-code}
 # Load the forest npp data
 forest_df <- read_csv("data/michaletz_etal_2014_clean.csv")
+```
 
+::: {.cell-output .cell-output-stderr}
+
+```
+Rows: 1220 Columns: 8
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): leaf
+dbl (7): npp, age, biomass, season, temp, precip, teb
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+
+:::
+
+```{.r .cell-code}
 # Display top lines
 head(forest_df)
 ```
@@ -118,25 +100,14 @@ head(forest_df)
 :::
 
 
-
-
-
-
-
-
 ## Data Preparation
 
-Following the original analysis, we'll focus on the key variables from a cleaned dataframe
+Following the original analysis, we'll focus on the key variables from a
+cleaned dataframe
 
 ## 1. Initial Exploration: Variable Relationships and Multicollinearity
 
 ### Correlation Matrix and Visualization
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -178,6 +149,8 @@ teb      1.00000000
 :::
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -187,24 +160,12 @@ corrplot(cor_matrix, method = "color", type = "upper",
 ```
 
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-html/visual_corr-1.png){width=960}
+![](10_02_class_activity_files/figure-html/visual_corr-1.png){width=336}
 :::
 :::
-
-
-
-
-
-
 
 
 ### Pairs Plot for Visual Inspection
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -227,21 +188,9 @@ forest_df %>%
 :::
 
 
-
-
-
-
-
-
 ## 2. Initial Multiple Regression Model
 
 Let's start with a full model including all predictors:
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -290,19 +239,7 @@ F-statistic: 309.8 on 7 and 1212 DF,  p-value: < 2.2e-16
 :::
 
 
-
-
-
-
-
-
 ### Check for Multicollinearity
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -323,6 +260,8 @@ vif_values
 
 :::
 :::
+
+
 
 ::: {.cell}
 
@@ -352,26 +291,15 @@ ggplot(vif_df, aes(x = reorder(Variable, VIF), y = VIF)) +
 ```
 
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-html/unnamed-chunk-1-1.png){width=960}
+![](10_02_class_activity_files/figure-html/unnamed-chunk-1-1.png){width=336}
 :::
 :::
-
-
-
-
-
-
 
 
 ### Address Multicollinearity by Removing Growing Season
 
-Based on the original analysis, season and Temperature are highly correlated. Let's remove season:
-
-
-
-
-
-
+Based on the original analysis, season and Temperature are highly
+correlated. Let's remove season:
 
 
 ::: {.cell}
@@ -418,6 +346,8 @@ F-statistic: 353.1 on 6 and 1213 DF,  p-value: < 2.2e-16
 :::
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -438,21 +368,9 @@ vif_values2
 :::
 
 
-
-
-
-
-
-
 ## 3. Exploring Variable Transformations
 
 ### Check the Shape of Relationships with Partial Regression Plots
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -467,7 +385,7 @@ avPlots(model_2, main = "Partial Regression Plots")
 ```
 
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-html/partial-plots-1.png){width=960}
+![](10_02_class_activity_files/figure-html/partial-plots-1.png){width=336}
 :::
 
 ```{.r .cell-code}
@@ -476,21 +394,11 @@ par(mfrow = c(1, 1))
 :::
 
 
-
-
-
-
-
-
 ### Apply Log Transformation to age
 
-The original analysis found that age showed a curvy relationship. Let's try log transformation: REally what you should do is log transform of the response variable first..
-
-
-
-
-
-
+The original analysis found that age showed a curvy relationship. Let's
+try log transformation: REally what you should do is log transform of
+the response variable first..
 
 
 ::: {.cell}
@@ -542,6 +450,8 @@ F-statistic: 384.4 on 6 and 1213 DF,  p-value: < 2.2e-16
 :::
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -551,7 +461,7 @@ avPlots(model_3, main = "Partial Regression Plots (Log age)")
 ```
 
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-html/unnamed-chunk-3-1.png){width=960}
+![](10_02_class_activity_files/figure-html/unnamed-chunk-3-1.png){width=336}
 :::
 
 ```{.r .cell-code}
@@ -560,31 +470,31 @@ par(mfrow = c(1, 1))
 :::
 
 
-
-
-
-
-
-
 ## 4. Model Diagnostics and Assumption Checking
-
-
-
-
-
-
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create diagnostic plots
-par(mfrow = c(2, 2))
+par(mfrow = c(1, 1))
 plot(model_3, main = "Model Diagnostics")
 ```
 
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-html/diagnostics-1.png){width=960}
+![](10_02_class_activity_files/figure-html/diagnostics-1.png){width=336}
+:::
+
+::: {.cell-output-display}
+![](10_02_class_activity_files/figure-html/diagnostics-2.png){width=336}
+:::
+
+::: {.cell-output-display}
+![](10_02_class_activity_files/figure-html/diagnostics-3.png){width=336}
+:::
+
+::: {.cell-output-display}
+![](10_02_class_activity_files/figure-html/diagnostics-4.png){width=336}
 :::
 
 ```{.r .cell-code}
@@ -593,19 +503,7 @@ par(mfrow = c(1, 1))
 :::
 
 
-
-
-
-
-
-
 ## Residuals - its the upper left above
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -631,27 +529,25 @@ ggplot(residuals_data, aes(x = Fitted, y = Residuals)) +
   theme_minimal()
 ```
 
+::: {.cell-output .cell-output-stderr}
+
+```
+`geom_smooth()` using formula = 'y ~ x'
+```
+
+
+:::
+
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-html/unnamed-chunk-4-1.png){width=960}
+![](10_02_class_activity_files/figure-html/unnamed-chunk-4-1.png){width=336}
 :::
 :::
-
-
-
-
-
-
 
 
 ### Try Response Variable Transformation
 
-Following the original analysis, let's try a cube root transformation of npp:
-
-
-
-
-
-
+Following the original analysis, let's try a cube root transformation of
+npp:
 
 
 ::: {.cell}
@@ -700,16 +596,30 @@ F-statistic: 428.2 on 6 and 1213 DF,  p-value: < 2.2e-16
 :::
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Check diagnostics
-par(mfrow = c(2, 2))
+par(mfrow = c(1, 1))
 plot(model_4, main = "Model Diagnostics (Cube Root npp)")
 ```
 
 ::: {.cell-output-display}
-![](10_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=960}
+![](10_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=336}
+:::
+
+::: {.cell-output-display}
+![](10_02_class_activity_files/figure-html/unnamed-chunk-5-2.png){width=336}
+:::
+
+::: {.cell-output-display}
+![](10_02_class_activity_files/figure-html/unnamed-chunk-5-3.png){width=336}
+:::
+
+::: {.cell-output-display}
+![](10_02_class_activity_files/figure-html/unnamed-chunk-5-4.png){width=336}
 :::
 
 ```{.r .cell-code}
@@ -718,21 +628,9 @@ par(mfrow = c(1, 1))
 :::
 
 
-
-
-
-
-
-
 ## 5. Model Simplification and Comparison
 
 ### Remove Non-significant Variables
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -777,6 +675,8 @@ F-statistic: 513.9 on 5 and 1214 DF,  p-value: < 2.2e-16
 :::
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -804,19 +704,7 @@ model_comparison
 :::
 
 
-
-
-
-
-
-
 ### Model Performance and Interpretation
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -859,19 +747,7 @@ F-statistic: 513.9 on 5 and 1214 DF,  p-value: < 2.2e-16
 :::
 
 
-
-
-
-
-
-
 ## using the sensemaker package
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -893,6 +769,8 @@ partial_r2_sensemakr
 
 :::
 :::
+
+
 
 ::: {.cell}
 
@@ -986,21 +864,10 @@ print(results_table)
 :::
 
 
-
-
-
-
-
-
 ## 6. Alternative Approach: Standardized Variables
 
-Following the original analysis, let's also try the standardized approach:
-
-
-
-
-
-
+Following the original analysis, let's also try the standardized
+approach:
 
 
 ::: {.cell}
@@ -1060,12 +927,6 @@ F-statistic: 341.5 on 6 and 1213 DF,  p-value: < 2.2e-16
 :::
 
 
-
-
-
-
-
-
 ## 7. Key Findings and Conclusions
 
 1.  MULTICOLLINEARITY:
@@ -1080,7 +941,8 @@ F-statistic: 341.5 on 6 and 1213 DF,  p-value: < 2.2e-16
 
 3.  FINAL MODEL RESULTS:
 
-    -   Significant predictors: age (negative), biomass (positive), temp (positive)
+    -   Significant predictors: age (negative), biomass (positive), temp
+        (positive)
     -   teb had negative effect, Leaf type differences were significant
 
 4.  BIOLOGICAL INTERPRETATION:
@@ -1094,21 +956,20 @@ F-statistic: 341.5 on 6 and 1213 DF,  p-value: < 2.2e-16
 
 This analysis is based on:
 
--   **Michaletz, S.T., Cheng, D., Kerkhoff, A.J. & Enquist, B.J.** (2014). Convergence of terrestrial plant production across global climate gradients. *Nature*, 512, 39-43.
+-   **Michaletz, S.T., Cheng, D., Kerkhoff, A.J. & Enquist, B.J.**
+    (2014). Convergence of terrestrial plant production across global
+    climate gradients. *Nature*, 512, 39-43.
 
 **Key Learning Points:**
 
-1.  **Multicollinearity Detection**: Use VIF values and correlation matrices
-2.  **Variable Transformations**: Log and power transformations can improve model fit
-3.  **Model Diagnostics**: Always check residual plots and assumption violations
+1.  **Multicollinearity Detection**: Use VIF values and correlation
+    matrices
+2.  **Variable Transformations**: Log and power transformations can
+    improve model fit
+3.  **Model Diagnostics**: Always check residual plots and assumption
+    violations
 4.  **Model Comparison**: Use AIC and other criteria for model selection
 5.  **Interpretation**: Focus on biologically meaningful relationships
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1123,7 +984,7 @@ sessionInfo()
 ```
 R version 4.5.1 (2025-06-13)
 Platform: aarch64-apple-darwin20
-Running under: macOS Sequoia 15.6
+Running under: macOS Tahoe 26.0.1
 
 Matrix products: default
 BLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib 
@@ -1139,29 +1000,30 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] sensemakr_0.1.6    see_0.11.0         performance_0.15.0 broom_1.0.9       
- [5] GGally_2.3.0       corrplot_0.95      car_3.1-3          carData_3.0-5     
- [9] lubridate_1.9.4    forcats_1.0.0      stringr_1.5.1      dplyr_1.1.4       
+ [1] sensemakr_0.1.6    see_0.12.0         performance_0.15.1 broom_1.0.10      
+ [5] GGally_2.4.0       corrplot_0.95      car_3.1-3          carData_3.0-5     
+ [9] lubridate_1.9.4    forcats_1.0.1      stringr_1.5.2      dplyr_1.1.4       
 [13] purrr_1.1.0        readr_2.1.5        tidyr_1.3.1        tibble_3.3.0      
-[17] ggplot2_3.5.2      tidyverse_2.0.0   
+[17] ggplot2_4.0.0      tidyverse_2.0.0   
 
 loaded via a namespace (and not attached):
- [1] gtable_0.3.6       xfun_0.52          htmlwidgets_1.6.4  insight_1.3.1     
+ [1] gtable_0.3.6       xfun_0.53          htmlwidgets_1.6.4  insight_1.4.2     
  [5] lattice_0.22-7     tzdb_0.5.0         vctrs_0.6.5        tools_4.5.1       
- [9] generics_0.1.4     parallel_4.5.1     pkgconfig_2.0.3    Matrix_1.7-3      
+ [9] generics_0.1.4     parallel_4.5.1     pkgconfig_2.0.3    Matrix_1.7-4      
 [13] RColorBrewer_1.1-3 S7_0.2.0           lifecycle_1.0.4    compiler_4.5.1    
 [17] farver_2.1.2       codetools_0.2-20   htmltools_0.5.8.1  yaml_2.3.10       
-[21] Formula_1.2-5      pillar_1.11.0      crayon_1.5.3       abind_1.4-8       
-[25] nlme_3.1-168       ggstats_0.10.0     tidyselect_1.2.1   digest_0.6.37     
+[21] Formula_1.2-5      pillar_1.11.1      crayon_1.5.3       abind_1.4-8       
+[25] nlme_3.1-168       ggstats_0.11.0     tidyselect_1.2.1   digest_0.6.37     
 [29] stringi_1.8.7      labeling_0.4.3     splines_4.5.1      fastmap_1.2.0     
-[33] grid_4.5.1         cli_3.6.5          magrittr_2.0.3     utf8_1.2.6        
+[33] grid_4.5.1         cli_3.6.5          magrittr_2.0.4     utf8_1.2.6        
 [37] withr_3.0.2        scales_1.4.0       backports_1.5.0    bit64_4.6.0-1     
-[41] timechange_0.3.0   rmarkdown_2.29     bit_4.6.0          hms_1.1.3         
-[45] evaluate_1.0.4     knitr_1.50         mgcv_1.9-3         rlang_1.1.6       
-[49] glue_1.8.0         rstudioapi_0.17.1  vroom_1.6.5        jsonlite_2.0.0    
+[41] timechange_0.3.0   rmarkdown_2.30     bit_4.6.0          hms_1.1.3         
+[45] evaluate_1.0.5     knitr_1.50         mgcv_1.9-3         rlang_1.1.6       
+[49] glue_1.8.0         rstudioapi_0.17.1  vroom_1.6.6        jsonlite_2.0.0    
 [53] R6_2.6.1          
 ```
 
 
 :::
 :::
+
