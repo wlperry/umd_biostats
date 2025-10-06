@@ -499,7 +499,12 @@ $$y_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \epsilon_i \quad \text{vs.} \q
 This leads to “Curvature” of the regression (hyper)plane
 
 # **Lecture 10:** Analyses
+::::: columns
+::: {.column width="30%"}
+Interaction terms lead to “Curvature” of the regression (hyper)plane
+:::
 
+::: {.column width="70%"}
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -507,6 +512,8 @@ This leads to “Curvature” of the regression (hyper)plane
 :::
 :::
 
+:::
+:::::
 
 # **Lecture 10:** Analyses
 
