@@ -6,18 +6,9 @@ metadata-files:
 format:
   html:
     output-file: "18_02_class_activity_nmds_permanova.html"
-  typst:
-    output-file: "18_02_class_activity_nmds_permanova.pdf"  
   docx:
     output-file: "18_02_class_activity_nmds_permanova.docx"
 ---
-
-
-
-
-
-
-
 
 
 
@@ -25,11 +16,18 @@ format:
 
 ## What is NMDS?
 
-NMDS (Non-metric Multidimensional Scaling) is an ordination technique that: - Visualizes dissimilarity between objects in reduced dimensions - Preserves rank order of distances, not exact distances - Works well with non-linear ecological relationships - Makes few assumptions about data structure
+NMDS (Non-metric Multidimensional Scaling) is an ordination technique
+that: - Visualizes dissimilarity between objects in reduced dimensions -
+Preserves rank order of distances, not exact distances - Works well with
+non-linear ecological relationships - Makes few assumptions about data
+structure
 
 ## When to Use NMDS
 
-Use NMDS when you have: - **Community data**: Species abundance or presence/absence matrices - **Non-linear relationships**: When PCA assumptions are violated - **Complex ecological gradients**: Multiple environmental factors affecting communities
+Use NMDS when you have: - **Community data**: Species abundance or
+presence/absence matrices - **Non-linear relationships**: When PCA
+assumptions are violated - **Complex ecological gradients**: Multiple
+environmental factors affecting communities
 
 ## Key Concepts of NMDS
 
@@ -42,21 +40,17 @@ Use NMDS when you have: - **Community data**: Species abundance or presence/abse
 ::: {.callout-important appearance="simple"}
 ## Critical First Step
 
-Always check your stress value! Stress \< 0.1 is excellent, 0.1-0.2 is good, \> 0.2 is poor representation.
+Always check your stress value! Stress \< 0.1 is excellent, 0.1-0.2 is
+good, \> 0.2 is poor representation.
 :::
 
 # Part 1: Data Preparation and Exploration
 
 ## Load and Prepare Data
 
-We'll use the iris dataset for this analysis, treating it as if the measurements represent abundances of different "species" at different "sites".
-
-
-
-
-
-
-
+We'll use the iris dataset for this analysis, treating it as if the
+measurements represent abundances of different "species" at different
+"sites".
 
 ::: {.cell}
 
@@ -134,21 +128,7 @@ tibble [150 × 4] (S3: tbl_df/tbl/data.frame)
 :::
 :::
 
-
-
-
-
-
-
-
 ## Visualize the Data
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -164,23 +144,9 @@ iris_pairs_plot <- iris_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 2: Running NMDS
 
 ## Step 1: Calculate Distance Matrix
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -203,21 +169,7 @@ iris_dist[1:5]
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 2: Run NMDS
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -297,23 +249,12 @@ Species: expanded scores based on 'iris_numeric_df'
 :::
 :::
 
-
-
-
-
-
-
-
-**Interpretation**: - Stress value: 0.025 - This is excellent representation
+**Interpretation**: - Stress value:
+0.025 - This is
+excellent
+representation
 
 ## Step 3: Extract NMDS Scores
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -343,21 +284,7 @@ head(nmds_scores_df)
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 4: Create NMDS Plot
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -380,21 +307,7 @@ nmds_basic_plot
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 5: Add Confidence Ellipses
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -430,21 +343,7 @@ nmds_ellipse_plot
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 6: Stress Plot (Shepard Diagram)
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -458,27 +357,15 @@ stressplot(iris_nmds_model, main = "Shepard Diagram: Ordination vs Original Dist
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 3: PERMANOVA Analysis
 
 ## What is PERMANOVA?
 
-PERMANOVA (Permutational Multivariate Analysis of Variance) tests whether groups have different multivariate centroids using permutation tests.
+PERMANOVA (Permutational Multivariate Analysis of Variance) tests
+whether groups have different multivariate centroids using permutation
+tests.
 
 ## Step 1: Run PERMANOVA
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -514,25 +401,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-**Interpretation**: - F-statistic: 487.33 - R² (variance explained): 0.869 - p-value: 0.001
+**Interpretation**: - F-statistic:
+487.33 - R² (variance explained):
+0.869 - p-value:
+0.001
 
 ## Step 2: Check Homogeneity of Dispersions
 
-Before interpreting PERMANOVA, we need to check if groups have similar multivariate spread.
-
-
-
-
-
-
-
+Before interpreting PERMANOVA, we need to check if groups have similar
+multivariate spread.
 
 ::: {.cell}
 
@@ -563,21 +440,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 3: Visualize Dispersions
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -591,21 +454,7 @@ plot(dispersion_model, main = "Multivariate Dispersion by Species")
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 4: Pairwise PERMANOVA
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -674,27 +523,14 @@ pairwise_results_df
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 4: ANOSIM Analysis
 
 ## What is ANOSIM?
 
-ANOSIM (Analysis of Similarities) tests whether there is a significant difference between groups using rank dissimilarities.
+ANOSIM (Analysis of Similarities) tests whether there is a significant
+difference between groups using rank dissimilarities.
 
 ## Step 1: Run ANOSIM
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -726,23 +562,12 @@ Number of permutations: 999
 :::
 :::
 
-
-
-
-
-
-
-
-**Interpretation**: - R statistic: 0.879 - p-value: 0.001 - R close to 1 indicates strong separation between groups
+**Interpretation**: - R statistic:
+0.879 - p-value:
+0.001 - R close to 1 indicates strong separation
+between groups
 
 ## Step 2: Plot ANOSIM Results
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -756,23 +581,9 @@ plot(iris_anosim_model, main = "ANOSIM Results: Distribution of Permuted R Stati
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 5: Environmental Fitting (Optional)
 
 If we had environmental variables, we could fit them to the ordination.
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -803,21 +614,7 @@ Number of permutations: 999
 :::
 :::
 
-
-
-
-
-
-
-
 ## Visualize Environmental Vectors
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -852,13 +649,6 @@ nmds_env_plot
 :::
 :::
 
-
-
-
-
-
-
-
 # Summary Checklist for NMDS and PERMANOVA
 
 ::: {.callout-tip appearance="simple"}
@@ -882,7 +672,8 @@ nmds_env_plot
 -   **NMDS preserves rank order** of distances, not exact values
 -   **Stress \< 0.2** is acceptable, \< 0.1 is excellent
 -   **PERMANOVA tests centroids**, ANOSIM tests overlap
--   **Check dispersion homogeneity** - violated assumption affects interpretation
+-   **Check dispersion homogeneity** - violated assumption affects
+    interpretation
 -   **Multiple comparisons** require p-value adjustment
 -   **Axes have no inherent meaning** in NMDS (unlike PCA)
 -   **Use appropriate distance measures** for your data type
@@ -890,13 +681,17 @@ nmds_env_plot
 ::: {.callout-important appearance="simple"}
 ## Key Takeaways from NMDS/PERMANOVA Analysis
 
-1.  **NMDS is flexible** - works with any distance measure and makes few assumptions
-2.  **Stress indicates fit quality** - always report and check this value
+1.  **NMDS is flexible** - works with any distance measure and makes few
+    assumptions
+2.  **Stress indicates fit quality** - always report and check this
+    value
 3.  **PERMANOVA is powerful** but assumes homogeneous dispersions
-4.  **ANOSIM is complementary** - provides different perspective on group separation
+4.  **ANOSIM is complementary** - provides different perspective on
+    group separation
 5.  **Visualization is crucial** - always plot your ordination results
 6.  **Environmental fitting** helps interpret ecological patterns
 7.  **Permutation tests** avoid distributional assumptions
 
-Remember: NMDS is iterative and may find different solutions - always set a seed for reproducibility!
+Remember: NMDS is iterative and may find different solutions - always
+set a seed for reproducibility!
 :::

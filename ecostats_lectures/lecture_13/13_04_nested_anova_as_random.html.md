@@ -12,25 +12,31 @@ format:
 
 
 
-
-
-
 # Introduction
 
-This analysis examines the effects of varying sea urchin densities on the percentage cover of filamentous algae. The experiment was designed with four urchin density treatments (control, 66% of original density, 33% of original density, and all urchins removed) nested within four random patches. Five replicate quadrats were measured within each treatment-patch combination.
+This analysis examines the effects of varying sea urchin densities on
+the percentage cover of filamentous algae. The experiment was designed
+with four urchin density treatments (control, 66% of original density,
+33% of original density, and all urchins removed) nested within four
+random patches. Five replicate quadrats were measured within each
+treatment-patch combination.
 
-The traditional nested ANOVA approach can be implemented using a linear mixed-effects model, which provides a more flexible framework for analyzing hierarchical designs. In this case, we'll use the `lme4` package to fit a model where treatment is a fixed effect and patch is a random effect nested within treatment.
+The traditional nested ANOVA approach can be implemented using a linear
+mixed-effects model, which provides a more flexible framework for
+analyzing hierarchical designs. In this case, we'll use the `lme4`
+package to fit a model where treatment is a fixed effect and patch is a
+random effect nested within treatment.
 
 # Data Overview
 
-The dataframe contains 80 observations with the following variables:
+The dataframe contains 80 observations with the
+following variables:
 
--   treat: Urchin density treatment (Control, 66% Density, 33% Density, Removed)
+-   treat: Urchin density treatment (Control, 66% Density, 33% Density,
+    Removed)
 -   patch: Random patches (1-16) where treatments were applied
 -   QUAD: Replicate quadrats within each treatment-patch combination
 -   algae: Percentage cover of filamentous algae (response variable)
-
-
 
 
 ::: {.cell}
@@ -91,11 +97,11 @@ summary_stats
 :::
 
 
-
-
 # Mixed Model Analysis
 
-In this experimental design, patch is nested within treat because each patch received only one treatment level. This hierarchical design is well-suited for analysis using linear mixed-effects models.
+In this experimental design, patch is nested within treat because each
+patch received only one treatment level. This hierarchical design is
+well-suited for analysis using linear mixed-effects models.
 
 ## Model Specification
 
@@ -103,11 +109,12 @@ We'll use the following model specification:
 
 $algae_{ijk} = \mu + \alpha_i + \beta_{j(i)} + \epsilon_{ijk}$
 
-Where: - $\mu$ is the overall mean - $\alpha_i$ is the fixed effect of treatment $i$ - $\beta_{j(i)}$ is the random effect of patch $j$ nested within treatment $i$ - $\epsilon_{ijk}$ is the residual error for quadrat $k$ in patch $j$ within treatment $i$
+Where: - $\mu$ is the overall mean - $\alpha_i$ is the fixed effect of
+treatment $i$ - $\beta_{j(i)}$ is the random effect of patch $j$ nested
+within treatment $i$ - $\epsilon_{ijk}$ is the residual error for
+quadrat $k$ in patch $j$ within treatment $i$
 
 In `lme4`, this model is specified as
-
-
 
 
 ::: {.cell}
@@ -161,13 +168,9 @@ treatremovl -0.707  0.500  0.500
 :::
 
 
-
-
 ## ANOVA Table
 
 The ANOVA table for the mixed model:
-
-
 
 
 ::: {.cell}
@@ -290,13 +293,9 @@ trad_anova_table
 :::
 
 
-
-
 ## Variance Components
 
 We can extract the variance components from the mixed model:
-
-
 
 
 ::: {.cell}
@@ -363,7 +362,7 @@ var_comp_table %>%
 ::: {.cell-output-display}
 
 ```{=html}
-<div class="tabwid"><style>.cl-bcca16d2{}.cl-bcc6ead4{font-family:'Helvetica';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-bcc6eade{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-bcc83240{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bcc83f06{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcc83f07{width:1.687in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcc83f10{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcc83f11{width:1.687in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcc83f12{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcc83f7e{width:1.687in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcc83f7f{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcc83f80{width:1.687in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-bcca16d2'><thead><tr style="overflow-wrap:break-word;"><th  colspan="2"class="cl-bcc83f06"><p class="cl-bcc83240"><span class="cl-bcc6ead4">Variance components</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-bcc83f06"><p class="cl-bcc83240"><span class="cl-bcc6ead4">Source of variation</span></p></th><th class="cl-bcc83f07"><p class="cl-bcc83240"><span class="cl-bcc6ead4">Variance component</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-bcc83f10"><p class="cl-bcc83240"><span class="cl-bcc6eade">treatment</span></p></td><td class="cl-bcc83f11"><p class="cl-bcc83240"><span class="cl-bcc6eade">152</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bcc83f12"><p class="cl-bcc83240"><span class="cl-bcc6eade">patches (treatment)</span></p></td><td class="cl-bcc83f7e"><p class="cl-bcc83240"><span class="cl-bcc6eade">294</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bcc83f7f"><p class="cl-bcc83240"><span class="cl-bcc6eade">Residual</span></p></td><td class="cl-bcc83f80"><p class="cl-bcc83240"><span class="cl-bcc6eade">299</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-a95df12a{}.cl-a95a453e{font-family:'Helvetica';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a95a4548{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a95bb770{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-a95bc508{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a95bc509{width:1.687in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a95bc512{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a95bc513{width:1.687in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a95bc51c{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a95bc51d{width:1.687in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a95bc51e{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a95bc526{width:1.687in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-a95df12a'><thead><tr style="overflow-wrap:break-word;"><th  colspan="2"class="cl-a95bc508"><p class="cl-a95bb770"><span class="cl-a95a453e">Variance components</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-a95bc508"><p class="cl-a95bb770"><span class="cl-a95a453e">Source of variation</span></p></th><th class="cl-a95bc509"><p class="cl-a95bb770"><span class="cl-a95a453e">Variance component</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-a95bc512"><p class="cl-a95bb770"><span class="cl-a95a4548">treatment</span></p></td><td class="cl-a95bc513"><p class="cl-a95bb770"><span class="cl-a95a4548">152</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a95bc51c"><p class="cl-a95bb770"><span class="cl-a95a4548">patches (treatment)</span></p></td><td class="cl-a95bc51d"><p class="cl-a95bb770"><span class="cl-a95a4548">294</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a95bc51e"><p class="cl-a95bb770"><span class="cl-a95a4548">Residual</span></p></td><td class="cl-a95bc526"><p class="cl-a95bb770"><span class="cl-a95a4548">299</span></p></td></tr></tbody></table></div>
 ```
 
 :::
@@ -401,28 +400,38 @@ complete_table %>%
 ::: {.cell-output-display}
 
 ```{=html}
-<div class="tabwid"><style>.cl-bcd9cbae{}.cl-bcd69e3e{font-family:'Helvetica';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-bcd69e48{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-bcd7e91a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bcd7e924{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bcd7f568{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f572{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f573{width:0.88in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f57c{width:0.583in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f57d{width:1.177in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f57e{width:1.024in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f586{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f587{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f588{width:0.88in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f590{width:0.583in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f59a{width:1.177in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f59b{width:1.024in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f59c{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f5a4{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f5a5{width:0.88in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f5a6{width:0.583in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f5a7{width:1.177in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f5ae{width:1.024in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f5af{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f5b0{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f5b8{width:0.88in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f5b9{width:0.583in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f5ba{width:1.177in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bcd7f5c2{width:1.024in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-bcd9cbae'><thead><tr style="overflow-wrap:break-word;"><th  colspan="6"class="cl-bcd7f568"><p class="cl-bcd7e91a"><span class="cl-bcd69e3e">Complete ANOVA table with variance components</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-bcd7f568"><p class="cl-bcd7e91a"><span class="cl-bcd69e3e">Source of variation</span></p></th><th class="cl-bcd7f572"><p class="cl-bcd7e924"><span class="cl-bcd69e3e">df</span></p></th><th class="cl-bcd7f573"><p class="cl-bcd7e924"><span class="cl-bcd69e3e">MS</span></p></th><th class="cl-bcd7f57c"><p class="cl-bcd7e924"><span class="cl-bcd69e3e">F</span></p></th><th class="cl-bcd7f57d"><p class="cl-bcd7e91a"><span class="cl-bcd69e3e">p</span></p></th><th class="cl-bcd7f57e"><p class="cl-bcd7e91a"><span class="cl-bcd69e3e">Var. comp.</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-bcd7f586"><p class="cl-bcd7e91a"><span class="cl-bcd69e48">treatment</span></p></td><td class="cl-bcd7f587"><p class="cl-bcd7e924"><span class="cl-bcd69e48">3</span></p></td><td class="cl-bcd7f588"><p class="cl-bcd7e924"><span class="cl-bcd69e48">4,809.71</span></p></td><td class="cl-bcd7f590"><p class="cl-bcd7e924"><span class="cl-bcd69e48">2.72</span></p></td><td class="cl-bcd7f59a"><p class="cl-bcd7e91a"><span class="cl-bcd69e48">0.091262004</span></p></td><td class="cl-bcd7f59b"><p class="cl-bcd7e91a"><span class="cl-bcd69e48">152</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bcd7f59c"><p class="cl-bcd7e91a"><span class="cl-bcd69e48">patches (treatment)</span></p></td><td class="cl-bcd7f5a4"><p class="cl-bcd7e924"><span class="cl-bcd69e48">12</span></p></td><td class="cl-bcd7f5a5"><p class="cl-bcd7e924"><span class="cl-bcd69e48">1,770.16</span></p></td><td class="cl-bcd7f5a6"><p class="cl-bcd7e924"><span class="cl-bcd69e48">5.93</span></p></td><td class="cl-bcd7f5a7"><p class="cl-bcd7e91a"><span class="cl-bcd69e48">&lt;0.001</span></p></td><td class="cl-bcd7f5ae"><p class="cl-bcd7e91a"><span class="cl-bcd69e48">294</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bcd7f5af"><p class="cl-bcd7e91a"><span class="cl-bcd69e48">Residual</span></p></td><td class="cl-bcd7f5b0"><p class="cl-bcd7e924"><span class="cl-bcd69e48">64</span></p></td><td class="cl-bcd7f5b8"><p class="cl-bcd7e924"><span class="cl-bcd69e48">298.60</span></p></td><td class="cl-bcd7f5b9"><p class="cl-bcd7e924"><span class="cl-bcd69e48"></span></p></td><td class="cl-bcd7f5ba"><p class="cl-bcd7e91a"><span class="cl-bcd69e48"></span></p></td><td class="cl-bcd7f5c2"><p class="cl-bcd7e91a"><span class="cl-bcd69e48">299</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-a96df84a{}.cl-a96ac026{font-family:'Helvetica';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a96ac030{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a96bf626{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-a96bf627{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-a96c0292{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c029c{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c029d{width:0.88in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c029e{width:0.583in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02a6{width:1.177in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02a7{width:1.024in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02a8{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02a9{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02b0{width:0.88in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02b1{width:0.583in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02b2{width:1.177in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02ba{width:1.024in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02bb{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02bc{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02c4{width:0.88in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02c5{width:0.583in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02ce{width:1.177in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02cf{width:1.024in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02d0{width:1.61in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02d8{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02e2{width:0.88in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02e3{width:0.583in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02e4{width:1.177in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a96c02e5{width:1.024in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-a96df84a'><thead><tr style="overflow-wrap:break-word;"><th  colspan="6"class="cl-a96c0292"><p class="cl-a96bf626"><span class="cl-a96ac026">Complete ANOVA table with variance components</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-a96c0292"><p class="cl-a96bf626"><span class="cl-a96ac026">Source of variation</span></p></th><th class="cl-a96c029c"><p class="cl-a96bf627"><span class="cl-a96ac026">df</span></p></th><th class="cl-a96c029d"><p class="cl-a96bf627"><span class="cl-a96ac026">MS</span></p></th><th class="cl-a96c029e"><p class="cl-a96bf627"><span class="cl-a96ac026">F</span></p></th><th class="cl-a96c02a6"><p class="cl-a96bf626"><span class="cl-a96ac026">p</span></p></th><th class="cl-a96c02a7"><p class="cl-a96bf626"><span class="cl-a96ac026">Var. comp.</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-a96c02a8"><p class="cl-a96bf626"><span class="cl-a96ac030">treatment</span></p></td><td class="cl-a96c02a9"><p class="cl-a96bf627"><span class="cl-a96ac030">3</span></p></td><td class="cl-a96c02b0"><p class="cl-a96bf627"><span class="cl-a96ac030">4,809.71</span></p></td><td class="cl-a96c02b1"><p class="cl-a96bf627"><span class="cl-a96ac030">2.72</span></p></td><td class="cl-a96c02b2"><p class="cl-a96bf626"><span class="cl-a96ac030">0.091262004</span></p></td><td class="cl-a96c02ba"><p class="cl-a96bf626"><span class="cl-a96ac030">152</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a96c02bb"><p class="cl-a96bf626"><span class="cl-a96ac030">patches (treatment)</span></p></td><td class="cl-a96c02bc"><p class="cl-a96bf627"><span class="cl-a96ac030">12</span></p></td><td class="cl-a96c02c4"><p class="cl-a96bf627"><span class="cl-a96ac030">1,770.16</span></p></td><td class="cl-a96c02c5"><p class="cl-a96bf627"><span class="cl-a96ac030">5.93</span></p></td><td class="cl-a96c02ce"><p class="cl-a96bf626"><span class="cl-a96ac030">&lt;0.001</span></p></td><td class="cl-a96c02cf"><p class="cl-a96bf626"><span class="cl-a96ac030">294</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a96c02d0"><p class="cl-a96bf626"><span class="cl-a96ac030">Residual</span></p></td><td class="cl-a96c02d8"><p class="cl-a96bf627"><span class="cl-a96ac030">64</span></p></td><td class="cl-a96c02e2"><p class="cl-a96bf627"><span class="cl-a96ac030">298.60</span></p></td><td class="cl-a96c02e3"><p class="cl-a96bf627"><span class="cl-a96ac030"></span></p></td><td class="cl-a96c02e4"><p class="cl-a96bf626"><span class="cl-a96ac030"></span></p></td><td class="cl-a96c02e5"><p class="cl-a96bf626"><span class="cl-a96ac030">299</span></p></td></tr></tbody></table></div>
 ```
 
 :::
 :::
 
 
-
-
 ::: {.callout-important appearance="simple"}
 **Interpretation of ANOVA Results**
 
-The nested ANOVA using mixed models reveals that there was no significant effect of urchin density treatment on algae cover (F = 2.72, df = 3, 12, p = 0.0913). However, there was significant variation among patches within treatments (F = 5.93, df = 12, 64, p \< 0.001).
+The nested ANOVA using mixed models reveals that there was no
+significant effect of urchin density treatment on algae cover (F =
+2.72, df = 3, 12, p =
+0.0913). However, there was significant variation
+among patches within treatments (F = 5.93, df =
+12, 64, p \< 0.001).
 
-The variance component for patches nested within treatments (294) indicates substantial spatial heterogeneity in algae cover, highlighting the importance of accounting for this spatial variation in the analysis. The negative variance component for treatment suggests that there is more variation among patches within treatments than among treatments themselves.
+The variance component for patches nested within treatments
+(294) indicates substantial spatial
+heterogeneity in algae cover, highlighting the importance of accounting
+for this spatial variation in the analysis. The negative variance
+component for treatment suggests that there is more variation among
+patches within treatments than among treatments themselves.
 :::
 
 # Lecture 13: Post-hoc Comparisons
 
-Although the main effect of treatment was not significant in the nested ANOVA (p = r format(p_treat, digits=3)), we can still examine the mean differences between treatments to understand patterns in the data. However, we should interpret these with caution given the lack of statistical significance at the α = 0.05 level.
-
-
+Although the main effect of treatment was not significant in the nested
+ANOVA (p = r format(p_treat, digits=3)), we can still examine the mean
+differences between treatments to understand patterns in the data.
+However, we should interpret these with caution given the lack of
+statistical significance at the α = 0.05 level.
 
 
 ::: {.cell}
@@ -451,20 +460,16 @@ as.data.frame(summary(emm)) %>%
 ::: {.cell-output-display}
 
 ```{=html}
-<div class="tabwid"><style>.cl-bd0bf4da{}.cl-bd08e5a6{font-family:'Helvetica';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-bd08e5b0{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-bd0a2e20{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bd0a2e2a{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-bd0a3adc{width:0.931in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3ae6{width:2.017in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3ae7{width:1.287in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3ae8{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3af0{width:0.939in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3af1{width:0.931in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3afa{width:2.017in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3afb{width:1.287in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3b04{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3b05{width:0.939in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3b06{width:0.931in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3b0e{width:2.017in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3b0f{width:1.287in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3b10{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3b18{width:0.939in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3b19{width:0.931in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3b1a{width:2.017in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3b1b{width:1.287in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3b22{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-bd0a3b23{width:0.939in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-bd0bf4da'><thead><tr style="overflow-wrap:break-word;"><th  colspan="6"class="cl-bd0a3adc"><p class="cl-bd0a2e20"><span class="cl-bd08e5a6">Estimated marginal means for each treatment</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-bd0a3adc"><p class="cl-bd0a2e20"><span class="cl-bd08e5a6">treatment</span></p></th><th class="cl-bd0a3ae6"><p class="cl-bd0a2e2a"><span class="cl-bd08e5a6">Estimated Marginal Mean</span></p></th><th class="cl-bd0a3ae7"><p class="cl-bd0a2e2a"><span class="cl-bd08e5a6">Standard Error</span></p></th><th class="cl-bd0a3ae8"><p class="cl-bd0a2e2a"><span class="cl-bd08e5a6">df</span></p></th><th class="cl-bd0a3af0"><p class="cl-bd0a2e2a"><span class="cl-bd08e5a6">Lower CL</span></p></th><th class="cl-bd0a3af0"><p class="cl-bd0a2e2a"><span class="cl-bd08e5a6">Upper CL</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-bd0a3af1"><p class="cl-bd0a2e20"><span class="cl-bd08e5b0">control</span></p></td><td class="cl-bd0a3afa"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">1.30</span></p></td><td class="cl-bd0a3afb"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">9.41</span></p></td><td class="cl-bd0a3b04"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">12</span></p></td><td class="cl-bd0a3b05"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">-19.20</span></p></td><td class="cl-bd0a3b05"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">21.80</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bd0a3b06"><p class="cl-bd0a2e20"><span class="cl-bd08e5b0">dens_33</span></p></td><td class="cl-bd0a3b0e"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">21.55</span></p></td><td class="cl-bd0a3b0f"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">9.41</span></p></td><td class="cl-bd0a3b10"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">12</span></p></td><td class="cl-bd0a3b18"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">1.05</span></p></td><td class="cl-bd0a3b18"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">42.05</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bd0a3b06"><p class="cl-bd0a2e20"><span class="cl-bd08e5b0">dens_66</span></p></td><td class="cl-bd0a3b0e"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">19.00</span></p></td><td class="cl-bd0a3b0f"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">9.41</span></p></td><td class="cl-bd0a3b10"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">12</span></p></td><td class="cl-bd0a3b18"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">-1.50</span></p></td><td class="cl-bd0a3b18"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">39.50</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-bd0a3b19"><p class="cl-bd0a2e20"><span class="cl-bd08e5b0">removal</span></p></td><td class="cl-bd0a3b1a"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">39.20</span></p></td><td class="cl-bd0a3b1b"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">9.41</span></p></td><td class="cl-bd0a3b22"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">12</span></p></td><td class="cl-bd0a3b23"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">18.70</span></p></td><td class="cl-bd0a3b23"><p class="cl-bd0a2e2a"><span class="cl-bd08e5b0">59.70</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-a9986c88{}.cl-a99502a0{font-family:'Helvetica';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a99502aa{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a9966a28{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-a9966a32{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-a9967afe{width:0.931in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b08{width:2.017in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b09{width:1.287in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b0a{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b12{width:0.939in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b13{width:0.931in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b1c{width:2.017in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b1d{width:1.287in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b26{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b27{width:0.939in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b30{width:0.931in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b31{width:2.017in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b3a{width:1.287in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b3b{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b44{width:0.939in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b45{width:0.931in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b46{width:2.017in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b4e{width:1.287in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b58{width:0.455in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a9967b59{width:0.939in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0.75pt solid rgba(102, 102, 102, 1.00);border-right: 0.75pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-a9986c88'><thead><tr style="overflow-wrap:break-word;"><th  colspan="6"class="cl-a9967afe"><p class="cl-a9966a28"><span class="cl-a99502a0">Estimated marginal means for each treatment</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-a9967afe"><p class="cl-a9966a28"><span class="cl-a99502a0">treatment</span></p></th><th class="cl-a9967b08"><p class="cl-a9966a32"><span class="cl-a99502a0">Estimated Marginal Mean</span></p></th><th class="cl-a9967b09"><p class="cl-a9966a32"><span class="cl-a99502a0">Standard Error</span></p></th><th class="cl-a9967b0a"><p class="cl-a9966a32"><span class="cl-a99502a0">df</span></p></th><th class="cl-a9967b12"><p class="cl-a9966a32"><span class="cl-a99502a0">Lower CL</span></p></th><th class="cl-a9967b12"><p class="cl-a9966a32"><span class="cl-a99502a0">Upper CL</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-a9967b13"><p class="cl-a9966a28"><span class="cl-a99502aa">control</span></p></td><td class="cl-a9967b1c"><p class="cl-a9966a32"><span class="cl-a99502aa">1.30</span></p></td><td class="cl-a9967b1d"><p class="cl-a9966a32"><span class="cl-a99502aa">9.41</span></p></td><td class="cl-a9967b26"><p class="cl-a9966a32"><span class="cl-a99502aa">12</span></p></td><td class="cl-a9967b27"><p class="cl-a9966a32"><span class="cl-a99502aa">-19.20</span></p></td><td class="cl-a9967b27"><p class="cl-a9966a32"><span class="cl-a99502aa">21.80</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a9967b30"><p class="cl-a9966a28"><span class="cl-a99502aa">dens_33</span></p></td><td class="cl-a9967b31"><p class="cl-a9966a32"><span class="cl-a99502aa">21.55</span></p></td><td class="cl-a9967b3a"><p class="cl-a9966a32"><span class="cl-a99502aa">9.41</span></p></td><td class="cl-a9967b3b"><p class="cl-a9966a32"><span class="cl-a99502aa">12</span></p></td><td class="cl-a9967b44"><p class="cl-a9966a32"><span class="cl-a99502aa">1.05</span></p></td><td class="cl-a9967b44"><p class="cl-a9966a32"><span class="cl-a99502aa">42.05</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a9967b30"><p class="cl-a9966a28"><span class="cl-a99502aa">dens_66</span></p></td><td class="cl-a9967b31"><p class="cl-a9966a32"><span class="cl-a99502aa">19.00</span></p></td><td class="cl-a9967b3a"><p class="cl-a9966a32"><span class="cl-a99502aa">9.41</span></p></td><td class="cl-a9967b3b"><p class="cl-a9966a32"><span class="cl-a99502aa">12</span></p></td><td class="cl-a9967b44"><p class="cl-a9966a32"><span class="cl-a99502aa">-1.50</span></p></td><td class="cl-a9967b44"><p class="cl-a9966a32"><span class="cl-a99502aa">39.50</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a9967b45"><p class="cl-a9966a28"><span class="cl-a99502aa">removal</span></p></td><td class="cl-a9967b46"><p class="cl-a9966a32"><span class="cl-a99502aa">39.20</span></p></td><td class="cl-a9967b4e"><p class="cl-a9966a32"><span class="cl-a99502aa">9.41</span></p></td><td class="cl-a9967b58"><p class="cl-a9966a32"><span class="cl-a99502aa">12</span></p></td><td class="cl-a9967b59"><p class="cl-a9966a32"><span class="cl-a99502aa">18.70</span></p></td><td class="cl-a9967b59"><p class="cl-a9966a32"><span class="cl-a99502aa">59.70</span></p></td></tr></tbody></table></div>
 ```
 
 :::
 :::
 
 
-
-
 # Lecture 13: Tukey Pairwise Comparisons
 
 -   text
-
-
 
 
 ::: {.cell}
@@ -513,11 +518,7 @@ P value adjustment: tukey method for comparing a family of 4 estimates
 :::
 
 
-
-
 # Lecture 13: Letter Display
-
-
 
 
 ::: {.cell}
@@ -571,19 +572,25 @@ NOTE: If two or more means share the same grouping symbol,
 :::
 
 
-
-
 ::: {.callout-important appearance="simple"}
-Interpretation of treatment Comparisons The mean algae cover for the Control treatment (1.30%) appears considerably lower than for the reduced urchin density treatments (66% Density: 21.55%, 33% Density: 19.00%, Removed: 39.20%). While the visual pattern suggests an inverse relationship between urchin density and algae cover, with complete removal showing the highest algae cover, the nested ANOVA showed that these differences were not statistically significant at the α = 0.05 level (p = r format(p_treat, digits=3)). The high variability among patches within treatments likely contributed to the lack of statistical significance for the treatment effect.
+Interpretation of treatment Comparisons The mean algae cover for the
+Control treatment (1.30%) appears considerably lower than for the
+reduced urchin density treatments (66% Density: 21.55%, 33% Density:
+19.00%, Removed: 39.20%). While the visual pattern suggests an inverse
+relationship between urchin density and algae cover, with complete
+removal showing the highest algae cover, the nested ANOVA showed that
+these differences were not statistically significant at the α = 0.05
+level (p = r format(p_treat, digits=3)). The high variability among
+patches within treatments likely contributed to the lack of statistical
+significance for the treatment effect.
 :::
 
 # Assumption Testing
 
-For valid inference from mixed models, several assumptions must be met. We test these assumptions below.
+For valid inference from mixed models, several assumptions must be met.
+We test these assumptions below.
 
 ## Normality of Residuals
-
-
 
 
 ::: {.cell}
@@ -595,7 +602,7 @@ qqline(resid(mixed_model))
 ```
 
 ::: {.cell-output-display}
-![](13_04_nested_anova_as_random_files/figure-html/normality-1.png){width=672}
+![](13_04_nested_anova_as_random_files/figure-html/normality-1.png){width=480}
 :::
 
 ```{.r .cell-code}
@@ -605,7 +612,7 @@ hist(resid(mixed_model), main = "Histogram of Residuals",
 ```
 
 ::: {.cell-output-display}
-![](13_04_nested_anova_as_random_files/figure-html/normality-2.png){width=672}
+![](13_04_nested_anova_as_random_files/figure-html/normality-2.png){width=480}
 :::
 
 ```{.r .cell-code}
@@ -615,16 +622,12 @@ plot(sim_residuals)
 ```
 
 ::: {.cell-output-display}
-![](13_04_nested_anova_as_random_files/figure-html/normality-3.png){width=672}
+![](13_04_nested_anova_as_random_files/figure-html/normality-3.png){width=480}
 :::
 :::
-
-
 
 
 ## Homogeneity of Variance
-
-
 
 
 ::: {.cell}
@@ -638,9 +641,11 @@ abline(h = 0, lty = 2, col = "red")
 ```
 
 ::: {.cell-output-display}
-![](13_04_nested_anova_as_random_files/figure-html/homogeneity-1.png){width=672}
+![](13_04_nested_anova_as_random_files/figure-html/homogeneity-1.png){width=480}
 :::
 :::
+
+
 
 ::: {.cell}
 
@@ -666,23 +671,32 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-
-
 ::: {.callout-important appearance="simple"}
 **Interpretation of Assumption Tests**
 
-The Q-Q plot shows some deviation from normality, particularly in the tails, and Levene's test indicates significant heterogeneity of variances across treatments (F = 8.17, p \< 0.001). As noted in the original analysis, there were "large differences in within-cell variances" in this dataset, and transformations did not improve variance homogeneity.
+The Q-Q plot shows some deviation from normality, particularly in the
+tails, and Levene's test indicates significant heterogeneity of
+variances across treatments (F = 8.17,
+p \< 0.001). As noted in the original analysis, there were "large
+differences in within-cell variances" in this dataset, and
+transformations did not improve variance homogeneity.
 
-The DHARMa residual diagnostics also indicate potential issues with the distribution of residuals and homogeneity of variance. The residuals vs. fitted plot shows a pattern of increasing variance with increasing fitted values, confirming the heteroscedasticity.
+The DHARMa residual diagnostics also indicate potential issues with the
+distribution of residuals and homogeneity of variance. The residuals vs.
+fitted plot shows a pattern of increasing variance with increasing
+fitted values, confirming the heteroscedasticity.
 
-However, mixed models are generally robust to moderate violations of assumptions, especially with balanced designs. Since transformations were not effective in improving the data properties, analyzing the untransformed data is a reasonable approach in this case.
+However, mixed models are generally robust to moderate violations of
+assumptions, especially with balanced designs. Since transformations
+were not effective in improving the data properties, analyzing the
+untransformed data is a reasonable approach in this case.
 :::
 
 # Post-hoc Comparisons
 
-Although the main effect of treatment was not significant in the nested ANOVA (p = 0.0913), we can still examine the mean differences between treatments to understand patterns in the data.
-
-
+Although the main effect of treatment was not significant in the nested
+ANOVA (p = 0.0913), we can still examine the mean
+differences between treatments to understand patterns in the data.
 
 
 ::: {.cell}
@@ -710,6 +724,8 @@ Confidence level used: 0.95
 :::
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -736,6 +752,8 @@ P value adjustment: tukey method for comparing a family of 4 estimates
 
 :::
 :::
+
+
 
 ::: {.cell}
 
@@ -768,11 +786,7 @@ NOTE: If two or more means share the same grouping symbol,
 :::
 
 
-
-
 # Visualization
-
-
 
 
 ::: {.cell}
@@ -818,6 +832,8 @@ means_plot <- ggplot(summary_stats, aes(x = treat, y = mean, group = 1)) +
 ```
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -826,9 +842,11 @@ ggplot_boxplot
 ```
 
 ::: {.cell-output-display}
-![](13_04_nested_anova_as_random_files/figure-html/unnamed-chunk-6-1.png){width=672}
+![](13_04_nested_anova_as_random_files/figure-html/unnamed-chunk-6-1.png){width=480}
 :::
 :::
+
+
 
 ::: {.cell}
 
@@ -837,9 +855,10 @@ means_plot
 ```
 
 ::: {.cell-output-display}
-![](13_04_nested_anova_as_random_files/figure-html/unnamed-chunk-7-1.png){width=672}
+![](13_04_nested_anova_as_random_files/figure-html/unnamed-chunk-7-1.png){width=480}
 :::
 :::
+
 
 ::: {.cell}
 
@@ -853,37 +872,65 @@ ggplot_boxplot + means_plot + plot_layout(ncol = 1)
 :::
 :::
 
-
-
-
 # Discussion
 
 ::: {.callout-important appearance="simple"}
 **Scientific Interpretation**
 
-Our mixed model analysis of the nested design revealed substantial spatial heterogeneity in algae cover, with significant variation among patches within each treatment (p \< 0.001). Surprisingly, the effect of urchin density treatments on filamentous algae cover was not statistically significant at the α = 0.05 level (p = 0.091), despite apparent trends in the data.
+Our mixed model analysis of the nested design revealed substantial
+spatial heterogeneity in algae cover, with significant variation among
+patches within each treatment (p \< 0.001). Surprisingly, the effect of
+urchin density treatments on filamentous algae cover was not
+statistically significant at the α = 0.05 level (p = 0.091), despite
+apparent trends in the data.
 
-The descriptive statistics show a pattern where algae cover appears to increase as urchin density decreases, with the Control treatment (mean = 1.3%) showing minimal algae cover compared to reduced density treatments (66% Density: 21.55%, 33% Density: 19.00%, and Removed: 39.20%). This pattern suggests a potential density-dependent relationship between urchin grazing and algal abundance, but the high variability among patches masked the treatment effect.
+The descriptive statistics show a pattern where algae cover appears to
+increase as urchin density decreases, with the Control treatment (mean =
+1.3%) showing minimal algae cover compared to reduced density treatments
+(66% Density: 21.55%, 33% Density: 19.00%, and Removed: 39.20%). This
+pattern suggests a potential density-dependent relationship between
+urchin grazing and algal abundance, but the high variability among
+patches masked the treatment effect.
 
-The substantial variance component associated with patches nested within treatments (294.31, approximately 39.5% of total variance) underscores the importance of spatial heterogeneity in structuring algal communities. This finding highlights the necessity of accounting for spatial variability when designing and analyzing ecological field experiments.
+The substantial variance component associated with patches nested within
+treatments (294.31, approximately 39.5% of total variance) underscores
+the importance of spatial heterogeneity in structuring algal
+communities. This finding highlights the necessity of accounting for
+spatial variability when designing and analyzing ecological field
+experiments.
 
-From an ecological perspective, these results suggest that while sea urchins may influence algal communities through grazing, local environmental factors and patch-specific conditions play a dominant role in determining algae cover. This has important implications for ecosystem management, as it indicates that the effects of urchin density manipulations may be context-dependent and influenced by local environmental conditions.
+From an ecological perspective, these results suggest that while sea
+urchins may influence algal communities through grazing, local
+environmental factors and patch-specific conditions play a dominant role
+in determining algae cover. This has important implications for
+ecosystem management, as it indicates that the effects of urchin density
+manipulations may be context-dependent and influenced by local
+environmental conditions.
 :::
 
 # Comparison with Traditional Nested ANOVA
 
-The linear mixed model approach provides similar results to the traditional nested ANOVA approach. The main advantage of the mixed model is the more elegant handling of random effects and the extensive diagnostic tools available through packages like DHARMa.
+The linear mixed model approach provides similar results to the
+traditional nested ANOVA approach. The main advantage of the mixed model
+is the more elegant handling of random effects and the extensive
+diagnostic tools available through packages like DHARMa.
 
 The mixed model approach confirms that:
 
 1.  treatment effects are not significant (p = 0.091)
 2.  patches within treatments show significant variation (p \< 0.001)
-3.  The variance components are similar to those from the traditional approach
+3.  The variance components are similar to those from the traditional
+    approach
 
-In both methods, the key ecological finding is the strong spatial heterogeneity in algal cover that overrides the grazing effect of urchins at different densities.
+In both methods, the key ecological finding is the strong spatial
+heterogeneity in algal cover that overrides the grazing effect of
+urchins at different densities.
 
 # References
 
-Andrew, N. L., & Underwood, A. J. (1993). Density-dependent foraging in the sea urchin Centrostephanus rodgersii on shallow subtidal reefs in New South Wales, Australia. Marine Ecology Progress Series, 99, 89-98.
+Andrew, N. L., & Underwood, A. J. (1993). Density-dependent foraging in
+the sea urchin Centrostephanus rodgersii on shallow subtidal reefs in
+New South Wales, Australia. Marine Ecology Progress Series, 99, 89-98.
 
-Quinn, G. P., & Keough, M. J. (2002). Experimental design and data analysis for biologists. Cambridge University Press.
+Quinn, G. P., & Keough, M. J. (2002). Experimental design and data
+analysis for biologists. Cambridge University Press.

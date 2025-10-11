@@ -6,14 +6,9 @@ metadata-files:
 format:
   html:
     output-file: "02_03_homework_stats_html.html"
-  typst:
-    output-file: "02_Homework_stats.pdf"
+  docx:
+    output-file: "02_Homework_stats.docx"
 ---
-
-
-
-
-
 
 # Homework Week 2
 
@@ -104,36 +99,11 @@ visualization, along with `patchwork` for combining plots.
 First, let's load the packages we need and the dataframe:
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Load required packages
 library(tidyverse)
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
-
-
-:::
-
-```{.r .cell-code}
 library(patchwork)
 
 # Read in the data file
@@ -180,15 +150,7 @@ head(w3_df)
 :::
 
 
-
-
-
-
 Let's calculate some basic statistics for lake trout
-
-
-
-
 
 
 ::: {.cell}
@@ -223,15 +185,7 @@ w3_stats
 :::
 
 
-
-
-
-
 # 
-
-
-
-
 
 
 ::: {.cell}
@@ -251,9 +205,11 @@ Warning: Removed 1 row containing non-finite outside the scale range
 :::
 
 ::: {.cell-output-display}
-![](02_03_homework_stats_files/figure-html/unnamed-chunk-3-1.png){width=672}
+![](02_03_homework_stats_files/figure-html/unnamed-chunk-3-1.png){width=480}
 :::
 :::
+
+
 
 ::: {.cell}
 
@@ -264,7 +220,7 @@ w3_df %>% ggplot(aes(x=mass_g, fill=lake )) +geom_histogram()+facet_wrap(~lake)
 ::: {.cell-output .cell-output-stderr}
 
 ```
-`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value `binwidth`.
 ```
 
 
@@ -281,13 +237,9 @@ Warning: Removed 2 rows containing non-finite outside the scale range
 :::
 
 ::: {.cell-output-display}
-![](02_03_homework_stats_files/figure-html/unnamed-chunk-4-1.png){width=672}
+![](02_03_homework_stats_files/figure-html/unnamed-chunk-4-1.png){width=480}
 :::
 :::
-
-
-
-
 
 
 ------------------------------------------------------------------------

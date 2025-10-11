@@ -6,8 +6,8 @@ metadata-files:
 format:
   html:
     output-file: "assignment_03.html"
-  typst:
-    output-file: "assignment_03.pdf"
+  docx:
+    output-file: "assignment_03.docx"
 editor: visual
 ---
 

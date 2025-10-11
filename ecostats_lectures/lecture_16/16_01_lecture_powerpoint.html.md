@@ -6,7 +6,7 @@ metadata-files:
 format:
   html:
     output-file: "16_02_lecture_powerpoint_html.html"
-    downloads: [docx, pptx, typst]  # This creates download links for all three
+    downloads: [docx, pptx]  # This creates download links for all three
   # RevealJS - UNCHANGED (keeps your two-column layout and large images)
   revealjs:
     output-file: "16_01_lecture_powerpoint_slides.html"
@@ -14,20 +14,7 @@ format:
     output-file: "16_01_lecture_powerpoint.docx"
   pptx:
     output-file: "16_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "16_01_lecture_powerpoint.pdf"
 ---
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -57,7 +44,8 @@ format:
 
 ::::: columns
 ::: {.column width="60%"}
--   Multiple variables recorded about each object (individual, quadrat, site, etc.)
+-   Multiple variables recorded about each object (individual, quadrat,
+    site, etc.)
     -   or responses that are from the same treatment factor
     -   length, weight, width, color, spines, etc
 -   Objects: rows (i = 1 to n)
@@ -76,7 +64,8 @@ format:
 ::: callout-tip
 # Multivariate data vs. multivariate analysis
 
-We've already seen multivariate data in multiple regression and multi-factor ANOVA
+We've already seen multivariate data in multiple regression and
+multi-factor ANOVA
 
 **Now we'll look at cases with multiple response variables.**
 :::
@@ -87,38 +76,20 @@ We've already seen multivariate data in multiple regression and multi-factor ANO
 ::: {.column width="60%"}
 ## Functional vs. Structural Methods
 
-**Functional methods**: - Clear response and predictor variables - Goal: relate Y's to X's - Examples: MANOVA, PERMANOVA
+**Functional methods**: - Clear response and predictor variables - Goal:
+relate Y's to X's - Examples: MANOVA, PERMANOVA
 
-**Structural methods**: - Find patterns/structure in data - Often no clear predictors - Examples: PCA, NMDS, Cluster Analysis
+**Structural methods**: - Find patterns/structure in data - Often no
+clear predictors - Examples: PCA, NMDS, Cluster Analysis
 :::
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-1-1.png){width=672}
+![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-1-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -165,9 +136,13 @@ Sometimes combine both…
 ::: {.column width="60%"}
 Can divide ecological MV methods into "functional" and "structural"
 
--   Functional methods: clear response variable(s) and predictor variables. Goal is to relate Ys to Xs (regression, MANOVA, ANOSIM, PERMANOVA).
+-   Functional methods: clear response variable(s) and predictor
+    variables. Goal is to relate Ys to Xs (regression, MANOVA, ANOSIM,
+    PERMANOVA).
 
--   Structural methods: concerned with finding structure /pattern in the data. Often no clear predictor variables (PCA, NMDS, Cluster analysis).
+-   Structural methods: concerned with finding structure /pattern in the
+    data. Often no clear predictor variables (PCA, NMDS, Cluster
+    analysis).
 :::
 
 ::: {.column width="40%"}
@@ -181,38 +156,21 @@ Can divide ecological MV methods into "functional" and "structural"
 ::: {.column width="60%"}
 ## Two Main Approaches
 
-**Scaling/Ordination Methods**: - Reduce dimensions with new derived variables - Summarize patterns in data - Examples: PCA, CCA
+**Scaling/Ordination Methods**: - Reduce dimensions with new derived
+variables - Summarize patterns in data - Examples: PCA, CCA
 
-**Dissimilarity-Based Methods**: - Measure dissimilarity between objects - Visualize relationships between objects - Examples: NMDS, Cluster Analysis
+**Dissimilarity-Based Methods**: - Measure dissimilarity between
+objects - Visualize relationships between objects - Examples: NMDS,
+Cluster Analysis
 :::
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](16_01_lecture_powerpoint_files/figure-html/label_code_chunk-1.png){width=672}
+![](16_01_lecture_powerpoint_files/figure-html/label_code_chunk-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -225,7 +183,8 @@ Structural methods can be divided further into:
 
 Methods based on [scaling or ordination]{.underline}
 
-Goal: reduce number of vars by deriving new variables that summarize data.
+Goal: reduce number of vars by deriving new variables that summarize
+data.
 
 Examples include PCA, CCA
 :::
@@ -243,7 +202,8 @@ Structural methods can be divided further into:
 
 -   Methods based on dissimilarity measurements
 
--   Goal: measure and graphically show degree of dissimilarity between objects.
+-   Goal: measure and graphically show degree of dissimilarity between
+    objects.
 
 -   Examples include (N)MDS and cluster analysis
 :::
@@ -257,9 +217,11 @@ Structural methods can be divided further into:
 
 ::::: columns
 ::: {.column width="60%"}
--   Goal: derive new variables (principal components) that explain variation in data
+-   Goal: derive new variables (principal components) that explain
+    variation in data
 -   Components are linear combinations of original variables:
-    -   z<sub>ik</sub> = c<sub>1</sub>y<sub>i1</sub> + c<sub>2</sub>y<sub>i2</sub> + ... + c<sub>p</sub>y<sub>ip</sub>
+    -   z<sub>ik</sub> = c<sub>1</sub>y<sub>i1</sub> +
+        c<sub>2</sub>y<sub>i2</sub> + ... + c<sub>p</sub>y<sub>ip</sub>
 -   Properties of derived variables:
     -   First component explains most variation
     -   Second explains most remaining variation
@@ -269,31 +231,11 @@ Structural methods can be divided further into:
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-2-1.png){width=672}
+![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-2-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -306,36 +248,17 @@ How to think about the new values
 
 -   zik is value of new variable k for object I
 -   yi1- yip are values of original variables for object i
--   c1-cp are coefficients that show importance of the original variables to new derived variable
+-   c1-cp are coefficients that show importance of the original
+    variables to new derived variable
 :::
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-3-1.png){width=672}
+![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-3-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -343,7 +266,9 @@ How to think about the new values
 ::: callout-tip
 # Key concept
 
-Eigenvalues (λ) represent the amount of variation explained by each new derived variable, while eigenvectors contain the coefficients showing how original variables contribute to each component.
+Eigenvalues (λ) represent the amount of variation explained by each new
+derived variable, while eigenvectors contain the coefficients showing
+how original variables contribute to each component.
 :::
 
 # Eigenvalues and Components: Properties
@@ -366,15 +291,19 @@ Derived variables are found so that:
 
 # Eigenvalues and Eigenvectors: Mathematical Details
 
--   Eigenvalues (latent roots) represent amount of variation in data explained by the new k= 1 to p derived variables (λ1, λ2 …λp).
+-   Eigenvalues (latent roots) represent amount of variation in data
+    explained by the new k= 1 to p derived variables (λ1, λ2 …λp).
 
--   Eigenvalues are population parameters and are estimated using ML to get sample statistics (l1, l2…lp)
+-   Eigenvalues are population parameters and are estimated using ML to
+    get sample statistics (l1, l2…lp)
 
--   Eigenvectors are lists of coefficients (c) that show contribution of original variables to new, derived variables
+-   Eigenvectors are lists of coefficients (c) that show contribution of
+    original variables to new, derived variables
 
 -   Each new variable has an eigenvalue and an eigenvector
 
--   New variables (components) are derived from a p x p covariance or correlation matrix of original variables
+-   New variables (components) are derived from a p x p covariance or
+    correlation matrix of original variables
 
 # Eigenvalue Matrix Representation
 
@@ -396,31 +325,11 @@ Derived variables are found so that:
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-4-1.png){width=672}
+![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-4-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -429,10 +338,14 @@ Derived variables are found so that:
 
 ::::: columns
 ::: {.column width="60%"}
--   Previous approach relies on analysis of covariance/ correlation bw variables
--   Another class of MV analysis uses measures of similarity/dissimilarity bw objects (MDS, cluster analysis)
--   Similarity/dissimilarity indices measure how alike/different objects (e.g. Lakes) are in MV space
--   Many measures of dissimilarity (Euclidean, Manhattan, Bray-Curtis, etc, etc)
+-   Previous approach relies on analysis of covariance/ correlation bw
+    variables
+-   Another class of MV analysis uses measures of
+    similarity/dissimilarity bw objects (MDS, cluster analysis)
+-   Similarity/dissimilarity indices measure how alike/different objects
+    (e.g. Lakes) are in MV space
+-   Many measures of dissimilarity (Euclidean, Manhattan, Bray-Curtis,
+    etc, etc)
 :::
 
 ::: {.column width="40%"}
@@ -450,16 +363,23 @@ Dissimilarity is often represented as a dissimilarity matrix
 
 Data transformation is common and useful in MV analyses
 
--   Log transformation is common in PCA/CCA analyses based on eigenvectors, since linearizing relationships bw variables will improve extraction of eigenvectors
--   Fourth root transform is very common and sometimes "blanket recommended" for analysis of species composition data (each variable is a species w counts- MDS, cluster analysis). Idea is to lessen importance of common and abundant species
+-   Log transformation is common in PCA/CCA analyses based on
+    eigenvectors, since linearizing relationships bw variables will
+    improve extraction of eigenvectors
+-   Fourth root transform is very common and sometimes "blanket
+    recommended" for analysis of species composition data (each variable
+    is a species w counts- MDS, cluster analysis). Idea is to lessen
+    importance of common and abundant species
 
 # Data Standardization: Methods
 
 ::::: columns
 ::: {.column width="60%"}
--   Data standardization is also common; adjusts data so all variables have same means and/or variance
+-   Data standardization is also common; adjusts data so all variables
+    have same means and/or variance
     -   Centering- mean subtracted from each value (new mean=0)
-    -   Standardization- centered observations divided by SD (mean=0, sd=1)
+    -   Standardization- centered observations divided by SD (mean=0,
+        sd=1)
 -   Crucial for analyses of variables measured in different units
 -   More ambiguous for species abundance data
 :::
@@ -475,39 +395,22 @@ Data transformation is common and useful in MV analyses
 ::: {.column width="60%"}
 ## Common Approaches
 
-**Transformations**: - Log transformation for skewed data - Root transformations for count data\
+**Transformations**: - Log transformation for skewed data - Root
+transformations for count data\
 - Fourth-root for species abundance data
 
-**Standardization**: - Centering: subtract mean (mean = 0) - Standardization: divide by SD (SD = 1) - Crucial for variables with different units - May not be appropriate for species data
+**Standardization**: - Centering: subtract mean (mean = 0) -
+Standardization: divide by SD (SD = 1) - Crucial for variables with
+different units - May not be appropriate for species data
 :::
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-5-1.png){width=672}
+![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-5-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -515,7 +418,9 @@ Data transformation is common and useful in MV analyses
 ::: callout-tip
 # Why standardize?
 
-Standardization ensures all variables contribute equally to the analysis regardless of their original units or scales of measurement. Without it, variables with larger values or variances would dominate the results.
+Standardization ensures all variables contribute equally to the analysis
+regardless of their original units or scales of measurement. Without it,
+variables with larger values or variances would dominate the results.
 :::
 
 # Multivariate Graphics Options
@@ -543,38 +448,22 @@ Standardization ensures all variables contribute equally to the analysis regardl
 ::: {.column width="60%"}
 ## Key Issues to Check
 
-**Multivariate Outliers**: - Objects with unusual patterns across variables - Detected with Mahalanobis distance (d²) - Test against χ² distribution with p df
+**Multivariate Outliers**: - Objects with unusual patterns across
+variables - Detected with Mahalanobis distance (d²) - Test against χ²
+distribution with p df
 
-**Missing Observations**: - Common approaches: - Deletion: remove affected object or variable - Imputation: estimate missing values - Maximum likelihood methods - Multiple imputation
+**Missing Observations**: - Common approaches: - Deletion: remove
+affected object or variable - Imputation: estimate missing values -
+Maximum likelihood methods - Multiple imputation
 :::
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-6-1.png){width=672}
+![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-6-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -584,7 +473,8 @@ Standardization ensures all variables contribute equally to the analysis regardl
 ::::: columns
 ::: {.column width="60%"}
 -   Multivariate extension of ANOVA
--   Tests for differences in group centroids based on multiple response variables
+-   Tests for differences in group centroids based on multiple response
+    variables
 -   Advantages over multiple ANOVAs:
     -   Controls family-wise error rate
     -   Accounts for correlations between variables
@@ -634,16 +524,6 @@ Question: are there differences bw species?
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -671,16 +551,6 @@ head(iris_df)
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -699,16 +569,6 @@ Question: are there differences bw species?
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -718,19 +578,9 @@ iris_long_df %>% ggplot(aes(species, measure, fill=species))+
 ```
 
 ::: {.cell-output-display}
-![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-8-1.png){width=672}
+![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-8-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -753,16 +603,6 @@ But:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -789,16 +629,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -812,16 +642,6 @@ but for all of the variables not just two
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -844,19 +664,9 @@ iris_plot
 ```
 
 ::: {.cell-output-display}
-![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-10-1.png){width=672}
+![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-10-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -865,25 +675,17 @@ iris_plot
 
 ::::: columns
 ::: {.column width="60%"}
-A one-way MANOVA tests the Ho that there are no differences in population centroids
+A one-way MANOVA tests the Ho that there are no differences in
+population centroids
 
--   Ho tested by partitioning variance, but instead of SS, use SSCP matrices:
+-   Ho tested by partitioning variance, but instead of SS, use SSCP
+    matrices:
 -   H matrix: between group SSCP
 -   E matrix: within group SSCP
 -   T matrix: total SSCP
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -892,19 +694,9 @@ iris_plot
 ```
 
 ::: {.cell-output-display}
-![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-11-1.png){width=672}
+![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-11-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -917,20 +709,11 @@ Several test statistics can be determined:
 
 -   Wilk's λ: ratio of matrix determinants:\|E\|/\|T\|
 -   Smaller values: larger group differences
--   Can be converted to approximate F ratios, compared to F distribution to find p
+-   Can be converted to approximate F ratios, compared to F distribution
+    to find p
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -939,19 +722,9 @@ iris_plot
 ```
 
 ::: {.cell-output-display}
-![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-12-1.png){width=672}
+![](16_01_lecture_powerpoint_files/figure-html/unnamed-chunk-12-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -960,7 +733,9 @@ iris_plot
 # MANOVA Assumptions
 
 -   Normal distribution:
-    -   response vars should be normally distributed within groups (relatively robust - No outliers (use di2 to diagnose; very sensitive to this assumption
+    -   response vars should be normally distributed within groups
+        (relatively robust - No outliers (use di2 to diagnose; very
+        sensitive to this assumption
     -   Equal variance of the response variables across groups
     -   Linearity: response variables linearly related to each other
     -   No strong multicollinearity in response variables
@@ -968,16 +743,6 @@ iris_plot
 :::
 
 # MANOVA: Model Fitting
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1003,16 +768,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-
-
-
-
-
-
-
-
-
-
 # MANOVA: Assumption Testing - Normality
 
 ::::: columns
@@ -1023,16 +778,6 @@ Assumption test
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1060,16 +805,6 @@ W = 0.97935, p-value = 0.02342
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1083,16 +818,6 @@ Assumption test
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1119,16 +844,6 @@ Chi-Sq (approx.) = 140.94, df = 20, p-value < 2.2e-16
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1142,16 +857,6 @@ Assumption test
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1172,19 +877,9 @@ iris_long %>%
 ```
 
 ::: {.cell-output-display}
-![](16_01_lecture_powerpoint_files/figure-html/assumption-plots-1.png){width=672}
+![](16_01_lecture_powerpoint_files/figure-html/assumption-plots-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -1197,16 +892,6 @@ iris_long %>%
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1289,16 +974,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1310,16 +985,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1456,16 +1121,6 @@ P value adjustment: tukey method for comparing a family of 3 estimates
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1477,16 +1132,6 @@ P value adjustment: tukey method for comparing a family of 3 estimates
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1622,16 +1267,6 @@ print(cumulative_prop)
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1643,16 +1278,6 @@ print(cumulative_prop)
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1751,16 +1376,6 @@ petal_width  -0.9728120 0.22290236
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1772,16 +1387,6 @@ Multivariate Visualization
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1825,19 +1430,9 @@ canonical_df_plot %>%
 ```
 
 ::: {.cell-output-display}
-![](16_01_lecture_powerpoint_files/figure-html/multivariate-plots-1.png){width=672}
+![](16_01_lecture_powerpoint_files/figure-html/multivariate-plots-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -1850,26 +1445,21 @@ canonical_df_plot %>%
 
 ## Key Interpretation
 
-**Pillai's Trace (1.1919)**: This is large, indicating substantial group differences across the multivariate space.
+**Pillai's Trace (1.1919)**: This is large, indicating substantial group
+differences across the multivariate space.
 
-**F-statistic (53.466)**: Very large F-value indicates strong evidence against the null hypothesis.
+**F-statistic (53.466)**: Very large F-value indicates strong evidence
+against the null hypothesis.
 
-**P-value**: Essentially zero, meaning we reject the null hypothesis that all three species have the same multivariate means.
+**P-value**: Essentially zero, meaning we reject the null hypothesis
+that all three species have the same multivariate means.
 
-**Conclusion**: The three iris species are significantly different when considering all four morphological measurements simultaneously in multivariate space.
+**Conclusion**: The three iris species are significantly different when
+considering all four morphological measurements simultaneously in
+multivariate space.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1892,16 +1482,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1913,30 +1493,29 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 **Wilks' Lambda (0.023439)**: Very small value (close to 0) indicates:
 
--   Only about 2.3% of the total variance is unexplained by group differences
--   About 97.7% of the multivariate variance is explained by species differences
+-   Only about 2.3% of the total variance is unexplained by group
+    differences
+-   About 97.7% of the multivariate variance is explained by species
+    differences
 -   Extremely strong group separation in multivariate space
 
-**Effect Size**: Partial η² ≈ 1 - 0.023439 = 0.977 (very large effect size)
+**Effect Size**: Partial η² ≈ 1 - 0.023439 = 0.977 (very large effect
+size)
 
-**F-statistic (199.15)**: Much larger than Pillai's F-value because Wilks' Lambda is often more powerful when assumptions are met
+**F-statistic (199.15)**: Much larger than Pillai's F-value because
+Wilks' Lambda is often more powerful when assumptions are met
 
-**Conclusion**: The three iris species show extremely large multivariate differences - they are very well separated in the 4-dimensional morphological space, with species explaining nearly 98% of the multivariate variance.
+**Conclusion**: The three iris species show extremely large multivariate
+differences - they are very well separated in the 4-dimensional
+morphological space, with species explaining nearly 98% of the
+multivariate variance.
 
-**Wilks' vs Pillai's**: Wilks' Lambda is generally preferred when assumptions are met, while Pillai's trace is more robust to assumption violations.
+**Wilks' vs Pillai's**: Wilks' Lambda is generally preferred when
+assumptions are met, while Pillai's trace is more robust to assumption
+violations.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1960,16 +1539,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1979,26 +1548,29 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ::: {.column width="60%"}
 ### Interpretation of MANOVA
 
-**Meaning**: Approximately 97.7% of the total multivariate variance is explained by species differences.
+**Meaning**: Approximately 97.7% of the total multivariate variance is
+explained by species differences.
 
-**Effect Size Guidelines:** - **Small effect**: η² ≈ 0.01 (1% of variance explained) - **Medium effect**: η² ≈ 0.06 (6% of variance explained) - **Large effect**: η² ≈ 0.14 (14% of variance explained) - **Our result**: η² = 0.977 (**extremely large effect**)
+**Effect Size Guidelines:** - **Small effect**: η² ≈ 0.01 (1% of
+variance explained) - **Medium effect**: η² ≈ 0.06 (6% of variance
+explained) - **Large effect**: η² ≈ 0.14 (14% of variance explained) -
+**Our result**: η² = 0.977 (**extremely large effect**)
 
-**Practical Interpretation:** - Species are almost perfectly separated in multivariate morphological space - Only 2.3% of the variation in the four measurements is due to within-species differences - Species membership explains nearly all the multivariate variation - This represents one of the strongest group separations possible in real biological data
+**Practical Interpretation:** - Species are almost perfectly separated
+in multivariate morphological space - Only 2.3% of the variation in the
+four measurements is due to within-species differences - Species
+membership explains nearly all the multivariate variation - This
+represents one of the strongest group separations possible in real
+biological data
 
-**Conclusion**: The iris species show dramatically different morphological profiles - they are essentially non-overlapping in the 4-dimensional space of sepal/petal measurements. This effect size indicates that species is an extremely powerful predictor of morphological characteristics.
+**Conclusion**: The iris species show dramatically different
+morphological profiles - they are essentially non-overlapping in the
+4-dimensional space of sepal/petal measurements. This effect size
+indicates that species is an extremely powerful predictor of
+morphological characteristics.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -2019,16 +1591,6 @@ partial_eta_sq
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -2038,30 +1600,30 @@ partial_eta_sq
 ::: {.column width="60%"}
 ### Interpretation of manova
 
-**Element \[1\] = 0.9912**: - First canonical variate explains 99.12% of the between-group variance - This dimension captures almost all the multivariate group differences
+**Element \[1\] = 0.9912**: - First canonical variate explains 99.12% of
+the between-group variance - This dimension captures almost all the
+multivariate group differences
 
-**Element \[2\] = 0.0088**: - Second canonical variate explains 0.88% of the between-group variance - This dimension captures the remaining small group differences
+**Element \[2\] = 0.0088**: - Second canonical variate explains 0.88% of
+the between-group variance - This dimension captures the remaining small
+group differences
 
 ## Interpretation
 
-**Dimensionality**: The group differences are essentially **one-dimensional** - 99% of separation occurs along the first canonical axis.
+**Dimensionality**: The group differences are essentially
+**one-dimensional** - 99% of separation occurs along the first canonical
+axis.
 
-**Biological Meaning**: There's one primary "direction" in morphological space that best separates the three iris species, with a very minor secondary pattern.
+**Biological Meaning**: There's one primary "direction" in morphological
+space that best separates the three iris species, with a very minor
+secondary pattern.
 
-**Practical Implication**: You could visualize almost all the group separation using just the first canonical variate, though plotting both dimensions shows the complete picture.
+**Practical Implication**: You could visualize almost all the group
+separation using just the first canonical variate, though plotting both
+dimensions shows the complete picture.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -2093,16 +1655,6 @@ sum(prop_variance)
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -2112,24 +1664,24 @@ sum(prop_variance)
 ::: {.column width="60%"}
 ### Interpretation of manova
 
-Group means: - **Setosa**: Smallest overall, widest sepals, tiny petals - **Versicolor**: Medium-sized in most dimensions - **Virginica**: Largest overall, especially in petal dimensions - Clear size progression: setosa \< versicolor \< virginica
+Group means: - **Setosa**: Smallest overall, widest sepals, tiny
+petals - **Versicolor**: Medium-sized in most dimensions -
+**Virginica**: Largest overall, especially in petal dimensions - Clear
+size progression: setosa \< versicolor \< virginica
 
-Coefficients of linear discriminants: - **LD1**: Positive weights for sepal measurements, negative for petal measurements - Separates small-petaled from large-petaled species - **LD2**: Mainly contrasts sepal width vs petal width - Fine-tunes separation between versicolor and virginica
+Coefficients of linear discriminants: - **LD1**: Positive weights for
+sepal measurements, negative for petal measurements - Separates
+small-petaled from large-petaled species - **LD2**: Mainly contrasts
+sepal width vs petal width - Fine-tunes separation between versicolor
+and virginica
 
-Proportion of trace: - **LD1**: Explains 99.12% of between-group discrimination - **LD2**: Explains 0.88% of between-group discrimination - Confirms the separation is essentially one-dimensional (petal vs sepal contrast)
+Proportion of trace: - **LD1**: Explains 99.12% of between-group
+discrimination - **LD2**: Explains 0.88% of between-group
+discrimination - Confirms the separation is essentially one-dimensional
+(petal vs sepal contrast)
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -2171,16 +1723,6 @@ Proportion of trace:
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -2198,8 +1740,10 @@ Proportion of trace:
 ### Interpretational Advantages
 
 -   Reveals patterns in multivariate space that univariate tests miss
--   Canonical variates show optimal linear combinations for group separation
--   Provides insight into which variables work together to discriminate groups
+-   Canonical variates show optimal linear combinations for group
+    separation
+-   Provides insight into which variables work together to discriminate
+    groups
 -   Shows the dimensionality of group differences
 
 ### Biological Relevance

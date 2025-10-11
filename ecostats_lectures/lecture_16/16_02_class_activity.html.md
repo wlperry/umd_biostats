@@ -6,8 +6,6 @@ metadata-files:
 format:
   html:
     output-file: "16_02_class_activity.html"
-  typst:
-    output-file: "16_02_class_activity.pdf"   
   docx:
     output-file: "16_02_class_activity.docx"
 ---
@@ -33,22 +31,22 @@ library(tidyverse)    # For data manipulation and visualization
 ```
 :::
 
-
-
-
-
-
-
-
 # Lecture 16: Multivariate Analysis of Variance (MANOVA)
 
 ## What is MANOVA?
 
-MANOVA (Multivariate Analysis of Variance) extends ANOVA to multiple response variables: - Compares group centroids in multivariate space - Tests whether groups differ on multiple dependent variables simultaneously - Controls family-wise error rate - Accounts for correlations between dependent variables
+MANOVA (Multivariate Analysis of Variance) extends ANOVA to multiple
+response variables: - Compares group centroids in multivariate space -
+Tests whether groups differ on multiple dependent variables
+simultaneously - Controls family-wise error rate - Accounts for
+correlations between dependent variables
 
 ## When to Use MANOVA
 
-Use MANOVA when you have: - **Response variables**: Multiple continuous variables (correlated) - **Predictor variable**: One or more categorical variables (factors/groups) - **Goal**: Test for group differences across all response variables simultaneously
+Use MANOVA when you have: - **Response variables**: Multiple continuous
+variables (correlated) - **Predictor variable**: One or more categorical
+variables (factors/groups) - **Goal**: Test for group differences across
+all response variables simultaneously
 
 ## Key Assumptions of MANOVA
 
@@ -62,24 +60,22 @@ Use MANOVA when you have: - **Response variables**: Multiple continuous variable
 ::: {.callout-important appearance="simple"}
 ## Critical First Step
 
-Always check **multivariate normality** and **homogeneity of covariance matrices** before proceeding with MANOVA. These assumptions are more stringent than univariate ANOVA.
+Always check **multivariate normality** and **homogeneity of covariance
+matrices** before proceeding with MANOVA. These assumptions are more
+stringent than univariate ANOVA.
 :::
 
 # Part 1: Iris Data Analysis
 
 ## Data Overview
 
-We'll analyze morphological measurements of three iris species: - *Iris setosa* - *Iris versicolor*\
+We'll analyze morphological measurements of three iris species: - *Iris
+setosa* - *Iris versicolor*\
 - *Iris virginica*
 
-We have four measurements: sepal length, sepal width, petal length, and petal width. MANOVA will test whether species differ across all four measurements simultaneously.
-
-
-
-
-
-
-
+We have four measurements: sepal length, sepal width, petal length, and
+petal width. MANOVA will test whether species differ across all four
+measurements simultaneously.
 
 ::: {.cell}
 
@@ -181,23 +177,10 @@ iris_boxplot
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 1: Visualize Relationships Between Variables
 
-Before running MANOVA, let's examine the correlations between our response variables.
-
-
-
-
-
-
-
+Before running MANOVA, let's examine the correlations between our
+response variables.
 
 ::: {.cell}
 
@@ -233,23 +216,9 @@ iris_centroid_plot
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 2: Test Assumptions
 
 ### Multivariate Normality
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -277,23 +246,11 @@ W = 0.97935, p-value = 0.02342
 :::
 :::
 
-
-
-
-
-
-
-
-**Interpretation**: If p \< 0.05, the assumption of multivariate normality is violated. MANOVA is fairly robust to moderate violations with large sample sizes.
+**Interpretation**: If p \< 0.05, the assumption of multivariate
+normality is violated. MANOVA is fairly robust to moderate violations
+with large sample sizes.
 
 ### Homogeneity of Covariance Matrices
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -321,23 +278,10 @@ Chi-Sq (approx.) = 140.94, df = 20, p-value < 2.2e-16
 :::
 :::
 
-
-
-
-
-
-
-
-**Interpretation**: If p \< 0.05, covariance matrices differ between groups. MANOVA is robust to this violation with equal sample sizes.
+**Interpretation**: If p \< 0.05, covariance matrices differ between
+groups. MANOVA is robust to this violation with equal sample sizes.
 
 ### Visual Assessment of Normality
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -359,21 +303,7 @@ iris_qq_plot
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 3: Fit MANOVA Model
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -400,23 +330,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-**Interpretation**: - Pillai's trace is the default test statistic (most robust) - Large F-value and small p-value indicate significant group differences - The null hypothesis (all species have same multivariate means) is rejected
+**Interpretation**: - Pillai's trace is the default test statistic (most
+robust) - Large F-value and small p-value indicate significant group
+differences - The null hypothesis (all species have same multivariate
+means) is rejected
 
 ## Step 4: Alternative Test Statistics
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -475,23 +394,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 5: Follow-up Univariate ANOVAs
 
-Since MANOVA is significant, we examine which variables contribute to group differences.
-
-
-
-
-
-
-
+Since MANOVA is significant, we examine which variables contribute to
+group differences.
 
 ::: {.cell}
 
@@ -536,21 +442,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 6: Post-hoc Comparisons
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -720,23 +612,10 @@ P value adjustment: tukey method for comparing a family of 3 estimates
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 7: Canonical Discriminant Analysis
 
-To understand how the groups differ in multivariate space, we perform canonical discriminant analysis.
-
-
-
-
-
-
-
+To understand how the groups differ in multivariate space, we perform
+canonical discriminant analysis.
 
 ::: {.cell}
 
@@ -813,21 +692,7 @@ cumsum(prop_variance)
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 8: Linear Discriminant Analysis
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -883,21 +748,7 @@ lda_scores_df <- data.frame(
 ```
 :::
 
-
-
-
-
-
-
-
 ## Step 9: Visualize Canonical Space
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -933,21 +784,7 @@ canonical_plot
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 10: Effect Size
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -983,13 +820,6 @@ partial_eta_squared
 :::
 :::
 
-
-
-
-
-
-
-
 # Summary Checklist for MANOVA
 
 When conducting MANOVA, always follow these steps:
@@ -1003,7 +833,8 @@ When conducting MANOVA, always follow these steps:
     -   Homogeneity of covariance matrices (Box's M test)
     -   Visual assessment with Q-Q plots
 3.  **Fit MANOVA model** - response variables \~ grouping factor
-4.  **Examine test statistics** - Pillai's, Wilks', Hotelling-Lawley, Roy's
+4.  **Examine test statistics** - Pillai's, Wilks', Hotelling-Lawley,
+    Roy's
 5.  **Follow-up analyses** if MANOVA is significant
     -   Univariate ANOVAs for each variable
     -   Post-hoc pairwise comparisons
@@ -1014,23 +845,34 @@ When conducting MANOVA, always follow these steps:
 
 ## Key Points to Remember
 
--   **MANOVA controls Type I error** when testing multiple dependent variables
+-   **MANOVA controls Type I error** when testing multiple dependent
+    variables
 -   **More powerful than separate ANOVAs** when variables are correlated
--   **Tests group centroids** in multivariate space, not individual means
--   **Canonical variates** show optimal linear combinations for group separation
+-   **Tests group centroids** in multivariate space, not individual
+    means
+-   **Canonical variates** show optimal linear combinations for group
+    separation
 -   **Effect sizes** can be very large when groups are well-separated
 -   **Assumptions are more stringent** than univariate ANOVA
 
 ::: {.callout-important appearance="simple"}
 ## Key Points from MANOVA Analysis
 
-1.  **Check multivariate assumptions first** - normality and homogeneity of covariances
-2.  **MANOVA tests the global hypothesis** - do groups differ on any combination of variables?
-3.  **Follow-up tests identify specific differences** - which variables drive group separation
-4.  **Canonical analysis reveals patterns** - how variables work together to discriminate groups
-5.  **Visualize in reduced space** - canonical plots show multivariate relationships clearly
-6.  **Interpret effect sizes** - Wilks' Lambda tells us proportion of variance explained
-7.  **Consider biological meaning** - what do the multivariate patterns tell us about the organisms?
+1.  **Check multivariate assumptions first** - normality and homogeneity
+    of covariances
+2.  **MANOVA tests the global hypothesis** - do groups differ on any
+    combination of variables?
+3.  **Follow-up tests identify specific differences** - which variables
+    drive group separation
+4.  **Canonical analysis reveals patterns** - how variables work
+    together to discriminate groups
+5.  **Visualize in reduced space** - canonical plots show multivariate
+    relationships clearly
+6.  **Interpret effect sizes** - Wilks' Lambda tells us proportion of
+    variance explained
+7.  **Consider biological meaning** - what do the multivariate patterns
+    tell us about the organisms?
 
-Remember: MANOVA is ideal when you expect groups to differ on multiple correlated traits that reflect an integrated biological system!
+Remember: MANOVA is ideal when you expect groups to differ on multiple
+correlated traits that reflect an integrated biological system!
 :::

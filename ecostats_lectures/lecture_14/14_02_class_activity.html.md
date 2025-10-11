@@ -6,47 +6,38 @@ metadata-files:
 format:
   html:
     output-file: "14_02_class_activity.html"
-  typst:
-    output-file: "14_02_class_activity.pdf"   
   docx:
     output-file: "14_02_class_activity.docx"
 ---
 
 
 
-
-
-
-
-
-
-
 # Lecture 14: Generalized Linear Models Overview
 
-Generalized Linear Models (GLMs) extend linear models to handle different types of response variables:
+Generalized Linear Models (GLMs) extend linear models to handle
+different types of response variables:
 
--   **Normal distribution**: Continuous data (like regular ANOVA/regression)
+-   **Normal distribution**: Continuous data (like regular
+    ANOVA/regression)
 -   **Poisson distribution**: Count data
--   **Binomial distribution**: Binary data (presence/absence, success/failure)
+-   **Binomial distribution**: Binary data (presence/absence,
+    success/failure)
 -   **Gamma distribution**: Positive continuous data
 -   **Negative binomial**: Overdispersed count data
 
 ## The Three Components of GLMs
 
-1.  **Random component**: The response variable and its probability distribution
-2.  **Systematic component**: The predictor variables (continuous or categorical)
-3.  **Link function**: Connects expected value of Y to predictor variables
+1.  **Random component**: The response variable and its probability
+    distribution
+2.  **Systematic component**: The predictor variables (continuous or
+    categorical)
+3.  **Link function**: Connects expected value of Y to predictor
+    variables
 
 # Part 1: Gaussian GLM (equivalent to normal ANOVA)
 
-Let's start with a familiar example using the mtcars dataset to show that Gaussian GLMs are equivalent to regular linear models.
-
-
-
-
-
-
-
+Let's start with a familiar example using the mtcars dataset to show
+that Gaussian GLMs are equivalent to regular linear models.
 
 ::: {.cell}
 
@@ -217,23 +208,10 @@ ggplot() +
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 2: Poisson GLM for Count Data
 
-Poisson GLMs are used for count data where the response variable consists of non-negative integers.
-
-
-
-
-
-
-
+Poisson GLMs are used for count data where the response variable
+consists of non-negative integers.
 
 ::: {.cell}
 
@@ -354,23 +332,10 @@ ggplot() +
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 3: Negative Binomial for Overdispersed Count Data
 
-When count data shows overdispersion (variance \> mean), use negative binomial instead of Poisson.
-
-
-
-
-
-
-
+When count data shows overdispersion (variance \> mean), use negative
+binomial instead of Poisson.
 
 ::: {.cell}
 
@@ -470,23 +435,10 @@ Lower AIC indicates better model fit
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 4: Logistic Regression for Binary Data
 
-Logistic regression models the probability of a binary outcome (0/1, absent/present, failure/success).
-
-
-
-
-
-
-
+Logistic regression models the probability of a binary outcome (0/1,
+absent/present, failure/success).
 
 ::: {.cell}
 
@@ -684,21 +636,7 @@ Warning: Removed 19 rows containing missing values or values outside the scale r
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 5: Model Comparison and Selection
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -740,21 +678,7 @@ NegBin     NegBin 162.61596     3.45          3
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 6: Assumption Checking
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -829,28 +753,29 @@ plot(predicted_probs, mtcars_binary$high_mpg,
 :::
 :::
 
-
-
-
-
-
-
-
 # Summary
 
 ::: {.callout-important appearance="simple"}
 ## Key Points from GLM Analysis
 
-1.  **Gaussian GLMs** with identity link are equivalent to standard linear models/ANOVA
-2.  **Poisson GLMs** are appropriate for count data, but check for overdispersion
-3.  **Negative binomial** models handle overdispersed count data better than Poisson
-4.  **Logistic regression** models binary outcomes using the logit link function
+1.  **Gaussian GLMs** with identity link are equivalent to standard
+    linear models/ANOVA
+2.  **Poisson GLMs** are appropriate for count data, but check for
+    overdispersion
+3.  **Negative binomial** models handle overdispersed count data better
+    than Poisson
+4.  **Logistic regression** models binary outcomes using the logit link
+    function
 5.  **Model comparison** using AIC helps select the best model
 6.  **Diagnostic plots** are essential for checking model assumptions
-7.  **Odds ratios** in logistic regression show multiplicative effects on odds
+7.  **Odds ratios** in logistic regression show multiplicative effects
+    on odds
 
-Choose the appropriate GLM family based on your response variable: - Normal/continuous → Gaussian - Counts → Poisson (or negative binomial if overdispersed)\
+Choose the appropriate GLM family based on your response variable: -
+Normal/continuous → Gaussian - Counts → Poisson (or negative binomial if
+overdispersed)\
 - Binary → Binomial (logistic regression)
 :::
 
-Remember: GLMs provide a unified framework for many different types of analyses you might encounter in biological research!
+Remember: GLMs provide a unified framework for many different types of
+analyses you might encounter in biological research!

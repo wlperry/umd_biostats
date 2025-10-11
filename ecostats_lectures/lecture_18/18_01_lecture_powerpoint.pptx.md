@@ -14,20 +14,7 @@ format:
     output-file: "18_01_lecture_powerpoint.docx"
   pptx:
     output-file: "18_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "18_01_lecture_powerpoint.pdf"
 ---
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -39,17 +26,6 @@ Let's import the data and start to explore it
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -172,17 +148,6 @@ tibble [29 × 13] (S3: tbl_df/tbl/data.frame)
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -212,17 +177,6 @@ tibble [29 × 13] (S3: tbl_df/tbl/data.frame)
 :::
 
 ::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -260,17 +214,6 @@ p1 / p2
 ![](18_01_lecture_powerpoint_files/figure-pptx/river-overview-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -296,17 +239,6 @@ p1 / p2
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -337,17 +269,6 @@ tibble(
 ![](18_01_lecture_powerpoint_files/figure-pptx/nmds-process-diagram-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -359,26 +280,17 @@ tibble(
 
 1.  **Calculate dissimilarity matrix** between all pairs of sites
 2.  **Start with random configuration** of points in 2D space
-3.  **Calculate stress** = difference between original distances and ordination distances
+3.  **Calculate stress** = difference between original distances and
+    ordination distances
 4.  **Move points** to reduce stress
 5.  **Repeat** until stress cannot be reduced further
 6.  **Try multiple random starts** to avoid local minima
 
-**Stress Values:** - \< 0.1: Good representation - 0.1-0.2: Acceptable - \> 0.2: Poor representation
+**Stress Values:** - \< 0.1: Good representation - 0.1-0.2: Acceptable -
+\> 0.2: Poor representation
 :::
 
 ::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -405,17 +317,6 @@ tibble(iterations, stress) %>%
 ![](18_01_lecture_powerpoint_files/figure-pptx/stress-visualization-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -442,17 +343,6 @@ tibble(iterations, stress) %>%
 :::
 
 ::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -479,34 +369,12 @@ tibble(x, y, group) %>%
 ![](18_01_lecture_powerpoint_files/figure-pptx/nmds-robustness-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 # NMDS in Practice
 
 ## Running NMDS on Fish Communities
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -579,41 +447,20 @@ Final stress: 0.074
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 ::::: columns
 ::: {.column width="50%"}
 **Code Explanation:**
 
 `metaMDS()`: Main NMDS function from vegan package
 
--   `distance = "bray"`: Bray-Curtis dissimilarity (best for abundance data)
+-   `distance = "bray"`: Bray-Curtis dissimilarity (best for abundance
+    data)
 -   `k = 2`: Two dimensions for plotting
 -   `trymax = 100`: Try 100 random starting configurations
 -   Small constant added to avoid zero-distance issues
 :::
 
 ::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -625,32 +472,10 @@ stressplot(fish_nmds, main = "NMDS Stress Plot")
 ![](18_01_lecture_powerpoint_files/figure-pptx/stress-diagnostic-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 ## Interpreting NMDS Output
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -705,40 +530,21 @@ species     54    -none- numeric
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 ::::: columns
 ::: {.column width="50%"}
 **Understanding the Output:**
 
-1.  **Stress = 0.074**: This is excellent
+1.  **Stress = 0.074**: This is
+    excellent
 2.  Our 2D representation preserves the original distances well
 3.  **Convergent solutions**: Found stable solutions from multiple tries
-4.  **Two dimensions**: Axis 1 and Axis 2 have no inherent meaning (unlike PCA components)
-5.  **No eigenvalues**: NMDS doesn't calculate variance explained per axis
+4.  **Two dimensions**: Axis 1 and Axis 2 have no inherent meaning
+    (unlike PCA components)
+5.  **No eigenvalues**: NMDS doesn't calculate variance explained per
+    axis
 :::
 
 ::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -750,32 +556,10 @@ plot(fish_nmds, type = "t", main = "Basic NMDS Plot")
 ![](18_01_lecture_powerpoint_files/figure-pptx/basic-nmds-plot-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 ## Creating Enhanced NMDS Plots
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -817,22 +601,12 @@ p1 + p2
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 **What the NMDS Shows:**
 
 -   **Clear separation** between river reaches
 -   **Gradient pattern** from upper to lower reaches
--   Sites within each reach are **more similar** to each other than to other reaches
+-   Sites within each reach are **more similar** to each other than to
+    other reaches
 
 # PERMANOVA: Testing Multivariate Differences
 
@@ -842,30 +616,22 @@ p1 + p2
 ::: {.column width="60%"}
 **PERMANOVA (Permutational Multivariate ANOVA):**
 
--   **Purpose**: Test whether groups have different multivariate centroids
+-   **Purpose**: Test whether groups have different multivariate
+    centroids
 -   **Method**: ANOVA using distance matrices instead of raw data
 -   **Advantage**: No distributional assumptions
--   **Permutation**: Creates null distribution by randomly reassigning group labels
+-   **Permutation**: Creates null distribution by randomly reassigning
+    group labels
 
 **Think of it as:**
 
 -   Multivariate version of ANOVA
 -   Uses distances between samples instead of means
--   Tests: "Are the centers of these groups different in multivariate space?"
+-   Tests: "Are the centers of these groups different in multivariate
+    space?"
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -898,17 +664,6 @@ combined %>%
 ![](18_01_lecture_powerpoint_files/figure-pptx/permanova-concept-plot-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -935,17 +690,6 @@ combined %>%
 :::
 
 ::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -971,17 +715,6 @@ tibble(F_statistic = null_F,
 ![](18_01_lecture_powerpoint_files/figure-pptx/permutation-distribution-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -989,11 +722,13 @@ tibble(F_statistic = null_F,
 
 ::::: columns
 ::: {.column width="50%"}
-**Research Question:** *"Do fish communities differ significantly between river reaches?"*
+**Research Question:** *"Do fish communities differ significantly
+between river reaches?"*
 
 **Statistical Hypotheses:**
 
-**H₀**: The centroids of fish communities are the same across all river reaches (Upper = Middle = Lower)
+**H₀**: The centroids of fish communities are the same across all river
+reaches (Upper = Middle = Lower)
 
 **H₁**: At least one river reach has a different community centroid
 
@@ -1004,17 +739,6 @@ tibble(F_statistic = null_F,
 :::
 
 ::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1042,17 +766,6 @@ nmds_scores %>%
 ![](18_01_lecture_powerpoint_files/figure-pptx/hypothesis-visualization-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1065,8 +778,10 @@ nmds_scores %>%
 ✅ **Required:**
 
 1.  **Independence**: Samples are independent
-2.  **Exchangeability**: Under H₀, observations are exchangeable between groups
-3.  **Homogeneity of dispersion**: Groups have similar multivariate spread
+2.  **Exchangeability**: Under H₀, observations are exchangeable between
+    groups
+3.  **Homogeneity of dispersion**: Groups have similar multivariate
+    spread
 
 ❌ **Not required:**
 
@@ -1077,21 +792,11 @@ nmds_scores %>%
 **Checking Assumptions:**
 
 -   Use `betadisper()` to test homogeneity of dispersion
--   If violated, PERMANOVA tests dispersion differences, not location differences
+-   If violated, PERMANOVA tests dispersion differences, not location
+    differences
 :::
 
 ::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1122,34 +827,12 @@ plot(dispersion_test, main = "Multivariate Dispersion by Group")
 ![](18_01_lecture_powerpoint_files/figure-pptx/assumption-testing-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 # Running PERMANOVA
 
 ## PERMANOVA on Fish Communities
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1184,17 +867,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 ::::: columns
 ::: {.column width="50%"}
 **Line-by-line interpretation:**
@@ -1218,17 +890,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::::
 
 ## Pairwise PERMANOVA Tests
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1299,36 +960,18 @@ pairwise_results %>%
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 **Interpretation of Pairwise Results:**
 
--   All pairwise comparisons are **statistically significant** even after Bonferroni correction
--   **Upper vs Lower** shows the strongest difference (highest F-statistic)
--   Each comparison explains a substantial portion of variance (R² \> 0.3)
--   **Biological interpretation**: Fish communities change progressively down the river
+-   All pairwise comparisons are **statistically significant** even
+    after Bonferroni correction
+-   **Upper vs Lower** shows the strongest difference (highest
+    F-statistic)
+-   Each comparison explains a substantial portion of variance (R² \>
+    0.3)
+-   **Biological interpretation**: Fish communities change progressively
+    down the river
 
 ## Visualizing PERMANOVA Results
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1368,17 +1011,6 @@ p1 + p2
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # ANOSIM: Analysis of Similarities
 
 ## What is ANOSIM?
@@ -1387,7 +1019,8 @@ p1 + p2
 ::: {.column width="60%"}
 **ANOSIM (Analysis of Similarities):**
 
--   **Purpose**: Test whether samples within groups are more similar than samples between groups
+-   **Purpose**: Test whether samples within groups are more similar
+    than samples between groups
 -   **Method**: Based on rank dissimilarities
 -   **Statistic**: R-statistic ranging from -1 to +1
 -   **Interpretation**:
@@ -1403,17 +1036,6 @@ p1 + p2
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1453,17 +1075,6 @@ sample_points %>%
 ![](18_01_lecture_powerpoint_files/figure-pptx/anosim-concept-diagram-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1477,7 +1088,8 @@ sample_points %>%
 2.  **Rank all dissimilarities** from smallest to largest
 3.  **Calculate mean rank** of within-group dissimilarities (r̄w)
 4.  **Calculate mean rank** of between-group dissimilarities (r̄b)
-5.  **Compute R-statistic**: R = (r̄b - r̄w) / (N(N-1)/4) where N = total number of samples
+5.  **Compute R-statistic**: R = (r̄b - r̄w) / (N(N-1)/4) where N = total
+    number of samples
 6.  **Permute group labels** and recalculate R many times
 7.  **P-value** = proportion of permuted R ≥ observed R
 
@@ -1489,17 +1101,6 @@ sample_points %>%
 :::
 
 ::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1534,32 +1135,10 @@ tibble(
 ![](18_01_lecture_powerpoint_files/figure-pptx/anosim-r-interpretation-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 ## Running ANOSIM
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1591,38 +1170,21 @@ Number of permutations: 999
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 ::::: columns
 ::: {.column width="50%"}
 **ANOSIM Results Interpretation:**
 
--   **R = 0.119**: This indicates **little** separation between groups
--   **p-value = 0.067**: Highly significant result
--   **Biological meaning**: Fish communities are well-separated between river reaches, with communities within each reach being much more similar to each other than to communities in other reaches
+-   **R = 0.119**: This indicates
+    **little**
+    separation between groups
+-   **p-value = 0.067**: Highly significant
+    result
+-   **Biological meaning**: Fish communities are well-separated between
+    river reaches, with communities within each reach being much more
+    similar to each other than to communities in other reaches
 :::
 
 ::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1634,32 +1196,10 @@ plot(anosim_result, main = "ANOSIM Results")
 ![](18_01_lecture_powerpoint_files/figure-pptx/anosim-boxplot-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 ## ANOSIM vs PERMANOVA Comparison
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1695,17 +1235,6 @@ comparison_table
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 ::::: columns
 ::: {.column width="50%"}
 **When to use which:**
@@ -1726,17 +1255,6 @@ comparison_table
 :::
 
 ::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1764,34 +1282,12 @@ tibble(
 ![](18_01_lecture_powerpoint_files/figure-pptx/method-comparison-visual-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 # Environmental Drivers
 
 ## Which Environmental Variables Matter?
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1834,33 +1330,11 @@ Number of permutations: 999
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 ::::: columns
 ::: {.column width="50%"}
 **Environmental Vector Results:**
 
 **Significant variables (p \< 0.05):**
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1907,17 +1381,6 @@ for(var in sig_env) {
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 **What this means:**
 
 -   These variables significantly correlate with community composition
@@ -1925,17 +1388,6 @@ for(var in sig_env) {
 :::
 
 ::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1952,32 +1404,10 @@ legend("topright", legend = levels(doubs_env$reach),
 ![](18_01_lecture_powerpoint_files/figure-pptx/environmental-vectors-plot-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 ## Environmental Gradient Analysis
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -2026,23 +1456,15 @@ p1 / p2
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 **Key Environmental Patterns:**
 
--   **Distance from source (das)**: Strong correlate with community change
+-   **Distance from source (das)**: Strong correlate with community
+    change
 -   **Oxygen (oxy)**: Decreases downstream, affects fish communities
--   **Biological oxygen demand (dbo)**: Increases downstream (pollution indicator)
--   **Altitude (alt)**: Decreases downstream, associated with temperature changes
+-   **Biological oxygen demand (dbo)**: Increases downstream (pollution
+    indicator)
+-   **Altitude (alt)**: Decreases downstream, associated with
+    temperature changes
 
 # Summary and Conclusions
 
@@ -2052,14 +1474,16 @@ p1 / p2
 ::: {.column width="50%"}
 **NMDS Results:**
 
--   **Stress = 0.074**: Excellent representation
+-   **Stress = 0.074**: Excellent
+    representation
 -   **Clear gradient** from upper to lower river reaches
 -   **Within-reach similarity** \> between-reach similarity
 
 **PERMANOVA Results:**
 
 -   **Highly significant** differences between reaches (p \< 0.001)
--   **River reach explains substantial variance** in community composition
+-   **River reach explains substantial variance** in community
+    composition
 -   **All pairwise comparisons significant** after correction
 
 **ANOSIM Results:**

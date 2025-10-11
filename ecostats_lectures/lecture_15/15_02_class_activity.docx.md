@@ -6,18 +6,9 @@ metadata-files:
 format:
   html:
     output-file: "15_02_class_activity.html"
-  typst:
-    output-file: "15_02_class_activity.pdf"  
   docx:
     output-file: "15_02_class_activity.docx"
 ---
-
-
-
-
-
-
-
 
 
 
@@ -63,13 +54,6 @@ exclamationis* - *Oecanthus niveus*
 But we measured rates at different temperatures, and there's a
 relationship between pulse rate and temperature. ANCOVA lets us adjust
 for temperature effect to get a more powerful test!
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -126,24 +110,10 @@ ggplot(cricket_data, aes(x = temp, y = chirp_rate, color = species)) +
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 1: Test Homogeneity of Slopes
 
 This is the most critical assumption! We test if the regression slopes
 are equal across all groups.
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -173,13 +143,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 **Interpretation**: If p \> 0.05, slopes are homogeneous and we can
 proceed with ANCOVA. If p \< 0.05, slopes differ and standard ANCOVA is
 inappropriate.
@@ -188,13 +151,6 @@ inappropriate.
 
 Since slopes are homogeneous (p \> 0.05), we can fit the ANCOVA model
 without the interaction term.
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -259,21 +215,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 3: Check Model Assumptions
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -292,24 +234,10 @@ par(mfrow = c(1, 1))
 ```
 :::
 
-
-
-
-
-
-
-
 ## Step 4: Calculate Adjusted Means
 
 ANCOVA compares adjusted means - what each group's mean would be at the
 overall mean of the covariate.
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -336,21 +264,7 @@ Confidence level used: 0.95
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 5: Pairwise Comparisons
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -370,21 +284,7 @@ pairs(cricket_adjusted_means, adjust = "sidak")
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 6: Visualize Results
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -419,26 +319,12 @@ ggplot(cricket_adj_means_df, aes(x = species, y = emmean, fill = species)) +
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 2: Partridge Longevity Analysis
 
 ## Data Overview
 
 We'll analyze the effect of mating strategy on male fruitfly longevity,
 using thorax length as a covariate.
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -511,21 +397,7 @@ ggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) +
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 1: Test Homogeneity of Slopes
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -555,21 +427,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 2: Fit ANCOVA Model
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -646,21 +504,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 3: Check Assumptions
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -675,21 +519,7 @@ plot(ancova_model)
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 4: Calculate Adjusted Means
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -716,21 +546,7 @@ Confidence level used: 0.95
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 5: Pairwise Comparisons
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -781,24 +597,10 @@ plot(adjusted_means, comparisons = TRUE)
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 3: Example with Heterogeneous Slopes
 
 Let's look at an example where slopes are NOT homogeneous using sea
 urchin data.
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -853,21 +655,7 @@ ggplot(urchin_data, aes(x = volume, y = suture_width, color = treatment)) +
 :::
 :::
 
-
-
-
-
-
-
-
 ## Test for Homogeneity of Slopes
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -897,26 +685,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 **Result**: With p \< 0.05, we have heterogeneous slopes! Standard
 ANCOVA would be inappropriate here.
 
 ## What to do with Heterogeneous Slopes
 
 When slopes are not homogeneous, you have several options:
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -986,13 +760,6 @@ Coefficients:
 
 :::
 :::
-
-
-
-
-
-
-
 
 # Summary Checklist for ANCOVA
 

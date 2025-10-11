@@ -6,9 +6,10 @@ metadata-files:
 format:
   html:
     output-file: "10_homework_ANCOVA_html.html"
-  typst:
-    output-file: "10_homework_ANCOVA.pdf"
+  docx:
+    output-file: "10_homework_ANCOVA.docx"
 ---
+
 
 ::: {.cell}
 
@@ -29,13 +30,13 @@ theme_set(theme_bw())
 :::
 
 
-
-
-
-
 # Assignment Overview
 
-This homework assignment focuses on Analysis of Covariance (ANCOVA) to examine the relationship between temperature and cricket chirp rate across two different cricket species. ANCOVA allows us to test whether the relationship between temperature and chirp rate differs between species while controlling for temperature as a covariate.
+This homework assignment focuses on Analysis of Covariance (ANCOVA) to
+examine the relationship between temperature and cricket chirp rate
+across two different cricket species. ANCOVA allows us to test whether
+the relationship between temperature and chirp rate differs between
+species while controlling for temperature as a covariate.
 
 ## Learning Objectives
 
@@ -50,16 +51,21 @@ By completing this assignment, you will be able to:
 
 ## Data Description
 
-The dataset `cricket_chirp_rate.csv` contains chirp rate measurements from two cricket species at different temperatures:
+The dataset `cricket_chirp_rate.csv` contains chirp rate measurements
+from two cricket species at different temperatures:
 
--   `species`: Cricket species (ex = *Oecanthus exclamationis*, niv = *Oecanthus niveus*)
+-   `species`: Cricket species (ex = *Oecanthus exclamationis*, niv =
+    *Oecanthus niveus*)
 -   `temp`: Temperature (°C)
 -   `pulse`: Chirp rate (chirps per second)
 
 ::: callout-note
 ## Important Background
 
-Cricket chirp rate is known to be temperature-dependent, following a near-linear relationship. Different cricket species may have different thermal sensitivities, leading to different slopes or intercepts in the temperature-chirp rate relationship.
+Cricket chirp rate is known to be temperature-dependent, following a
+near-linear relationship. Different cricket species may have different
+thermal sensitivities, leading to different slopes or intercepts in the
+temperature-chirp rate relationship.
 :::
 
 ------------------------------------------------------------------------
@@ -69,16 +75,14 @@ Cricket chirp rate is known to be temperature-dependent, following a near-linear
 ## 1.1 Load and Clean the Data
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Load the cricket data
 ```
 :::
+
+
 
 ::: {.cell}
 
@@ -96,10 +100,6 @@ Cricket chirp rate is known to be temperature-dependent, following a near-linear
 :::
 
 
-
-
-
-
 ------------------------------------------------------------------------
 
 # Part 2: Statistical Model Setup
@@ -111,9 +111,13 @@ Cricket chirp rate is known to be temperature-dependent, following a near-linear
 
 **Type of Analysis:** Analysis of Covariance (ANCOVA)
 
-**Model Equation:** pulse_rate = β₀ + β₁(temperature) + β₂(species) + β₃(temperature × species) + ε
+**Model Equation:** pulse_rate = β₀ + β₁(temperature) + β₂(species) +
+β₃(temperature × species) + ε
 
-Where: - pulse_rate = chirp rate (response variable) - β₀ = intercept for reference species - β₁ = slope for temperature effect in reference species - β₂ = difference in intercept between species - β₃ = difference in slope between species (interaction term) - ε = random error term
+Where: - pulse_rate = chirp rate (response variable) - β₀ = intercept
+for reference species - β₁ = slope for temperature effect in reference
+species - β₂ = difference in intercept between species - β₃ = difference
+in slope between species (interaction term) - ε = random error term
 
 **Hypotheses Being Tested:**
 
@@ -121,7 +125,10 @@ Where: - pulse_rate = chirp rate (response variable) - β₀ = intercept for ref
 2.  **Main effect of species:** H₀: β₂ = 0 vs H₁: β₂ ≠ 0\
 3.  **Interaction effect:** H₀: β₃ = 0 vs H₁: β₃ ≠ 0
 
-**ANCOVA Assumptions:** 1. Independence of observations 2. Normality of residuals 3. Homogeneity of variance (homoscedasticity) 4. Linear relationship between covariate and response 5. Homogeneity of regression slopes (if no interaction)
+**ANCOVA Assumptions:** 1. Independence of observations 2. Normality of
+residuals 3. Homogeneity of variance (homoscedasticity) 4. Linear
+relationship between covariate and response 5. Homogeneity of regression
+slopes (if no interaction)
 :::
 
 ------------------------------------------------------------------------
@@ -129,10 +136,6 @@ Where: - pulse_rate = chirp rate (response variable) - β₀ = intercept for ref
 # Part 3: Descriptive Statistics and Exploratory Analysis
 
 ## 3.1 Summary Statistics by Group
-
-
-
-
 
 
 ::: {.cell}
@@ -146,15 +149,7 @@ Where: - pulse_rate = chirp rate (response variable) - β₀ = intercept for ref
 :::
 
 
-
-
-
-
 ## 3.2 Exploratory Data Visualization
-
-
-
-
 
 
 ::: {.cell}
@@ -169,13 +164,15 @@ t
 ```
 function (x) 
 UseMethod("t")
-<bytecode: 0x117f097a8>
+<bytecode: 0x120d03120>
 <environment: namespace:base>
 ```
 
 
 :::
 :::
+
+
 
 ::: {.cell}
 
@@ -185,19 +182,11 @@ UseMethod("t")
 :::
 
 
-
-
-
-
 ------------------------------------------------------------------------
 
 # Part 4: ANCOVA Analysis
 
 ## 4.1 Fit the ANCOVA Model
-
-
-
-
 
 
 ::: {.cell}
@@ -208,15 +197,7 @@ UseMethod("t")
 :::
 
 
-
-
-
-
 ## 4.2 Model Interpretation
-
-
-
-
 
 
 ::: {.cell}
@@ -227,26 +208,21 @@ UseMethod("t")
 :::
 
 
-
-
-
-
 **Model Interpretation:**
 
 -   **Intercept (β₀):** Estimated pulse rate for O. exclamationis at 0°C
--   **temp (β₁):** For every 1°C increase in temperature, O. exclamationis chirp rate increases by β₁ chirps/sec
--   **species O. niveus (β₂):** Difference in intercept between O. niveus and O. exclamationis
--   **temp:species O. niveus (β₃):** Difference in temperature slope between the two species
+-   **temp (β₁):** For every 1°C increase in temperature, O.
+    exclamationis chirp rate increases by β₁ chirps/sec
+-   **species O. niveus (β₂):** Difference in intercept between O.
+    niveus and O. exclamationis
+-   **temp:species O. niveus (β₃):** Difference in temperature slope
+    between the two species
 
 ------------------------------------------------------------------------
 
 # Part 5: Assumption Testing
 
 ## 5.1 Diagnostic Plots
-
-
-
-
 
 
 ::: {.cell}
@@ -260,15 +236,7 @@ UseMethod("t")
 :::
 
 
-
-
-
-
 ## 5.2 Formal Assumption Tests
-
-
-
-
 
 
 ::: {.cell}
@@ -278,16 +246,14 @@ UseMethod("t")
 ```
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Levene's test for homogeneity of variances
 ```
 :::
-
-
-
-
 
 
 ------------------------------------------------------------------------
@@ -299,20 +265,12 @@ UseMethod("t")
 ## 7.1 Create Final Figure
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create publication-quality plot
 ```
 :::
-
-
-
-
 
 
 ------------------------------------------------------------------------
@@ -323,11 +281,18 @@ UseMethod("t")
 
 ## What to turn in -
 
-1.  a quarto markdown file and dataframe if you modified the original. All of the code should be able to run with what you turn in. **(2 points)**
+1.  a quarto markdown file and dataframe if you modified the original.
+    All of the code should be able to run with what you turn in. **(2
+    points)**
 
-2.  a self-contained html file showing the code and output **(2 points)**
+2.  a self-contained html file showing the code and output **(2
+    points)**
 
-3.  annotations in the quarto file that shows or tells what is being done in the r code chunks describing what you are trying to do - credit will be given even if it does not work as long as you detail what you are doing. As we start to move into more statistics you will be expected to interpret the results. **(2 points)**
+3.  annotations in the quarto file that shows or tells what is being
+    done in the r code chunks describing what you are trying to do -
+    credit will be given even if it does not work as long as you detail
+    what you are doing. As we start to move into more statistics you
+    will be expected to interpret the results. **(2 points)**
 
 ## Points
 

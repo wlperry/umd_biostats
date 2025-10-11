@@ -13,8 +13,6 @@ format:
     output-file: "10_01_lecture_powerpoint.docx"
   pptx:
     output-file: "10_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "10_01_lecture_powerpoint.pdf"
 ---
 
 
@@ -499,6 +497,7 @@ $$y_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \epsilon_i \quad \text{vs.} \q
 This leads to “Curvature” of the regression (hyper)plane
 
 # **Lecture 10:** Analyses
+
 ::::: columns
 ::: {.column width="30%"}
 Interaction terms lead to “Curvature” of the regression (hyper)plane
@@ -520,7 +519,7 @@ Interaction terms lead to “Curvature” of the regression (hyper)plane
 Adding interactions:
 
 -   many more predictors (“parameter proliferation”):
--   2n is required; 6 parameters= 64 terms; 7 parameters= 128
+-   2^n^ is required; 6 parameters = 64 terms; 7 parameters= 128
 -   interpretation more complex
 -   When to include interactions? When they make biological sense!!!
 

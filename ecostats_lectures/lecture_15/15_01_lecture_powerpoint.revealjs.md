@@ -14,20 +14,7 @@ format:
     output-file: "15_01_lecture_powerpoint.docx"
   pptx:
     output-file: "15_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "15_01_lecture_powerpoint.pdf"
 ---
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -48,29 +35,9 @@ General Linearized Models (GLM)
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -100,39 +67,20 @@ Analysis of covariance (ANCOVA):
 
 -   ANCOVA = Analysis of COVAriance
 -   Combination of regression and ANOVA
--   A continuous covariate is measured along with the response variable for each experimental unit
--   Common use: compare means of factor levels (groups), adjusting for variance from continuous covariate
--   Another use: determine whether two or more regression lines differ in slopes and intercepts
+-   A continuous covariate is measured along with the response variable
+    for each experimental unit
+-   Common use: compare means of factor levels (groups), adjusting for
+    variance from continuous covariate
+-   Another use: determine whether two or more regression lines differ
+    in slopes and intercepts
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/intro_ancova_diagram-1.png){width=384}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -141,13 +89,15 @@ Analysis of covariance (ANCOVA):
 ## Common Applications of ANCOVA
 
 -   **Increasing statistical power**
-    -   Removing variation associated with a covariate can reduce residual error
+    -   Removing variation associated with a covariate can reduce
+        residual error
     -   More powerful test of treatment effects
 -   **Adjusting for confounding variables**
     -   When treatments might differ in some continuous variable
     -   Need to separate treatment effects from covariate effects
 -   **Testing equality of regression lines**
-    -   Do treatments have the same relationship with a continuous variable?
+    -   Do treatments have the same relationship with a continuous
+        variable?
     -   Tests for both slopes and intercepts
 
 # ANCOVA Example: Cricket Chirping
@@ -167,37 +117,16 @@ But:
 -   Range of temperatures differed between species
 -   Apparent relationship between pulse rate and temperature
 
-ANCOVA lets us adjust for temperature effect to get a more powerful test!
+ANCOVA lets us adjust for temperature effect to get a more powerful
+test!
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/cricket_example-1.png){width=384}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -205,31 +134,33 @@ ANCOVA lets us adjust for temperature effect to get a more powerful test!
 
 ## The ANCOVA Model
 
-Key concept in ANCOVA: the difference between "unadjusted" group means and "adjusted" means.
+Key concept in ANCOVA: the difference between "unadjusted" group means
+and "adjusted" means.
 
 In this visualization:
 
--   Group Means (shown as asterisks): raw/unadjusted means for each group - simply the average X value and average Y value for all points in that group. Notice that Group A and Group B have different mean X values (they're positioned at different points along the X axis).
+-   Group Means (shown as asterisks): raw/unadjusted means for each
+    group - simply the average X value and average Y value for all
+    points in that group. Notice that Group A and Group B have different
+    mean X values (they're positioned at different points along the X
+    axis).
 
--   Adjusted Means (shown as triangles): These are what ANCOVA actually compares. The adjusted means represent what each group's mean would be if all groups had the same value of the covariate (in this case, the overall mean X).
+-   Adjusted Means (shown as triangles): These are what ANCOVA actually
+    compares. The adjusted means represent what each group's mean would
+    be if all groups had the same value of the covariate (in this case,
+    the overall mean X).
 
-The core purpose of ANCOVA is to make this adjustment. This is important because:
+The core purpose of ANCOVA is to make this adjustment. This is important
+because:
 
--   When groups differ in their covariate values (as they often do in observational studies or even in experiments with random assignment), comparing raw means can be misleading
--   The adjustment helps "level the playing field" by estimating what each group's mean would be if they all had the same value of the covariate
+-   When groups differ in their covariate values (as they often do in
+    observational studies or even in experiments with random
+    assignment), comparing raw means can be misleading
+-   The adjustment helps "level the playing field" by estimating what
+    each group's mean would be if they all had the same value of the
+    covariate
 
 # ANCOVA Model Visualization
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -237,24 +168,18 @@ The core purpose of ANCOVA is to make this adjustment. This is important because
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Mathematical Model for ANCOVA
 
-For a single-factor ANCOVA with factor A (p levels, i = 1 to p), a continuous covariate (x), and response variable (y):
+For a single-factor ANCOVA with factor A (p levels, i = 1 to p), a
+continuous covariate (x), and response variable (y):
 
 $Y_{ij} = \mu + \alpha_i + \beta(X_{ij} - \bar{X}) + \varepsilon_{ij}$
 
-Where: - $Y_{ij}$ = response value for observation j in level i of factor A - $\mu$ = overall mean - $\alpha_i$ = effect of level i of factor A - $\beta$ = common regression slope relating Y to X - $X_{ij}$ = covariate value for observation j in level i of factor A - $\bar{X}$ = mean value of covariate - $\varepsilon_{ij}$ = error term
+Where: - $Y_{ij}$ = response value for observation j in level i of
+factor A - $\mu$ = overall mean - $\alpha_i$ = effect of level i of
+factor A - $\beta$ = common regression slope relating Y to X - $X_{ij}$
+= covariate value for observation j in level i of factor A - $\bar{X}$ =
+mean value of covariate - $\varepsilon_{ij}$ = error term
 
 # ANCOVA Parameters Interpretation
 
@@ -263,43 +188,23 @@ Where: - $Y_{ij}$ = response value for observation j in level i of factor A - $\
 ## Interpretation of Parameters
 
 -   $\mu$ = overall mean response
--   $\alpha_i$ = effect of level i (difference between group mean and overall mean)
+-   $\alpha_i$ = effect of level i (difference between group mean and
+    overall mean)
 -   $\beta$ = pooled within-group regression coefficient
 -   $X_{ij}$ = covariate value for observation j in group i
 -   $\bar{X}$ = overall mean of covariate
 -   $\varepsilon_{ij}$ = unexplained error
 
-This model assumes **homogeneous slopes** across all treatment groups (we'll test this later).
+This model assumes **homogeneous slopes** across all treatment groups
+(we'll test this later).
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/parameters_illustration-1.png){width=384}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -309,7 +214,8 @@ This model assumes **homogeneous slopes** across all treatment groups (we'll tes
 ::: {.column width="60%"}
 ## Running ANCOVA in R
 
-Basic ANCOVA model: - Response: continuous variable (y) - Predictor: categorical factor (A)\
+Basic ANCOVA model: - Response: continuous variable (y) - Predictor:
+categorical factor (A)\
 - Covariate: continuous variable (x)
 
 The simplest ANCOVA model is:
@@ -326,20 +232,11 @@ model <- aov(y ~ A + x, data = mydata)
 summary(model)
 ```
 
-Both approaches use Type I SS (sequential). For unbalanced designs, you may want Type III SS using car package.
+Both approaches use Type I SS (sequential). For unbalanced designs, you
+may want Type III SS using car package.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -403,16 +300,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -421,16 +308,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ::::: columns
 ::: {.column width="60%"}
 Using Type III SS from car package:
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -461,35 +338,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 
 ::: {.column width="40%"}
-The Type III approach is often preferred for: - Unbalanced designs - When you want to test each effect adjusted for all others - More conservative approach when groups differ in covariate values
+The Type III approach is often preferred for: - Unbalanced designs -
+When you want to test each effect adjusted for all others - More
+conservative approach when groups differ in covariate values
 :::
 :::::
 
 # Analysis of Variance for ANCOVA: Partitioning
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -497,56 +355,26 @@ The Type III approach is often preferred for: - Unbalanced designs - When you wa
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # ANOVA Table for ANCOVA
 
 The ANOVA table for a single-factor ANCOVA has these components:
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
 ::: {.cell-output-display}
 
 ```{=html}
-<div class="tabwid"><style>.cl-400ea7d2{}.cl-400b54ce{font-family:'Helvetica';font-size:10pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-400b54d8{font-family:'Helvetica';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-400cb134{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-400cbe86{width:1.392in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbe87{width:0.535in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbe88{width:1.268in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbe90{width:2.454in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbe91{width:1.956in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbe92{width:1.14in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbe9a{width:1.392in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbe9b{width:0.535in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbe9c{width:1.268in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbea4{width:2.454in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbea5{width:1.956in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbeae{width:1.14in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbeaf{width:1.392in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbeb0{width:0.535in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbeb8{width:1.268in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbec2{width:2.454in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbec3{width:1.956in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbec4{width:1.14in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbecc{width:1.392in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbecd{width:0.535in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbece{width:1.268in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbed6{width:2.454in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbed7{width:1.956in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbed8{width:1.14in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbed9{width:1.392in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbee0{width:0.535in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbee1{width:1.268in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbeea{width:2.454in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbeeb{width:1.956in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-400cbeec{width:1.14in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-400ea7d2'><thead><tr style="overflow-wrap:break-word;"><th class="cl-400cbe86"><p class="cl-400cb134"><span class="cl-400b54ce">Source</span></p></th><th class="cl-400cbe87"><p class="cl-400cb134"><span class="cl-400b54ce">df</span></p></th><th class="cl-400cbe88"><p class="cl-400cb134"><span class="cl-400b54ce">Sum of Squares</span></p></th><th class="cl-400cbe90"><p class="cl-400cb134"><span class="cl-400b54ce">Mean Square</span></p></th><th class="cl-400cbe91"><p class="cl-400cb134"><span class="cl-400b54ce">F-ratio</span></p></th><th class="cl-400cbe92"><p class="cl-400cb134"><span class="cl-400b54ce">Expected MS</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-400cbe9a"><p class="cl-400cb134"><span class="cl-400b54d8">Factor A (adjusted)</span></p></td><td class="cl-400cbe9b"><p class="cl-400cb134"><span class="cl-400b54d8">(p-1)</span></p></td><td class="cl-400cbe9c"><p class="cl-400cb134"><span class="cl-400b54d8">SS_A(adj)</span></p></td><td class="cl-400cbea4"><p class="cl-400cb134"><span class="cl-400b54d8">MS_A(adj) = SS_A(adj)/(p-1)</span></p></td><td class="cl-400cbea5"><p class="cl-400cb134"><span class="cl-400b54d8">MS_A(adj)/MS_Residual</span></p></td><td class="cl-400cbeae"><p class="cl-400cb134"><span class="cl-400b54d8">σ² + n∑α²/(p-1)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-400cbeaf"><p class="cl-400cb134"><span class="cl-400b54d8">Covariate</span></p></td><td class="cl-400cbeb0"><p class="cl-400cb134"><span class="cl-400b54d8">1</span></p></td><td class="cl-400cbeb8"><p class="cl-400cb134"><span class="cl-400b54d8">SS_Covariate</span></p></td><td class="cl-400cbec2"><p class="cl-400cb134"><span class="cl-400b54d8">MS_Covariate = SS_Covariate/1</span></p></td><td class="cl-400cbec3"><p class="cl-400cb134"><span class="cl-400b54d8">MS_Covariate/MS_Residual</span></p></td><td class="cl-400cbec4"><p class="cl-400cb134"><span class="cl-400b54d8">σ² + β²∑(X-X̄)²</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-400cbecc"><p class="cl-400cb134"><span class="cl-400b54d8">Residual</span></p></td><td class="cl-400cbecd"><p class="cl-400cb134"><span class="cl-400b54d8">n-p-1</span></p></td><td class="cl-400cbece"><p class="cl-400cb134"><span class="cl-400b54d8">SS_Residual</span></p></td><td class="cl-400cbed6"><p class="cl-400cb134"><span class="cl-400b54d8">MS_Residual = SS_Residual/(n-p-1)</span></p></td><td class="cl-400cbed7"><p class="cl-400cb134"><span class="cl-400b54d8"></span></p></td><td class="cl-400cbed8"><p class="cl-400cb134"><span class="cl-400b54d8">σ²</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-400cbed9"><p class="cl-400cb134"><span class="cl-400b54d8">Total</span></p></td><td class="cl-400cbee0"><p class="cl-400cb134"><span class="cl-400b54d8">n-1</span></p></td><td class="cl-400cbee1"><p class="cl-400cb134"><span class="cl-400b54d8">SS_Total</span></p></td><td class="cl-400cbeea"><p class="cl-400cb134"><span class="cl-400b54d8"></span></p></td><td class="cl-400cbeeb"><p class="cl-400cb134"><span class="cl-400b54d8"></span></p></td><td class="cl-400cbeec"><p class="cl-400cb134"><span class="cl-400b54d8"></span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-c7bf5852{}.cl-c7bbc944{font-family:'Helvetica';font-size:10pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-c7bbc962{font-family:'Helvetica';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-c7bd444a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-c7bd51c4{width:1.392in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51c5{width:0.535in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51c6{width:1.268in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51c7{width:2.454in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51ce{width:1.956in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51cf{width:1.14in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51d8{width:1.392in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51d9{width:0.535in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51da{width:1.268in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51e2{width:2.454in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51e3{width:1.956in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51e4{width:1.14in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51e5{width:1.392in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51ec{width:0.535in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51ed{width:1.268in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51f6{width:2.454in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd51f7{width:1.956in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd5200{width:1.14in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd5201{width:1.392in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd520a{width:0.535in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd520b{width:1.268in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd520c{width:2.454in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd520d{width:1.956in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd5214{width:1.14in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd5215{width:1.392in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd5216{width:0.535in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd5217{width:1.268in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd521e{width:2.454in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd521f{width:1.956in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c7bd5228{width:1.14in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-c7bf5852'><thead><tr style="overflow-wrap:break-word;"><th class="cl-c7bd51c4"><p class="cl-c7bd444a"><span class="cl-c7bbc944">Source</span></p></th><th class="cl-c7bd51c5"><p class="cl-c7bd444a"><span class="cl-c7bbc944">df</span></p></th><th class="cl-c7bd51c6"><p class="cl-c7bd444a"><span class="cl-c7bbc944">Sum of Squares</span></p></th><th class="cl-c7bd51c7"><p class="cl-c7bd444a"><span class="cl-c7bbc944">Mean Square</span></p></th><th class="cl-c7bd51ce"><p class="cl-c7bd444a"><span class="cl-c7bbc944">F-ratio</span></p></th><th class="cl-c7bd51cf"><p class="cl-c7bd444a"><span class="cl-c7bbc944">Expected MS</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-c7bd51d8"><p class="cl-c7bd444a"><span class="cl-c7bbc962">Factor A (adjusted)</span></p></td><td class="cl-c7bd51d9"><p class="cl-c7bd444a"><span class="cl-c7bbc962">(p-1)</span></p></td><td class="cl-c7bd51da"><p class="cl-c7bd444a"><span class="cl-c7bbc962">SS_A(adj)</span></p></td><td class="cl-c7bd51e2"><p class="cl-c7bd444a"><span class="cl-c7bbc962">MS_A(adj) = SS_A(adj)/(p-1)</span></p></td><td class="cl-c7bd51e3"><p class="cl-c7bd444a"><span class="cl-c7bbc962">MS_A(adj)/MS_Residual</span></p></td><td class="cl-c7bd51e4"><p class="cl-c7bd444a"><span class="cl-c7bbc962">σ² + n∑α²/(p-1)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c7bd51e5"><p class="cl-c7bd444a"><span class="cl-c7bbc962">Covariate</span></p></td><td class="cl-c7bd51ec"><p class="cl-c7bd444a"><span class="cl-c7bbc962">1</span></p></td><td class="cl-c7bd51ed"><p class="cl-c7bd444a"><span class="cl-c7bbc962">SS_Covariate</span></p></td><td class="cl-c7bd51f6"><p class="cl-c7bd444a"><span class="cl-c7bbc962">MS_Covariate = SS_Covariate/1</span></p></td><td class="cl-c7bd51f7"><p class="cl-c7bd444a"><span class="cl-c7bbc962">MS_Covariate/MS_Residual</span></p></td><td class="cl-c7bd5200"><p class="cl-c7bd444a"><span class="cl-c7bbc962">σ² + β²∑(X-X̄)²</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c7bd5201"><p class="cl-c7bd444a"><span class="cl-c7bbc962">Residual</span></p></td><td class="cl-c7bd520a"><p class="cl-c7bd444a"><span class="cl-c7bbc962">n-p-1</span></p></td><td class="cl-c7bd520b"><p class="cl-c7bd444a"><span class="cl-c7bbc962">SS_Residual</span></p></td><td class="cl-c7bd520c"><p class="cl-c7bd444a"><span class="cl-c7bbc962">MS_Residual = SS_Residual/(n-p-1)</span></p></td><td class="cl-c7bd520d"><p class="cl-c7bd444a"><span class="cl-c7bbc962"></span></p></td><td class="cl-c7bd5214"><p class="cl-c7bd444a"><span class="cl-c7bbc962">σ²</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c7bd5215"><p class="cl-c7bd444a"><span class="cl-c7bbc962">Total</span></p></td><td class="cl-c7bd5216"><p class="cl-c7bd444a"><span class="cl-c7bbc962">n-1</span></p></td><td class="cl-c7bd5217"><p class="cl-c7bd444a"><span class="cl-c7bbc962">SS_Total</span></p></td><td class="cl-c7bd521e"><p class="cl-c7bd444a"><span class="cl-c7bbc962"></span></p></td><td class="cl-c7bd521f"><p class="cl-c7bd444a"><span class="cl-c7bbc962"></span></p></td><td class="cl-c7bd5228"><p class="cl-c7bd444a"><span class="cl-c7bbc962"></span></p></td></tr></tbody></table></div>
 ```
 
 :::
 :::
 
 
-
-
-
-
-
-
-
-
-
-
 # Null Hypotheses in ANCOVA
 
-1.  **Treatment Effect (adjusted for covariate)** $H_0: \alpha_1 = \alpha_2 = ... = \alpha_p = 0$
+1.  **Treatment Effect (adjusted for covariate)**
+    $H_0: \alpha_1 = \alpha_2 = ... = \alpha_p = 0$
 
     -   Are the adjusted group means equal?
     -   Test with F = MS_A(adj)/MS_Residual
@@ -556,7 +384,8 @@ The ANOVA table for a single-factor ANCOVA has these components:
     -   Is there a relationship between the covariate and the response?
     -   Test with F = MS_Covariate/MS_Residual
 
-3.  **Homogeneity of Slopes** (test this first!) $H_0: \beta_1 = \beta_2 = ... = \beta_p$
+3.  **Homogeneity of Slopes** (test this first!)
+    $H_0: \beta_1 = \beta_2 = ... = \beta_p$
 
     -   Are the regression slopes the same for all groups?
     -   Test by adding group\*covariate interaction term
@@ -567,7 +396,8 @@ The ANOVA table for a single-factor ANCOVA has these components:
 ::: {.column width="60%"}
 ## Testing for Homogeneous Slopes
 
-ANCOVA assumes the regression slopes are the same for all groups (parallel regression lines)
+ANCOVA assumes the regression slopes are the same for all groups
+(parallel regression lines)
 
 To test this assumption:
 
@@ -590,16 +420,6 @@ anova(model_int)
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -638,17 +458,9 @@ interaction_pvalue <- anova(model_int)[3, "Pr(>F)"]
 :::
 
 
-
-
-
-
-
-
-
-
-
-
-The p-value for the interaction is 0.984. Since p \> 0.05, we can proceed with standard ANCOVA (assuming homogeneous slopes).
+The p-value for the interaction is 0.984.
+Since p \> 0.05, we can proceed with standard ANCOVA (assuming
+homogeneous slopes).
 :::
 :::::
 
@@ -656,33 +468,11 @@ The p-value for the interaction is 0.984. Since p \> 0.05, we can proceed with s
 
 ## Parallel vs. Non-Parallel Slopes
 
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/slopes_visualization-1.png){width=768}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 
 # Handling Heterogeneous Slopes
 
@@ -690,63 +480,35 @@ The p-value for the interaction is 0.984. Since p \> 0.05, we can proceed with s
 ::: {.column width="60%"}
 ## When Slopes Are Not Homogeneous
 
-If the interaction term is significant (p \< 0.05), the slope-group relationship is not the same across groups.
+If the interaction term is significant (p \< 0.05), the slope-group
+relationship is not the same across groups.
 
 Options:
 
-1.  **Report the interaction** - this is a biologically interesting result!
+1.  **Report the interaction** - this is a biologically interesting
+    result!
 
 2.  **Separate regressions** - analyze each group separately
 
-3.  **Johnson-Neyman procedure** - identifies regions of the covariate where groups differ significantly
+3.  **Johnson-Neyman procedure** - identifies regions of the covariate
+    where groups differ significantly
 
-4.  **Alternative models** - consider transformation, polynomial terms, or more complex models
+4.  **Alternative models** - consider transformation, polynomial terms,
+    or more complex models
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/heterogeneous_slopes_example-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 # Partridge Example: Data Overview
 
 ## ANCOVA on Longevity of Male Fruitflies
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -777,34 +539,14 @@ ggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) +
 ```
 
 ::: {.cell-output-display}
-![](15_01_lecture_powerpoint_files/figure-html/partridge_analysis-1.png){width=672}
+![](15_01_lecture_powerpoint_files/figure-html/partridge_analysis-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 
 # Partridge Example: Testing Homogeneity
 
 ## Testing Homogeneity of Slopes
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -840,29 +582,11 @@ p_interaction <- anova(homo_slopes_model)[3, "Pr(>F)"]
 :::
 
 
-
-
-
-
-
-
-
-
-
-
-The p-value for the interaction term (treatment × THORAX) is 0.984. Since this value is \> 0.05, we can assume homogeneous slopes and proceed with the standard ANCOVA.
+The p-value for the interaction term (treatment × THORAX) is
+0.984. Since this value is \> 0.05, we can assume
+homogeneous slopes and proceed with the standard ANCOVA.
 
 # Partridge Example: Full ANCOVA Analysis
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -958,29 +682,9 @@ Confidence level used: 0.95
 :::
 
 
-
-
-
-
-
-
-
-
-
-
 # Partridge Example: Pairwise Comparisons
 
 ## Pairwise Comparisons of Adjusted Means
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1032,35 +736,14 @@ plot(adjusted_means, comparisons = TRUE) +
 ```
 
 ::: {.cell-output-display}
-![](15_01_lecture_powerpoint_files/figure-html/partridge_comparisons-1.png){width=672}
+![](15_01_lecture_powerpoint_files/figure-html/partridge_comparisons-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 
 # Visualizing ANCOVA Results
 
 ## Visualization Options for ANCOVA
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -1068,73 +751,33 @@ plot(adjusted_means, comparisons = TRUE) +
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Sea Urchin Example: Heterogeneous Slopes
 
 ::::: columns
 ::: {.column width="60%"}
 ## Heterogeneous Slopes Example
 
-Constable (1993) studied shrinking in sea urchin test: - Compared suture widths between treatments - Three groups: high food, low food, initial sample - Covariate: body volume (cube root transformed)
+Constable (1993) studied shrinking in sea urchin test: - Compared suture
+widths between treatments - Three groups: high food, low food, initial
+sample - Covariate: body volume (cube root transformed)
 
-The analysis showed: - Significant interaction between treatment and covariate - **Heterogeneous slopes** across treatments - Can't use standard ANCOVA
+The analysis showed: - Significant interaction between treatment and
+covariate - **Heterogeneous slopes** across treatments - Can't use
+standard ANCOVA
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/urchin_heterogeneous-1.png){width=432}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 # Johnson-Neyman Procedure
 
 ## Johnson-Neyman Procedure for Heterogeneous Slopes
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -1160,29 +803,24 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Interpretation of Heterogeneous Slopes
 
-When you have heterogeneous slopes, the Johnson-Neyman procedure identifies regions of the covariate where groups differ:
+When you have heterogeneous slopes, the Johnson-Neyman procedure
+identifies regions of the covariate where groups differ:
 
 1.  **Initial \> Low Food** when cube root body volume \> 2.95
-    -   For large urchins, the initial sample has wider sutures than low food urchins
+    -   For large urchins, the initial sample has wider sutures than low
+        food urchins
 2.  **High Food \> Initial** when cube root body volume \> 1.81
-    -   For most urchins, high food treatment results in wider sutures than initial samples
+    -   For most urchins, high food treatment results in wider sutures
+        than initial samples
 3.  **High Food \> Low Food** when cube root body volume \> 2.07
-    -   For most medium to large urchins, high food results in wider sutures than low food
+    -   For most medium to large urchins, high food results in wider
+        sutures than low food
 
-The biological interpretation is that **food regime affects suture width differently depending on urchin size**. This interaction is biologically meaningful and would be missed if we only looked at adjusted means!
+The biological interpretation is that **food regime affects suture width
+differently depending on urchin size**. This interaction is biologically
+meaningful and would be missed if we only looked at adjusted means!
 
 # Assumptions of ANCOVA
 
@@ -1208,17 +846,6 @@ The biological interpretation is that **food regime affects suture width differe
 
 ## Checking Assumptions in R
 
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1234,17 +861,6 @@ plot(ancova_model)
 ![](15_01_lecture_powerpoint_files/figure-html/check_assumptions-1.png){width=768}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 
 # Robust ANCOVA Approaches
 
@@ -1270,16 +886,6 @@ When ANCOVA assumptions are violated, consider:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1353,17 +959,9 @@ P-value for treatment effect (rank-based): 0
 :::
 
 
-
-
-
-
-
-
-
-
-
-
-Note: The permutation test is commented out as it requires the lmPerm package, which may not be installed. The rank-based approach is shown as a simple alternative.
+Note: The permutation test is commented out as it requires the lmPerm
+package, which may not be installed. The rank-based approach is shown as
+a simple alternative.
 :::
 :::::
 
@@ -1373,39 +971,36 @@ Note: The permutation test is commented out as it requires the lmPerm package, w
 
 Here's how you might write up ANCOVA results for publication:
 
-> "We analyzed the effects of mating strategy on male fruitfly longevity using analysis of covariance (ANCOVA), with thorax length as a covariate. Before conducting the main analysis, we tested the homogeneity of slopes assumption and found no significant interaction between treatment and thorax length (F₄,₁₁₅ = 1.56, P = 0.19), indicating that the effect of body size on longevity was consistent across treatments.
+> "We analyzed the effects of mating strategy on male fruitfly longevity
+> using analysis of covariance (ANCOVA), with thorax length as a
+> covariate. Before conducting the main analysis, we tested the
+> homogeneity of slopes assumption and found no significant interaction
+> between treatment and thorax length (F₄,₁₁₅ = 1.56, P = 0.19),
+> indicating that the effect of body size on longevity was consistent
+> across treatments.
 >
-> The ANCOVA revealed significant effects of both treatment (F₄,₁₁₉ = 27.97, P \< 0.001) and thorax length (F₁,₁₁₉ = 145.44, P \< 0.001) on longevity. Thorax length was positively associated with longevity (b = 1.19), with larger males living longer. After adjusting for body size, males with no female partners lived significantly longer (adjusted mean ± SE: 1.81 ± 0.02 log₁₀ days) than males in any other treatment group. Males provided with a single virgin female daily (1.77 ± 0.02) or a single inseminated female daily (1.79 ± 0.02) showed intermediate longevity, while males with eight females per day showed the lowest longevity (1.72 ± 0.02 for inseminated females; 1.59 ± 0.02 for virgin females). Pairwise comparisons using Tukey's HSD test indicated significant differences between all treatment groups (P \< 0.05) except between the two treatments with a single female per day (P = 0.42)."
+> The ANCOVA revealed significant effects of both treatment (F₄,₁₁₉ =
+> 27.97, P \< 0.001) and thorax length (F₁,₁₁₉ = 145.44, P \< 0.001) on
+> longevity. Thorax length was positively associated with longevity (b =
+> 1.19), with larger males living longer. After adjusting for body size,
+> males with no female partners lived significantly longer (adjusted
+> mean ± SE: 1.81 ± 0.02 log₁₀ days) than males in any other treatment
+> group. Males provided with a single virgin female daily (1.77 ± 0.02)
+> or a single inseminated female daily (1.79 ± 0.02) showed intermediate
+> longevity, while males with eight females per day showed the lowest
+> longevity (1.72 ± 0.02 for inseminated females; 1.59 ± 0.02 for virgin
+> females). Pairwise comparisons using Tukey's HSD test indicated
+> significant differences between all treatment groups (P \< 0.05)
+> except between the two treatments with a single female per day (P =
+> 0.42)."
 
 # Publication Quality Figure
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-html/publication_figure-1.png){width=960}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 
 # Summary
 
@@ -1418,7 +1013,8 @@ Here's how you might write up ANCOVA results for publication:
 2.  **The Analysis**
     -   Always test for homogeneity of slopes first!
     -   If slopes are homogeneous, proceed with standard ANCOVA
-    -   If slopes are heterogeneous, use alternatives (Johnson-Neyman procedure)
+    -   If slopes are heterogeneous, use alternatives (Johnson-Neyman
+        procedure)
 3.  **Interpretation**
     -   Focus on adjusted means (at mean covariate value)
     -   Consider both statistical and biological significance

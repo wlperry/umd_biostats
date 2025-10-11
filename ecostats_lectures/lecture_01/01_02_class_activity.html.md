@@ -4,18 +4,9 @@ metadata-files:
 format:
   html:
     output-file: "01_2_class_activity_html.html"
-  typst:
-    output-file: "01_02_class_activity.pdf"
   docx:
     output-file: "01_02_class_activity.docx"
 ---
-
-
-
-
-
-
-
 
 # In class activity 1:
 
@@ -277,13 +268,6 @@ We need to cover a bit of syntax in R
 You should have installed packages which is done below The `#` is a
 comment and allows you to write whatever you want and it won' run
 
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -294,22 +278,8 @@ comment and allows you to write whatever you want and it won' run
 ```
 :::
 
-
-
-
-
-
-
-
 Each script you run from then on you will load the libraries from within
 the package.
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -323,24 +293,10 @@ library(tidyverse) # provides utilities seen in console
 ```
 :::
 
-
-
-
-
-
-
-
 # Loading files
 
 Now like we did before with x and y we will do this with a spreadsheet
 from a CSV file or excel file
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -374,21 +330,7 @@ dbl (2): tree_no, length_mm
 ```
 :::
 
-
-
-
-
-
-
-
 This will import the excel file
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -397,13 +339,6 @@ This will import the excel file
 p_xl_df <- read_excel("data/pine_needles.xlsx")
 ```
 :::
-
-
-
-
-
-
-
 
 # Visualize data
 
@@ -416,13 +351,6 @@ data
 
 ## Tapestry Plot ------
 
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -434,23 +362,9 @@ ggplot(data = p_df, aes(x=wind, y=length_mm))
 :::
 :::
 
-
-
-
-
-
-
-
 ## XY Plot -----
 
 notice the points are layered on top but some overlap
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -464,21 +378,7 @@ ggplot(data = p_df, aes(x=wind, y=length_mm)) +
 :::
 :::
 
-
-
-
-
-
-
-
 ## XY Plot with dodged points ------
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -496,23 +396,9 @@ ggplot(data = p_df, aes(x=wind, y=length_mm)) +
 ```
 :::
 
-
-
-
-
-
-
-
 What are the other ways to display the data?
 
 ## Histogram -----
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -535,25 +421,11 @@ ggplot(data = p_df, aes(x=length_mm)) +
 :::
 :::
 
-
-
-
-
-
-
-
 Note we really want to see the histograms colored by wind direction
 
 We can map the wind aesthetic to a fill in the histogram
 
 ## Histogram Colors -----
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -575,21 +447,7 @@ ggplot(data = p_df, aes(x=length_mm, fill = wind)) + geom_histogram( position = 
 :::
 :::
 
-
-
-
-
-
-
-
 ## Histogram Bins -----
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -605,23 +463,9 @@ ggplot(data = p_df, aes(x=length_mm, fill = wind)) +
 :::
 :::
 
-
-
-
-
-
-
-
 ## Other Plots if time in class
 
 ## Box and Whisker Plots
-
-
-
-
-
-
-
 
 ::: {.cell}
 

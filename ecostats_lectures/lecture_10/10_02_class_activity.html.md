@@ -6,8 +6,6 @@ metadata-files:
 format:
   html:
     output-file: "10_02_class_activity.html"
-  typst:
-    output-file: "10_02_class_activity.pdf"  
   docx:
     output-file: "10_02_class_activity.docx"
 ---

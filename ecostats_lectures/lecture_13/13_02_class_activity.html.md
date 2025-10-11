@@ -6,36 +6,22 @@ metadata-files:
 format:
   html:
     output-file: "13_02_class_activity.html"
-  typst:
-    output-file: "13_02_class_activity.pdf"  
   docx:
     output-file: "13_02_class_activity.docx"
 ---
 
 
 
-
-
-
-
-
-
-
 # Lecture 13: Data Overview
 
-The dataframe contains r nrow(urchin_df) observations with the following variables:
+The dataframe contains r nrow(urchin_df) observations with the following
+variables:
 
--   treat: Urchin density treatment (Control, 66% Density, 33% Density, Removed)
+-   treat: Urchin density treatment (Control, 66% Density, 33% Density,
+    Removed)
 -   patch: Random patches (1-16) where treatments were applied
 -   QUAD: Replicate quadrats within each treatment-patch combination
 -   algae: Percentage cover of filamentous algae (response variable)
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -72,23 +58,13 @@ summary_stats
 :::
 :::
 
-
-
-
-
-
-
-
 # Nested ANOVA Analysis
 
-In this experimental design, patch is nested within treat because each patch received only one treatment level. This is a hierarchical design where the effect of patches must be considered within each treatment. Following the approach used in Quinn & Keough (2002), we'll use a traditional nested ANOVA.
-
-
-
-
-
-
-
+In this experimental design, patch is nested within treat because each
+patch received only one treatment level. This is a hierarchical design
+where the effect of patches must be considered within each treatment.
+Following the approach used in Quinn & Keough (2002), we'll use a
+traditional nested ANOVA.
 
 ::: {.cell}
 
@@ -294,13 +270,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 # Lecture 13: ANOVA Results
 
 The nested ANOVA model is specified as:
@@ -311,15 +280,10 @@ Where:
 
 -   \- $\mu$ is the overall mean
 -   \- $\alpha_i$ is the fixed effect of treatment $i$
--   \- $\beta_{j(i)}$ is the random effect of patch $j$ nested within treatment $i$
--   \- $\epsilon_{ijk}$ is the residual error for quadrat $k$ in patch $j$ within treatment $i$
-
-
-
-
-
-
-
+-   \- $\beta_{j(i)}$ is the random effect of patch $j$ nested within
+    treatment $i$
+-   \- $\epsilon_{ijk}$ is the residual error for quadrat $k$ in patch
+    $j$ within treatment $i$
 
 ::: {.cell}
 
@@ -341,23 +305,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 # Lecture 13: Post-hoc Comparisons
 
-Although the main effect of treatment was not significant in the nested ANOVA (p = r format(p_treat, digits=3)), we can still examine the mean differences between treatments to understand patterns in the data. However, we should interpret these with caution given the lack of statistical significance at the α = 0.05 level.
-
-
-
-
-
-
-
+Although the main effect of treatment was not significant in the nested
+ANOVA (p = r format(p_treat, digits=3)), we can still examine the mean
+differences between treatments to understand patterns in the data.
+However, we should interpret these with caution given the lack of
+statistical significance at the α = 0.05 level.
 
 ::: {.cell}
 
@@ -385,21 +339,7 @@ Confidence level used: 0.95
 :::
 :::
 
-
-
-
-
-
-
-
 # Lecture 13: Tukey Pairwise Comparisons
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -428,21 +368,7 @@ P value adjustment: tukey method for comparing a family of 4 estimates
 :::
 :::
 
-
-
-
-
-
-
-
 # Lecture 13: Letter Display
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -475,27 +401,23 @@ NOTE: If two or more means share the same grouping symbol,
 :::
 :::
 
-
-
-
-
-
-
-
 ::: {.callout-important appearance="simple"}
-Interpretation of Treatment Comparisons The mean algae cover for the Control treatment (1.30%) appears considerably lower than for the reduced urchin density treatments (66% Density: 21.55%, 33% Density: 19.00%, Removed: 39.20%). While the visual pattern suggests an inverse relationship between urchin density and algae cover, with complete removal showing the highest algae cover, the nested ANOVA showed that these differences were not statistically significant at the α = 0.05 level (p = xxxx). The high variability among patches within treatments likely contributed to the lack of statistical significance for the treatment effect.
+Interpretation of Treatment Comparisons The mean algae cover for the
+Control treatment (1.30%) appears considerably lower than for the
+reduced urchin density treatments (66% Density: 21.55%, 33% Density:
+19.00%, Removed: 39.20%). While the visual pattern suggests an inverse
+relationship between urchin density and algae cover, with complete
+removal showing the highest algae cover, the nested ANOVA showed that
+these differences were not statistically significant at the α = 0.05
+level (p = xxxx). The high variability among patches within treatments
+likely contributed to the lack of statistical significance for the
+treatment effect.
 :::
 
 # Lecture 13: ANOVA Assumptions Testing
 
-For valid inference from ANOVA, several assumptions must be met. We test these assumptions below.
-
-
-
-
-
-
-
+For valid inference from ANOVA, several assumptions must be met. We test
+these assumptions below.
 
 ::: {.cell}
 
@@ -540,21 +462,7 @@ qq_plot + hist_plot + resid_plot + plot_layout(ncol = 3)
 :::
 :::
 
-
-
-
-
-
-
-
 # Lecture 13: Levenes Test for Homogeneity of Variance
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -581,25 +489,20 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 ::: {.callout-important appearance="simple"}
-Interpretation of Assumption Tests The Q-Q plot shows some deviation from normality, particularly in the tails, and Levene's test indicates significant heterogeneity of variances across treatments (F = (xxxxx). As noted by Quinn & Keough (2002), there were "large differences in within-cell variances" in this dataset, and transformations (including arcsin) did not improve variance homogeneity. However, ANOVA is generally robust to heteroscedasticity with balanced designs, which is why they chose to analyze untransformed data. The residuals vs. fitted plot also shows a pattern of increasing variance with increasing fitted values, confirming the heteroscedasticity.
+Interpretation of Assumption Tests The Q-Q plot shows some deviation
+from normality, particularly in the tails, and Levene's test indicates
+significant heterogeneity of variances across treatments (F = (xxxxx).
+As noted by Quinn & Keough (2002), there were "large differences in
+within-cell variances" in this dataset, and transformations (including
+arcsin) did not improve variance homogeneity. However, ANOVA is
+generally robust to heteroscedasticity with balanced designs, which is
+why they chose to analyze untransformed data. The residuals vs. fitted
+plot also shows a pattern of increasing variance with increasing fitted
+values, confirming the heteroscedasticity.
 :::
 
 # Lecture 13: Visualization
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -632,23 +535,9 @@ print(ggplot_boxplot)
 :::
 :::
 
-
-
-
-
-
-
-
 # Lecture 13: Means Plot
 
 -   text
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -680,24 +569,42 @@ print(means_plot)
 :::
 :::
 
-
-
-
-
-
-
-
 # Lecture 13: Discussion
 
 ::: {.callout-important appearance="simple"}
-Scientific Interpretation Our nested ANOVA analysis revealed substantial spatial heterogeneity in algae cover, with significant variation among patches within each treatment (p \< 0.001). Surprisingly, the effect of urchin density treatments on filamentous algae cover was not statistically significant at the α = 0.05 level (p = 0.091), despite apparent trends in the data. The descriptive statistics show a pattern where algae cover appears to increase as urchin density decreases, with the Control treatment (mean = 1.3%) showing minimal algae cover compared to reduced density treatments (66% Density: 21.55%, 33% Density: 19.00%, and Removed: 39.20%). This pattern suggests a potential density-dependent relationship between urchin grazing and algal abundance, but the high variability among patches masked the treatment effect. The substantial variance component associated with patches nested within treatments (294.31, approximately 39.5% of total variance) underscores the importance of spatial heterogeneity in structuring algal communities. This finding highlights the necessity of accounting for spatial variability when designing and analyzing ecological field experiments. From an ecological perspective, these results suggest that while sea urchins may influence algal communities through grazing, local environmental factors and patch-specific conditions play a dominant role in determining algae cover. This has important implications for ecosystem management, as it indicates that the effects of urchin density manipulations may be context-dependent and influenced by local environmental conditions.
+Scientific Interpretation Our nested ANOVA analysis revealed substantial
+spatial heterogeneity in algae cover, with significant variation among
+patches within each treatment (p \< 0.001). Surprisingly, the effect of
+urchin density treatments on filamentous algae cover was not
+statistically significant at the α = 0.05 level (p = 0.091), despite
+apparent trends in the data. The descriptive statistics show a pattern
+where algae cover appears to increase as urchin density decreases, with
+the Control treatment (mean = 1.3%) showing minimal algae cover compared
+to reduced density treatments (66% Density: 21.55%, 33% Density: 19.00%,
+and Removed: 39.20%). This pattern suggests a potential
+density-dependent relationship between urchin grazing and algal
+abundance, but the high variability among patches masked the treatment
+effect. The substantial variance component associated with patches
+nested within treatments (294.31, approximately 39.5% of total variance)
+underscores the importance of spatial heterogeneity in structuring algal
+communities. This finding highlights the necessity of accounting for
+spatial variability when designing and analyzing ecological field
+experiments. From an ecological perspective, these results suggest that
+while sea urchins may influence algal communities through grazing, local
+environmental factors and patch-specific conditions play a dominant role
+in determining algae cover. This has important implications for
+ecosystem management, as it indicates that the effects of urchin density
+manipulations may be context-dependent and influenced by local
+environmental conditions.
 :::
 
 # THE ALTERNATE WAY AND BETTER!!!
 
 # Mixed Model Analysis
 
-In this experimental design, patch is nested within treat because each patch received only one treatment level. This hierarchical design is well-suited for analysis using linear mixed-effects models.
+In this experimental design, patch is nested within treat because each
+patch received only one treatment level. This hierarchical design is
+well-suited for analysis using linear mixed-effects models.
 
 ## Model Specification
 
@@ -705,16 +612,12 @@ We'll use the following model specification:
 
 $algae_{ijk} = \mu + \alpha_i + \beta_{j(i)} + \epsilon_{ijk}$
 
-Where: - $\mu$ is the overall mean - $\alpha_i$ is the fixed effect of treatment $i$ - $\beta_{j(i)}$ is the random effect of patch $j$ nested within treatment $i$ - $\epsilon_{ijk}$ is the residual error for quadrat $k$ in patch $j$ within treatment $i$
+Where: - $\mu$ is the overall mean - $\alpha_i$ is the fixed effect of
+treatment $i$ - $\beta_{j(i)}$ is the random effect of patch $j$ nested
+within treatment $i$ - $\epsilon_{ijk}$ is the residual error for
+quadrat $k$ in patch $j$ within treatment $i$
 
 In `lme4`, this model is specified as
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -766,23 +669,9 @@ treatremovl -0.707  0.500  0.500
 :::
 :::
 
-
-
-
-
-
-
-
 ## ANOVA Table
 
 The ANOVA table for the mixed model:
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -806,25 +695,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 # Assumption Testing
 
-For valid inference from mixed models, several assumptions must be met. We test these assumptions below.
+For valid inference from mixed models, several assumptions must be met.
+We test these assumptions below.
 
 ## Normality of Residuals
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -859,21 +735,7 @@ plot(sim_residuals)
 :::
 :::
 
-
-
-
-
-
-
-
 ## Homogeneity of Variance
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -913,23 +775,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 # Post-hoc Comparisons
 
-Although the main effect of treatment was not significant in the nested ANOVA (p = xxxxx), we can still examine the mean differences between treatments to understand patterns in the data.
-
-
-
-
-
-
-
+Although the main effect of treatment was not significant in the nested
+ANOVA (p = xxxxx), we can still examine the mean differences between
+treatments to understand patterns in the data.
 
 ::: {.cell}
 
@@ -1013,21 +863,7 @@ NOTE: If two or more means share the same grouping symbol,
 :::
 :::
 
-
-
-
-
-
-
-
 # Visualization
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1107,21 +943,20 @@ ggplot_boxplot + means_plot + plot_layout(ncol = 1)
 :::
 :::
 
-
-
-
-
-
-
-
 # Comparison with Traditional Nested ANOVA
 
-The linear mixed model approach provides similar results to the traditional nested ANOVA approach. The main advantage of the mixed model is the more elegant handling of random effects and the extensive diagnostic tools available through packages like DHARMa.
+The linear mixed model approach provides similar results to the
+traditional nested ANOVA approach. The main advantage of the mixed model
+is the more elegant handling of random effects and the extensive
+diagnostic tools available through packages like DHARMa.
 
 The mixed model approach confirms that:
 
 1.  Treatment effects are not significant (p = 0.091)
 2.  Patches within treatments show significant variation (p \< 0.001)
-3.  The variance components are similar to those from the traditional approach
+3.  The variance components are similar to those from the traditional
+    approach
 
-In both methods, the key ecological finding is the strong spatial heterogeneity in algal cover that overrides the grazing effect of urchins at different densities.
+In both methods, the key ecological finding is the strong spatial
+heterogeneity in algal cover that overrides the grazing effect of
+urchins at different densities.

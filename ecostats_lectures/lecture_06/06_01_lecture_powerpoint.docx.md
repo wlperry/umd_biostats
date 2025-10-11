@@ -13,8 +13,6 @@ format:
     output-file: "06_01_lecture_powerpoint.docx"
   pptx:
     output-file: "06_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "06_01_lecture_powerpoint.pdf"
 ---
 
 # Lecture 5: Review

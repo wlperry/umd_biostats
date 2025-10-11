@@ -6,12 +6,9 @@ metadata-files:
 format:
   html:
     output-file: "assignment_01_example.html"
-  typst:
-    output-file: "assignment_01_example.pdf"
+  docx:
+    output-file: "assignment_01_example.docx"
 ---
-
-
-
 
 # Ecological Statistics Assignment 01
 
@@ -23,8 +20,6 @@ a paired t-Test on the original data or transformed data.
 The set up for the analyses - load libraries - read in the data - make
 transformations up front in this case - you might thing through this and
 name things so you can copy the whole code chunk for each question ; )
-
-
 
 
 ::: {.cell}
@@ -55,8 +50,8 @@ library(tidyverse)    # needed for almost all of the code and plotting
 ```
 ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ forcats   1.0.1     ✔ stringr   1.5.2
+✔ ggplot2   4.0.0     ✔ tibble    3.3.0
 ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
 ✔ purrr     1.1.0     
 ```
@@ -78,6 +73,8 @@ library(tidyverse)    # needed for almost all of the code and plotting
 
 :::
 :::
+
+
 
 ::: {.cell}
 
@@ -119,8 +116,6 @@ library(tidyverse)    # needed for almost all of the code and plotting
 :::
 
 
-
-
 # Question 1: Hypothesis statements:
 
 1.  Question 1: is there a difference in total phosphorus concentrations
@@ -139,8 +134,6 @@ library(tidyverse)    # needed for almost all of the code and plotting
 ## Data exploration of TP
 
 ## two ways to calcualte effect size
-
-
 
 
 ::: {.cell}
@@ -167,11 +160,7 @@ library(tidyverse)    # needed for almost all of the code and plotting
 :::
 
 
-
-
 # the way to make a new variable
-
-
 
 
 ::: {.cell}
@@ -181,3 +170,4 @@ library(tidyverse)    # needed for almost all of the code and plotting
 #   mutate(tp_level_2 = if_else(tp_ugl >= 2, "high", "low"))
 ```
 :::
+

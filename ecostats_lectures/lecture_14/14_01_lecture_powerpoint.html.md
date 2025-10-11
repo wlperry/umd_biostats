@@ -14,20 +14,7 @@ format:
     output-file: "14_01_lecture_powerpoint.docx"
   pptx:
     output-file: "14_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "14_01_lecture_powerpoint.pdf"
 ---
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -73,7 +60,10 @@ Logistic Regression
 
 ::::: columns
 ::: {.column width="60%"}
-General linear models assume normal distribution of response variables and residuals. However, many types of biological data don't meet this assumption. Generalized Linear Models (GLMs) allow for a wider range of probability distributions for the response variable.
+General linear models assume normal distribution of response variables
+and residuals. However, many types of biological data don't meet this
+assumption. Generalized Linear Models (GLMs) allow for a wider range of
+probability distributions for the response variable.
 
 GLMs allow all types of "exponential family" distributions:
 
@@ -84,38 +74,20 @@ GLMs allow all types of "exponential family" distributions:
 -   Gamma
 -   Negative binomial
 
-GLMs can be used for binary (yes/no), discrete (count), and categorical/multinomial response variables, using maximum likelihood (ML) rather than ordinary least squares (OLS) for estimation.
+GLMs can be used for binary (yes/no), discrete (count), and
+categorical/multinomial response variables, using maximum likelihood
+(ML) rather than ordinary least squares (OLS) for estimation.
 
 **Note:** GLMs extend linear models to non-normal data distributions.
 :::
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![Examples of distributions in the exponential family](14_01_lecture_powerpoint_files/figure-html/glm-distributions-1.png){width=672}
+![Examples of distributions in the exponential family](14_01_lecture_powerpoint_files/figure-html/glm-distributions-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -124,11 +96,14 @@ GLMs can be used for binary (yes/no), discrete (count), and categorical/multinom
 
 GLMs consist of three components:
 
-1.  **Random component**: The response variable and its probability distribution (from exponential family: normal, binomial, Poisson)
+1.  **Random component**: The response variable and its probability
+    distribution (from exponential family: normal, binomial, Poisson)
 
-2.  **Systematic component**: The predictor variable(s) in the model, which can be continuous or categorical
+2.  **Systematic component**: The predictor variable(s) in the model,
+    which can be continuous or categorical
 
-3.  **Link function**: Connects expected value of Y to predictor variables
+3.  **Link function**: Connects expected value of Y to predictor
+    variables
 
 $$g(\mu) = \beta_0 + \beta_1X_1 + \beta_2X_2...$$
 
@@ -146,19 +121,13 @@ $$g(\mu) = \beta_0 + \beta_1X_1 + \beta_2X_2...$$
 
 ::::: columns
 ::: {.column width="60%"}
-The simplest form of GLM uses a normal (Gaussian) distribution with an identity link function. This is equivalent to standard linear regression.
+The simplest form of GLM uses a normal (Gaussian) distribution with an
+identity link function. This is equivalent to standard linear
+regression.
 
-Let's compare a standard linear model and a Gaussian GLM using the `mtcars` dataset, modeling miles per gallon (mpg) by the number of cylinders (cyl).
-
-
-
-
-
-
-
-
-
-
+Let's compare a standard linear model and a Gaussian GLM using the
+`mtcars` dataset, modeling miles per gallon (mpg) by the number of
+cylinders (cyl).
 
 
 ::: {.cell}
@@ -194,30 +163,10 @@ all.equal(coef_lm, coef_glm)
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 
 ::: {.column width="40%"}
 Let's look at the summary of our Gaussian GLM:
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -255,16 +204,6 @@ Number of Fisher Scoring iterations: 2
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -273,16 +212,6 @@ Number of Fisher Scoring iterations: 2
 ::::: columns
 ::: {.column width="60%"}
 Now let's perform an ANOVA on our GLM model using the `car` package:
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -310,31 +239,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 
 ::: {.column width="40%"}
 Visualizing the results:
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -371,17 +279,6 @@ ggplot() +
 ![](14_01_lecture_powerpoint_files/figure-html/gaussian-plot-1.png){width=768}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -390,28 +287,23 @@ ggplot() +
 ::: callout-important
 ## Equivalence of Linear Models and Gaussian GLMs
 
-When we use a Gaussian distribution with an identity link, GLM gives identical results to standard linear regression. This can be seen in the coefficient values and overall model statistics.
+When we use a Gaussian distribution with an identity link, GLM gives
+identical results to standard linear regression. This can be seen in the
+coefficient values and overall model statistics.
 
-The key difference is that GLMs provide a framework that extends to non-normal distributions.
+The key difference is that GLMs provide a framework that extends to
+non-normal distributions.
 :::
 
 # GLM with Poisson Distribution: Setup
 
 ::::: columns
 ::: {.column width="60%"}
-Poisson GLMs are appropriate for count data. The Poisson distribution assumes that the variance equals the mean.
+Poisson GLMs are appropriate for count data. The Poisson distribution
+assumes that the variance equals the mean.
 
-For this example, we'll use the quarter-mile time (`qsec`) from the `mtcars` dataset, rounded to create a count-like variable.
-
-
-
-
-
-
-
-
-
-
+For this example, we'll use the quarter-mile time (`qsec`) from the
+`mtcars` dataset, rounded to create a count-like variable.
 
 
 ::: {.cell}
@@ -445,27 +337,8 @@ Valiant             6 20.22         20
 :::
 
 
-
-
-
-
-
-
-
-
-
-
-Now let's fit a Poisson GLM to model the relationship between the rounded quarter-mile time and the number of cylinders:
-
-
-
-
-
-
-
-
-
-
+Now let's fit a Poisson GLM to model the relationship between the
+rounded quarter-mile time and the number of cylinders:
 
 
 ::: {.cell}
@@ -509,30 +382,10 @@ Number of Fisher Scoring iterations: 3
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 
 ::: {.column width="40%"}
 Let's check for overdispersion, which is common in count data:
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -562,16 +415,6 @@ Dispersion parameter: 0.12
 ```
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -579,16 +422,6 @@ Dispersion parameter: 0.12
 
 :::::: columns
 ::: {.column width="60%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -622,19 +455,9 @@ ggplot() +
 ```
 
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/poisson-plot-1.png){width=672}
+![](14_01_lecture_powerpoint_files/figure-html/poisson-plot-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 
@@ -644,27 +467,19 @@ ggplot() +
 
 In a Poisson GLM with a log link function:
 
-1.  The coefficients represent changes in the **log** of the expected count
+1.  The coefficients represent changes in the **log** of the expected
+    count
 
-2.  When exponentiated (`exp(coef)`), they represent multiplicative effects
+2.  When exponentiated (`exp(coef)`), they represent multiplicative
+    effects
 
-3.  For example, `exp(coef)` = 0.90 means the expected count is 90% of the reference level
+3.  For example, `exp(coef)` = 0.90 means the expected count is 90% of
+    the reference level
 :::
 ::::
 ::::::
 
 # Checking Model Assumptions with DHARMa
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -682,32 +497,13 @@ plot(simulation_poisson)
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Dealing with Overdispersion in Count Data
 
 ::::: columns
 ::: {.column width="60%"}
-When count data shows more variability than expected under a Poisson distribution (variance \> mean), we may need to use a negative binomial model instead.
-
-
-
-
-
-
-
-
-
-
+When count data shows more variability than expected under a Poisson
+distribution (variance \> mean), we may need to use a negative binomial
+model instead.
 
 
 ::: {.cell}
@@ -759,31 +555,12 @@ Warning while fitting theta: iteration limit reached
 :::
 
 
-
-
-
-
-
-
-
-
-
-
-The negative binomial model includes an additional dispersion parameter (theta) that allows the variance to be larger than the mean.
+The negative binomial model includes an additional dispersion parameter
+(theta) that allows the variance to be larger than the mean.
 :::
 
 ::: {.column width="40%"}
 Let's compare the predictions from both models:
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -806,19 +583,9 @@ ggplot(mtcars_count) +
 ```
 
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/compare-models-1.png){width=672}
+![](14_01_lecture_powerpoint_files/figure-html/compare-models-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -827,32 +594,27 @@ ggplot(mtcars_count) +
 
 ::::: columns
 ::: {.column width="60%"}
-Logistic regression is a GLM used when the response variable is binary (e.g., dead/alive, present/absent). It models the probability of the response being "1" (success) given predictor values.
+Logistic regression is a GLM used when the response variable is binary
+(e.g., dead/alive, present/absent). It models the probability of the
+response being "1" (success) given predictor values.
 
 Let's examine the simple logistic regression model:
 
 $$\pi(x) = \frac{e^{\beta_0 + \beta_1 x}}{1 + e^{\beta_0 + \beta_1 x}}$$
 
-Where: - $\pi(x)$ is the probability that Y = 1 given X = x - $\beta_0$ is the intercept - $\beta_1$ is the slope (rate of change in $\pi(x)$ for a unit change in X)
+Where: - $\pi(x)$ is the probability that Y = 1 given X = x - $\beta_0$
+is the intercept - $\beta_1$ is the slope (rate of change in $\pi(x)$
+for a unit change in X)
 
 To linearize this relationship, we use the logit link function:
 
 $$g(x) = \log\left(\frac{\pi(x)}{1-\pi(x)}\right) = \beta_0 + \beta_1 x$$
 
-This transforms the probability (which is bounded between 0 and 1) to a linear function that can range from -∞ to +∞.
+This transforms the probability (which is bounded between 0 and 1) to a
+linear function that can range from -∞ to +∞.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -881,36 +643,18 @@ ggplot(sigmoid_data, aes(x, p)) +
 ```
 
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/logistic-curve-1.png){width=672}
+![](14_01_lecture_powerpoint_files/figure-html/logistic-curve-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
 
 # Example: Lizard Presence on Islands
 
-Based on the example from Polis et al. (1998), we'll model the presence/absence of lizards (*Uta*) on islands in the Gulf of California based on perimeter/area ratio.
-
-
-
-
-
-
-
-
-
-
+Based on the example from Polis et al. (1998), we'll model the
+presence/absence of lizards (*Uta*) on islands in the Gulf of California
+based on perimeter/area ratio.
 
 
 ::: {.cell}
@@ -961,31 +705,11 @@ Number of Fisher Scoring iterations: 25
 :::
 
 
-
-
-
-
-
-
-
-
-
-
 # Lizard Example: Visualization and Testing
 
 ::::: columns
 ::: {.column width="60%"}
 Let's visualize the data and the fitted model:
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1022,40 +746,23 @@ ggplot() +
 ```
 
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/lizard-plot-1.png){width=672}
+![](14_01_lecture_powerpoint_files/figure-html/lizard-plot-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 
 ::: {.column width="40%"}
-We want to test the null hypothesis that β₁ = 0, meaning there's no relationship between P/A ratio and lizard presence.
+We want to test the null hypothesis that β₁ = 0, meaning there's no
+relationship between P/A ratio and lizard presence.
 
 There are two common ways to test this hypothesis:
 
-1.  **Wald test**: Tests if the parameter estimate divided by its standard error differs significantly from zero
+1.  **Wald test**: Tests if the parameter estimate divided by its
+    standard error differs significantly from zero
 
-2.  **Likelihood ratio test**: Compares the fit of the full model to a reduced model without the predictor variable
-
-
-
-
-
-
-
-
-
-
+2.  **Likelihood ratio test**: Compares the fit of the full model to a
+    reduced model without the predictor variable
 
 
 ::: {.cell}
@@ -1088,16 +795,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1106,23 +803,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ::: callout-note
 ## Working with Odds Ratios
 
-The odds ratio represents how the odds of the event (e.g., lizard presence) change with a unit increase in the predictor.
+The odds ratio represents how the odds of the event (e.g., lizard
+presence) change with a unit increase in the predictor.
 
 -   **Odds ratio = exp(β₁)**
--   If odds ratio \> 1: Increasing the predictor increases the odds of event
--   If odds ratio \< 1: Increasing the predictor decreases the odds of event
+-   If odds ratio \> 1: Increasing the predictor increases the odds of
+    event
+-   If odds ratio \< 1: Increasing the predictor decreases the odds of
+    event
 -   If odds ratio = 1: No effect of predictor on odds of event
 :::
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1161,29 +851,10 @@ cat("95% CI:", round(ci[1], 3), "to", round(ci[2], 3), "\n")
 :::
 
 
-
-
-
-
-
-
-
-
-
-
 # Assessing Model Fit
 
-There are several ways to assess the goodness-of-fit for logistic regression models:
-
-
-
-
-
-
-
-
-
-
+There are several ways to assess the goodness-of-fit for logistic
+regression models:
 
 
 ::: {.cell}
@@ -1248,37 +919,20 @@ McFadden's R²: 1
 :::
 
 
-
-
-
-
-
-
-
-
-
-
 # Multiple Logistic Regression: Setup
 
 ::::: columns
 ::: {.column width="60%"}
-Logistic regression can be extended to include multiple predictors. The model becomes:
+Logistic regression can be extended to include multiple predictors. The
+model becomes:
 
 $$g(x) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \ldots + \beta_p x_p$$
 
-Where g(x) is the logit link function, and x₁, x₂, ..., xₚ are the predictor variables.
+Where g(x) is the logit link function, and x₁, x₂, ..., xₚ are the
+predictor variables.
 
-Let's create a simulated dataset based on the Bolger et al. (1997) study of the presence/absence of native rodents in canyon fragments.
-
-
-
-
-
-
-
-
-
-
+Let's create a simulated dataset based on the Bolger et al. (1997) study
+of the presence/absence of native rodents in canyon fragments.
 
 
 ::: {.cell}
@@ -1346,30 +1000,11 @@ Number of Fisher Scoring iterations: 8
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 
 ::: {.column width="40%"}
-To test the significance of individual predictors, we can use likelihood ratio tests comparing nested models:
-
-
-
-
-
-
-
-
-
-
+To test the significance of individual predictors, we can use likelihood
+ratio tests comparing nested models:
 
 
 ::: {.cell}
@@ -1446,32 +1081,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 # Multiple Logistic Regression: Odds Ratios
 
 Let's calculate odds ratios and confidence intervals for all predictors:
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1501,39 +1116,19 @@ or_df %>%
 ::: {.cell-output-display}
 
 ```{=html}
-<div class="tabwid"><style>.cl-a0065c32{}.cl-a0021c26{font-family:'Helvetica';font-size:10pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a0021c30{font-family:'Helvetica';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a0038c00{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-a0038c0a{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-a0039952{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a003995c{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a003995d{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a0039966{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a0039967{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a0039968{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a0039970{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a0039971{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-a0065c32'><thead><tr style="overflow-wrap:break-word;"><th class="cl-a0039952"><p class="cl-a0038c00"><span class="cl-a0021c26">Predictor</span></p></th><th class="cl-a003995c"><p class="cl-a0038c0a"><span class="cl-a0021c26">OddsRatio</span></p></th><th class="cl-a0039952"><p class="cl-a0038c00"><span class="cl-a0021c26">CI</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-a003995d"><p class="cl-a0038c00"><span class="cl-a0021c30">distance</span></p></td><td class="cl-a0039966"><p class="cl-a0038c0a"><span class="cl-a0021c30">1.0021</span></p></td><td class="cl-a003995d"><p class="cl-a0038c00"><span class="cl-a0021c30">(0.9994, 1.0069)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a0039967"><p class="cl-a0038c00"><span class="cl-a0021c30">age</span></p></td><td class="cl-a0039968"><p class="cl-a0038c0a"><span class="cl-a0021c30">1.0712</span></p></td><td class="cl-a0039967"><p class="cl-a0038c00"><span class="cl-a0021c30">(0.9721, 1.2577)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a0039970"><p class="cl-a0038c00"><span class="cl-a0021c30">shrub_cover</span></p></td><td class="cl-a0039971"><p class="cl-a0038c0a"><span class="cl-a0021c30">1.2129</span></p></td><td class="cl-a0039970"><p class="cl-a0038c00"><span class="cl-a0021c30">(1.0645, 1.7909)</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-20e69bd6{}.cl-20e2dc1c{font-family:'Helvetica';font-size:10pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-20e2dc3a{font-family:'Helvetica';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-20e48076{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-20e48080{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-20e49534{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20e4953e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20e4953f{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20e49548{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20e49549{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20e4954a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20e49552{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20e4955c{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-20e69bd6'><thead><tr style="overflow-wrap:break-word;"><th class="cl-20e49534"><p class="cl-20e48076"><span class="cl-20e2dc1c">Predictor</span></p></th><th class="cl-20e4953e"><p class="cl-20e48080"><span class="cl-20e2dc1c">OddsRatio</span></p></th><th class="cl-20e49534"><p class="cl-20e48076"><span class="cl-20e2dc1c">CI</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-20e4953f"><p class="cl-20e48076"><span class="cl-20e2dc3a">distance</span></p></td><td class="cl-20e49548"><p class="cl-20e48080"><span class="cl-20e2dc3a">1.0021</span></p></td><td class="cl-20e4953f"><p class="cl-20e48076"><span class="cl-20e2dc3a">(0.9994, 1.0069)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-20e49549"><p class="cl-20e48076"><span class="cl-20e2dc3a">age</span></p></td><td class="cl-20e4954a"><p class="cl-20e48080"><span class="cl-20e2dc3a">1.0712</span></p></td><td class="cl-20e49549"><p class="cl-20e48076"><span class="cl-20e2dc3a">(0.9721, 1.2577)</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-20e49552"><p class="cl-20e48076"><span class="cl-20e2dc3a">shrub_cover</span></p></td><td class="cl-20e4955c"><p class="cl-20e48080"><span class="cl-20e2dc3a">1.2129</span></p></td><td class="cl-20e49552"><p class="cl-20e48076"><span class="cl-20e2dc3a">(1.0645, 1.7909)</span></p></td></tr></tbody></table></div>
 ```
 
 :::
 :::
 
 
-
-
-
-
-
-
-
-
-
-
 # Visualizing Multiple Logistic Regression
 
 ::::: columns
 ::: {.column width="60%"}
-For multiple predictors, we can visualize the effect of each predictor while holding others constant at their mean or median values.
-
-
-
-
-
-
-
-
-
-
-
+For multiple predictors, we can visualize the effect of each predictor
+while holding others constant at their mean or median values.
 
 ::: {.cell}
 
@@ -1606,21 +1201,12 @@ p1 + p2 + p3
 ![](14_01_lecture_powerpoint_files/figure-html/visualize-effects-1.png){width=864}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 ::: {.column width="40%"}
-This visualization shows the effect of each predictor on the probability of rodent presence, while holding the other predictors constant at their mean values.
+This visualization shows the effect of each predictor on the probability
+of rodent presence, while holding the other predictors constant at their
+mean values.
 :::
 :::::
 
@@ -1634,17 +1220,6 @@ Logistic regression has several key assumptions:
 4.  No multicollinearity (when multiple predictors are used)
 
 Let's check the diagnostics for our multiple logistic regression model:
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1694,38 +1269,18 @@ p1 / p2 / p3
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Model Comparison and Selection
 
 ::::: columns
 ::: {.column width="60%"}
-When working with multiple predictors, we often want to find the most parsimonious model. We can use:
+When working with multiple predictors, we often want to find the most
+parsimonious model. We can use:
 
 1.  Likelihood ratio tests for nested models
 2.  Information criteria (AIC, BIC) for non-nested models
 3.  Classification metrics like accuracy, sensitivity, and specificity
 
 Let's compare models and calculate AIC values:
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1761,36 +1316,16 @@ model_comparison %>%
 ::: {.cell-output-display}
 
 ```{=html}
-<div class="tabwid"><style>.cl-a14ccf22{}.cl-a149291c{font-family:'Helvetica';font-size:10pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a1492926{font-family:'Helvetica';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-a14b09c6{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-a14b09d0{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-a14b1718{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a14b1719{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a14b1722{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a14b1723{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a14b1724{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a14b172c{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a14b172d{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-a14b172e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-a14ccf22'><thead><tr style="overflow-wrap:break-word;"><th class="cl-a14b1718"><p class="cl-a14b09c6"><span class="cl-a149291c">Model</span></p></th><th class="cl-a14b1719"><p class="cl-a14b09d0"><span class="cl-a149291c">Parameters</span></p></th><th class="cl-a14b1719"><p class="cl-a14b09d0"><span class="cl-a149291c">AIC</span></p></th><th class="cl-a14b1719"><p class="cl-a14b09d0"><span class="cl-a149291c">BIC</span></p></th><th class="cl-a14b1719"><p class="cl-a14b09d0"><span class="cl-a149291c">Deviance</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-a14b1722"><p class="cl-a14b09c6"><span class="cl-a1492926">No Age</span></p></td><td class="cl-a14b1723"><p class="cl-a14b09d0"><span class="cl-a1492926">3</span></p></td><td class="cl-a14b1723"><p class="cl-a14b09d0"><span class="cl-a1492926">17.05</span></p></td><td class="cl-a14b1723"><p class="cl-a14b09d0"><span class="cl-a1492926">20.71</span></p></td><td class="cl-a14b1723"><p class="cl-a14b09d0"><span class="cl-a1492926">11.05</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a14b1724"><p class="cl-a14b09c6"><span class="cl-a1492926">Full</span></p></td><td class="cl-a14b172c"><p class="cl-a14b09d0"><span class="cl-a1492926">4</span></p></td><td class="cl-a14b172c"><p class="cl-a14b09d0"><span class="cl-a1492926">17.27</span></p></td><td class="cl-a14b172c"><p class="cl-a14b09d0"><span class="cl-a1492926">22.15</span></p></td><td class="cl-a14b172c"><p class="cl-a14b09d0"><span class="cl-a1492926">9.27</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a14b1724"><p class="cl-a14b09c6"><span class="cl-a1492926">No Distance</span></p></td><td class="cl-a14b172c"><p class="cl-a14b09d0"><span class="cl-a1492926">3</span></p></td><td class="cl-a14b172c"><p class="cl-a14b09d0"><span class="cl-a1492926">17.38</span></p></td><td class="cl-a14b172c"><p class="cl-a14b09d0"><span class="cl-a1492926">21.04</span></p></td><td class="cl-a14b172c"><p class="cl-a14b09d0"><span class="cl-a1492926">11.38</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a14b1724"><p class="cl-a14b09c6"><span class="cl-a1492926">Intercept Only</span></p></td><td class="cl-a14b172c"><p class="cl-a14b09d0"><span class="cl-a1492926">1</span></p></td><td class="cl-a14b172c"><p class="cl-a14b09d0"><span class="cl-a1492926">29.55</span></p></td><td class="cl-a14b172c"><p class="cl-a14b09d0"><span class="cl-a1492926">30.77</span></p></td><td class="cl-a14b172c"><p class="cl-a14b09d0"><span class="cl-a1492926">27.55</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-a14b172d"><p class="cl-a14b09c6"><span class="cl-a1492926">No Shrub</span></p></td><td class="cl-a14b172e"><p class="cl-a14b09d0"><span class="cl-a1492926">3</span></p></td><td class="cl-a14b172e"><p class="cl-a14b09d0"><span class="cl-a1492926">32.73</span></p></td><td class="cl-a14b172e"><p class="cl-a14b09d0"><span class="cl-a1492926">36.39</span></p></td><td class="cl-a14b172e"><p class="cl-a14b09d0"><span class="cl-a1492926">26.73</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-20fd43e0{}.cl-20fa4604{font-family:'Helvetica';font-size:10pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-20fa460e{font-family:'Helvetica';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-20fb815e{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-20fb815f{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-20fb8e24{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20fb8e2e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20fb8e2f{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20fb8e30{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20fb8e38{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20fb8e39{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20fb8e42{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-20fb8e43{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-20fd43e0'><thead><tr style="overflow-wrap:break-word;"><th class="cl-20fb8e24"><p class="cl-20fb815e"><span class="cl-20fa4604">Model</span></p></th><th class="cl-20fb8e2e"><p class="cl-20fb815f"><span class="cl-20fa4604">Parameters</span></p></th><th class="cl-20fb8e2e"><p class="cl-20fb815f"><span class="cl-20fa4604">AIC</span></p></th><th class="cl-20fb8e2e"><p class="cl-20fb815f"><span class="cl-20fa4604">BIC</span></p></th><th class="cl-20fb8e2e"><p class="cl-20fb815f"><span class="cl-20fa4604">Deviance</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-20fb8e2f"><p class="cl-20fb815e"><span class="cl-20fa460e">No Age</span></p></td><td class="cl-20fb8e30"><p class="cl-20fb815f"><span class="cl-20fa460e">3</span></p></td><td class="cl-20fb8e30"><p class="cl-20fb815f"><span class="cl-20fa460e">17.05</span></p></td><td class="cl-20fb8e30"><p class="cl-20fb815f"><span class="cl-20fa460e">20.71</span></p></td><td class="cl-20fb8e30"><p class="cl-20fb815f"><span class="cl-20fa460e">11.05</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-20fb8e38"><p class="cl-20fb815e"><span class="cl-20fa460e">Full</span></p></td><td class="cl-20fb8e39"><p class="cl-20fb815f"><span class="cl-20fa460e">4</span></p></td><td class="cl-20fb8e39"><p class="cl-20fb815f"><span class="cl-20fa460e">17.27</span></p></td><td class="cl-20fb8e39"><p class="cl-20fb815f"><span class="cl-20fa460e">22.15</span></p></td><td class="cl-20fb8e39"><p class="cl-20fb815f"><span class="cl-20fa460e">9.27</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-20fb8e38"><p class="cl-20fb815e"><span class="cl-20fa460e">No Distance</span></p></td><td class="cl-20fb8e39"><p class="cl-20fb815f"><span class="cl-20fa460e">3</span></p></td><td class="cl-20fb8e39"><p class="cl-20fb815f"><span class="cl-20fa460e">17.38</span></p></td><td class="cl-20fb8e39"><p class="cl-20fb815f"><span class="cl-20fa460e">21.04</span></p></td><td class="cl-20fb8e39"><p class="cl-20fb815f"><span class="cl-20fa460e">11.38</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-20fb8e38"><p class="cl-20fb815e"><span class="cl-20fa460e">Intercept Only</span></p></td><td class="cl-20fb8e39"><p class="cl-20fb815f"><span class="cl-20fa460e">1</span></p></td><td class="cl-20fb8e39"><p class="cl-20fb815f"><span class="cl-20fa460e">29.55</span></p></td><td class="cl-20fb8e39"><p class="cl-20fb815f"><span class="cl-20fa460e">30.77</span></p></td><td class="cl-20fb8e39"><p class="cl-20fb815f"><span class="cl-20fa460e">27.55</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-20fb8e42"><p class="cl-20fb815e"><span class="cl-20fa460e">No Shrub</span></p></td><td class="cl-20fb8e43"><p class="cl-20fb815f"><span class="cl-20fa460e">3</span></p></td><td class="cl-20fb8e43"><p class="cl-20fb815f"><span class="cl-20fa460e">32.73</span></p></td><td class="cl-20fb8e43"><p class="cl-20fb815f"><span class="cl-20fa460e">36.39</span></p></td><td class="cl-20fb8e43"><p class="cl-20fb815f"><span class="cl-20fa460e">26.73</span></p></td></tr></tbody></table></div>
 ```
 
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 
 ::: {.column width="40%"}
 We can also evaluate the predictive performance of our model:
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1866,33 +1401,14 @@ Specificity: 0.833
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 # Publication-Quality Figure
 
-Let's create a publication-quality figure for our multiple logistic regression model and show how we would write up the results for a scientific publication.
-
-
-
-
-
-
-
-
-
-
-
+Let's create a publication-quality figure for our multiple logistic
+regression model and show how we would write up the results for a
+scientific publication.
 
 ::: {.cell}
 
@@ -1961,17 +1477,6 @@ ggplot() +
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Scientific Write-Up Example
 
 ::: callout-note
@@ -1979,15 +1484,37 @@ ggplot() +
 
 **Results**
 
-The presence of native rodents in canyon fragments was modeled using multiple logistic regression with three predictors: distance to nearest source canyon, years since isolation, and percentage of shrub cover. The model was statistically significant (χ² = 12.63, df = 3, p = 0.005) and explained 38.7% of the variation in rodent presence (McFadden's R² = 0.387).
+The presence of native rodents in canyon fragments was modeled using
+multiple logistic regression with three predictors: distance to nearest
+source canyon, years since isolation, and percentage of shrub cover. The
+model was statistically significant (χ² = 12.63, df = 3, p = 0.005) and
+explained 38.7% of the variation in rodent presence (McFadden's R² =
+0.387).
 
-Among the predictors, only shrub cover had a statistically significant effect on rodent presence (β = 0.091, SE = 0.041, p = 0.026). The odds ratio for shrub cover was 1.095 (95% CI: 1.011-1.186), indicating that for each percentage increase in shrub cover, the odds of rodent presence increased by approximately 9.5%. Neither distance to source canyon (β = 0.0002, p = 0.690) nor years since isolation (β = 0.022, p = 0.566) showed significant relationships with rodent presence.
+Among the predictors, only shrub cover had a statistically significant
+effect on rodent presence (β = 0.091, SE = 0.041, p = 0.026). The odds
+ratio for shrub cover was 1.095 (95% CI: 1.011-1.186), indicating that
+for each percentage increase in shrub cover, the odds of rodent presence
+increased by approximately 9.5%. Neither distance to source canyon (β =
+0.0002, p = 0.690) nor years since isolation (β = 0.022, p = 0.566)
+showed significant relationships with rodent presence.
 
-The model correctly classified 76% of the fragments, with a sensitivity of 0.77 and a specificity of 0.75. Diagnostics indicated no significant issues with model fit (Hosmer-Lemeshow χ² = 7.31, df = 8, p = 0.504).
+The model correctly classified 76% of the fragments, with a sensitivity
+of 0.77 and a specificity of 0.75. Diagnostics indicated no significant
+issues with model fit (Hosmer-Lemeshow χ² = 7.31, df = 8, p = 0.504).
 
 **Discussion**
 
-Our findings suggest that vegetation structure, as measured by shrub cover, plays a crucial role in determining the presence of native rodents in canyon fragments. The positive relationship between shrub cover and rodent occurrence likely reflects the importance of vegetation for providing food resources, shelter from predators, and suitable microhabitat conditions. Contrary to our expectations, isolation metrics (distance to source canyon and years since isolation) did not significantly predict rodent presence, suggesting that local habitat quality may be more important than landscape connectivity for these species.
+Our findings suggest that vegetation structure, as measured by shrub
+cover, plays a crucial role in determining the presence of native
+rodents in canyon fragments. The positive relationship between shrub
+cover and rodent occurrence likely reflects the importance of vegetation
+for providing food resources, shelter from predators, and suitable
+microhabitat conditions. Contrary to our expectations, isolation metrics
+(distance to source canyon and years since isolation) did not
+significantly predict rodent presence, suggesting that local habitat
+quality may be more important than landscape connectivity for these
+species.
 :::
 
 # Relationship Between GLMs and ANOVAs
@@ -1995,28 +1522,20 @@ Our findings suggest that vegetation structure, as measured by shrub cover, play
 ::: callout-important
 ## GLMs and ANOVAs: The Connection
 
-General linear models (including ANOVAs and standard regression) are special cases of Generalized Linear Models where:
+General linear models (including ANOVAs and standard regression) are
+special cases of Generalized Linear Models where:
 
 1.  The response variable follows a normal distribution
 2.  The link function is the identity function
 
-Therefore, a one-way ANOVA is equivalent to: - A linear regression with a categorical predictor - A Gaussian GLM with an identity link and a categorical predictor
+Therefore, a one-way ANOVA is equivalent to: - A linear regression with
+a categorical predictor - A Gaussian GLM with an identity link and a
+categorical predictor
 :::
 
 # Demonstrating ANOVA-GLM Equivalence
 
 Let's demonstrate this equivalence:
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -2090,44 +1609,31 @@ ggplot() +
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Assumptions and Diagnostics Summary
 
 ::::: columns
-::: {.column width="60%"}
-Generalized Linear Models have different assumptions depending on the specific distribution and link function used:
+::: {.column width="40%"}
+Generalized Linear Models have different assumptions depending on the
+specific distribution and link function used:
 
-**All GLMs:** - Independence of observations - Correct specification of the link function - Correct specification of the variance structure - No influential outliers - No multicollinearity among predictors
+**All GLMs:** - Independence of observations - Correct specification of
+the link function - Correct specification of the variance structure - No
+influential outliers - No multicollinearity among predictors
 
-**Gaussian GLMs (including linear regression):** - Normality of residuals - Homogeneity of variance
+**Gaussian GLMs (including linear regression):** - Normality of
+residuals - Homogeneity of variance
 
-**Poisson GLMs:** - Count data (non-negative integers) - Mean equals variance (if overdispersed, consider negative binomial)
+**Poisson GLMs:** - Count data (non-negative integers) - Mean equals
+variance (if overdispersed, consider negative binomial)
 
-**Logistic GLMs:** - Binary response variable - Linear relationship between predictors and log odds - Adequate sample size relative to number of parameters
+**Logistic GLMs:** - Binary response variable - Linear relationship
+between predictors and log odds - Adequate sample size relative to
+number of parameters
 :::
 
-::: {.column width="40%"}
-The following R code checks some common diagnostics for our logistic model:
-
-
-
-
-
-
-
-
-
-
+::: {.column width="60%"}
+The following R code checks some common diagnostics for our logistic
+model:
 
 
 ::: {.cell}
@@ -2171,60 +1677,70 @@ curve(I, from = 0, to = 1, add = TRUE, col = "red")
 ```
 
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/diagnostic-summary-1.png){width=672}
+![](14_01_lecture_powerpoint_files/figure-html/diagnostic-summary-1.png){width=576}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
 
 # Summary and Conclusions
 
-Generalized Linear Models (GLMs) provide a powerful and flexible framework for analyzing a wide range of data types in biology:
+Generalized Linear Models (GLMs) provide a powerful and flexible
+framework for analyzing a wide range of data types in biology:
 
-1.  **Gaussian GLMs** with identity link function are equivalent to standard linear models and ANOVAs, suitable for normally distributed continuous responses.
+1.  **Gaussian GLMs** with identity link function are equivalent to
+    standard linear models and ANOVAs, suitable for normally distributed
+    continuous responses.
 
-2.  **Poisson GLMs** with log link function are appropriate for count data, but be cautious of overdispersion.
+2.  **Poisson GLMs** with log link function are appropriate for count
+    data, but be cautious of overdispersion.
 
-3.  **Logistic GLMs** with logit link function are useful for binary responses, modeling the probability of success or presence.
+3.  **Logistic GLMs** with logit link function are useful for binary
+    responses, modeling the probability of success or presence.
 
 Key advantages of GLMs include:
 
--   Ability to handle various types of response variables beyond normal distributions
+-   Ability to handle various types of response variables beyond normal
+    distributions
 -   Unified framework for linear modeling
--   Flexibility in specifying the link function to match the data structure
--   Interpretable parameters, though interpretation differs by model type
+-   Flexibility in specifying the link function to match the data
+    structure
+-   Interpretable parameters, though interpretation differs by model
+    type
 
 When working with GLMs:
 
-1.  Choose the appropriate distribution family based on your response variable
+1.  Choose the appropriate distribution family based on your response
+    variable
 2.  Verify model assumptions through diagnostic plots
 3.  Watch for overdispersion in count data
 4.  Use odds ratios to interpret logistic regression results
-5.  Compare competing models using likelihood ratio tests and information criteria
+5.  Compare competing models using likelihood ratio tests and
+    information criteria
 
-This framework allows biologists to appropriately model many types of data encountered in ecological, behavioral, and physiological research.
+This framework allows biologists to appropriately model many types of
+data encountered in ecological, behavioral, and physiological research.
 
 # References
 
-Agresti, A. (1996). An Introduction to Categorical Data Analysis. Wiley, New York.
+Agresti, A. (1996). An Introduction to Categorical Data Analysis. Wiley,
+New York.
 
-Bolger, D. T., Alberts, A. C., Sauvajot, R. M., Potenza, P., McCalvin, C., Tran, D., Mazzoni, S., & Soulé, M. E. (1997). Response of rodents to habitat fragmentation in coastal southern California. Ecological Applications, 7(2), 552-563.
+Bolger, D. T., Alberts, A. C., Sauvajot, R. M., Potenza, P., McCalvin,
+C., Tran, D., Mazzoni, S., & Soulé, M. E. (1997). Response of rodents to
+habitat fragmentation in coastal southern California. Ecological
+Applications, 7(2), 552-563.
 
-Christensen, R. (1997). Log-linear Models and Logistic Regression. Springer, New York.
+Christensen, R. (1997). Log-linear Models and Logistic Regression.
+Springer, New York.
 
-Hosmer, D. W., & Lemeshow, S. (1989). Applied Logistic Regression. Wiley, New York.
+Hosmer, D. W., & Lemeshow, S. (1989). Applied Logistic Regression.
+Wiley, New York.
 
-McCullagh, P., & Nelder, J. A. (1989). Generalized Linear Models. Chapman and Hall, London.
+McCullagh, P., & Nelder, J. A. (1989). Generalized Linear Models.
+Chapman and Hall, London.
 
-Polis, G. A., Hurd, S. D., Jackson, C. T., & Piñero, F. S. (1998). Multifactor analysis of ecosystem patterns on islands in the Gulf of California. Ecological Monographs, 68, 490-502.
+Polis, G. A., Hurd, S. D., Jackson, C. T., & Piñero, F. S. (1998).
+Multifactor analysis of ecosystem patterns on islands in the Gulf of
+California. Ecological Monographs, 68, 490-502.

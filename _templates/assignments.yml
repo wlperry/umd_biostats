@@ -25,7 +25,7 @@ format:
     toc-depth: 3
     number-sections: false
     highlight-style: github
-    reference-doc: .././ms_templates/custom-reference.docx
+    reference-doc: ../../ms_templates/custom-reference.docx
     fig-width: 3      # Smaller figures for better document layout
     fig-height: 3     # Better proportions for printing
     fig-dpi: 72        # High resolution for crisp printing

@@ -13,20 +13,7 @@ format:
     output-file: "13_01_lecture_powerpoint.docx"
   pptx:
     output-file: "13_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "13_01_lecture_powerpoint.pdf"
 ---
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -147,7 +134,8 @@ Study on effects of enclosure size on limpet growth:
 
 ::::: columns
 ::: {.column width="60%"}
-Study on reef fish recruitment: 5 sites (factor A) 6 transects at each site (factor B) replicate observations along each transect
+Study on reef fish recruitment: 5 sites (factor A) 6 transects at each
+site (factor B) replicate observations along each transect
 :::
 
 ::: {.column width="40%"}
@@ -226,8 +214,10 @@ Effect of season and density on limpet fecundity.
 Consider a nested design with:
 
 -   p levels of factor A (i= 1…p) (e.g., 4 grazing levels)
--   q levels of factor B (j= 1…q), nested within each level of A (e.g., 4 - diff. patches per grazing level)
--   n replicates (k= 1…n) in each combination of A and B (5 replicate - quadrats in each patch in each grazing level)
+-   q levels of factor B (j= 1…q), nested within each level of A (e.g.,
+    4 - diff. patches per grazing level)
+-   n replicates (k= 1…n) in each combination of A and B (5 replicate -
+    quadrats in each patch in each grazing level)
 :::
 
 ::: {.column width="40%"}
@@ -264,8 +254,10 @@ The linear model for a nested design is:
 Where:
 
 -   $y_{ijk}$ is the response variable
-    -   value of the k-th replicate in j-th level of B in the i-th level of A
-    -   (algal biomass in 3rd quadrat, in 2nd patch in low grazing treatment)
+    -   value of the k-th replicate in j-th level of B in the i-th level
+        of A
+    -   (algal biomass in 3rd quadrat, in 2nd patch in low grazing
+        treatment)
 -   $\mu$ is the overall mean
     -   (overall average algal biomass)
 
@@ -276,10 +268,14 @@ The linear model for a nested design is:
 ## $$y_{ijk} = \mu + \alpha_i + \beta_{j(i)} + \varepsilon_{ijk}$$
 
 -   $\alpha_i$ is the fixed effect of factor $i$
--   (difference between average biomass in all low grazing level quadrats and overall mean)
--   $\beta_{j(i)}$ is the random effect of factor $j$ nested within factor $i$
--   usually random variable, measuring variance among all possible levels of B within each level of A
--   (variance among all possible patches that may have been used in the low grazing treatment)
+-   (difference between average biomass in all low grazing level
+    quadrats and overall mean)
+-   $\beta_{j(i)}$ is the random effect of factor $j$ nested within
+    factor $i$
+-   usually random variable, measuring variance among all possible
+    levels of B within each level of A
+-   (variance among all possible patches that may have been used in the
+    low grazing treatment)
 
 # Error Term in Nested Model
 
@@ -289,14 +285,18 @@ The linear model for a nested design is:
 
 -   $\varepsilon_{ijk}$ is the error term
 -   αi: is the effect of the ith level of A: µi- µ
--   unexplained variance associated with the kth replicate in jth level of B in the ith level of A
--   (difference bw observed algal biomass in 3rd quadrat in 2nd patch in low grazing treatment and predicted biomass - average biomass in 2nd patch in low grazing treatment)
+-   unexplained variance associated with the kth replicate in jth level
+    of B in the ith level of A
+-   (difference bw observed algal biomass in 3rd quadrat in 2nd patch in
+    low grazing treatment and predicted biomass - average biomass in 2nd
+    patch in low grazing treatment)
 
 # Analysis of Variance: SSA
 
 ::::: columns
 ::: {.column width="60%"}
-As before, partition the variance in the response variable using SS SSA is SS of differences between means in each level of A and overall mean
+As before, partition the variance in the response variable using SS SSA
+is SS of differences between means in each level of A and overall mean
 :::
 
 ::: {.column width="40%"}
@@ -308,7 +308,8 @@ As before, partition the variance in the response variable using SS SSA is SS of
 
 ::::: columns
 ::: {.column width="60%"}
-SSB is SS of difference between means in each level of B and the mean of corresponding level of A summed across levels of A
+SSB is SS of difference between means in each level of B and the mean of
+corresponding level of A summed across levels of A
 :::
 
 ::: {.column width="40%"}
@@ -320,7 +321,8 @@ SSB is SS of difference between means in each level of B and the mean of corresp
 
 ::::: columns
 ::: {.column width="60%"}
--   SSresid is difference bw each observation and mean for its level of factor B, summed over all observations
+-   SSresid is difference bw each observation and mean for its level of
+    factor B, summed over all observations
 -   SStotal = SSA + SSB + SSresid
 -   SS can be turned into MS by dividing by appropriate df
 :::
@@ -344,8 +346,10 @@ Two hypotheses tested on values of MS:
 
 -   Assuming A is fixed:
 -   Ho(A): µ1= µ2= µ3=…. µi= µ
--   Same as in 1-factor ANOVA, using means from B factors nested within each - level of A
--   (no difference in algal biomass across all levels of grazing: µnone= - µlow= µmed= µhigh)
+-   Same as in 1-factor ANOVA, using means from B factors nested within
+    each - level of A
+-   (no difference in algal biomass across all levels of grazing:
+    µnone= - µlow= µmed= µhigh)
 :::
 
 ::: {.column width="40%"}
@@ -362,7 +366,8 @@ Two hypotheses tested on values of MS:
 2.  No effects of factor B nested in A
 
 -   Assuming B is random:
--   Ho(B): σβ2= 0 (no variance added due to differences between all possible - levels of B)
+-   Ho(B): σβ2= 0 (no variance added due to differences between all
+    possible - levels of B)
 -   (no variance added due to differences between patches)
 :::
 
@@ -377,7 +382,9 @@ Two hypotheses tested on values of MS:
 ::: {.column width="60%"}
 **Conclusions?**
 
-"significant variation between replicate patches within each treatment, but no significant difference in amount of filamentous algae between treatments"
+"significant variation between replicate patches within each treatment,
+but no significant difference in amount of filamentous algae between
+treatments"
 :::
 
 ::: {.column width="40%"}
@@ -394,7 +401,8 @@ Unequal sample sizes can be because of:
 -   uneven number of B levels within each A
 -   uneven number of replicates within each level of B
 
-Not a problem, unless have unequal variance or large deviation from - normality
+Not a problem, unless have unequal variance or large deviation from -
+normality
 :::
 
 ::: {.column width="40%"}
@@ -412,6 +420,8 @@ As usual, we assume
 
 Equal variance + normality need to be assessed at both levels:
 
--   Since means for each level of B within each A are used for the H-test about A, need to assess whether those means meet normality and equal variance
+-   Since means for each level of B within each A are used for the
+    H-test about A, need to assess whether those means meet normality
+    and equal variance
 -   Examine residuals for H-test about B
 -   Transformations can be used

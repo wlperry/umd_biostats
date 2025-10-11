@@ -6,18 +6,9 @@ metadata-files:
 format:
   html:
     output-file: "03_02_class_activity.html"
-  typst:
-    output-file: "03_Class_Activity_pdf.pdf"  
   docx:
     output-file: "03_02_class_activity.docx"
 ---
-
-
-
-
-
-
-
 
 # In class activity 3:
 
@@ -69,13 +60,6 @@ format:
 
 First, let's load the necessary packages and import our data:
 
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -86,13 +70,6 @@ library(tidyverse)    # For data wrangling and visualization
 ```
 :::
 
-
-
-
-
-
-
-
 ## Getting the data
 
 ::: callout-tip
@@ -100,13 +77,6 @@ library(tidyverse)    # For data wrangling and visualization
 
 We'll be working with data on arctic grayling fish from two different
 lakes (I3 and I8).
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -156,13 +126,6 @@ head(g_df)
 
 :::
 :::
-
-
-
-
-
-
-
 :::
 
 # Questions to Consider:
@@ -174,13 +137,6 @@ head(g_df)
 5.  What is the distribution of data?
 
 ### Base R way of getting some summary stats
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -214,21 +170,7 @@ summary(g_df)
 :::
 :::
 
-
-
-
-
-
-
-
 ### Skimnr way of seeing summary stats
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -278,13 +220,6 @@ Table: Data summary
 :::
 :::
 
-
-
-
-
-
-
-
 # Part 2: Visualizing Distributions
 
 Visualizations can help us better understand the descriptive statistics
@@ -295,13 +230,6 @@ we've calculated.
 
 One of the best ways to look at data is a histogram - and we will do it
 again
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -315,23 +243,9 @@ g_df %>% ggplot(aes(x = length_mm)) +
 ![](03_02_class_activity_files/figure-html/histograms-1.png){width=336}
 :::
 :::
-
-
-
-
-
-
-
 :::
 
 ### 
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -346,24 +260,10 @@ g_df  %>% ggplot(aes(x = length_mm, fill = lake)) +
 :::
 :::
 
-
-
-
-
-
-
-
 ::: callout-tip
 ### Exercise 2: Creating Box Plots
 
 Personally I like box plots
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -378,13 +278,6 @@ g_df  %>%  ggplot( aes(x = lake, y = length_mm, fill = lake)) +
 ![](03_02_class_activity_files/figure-html/boxplots-1.png){width=336}
 :::
 :::
-
-
-
-
-
-
-
 :::
 
 ### 
@@ -393,13 +286,6 @@ g_df  %>%  ggplot( aes(x = lake, y = length_mm, fill = lake)) +
 ### Exercise 3: Creating Density Plots
 
 Now these will be really important later on
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -413,13 +299,6 @@ g_df  %>%  ggplot(aes(x = length_mm, fill = lake)) +
 ![](03_02_class_activity_files/figure-html/density-plots-1.png){width=336}
 :::
 :::
-
-
-
-
-
-
-
 :::
 
 ### 
@@ -432,13 +311,6 @@ g_df  %>%  ggplot(aes(x = length_mm, fill = lake)) +
 
 ::: callout-tip
 ## Practice Exercise 4: Measures of Central Tendency
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -469,21 +341,7 @@ median(g_df$length_mm)
 
 :::
 :::
-
-
-
-
-
-
-
 :::
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -511,13 +369,6 @@ g_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 ## Summarizing data - two ways
 
 lets say we want to summarize the data and need to get n, means,
@@ -525,13 +376,6 @@ standard deviation, standard error
 
 We could do the following - if we had missing cells the code below would
 give an error
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -581,13 +425,6 @@ length(g_df$length_mm)
 :::
 :::
 
-
-
-
-
-
-
-
 -   **the length counts missing and non-missing data**
 
 -   however this would get old if we had to do this for everything and
@@ -599,13 +436,6 @@ length(g_df$length_mm)
 
 -   the dataframe –\> pipe command that feed the dataframe into –\> next
     command
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -627,21 +457,7 @@ g_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 ## What is cool is we can do a lot of different things now
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -666,21 +482,7 @@ g_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 ## Super cool code in case there are missing values
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -705,24 +507,10 @@ g_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 # Now for Spread...
 
 ::: callout-tip
 ## Practice Exercise 5: Measures of Spread
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -770,24 +558,10 @@ var_length
 
 :::
 :::
-
-
-
-
-
-
-
 :::
 
 ::: callout-tip
 ## Exercise 6: Calculate Quartiles and Percentiles
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -824,13 +598,6 @@ percentiles
 
 :::
 :::
-
-
-
-
-
-
-
 :::
 
 ### Note you could add a box plot by lake to see this if you wanted
@@ -842,13 +609,6 @@ The coefficient of variation (CV) is the standard deviation expressed as
 a percentage of the mean:
 
 $$CV = \frac{s}{\bar{Y}} \times 100\%$$
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -866,21 +626,7 @@ sd_length / mean_length * 100
 
 :::
 :::
-
-
-
-
-
-
-
 :::
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -908,13 +654,6 @@ g_df %>%
 
 :::
 :::
-
-
-
-
-
-
-
 
 ### Questions to Consider:
 

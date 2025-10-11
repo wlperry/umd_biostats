@@ -17,8 +17,6 @@ format:
     output-file: "08_01_lecture_powerpoint.docx"
   pptx:
     output-file: "08_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "08_01_lecture_powerpoint.pdf"
 ---
 
 

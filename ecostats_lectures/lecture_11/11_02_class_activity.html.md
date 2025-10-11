@@ -6,8 +6,6 @@ metadata-files:
 format:
   html:
       output-file: "11_02_class_activity.html"
-  typst:
-    output-file: "11_02_class_activity.pdf"   
   docx:
     output-file: "11_02_class_activity.docx"
 ---
@@ -79,13 +77,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
 # ANOVA-Assumptions and Diagnostics
 
 ANOVA has the same assumptions as the two-sample t-test, but applied to
@@ -107,13 +98,6 @@ all k groups:
 
 This is the default output of base R
 
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -131,26 +115,12 @@ par(mfrow = c(1, 1))
 ```
 :::
 
-
-
-
-
-
-
-
 # ANOVA Diagnostics
 
 Levene's test of homogeneity of variance
 
 -   Null Hypothesis is that they are homogeneous
 -   So you want a non significant result here
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -166,26 +136,12 @@ group  2  0.1586 0.8545
 :::
 :::
 
-
-
-
-
-
-
-
 # **Lecture 12:** ANOVA Diagnostics
 
 Shapiro-Wilk Normality Test
 
 -   Null Hypothesis is that they are normally distributed\
 -   So you want a **non significant** result here
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -202,26 +158,12 @@ W = 0.95893, p-value = 0.468
 :::
 :::
 
-
-
-
-
-
-
-
 # **Lecture 12:** ANOVA Post-Hoc Testing
 
 When ANOVA rejects H₀, we need to determine which groups differ.
 
 **Example**: Using Tukey's HSD to compare all pairs of treatments in the
 circadian rhythm data.
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -312,21 +254,7 @@ NOTE: If two or more means share the same grouping symbol,
 :::
 :::
 
-
-
-
-
-
-
-
 ## Can do in one go as well
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -350,21 +278,7 @@ NOTE: If two or more means share the same grouping symbol,
 :::
 :::
 
-
-
-
-
-
-
-
 # **Lecture 12:** ANOVA Post-Hoc Testing
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -372,34 +286,13 @@ NOTE: If two or more means share the same grouping symbol,
 :::
 :::
 
-
-
-
-
-
-
-
 # **Lecture 12:** ANOVA Post-Hoc Testing
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output-display}
 ![](11_02_class_activity_files/figure-html/unnamed-chunk-13-1.png){width=336}
 :::
 :::
-
-
-
-
-
-
-
 
 # **Lecture 12:** ANOVA Reporting results
 

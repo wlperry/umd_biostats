@@ -13,20 +13,7 @@ format:
     output-file: "11_01_lecture_powerpoint.docx"
   pptx:
     output-file: "11_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "11_01_lecture_powerpoint.pdf"
 ---
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -56,89 +43,74 @@ format:
 
 # Lecture 12: Overview
 
+::::: columns
+::: {.column width="60%"}
 ### ANOVA
 
-Analysis of variance: single and multi-factor designs
+Analysis of variance: single and to come multi-factor designs
 
--   Examples: diatoms, circadian rhythms
--   Predictor variables: fixed vs. random
+-   Predictor variables: fixed
 -   ANOVA model
 -   Analysis and partitioning of variance
 -   Null hypothesis
 -   Assumptions and diagnostics
 -   Post F Tests - Tukey and others
 -   Reporting the results
+-   Mixed Model Anova - random effects
+:::
 
-# **Lecture 12:** ANOVA Introduction
-
+::: {.column width="40%"}
 What if response continuous and predictor(s) categorical?
 
 |                        | Independent variable |                 |
 |:-----------------------|:---------------------|:----------------|
 | **Dependent variable** | **Continuous**       | **Categorical** |
 | **Continuous**         | Regression           | ANOVA           |
-| **Categorical**        | Logistic regression  | Tabular         |
+| **Categorical**        | Logistic regression  |                 |
+:::
+:::::
 
 # **Lecture 12:** ANOVA and Regression Connection
 
-::: callout-note
-# Remember
-
-## Key Insight
-
-Both regression and ANOVA:
+::::: columns
+::: {.column width="60%"}
+### Both regression and ANOVA:
 
 -   Partition the total variation in Y
--   Use F-tests for significance
--   Are based on the General Linear Model
--   Test if explanatory variables predict Y ANOVA is fundamentally
-    connected to regression analysis - both are special cases of the
-    General Linear Model.
+-   Use F-tests for significance where one MS is divided by another
 
+### Regression
 
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 2 × 3
-  Model      Form               Tests                 
-  <chr>      <chr>              <chr>                 
-1 Regression Y = β₀ + β₁X + ε   H₀: β₁ = 0            
-2 ANOVA      Yᵢⱼ = μ + Aᵢ + εᵢⱼ H₀: μ₁ = μ₂ = ... = μₖ
-```
-
-
-:::
+-   **Form:** $Y = \beta_0 + \beta_1X + \varepsilon$
+    -   $Y$ = outcome/response variable
+    -   $\beta_0$ = intercept (value of Y when X = 0)
+    -   $\beta_1$ = slope (change in Y per unit increase in X)
+    -   $X$ = predictor/independent variable
+    -   $\varepsilon$ = error term
+-   **Test:** $H_0: \beta_1 = 0$
+    -   Tests whether slope equals zero
+    -   Rejecting means X significantly predicts Y
 :::
 
+::: {.column width="40%"}
+### ANOVA
 
-
-
-
-
-
-
-
-
-
+-   **Form:** $Y_{ij} = \mu + A_i + \varepsilon_{ij}$
+    -   $Y_{ij}$ = observation for person j in group i
+    -   $\mu$ = grand mean across all groups
+    -   $A_i$ = effect of group i
+    -   $\varepsilon_{ij}$ = error term
+-   **Test:** $H_0: \mu_1 = \mu_2 = ... = \mu_k$
+    -   Tests whether all group means are equal
+    -   Rejecting means at least one group differs
 :::
+:::::
 
 # **Lecture 12:** ANOVA Partitioning
 
 ::::: columns
 ::: {.column width="60%"}
-General method for partitioning variation in continuous dependent
-variable
+### General method for partitioning variation in continuous dependent variable
 
 -   One or more continuous (and categorical) predictors:
     -   regression
@@ -150,31 +122,11 @@ variable
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-2-1.png)
+![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-1-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -187,18 +139,11 @@ variable
 With one categorical variable, ANOVA is equivalent to regression with
 dummy variables.
 
-In fact when we will run ANOVAs we will use he smae code as for
-regression! See explanation on oher web page - Will link here
+In fact when we will run ANOVAs we will use he same code as for
+regression!
 
-
-
-
-
-
-
-
-
-
+regression: model \<- lm(response \~ predictor, data = df)\
+anova: model \<- lm(response \~ factor, data = df)
 
 
 ::: {.cell}
@@ -207,64 +152,58 @@ regression! See explanation on oher web page - Will link here
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 
 # **Lecture 12:** ANOVA Goals
 
-ANOVA aims to compare means of groups:
+::::: columns
+::: {.column width="60%"}
+### ANOVA aims to compare means of groups:
 
 -   Contribution of predictors + "error" to variability
 -   Test H₀ that population (random effects) or group (fixed effects)
     means are equal
 -   Single factor (1-way) and multifactor (2-, 3-way designs)
-    -   Single factor: one factor, more than two levels.
+    -   Single factor: one factor with more than two levels
 -   Multifactor:
-    -   two or three factors, two or more levels.
+    -   two or three factors with two or more levels each
     -   Examines variation due to factors **AND** their interaction
+:::
 
-# The Analysis of Variance
+::: {.column width="40%"}
 
-:::::: columns
-:::: {.column width="60%"}
-Analysis of variance is the most powerful approach known for
-simultaneously testing whether the means of k groups are equal. It works
-by assessing whether individuals chosen from different groups are, on
+::: {.cell}
+::: {.cell-output-display}
+![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-2-1.png)
+:::
+:::
+
+:::
+:::::
+
+# **Lecture 12:** Analysis of Variance
+
+::::: columns
+::: {.column width="60%"}
+*Analysis of variance* - the most powerful approach known for
+simultaneously testing if the means of k groups are equal - works by
+assessing whether individuals chosen from different groups are, on
 average, more different than individuals chosen from the same group.
 
 The null hypothesis of ANOVA is that the population means μᵢ are the
 same for all treatments.
 
-**H₀**: μ₁ = μ₂ = ... = μₖ
+-   **H₀**: μ₁ = μ₂ = ... = μₖ
+-   **H₁**: At least one μᵢ is different from the others.
 
-**H₁**: At least one μᵢ is different from the others.
+Rejecting H₀ in ANOVA
 
-::: callout-note
-Rejecting H₀ in ANOVA is evidence that the mean of at least one group is
-different from the others. It does not indicate *which* means differ.
+-   evidence that the mean of at least one group is different from the
+    others\
+-   does not indicate *which* means differ
 :::
-::::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -272,18 +211,8 @@ different from the others. It does not indicate *which* means differ.
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
-::::::
+:::::
 
 # **Lecture 12:** ANOVA Logic
 
@@ -314,37 +243,19 @@ $$F = \frac{MS_{groups}}{MS_{error}}$$
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-4-1.png)
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 # **Lecture 12:** Partitioning the Sum of Squares
 
+::::: columns
+::: {.column width="60%"}
 The total variation in Y can be expressed as a sum of squares:
 
 $SS_{total} = \sum_{i=1}^{a}\sum_{j=1}^{n}(Y_{ij} - \bar{Y})^2$
@@ -358,80 +269,94 @@ This can be partitioned into two components:
     $SS_{within} = \sum_{i=1}^{a}\sum_{j=1}^{n}(Y_{ij} - \bar{Y}_i)^2$
 
 These components are additive: $SS_{total} = SS_{among} + SS_{within}$
+:::
+
+::: {.column width="40%"}
+
+::: {.cell}
+::: {.cell-output-display}
+![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-5-1.png)
+:::
+:::
+
+:::
+:::::
 
 # **Lecture 12:** Sum of Squares Example
 
-
-
-
-
-
-
-
-
-
-
+:::::: columns
+::: {.column width="60%"}
 
 ::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+
+Call:
+lm(formula = phase_shift ~ treatment, data = circ_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.27857 -0.36125  0.03857  0.61147  1.06571 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)   
+(Intercept)    -0.30875    0.24888  -1.241  0.22988   
+treatmentEyes  -1.24268    0.36433  -3.411  0.00293 **
+treatmentKnees -0.02696    0.36433  -0.074  0.94178   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7039 on 19 degrees of freedom
+Multiple R-squared:  0.4342,	Adjusted R-squared:  0.3746 
+F-statistic: 7.289 on 2 and 19 DF,  p-value: 0.004472
+```
+
+
+:::
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
 Analysis of Variance Table
 
 Response: phase_shift
-          Df  Sum Sq Mean Sq F value   Pr(>F)   
-treatment  2 2.23686 1.11843   16.05 0.001076 **
-Residuals  9 0.62714 0.06968                    
+          Df Sum Sq Mean Sq F value   Pr(>F)   
+treatment  2 7.2245  3.6122  7.2894 0.004472 **
+Residuals 19 9.4153  0.4955                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
 :::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 3 × 4
-  Component     `Sum of Squares` `Degrees of Freedom` `Mean Square`
-  <chr>                    <dbl>                <dbl>         <dbl>
-1 Total                    2.86                    11       NA     
-2 Among Groups             2.24                     2        1.12  
-3 Within Groups            0.627                    9        0.0697
-```
-
-
-:::
 :::
 
+:::
 
-
-
-
-
-
-
-
-
-
-
+:::: {.column width="40%"}
 ::: callout-important
 # Key Connection to Regression
 
-This is the same partitioning we saw in regression analysis:
-$SS_{total} = SS_{regression} + SS_{residual}$
+-   This is the same partitioning we saw in regression analysis:
 
-Where:
+    -   $SS_{total} = SS_{regression} + SS_{residual}$
 
--   $SS_{among}$ in ANOVA = $SS_{regression}$ in regression
--   $SS_{within}$ in ANOVA = $SS_{residual}$ in regression
+-   Where:
 
-Both measure how much variation is explained by our model vs.
-unexplained (error).
+    -   $SS_{among}$ in ANOVA = $SS_{regression}$ in regression
+    -   $SS_{within}$ in ANOVA = $SS_{residual}$ in regression
+
+-   Both measure how much variation is explained by our model vs.
+    unexplained (error).
 :::
+::::
+::::::
 
 # **Lecture 12:** ANOVA Tables
 
+::::: columns
+::: {.column width="60%"}
 The ANOVA table organizes all computations leading to a test of the null
 hypothesis of no differences among population means.
 
@@ -448,21 +373,38 @@ group:
 -   df for treatments = (a - 1) = 2
 -   df for error = a(n - 1) = 3(4 - 1) = 9
 -   df total = an - 1 = 11
+:::
 
-# **Lecture 12:** Circadian Rhythm Data Example
-
-
-
-
-
-
-
-
-
-
-
+::: {.column width="40%"}
 
 ::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+
+Call:
+lm(formula = phase_shift ~ treatment, data = circ_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.27857 -0.36125  0.03857  0.61147  1.06571 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)   
+(Intercept)    -0.30875    0.24888  -1.241  0.22988   
+treatmentEyes  -1.24268    0.36433  -3.411  0.00293 **
+treatmentKnees -0.02696    0.36433  -0.074  0.94178   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7039 on 19 degrees of freedom
+Multiple R-squared:  0.4342,	Adjusted R-squared:  0.3746 
+F-statistic: 7.289 on 2 and 19 DF,  p-value: 0.004472
+```
+
+
+:::
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -484,7 +426,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 # A tibble: 3 × 4
   treatment   Mean    SD     N
-  <fct>      <dbl> <dbl> <int>
+  <chr>      <dbl> <dbl> <int>
 1 Control   -0.309 0.618     8
 2 Eyes      -1.55  0.706     7
 3 Knees     -0.336 0.791     7
@@ -494,29 +436,21 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
+:::
+:::::
 
 # **Lecture 12:** ANOVA vs Regression Tables
 
 ::: callout-important
 # Comparing ANOVA and Regression Tables
 
-An ANOVA table from an ANOVA model:
+An ANOVA table compared to a regression table:
 
 | Source    | df     | SS           | MS           | F   | p   |
 |-----------|--------|--------------|--------------|-----|-----|
 | Treatment | a-1    | SS_treatment | MS_treatment | F   | p   |
 | Error     | a(n-1) | SS_error     | MS_error     |     |     |
-| Total     | an-1   | SS_total     |              |     |     |
+| Total     | a\*n-1 | SS_total     |              |     |     |
 
 Is equivalent to an ANOVA table from a regression model:
 
@@ -526,36 +460,24 @@ Is equivalent to an ANOVA table from a regression model:
 | Error      | n-k-1 | SS_residual   | MS_residual   |     |     |
 | Total      | n-1   | SS_total      |               |     |     |
 
-where k = number of dummy variables = a-1
+-   k = number of predictor / dummy variables = a-1
+-   a = treatment groups/levels of factors
 :::
 
 # **Lecture 12:** F ratio
 
 ::::: columns
 ::: {.column width="60%"}
-The F-ratio is calculated as:
+### The F-ratio is calculated as: $F = \frac{MS_{among}}{MS_{error}}$
 
-$$F = \frac{MS_{among}}{MS_{error}}$$
-
-Under the null hypothesis (all means equal): - The F-ratio should be
-approximately 1 - Larger F-ratios suggest the among-group variance
-exceeds what would be expected by chance
-
-With the circadian rhythm data: - F = 7.29 - p = 0.004 - We reject the
-null hypothesis
-
-The F-ratio follows an F-distribution with (a - 1) and (a(n - 1))
-degrees of freedom.
-
-
-
-
-
-
-
-
-
-
+-   Under the null hypothesis (all means equal):
+    -   The F-ratio should be approximately 1\
+    -   Larger F-ratios suggest among-group variance exceeds that
+        expected by chance\
+-   With the circadian rhythm data:
+    -   F = 7.29 - p = 0.004\
+    -   We reject the null hypothesis\
+    -   F-ratio follows F-distribution with (a - 1) and (a(n - 1)) df
 
 
 ::: {.cell}
@@ -573,138 +495,164 @@ degrees of freedom.
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-8-1.png)
+![](11_01_lecture_powerpoint_files/figure-docx/f_dist-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
 
-::: callout-note
-# Connection to t-test
+# Connection of a F test to T Test
 
-An ANOVA with two groups (a = 2) is equivalent to a t-test: $$F = t^2$$
+::::: columns
+::: {.column width="60%"}
+### An ANOVA with two groups (a = 2) is equivalent to a t-test:
+
+-   Why $F=t^2$
+    -   testing the same hypothesis: are means of two groups different?
+-   *Understanding the t-statistic*
+    -   The t-statistic for comparing two independent groups is:
+        $t = \frac{\bar{X}_1 - \bar{X}_2}{SE_{\text{difference}}}$
+
+    -   Measuring \# standard errors apart the two means are and can
+        be + / -
+-   *Understanding the F-statistic*
+    -   F-statistic in ANOVA is:
+        $F = \frac{\text{Mean Square Between Groups}}{\text{Mean Square Within Groups}} = \frac{MS_B}{MS_W}$
+
+    -   ratio of variance *between* groups to variance *within* groups
+
+    -   Unlike $t$, $F$ is always non-negative (it's a ratio of squared
+        quantities).
 :::
+
+::: {.column width="40%"}
+-   *The Mathematical Connection (squaring remove sign) of t^2^*
+    -   **Both measure same signal-to-noise ratio**:
+        -   numerators capture difference between groups (signal)
+
+        -   denominator captures variability within groups (noise)
+-   **When you have two groups**:
+    -   $MS_B$ is directly related to $(\bar{X}_1 - \bar{X}_2)^2$
+
+    -   $MS_W$ is related to the pooled variance
+-   *Degrees of Freedom also match up:*
+    -   t-test: $df = n_1 + n_2 - 2$
+
+    -   F-test (two groups): $df_1 = 1$ (numerator),
+        $df_2 = n_1 + n_2 - 2$ (denominator)
+
+    -   F-distribution with $df_1 = 1$ is the square of a t-distribution
+        with $df_2$
+:::
+:::::
+
+# Connection of a F test to T Test
+
+### Why This Matters
+
+-   Shows ANOVA is actually a *generalization* of the t-test
+
+-   When $a = 2$, you get the same result either way
+
+-   but ANOVA extends naturally to comparing three or more groups,
+
+-   can't do that directly with a t-test (without running into multiple
+    comparison problems).
+
+### Numerical Example
+
+Let's verify this relationship with a simple example in R:
+
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+Using circ_data (Control vs Knees groups):
+ t-statistic: 0.0741 
+ t^2: 0.0055 
+ F-statistic: 0.0055 
+ Difference (should be ~0): 0 
+```
+
+
+:::
+:::
+
 
 # **Lecture 12:** F ratio Visualization
 
 ::::: columns
 ::: {.column width="60%"}
-The F-ratio is calculated as:
-
-$$F = \frac{MS_{among}}{MS_{error}}$$
-
-Under the null hypothesis (all means equal): - The F-ratio should be
-approximately 1 - Larger F-ratios suggest the among-group variance
-exceeds what would be expected by chance
-
-With the circadian rhythm data: - F = 7.29 - p = 0.004 - We reject the
-null hypothesis
-
-The F-ratio follows an F-distribution with (a - 1) and (a(n - 1))
-degrees of freedom.
-
-
-
-
-
-
-
-
-
-
+The F-ratio is calculated as: $F = \frac{MS_{among}}{MS_{error}}$ -
+Under the null hypothesis (all means equal): - F-ratio should be
+approximately 1 - Larger F-ratios suggests among-group variance exceeds
+chance - With the circadian rhythm data: F~2,19~ = 7.29, p = 0.004\
+- We reject the null hypothesis\
+- F-ratio follows an F-distribution with (a - 1) and (a(n - 1)) df
 
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 2 × 2
-  Metric                Value
-  <chr>                 <dbl>
-1 F-observed             7.29
-2 F-critical (α = 0.05)  3.52
+
+Call:
+lm(formula = phase_shift ~ treatment, data = circ_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.27857 -0.36125  0.03857  0.61147  1.06571 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)   
+(Intercept)    -0.30875    0.24888  -1.241  0.22988   
+treatmentEyes  -1.24268    0.36433  -3.411  0.00293 **
+treatmentKnees -0.02696    0.36433  -0.074  0.94178   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7039 on 19 degrees of freedom
+Multiple R-squared:  0.4342,	Adjusted R-squared:  0.3746 
+F-statistic: 7.289 on 2 and 19 DF,  p-value: 0.004472
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Anova Table (Type II tests)
+
+Response: phase_shift
+          Sum Sq Df F value   Pr(>F)   
+treatment 7.2245  2  7.2894 0.004472 **
+Residuals 9.4153 19                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
 
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-10-1.png)
+![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-11-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -733,154 +681,77 @@ $$R^2 = \frac{SS_{regression}}{SS_{total}}$$
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-11-1.png)
+![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-12-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
 
 # **Lecture 12:** ANOVA Assumptions
 
-ANOVA has the same assumptions as the two-sample t-test, but applied to
-all k groups:
+-   ANOVA has the same assumptions as the two-sample t-test, but applied
+    to all k groups:
+    -   **Random samples** from corresponding populations
+    -   **Normality**: Y values are normally distributed in each
+        population
+    -   **Homogeneity of variance**: variance is the same in all
+        populations
+    -   **Independence**: observations are independent
+-   **Checking assumptions**:
+    -   Normality: Q-Q plots, histogram of residuals, Shapiro-Wilk test
+    -   Homogeneity: plot residuals vs. predicted values or x-values
+    -   Independence: examine experimental design
+-   **If assumptions are violated**:
+    -   Transform Y (e.g., log, square root)
 
-1.  **Random samples** from corresponding populations
-2.  **Normality**: Y values are normally distributed in each population
-3.  **Homogeneity of variance**: variance is the same in all populations
-4.  **Independence**: observations are independent
+    -   Use robust or non-parametric alternatives
 
-**Checking assumptions**:
-
--   Normality: Q-Q plots, histogram of residuals, Shapiro-Wilk test
--   Homogeneity: plot residuals vs. predicted values or x-values
--   Independence: examine experimental design
-
-**If assumptions are violated**:
-
--   Transform Y (e.g., log, square root)
--   Use robust or non-parametric alternatives
--   Use generalized linear models (GLMs)
+    -   Use generalized linear models (GLMs)
 
 # **Lecture 12:** ANOVA diagnostics
 
-This is the default output of base R
 
-
-
-
-
-
-
-
-
+::: {.cell}
+::: {.cell-output-display}
+![](11_01_lecture_powerpoint_files/figure-docx/ggplot_diag-1.png)
+:::
+:::
 
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-# Model diagnostics
-par(mfrow = c(2, 2))
-plot(circ_model)
-dev.off() # This forces the plot to be written
+print((p1 | p2) / (p3 | p4))
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-null device 
-          1 
-```
-
-
-:::
 
 ::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-12-1.png)
+![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-13-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 
 # A newer way to check with the performance library
 
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
-
-```{.r .cell-code}
-# install.packages("performance")
-library(performance)
-check_model(circ_model)
-```
+::: {.cell-output-display}
+![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-14-1.png){width=80%}
+:::
 :::
 
 
-
-
-
-
-
-
-
-
-
+![](diagnostics_2.png){width="80%"}
 
 # **Lecture 12:** Levene's Test
 
-Levene's test of homogeneity of variance Null Hypothesis is that they
-are homogeneous So you want a non significant result here
+Levene's test of homogeneity of variance
 
-
-
-
-
-
-
-
-
-
+-   Null Hypothesis is that they are homogeneous
+-   So you want a non significant result here
 
 
 ::: {.cell}
@@ -898,30 +769,10 @@ group  2  0.1586 0.8545
 :::
 
 
-
-
-
-
-
-
-
-
-
-
 # **Lecture 12:** Shapiro-Wilk Test
 
 Shapiro-Wilk Normality Test Null Hypothesis is that they are normally
 distributed So you want a non significant result here
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -940,16 +791,6 @@ W = 0.95893, p-value = 0.468
 :::
 
 
-
-
-
-
-
-
-
-
-
-
 ::: callout-note
 # Shared Assumptions with Regression
 
@@ -958,8 +799,8 @@ are both linear models:
 
 | Assumption | ANOVA | Regression |
 |------------------------|------------------------|------------------------|
-| Linearity | Relationship between group membership and Y is additive | Relationship between X and Y is linear |
-| Normality | Residuals within each group are normal | Residuals are normal |
+| Linearity | Each group has its own mean; effects are additive (no interaction in one-way ANOVA) | Relationship between X and Y is linear |
+| Normality | Residuals are normal | Residuals are normal |
 | Equal variance | Variance is the same across all groups | Variance is the same across all X values |
 | Independence | Observations are independent | Observations are independent |
 :::
@@ -968,31 +809,21 @@ are both linear models:
 
 ::::: columns
 ::: {.column width="50%"}
-When ANOVA rejects H₀, we need to determine which groups differ.
+When ANOVA rejects H₀, we need to determine which groups differ
 
-**Planned comparisons**: - Identified during study design - Have strong
-prior justification - Use pooled variance from all groups - Have higher
-precision than separate t-tests
-
-**Unplanned (post hoc) comparisons**: - Used when no specific
-comparisons were planned - Must adjust for multiple testing - Common
-methods: Tukey-Kramer, Bonferroni, Scheffé
-
-**Example**: Using Tukey's HSD to compare all pairs of treatments in the
-circadian rhythm data.
+-   **Unplanned (post hoc) comparisons**:
+    -   Used when no specific comparisons were planned
+    -   Must adjust for multiple testing
+    -   *Common methods*: Tukey-Kramer, Bonferroni, Scheffé, Sidak
+-   **Planned (post hoc) comparisons**:
+    -   Have strong prior justification
+    -   Use pooled variance from all groups
+    -   Have higher precision than separate t-tests
+-   **Example**: Using Tukey's HSD to compare all pairs of treatments in
+    the circadian rhythm data.
 :::
 
 ::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -1008,61 +839,17 @@ P value adjustment: tukey method for comparing a family of 3 estimates
 
 
 :::
-:::
 
-
-
-
-
-
-
-
-
-
-
-:::
-:::::
-
-# **Lecture 12:** Post-Hoc Testing Results
-
-::::: columns
-::: {.column width="50%"}
-When ANOVA rejects H₀, we need to determine which groups differ.
-
-**Planned comparisons**: - Identified during study design - Have strong
-prior justification - Use pooled variance from all groups - Have higher
-precision than separate t-tests
-
-**Unplanned (post hoc) comparisons**: - Used when no specific
-comparisons were planned - Must adjust for multiple testing - Common
-methods: Tukey-Kramer, Bonferroni, Scheffé
-
-**Example**: Using Tukey's HSD to compare all pairs of treatments in the
-circadian rhythm data.
-:::
-
-::: {.column width="50%"}
-
-
-
-
-
-
-
-
-
-
-
-::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
 ```
  treatment emmean    SE df lower.CL upper.CL .group
- Eyes      -1.551 0.266 19   -2.108   -0.995  a    
- Knees     -0.336 0.266 19   -0.893    0.221   b   
- Control   -0.309 0.249 19   -0.830    0.212   b   
+ Eyes      -1.551 0.266 19    -2.25   -0.855  a    
+ Knees     -0.336 0.266 19    -1.03    0.361   b   
+ Control   -0.309 0.249 19    -0.96    0.343   b   
 
 Confidence level used: 0.95 
+Conf-level adjustment: sidak method for 3 estimates 
 P value adjustment: tukey method for comparing a family of 3 estimates 
 significance level used: alpha = 0.05 
 NOTE: If two or more means share the same grouping symbol,
@@ -1074,15 +861,184 @@ NOTE: If two or more means share the same grouping symbol,
 :::
 :::
 
+:::
+:::::
+
+# **Lecture 12:** Post-Hoc Testing Results
+
+::::: columns
+::: {.column width="50%"}
+When ANOVA rejects H₀, we need to determine which groups differ
+
+-   **Unplanned (post hoc) comparisons**:
+    -   Used when no specific comparisons were planned
+    -   Must adjust for multiple testing
+    -   *Common methods*: Tukey-Kramer, Bonferroni, Scheffé
+-   **Planned (post hoc) comparisons**:
+    -   Have strong prior justification
+    -   Use pooled variance from all groups
+    -   Have higher precision than separate t-tests
+-   **Example**: Using Tukey's HSD to compare all pairs of treatments in
+    the circadian rhythm data.
+:::
+
+::: {.column width="50%"}
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+[1] "Control" "Eyes"    "Knees"  
+```
 
 
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+ contrast         estimate    SE df t.ratio p.value
+ control vs eyes     1.243 0.364 19   3.411  0.0029
+ control vs knees    0.027 0.364 19   0.074  0.9418
+```
 
 
+:::
+:::
+
+:::
+:::::
+
+# Comparison of Post-Hoc Tests
+
+::::: columns
+::: {.column width="60%"}
+The Main Post-Hoc Tests
+
+-   Tukey-Kramer (HSD - Honestly Significant Difference)
+    -   Compares all possible pairs of group means
+    -   Controls family-wise error rate when making multiple comparisons
+    -   Most powerful when you want to compare ALL pairwise combinations
+-   Bonferroni
+    -   Adjusts α level by dividing by the number of comparisons (e.g.,
+        α/k)
+    -   Very conservative - reduces power to detect real differences
+    -   Best choice for: small number of planned comparisons (not
+        exploratory analyses of all pairs)
+-   Sidak
+    -   Similar to Bonferroni but slightly less conservative
+    -   Uses multiplicative adjustment: 1-(1-α)\^(1/k)
+    -   Best choice for: similar situations to Bonferroni, gives
+        slightly more power
+-   Dunnett's Test
+-   Specifically for comparing treatment groups to control
+-   More powerful than other tests
+
+The key tradeoff is between power (ability to detect real differences)
+and Type I error control (avoiding false positives). More conservative
+tests = better error control but less power.
+:::
+
+::: {.column width="40%"}
+
+::: {.cell}
+
+```{.r .cell-code}
+# ============================================
+# TUKEY-KRAMER (HSD)
+# ============================================
+# All pairwise comparisons
+tukey_result <- emmeans(circ_model, "treatment") |> 
+  pairs(adjust = "tukey")
+# tukey_result
+# # With compact letter display
+# tukey_cld <- emmeans(circ_model, "treatment") |> 
+#   multcomp::cld(Letters = letters, adjust = "tukey")
+# # tukey_cld
+# ============================================
+# BONFERRONI
+# ============================================
+# All pairwise comparisons with Bonferroni adjustment
+bonferroni_result <- emmeans(circ_model, "treatment") |> 
+  pairs(adjust = "bonferroni")
+# bonferroni_result
+
+# # With compact letter display
+# bonferroni_cld <- emmeans(circ_model, "treatment") |> 
+#   multcomp::cld(Letters = letters, adjust = "bonferroni")
+# # bonferroni_cld
+# ============================================
+# ŠIDÁK (SIDAK)
+# ============================================
+# All pairwise comparisons with Šidák adjustment
+sidak_result <- emmeans(circ_model, "treatment") |> 
+  pairs(adjust = "sidak")
+# sidak_result
+# # With compact letter display
+# sidak_cld <- emmeans(circ_model, "treatment") |> 
+#   multcomp::cld(Letters = letters, adjust = "sidak")
+# # sidak_cld
+# ============================================
+# DUNNETT'S TEST
+# ============================================
+# Compare all treatments to control
+# Need to specify control group as reference
+dunnett_result <- emmeans(circ_model, "treatment") |> 
+  contrast(method = "trt.vs.ctrl", ref = 1, adjust = "dunnett")
+# dunnett_result
+# ============================================
+# COMPARISON TABLE
+# ============================================
+# Create a comparison tibble showing p-values from different methods
+# First, get the actual comparison names from your results
+comparison_summary <- tibble(
+  Comparison = summary(tukey_result)$contrast,
+  Tukey = summary(tukey_result)$p.value,
+  Bonferroni = summary(bonferroni_result)$p.value,
+  Sidak = summary(sidak_result)$p.value
+)
+# ============================================
+# SUMMARY TABLE WITH ALL RESULTS
+# ============================================
+# Create a comprehensive comparison
+all_methods <- bind_rows(
+  summary(tukey_result) |> 
+    as_tibble() |> 
+    select(contrast, estimate, SE, p.value) |> 
+    mutate(Method = "Tukey"),
+  
+  summary(bonferroni_result) |> 
+    as_tibble() |> 
+    select(contrast, estimate, SE, p.value) |> 
+    mutate(Method = "Bonferroni"),
+  
+  summary(sidak_result) |> 
+    as_tibble() |> 
+    select(contrast, estimate, SE, p.value) |> 
+    mutate(Method = "Sidak")
+)
+
+# Pivot wider for easy comparison
+all_methods |> 
+  select(contrast, Method, p.value) |> 
+  pivot_wider(names_from = Method, values_from = p.value) |> 
+  arrange(Tukey)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 3 × 4
+  contrast          Tukey Bonferroni   Sidak
+  <chr>             <dbl>      <dbl>   <dbl>
+1 Control - Eyes  0.00787    0.00879 0.00877
+2 Eyes - Knees    0.0117     0.0132  0.0131 
+3 Control - Knees 0.997      1       1.000  
+```
 
 
-
-
-
+:::
+:::
 
 :::
 :::::
@@ -1093,45 +1049,25 @@ NOTE: If two or more means share the same grouping symbol,
 ::: {.column width="50%"}
 When ANOVA rejects H₀, we need to determine which groups differ.
 
-**Planned comparisons**: - Identified during study design - Have strong
-prior justification - Use pooled variance from all groups - Have higher
-precision than separate t-tests
-
-**Unplanned (post hoc) comparisons**: - Used when no specific
-comparisons were planned - Must adjust for multiple testing - Common
-methods: Tukey-Kramer, Bonferroni, Scheffé
-
-**Example**: Using Tukey's HSD to compare all pairs of treatments in the
-circadian rhythm data.
+-   **Unplanned (post hoc) comparisons**:
+    -   Used when no specific comparisons were planned
+    -   Must adjust for multiple testing
+    -   *Common methods*: Tukey-Kramer, Bonferroni, Scheffé
+-   **Planned (post hoc) comparisons**:
+    -   Have strong prior justification
+    -   Use pooled variance from all groups
+    -   Have higher precision than separate t-tests
+-   **Example**: Using Tukey's HSD to compare all pairs of treatments in
+    the circadian rhythm data.
 :::
 
 ::: {.column width="50%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-18-1.png)
+![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-20-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -1142,45 +1078,25 @@ circadian rhythm data.
 ::: {.column width="60%"}
 When ANOVA rejects H₀, we need to determine which groups differ.
 
-**Planned comparisons**: - Identified during study design - Have strong
-prior justification - Use pooled variance from all groups - Have higher
-precision than separate t-tests
-
-**Unplanned (post hoc) comparisons**: - Used when no specific
-comparisons were planned - Must adjust for multiple testing - Common
-methods: Tukey-Kramer, Bonferroni, Scheffé
-
-**Example**: Using Tukey's HSD to compare all pairs of treatments in the
-circadian rhythm data.
+-   **Unplanned (post hoc) comparisons**:
+    -   Used when no specific comparisons were planned
+    -   Must adjust for multiple testing
+    -   *Common methods*: Tukey-Kramer, Bonferroni, Scheffé
+-   **Planned (post hoc) comparisons**:
+    -   Have strong prior justification
+    -   Use pooled variance from all groups
+    -   Have higher precision than separate t-tests
+-   **Example**: Using Tukey's HSD to compare all pairs of treatments in
+    the circadian rhythm data.
 :::
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-19-1.png)
+![](11_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-21-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -1206,35 +1122,23 @@ the knees, impacts circadian rhythm phase shifts."
 
 1.  **Purpose**: ANOVA (Analysis of Variance) compares means across
     multiple groups simultaneously
-
 2.  **Connection to Regression**:
-
     -   Both are special cases of the General Linear Model
     -   ANOVA with categorical predictors = Regression with dummy
         variables
     -   Both partition variance into explained and unexplained
         components
-
 3.  **The Analysis of Variance**:
-
     -   Partitions total variation into components
     -   Tests whether differences among groups exceed what would be
         expected by chance
     -   Uses F-tests to compare variance between groups to variance
         within groups
-
 4.  **Sum of Squares Partitioning**:
-
     -   SS(Total) = SS(Between Groups) + SS(Within Groups)
     -   Same as SS(Total) = SS(Regression) + SS(Error) in regression
-
 5.  **Fixed vs. Random Effects**:
-
     -   Fixed effects: specific groups of interest (most common)
     -   Random effects: sampling from a larger population
 
-# ANOVA Assumptions
-
-1.  Independence of observations
-2.  Normal distribution of residuals
-3.  Homogeneity of variances
+# 

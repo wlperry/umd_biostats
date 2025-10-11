@@ -6,8 +6,6 @@ metadata-files:
 format:
   html:
     output-file: "17_02_class_activity_PCA.html"
-  typst:
-    output-file: "17_02_class_activity_PCA.pdf"  
   docx:
     output-file: "17_02_class_activity_PCA.docx"
 editor: visual  
@@ -15,51 +13,49 @@ editor: visual
 
 
 
-
-
-
-
-
-
-
 # Lecture 17: Principal Component Analysis (PCA)
 
 ## What is PCA?
 
-PCA (Principal Component Analysis) is a technique to: - Reduce the number of variables in your dataset - Find patterns in high-dimensional data - Create new uncorrelated variables (principal components) from correlated original variables - Visualize complex relationships in multivariate data
+PCA (Principal Component Analysis) is a technique to: - Reduce the
+number of variables in your dataset - Find patterns in high-dimensional
+data - Create new uncorrelated variables (principal components) from
+correlated original variables - Visualize complex relationships in
+multivariate data
 
 ## When to Use PCA
 
-Use PCA when you have: - **Multiple continuous variables** that may be correlated - **Too many variables** to analyze or visualize easily - **Need to reduce dimensionality** while retaining most information - **Want to explore patterns** in multivariate data
+Use PCA when you have: - **Multiple continuous variables** that may be
+correlated - **Too many variables** to analyze or visualize easily -
+**Need to reduce dimensionality** while retaining most information -
+**Want to explore patterns** in multivariate data
 
 ## Key Assumptions of PCA
 
 1.  **Linear relationships** between variables
 2.  **No extreme outliers** (can distort results)
-3.  **Variables should be correlated** (if not, PCA won't reduce dimensions effectively)
+3.  **Variables should be correlated** (if not, PCA won't reduce
+    dimensions effectively)
 4.  **Adequate sample size** (generally n \> 50)
 5.  **Consider standardization** when variables have different scales
 
 ::: {.callout-important appearance="simple"}
 ## Critical First Step
 
-Always **standardize your data** when variables are measured on different scales. This prevents variables with larger values from dominating the analysis.
+Always **standardize your data** when variables are measured on
+different scales. This prevents variables with larger values from
+dominating the analysis.
 :::
 
 # Part 1: Iris Data Analysis
 
 ## Data Overview
 
-We'll analyze the famous iris dataset with measurements from three species: - *Iris setosa* - *Iris versicolor* - *Iris virginica*
+We'll analyze the famous iris dataset with measurements from three
+species: - *Iris setosa* - *Iris versicolor* - *Iris virginica*
 
-Each flower has 4 measurements: sepal length, sepal width, petal length, and petal width.
-
-
-
-
-
-
-
+Each flower has 4 measurements: sepal length, sepal width, petal length,
+and petal width.
 
 ::: {.cell}
 
@@ -129,23 +125,9 @@ overview_plot
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 1: Check PCA Assumptions
 
 ### Check Correlations
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -186,21 +168,7 @@ corrplot(cor_matrix, method = "color", type = "upper",
 :::
 :::
 
-
-
-
-
-
-
-
 ### Check for Outliers
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -224,23 +192,10 @@ outlier_plot
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 2: Standardize the Data
 
-Since our variables have different scales (e.g., petal width ranges 0.1-2.5 while sepal length ranges 4-8), we need to standardize.
-
-
-
-
-
-
-
+Since our variables have different scales (e.g., petal width ranges
+0.1-2.5 while sepal length ranges 4-8), we need to standardize.
 
 ::: {.cell}
 
@@ -280,21 +235,7 @@ sepal_length  sepal_width petal_length  petal_width
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 3: Perform PCA
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -320,23 +261,9 @@ Cumulative Proportion  0.7296 0.9581 0.99482 1.00000
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 4: Extract and Understand Results
 
 ### Eigenvalues and Variance Explained
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -371,21 +298,7 @@ pca_summary_df
 :::
 :::
 
-
-
-
-
-
-
-
 ### Component Loadings
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -416,23 +329,9 @@ petal_width   petal_width  0.5648565 -0.06694199 -0.6342727  0.5235971
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 5: Determine Number of Components
 
 ### Scree Plot
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -472,21 +371,7 @@ scree_plot
 :::
 :::
 
-
-
-
-
-
-
-
 ### Apply Decision Rules
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -521,21 +406,7 @@ components_80_percent
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 6: Create PCA Scores
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -566,23 +437,9 @@ head(pca_scores_df)
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 7: Visualize Results
 
 ### PCA Scores Plot
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -608,21 +465,7 @@ scores_plot
 :::
 :::
 
-
-
-
-
-
-
-
 ### Loading Plot
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -663,21 +506,7 @@ Warning: Removed 1 row containing missing values or values outside the scale ran
 :::
 :::
 
-
-
-
-
-
-
-
 ### Combined Biplot
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -720,21 +549,7 @@ biplot_plot
 :::
 :::
 
-
-
-
-
-
-
-
 ## Step 8: Interpret Results
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -786,13 +601,6 @@ total_variance_2pc
 :::
 :::
 
-
-
-
-
-
-
-
 # Summary Checklist for PCA
 
 When conducting PCA, always follow these steps:
@@ -803,9 +611,11 @@ When conducting PCA, always follow these steps:
 1.  **Explore your data** - check distributions and relationships
 2.  **Check correlations** - PCA works best with correlated variables
 3.  **Check for outliers** - they can distort results
-4.  **Standardize if needed** - essential when variables have different scales
+4.  **Standardize if needed** - essential when variables have different
+    scales
 5.  **Run PCA** - extract components
-6.  **Determine number of components** - use scree plot and variance explained
+6.  **Determine number of components** - use scree plot and variance
+    explained
 7.  **Interpret loadings** - understand what each component represents
 8.  **Visualize results** - create scores plots and biplots
 9.  **Validate interpretation** - ensure it makes biological sense
@@ -813,9 +623,11 @@ When conducting PCA, always follow these steps:
 
 ## Key Points to Remember
 
--   **PCA finds new variables** (components) that are linear combinations of original variables
+-   **PCA finds new variables** (components) that are linear
+    combinations of original variables
 -   **Components are uncorrelated** and ordered by variance explained
--   **Standardization is crucial** when variables have different units/scales
+-   **Standardization is crucial** when variables have different
+    units/scales
 -   **First few components** usually capture most variation
 -   **Loadings show** how original variables contribute to components
 -   **Scores show** where observations fall in the new component space
@@ -824,12 +636,19 @@ When conducting PCA, always follow these steps:
 ## Key Points from PCA Analysis
 
 1.  **Check assumptions first** - especially correlations and outliers
-2.  **Standardize when necessary** - prevents scale effects from dominating
-3.  **Use multiple criteria** to decide number of components (scree plot, eigenvalue \> 1, variance explained)
-4.  **Interpret components** based on loadings - what do they represent biologically?
-5.  **Visualize in 2D** using first two components if they explain sufficient variance
-6.  **PCA is exploratory** - use it to understand patterns, not for hypothesis testing
-7.  **Document your choices** - why you kept certain components, how you interpreted them
+2.  **Standardize when necessary** - prevents scale effects from
+    dominating
+3.  **Use multiple criteria** to decide number of components (scree
+    plot, eigenvalue \> 1, variance explained)
+4.  **Interpret components** based on loadings - what do they represent
+    biologically?
+5.  **Visualize in 2D** using first two components if they explain
+    sufficient variance
+6.  **PCA is exploratory** - use it to understand patterns, not for
+    hypothesis testing
+7.  **Document your choices** - why you kept certain components, how you
+    interpreted them
 
-Remember: PCA is a dimension reduction technique - the goal is to simplify complex data while retaining the important patterns!
+Remember: PCA is a dimension reduction technique - the goal is to
+simplify complex data while retaining the important patterns!
 :::

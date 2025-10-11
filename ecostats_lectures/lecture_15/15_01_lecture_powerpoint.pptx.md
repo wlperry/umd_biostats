@@ -14,20 +14,7 @@ format:
     output-file: "15_01_lecture_powerpoint.docx"
   pptx:
     output-file: "15_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "15_01_lecture_powerpoint.pdf"
 ---
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -47,31 +34,9 @@ General Linearized Models (GLM)
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -100,39 +65,20 @@ Analysis of covariance (ANCOVA):
 
 -   ANCOVA = Analysis of COVAriance
 -   Combination of regression and ANOVA
--   A continuous covariate is measured along with the response variable for each experimental unit
--   Common use: compare means of factor levels (groups), adjusting for variance from continuous covariate
--   Another use: determine whether two or more regression lines differ in slopes and intercepts
+-   A continuous covariate is measured along with the response variable
+    for each experimental unit
+-   Common use: compare means of factor levels (groups), adjusting for
+    variance from continuous covariate
+-   Another use: determine whether two or more regression lines differ
+    in slopes and intercepts
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-pptx/intro_ancova_diagram-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -141,13 +87,15 @@ Analysis of covariance (ANCOVA):
 ## Common Applications of ANCOVA
 
 -   **Increasing statistical power**
-    -   Removing variation associated with a covariate can reduce residual error
+    -   Removing variation associated with a covariate can reduce
+        residual error
     -   More powerful test of treatment effects
 -   **Adjusting for confounding variables**
     -   When treatments might differ in some continuous variable
     -   Need to separate treatment effects from covariate effects
 -   **Testing equality of regression lines**
-    -   Do treatments have the same relationship with a continuous variable?
+    -   Do treatments have the same relationship with a continuous
+        variable?
     -   Tests for both slopes and intercepts
 
 # ANCOVA Example: Cricket Chirping
@@ -167,37 +115,16 @@ But:
 -   Range of temperatures differed between species
 -   Apparent relationship between pulse rate and temperature
 
-ANCOVA lets us adjust for temperature effect to get a more powerful test!
+ANCOVA lets us adjust for temperature effect to get a more powerful
+test!
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-pptx/cricket_example-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -205,31 +132,33 @@ ANCOVA lets us adjust for temperature effect to get a more powerful test!
 
 ## The ANCOVA Model
 
-Key concept in ANCOVA: the difference between "unadjusted" group means and "adjusted" means.
+Key concept in ANCOVA: the difference between "unadjusted" group means
+and "adjusted" means.
 
 In this visualization:
 
--   Group Means (shown as asterisks): raw/unadjusted means for each group - simply the average X value and average Y value for all points in that group. Notice that Group A and Group B have different mean X values (they're positioned at different points along the X axis).
+-   Group Means (shown as asterisks): raw/unadjusted means for each
+    group - simply the average X value and average Y value for all
+    points in that group. Notice that Group A and Group B have different
+    mean X values (they're positioned at different points along the X
+    axis).
 
--   Adjusted Means (shown as triangles): These are what ANCOVA actually compares. The adjusted means represent what each group's mean would be if all groups had the same value of the covariate (in this case, the overall mean X).
+-   Adjusted Means (shown as triangles): These are what ANCOVA actually
+    compares. The adjusted means represent what each group's mean would
+    be if all groups had the same value of the covariate (in this case,
+    the overall mean X).
 
-The core purpose of ANCOVA is to make this adjustment. This is important because:
+The core purpose of ANCOVA is to make this adjustment. This is important
+because:
 
--   When groups differ in their covariate values (as they often do in observational studies or even in experiments with random assignment), comparing raw means can be misleading
--   The adjustment helps "level the playing field" by estimating what each group's mean would be if they all had the same value of the covariate
+-   When groups differ in their covariate values (as they often do in
+    observational studies or even in experiments with random
+    assignment), comparing raw means can be misleading
+-   The adjustment helps "level the playing field" by estimating what
+    each group's mean would be if they all had the same value of the
+    covariate
 
 # ANCOVA Model Visualization
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -237,24 +166,18 @@ The core purpose of ANCOVA is to make this adjustment. This is important because
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Mathematical Model for ANCOVA
 
-For a single-factor ANCOVA with factor A (p levels, i = 1 to p), a continuous covariate (x), and response variable (y):
+For a single-factor ANCOVA with factor A (p levels, i = 1 to p), a
+continuous covariate (x), and response variable (y):
 
 $Y_{ij} = \mu + \alpha_i + \beta(X_{ij} - \bar{X}) + \varepsilon_{ij}$
 
-Where: - $Y_{ij}$ = response value for observation j in level i of factor A - $\mu$ = overall mean - $\alpha_i$ = effect of level i of factor A - $\beta$ = common regression slope relating Y to X - $X_{ij}$ = covariate value for observation j in level i of factor A - $\bar{X}$ = mean value of covariate - $\varepsilon_{ij}$ = error term
+Where: - $Y_{ij}$ = response value for observation j in level i of
+factor A - $\mu$ = overall mean - $\alpha_i$ = effect of level i of
+factor A - $\beta$ = common regression slope relating Y to X - $X_{ij}$
+= covariate value for observation j in level i of factor A - $\bar{X}$ =
+mean value of covariate - $\varepsilon_{ij}$ = error term
 
 # ANCOVA Parameters Interpretation
 
@@ -263,43 +186,23 @@ Where: - $Y_{ij}$ = response value for observation j in level i of factor A - $\
 ## Interpretation of Parameters
 
 -   $\mu$ = overall mean response
--   $\alpha_i$ = effect of level i (difference between group mean and overall mean)
+-   $\alpha_i$ = effect of level i (difference between group mean and
+    overall mean)
 -   $\beta$ = pooled within-group regression coefficient
 -   $X_{ij}$ = covariate value for observation j in group i
 -   $\bar{X}$ = overall mean of covariate
 -   $\varepsilon_{ij}$ = unexplained error
 
-This model assumes **homogeneous slopes** across all treatment groups (we'll test this later).
+This model assumes **homogeneous slopes** across all treatment groups
+(we'll test this later).
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-pptx/parameters_illustration-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -309,7 +212,8 @@ This model assumes **homogeneous slopes** across all treatment groups (we'll tes
 ::: {.column width="60%"}
 ## Running ANCOVA in R
 
-Basic ANCOVA model: - Response: continuous variable (y) - Predictor: categorical factor (A)\
+Basic ANCOVA model: - Response: continuous variable (y) - Predictor:
+categorical factor (A)\
 - Covariate: continuous variable (x)
 
 The simplest ANCOVA model is:
@@ -326,21 +230,11 @@ model <- aov(y ~ A + x, data = mydata)
 summary(model)
 ```
 
-Both approaches use Type I SS (sequential). For unbalanced designs, you may want Type III SS using car package.
+Both approaches use Type I SS (sequential). For unbalanced designs, you
+may want Type III SS using car package.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -402,17 +296,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -421,17 +304,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ::::: columns
 ::: {.column width="60%"}
 Using Type III SS from car package:
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -460,36 +332,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 ::: {.column width="40%"}
-The Type III approach is often preferred for: - Unbalanced designs - When you want to test each effect adjusted for all others - More conservative approach when groups differ in covariate values
+The Type III approach is often preferred for: - Unbalanced designs -
+When you want to test each effect adjusted for all others - More
+conservative approach when groups differ in covariate values
 :::
 :::::
 
 # Analysis of Variance for ANCOVA: Partitioning
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -497,31 +349,9 @@ The Type III approach is often preferred for: - Unbalanced designs - When you wa
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # ANOVA Table for ANCOVA
 
 The ANOVA table for a single-factor ANCOVA has these components:
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -534,20 +364,10 @@ The ANOVA table for a single-factor ANCOVA has these components:
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Null Hypotheses in ANCOVA
 
-1.  **Treatment Effect (adjusted for covariate)** $H_0: \alpha_1 = \alpha_2 = ... = \alpha_p = 0$
+1.  **Treatment Effect (adjusted for covariate)**
+    $H_0: \alpha_1 = \alpha_2 = ... = \alpha_p = 0$
 
     -   Are the adjusted group means equal?
     -   Test with F = MS_A(adj)/MS_Residual
@@ -557,7 +377,8 @@ The ANOVA table for a single-factor ANCOVA has these components:
     -   Is there a relationship between the covariate and the response?
     -   Test with F = MS_Covariate/MS_Residual
 
-3.  **Homogeneity of Slopes** (test this first!) $H_0: \beta_1 = \beta_2 = ... = \beta_p$
+3.  **Homogeneity of Slopes** (test this first!)
+    $H_0: \beta_1 = \beta_2 = ... = \beta_p$
 
     -   Are the regression slopes the same for all groups?
     -   Test by adding group\*covariate interaction term
@@ -568,7 +389,8 @@ The ANOVA table for a single-factor ANCOVA has these components:
 ::: {.column width="60%"}
 ## Testing for Homogeneous Slopes
 
-ANCOVA assumes the regression slopes are the same for all groups (parallel regression lines)
+ANCOVA assumes the regression slopes are the same for all groups
+(parallel regression lines)
 
 To test this assumption:
 
@@ -591,17 +413,6 @@ anova(model_int)
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -638,18 +449,9 @@ interaction_pvalue <- anova(model_int)[3, "Pr(>F)"]
 ```
 :::
 
-
-
-
-
-
-
-
-
-
-
-
-The p-value for the interaction is 0.984. Since p \> 0.05, we can proceed with standard ANCOVA (assuming homogeneous slopes).
+The p-value for the interaction is 0.984.
+Since p \> 0.05, we can proceed with standard ANCOVA (assuming
+homogeneous slopes).
 :::
 :::::
 
@@ -657,33 +459,11 @@ The p-value for the interaction is 0.984. Since p \> 0.05, we can proceed with s
 
 ## Parallel vs. Non-Parallel Slopes
 
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-pptx/slopes_visualization-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 
 # Handling Heterogeneous Slopes
 
@@ -691,64 +471,35 @@ The p-value for the interaction is 0.984. Since p \> 0.05, we can proceed with s
 ::: {.column width="60%"}
 ## When Slopes Are Not Homogeneous
 
-If the interaction term is significant (p \< 0.05), the slope-group relationship is not the same across groups.
+If the interaction term is significant (p \< 0.05), the slope-group
+relationship is not the same across groups.
 
 Options:
 
-1.  **Report the interaction** - this is a biologically interesting result!
+1.  **Report the interaction** - this is a biologically interesting
+    result!
 
 2.  **Separate regressions** - analyze each group separately
 
-3.  **Johnson-Neyman procedure** - identifies regions of the covariate where groups differ significantly
+3.  **Johnson-Neyman procedure** - identifies regions of the covariate
+    where groups differ significantly
 
-4.  **Alternative models** - consider transformation, polynomial terms, or more complex models
+4.  **Alternative models** - consider transformation, polynomial terms,
+    or more complex models
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-pptx/heterogeneous_slopes_example-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 # Partridge Example: Data Overview
 
 ## ANCOVA on Longevity of Male Fruitflies
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -782,31 +533,9 @@ ggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) +
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Partridge Example: Testing Homogeneity
 
 ## Testing Homogeneity of Slopes
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -840,31 +569,11 @@ p_interaction <- anova(homo_slopes_model)[3, "Pr(>F)"]
 ```
 :::
 
-
-
-
-
-
-
-
-
-
-
-
-The p-value for the interaction term (treatment × THORAX) is 0.984. Since this value is \> 0.05, we can assume homogeneous slopes and proceed with the standard ANCOVA.
+The p-value for the interaction term (treatment × THORAX) is
+0.984. Since this value is \> 0.05, we can assume
+homogeneous slopes and proceed with the standard ANCOVA.
 
 # Partridge Example: Full ANCOVA Analysis
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -958,31 +667,9 @@ Confidence level used: 0.95
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Partridge Example: Pairwise Comparisons
 
 ## Pairwise Comparisons of Adjusted Means
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1037,31 +724,9 @@ plot(adjusted_means, comparisons = TRUE) +
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Visualizing ANCOVA Results
 
 ## Visualization Options for ANCOVA
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -1069,73 +734,33 @@ plot(adjusted_means, comparisons = TRUE) +
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Sea Urchin Example: Heterogeneous Slopes
 
 ::::: columns
 ::: {.column width="60%"}
 ## Heterogeneous Slopes Example
 
-Constable (1993) studied shrinking in sea urchin test: - Compared suture widths between treatments - Three groups: high food, low food, initial sample - Covariate: body volume (cube root transformed)
+Constable (1993) studied shrinking in sea urchin test: - Compared suture
+widths between treatments - Three groups: high food, low food, initial
+sample - Covariate: body volume (cube root transformed)
 
-The analysis showed: - Significant interaction between treatment and covariate - **Heterogeneous slopes** across treatments - Can't use standard ANCOVA
+The analysis showed: - Significant interaction between treatment and
+covariate - **Heterogeneous slopes** across treatments - Can't use
+standard ANCOVA
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-pptx/urchin_heterogeneous-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
 # Johnson-Neyman Procedure
 
 ## Johnson-Neyman Procedure for Heterogeneous Slopes
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -1161,29 +786,24 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Interpretation of Heterogeneous Slopes
 
-When you have heterogeneous slopes, the Johnson-Neyman procedure identifies regions of the covariate where groups differ:
+When you have heterogeneous slopes, the Johnson-Neyman procedure
+identifies regions of the covariate where groups differ:
 
 1.  **Initial \> Low Food** when cube root body volume \> 2.95
-    -   For large urchins, the initial sample has wider sutures than low food urchins
+    -   For large urchins, the initial sample has wider sutures than low
+        food urchins
 2.  **High Food \> Initial** when cube root body volume \> 1.81
-    -   For most urchins, high food treatment results in wider sutures than initial samples
+    -   For most urchins, high food treatment results in wider sutures
+        than initial samples
 3.  **High Food \> Low Food** when cube root body volume \> 2.07
-    -   For most medium to large urchins, high food results in wider sutures than low food
+    -   For most medium to large urchins, high food results in wider
+        sutures than low food
 
-The biological interpretation is that **food regime affects suture width differently depending on urchin size**. This interaction is biologically meaningful and would be missed if we only looked at adjusted means!
+The biological interpretation is that **food regime affects suture width
+differently depending on urchin size**. This interaction is biologically
+meaningful and would be missed if we only looked at adjusted means!
 
 # Assumptions of ANCOVA
 
@@ -1209,17 +829,6 @@ The biological interpretation is that **food regime affects suture width differe
 
 ## Checking Assumptions in R
 
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1235,17 +844,6 @@ plot(ancova_model)
 ![](15_01_lecture_powerpoint_files/figure-pptx/check_assumptions-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 
 # Robust ANCOVA Approaches
 
@@ -1271,17 +869,6 @@ When ANCOVA assumptions are violated, consider:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1353,18 +940,9 @@ P-value for treatment effect (rank-based): 0
 ```
 :::
 
-
-
-
-
-
-
-
-
-
-
-
-Note: The permutation test is commented out as it requires the lmPerm package, which may not be installed. The rank-based approach is shown as a simple alternative.
+Note: The permutation test is commented out as it requires the lmPerm
+package, which may not be installed. The rank-based approach is shown as
+a simple alternative.
 :::
 :::::
 
@@ -1374,39 +952,36 @@ Note: The permutation test is commented out as it requires the lmPerm package, w
 
 Here's how you might write up ANCOVA results for publication:
 
-> "We analyzed the effects of mating strategy on male fruitfly longevity using analysis of covariance (ANCOVA), with thorax length as a covariate. Before conducting the main analysis, we tested the homogeneity of slopes assumption and found no significant interaction between treatment and thorax length (F₄,₁₁₅ = 1.56, P = 0.19), indicating that the effect of body size on longevity was consistent across treatments.
+> "We analyzed the effects of mating strategy on male fruitfly longevity
+> using analysis of covariance (ANCOVA), with thorax length as a
+> covariate. Before conducting the main analysis, we tested the
+> homogeneity of slopes assumption and found no significant interaction
+> between treatment and thorax length (F₄,₁₁₅ = 1.56, P = 0.19),
+> indicating that the effect of body size on longevity was consistent
+> across treatments.
 >
-> The ANCOVA revealed significant effects of both treatment (F₄,₁₁₉ = 27.97, P \< 0.001) and thorax length (F₁,₁₁₉ = 145.44, P \< 0.001) on longevity. Thorax length was positively associated with longevity (b = 1.19), with larger males living longer. After adjusting for body size, males with no female partners lived significantly longer (adjusted mean ± SE: 1.81 ± 0.02 log₁₀ days) than males in any other treatment group. Males provided with a single virgin female daily (1.77 ± 0.02) or a single inseminated female daily (1.79 ± 0.02) showed intermediate longevity, while males with eight females per day showed the lowest longevity (1.72 ± 0.02 for inseminated females; 1.59 ± 0.02 for virgin females). Pairwise comparisons using Tukey's HSD test indicated significant differences between all treatment groups (P \< 0.05) except between the two treatments with a single female per day (P = 0.42)."
+> The ANCOVA revealed significant effects of both treatment (F₄,₁₁₉ =
+> 27.97, P \< 0.001) and thorax length (F₁,₁₁₉ = 145.44, P \< 0.001) on
+> longevity. Thorax length was positively associated with longevity (b =
+> 1.19), with larger males living longer. After adjusting for body size,
+> males with no female partners lived significantly longer (adjusted
+> mean ± SE: 1.81 ± 0.02 log₁₀ days) than males in any other treatment
+> group. Males provided with a single virgin female daily (1.77 ± 0.02)
+> or a single inseminated female daily (1.79 ± 0.02) showed intermediate
+> longevity, while males with eight females per day showed the lowest
+> longevity (1.72 ± 0.02 for inseminated females; 1.59 ± 0.02 for virgin
+> females). Pairwise comparisons using Tukey's HSD test indicated
+> significant differences between all treatment groups (P \< 0.05)
+> except between the two treatments with a single female per day (P =
+> 0.42)."
 
 # Publication Quality Figure
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-pptx/publication_figure-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 
 # Summary
 
@@ -1419,7 +994,8 @@ Here's how you might write up ANCOVA results for publication:
 2.  **The Analysis**
     -   Always test for homogeneity of slopes first!
     -   If slopes are homogeneous, proceed with standard ANCOVA
-    -   If slopes are heterogeneous, use alternatives (Johnson-Neyman procedure)
+    -   If slopes are heterogeneous, use alternatives (Johnson-Neyman
+        procedure)
 3.  **Interpretation**
     -   Focus on adjusted means (at mean covariate value)
     -   Consider both statistical and biological significance

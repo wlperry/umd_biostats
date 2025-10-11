@@ -14,20 +14,7 @@ format:
     output-file: "04_01_lecture_powerpoint.docx"
   pptx:
     output-file: "04_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "04_01_lecture_powerpoint.pdf"
 ---
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -43,33 +30,11 @@ format:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-2-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -80,17 +45,6 @@ format:
 
 Let's explore the Arctic grayling data from lakes I3 and I8. Use the
 `grayling_df` data frame to create basic summary statistics.
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -124,17 +78,6 @@ grayling_summary
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # **Lecture 4:** Probability Distributions
@@ -153,33 +96,11 @@ grayling_summary
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-4-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -203,33 +124,11 @@ Z-scores allow us to convert any **normal distribution** to the
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-5-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -242,17 +141,6 @@ Let's practice converting raw values to Z-scores using the Arctic
 grayling data.
 
 **Z Score = (length - mean) / standard deviation**
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -286,17 +174,6 @@ head(i3_df)
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # **Lecture 4:** The fish data as a z score
@@ -308,33 +185,11 @@ distributon?
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-7-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -354,17 +209,6 @@ should be **approximately (varies if distribution is not normal)**:
 -   **95% of data within ±2σ of the mean - really 1.96σ**
 -   99.7% of data within ±3σ of the mean
 
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -383,17 +227,6 @@ Proportion within 1 SD: 81.8 %
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Lecture 4: Standard normal distribution - Fish Data
 
 ::::: columns
@@ -409,17 +242,6 @@ You want to know things about this population like
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -437,17 +259,6 @@ You want to know things about this population like
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-9-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -469,33 +280,11 @@ Standard Normal Distribution
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-10-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -515,33 +304,11 @@ Areas under curve of Standard Normal Distribution
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-11-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -567,33 +334,11 @@ z = (300 - 265.61)/28.3 = 1.215194
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-12-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -645,17 +390,6 @@ We can use R to get these values easier...
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -717,17 +451,6 @@ print(z_for_95_percent)
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -743,17 +466,6 @@ Maybe we expect 95% of the time to catch a fish that is "common" but the
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -787,17 +499,6 @@ This corresponds to z-score: 1.645
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -863,33 +564,11 @@ Previously we had calculated Standard Error and Confidence Intervals -
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-13-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1000,28 +679,6 @@ versus the t-distribution for our fish data. I3 data and 10 fish Mean is
 \## $\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 ::: callout-tip
@@ -1032,17 +689,6 @@ versus the t-distribution for our fish data. I3 data and 10 fish Mean is
 266.7 - sd is 17.12 - se is 5.41
 
 \## $\text{CI} = \bar{y} \pm t \cdot \frac{s}{\sqrt{n}}$
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1125,17 +771,6 @@ t critical value: 2.262 vs z critical value: 1.96
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # **Lecture 4:** Intro to Hypothesis Testing one tailed
@@ -1168,17 +803,6 @@ only interested if it is larger
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -1270,17 +894,6 @@ Decision: Reject Ho (sample mean falls in upper rejection region)
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1314,33 +927,11 @@ only interested if it is larger
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-17-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1371,17 +962,6 @@ we are looking at the confidence intervals!!!\
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -1455,17 +1035,6 @@ Decision: Reject Ho (sample mean falls in rejection region)
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1494,33 +1063,11 @@ we are looking at the confidence intervals!!!
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-19-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1531,17 +1078,6 @@ we are looking at the confidence intervals!!!
 
 Let's perform a one-sample t-test to determine if the mean fish length
 in Lake I3 differs from 260 mm:
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1591,17 +1127,6 @@ mean of x
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 Interpret this test result by answering these questions:
 
 1.  What was the null hypothesis?
@@ -1621,17 +1146,6 @@ For the following research questions about Arctic grayling, write the
 null and alternative hypotheses:
 
 1.  Are fish in Lake I8 longer than fish in Lake I3?
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1666,17 +1180,6 @@ mean in group I3 mean in group I8
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 Based on this t-test, what can we conclude about the difference in fish
 length between the two lakes?
 :::
@@ -1704,33 +1207,11 @@ something more extreme) if the null hypothesis is true.
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-22-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1766,33 +1247,11 @@ occur:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-23-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1826,33 +1285,11 @@ The Key Insight fundamental trade-off in hypothesis testing:
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-24-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1874,17 +1311,6 @@ error might have occurred:
 
 3.  Let's calculate the power of our t-test to detect a 30 mm difference
     in length between lakes:
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1934,17 +1360,6 @@ NOTE: n is number in *each* group
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 
 # **Lecture 4:** Summary
@@ -1969,32 +1384,10 @@ NOTE: n is number in *each* group
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
 ![](04_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-26-1.png)
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
 :::
 :::::

@@ -11,6 +11,7 @@ format:
     output-file: "13_05_nested_anovat_visual_slides.html"
 ---
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -37,24 +38,27 @@ my_theme <- theme_minimal() +
 :::
 
 
-
-
 # Introduction
 
-This document provides a comparison between one-way ANOVA and nested ANOVA using the `urchin_df` dataset from Quinn & Keough (2002). This tutorial aims to help students understand how the partitioning of variance differs between these two approaches and why accounting for nested factors is crucial in certain experimental designs.
+This document provides a comparison between one-way ANOVA and nested
+ANOVA using the `urchin_df` dataset from Quinn & Keough (2002). This
+tutorial aims to help students understand how the partitioning of
+variance differs between these two approaches and why accounting for
+nested factors is crucial in certain experimental designs.
 
 In the `urchin_df` dataset, the experimental design consists of:
 
--   Four urchin density **treatments** (`treat`): Control, 66% Density, 33% Density, and Removed
--   Each treatment was replicated within four random **patches** (`patch`)
--   Five replicate **quadrats** were measured within each treatment-patch combination
+-   Four urchin density **treatments** (`treat`): Control, 66% Density,
+    33% Density, and Removed
+-   Each treatment was replicated within four random **patches**
+    (`patch`)
+-   Five replicate **quadrats** were measured within each
+    treatment-patch combination
 -   The response variable is percentage cover of filamentous **algae**
 
 ## Dataset Overview
 
 First, let's load and explore the dataset:
-
-
 
 
 ::: {.cell}
@@ -97,11 +101,7 @@ summary_stats
 :::
 
 
-
-
 Let's visualize the data distribution by treatment:
-
-
 
 
 ::: {.cell}
@@ -121,18 +121,15 @@ ggplot(urchin_df, aes(x = treat, y = algae, fill = treat)) +
 ```
 
 ::: {.cell-output-display}
-![](13_05_nested_anova_visualization_files/figure-html/visualize-data-1.png){width=672}
+![](13_05_nested_anova_visualization_files/figure-html/visualize-data-1.png){width=480}
 :::
 :::
-
-
 
 
 # One-way ANOVA
 
-In a one-way ANOVA, we ignore the nested structure of the data and simply compare the means of the four treatment groups.
-
-
+In a one-way ANOVA, we ignore the nested structure of the data and
+simply compare the means of the four treatment groups.
 
 
 ::: {.cell}
@@ -161,15 +158,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-
-
-In this one-way ANOVA, we find a significant effect of treatment on algae cover (F(3, 76) = 9.06, p = 0).
+In this one-way ANOVA, we find a significant effect of treatment on
+algae cover (F(3,
+76) =
+9.06, p =
+0).
 
 # Nested ANOVA
 
-Now, let's run a nested ANOVA that accounts for the hierarchical structure where patches are nested within treatments.
-
-
+Now, let's run a nested ANOVA that accounts for the hierarchical
+structure where patches are nested within treatments.
 
 
 ::: {.cell}
@@ -199,15 +197,14 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-
-
-**Important Note**: The ANOVA table above does not use the correct error terms for testing the treatment effect. In a nested design, the treatment effect should be tested against the patch variation, not the residual error.
+**Important Note**: The ANOVA table above does not use the correct error
+terms for testing the treatment effect. In a nested design, the
+treatment effect should be tested against the patch variation, not the
+residual error.
 
 ## Corrected Nested ANOVA with Proper F-tests
 
 Let's calculate the correct F-ratios and p-values for the nested design:
-
-
 
 
 ::: {.cell}
@@ -266,23 +263,25 @@ anova_table
 :::
 
 
-
-
 With the corrected nested ANOVA, we find:
 
-1.  The treatment effect is not significant (F = 3.39, p = 0.135) when tested against the patch variation.
-2.  There is significant variation among patches within treatments (F = 2.95, p = 0.026)
+1.  The treatment effect is not significant (F = 3.39,
+    p = 0.135) when tested against the patch
+    variation.
+2.  There is significant variation among patches within treatments (F =
+    2.95, p
+    = 0.026)
 
-This is a different conclusion than the one-way ANOVA, which found a significant treatment effect.
+This is a different conclusion than the one-way ANOVA, which found a
+significant treatment effect.
 
 # Variance Decomposition Comparison
 
 ## Visual Decomposition of Variance Components
 
-First, let's create a visual representation of how variance is partitioned in a standard one-way ANOVA, and then contrast it with how a nested ANOVA further divides the variance components.
-
-
-
+First, let's create a visual representation of how variance is
+partitioned in a standard one-way ANOVA, and then contrast it with how a
+nested ANOVA further divides the variance components.
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -353,24 +352,29 @@ First, let's create a visual representation of how variance is partitioned in a 
 :::
 :::
 
-
-
-
-The plots above visually demonstrate the key differences in how variance is partitioned between one-way and nested ANOVA:
+The plots above visually demonstrate the key differences in how variance
+is partitioned between one-way and nested ANOVA:
 
 1.  **One-way ANOVA** (first plot):
-    -   Total variance is split into just two components: Among Groups (treatment) and Within Groups (Error)
-    -   The Within Groups component includes all variation not explained by treatments
+    -   Total variance is split into just two components: Among Groups
+        (treatment) and Within Groups (Error)
+    -   The Within Groups component includes all variation not explained
+        by treatments
 2.  **Nested ANOVA** (second plot):
-    -   Total variance is split into three components: Among treatments, Among patches within treatments, and Within patches (Residual Error)
-    -   The important addition is the "Among patches within treatments" component, which captures the spatial heterogeneity
-    -   The actual residual error (Within patches) is smaller than the Within Groups error in one-way ANOVA
+    -   Total variance is split into three components: Among treatments,
+        Among patches within treatments, and Within patches (Residual
+        Error)
+    -   The important addition is the "Among patches within treatments"
+        component, which captures the spatial heterogeneity
+    -   The actual residual error (Within patches) is smaller than the
+        Within Groups error in one-way ANOVA
 
-This visualization demonstrates why we get different conclusions: in one-way ANOVA, the patch-to-patch variation is incorrectly included in the error term, leading to an artificially inflated F-ratio for treatments.
+This visualization demonstrates why we get different conclusions: in
+one-way ANOVA, the patch-to-patch variation is incorrectly included in
+the error term, leading to an artificially inflated F-ratio for
+treatments.
 
 ## Numerical Decomposition of Variance
-
-
 
 
 ::: {.cell}
@@ -503,9 +507,11 @@ p1
 ```
 
 ::: {.cell-output-display}
-![](13_05_nested_anova_visualization_files/figure-html/variance-components-1.png){width=672}
+![](13_05_nested_anova_visualization_files/figure-html/variance-components-1.png){width=480}
 :::
 :::
+
+
 
 ::: {.cell}
 
@@ -515,18 +521,15 @@ p2 + p3 + plot_layout(ncol = 2)
 ```
 
 ::: {.cell-output-display}
-![](13_05_nested_anova_visualization_files/figure-html/pie-charts-1.png){width=672}
+![](13_05_nested_anova_visualization_files/figure-html/pie-charts-1.png){width=480}
 :::
 :::
-
-
 
 
 # Mixed-Effects Model Approach
 
-A modern way to analyze nested designs is to use mixed-effects models. Let's compare the results with our previous analyses:
-
-
+A modern way to analyze nested designs is to use mixed-effects models.
+Let's compare the results with our previous analyses:
 
 
 ::: {.cell}
@@ -598,15 +601,14 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-
-
-The mixed model approach gives us similar conclusions to the correctly specified nested ANOVA. The treatment effect is non-significant when accounting for the nested structure of patches within treatments.
+The mixed model approach gives us similar conclusions to the correctly
+specified nested ANOVA. The treatment effect is non-significant when
+accounting for the nested structure of patches within treatments.
 
 # Visualizing the Nested Structure
 
-One way to understand why we get different results is to visualize the data by patch within treatment:
-
-
+One way to understand why we get different results is to visualize the
+data by patch within treatment:
 
 
 ::: {.cell}
@@ -647,20 +649,19 @@ ggplot() +
 ```
 
 ::: {.cell-output-display}
-![](13_05_nested_anova_visualization_files/figure-html/nested-structure-viz-1.png){width=672}
+![](13_05_nested_anova_visualization_files/figure-html/nested-structure-viz-1.png){width=480}
 :::
 :::
 
 
-
-
-This plot clearly shows the high variation among patches within each treatment. This patch-to-patch variation contributes substantially to the total variance, which is not accounted for in the one-way ANOVA.
+This plot clearly shows the high variation among patches within each
+treatment. This patch-to-patch variation contributes substantially to
+the total variance, which is not accounted for in the one-way ANOVA.
 
 # F-ratio Demonstration
 
-Let's illustrate how the F-ratio for treatments differs between one-way and nested ANOVA:
-
-
+Let's illustrate how the F-ratio for treatments differs between one-way
+and nested ANOVA:
 
 
 ::: {.cell}
@@ -692,42 +693,57 @@ f_ratio_comparison
 :::
 
 
-
-
 # Key Differences and Implications
 
-The comparison between one-way ANOVA and nested ANOVA reveals several important differences:
+The comparison between one-way ANOVA and nested ANOVA reveals several
+important differences:
 
 1.  **Variance Partitioning**:
-    -   In one-way ANOVA, all variation not explained by treatments is lumped into the "Error" term.
-    -   In nested ANOVA, this variation is partitioned into "patch(treatment)" and "Error" components.
+    -   In one-way ANOVA, all variation not explained by treatments is
+        lumped into the "Error" term.
+    -   In nested ANOVA, this variation is partitioned into
+        "patch(treatment)" and "Error" components.
 2.  **F-ratio for Testing treatment Effects**:
-    -   One-way ANOVA tests treatments against residual error (MS treatment / MS Residual).
-    -   Nested ANOVA tests treatments against patch variation (MS treatment / MS patch(treatment)).
+    -   One-way ANOVA tests treatments against residual error (MS
+        treatment / MS Residual).
+    -   Nested ANOVA tests treatments against patch variation (MS
+        treatment / MS patch(treatment)).
 3.  **Biological Interpretation**:
-    -   One-way ANOVA suggests significant treatment effects (p = 0).
-    -   Nested ANOVA reveals that most variation is among patches, with non-significant treatment effects (p = 0.135).
-    -   The substantial patch variability (38.8% of total variation) masks the treatment effect when properly accounted for.
+    -   One-way ANOVA suggests significant treatment effects (p =
+        0).
+    -   Nested ANOVA reveals that most variation is among patches, with
+        non-significant treatment effects (p =
+        0.135).
+    -   The substantial patch variability (38.8% of total variation)
+        masks the treatment effect when properly accounted for.
 4.  **Statistical Power and Type I Error**:
-    -   Ignoring the nested structure leads to pseudoreplication and inflated Type I error rates.
-    -   The one-way ANOVA effectively treats each quadrat as an independent sample, inflating the degrees of freedom for the error term.
+    -   Ignoring the nested structure leads to pseudoreplication and
+        inflated Type I error rates.
+    -   The one-way ANOVA effectively treats each quadrat as an
+        independent sample, inflating the degrees of freedom for the
+        error term.
 
 # Conclusion
 
-This demonstration illustrates why accounting for hierarchical or nested structures in experimental designs is crucial for valid statistical inference. Failure to account for such structures can lead to:
+This demonstration illustrates why accounting for hierarchical or nested
+structures in experimental designs is crucial for valid statistical
+inference. Failure to account for such structures can lead to:
 
 1.  Pseudoreplication (treating non-independent samples as independent)
-2.  Inflation of Type I error rates (finding spurious "significant" effects)
+2.  Inflation of Type I error rates (finding spurious "significant"
+    effects)
 3.  Incorrect partitioning of variance sources
 4.  Misleading biological interpretations
 
-In the `urchin_df` dataset, the nested ANOVA reveals that spatial heterogeneity (patch-to-patch variation) is the dominant factor influencing algae cover, not the experimental treatment. This insight would be missed if only a one-way ANOVA were used.
+In the `urchin_df` dataset, the nested ANOVA reveals that spatial
+heterogeneity (patch-to-patch variation) is the dominant factor
+influencing algae cover, not the experimental treatment. This insight
+would be missed if only a one-way ANOVA were used.
 
 ## Alternative Code for Mixed Models
 
-For advanced users, we could also fit this as a mixed model with `lmerTest`:
-
-
+For advanced users, we could also fit this as a mixed model with
+`lmerTest`:
 
 
 ::: {.cell}
@@ -774,6 +790,5 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-
-
-Mixed models provide a more flexible approach to handle nested designs and are the recommended approach in modern statistical practice.
+Mixed models provide a more flexible approach to handle nested designs
+and are the recommended approach in modern statistical practice.

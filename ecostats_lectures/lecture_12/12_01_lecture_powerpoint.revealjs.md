@@ -14,20 +14,7 @@ format:
     output-file: "12_01_lecture_powerpoint.docx"
   pptx:
     output-file: "12_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "12_01_lecture_powerpoint.pdf"
 ---
-
-
-
-
-
-
-
-
-
-
-
 
 # Lecture 12: Review
 
@@ -91,7 +78,8 @@ In factorial designs
 
 -   look at two types of factor effects:
     -   Main effect of each factor (polling across other factor)
-    -   Interaction effects; is there synergistic/ antagonistic effect of factors?
+    -   Interaction effects; is there synergistic/ antagonistic effect
+        of factors?
 :::
 
 ::: {.column width="40%"}
@@ -122,8 +110,10 @@ Effect of season and density on limpet fecundity.
 Consider a crossed design with:
 
 -   p levels of factor A (i= 1…p) (2 seasons)
--   q levels of factor B (j= 1…q), crossed with each level of A (4 density levels)
--   n~i~ replicates (k= 1…n~i~) in each combination of A and B (3 replicate plates per density per season)
+-   q levels of factor B (j= 1…q), crossed with each level of A (4
+    density levels)
+-   n~i~ replicates (k= 1…n~i~) in each combination of A and B (3
+    replicate plates per density per season)
 :::
 
 ::: {.column width="40%"}
@@ -143,7 +133,8 @@ We can calculate several means:
 
 We can calculate several means:
 
--   Marginal means for levels of each factor, pooling across all levels of other factor\
+-   Marginal means for levels of each factor, pooling across all levels
+    of other factor\
 -   Marginal mean for levels of A= µi
 -   Marginal mean for levels of B= µj
 
@@ -173,17 +164,25 @@ Model 1 ANOVA:
 
 ## $$y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$$
 
--   $y_{ijk}$: value of the k~th~ observation from jth and ith combination of B and A (fecundity on 2nd plate, in "8 per plate" density in summer)
+-   $y_{ijk}$: value of the k~th~ observation from jth and ith
+    combination of B and A (fecundity on 2nd plate, in "8 per plate"
+    density in summer)
 -   µ: overall mean (overall fecundity)
--   αi: effect of the ith level of A, pooling across all levels of B: µi- µ (difference between average fecundity in all "8 per plate" treatments and overall mean)
+-   αi: effect of the ith level of A, pooling across all levels of B:
+    µi- µ (difference between average fecundity in all "8 per plate"
+    treatments and overall mean)
 
 # Interaction Effects
 
 ## $$y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$$
 
--   Βj: effect of jth level of B, pooling across all levels of A: µj- µ (difference between average fecundity in all winter treatments and overall mean)
--   (αβ)ij: effect of interaction of ith level of A and jth level of B (µij - µi - µj + µ).
-    -   Does effect of B depend on level of A? (is effect of density different in winter and summer?)
+-   Βj: effect of jth level of B, pooling across all levels of A: µj- µ
+    (difference between average fecundity in all winter treatments and
+    overall mean)
+-   (αβ)ij: effect of interaction of ith level of A and jth level of B
+    (µij - µi - µj + µ).
+    -   Does effect of B depend on level of A? (is effect of density
+        different in winter and summer?)
 
 # Model Types and Interpretation
 
@@ -191,12 +190,17 @@ Model 1 ANOVA:
 
 -   Model 2 ANOVA rare in ecology
 -   Model 3 interpretation is different:
-    -   βj: random variable measuring variance in y across all possible levels of B, pooling across all levels of A
-    -   (αβ)ij is random variable measuring variance of interaction bw A and B across all possible levels of B ("is effect of A consistent across all possible levels of B that could have been chosen?")
+    -   βj: random variable measuring variance in y across all possible
+        levels of B, pooling across all levels of A
+    -   (αβ)ij is random variable measuring variance of interaction bw A
+        and B across all possible levels of B ("is effect of A
+        consistent across all possible levels of B that could have been
+        chosen?")
 
 # ANOVA Table Structure
 
-SSA is SS of differences between each marginal mean of A and overall mean
+SSA is SS of differences between each marginal mean of A and overall
+mean
 
 | Source | SS | df | MS |
 |:-----------------|:-----------------|:-----------------|:-----------------|
@@ -210,7 +214,8 @@ SSA is SS of differences between each marginal mean of A and overall mean
 
 ::::: columns
 ::: {.column width="60%"}
-SSA is SS of differences between each marginal mean of A and overall mean
+SSA is SS of differences between each marginal mean of A and overall
+mean
 :::
 
 ::: {.column width="40%"}
@@ -222,7 +227,8 @@ SSA is SS of differences between each marginal mean of A and overall mean
 
 ::::: columns
 ::: {.column width="60%"}
-SSB is SS of differences between each marginal mean of B and overall mean
+SSB is SS of differences between each marginal mean of B and overall
+mean
 :::
 
 ::: {.column width="40%"}
@@ -234,7 +240,8 @@ SSB is SS of differences between each marginal mean of B and overall mean
 
 ::::: columns
 ::: {.column width="60%"}
-SSB is SS of differences between each marginal mean of B and overall mean
+SSB is SS of differences between each marginal mean of B and overall
+mean
 :::
 
 ::: {.column width="40%"}
@@ -270,7 +277,8 @@ SSAB is SS of cell means minus marginal means plus overall mean
 
 ::::: columns
 ::: {.column width="60%"}
-SSresid is difference between each observation and the appropriate cell mean, summed over all observations
+SSresid is difference between each observation and the appropriate cell
+mean, summed over all observations
 :::
 
 ::: {.column width="40%"}
@@ -294,7 +302,8 @@ SStotal = SSA + SSB + SSAB + SSresid
 
 SS converted to MS;
 
-F-ratio calculations are different depending on whether factors are fixed, random or mixed
+F-ratio calculations are different depending on whether factors are
+fixed, random or mixed
 
 | Source | A and B fixed | A and B random | A fixed, B random |
 |:-----------------|:----------------:|:----------------:|:----------------:|
@@ -308,8 +317,10 @@ F-ratio calculations are different depending on whether factors are fixed, rando
 
 A, B, A\*B Both factors fixed:
 
--   Ho(A): µ1= µ2= µ3=…. µi= µp (no diff. in marginal means of A, pooling across all levels of B)
--   Ho(B): µ1= µ2= µ3=…. µj= µq (no diff. in marginal means of B, pooling across all levels of A)
+-   Ho(A): µ1= µ2= µ3=…. µi= µp (no diff. in marginal means of A,
+    pooling across all levels of B)
+-   Ho(B): µ1= µ2= µ3=…. µj= µq (no diff. in marginal means of B,
+    pooling across all levels of A)
 -   Ho(AB): µij- µi - µj + µ = 0 (no effect of interaction)
 
 # Hypotheses: Random Factors
@@ -318,11 +329,18 @@ A, B, A\*B Both factors fixed:
 
 Both factors random:
 
--   Ho(A): σA2= 0 (no added variance due to levels of A that could have been used)
--   Ho(B): σB2= 0 (no added variance due to levels of B that could have been used)
--   Ho(AB): σAB2= 0 (no added variance due to interaction between all levels of A and B that could have been used)
+-   Ho(A): σA2= 0 (no added variance due to levels of A that could have
+    been used)
+-   Ho(B): σB2= 0 (no added variance due to levels of B that could have
+    been used)
+-   Ho(AB): σAB2= 0 (no added variance due to interaction between all
+    levels of A and B that could have been used)
 
-The random effect hypothesis tests whether there is significant variation or "added variance" in the data that can be attributed to the random groups or individuals within the fixed groups. In other words, it examines whether there are factors beyond the fixed conditions that contribute to the variability in the data.
+The random effect hypothesis tests whether there is significant
+variation or "added variance" in the data that can be attributed to the
+random groups or individuals within the fixed groups. In other words, it
+examines whether there are factors beyond the fixed conditions that
+contribute to the variability in the data.
 
 # Hypotheses: Mixed Model
 
@@ -330,15 +348,19 @@ The random effect hypothesis tests whether there is significant variation or "ad
 
 One fixed, one random:
 
--   Ho(A): µ1= µ2= µ3=…. µi= µp (no diff. in marginal means of A, pooling across all levels of B)
--   Ho(B): σB2= 0 (no added variance due to levels of B that could have been used)
--   Ho(AB): σAB2= 0 (no added variance due to interaction between all levels of A and B that could have been used)
+-   Ho(A): µ1= µ2= µ3=…. µi= µp (no diff. in marginal means of A,
+    pooling across all levels of B)
+-   Ho(B): σB2= 0 (no added variance due to levels of B that could have
+    been used)
+-   Ho(AB): σAB2= 0 (no added variance due to interaction between all
+    levels of A and B that could have been used)
 
 # Example Study Details
 
 ::::: columns
 ::: {.column width="60%"}
-So lets try the example with the fecundity of limpets in low and high tide areas of a rocky inter-tidal area
+So lets try the example with the fecundity of limpets in low and high
+tide areas of a rocky inter-tidal area
 
 Effect of season and density on limpet fecundity.
 
@@ -346,7 +368,11 @@ Effect of season and density on limpet fecundity.
 -   4 density treatments (factor B)
 -   3 replicates in each cell
 -   This is data from Quinn and Keough Edition 1 box 9.4
--   This analysis examines the effects of season (winter/spring vs. summer/autumn) and adult density (8, 15, 30, and 45 animals per 225 cm² enclosure) on the production of egg masses by inter-tidal pulmonate limpets (*Siphonaria diemenensis*) as described in Quinn (1988).
+-   This analysis examines the effects of season (winter/spring vs.
+    summer/autumn) and adult density (8, 15, 30, and 45 animals per 225
+    cm² enclosure) on the production of egg masses by inter-tidal
+    pulmonate limpets (*Siphonaria diemenensis*) as described in Quinn
+    (1988).
 :::
 
 ::: {.column width="40%"}
@@ -362,16 +388,6 @@ The set up and data overview
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -427,16 +443,6 @@ quinn_data %>%
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -444,7 +450,8 @@ quinn_data %>%
 
 ::::: columns
 ::: {.column width="60%"}
-Before conducting the factorial ANOVA, we need to check several assumptions:
+Before conducting the factorial ANOVA, we need to check several
+assumptions:
 
 1.  Independence of observations
 2.  Normality of residuals
@@ -453,16 +460,6 @@ Before conducting the factorial ANOVA, we need to check several assumptions:
 
 ::: {.column width="40%"}
 Fit the model
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -551,16 +548,6 @@ F-statistic: 6.822 on 7 and 16 DF,  p-value: 0.000745
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -572,16 +559,6 @@ Q-Q Plot of Residuals
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -596,19 +573,9 @@ ggplot(quinn_data, aes(sample = residuals)) +
 ```
 
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-html/normality_1-1.png){width=672}
+![](12_01_lecture_powerpoint_files/figure-html/normality_1-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -622,16 +589,6 @@ Histogram of Residuals
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -644,19 +601,9 @@ ggplot(quinn_data, aes(x = residuals)) +
 ```
 
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-html/normality_2-1.png){width=672}
+![](12_01_lecture_powerpoint_files/figure-html/normality_2-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -669,16 +616,6 @@ Shapiro-Wilk Test for Normality
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -701,16 +638,6 @@ W = 0.97373, p-value = 0.7587
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -722,16 +649,6 @@ Levene's Test for Homogeneity of Variances
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -753,16 +670,6 @@ group  7  0.3337 0.9268
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -774,16 +681,6 @@ Residuals vs. Fitted Values
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -798,19 +695,9 @@ ggplot(quinn_data, aes(x = fitted, y = residuals)) +
 ```
 
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-html/homogeneity_2-1.png){width=672}
+![](12_01_lecture_powerpoint_files/figure-html/homogeneity_2-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -823,16 +710,6 @@ Residuals by Treatment Combination
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -847,19 +724,9 @@ ggplot(quinn_data, aes(x = interaction(DENSITY, SEASON), y = residuals)) +
 ```
 
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-html/homogeneity_3-1.png){width=672}
+![](12_01_lecture_powerpoint_files/figure-html/homogeneity_3-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -872,16 +739,6 @@ Now to run the Factorial ANOVA
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -934,16 +791,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -955,16 +802,6 @@ To get the polynomial and quadratic contrasts
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1070,16 +907,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1091,16 +918,6 @@ Estimated Marginal Means and Effects
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1150,16 +967,6 @@ P value adjustment: tukey method for comparing a family of 4 estimates
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1172,16 +979,6 @@ Main Effect of Density Plot
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1192,19 +989,9 @@ density_plot
 ```
 
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-html/emmeans_lm_2-1.png){width=672}
+![](12_01_lecture_powerpoint_files/figure-html/emmeans_lm_2-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -1217,16 +1004,6 @@ Main Effect of Season
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1267,16 +1044,6 @@ Results are averaged over the levels of: DENSITY
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1289,16 +1056,6 @@ Main Effect of Season Plot
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1310,19 +1067,9 @@ season_plot
 ```
 
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-html/emmeans_lm_4-1.png){width=672}
+![](12_01_lecture_powerpoint_files/figure-html/emmeans_lm_4-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -1335,16 +1082,6 @@ Interaction Effects and Raw Means Comparison
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1435,16 +1172,6 @@ quinn_data %>%
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1456,16 +1183,6 @@ Standard Interaction Plot
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1479,19 +1196,9 @@ interaction_plot
 ```
 
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-html/emmeans_lm_6-1.png){width=672}
+![](12_01_lecture_powerpoint_files/figure-html/emmeans_lm_6-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -1504,16 +1211,6 @@ Custom Interaction Plot with Error Bars
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1546,19 +1243,9 @@ custom_interaction
 ```
 
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-html/emmeans_lm_7-1.png){width=672}
+![](12_01_lecture_powerpoint_files/figure-html/emmeans_lm_7-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -1571,16 +1258,6 @@ This is a plot you might produce for publication
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1618,56 +1295,69 @@ pub_plot
 ```
 
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-html/unnamed-chunk-3-1.png){width=672}
+![](12_01_lecture_powerpoint_files/figure-html/unnamed-chunk-3-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
 
 # Results Interpretation for Linear Model Approach
 
-The factorial ANOVA was conducted using a linear model approach, which provides additional insights beyond the traditional ANOVA table.
+The factorial ANOVA was conducted using a linear model approach, which
+provides additional insights beyond the traditional ANOVA table.
 
 Key findings from the linear model analysis:
 
-1.  **Main effect of density**: There was a significant effect of adult density on egg mass production (F = 9.67, df = 3, 16, p = 0.001). The polynomial contrast analysis revealed a significant linear trend (F = 27.58, df = 1, 16, p = 0.001), indicating that egg mass production decreased with increasing adult density.
+1.  **Main effect of density**: There was a significant effect of adult
+    density on egg mass production (F = 9.67, df = 3, 16, p = 0.001).
+    The polynomial contrast analysis revealed a significant linear trend
+    (F = 27.58, df = 1, 16, p = 0.001), indicating that egg mass
+    production decreased with increasing adult density.
 
-2.  **Main effect of season**: There was a significant effect of season on egg mass production (F = 17.84, df = 1, 16, p = 0.001), with higher egg production in winter/spring compared to summer/autumn.
+2.  **Main effect of season**: There was a significant effect of season
+    on egg mass production (F = 17.84, df = 1, 16, p = 0.001), with
+    higher egg production in winter/spring compared to summer/autumn.
 
-3.  **Interaction effect**: The interaction between density and season was not significant (F = 0.30, df = 3, 16, p = 0.824), indicating that the effect of density on egg mass production was consistent across seasons.
+3.  **Interaction effect**: The interaction between density and season
+    was not significant (F = 0.30, df = 3, 16, p = 0.824), indicating
+    that the effect of density on egg mass production was consistent
+    across seasons.
 
 # Results Interpretation: Effect Sizes
 
-The factorial ANOVA was conducted using a linear model approach, which provides additional insights beyond the traditional ANOVA table.
+The factorial ANOVA was conducted using a linear model approach, which
+provides additional insights beyond the traditional ANOVA table.
 
 Key findings from the linear model analysis:
 
 4.  **Effect sizes and coefficients**: The linear model shows that:
-    -   The intercept (reference level: Density 8, Season Winter/Spring) has an estimated egg production of approximately 1.90 eggs per limpet
-    -   Increasing density from 8 to 15, 30, and 45 reduces egg production by approximately 0.28, 0.74, and 0.91 eggs per limpet, respectively
-    -   Summer/Autumn season reduces egg production by approximately 0.75 eggs per limpet compared to Winter/Spring
-    -   The non-significant interaction terms indicate that the density effect is not significantly different between seasons
+    -   The intercept (reference level: Density 8, Season Winter/Spring)
+        has an estimated egg production of approximately 1.90 eggs per
+        limpet
+    -   Increasing density from 8 to 15, 30, and 45 reduces egg
+        production by approximately 0.28, 0.74, and 0.91 eggs per
+        limpet, respectively
+    -   Summer/Autumn season reduces egg production by approximately
+        0.75 eggs per limpet compared to Winter/Spring
+    -   The non-significant interaction terms indicate that the density
+        effect is not significantly different between seasons
 
 # Results Interpretation: Model Performance
 
-5.  **Polynomial contrasts**: The significant linear contrast (p = 0.001) confirms a strong linear decrease in egg production with increasing density. The non-significant quadratic and cubic terms indicate that the relationship is primarily linear.
+5.  **Polynomial contrasts**: The significant linear contrast (p =
+    0.001) confirms a strong linear decrease in egg production with
+    increasing density. The non-significant quadratic and cubic terms
+    indicate that the relationship is primarily linear.
 
-6.  **Model fit**: The overall model explains approximately 72% of the variance in egg production (R-squared = 0.72), indicating a good fit to the data.
+6.  **Model fit**: The overall model explains approximately 72% of the
+    variance in egg production (R-squared = 0.72), indicating a good fit
+    to the data.
 
 # Writing the Results for a Scientific Paper
 
-Here's how you might write up these results using the linear model approach for a scientific paper:
+Here's how you might write up these results using the linear model
+approach for a scientific paper:
 
 ```         
 Results
@@ -1681,4 +1371,5 @@ Polynomial contrast analysis confirmed a significant negative linear relationshi
 Post-hoc pairwise comparisons using estimated marginal means showed significant differences between the lowest density (8) and the two highest densities (30 and 45), while the difference between densities 8 and 15 was not statistically significant after adjustment for multiple comparisons.
 ```
 
-Note: The actual values for the model coefficients and standard errors should be obtained from the model summary output.
+Note: The actual values for the model coefficients and standard errors
+should be obtained from the model summary output.

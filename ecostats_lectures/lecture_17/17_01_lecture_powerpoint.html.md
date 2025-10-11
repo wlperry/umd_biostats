@@ -13,20 +13,7 @@ format:
     output-file: "17_01_lecture_powerpoint.docx"
   pptx:
     output-file: "17_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "17_01_lecture_powerpoint.pdf"
 ---
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -55,9 +42,13 @@ format:
 
 Eigenvectors, eigenvalues and components
 
--   Common goal of MV analysis is variable reduction: can we derive new variables (based on linear combinations of "original" variables) that explain variation in data?
+-   Common goal of MV analysis is variable reduction: can we derive new
+    variables (based on linear combinations of "original" variables)
+    that explain variation in data?
 
--   For data set with i= 1 to n objects and j = 1 to p original variables we seek new variables (principal components) using the equation:
+-   For data set with i= 1 to n objects and j = 1 to p original
+    variables we seek new variables (principal components) using the
+    equation:
 
 ### $$z_{ik} = c_1y_{i1} + c_2y_{i2} + \cdots c_jy_{ij} + \cdots + c_py_{ip}$$
 
@@ -65,7 +56,8 @@ Eigenvectors, eigenvalues and components
 
 -   zik is value of new variable k for object I
 -   yi1- yip are values of original variables for object i
--   c1-cp are coefficients that show importance of the original variables to new derived variable
+-   c1-cp are coefficients that show importance of the original
+    variables to new derived variable
 
 ### $$z_{ik} = c_1y_{i1} + c_2y_{i2} + \cdots c_jy_{ij} + \cdots + c_py_{ip}$$
 
@@ -93,29 +85,27 @@ Derived variables are found so that:
 
 Eigenvectors, eigenvalues and components
 
--   Eigenvalues (latent roots) represent amount of variation in data explained by the new k= 1 to p derived variables (λ1, λ2 …λp).
--   Eigenvalues are population parameters and are estimated using ML to get sample statistics (l1, l2…lp)
--   Eigenvectors are lists of coefficients (c) that show contribution of original variables to new, derived variables
+-   Eigenvalues (latent roots) represent amount of variation in data
+    explained by the new k= 1 to p derived variables (λ1, λ2 …λp).
+-   Eigenvalues are population parameters and are estimated using ML to
+    get sample statistics (l1, l2…lp)
+-   Eigenvectors are lists of coefficients (c) that show contribution of
+    original variables to new, derived variables
 -   Each new variable has an eigenvalue and an eigenvector
--   New variables (components) are derived from a p x p covariance or correlation matrix of original variables
+-   New variables (components) are derived from a p x p covariance or
+    correlation matrix of original variables
 
 # Lecture 17: PCA Goals and Introduction
 
--   Common goals of MV data analysis are variable reduction (finding derived variables that summarize data) and exploration of patterns in data (scaling/ordination)
--   Can use association (correlation/ covariance) matrices (PCA) or dissimilarity measures (MDS)
--   In PCA: take p old variables and transform them into p "new/derived" uncorrelated variables (principal components)
+-   Common goals of MV data analysis are variable reduction (finding
+    derived variables that summarize data) and exploration of patterns
+    in data (scaling/ordination)
+-   Can use association (correlation/ covariance) matrices (PCA) or
+    dissimilarity measures (MDS)
+-   In PCA: take p old variables and transform them into p "new/derived"
+    uncorrelated variables (principal components)
 
 # Data for PCA Analysis
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -453,16 +443,6 @@ iris_df
 :::
 
 
-
-
-
-
-
-
-
-
-
-
 # Step 1: Explore the Iris Dataset
 
 ::::: columns
@@ -473,16 +453,6 @@ Right is the data on iris from a long dataframe
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -495,19 +465,9 @@ overview_plot
 ```
 
 ::: {.cell-output-display}
-![](17_01_lecture_powerpoint_files/figure-html/unnamed-chunk-1-1.png){width=672}
+![](17_01_lecture_powerpoint_files/figure-html/unnamed-chunk-1-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -518,41 +478,26 @@ overview_plot
 ::: {.column width="40%"}
 ## Principal Component Analysis Goals:
 
--   **Variable Reduction**: Transform many correlated variables into fewer uncorrelated components
--   **Data Exploration**: Visualize patterns and relationships in high-dimensional data
--   **Noise Reduction**: Focus on the most important sources of variation
--   **Dimension Reduction**: Make complex datasets easier to analyze and interpret
+-   **Variable Reduction**: Transform many correlated variables into
+    fewer uncorrelated components
+-   **Data Exploration**: Visualize patterns and relationships in
+    high-dimensional data
+-   **Noise Reduction**: Focus on the most important sources of
+    variation
+-   **Dimension Reduction**: Make complex datasets easier to analyze and
+    interpret
 
-**Today's Example**: Iris flower measurements - can we reduce 4 measurements to 2-3 components that capture most variation?
+**Today's Example**: Iris flower measurements - can we reduce 4
+measurements to 2-3 components that capture most variation?
 :::
 
 ::: {.column width="60%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](17_01_lecture_powerpoint_files/figure-html/correaltions-1.png){width=672}
+![](17_01_lecture_powerpoint_files/figure-html/correaltions-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -563,46 +508,31 @@ overview_plot
 ::: {.column width="40%"}
 ## Principal Component Analysis Goals:
 
--   **Variable Reduction**: Transform many correlated variables into fewer uncorrelated components
--   **Data Exploration**: Visualize patterns and relationships in high-dimensional data
--   **Noise Reduction**: Focus on the most important sources of variation
--   **Dimension Reduction**: Make complex datasets easier to analyze and interpret
+-   **Variable Reduction**: Transform many correlated variables into
+    fewer uncorrelated components
+-   **Data Exploration**: Visualize patterns and relationships in
+    high-dimensional data
+-   **Noise Reduction**: Focus on the most important sources of
+    variation
+-   **Dimension Reduction**: Make complex datasets easier to analyze and
+    interpret
 
-**Today's Example**: Iris flower measurements - can we reduce 4 measurements to fewer components that capture most variation?
+**Today's Example**: Iris flower measurements - can we reduce 4
+measurements to fewer components that capture most variation?
 :::
 
 ::: {.column width="60%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output-display}
 
 ```{=html}
-<div class="plotly html-widget html-fill-item" id="htmlwidget-122eebe00a926d57db59" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-122eebe00a926d57db59">{"x":{"visdat":{"11c3b18aea5b6":["function () ","plotlyVisDat"]},"cur_data":"11c3b18aea5b6","attrs":{"11c3b18aea5b6":{"x":{},"y":{},"z":{},"mode":"markers","marker":{"size":5,"opacity":0.80000000000000004},"text":{},"hoverinfo":"text","color":{},"colors":["#E41A1C","#377EB8","#4DAF4A"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"","showgrid":false,"showline":false,"showticklabels":false,"zeroline":false,"showspikes":false},"yaxis":{"title":"","showgrid":false,"showline":false,"showticklabels":false,"zeroline":false,"showspikes":false},"zaxis":{"title":"","showgrid":false,"showline":false,"showticklabels":false,"zeroline":false,"showspikes":false},"bgcolor":"white","camera":{"eye":{"x":1.5,"y":1.5,"z":1.5}}},"paper_bgcolor":"white","showlegend":true,"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[5.0999999999999996,4.9000000000000004,4.7000000000000002,4.5999999999999996,5,5.4000000000000004,4.5999999999999996,5,4.4000000000000004,4.9000000000000004,5.4000000000000004,4.7999999999999998,4.7999999999999998,4.2999999999999998,5.7999999999999998,5.7000000000000002,5.4000000000000004,5.0999999999999996,5.7000000000000002,5.0999999999999996,5.4000000000000004,5.0999999999999996,4.5999999999999996,5.0999999999999996,4.7999999999999998,5,5,5.2000000000000002,5.2000000000000002,4.7000000000000002,4.7999999999999998,5.4000000000000004,5.2000000000000002,5.5,4.9000000000000004,5,5.5,4.9000000000000004,4.4000000000000004,5.0999999999999996,5,4.5,4.4000000000000004,5,5.0999999999999996,4.7999999999999998,5.0999999999999996,4.5999999999999996,5.2999999999999998,5],"y":[3.5,3,3.2000000000000002,3.1000000000000001,3.6000000000000001,3.8999999999999999,3.3999999999999999,3.3999999999999999,2.8999999999999999,3.1000000000000001,3.7000000000000002,3.3999999999999999,3,3,4,4.4000000000000004,3.8999999999999999,3.5,3.7999999999999998,3.7999999999999998,3.3999999999999999,3.7000000000000002,3.6000000000000001,3.2999999999999998,3.3999999999999999,3,3.3999999999999999,3.5,3.3999999999999999,3.2000000000000002,3.1000000000000001,3.3999999999999999,4.0999999999999996,4.2000000000000002,3.1000000000000001,3.2000000000000002,3.5,3.6000000000000001,3,3.3999999999999999,3.5,2.2999999999999998,3.2000000000000002,3.5,3.7999999999999998,3,3.7999999999999998,3.2000000000000002,3.7000000000000002,3.2999999999999998],"z":[5.379999999999999,5.0299999999999994,4.96,4.9999999999999991,5.379999999999999,6.04,5.1299999999999999,5.3499999999999996,4.7299999999999995,5.0999999999999996,5.7000000000000002,5.3199999999999994,4.9299999999999997,4.4699999999999998,5.8399999999999999,6.3000000000000007,5.7600000000000007,5.4299999999999997,6.0899999999999999,5.6499999999999995,5.6899999999999995,5.6500000000000004,4.8999999999999995,5.6399999999999988,5.5299999999999994,5.2199999999999998,5.5200000000000005,5.4999999999999991,5.379999999999999,5.1699999999999999,5.1699999999999999,5.6500000000000004,5.75,5.9299999999999988,5.1499999999999995,5.0399999999999991,5.5099999999999998,5.2799999999999994,4.71,5.3999999999999995,5.3100000000000005,4.46,4.8099999999999996,5.6699999999999999,5.9799999999999995,5.0300000000000002,5.669999999999999,4.9799999999999995,5.6499999999999995,5.2299999999999995],"mode":"markers","marker":{"color":"rgba(228,26,28,1)","size":5,"opacity":0.80000000000000004,"line":{"color":"rgba(228,26,28,1)"}},"text":["Sepal Length: 5.1 <br> Sepal Width: 3.5 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 4.9 <br> Sepal Width: 3 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 4.7 <br> Sepal Width: 3.2 <br> Petal Length: 1.3 <br> Petal Width: 0.2","Sepal Length: 4.6 <br> Sepal Width: 3.1 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3.6 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 5.4 <br> Sepal Width: 3.9 <br> Petal Length: 1.7 <br> Petal Width: 0.4","Sepal Length: 4.6 <br> Sepal Width: 3.4 <br> Petal Length: 1.4 <br> Petal Width: 0.3","Sepal Length: 5 <br> Sepal Width: 3.4 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 4.4 <br> Sepal Width: 2.9 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 4.9 <br> Sepal Width: 3.1 <br> Petal Length: 1.5 <br> Petal Width: 0.1","Sepal Length: 5.4 <br> Sepal Width: 3.7 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 4.8 <br> Sepal Width: 3.4 <br> Petal Length: 1.6 <br> Petal Width: 0.2","Sepal Length: 4.8 <br> Sepal Width: 3 <br> Petal Length: 1.4 <br> Petal Width: 0.1","Sepal Length: 4.3 <br> Sepal Width: 3 <br> Petal Length: 1.1 <br> Petal Width: 0.1","Sepal Length: 5.8 <br> Sepal Width: 4 <br> Petal Length: 1.2 <br> Petal Width: 0.2","Sepal Length: 5.7 <br> Sepal Width: 4.4 <br> Petal Length: 1.5 <br> Petal Width: 0.4","Sepal Length: 5.4 <br> Sepal Width: 3.9 <br> Petal Length: 1.3 <br> Petal Width: 0.4","Sepal Length: 5.1 <br> Sepal Width: 3.5 <br> Petal Length: 1.4 <br> Petal Width: 0.3","Sepal Length: 5.7 <br> Sepal Width: 3.8 <br> Petal Length: 1.7 <br> Petal Width: 0.3","Sepal Length: 5.1 <br> Sepal Width: 3.8 <br> Petal Length: 1.5 <br> Petal Width: 0.3","Sepal Length: 5.4 <br> Sepal Width: 3.4 <br> Petal Length: 1.7 <br> Petal Width: 0.2","Sepal Length: 5.1 <br> Sepal Width: 3.7 <br> Petal Length: 1.5 <br> Petal Width: 0.4","Sepal Length: 4.6 <br> Sepal Width: 3.6 <br> Petal Length: 1 <br> Petal Width: 0.2","Sepal Length: 5.1 <br> Sepal Width: 3.3 <br> Petal Length: 1.7 <br> Petal Width: 0.5","Sepal Length: 4.8 <br> Sepal Width: 3.4 <br> Petal Length: 1.9 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3 <br> Petal Length: 1.6 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3.4 <br> Petal Length: 1.6 <br> Petal Width: 0.4","Sepal Length: 5.2 <br> Sepal Width: 3.5 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 5.2 <br> Sepal Width: 3.4 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 4.7 <br> Sepal Width: 3.2 <br> Petal Length: 1.6 <br> Petal Width: 0.2","Sepal Length: 4.8 <br> Sepal Width: 3.1 <br> Petal Length: 1.6 <br> Petal Width: 0.2","Sepal Length: 5.4 <br> Sepal Width: 3.4 <br> Petal Length: 1.5 <br> Petal Width: 0.4","Sepal Length: 5.2 <br> Sepal Width: 4.1 <br> Petal Length: 1.5 <br> Petal Width: 0.1","Sepal Length: 5.5 <br> Sepal Width: 4.2 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 4.9 <br> Sepal Width: 3.1 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3.2 <br> Petal Length: 1.2 <br> Petal Width: 0.2","Sepal Length: 5.5 <br> Sepal Width: 3.5 <br> Petal Length: 1.3 <br> Petal Width: 0.2","Sepal Length: 4.9 <br> Sepal Width: 3.6 <br> Petal Length: 1.4 <br> Petal Width: 0.1","Sepal Length: 4.4 <br> Sepal Width: 3 <br> Petal Length: 1.3 <br> Petal Width: 0.2","Sepal Length: 5.1 <br> Sepal Width: 3.4 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3.5 <br> Petal Length: 1.3 <br> Petal Width: 0.3","Sepal Length: 4.5 <br> Sepal Width: 2.3 <br> Petal Length: 1.3 <br> Petal Width: 0.3","Sepal Length: 4.4 <br> Sepal Width: 3.2 <br> Petal Length: 1.3 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3.5 <br> Petal Length: 1.6 <br> Petal Width: 0.6","Sepal Length: 5.1 <br> Sepal Width: 3.8 <br> Petal Length: 1.9 <br> Petal Width: 0.4","Sepal Length: 4.8 <br> Sepal Width: 3 <br> Petal Length: 1.4 <br> Petal Width: 0.3","Sepal Length: 5.1 <br> Sepal Width: 3.8 <br> Petal Length: 1.6 <br> Petal Width: 0.2","Sepal Length: 4.6 <br> Sepal Width: 3.2 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 5.3 <br> Sepal Width: 3.7 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3.3 <br> Petal Length: 1.4 <br> Petal Width: 0.2"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"scatter3d","name":"setosa","textfont":{"color":"rgba(228,26,28,1)"},"error_y":{"color":"rgba(228,26,28,1)"},"error_x":{"color":"rgba(228,26,28,1)"},"line":{"color":"rgba(228,26,28,1)"},"frame":null},{"x":[7,6.4000000000000004,6.9000000000000004,5.5,6.5,5.7000000000000002,6.2999999999999998,4.9000000000000004,6.5999999999999996,5.2000000000000002,5,5.9000000000000004,6,6.0999999999999996,5.5999999999999996,6.7000000000000002,5.5999999999999996,5.7999999999999998,6.2000000000000002,5.5999999999999996,5.9000000000000004,6.0999999999999996,6.2999999999999998,6.0999999999999996,6.4000000000000004,6.5999999999999996,6.7999999999999998,6.7000000000000002,6,5.7000000000000002,5.5,5.5,5.7999999999999998,6,5.4000000000000004,6,6.7000000000000002,6.2999999999999998,5.5999999999999996,5.5,5.5,6.0999999999999996,5.7999999999999998,5,5.5999999999999996,5.7000000000000002,5.7000000000000002,6.2000000000000002,5.0999999999999996,5.7000000000000002],"y":[3.2000000000000002,3.2000000000000002,3.1000000000000001,2.2999999999999998,2.7999999999999998,2.7999999999999998,3.2999999999999998,2.3999999999999999,2.8999999999999999,2.7000000000000002,2,3,2.2000000000000002,2.8999999999999999,2.8999999999999999,3.1000000000000001,3,2.7000000000000002,2.2000000000000002,2.5,3.2000000000000002,2.7999999999999998,2.5,2.7999999999999998,2.8999999999999999,3,2.7999999999999998,3,2.8999999999999999,2.6000000000000001,2.3999999999999999,2.3999999999999999,2.7000000000000002,2.7000000000000002,3,3.3999999999999999,3.1000000000000001,2.2999999999999998,3,2.5,2.6000000000000001,3,2.6000000000000001,2.2999999999999998,2.7000000000000002,3,2.8999999999999999,2.8999999999999999,2.5,2.7999999999999998],"z":[9.0899999999999981,8.6999999999999993,9.1799999999999997,7.3499999999999996,8.620000000000001,8.0499999999999989,8.8900000000000006,6.46,8.6199999999999992,7.3799999999999999,6.4500000000000002,8.1400000000000006,7.3999999999999995,8.4900000000000002,7.4199999999999999,8.6799999999999997,8.1999999999999993,7.6199999999999992,8.0999999999999996,7.3299999999999992,8.8100000000000005,7.8999999999999995,8.5800000000000001,8.3399999999999999,8.3100000000000005,8.5800000000000001,8.8599999999999994,9.1999999999999993,8.3499999999999996,7.1000000000000005,7.1600000000000001,7.04,7.5799999999999992,8.7199999999999989,8.0999999999999996,8.6500000000000004,8.9399999999999995,8.0299999999999994,7.8199999999999994,7.4500000000000002,7.7299999999999995,8.4699999999999989,7.5999999999999996,6.46,7.7400000000000002,7.8899999999999988,7.8899999999999997,8.2099999999999991,6.4499999999999993,7.7699999999999996],"mode":"markers","marker":{"color":"rgba(55,126,184,1)","size":5,"opacity":0.80000000000000004,"line":{"color":"rgba(55,126,184,1)"}},"text":["Sepal Length: 7 <br> Sepal Width: 3.2 <br> Petal Length: 4.7 <br> Petal Width: 1.4","Sepal Length: 6.4 <br> Sepal Width: 3.2 <br> Petal Length: 4.5 <br> Petal Width: 1.5","Sepal Length: 6.9 <br> Sepal Width: 3.1 <br> Petal Length: 4.9 <br> Petal Width: 1.5","Sepal Length: 5.5 <br> Sepal Width: 2.3 <br> Petal Length: 4 <br> Petal Width: 1.3","Sepal Length: 6.5 <br> Sepal Width: 2.8 <br> Petal Length: 4.6 <br> Petal Width: 1.5","Sepal Length: 5.7 <br> Sepal Width: 2.8 <br> Petal Length: 4.5 <br> Petal Width: 1.3","Sepal Length: 6.3 <br> Sepal Width: 3.3 <br> Petal Length: 4.7 <br> Petal Width: 1.6","Sepal Length: 4.9 <br> Sepal Width: 2.4 <br> Petal Length: 3.3 <br> Petal Width: 1","Sepal Length: 6.6 <br> Sepal Width: 2.9 <br> Petal Length: 4.6 <br> Petal Width: 1.3","Sepal Length: 5.2 <br> Sepal Width: 2.7 <br> Petal Length: 3.9 <br> Petal Width: 1.4","Sepal Length: 5 <br> Sepal Width: 2 <br> Petal Length: 3.5 <br> Petal Width: 1","Sepal Length: 5.9 <br> Sepal Width: 3 <br> Petal Length: 4.2 <br> Petal Width: 1.5","Sepal Length: 6 <br> Sepal Width: 2.2 <br> Petal Length: 4 <br> Petal Width: 1","Sepal Length: 6.1 <br> Sepal Width: 2.9 <br> Petal Length: 4.7 <br> Petal Width: 1.4","Sepal Length: 5.6 <br> Sepal Width: 2.9 <br> Petal Length: 3.6 <br> Petal Width: 1.3","Sepal Length: 6.7 <br> Sepal Width: 3.1 <br> Petal Length: 4.4 <br> Petal Width: 1.4","Sepal Length: 5.6 <br> Sepal Width: 3 <br> Petal Length: 4.5 <br> Petal Width: 1.5","Sepal Length: 5.8 <br> Sepal Width: 2.7 <br> Petal Length: 4.1 <br> Petal Width: 1","Sepal Length: 6.2 <br> Sepal Width: 2.2 <br> Petal Length: 4.5 <br> Petal Width: 1.5","Sepal Length: 5.6 <br> Sepal Width: 2.5 <br> Petal Length: 3.9 <br> Petal Width: 1.1","Sepal Length: 5.9 <br> Sepal Width: 3.2 <br> Petal Length: 4.8 <br> Petal Width: 1.8","Sepal Length: 6.1 <br> Sepal Width: 2.8 <br> Petal Length: 4 <br> Petal Width: 1.3","Sepal Length: 6.3 <br> Sepal Width: 2.5 <br> Petal Length: 4.9 <br> Petal Width: 1.5","Sepal Length: 6.1 <br> Sepal Width: 2.8 <br> Petal Length: 4.7 <br> Petal Width: 1.2","Sepal Length: 6.4 <br> Sepal Width: 2.9 <br> Petal Length: 4.3 <br> Petal Width: 1.3","Sepal Length: 6.6 <br> Sepal Width: 3 <br> Petal Length: 4.4 <br> Petal Width: 1.4","Sepal Length: 6.8 <br> Sepal Width: 2.8 <br> Petal Length: 4.8 <br> Petal Width: 1.4","Sepal Length: 6.7 <br> Sepal Width: 3 <br> Petal Length: 5 <br> Petal Width: 1.7","Sepal Length: 6 <br> Sepal Width: 2.9 <br> Petal Length: 4.5 <br> Petal Width: 1.5","Sepal Length: 5.7 <br> Sepal Width: 2.6 <br> Petal Length: 3.5 <br> Petal Width: 1","Sepal Length: 5.5 <br> Sepal Width: 2.4 <br> Petal Length: 3.8 <br> Petal Width: 1.1","Sepal Length: 5.5 <br> Sepal Width: 2.4 <br> Petal Length: 3.7 <br> Petal Width: 1","Sepal Length: 5.8 <br> Sepal Width: 2.7 <br> Petal Length: 3.9 <br> Petal Width: 1.2","Sepal Length: 6 <br> Sepal Width: 2.7 <br> Petal Length: 5.1 <br> Petal Width: 1.6","Sepal Length: 5.4 <br> Sepal Width: 3 <br> Petal Length: 4.5 <br> Petal Width: 1.5","Sepal Length: 6 <br> Sepal Width: 3.4 <br> Petal Length: 4.5 <br> Petal Width: 1.6","Sepal Length: 6.7 <br> Sepal Width: 3.1 <br> Petal Length: 4.7 <br> Petal Width: 1.5","Sepal Length: 6.3 <br> Sepal Width: 2.3 <br> Petal Length: 4.4 <br> Petal Width: 1.3","Sepal Length: 5.6 <br> Sepal Width: 3 <br> Petal Length: 4.1 <br> Petal Width: 1.3","Sepal Length: 5.5 <br> Sepal Width: 2.5 <br> Petal Length: 4 <br> Petal Width: 1.3","Sepal Length: 5.5 <br> Sepal Width: 2.6 <br> Petal Length: 4.4 <br> Petal Width: 1.2","Sepal Length: 6.1 <br> Sepal Width: 3 <br> Petal Length: 4.6 <br> Petal Width: 1.4","Sepal Length: 5.8 <br> Sepal Width: 2.6 <br> Petal Length: 4 <br> Petal Width: 1.2","Sepal Length: 5 <br> Sepal Width: 2.3 <br> Petal Length: 3.3 <br> Petal Width: 1","Sepal Length: 5.6 <br> Sepal Width: 2.7 <br> Petal Length: 4.2 <br> Petal Width: 1.3","Sepal Length: 5.7 <br> Sepal Width: 3 <br> Petal Length: 4.2 <br> Petal Width: 1.2","Sepal Length: 5.7 <br> Sepal Width: 2.9 <br> Petal Length: 4.2 <br> Petal Width: 1.3","Sepal Length: 6.2 <br> Sepal Width: 2.9 <br> Petal Length: 4.3 <br> Petal Width: 1.3","Sepal Length: 5.1 <br> Sepal Width: 2.5 <br> Petal Length: 3 <br> Petal Width: 1.1","Sepal Length: 5.7 <br> Sepal Width: 2.8 <br> Petal Length: 4.1 <br> Petal Width: 1.3"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"scatter3d","name":"versicolor","textfont":{"color":"rgba(55,126,184,1)"},"error_y":{"color":"rgba(55,126,184,1)"},"error_x":{"color":"rgba(55,126,184,1)"},"line":{"color":"rgba(55,126,184,1)"},"frame":null},{"x":[6.2999999999999998,5.7999999999999998,7.0999999999999996,6.2999999999999998,6.5,7.5999999999999996,4.9000000000000004,7.2999999999999998,6.7000000000000002,7.2000000000000002,6.5,6.4000000000000004,6.7999999999999998,5.7000000000000002,5.7999999999999998,6.4000000000000004,6.5,7.7000000000000002,7.7000000000000002,6,6.9000000000000004,5.5999999999999996,7.7000000000000002,6.2999999999999998,6.7000000000000002,7.2000000000000002,6.2000000000000002,6.0999999999999996,6.4000000000000004,7.2000000000000002,7.4000000000000004,7.9000000000000004,6.4000000000000004,6.2999999999999998,6.0999999999999996,7.7000000000000002,6.2999999999999998,6.4000000000000004,6,6.9000000000000004,6.7000000000000002,6.9000000000000004,5.7999999999999998,6.7999999999999998,6.7000000000000002,6.7000000000000002,6.2999999999999998,6.5,6.2000000000000002,5.9000000000000004],"y":[3.2999999999999998,2.7000000000000002,3,2.8999999999999999,3,3,2.5,2.8999999999999999,2.5,3.6000000000000001,3.2000000000000002,2.7000000000000002,3,2.5,2.7999999999999998,3.2000000000000002,3,3.7999999999999998,2.6000000000000001,2.2000000000000002,3.2000000000000002,2.7999999999999998,2.7999999999999998,2.7000000000000002,3.2999999999999998,3.2000000000000002,2.7999999999999998,3,2.7999999999999998,3,2.7999999999999998,3.7999999999999998,2.7999999999999998,2.7999999999999998,2.6000000000000001,3,3.3999999999999999,3.1000000000000001,3,3.1000000000000001,3.1000000000000001,3.1000000000000001,2.7000000000000002,3.2000000000000002,3.2999999999999998,3,2.5,3,3.3999999999999999,3],"z":[10.25,8.7699999999999996,10.23,9.4199999999999999,9.9100000000000001,10.970000000000001,7.6999999999999993,10.41,9.5600000000000005,10.92,9.4199999999999999,9.2099999999999991,9.8000000000000007,8.5999999999999996,9.0699999999999985,9.6600000000000001,9.5,11.539999999999999,11.130000000000001,8.3499999999999996,10.190000000000001,8.629999999999999,10.94,8.8300000000000001,10.040000000000001,10.300000000000001,8.7599999999999998,8.879999999999999,9.5700000000000003,9.9600000000000009,10.319999999999999,11.33,9.6199999999999992,8.8699999999999992,8.9699999999999989,10.77,9.9699999999999989,9.5,8.7599999999999998,9.8300000000000001,10.02,9.7200000000000006,8.7699999999999996,10.280000000000001,10.24,9.6400000000000006,8.8499999999999996,9.3900000000000006,9.7300000000000004,8.9199999999999999],"mode":"markers","marker":{"color":"rgba(77,175,74,1)","size":5,"opacity":0.80000000000000004,"line":{"color":"rgba(77,175,74,1)"}},"text":["Sepal Length: 6.3 <br> Sepal Width: 3.3 <br> Petal Length: 6 <br> Petal Width: 2.5","Sepal Length: 5.8 <br> Sepal Width: 2.7 <br> Petal Length: 5.1 <br> Petal Width: 1.9","Sepal Length: 7.1 <br> Sepal Width: 3 <br> Petal Length: 5.9 <br> Petal Width: 2.1","Sepal Length: 6.3 <br> Sepal Width: 2.9 <br> Petal Length: 5.6 <br> Petal Width: 1.8","Sepal Length: 6.5 <br> Sepal Width: 3 <br> Petal Length: 5.8 <br> Petal Width: 2.2","Sepal Length: 7.6 <br> Sepal Width: 3 <br> Petal Length: 6.6 <br> Petal Width: 2.1","Sepal Length: 4.9 <br> Sepal Width: 2.5 <br> Petal Length: 4.5 <br> Petal Width: 1.7","Sepal Length: 7.3 <br> Sepal Width: 2.9 <br> Petal Length: 6.3 <br> Petal Width: 1.8","Sepal Length: 6.7 <br> Sepal Width: 2.5 <br> Petal Length: 5.8 <br> Petal Width: 1.8","Sepal Length: 7.2 <br> Sepal Width: 3.6 <br> Petal Length: 6.1 <br> Petal Width: 2.5","Sepal Length: 6.5 <br> Sepal Width: 3.2 <br> Petal Length: 5.1 <br> Petal Width: 2","Sepal Length: 6.4 <br> Sepal Width: 2.7 <br> Petal Length: 5.3 <br> Petal Width: 1.9","Sepal Length: 6.8 <br> Sepal Width: 3 <br> Petal Length: 5.5 <br> Petal Width: 2.1","Sepal Length: 5.7 <br> Sepal Width: 2.5 <br> Petal Length: 5 <br> Petal Width: 2","Sepal Length: 5.8 <br> Sepal Width: 2.8 <br> Petal Length: 5.1 <br> Petal Width: 2.4","Sepal Length: 6.4 <br> Sepal Width: 3.2 <br> Petal Length: 5.3 <br> Petal Width: 2.3","Sepal Length: 6.5 <br> Sepal Width: 3 <br> Petal Length: 5.5 <br> Petal Width: 1.8","Sepal Length: 7.7 <br> Sepal Width: 3.8 <br> Petal Length: 6.7 <br> Petal Width: 2.2","Sepal Length: 7.7 <br> Sepal Width: 2.6 <br> Petal Length: 6.9 <br> Petal Width: 2.3","Sepal Length: 6 <br> Sepal Width: 2.2 <br> Petal Length: 5 <br> Petal Width: 1.5","Sepal Length: 6.9 <br> Sepal Width: 3.2 <br> Petal Length: 5.7 <br> Petal Width: 2.3","Sepal Length: 5.6 <br> Sepal Width: 2.8 <br> Petal Length: 4.9 <br> Petal Width: 2","Sepal Length: 7.7 <br> Sepal Width: 2.8 <br> Petal Length: 6.7 <br> Petal Width: 2","Sepal Length: 6.3 <br> Sepal Width: 2.7 <br> Petal Length: 4.9 <br> Petal Width: 1.8","Sepal Length: 6.7 <br> Sepal Width: 3.3 <br> Petal Length: 5.7 <br> Petal Width: 2.1","Sepal Length: 7.2 <br> Sepal Width: 3.2 <br> Petal Length: 6 <br> Petal Width: 1.8","Sepal Length: 6.2 <br> Sepal Width: 2.8 <br> Petal Length: 4.8 <br> Petal Width: 1.8","Sepal Length: 6.1 <br> Sepal Width: 3 <br> Petal Length: 4.9 <br> Petal Width: 1.8","Sepal Length: 6.4 <br> Sepal Width: 2.8 <br> Petal Length: 5.6 <br> Petal Width: 2.1","Sepal Length: 7.2 <br> Sepal Width: 3 <br> Petal Length: 5.8 <br> Petal Width: 1.6","Sepal Length: 7.4 <br> Sepal Width: 2.8 <br> Petal Length: 6.1 <br> Petal Width: 1.9","Sepal Length: 7.9 <br> Sepal Width: 3.8 <br> Petal Length: 6.4 <br> Petal Width: 2","Sepal Length: 6.4 <br> Sepal Width: 2.8 <br> Petal Length: 5.6 <br> Petal Width: 2.2","Sepal Length: 6.3 <br> Sepal Width: 2.8 <br> Petal Length: 5.1 <br> Petal Width: 1.5","Sepal Length: 6.1 <br> Sepal Width: 2.6 <br> Petal Length: 5.6 <br> Petal Width: 1.4","Sepal Length: 7.7 <br> Sepal Width: 3 <br> Petal Length: 6.1 <br> Petal Width: 2.3","Sepal Length: 6.3 <br> Sepal Width: 3.4 <br> Petal Length: 5.6 <br> Petal Width: 2.4","Sepal Length: 6.4 <br> Sepal Width: 3.1 <br> Petal Length: 5.5 <br> Petal Width: 1.8","Sepal Length: 6 <br> Sepal Width: 3 <br> Petal Length: 4.8 <br> Petal Width: 1.8","Sepal Length: 6.9 <br> Sepal Width: 3.1 <br> Petal Length: 5.4 <br> Petal Width: 2.1","Sepal Length: 6.7 <br> Sepal Width: 3.1 <br> Petal Length: 5.6 <br> Petal Width: 2.4","Sepal Length: 6.9 <br> Sepal Width: 3.1 <br> Petal Length: 5.1 <br> Petal Width: 2.3","Sepal Length: 5.8 <br> Sepal Width: 2.7 <br> Petal Length: 5.1 <br> Petal Width: 1.9","Sepal Length: 6.8 <br> Sepal Width: 3.2 <br> Petal Length: 5.9 <br> Petal Width: 2.3","Sepal Length: 6.7 <br> Sepal Width: 3.3 <br> Petal Length: 5.7 <br> Petal Width: 2.5","Sepal Length: 6.7 <br> Sepal Width: 3 <br> Petal Length: 5.2 <br> Petal Width: 2.3","Sepal Length: 6.3 <br> Sepal Width: 2.5 <br> Petal Length: 5 <br> Petal Width: 1.9","Sepal Length: 6.5 <br> Sepal Width: 3 <br> Petal Length: 5.2 <br> Petal Width: 2","Sepal Length: 6.2 <br> Sepal Width: 3.4 <br> Petal Length: 5.4 <br> Petal Width: 2.3","Sepal Length: 5.9 <br> Sepal Width: 3 <br> Petal Length: 5.1 <br> Petal Width: 1.8"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"scatter3d","name":"virginica","textfont":{"color":"rgba(77,175,74,1)"},"error_y":{"color":"rgba(77,175,74,1)"},"error_x":{"color":"rgba(77,175,74,1)"},"line":{"color":"rgba(77,175,74,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-e3333d85f92362330c7c" style="width:100%;height:650px;"></div>
+<script type="application/json" data-for="htmlwidget-e3333d85f92362330c7c">{"x":{"visdat":{"830e28461efb":["function () ","plotlyVisDat"]},"cur_data":"830e28461efb","attrs":{"830e28461efb":{"x":{},"y":{},"z":{},"mode":"markers","marker":{"size":5,"opacity":0.80000000000000004},"text":{},"hoverinfo":"text","color":{},"colors":["#E41A1C","#377EB8","#4DAF4A"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"","showgrid":false,"showline":false,"showticklabels":false,"zeroline":false,"showspikes":false},"yaxis":{"title":"","showgrid":false,"showline":false,"showticklabels":false,"zeroline":false,"showspikes":false},"zaxis":{"title":"","showgrid":false,"showline":false,"showticklabels":false,"zeroline":false,"showspikes":false},"bgcolor":"white","camera":{"eye":{"x":1.5,"y":1.5,"z":1.5}}},"paper_bgcolor":"white","showlegend":true,"hovermode":"closest"},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[5.0999999999999996,4.9000000000000004,4.7000000000000002,4.5999999999999996,5,5.4000000000000004,4.5999999999999996,5,4.4000000000000004,4.9000000000000004,5.4000000000000004,4.7999999999999998,4.7999999999999998,4.2999999999999998,5.7999999999999998,5.7000000000000002,5.4000000000000004,5.0999999999999996,5.7000000000000002,5.0999999999999996,5.4000000000000004,5.0999999999999996,4.5999999999999996,5.0999999999999996,4.7999999999999998,5,5,5.2000000000000002,5.2000000000000002,4.7000000000000002,4.7999999999999998,5.4000000000000004,5.2000000000000002,5.5,4.9000000000000004,5,5.5,4.9000000000000004,4.4000000000000004,5.0999999999999996,5,4.5,4.4000000000000004,5,5.0999999999999996,4.7999999999999998,5.0999999999999996,4.5999999999999996,5.2999999999999998,5],"y":[3.5,3,3.2000000000000002,3.1000000000000001,3.6000000000000001,3.8999999999999999,3.3999999999999999,3.3999999999999999,2.8999999999999999,3.1000000000000001,3.7000000000000002,3.3999999999999999,3,3,4,4.4000000000000004,3.8999999999999999,3.5,3.7999999999999998,3.7999999999999998,3.3999999999999999,3.7000000000000002,3.6000000000000001,3.2999999999999998,3.3999999999999999,3,3.3999999999999999,3.5,3.3999999999999999,3.2000000000000002,3.1000000000000001,3.3999999999999999,4.0999999999999996,4.2000000000000002,3.1000000000000001,3.2000000000000002,3.5,3.6000000000000001,3,3.3999999999999999,3.5,2.2999999999999998,3.2000000000000002,3.5,3.7999999999999998,3,3.7999999999999998,3.2000000000000002,3.7000000000000002,3.2999999999999998],"z":[5.379999999999999,5.0299999999999994,4.96,4.9999999999999991,5.379999999999999,6.04,5.1299999999999999,5.3499999999999996,4.7299999999999995,5.0999999999999996,5.7000000000000002,5.3199999999999994,4.9299999999999997,4.4699999999999998,5.8399999999999999,6.3000000000000007,5.7600000000000007,5.4299999999999997,6.0899999999999999,5.6499999999999995,5.6899999999999995,5.6500000000000004,4.8999999999999995,5.6399999999999988,5.5299999999999994,5.2199999999999998,5.5200000000000005,5.4999999999999991,5.379999999999999,5.1699999999999999,5.1699999999999999,5.6500000000000004,5.75,5.9299999999999988,5.1499999999999995,5.0399999999999991,5.5099999999999998,5.2799999999999994,4.71,5.3999999999999995,5.3100000000000005,4.46,4.8099999999999996,5.6699999999999999,5.9799999999999995,5.0300000000000002,5.669999999999999,4.9799999999999995,5.6499999999999995,5.2299999999999995],"mode":"markers","marker":{"color":"rgba(228,26,28,1)","size":5,"opacity":0.80000000000000004,"line":{"color":"rgba(228,26,28,1)"}},"text":["Sepal Length: 5.1 <br> Sepal Width: 3.5 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 4.9 <br> Sepal Width: 3 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 4.7 <br> Sepal Width: 3.2 <br> Petal Length: 1.3 <br> Petal Width: 0.2","Sepal Length: 4.6 <br> Sepal Width: 3.1 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3.6 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 5.4 <br> Sepal Width: 3.9 <br> Petal Length: 1.7 <br> Petal Width: 0.4","Sepal Length: 4.6 <br> Sepal Width: 3.4 <br> Petal Length: 1.4 <br> Petal Width: 0.3","Sepal Length: 5 <br> Sepal Width: 3.4 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 4.4 <br> Sepal Width: 2.9 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 4.9 <br> Sepal Width: 3.1 <br> Petal Length: 1.5 <br> Petal Width: 0.1","Sepal Length: 5.4 <br> Sepal Width: 3.7 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 4.8 <br> Sepal Width: 3.4 <br> Petal Length: 1.6 <br> Petal Width: 0.2","Sepal Length: 4.8 <br> Sepal Width: 3 <br> Petal Length: 1.4 <br> Petal Width: 0.1","Sepal Length: 4.3 <br> Sepal Width: 3 <br> Petal Length: 1.1 <br> Petal Width: 0.1","Sepal Length: 5.8 <br> Sepal Width: 4 <br> Petal Length: 1.2 <br> Petal Width: 0.2","Sepal Length: 5.7 <br> Sepal Width: 4.4 <br> Petal Length: 1.5 <br> Petal Width: 0.4","Sepal Length: 5.4 <br> Sepal Width: 3.9 <br> Petal Length: 1.3 <br> Petal Width: 0.4","Sepal Length: 5.1 <br> Sepal Width: 3.5 <br> Petal Length: 1.4 <br> Petal Width: 0.3","Sepal Length: 5.7 <br> Sepal Width: 3.8 <br> Petal Length: 1.7 <br> Petal Width: 0.3","Sepal Length: 5.1 <br> Sepal Width: 3.8 <br> Petal Length: 1.5 <br> Petal Width: 0.3","Sepal Length: 5.4 <br> Sepal Width: 3.4 <br> Petal Length: 1.7 <br> Petal Width: 0.2","Sepal Length: 5.1 <br> Sepal Width: 3.7 <br> Petal Length: 1.5 <br> Petal Width: 0.4","Sepal Length: 4.6 <br> Sepal Width: 3.6 <br> Petal Length: 1 <br> Petal Width: 0.2","Sepal Length: 5.1 <br> Sepal Width: 3.3 <br> Petal Length: 1.7 <br> Petal Width: 0.5","Sepal Length: 4.8 <br> Sepal Width: 3.4 <br> Petal Length: 1.9 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3 <br> Petal Length: 1.6 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3.4 <br> Petal Length: 1.6 <br> Petal Width: 0.4","Sepal Length: 5.2 <br> Sepal Width: 3.5 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 5.2 <br> Sepal Width: 3.4 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 4.7 <br> Sepal Width: 3.2 <br> Petal Length: 1.6 <br> Petal Width: 0.2","Sepal Length: 4.8 <br> Sepal Width: 3.1 <br> Petal Length: 1.6 <br> Petal Width: 0.2","Sepal Length: 5.4 <br> Sepal Width: 3.4 <br> Petal Length: 1.5 <br> Petal Width: 0.4","Sepal Length: 5.2 <br> Sepal Width: 4.1 <br> Petal Length: 1.5 <br> Petal Width: 0.1","Sepal Length: 5.5 <br> Sepal Width: 4.2 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 4.9 <br> Sepal Width: 3.1 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3.2 <br> Petal Length: 1.2 <br> Petal Width: 0.2","Sepal Length: 5.5 <br> Sepal Width: 3.5 <br> Petal Length: 1.3 <br> Petal Width: 0.2","Sepal Length: 4.9 <br> Sepal Width: 3.6 <br> Petal Length: 1.4 <br> Petal Width: 0.1","Sepal Length: 4.4 <br> Sepal Width: 3 <br> Petal Length: 1.3 <br> Petal Width: 0.2","Sepal Length: 5.1 <br> Sepal Width: 3.4 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3.5 <br> Petal Length: 1.3 <br> Petal Width: 0.3","Sepal Length: 4.5 <br> Sepal Width: 2.3 <br> Petal Length: 1.3 <br> Petal Width: 0.3","Sepal Length: 4.4 <br> Sepal Width: 3.2 <br> Petal Length: 1.3 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3.5 <br> Petal Length: 1.6 <br> Petal Width: 0.6","Sepal Length: 5.1 <br> Sepal Width: 3.8 <br> Petal Length: 1.9 <br> Petal Width: 0.4","Sepal Length: 4.8 <br> Sepal Width: 3 <br> Petal Length: 1.4 <br> Petal Width: 0.3","Sepal Length: 5.1 <br> Sepal Width: 3.8 <br> Petal Length: 1.6 <br> Petal Width: 0.2","Sepal Length: 4.6 <br> Sepal Width: 3.2 <br> Petal Length: 1.4 <br> Petal Width: 0.2","Sepal Length: 5.3 <br> Sepal Width: 3.7 <br> Petal Length: 1.5 <br> Petal Width: 0.2","Sepal Length: 5 <br> Sepal Width: 3.3 <br> Petal Length: 1.4 <br> Petal Width: 0.2"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"scatter3d","name":"setosa","textfont":{"color":"rgba(228,26,28,1)"},"error_y":{"color":"rgba(228,26,28,1)"},"error_x":{"color":"rgba(228,26,28,1)"},"line":{"color":"rgba(228,26,28,1)"},"frame":null},{"x":[7,6.4000000000000004,6.9000000000000004,5.5,6.5,5.7000000000000002,6.2999999999999998,4.9000000000000004,6.5999999999999996,5.2000000000000002,5,5.9000000000000004,6,6.0999999999999996,5.5999999999999996,6.7000000000000002,5.5999999999999996,5.7999999999999998,6.2000000000000002,5.5999999999999996,5.9000000000000004,6.0999999999999996,6.2999999999999998,6.0999999999999996,6.4000000000000004,6.5999999999999996,6.7999999999999998,6.7000000000000002,6,5.7000000000000002,5.5,5.5,5.7999999999999998,6,5.4000000000000004,6,6.7000000000000002,6.2999999999999998,5.5999999999999996,5.5,5.5,6.0999999999999996,5.7999999999999998,5,5.5999999999999996,5.7000000000000002,5.7000000000000002,6.2000000000000002,5.0999999999999996,5.7000000000000002],"y":[3.2000000000000002,3.2000000000000002,3.1000000000000001,2.2999999999999998,2.7999999999999998,2.7999999999999998,3.2999999999999998,2.3999999999999999,2.8999999999999999,2.7000000000000002,2,3,2.2000000000000002,2.8999999999999999,2.8999999999999999,3.1000000000000001,3,2.7000000000000002,2.2000000000000002,2.5,3.2000000000000002,2.7999999999999998,2.5,2.7999999999999998,2.8999999999999999,3,2.7999999999999998,3,2.8999999999999999,2.6000000000000001,2.3999999999999999,2.3999999999999999,2.7000000000000002,2.7000000000000002,3,3.3999999999999999,3.1000000000000001,2.2999999999999998,3,2.5,2.6000000000000001,3,2.6000000000000001,2.2999999999999998,2.7000000000000002,3,2.8999999999999999,2.8999999999999999,2.5,2.7999999999999998],"z":[9.0899999999999981,8.6999999999999993,9.1799999999999997,7.3499999999999996,8.620000000000001,8.0499999999999989,8.8900000000000006,6.46,8.6199999999999992,7.3799999999999999,6.4500000000000002,8.1400000000000006,7.3999999999999995,8.4900000000000002,7.4199999999999999,8.6799999999999997,8.1999999999999993,7.6199999999999992,8.0999999999999996,7.3299999999999992,8.8100000000000005,7.8999999999999995,8.5800000000000001,8.3399999999999999,8.3100000000000005,8.5800000000000001,8.8599999999999994,9.1999999999999993,8.3499999999999996,7.1000000000000005,7.1600000000000001,7.04,7.5799999999999992,8.7199999999999989,8.0999999999999996,8.6500000000000004,8.9399999999999995,8.0299999999999994,7.8199999999999994,7.4500000000000002,7.7299999999999995,8.4699999999999989,7.5999999999999996,6.46,7.7400000000000002,7.8899999999999988,7.8899999999999997,8.2099999999999991,6.4499999999999993,7.7699999999999996],"mode":"markers","marker":{"color":"rgba(55,126,184,1)","size":5,"opacity":0.80000000000000004,"line":{"color":"rgba(55,126,184,1)"}},"text":["Sepal Length: 7 <br> Sepal Width: 3.2 <br> Petal Length: 4.7 <br> Petal Width: 1.4","Sepal Length: 6.4 <br> Sepal Width: 3.2 <br> Petal Length: 4.5 <br> Petal Width: 1.5","Sepal Length: 6.9 <br> Sepal Width: 3.1 <br> Petal Length: 4.9 <br> Petal Width: 1.5","Sepal Length: 5.5 <br> Sepal Width: 2.3 <br> Petal Length: 4 <br> Petal Width: 1.3","Sepal Length: 6.5 <br> Sepal Width: 2.8 <br> Petal Length: 4.6 <br> Petal Width: 1.5","Sepal Length: 5.7 <br> Sepal Width: 2.8 <br> Petal Length: 4.5 <br> Petal Width: 1.3","Sepal Length: 6.3 <br> Sepal Width: 3.3 <br> Petal Length: 4.7 <br> Petal Width: 1.6","Sepal Length: 4.9 <br> Sepal Width: 2.4 <br> Petal Length: 3.3 <br> Petal Width: 1","Sepal Length: 6.6 <br> Sepal Width: 2.9 <br> Petal Length: 4.6 <br> Petal Width: 1.3","Sepal Length: 5.2 <br> Sepal Width: 2.7 <br> Petal Length: 3.9 <br> Petal Width: 1.4","Sepal Length: 5 <br> Sepal Width: 2 <br> Petal Length: 3.5 <br> Petal Width: 1","Sepal Length: 5.9 <br> Sepal Width: 3 <br> Petal Length: 4.2 <br> Petal Width: 1.5","Sepal Length: 6 <br> Sepal Width: 2.2 <br> Petal Length: 4 <br> Petal Width: 1","Sepal Length: 6.1 <br> Sepal Width: 2.9 <br> Petal Length: 4.7 <br> Petal Width: 1.4","Sepal Length: 5.6 <br> Sepal Width: 2.9 <br> Petal Length: 3.6 <br> Petal Width: 1.3","Sepal Length: 6.7 <br> Sepal Width: 3.1 <br> Petal Length: 4.4 <br> Petal Width: 1.4","Sepal Length: 5.6 <br> Sepal Width: 3 <br> Petal Length: 4.5 <br> Petal Width: 1.5","Sepal Length: 5.8 <br> Sepal Width: 2.7 <br> Petal Length: 4.1 <br> Petal Width: 1","Sepal Length: 6.2 <br> Sepal Width: 2.2 <br> Petal Length: 4.5 <br> Petal Width: 1.5","Sepal Length: 5.6 <br> Sepal Width: 2.5 <br> Petal Length: 3.9 <br> Petal Width: 1.1","Sepal Length: 5.9 <br> Sepal Width: 3.2 <br> Petal Length: 4.8 <br> Petal Width: 1.8","Sepal Length: 6.1 <br> Sepal Width: 2.8 <br> Petal Length: 4 <br> Petal Width: 1.3","Sepal Length: 6.3 <br> Sepal Width: 2.5 <br> Petal Length: 4.9 <br> Petal Width: 1.5","Sepal Length: 6.1 <br> Sepal Width: 2.8 <br> Petal Length: 4.7 <br> Petal Width: 1.2","Sepal Length: 6.4 <br> Sepal Width: 2.9 <br> Petal Length: 4.3 <br> Petal Width: 1.3","Sepal Length: 6.6 <br> Sepal Width: 3 <br> Petal Length: 4.4 <br> Petal Width: 1.4","Sepal Length: 6.8 <br> Sepal Width: 2.8 <br> Petal Length: 4.8 <br> Petal Width: 1.4","Sepal Length: 6.7 <br> Sepal Width: 3 <br> Petal Length: 5 <br> Petal Width: 1.7","Sepal Length: 6 <br> Sepal Width: 2.9 <br> Petal Length: 4.5 <br> Petal Width: 1.5","Sepal Length: 5.7 <br> Sepal Width: 2.6 <br> Petal Length: 3.5 <br> Petal Width: 1","Sepal Length: 5.5 <br> Sepal Width: 2.4 <br> Petal Length: 3.8 <br> Petal Width: 1.1","Sepal Length: 5.5 <br> Sepal Width: 2.4 <br> Petal Length: 3.7 <br> Petal Width: 1","Sepal Length: 5.8 <br> Sepal Width: 2.7 <br> Petal Length: 3.9 <br> Petal Width: 1.2","Sepal Length: 6 <br> Sepal Width: 2.7 <br> Petal Length: 5.1 <br> Petal Width: 1.6","Sepal Length: 5.4 <br> Sepal Width: 3 <br> Petal Length: 4.5 <br> Petal Width: 1.5","Sepal Length: 6 <br> Sepal Width: 3.4 <br> Petal Length: 4.5 <br> Petal Width: 1.6","Sepal Length: 6.7 <br> Sepal Width: 3.1 <br> Petal Length: 4.7 <br> Petal Width: 1.5","Sepal Length: 6.3 <br> Sepal Width: 2.3 <br> Petal Length: 4.4 <br> Petal Width: 1.3","Sepal Length: 5.6 <br> Sepal Width: 3 <br> Petal Length: 4.1 <br> Petal Width: 1.3","Sepal Length: 5.5 <br> Sepal Width: 2.5 <br> Petal Length: 4 <br> Petal Width: 1.3","Sepal Length: 5.5 <br> Sepal Width: 2.6 <br> Petal Length: 4.4 <br> Petal Width: 1.2","Sepal Length: 6.1 <br> Sepal Width: 3 <br> Petal Length: 4.6 <br> Petal Width: 1.4","Sepal Length: 5.8 <br> Sepal Width: 2.6 <br> Petal Length: 4 <br> Petal Width: 1.2","Sepal Length: 5 <br> Sepal Width: 2.3 <br> Petal Length: 3.3 <br> Petal Width: 1","Sepal Length: 5.6 <br> Sepal Width: 2.7 <br> Petal Length: 4.2 <br> Petal Width: 1.3","Sepal Length: 5.7 <br> Sepal Width: 3 <br> Petal Length: 4.2 <br> Petal Width: 1.2","Sepal Length: 5.7 <br> Sepal Width: 2.9 <br> Petal Length: 4.2 <br> Petal Width: 1.3","Sepal Length: 6.2 <br> Sepal Width: 2.9 <br> Petal Length: 4.3 <br> Petal Width: 1.3","Sepal Length: 5.1 <br> Sepal Width: 2.5 <br> Petal Length: 3 <br> Petal Width: 1.1","Sepal Length: 5.7 <br> Sepal Width: 2.8 <br> Petal Length: 4.1 <br> Petal Width: 1.3"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"scatter3d","name":"versicolor","textfont":{"color":"rgba(55,126,184,1)"},"error_y":{"color":"rgba(55,126,184,1)"},"error_x":{"color":"rgba(55,126,184,1)"},"line":{"color":"rgba(55,126,184,1)"},"frame":null},{"x":[6.2999999999999998,5.7999999999999998,7.0999999999999996,6.2999999999999998,6.5,7.5999999999999996,4.9000000000000004,7.2999999999999998,6.7000000000000002,7.2000000000000002,6.5,6.4000000000000004,6.7999999999999998,5.7000000000000002,5.7999999999999998,6.4000000000000004,6.5,7.7000000000000002,7.7000000000000002,6,6.9000000000000004,5.5999999999999996,7.7000000000000002,6.2999999999999998,6.7000000000000002,7.2000000000000002,6.2000000000000002,6.0999999999999996,6.4000000000000004,7.2000000000000002,7.4000000000000004,7.9000000000000004,6.4000000000000004,6.2999999999999998,6.0999999999999996,7.7000000000000002,6.2999999999999998,6.4000000000000004,6,6.9000000000000004,6.7000000000000002,6.9000000000000004,5.7999999999999998,6.7999999999999998,6.7000000000000002,6.7000000000000002,6.2999999999999998,6.5,6.2000000000000002,5.9000000000000004],"y":[3.2999999999999998,2.7000000000000002,3,2.8999999999999999,3,3,2.5,2.8999999999999999,2.5,3.6000000000000001,3.2000000000000002,2.7000000000000002,3,2.5,2.7999999999999998,3.2000000000000002,3,3.7999999999999998,2.6000000000000001,2.2000000000000002,3.2000000000000002,2.7999999999999998,2.7999999999999998,2.7000000000000002,3.2999999999999998,3.2000000000000002,2.7999999999999998,3,2.7999999999999998,3,2.7999999999999998,3.7999999999999998,2.7999999999999998,2.7999999999999998,2.6000000000000001,3,3.3999999999999999,3.1000000000000001,3,3.1000000000000001,3.1000000000000001,3.1000000000000001,2.7000000000000002,3.2000000000000002,3.2999999999999998,3,2.5,3,3.3999999999999999,3],"z":[10.25,8.7699999999999996,10.23,9.4199999999999999,9.9100000000000001,10.970000000000001,7.6999999999999993,10.41,9.5600000000000005,10.92,9.4199999999999999,9.2099999999999991,9.8000000000000007,8.5999999999999996,9.0699999999999985,9.6600000000000001,9.5,11.539999999999999,11.130000000000001,8.3499999999999996,10.190000000000001,8.629999999999999,10.94,8.8300000000000001,10.040000000000001,10.300000000000001,8.7599999999999998,8.879999999999999,9.5700000000000003,9.9600000000000009,10.319999999999999,11.33,9.6199999999999992,8.8699999999999992,8.9699999999999989,10.77,9.9699999999999989,9.5,8.7599999999999998,9.8300000000000001,10.02,9.7200000000000006,8.7699999999999996,10.280000000000001,10.24,9.6400000000000006,8.8499999999999996,9.3900000000000006,9.7300000000000004,8.9199999999999999],"mode":"markers","marker":{"color":"rgba(77,175,74,1)","size":5,"opacity":0.80000000000000004,"line":{"color":"rgba(77,175,74,1)"}},"text":["Sepal Length: 6.3 <br> Sepal Width: 3.3 <br> Petal Length: 6 <br> Petal Width: 2.5","Sepal Length: 5.8 <br> Sepal Width: 2.7 <br> Petal Length: 5.1 <br> Petal Width: 1.9","Sepal Length: 7.1 <br> Sepal Width: 3 <br> Petal Length: 5.9 <br> Petal Width: 2.1","Sepal Length: 6.3 <br> Sepal Width: 2.9 <br> Petal Length: 5.6 <br> Petal Width: 1.8","Sepal Length: 6.5 <br> Sepal Width: 3 <br> Petal Length: 5.8 <br> Petal Width: 2.2","Sepal Length: 7.6 <br> Sepal Width: 3 <br> Petal Length: 6.6 <br> Petal Width: 2.1","Sepal Length: 4.9 <br> Sepal Width: 2.5 <br> Petal Length: 4.5 <br> Petal Width: 1.7","Sepal Length: 7.3 <br> Sepal Width: 2.9 <br> Petal Length: 6.3 <br> Petal Width: 1.8","Sepal Length: 6.7 <br> Sepal Width: 2.5 <br> Petal Length: 5.8 <br> Petal Width: 1.8","Sepal Length: 7.2 <br> Sepal Width: 3.6 <br> Petal Length: 6.1 <br> Petal Width: 2.5","Sepal Length: 6.5 <br> Sepal Width: 3.2 <br> Petal Length: 5.1 <br> Petal Width: 2","Sepal Length: 6.4 <br> Sepal Width: 2.7 <br> Petal Length: 5.3 <br> Petal Width: 1.9","Sepal Length: 6.8 <br> Sepal Width: 3 <br> Petal Length: 5.5 <br> Petal Width: 2.1","Sepal Length: 5.7 <br> Sepal Width: 2.5 <br> Petal Length: 5 <br> Petal Width: 2","Sepal Length: 5.8 <br> Sepal Width: 2.8 <br> Petal Length: 5.1 <br> Petal Width: 2.4","Sepal Length: 6.4 <br> Sepal Width: 3.2 <br> Petal Length: 5.3 <br> Petal Width: 2.3","Sepal Length: 6.5 <br> Sepal Width: 3 <br> Petal Length: 5.5 <br> Petal Width: 1.8","Sepal Length: 7.7 <br> Sepal Width: 3.8 <br> Petal Length: 6.7 <br> Petal Width: 2.2","Sepal Length: 7.7 <br> Sepal Width: 2.6 <br> Petal Length: 6.9 <br> Petal Width: 2.3","Sepal Length: 6 <br> Sepal Width: 2.2 <br> Petal Length: 5 <br> Petal Width: 1.5","Sepal Length: 6.9 <br> Sepal Width: 3.2 <br> Petal Length: 5.7 <br> Petal Width: 2.3","Sepal Length: 5.6 <br> Sepal Width: 2.8 <br> Petal Length: 4.9 <br> Petal Width: 2","Sepal Length: 7.7 <br> Sepal Width: 2.8 <br> Petal Length: 6.7 <br> Petal Width: 2","Sepal Length: 6.3 <br> Sepal Width: 2.7 <br> Petal Length: 4.9 <br> Petal Width: 1.8","Sepal Length: 6.7 <br> Sepal Width: 3.3 <br> Petal Length: 5.7 <br> Petal Width: 2.1","Sepal Length: 7.2 <br> Sepal Width: 3.2 <br> Petal Length: 6 <br> Petal Width: 1.8","Sepal Length: 6.2 <br> Sepal Width: 2.8 <br> Petal Length: 4.8 <br> Petal Width: 1.8","Sepal Length: 6.1 <br> Sepal Width: 3 <br> Petal Length: 4.9 <br> Petal Width: 1.8","Sepal Length: 6.4 <br> Sepal Width: 2.8 <br> Petal Length: 5.6 <br> Petal Width: 2.1","Sepal Length: 7.2 <br> Sepal Width: 3 <br> Petal Length: 5.8 <br> Petal Width: 1.6","Sepal Length: 7.4 <br> Sepal Width: 2.8 <br> Petal Length: 6.1 <br> Petal Width: 1.9","Sepal Length: 7.9 <br> Sepal Width: 3.8 <br> Petal Length: 6.4 <br> Petal Width: 2","Sepal Length: 6.4 <br> Sepal Width: 2.8 <br> Petal Length: 5.6 <br> Petal Width: 2.2","Sepal Length: 6.3 <br> Sepal Width: 2.8 <br> Petal Length: 5.1 <br> Petal Width: 1.5","Sepal Length: 6.1 <br> Sepal Width: 2.6 <br> Petal Length: 5.6 <br> Petal Width: 1.4","Sepal Length: 7.7 <br> Sepal Width: 3 <br> Petal Length: 6.1 <br> Petal Width: 2.3","Sepal Length: 6.3 <br> Sepal Width: 3.4 <br> Petal Length: 5.6 <br> Petal Width: 2.4","Sepal Length: 6.4 <br> Sepal Width: 3.1 <br> Petal Length: 5.5 <br> Petal Width: 1.8","Sepal Length: 6 <br> Sepal Width: 3 <br> Petal Length: 4.8 <br> Petal Width: 1.8","Sepal Length: 6.9 <br> Sepal Width: 3.1 <br> Petal Length: 5.4 <br> Petal Width: 2.1","Sepal Length: 6.7 <br> Sepal Width: 3.1 <br> Petal Length: 5.6 <br> Petal Width: 2.4","Sepal Length: 6.9 <br> Sepal Width: 3.1 <br> Petal Length: 5.1 <br> Petal Width: 2.3","Sepal Length: 5.8 <br> Sepal Width: 2.7 <br> Petal Length: 5.1 <br> Petal Width: 1.9","Sepal Length: 6.8 <br> Sepal Width: 3.2 <br> Petal Length: 5.9 <br> Petal Width: 2.3","Sepal Length: 6.7 <br> Sepal Width: 3.3 <br> Petal Length: 5.7 <br> Petal Width: 2.5","Sepal Length: 6.7 <br> Sepal Width: 3 <br> Petal Length: 5.2 <br> Petal Width: 2.3","Sepal Length: 6.3 <br> Sepal Width: 2.5 <br> Petal Length: 5 <br> Petal Width: 1.9","Sepal Length: 6.5 <br> Sepal Width: 3 <br> Petal Length: 5.2 <br> Petal Width: 2","Sepal Length: 6.2 <br> Sepal Width: 3.4 <br> Petal Length: 5.4 <br> Petal Width: 2.3","Sepal Length: 5.9 <br> Sepal Width: 3 <br> Petal Length: 5.1 <br> Petal Width: 1.8"],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"type":"scatter3d","name":"virginica","textfont":{"color":"rgba(77,175,74,1)"},"error_y":{"color":"rgba(77,175,74,1)"},"error_x":{"color":"rgba(77,175,74,1)"},"line":{"color":"rgba(77,175,74,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 ```
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -613,26 +543,18 @@ overview_plot
 
 1.  **Linear relationships** between variables
 2.  **No extreme outliers** (can distort results)
-3.  **Variables should be correlated** (if not, PCA won't reduce dimensions)
+3.  **Variables should be correlated** (if not, PCA won't reduce
+    dimensions)
 4.  **Adequate sample size** (generally n \> 50, preferably n \> 100)
 5.  **No missing data** (complete cases only)
 6.  **Consider standardization** when variables have different scales
 
-**Important**: PCA works best when original variables are moderately to highly correlated!
+**Important**: PCA works best when original variables are moderately to
+highly correlated!
 
 **Let's check these assumptions with our iris data...**
 
 # Step 2: Check PCA Assumptions - Correlations
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -659,79 +581,29 @@ petal_width         0.818      -0.366        0.963       1.000
 :::
 
 ::: {.cell-output-display}
-![](17_01_lecture_powerpoint_files/figure-html/check_correlations-1.png){width=672}
+![](17_01_lecture_powerpoint_files/figure-html/check_correlations-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 
 # Step 2: Check PCA Assumptions - Linearity
 
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](17_01_lecture_powerpoint_files/figure-html/check_linearity-1.png){width=672}
+![](17_01_lecture_powerpoint_files/figure-html/check_linearity-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 
 # Step 2: Check PCA Assumptions - Outliers
 
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](17_01_lecture_powerpoint_files/figure-html/check_outliers-1.png){width=672}
+![](17_01_lecture_powerpoint_files/figure-html/check_outliers-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 
 # Step 3: Standardize the Data
@@ -749,7 +621,9 @@ Our measurements have different units and scales:
 -   Petal length: ranges from \~1-7 cm
 -   Petal width: ranges from \~0.1-2.5 cm
 
-Without standardization, PCA would be dominated by variables with larger numbers (like petal length) simply because they have bigger values, not because they're more important biologically
+Without standardization, PCA would be dominated by variables with larger
+numbers (like petal length) simply because they have bigger values, not
+because they're more important biologically
 
 What does standardization do?
 
@@ -758,20 +632,12 @@ What does standardization do?
     -   Standard deviation = 1 (same spread)
     -   This gives all variables equal weight in the analysis
 
-How to interpret standardized values: Example: A sepal length of 5.1 cm might become -0.9 after standardization, meaning it's 0.9 standard deviations below the average sepal length
+How to interpret standardized values: Example: A sepal length of 5.1 cm
+might become -0.9 after standardization, meaning it's 0.9 standard
+deviations below the average sepal length
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -813,16 +679,6 @@ sepal_length  sepal_width petal_length  petal_width
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -832,36 +688,34 @@ sepal_length  sepal_width petal_length  petal_width
 ::: {.column width="60%"}
 ## What is PCA doing?
 
-Principal Component Analysis finds new variables (called components) that capture the most variation in your data. Think of it as finding the "best viewing angles" to see differences between flowers.
+Principal Component Analysis finds new variables (called components)
+that capture the most variation in your data. Think of it as finding the
+"best viewing angles" to see differences between flowers.
 
 ## The mathematics (simplified):
 
--   PCA rotates your data to find the direction with maximum spread (PC1)
--   Then finds the next direction with maximum spread perpendicular to PC1 (PC2)
--   Continues until it has as many components as original variables (4 in our case)
+-   PCA rotates your data to find the direction with maximum spread
+    (PC1)
+-   Then finds the next direction with maximum spread perpendicular to
+    PC1 (PC2)
+-   Continues until it has as many components as original variables (4
+    in our case)
 
 ## Why center = FALSE and scale = FALSE?
 
-We already standardized our data in Step 3, so we tell R not to do it again: - center = FALSE: Don't subtract the mean (we already did) - scale = FALSE: Don't divide by standard deviation (we already did)
+We already standardized our data in Step 3, so we tell R not to do it
+again: - center = FALSE: Don't subtract the mean (we already did) -
+scale = FALSE: Don't divide by standard deviation (we already did)
 
 ## What the summary shows:
 
 -   **Standard deviation**: How much variation each component captures
--   **Proportion of Variance**: Percentage of total variation explained by each component
+-   **Proportion of Variance**: Percentage of total variation explained
+    by each component
 -   **Cumulative Proportion**: Running total of variance explained
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -891,16 +745,6 @@ Cumulative Proportion  0.7296 0.9581 0.99482 1.00000
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -908,7 +752,8 @@ Cumulative Proportion  0.7296 0.9581 0.99482 1.00000
 
 ::::: columns
 ::: {.column width="60%"}
-How are new uncorrelated components derived? One way to think it is in terms of axis rotation Consider a 2-variable dataset:
+How are new uncorrelated components derived? One way to think it is in
+terms of axis rotation Consider a 2-variable dataset:
 :::
 
 ::: {.column width="40%"}
@@ -920,7 +765,10 @@ How are new uncorrelated components derived? One way to think it is in terms of 
 
 ::::: columns
 ::: {.column width="60%"}
-Goal is to "rotate the axes" around center of the data "cloud" in such a way that most of the variation lies along the first axis Then find second axis that explains the second-most variation AND is orthogonal to first axis
+Goal is to "rotate the axes" around center of the data "cloud" in such a
+way that most of the variation lies along the first axis Then find
+second axis that explains the second-most variation AND is orthogonal to
+first axis
 :::
 
 ::: {.column width="40%"}
@@ -932,7 +780,10 @@ Goal is to "rotate the axes" around center of the data "cloud" in such a way tha
 
 ::::: columns
 ::: {.column width="60%"}
-Easy to picture in 2D (or even 3D), but harder in multivariate space Practically, components are "extracted" from a covariance of correlation matrix among original variables Will extract as many principal components as original variables
+Easy to picture in 2D (or even 3D), but harder in multivariate space
+Practically, components are "extracted" from a covariance of correlation
+matrix among original variables Will extract as many principal
+components as original variables
 :::
 
 ::: {.column width="40%"}
@@ -942,10 +793,15 @@ Easy to picture in 2D (or even 3D), but harder in multivariate space Practically
 
 # Component Information: Eigenvalues and Eigenvectors
 
--   Get two important pieces of information from PCA: eigenvectors and eigenvalues
--   Eigenvalues (latent roots)- how much of the variation is explained by each component?
--   Eigenvectors- list of coefficients for original variables. There are p coefficients in an eigenvector and p eigenvectors
--   Correlation bw original variables will result in fewer components explaining more variance; variable reduction will fail if original variables are not correlated
+-   Get two important pieces of information from PCA: eigenvectors and
+    eigenvalues
+-   Eigenvalues (latent roots)- how much of the variation is explained
+    by each component?
+-   Eigenvectors- list of coefficients for original variables. There are
+    p coefficients in an eigenvector and p eigenvectors
+-   Correlation bw original variables will result in fewer components
+    explaining more variance; variable reduction will fail if original
+    variables are not correlated
 
 # Step 4: Understanding Eigenvalues and Variance
 
@@ -955,40 +811,38 @@ Easy to picture in 2D (or even 3D), but harder in multivariate space Practically
 
 ### What are eigenvalues?
 
--   Eigenvalues tell us how much variation each principal component captures.
+-   Eigenvalues tell us how much variation each principal component
+    captures.
 -   Larger eigenvalues = more important components.
 
 ### Key terms explained:
 
--   **Eigenvalue**: The amount of variance captured by each component (always positive)
--   **Proportion of Variance**: What percentage of total variation this component explains
--   **Cumulative Variance**: Running total - helps us decide how many components we need
+-   **Eigenvalue**: The amount of variance captured by each component
+    (always positive)
+-   **Proportion of Variance**: What percentage of total variation this
+    component explains
+-   **Cumulative Variance**: Running total - helps us decide how many
+    components we need
 
 ### How to read the results:
 
 -   If PC1 has eigenvalue = 2.9, it captures 2.9 "units" of variance
--   If Prop_Variance = 0.728, PC1 explains 72.8% of all variation in the data
--   If Cumsum_Variance = 0.959 at PC2, the first 2 components together explain 95.9% of variation
+-   If Prop_Variance = 0.728, PC1 explains 72.8% of all variation in the
+    data
+-   If Cumsum_Variance = 0.959 at PC2, the first 2 components together
+    explain 95.9% of variation
 
 ### Why this matters:
 
 This table helps us decide how many components to keep.
 
--   If 2 components explain 95% of variance, we've successfully reduced 4 variables to 2
--   We only lose 5% of information without including the other variables!
+-   If 2 components explain 95% of variance, we've successfully reduced
+    4 variables to 2
+-   We only lose 5% of information without including the other
+    variables!
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1036,16 +890,6 @@ kable(pca_summary, digits = 3)
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1055,13 +899,17 @@ kable(pca_summary, digits = 3)
 ::: {.column width="60%"}
 ## What is a Scree Plot?
 
-A scree plot shows how much variance each component explains, helping us decide how many components we need. The name comes from the geological term "scree" - loose rocks at the base of a cliff - because the plot often looks like a steep cliff followed by rubble.
+A scree plot shows how much variance each component explains, helping us
+decide how many components we need. The name comes from the geological
+term "scree" - loose rocks at the base of a cliff - because the plot
+often looks like a steep cliff followed by rubble.
 
 ## How to read a Scree Plot:
 
 -   **Y-axis**: Percentage of variance explained by each component
 -   **X-axis**: Component number (PC1, PC2, etc.)
--   **The pattern**: Usually shows a steep drop followed by a leveling off
+-   **The pattern**: Usually shows a steep drop followed by a leveling
+    off
 
 ## The "Elbow Method":
 
@@ -1073,53 +921,25 @@ Look for where the line "bends" or forms an elbow:
 
 ## What to look for in our plot:
 
--   If PC1 explains 70% and PC2 explains 20%, but PC3 only explains 5%, the elbow is at PC2
+-   If PC1 explains 70% and PC2 explains 20%, but PC3 only explains 5%,
+    the elbow is at PC2
 -   This suggests keeping the first 2 components
--   The dramatic drop from PC1 to PC2, then gentle decline after, confirms our dimension reduction worked well
+-   The dramatic drop from PC1 to PC2, then gentle decline after,
+    confirms our dimension reduction worked well
 :::
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](17_01_lecture_powerpoint_files/figure-html/scree_plot-1.png){width=672}
+![](17_01_lecture_powerpoint_files/figure-html/scree_plot-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
 
 # Step 5: Component Selection Rules
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1156,36 +976,34 @@ print(paste("Components needed for 80% variance:", components_80_percent))
 :::
 
 
-
-
-
-
-
-
-
-
-
-
 # Step 6: Interpret the Components - Loadings
 
 ::::: columns
 ::: {.column width="60%"}
 ## What are Component Loadings
 
-Loadings tell us how much each original variable contributes to each principal component. Think of them as "recipes" that show how to mix your original measurements to create the new components.
+Loadings tell us how much each original variable contributes to each
+principal component. Think of them as "recipes" that show how to mix
+your original measurements to create the new components.
 
 ## How to read the loadings table
 
 -   **Values range from -1 to +1** (like correlations)
--   **Large positive values** (e.g., 0.8): This variable contributes strongly in the positive direction
--   **Large negative values** (e.g., -0.8): This variable contributes strongly in the negative direction
--   **Values near 0**: This variable doesn't contribute much to this component
+-   **Large positive values** (e.g., 0.8): This variable contributes
+    strongly in the positive direction
+-   **Large negative values** (e.g., -0.8): This variable contributes
+    strongly in the negative direction
+-   **Values near 0**: This variable doesn't contribute much to this
+    component
 
 ## Interpreting the patterns:
 
--   **If all loadings have similar signs**: Component represents overall size (all measurements increase/decrease together)
--   **If loadings have mixed signs**: Component represents shape or proportions (some measurements increase while others decrease)
--   **Dominant variables**: Variables with the largest absolute loadings drive that component's meaning
+-   **If all loadings have similar signs**: Component represents overall
+    size (all measurements increase/decrease together)
+-   **If loadings have mixed signs**: Component represents shape or
+    proportions (some measurements increase while others decrease)
+-   **Dominant variables**: Variables with the largest absolute loadings
+    drive that component's meaning
 
 ## Example interpretation:
 
@@ -1193,20 +1011,11 @@ If PC1 has all negative loadings around -0.5, it means:
 
 -   Flowers with high PC1 scores have small values for ALL measurements
 -   This component captures "overall flower size"
--   The negative sign just indicates direction (could flip signs and interpretation)
+-   The negative sign just indicates direction (could flip signs and
+    interpretation)
 :::
 
 ::: {.column width="40%"}
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -1250,16 +1059,6 @@ petal_width   petal_width  0.5648565 -0.06694199 -0.6342727  0.5235971
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
 :::
 :::::
 
@@ -1268,13 +1067,16 @@ petal_width   petal_width  0.5648565 -0.06694199 -0.6342727  0.5235971
 ### Key properties of eigenvectors/loadings:
 
 -   **Unit length**: Each eigenvector has length 1 (sum of squares = 1)
--   **Orthogonal**: Eigenvectors are perpendicular to each other (dot product = 0)
--   **Ordered by importance**: First eigenvector (PC1) explains most variance
+-   **Orthogonal**: Eigenvectors are perpendicular to each other (dot
+    product = 0)
+-   **Ordered by importance**: First eigenvector (PC1) explains most
+    variance
 
 ### The complete picture:
 
 -   **Eigenvectors** = The directions (loadings)
--   **Eigenvalues** = The importance of each direction (variance explained)
+-   **Eigenvalues** = The importance of each direction (variance
+    explained)
 -   Together they fully describe the PCA transformation
 
 # Step 6b: Visualization of Component Loadings
@@ -1283,14 +1085,19 @@ petal_width   petal_width  0.5648565 -0.06694199 -0.6342727  0.5235971
 ::: {.column width="60%"}
 What does this plot show?
 
-This is a visual representation of the loadings table, showing how each original variable contributes to PC1 and PC2. It's like a map of how your original measurements relate to the new principal components.
+This is a visual representation of the loadings table, showing how each
+original variable contributes to PC1 and PC2. It's like a map of how
+your original measurements relate to the new principal components.
 
 How to read the plot:
 
--   Arrows represent your original variables (sepal_length, sepal_width, etc.)
+-   Arrows represent your original variables (sepal_length, sepal_width,
+    etc.)
 -   Arrow direction shows which PC the variable contributes to
--   Arrow length indicates the strength of contribution (longer = stronger)
--   Arrow color shows the overall contribution magnitude (red = highest, blue = lowest)
+-   Arrow length indicates the strength of contribution (longer =
+    stronger)
+-   Arrow color shows the overall contribution magnitude (red = highest,
+    blue = lowest)
 -   The circle represents the maximum possible contribution
 
 Key interpretations from this plot:
@@ -1310,31 +1117,11 @@ PC2 (vertical axis, 22.9% variance):
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](17_01_lecture_powerpoint_files/figure-html/loading_visualization-1.png){width=672}
+![](17_01_lecture_powerpoint_files/figure-html/loading_visualization-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
@@ -1351,7 +1138,8 @@ The practical meaning:
 
 -   Flowers with high PC1 scores have large values for all measurements
 -   Flowers with high PC2 scores have narrow sepals but long/wide petals
--   The plot confirms our dimension reduction worked - we've captured 95.9% of variation in just 2 dimensions!
+-   The plot confirms our dimension reduction worked - we've captured
+    95.9% of variation in just 2 dimensions!
 
 # Step 7: PCA Biplot - The Main Result
 
@@ -1368,59 +1156,32 @@ The practical meaning:
 
 ### Understanding flower characteristics:
 
--   **Setosa flowers**: Small overall (negative PC1), relatively wide sepals (positive PC2)
--   **Virginica flowers**: Large overall (positive PC1), especially long petals
+-   **Setosa flowers**: Small overall (negative PC1), relatively wide
+    sepals (positive PC2)
+-   **Virginica flowers**: Large overall (positive PC1), especially long
+    petals
 -   **Versicolor flowers**: Intermediate in most characteristics
 
 ### Variable relationships:
 
 -   Petal measurements point together → highly correlated
 -   Sepal width points differently → captures different information
--   All arrows point right → all measurements increase from setosa to virginica
+-   All arrows point right → all measurements increase from setosa to
+    virginica
 :::
 
 ::: {.column width="40%"}
 
-
-
-
-
-
-
-
-
-
-
 ::: {.cell}
 ::: {.cell-output-display}
-![](17_01_lecture_powerpoint_files/figure-html/pca_biplot_species-1.png){width=672}
+![](17_01_lecture_powerpoint_files/figure-html/pca_biplot_species-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 :::
 :::::
 
 # Step 7: PCA Scores Plot - Alternative Visualization
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1441,19 +1202,9 @@ ggplot(pca_scores, aes(x = PC1, y = PC2, color = species)) +
 ```
 
 ::: {.cell-output-display}
-![](17_01_lecture_powerpoint_files/figure-html/pca_scores_plot-1.png){width=672}
+![](17_01_lecture_powerpoint_files/figure-html/pca_scores_plot-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 
 # Step 8: Interpret PC1 Results
@@ -1466,16 +1217,6 @@ The loadings show how each original variable contributes to PC1:
 -   **Sepal width: -0.269** - Moderate negative contribution
 -   **Petal length: 0.580** - Strong positive contribution
 -   **Petal width: 0.565** - Strong positive contribution
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1567,38 +1308,38 @@ cat("\n- Lower PC1 values = larger flowers overall")
 :::
 
 
-
-
-
-
-
-
-
-
-
-
 # PC1 Interpretation: Overall Flower Size
 
 ### PC1 Interpretation: Overall flower size (with a twist)
 
-Note: The output says "all variables have similar negative loadings" but the actual values show mostly positive loadings. This is likely due to a sign flip - PCA signs can be arbitrary. Let's interpret based on the actual values shown:
+Note: The output says "all variables have similar negative loadings" but
+the actual values show mostly positive loadings. This is likely due to a
+sign flip - PCA signs can be arbitrary. Let's interpret based on the
+actual values shown:
 
--   **Three variables (sepal length, petal length, petal width) have similar positive loadings** (\~0.52-0.58)
+-   **Three variables (sepal length, petal length, petal width) have
+    similar positive loadings** (\~0.52-0.58)
 -   **Sepal width has a negative loading** (-0.269)
--   This means PC1 captures flowers where length and width measurements (except sepal width) vary together
+-   This means PC1 captures flowers where length and width measurements
+    (except sepal width) vary together
 
 ### What PC1 scores mean:
 
--   **Higher PC1 values** = Longer petals, longer sepals, wider petals, but narrower sepals
--   **Lower PC1 values** = Shorter petals, shorter sepals, narrower petals, but wider sepals
--   PC1 essentially captures "overall flower size except sepal width goes opposite"
+-   **Higher PC1 values** = Longer petals, longer sepals, wider petals,
+    but narrower sepals
+-   **Lower PC1 values** = Shorter petals, shorter sepals, narrower
+    petals, but wider sepals
+-   PC1 essentially captures "overall flower size except sepal width
+    goes opposite"
 
 ### Biological interpretation:
 
 PC1 distinguishes between:
 
--   Small flowers with relatively wide sepals (negative PC1) - typical of setosa
--   Large flowers with relatively narrow sepals (positive PC1) - typical of virginica
+-   Small flowers with relatively wide sepals (negative PC1) - typical
+    of setosa
+-   Large flowers with relatively narrow sepals (positive PC1) - typical
+    of virginica
 
 # Step 8: Interpret PC2 Results
 
@@ -1610,16 +1351,6 @@ The loadings show how each original variable contributes to PC2:
 -   **Sepal width: -0.923** - Very strong negative contribution
 -   **Petal length: -0.024** - Almost no contribution
 -   **Petal width: -0.067** - Very small negative contribution
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1725,33 +1456,30 @@ cat("\n- Lower PC2 = longer/wider petals relative to sepal width")
 :::
 
 
-
-
-
-
-
-
-
-
-
-
 # PC2 Interpretation: Flower Shape Contrast
 
 ### PC2 Interpretation: Correcting the output
 
-Note: The output says "Positive loadings: sepal width" but the actual value is -0.923 (negative). All loadings are actually negative, with sepal width being the most strongly negative.
+Note: The output says "Positive loadings: sepal width" but the actual
+value is -0.923 (negative). All loadings are actually negative, with
+sepal width being the most strongly negative.
 
 ### What PC2 actually represents:
 
--   **All variables have negative loadings**, but sepal width is dominant (-0.923)
+-   **All variables have negative loadings**, but sepal width is
+    dominant (-0.923)
 -   **Petal measurements contribute very little** (-0.024 and -0.067)
--   **This component is primarily driven by sepal width**, with some contribution from sepal length
+-   **This component is primarily driven by sepal width**, with some
+    contribution from sepal length
 
 ### What PC2 scores mean:
 
--   **Higher PC2 values** = Smaller measurements overall, especially narrow sepals
--   **Lower PC2 values** = Larger measurements overall, especially wide sepals
--   Since sepal width has the strongest loading, PC2 primarily captures sepal width variation
+-   **Higher PC2 values** = Smaller measurements overall, especially
+    narrow sepals
+-   **Lower PC2 values** = Larger measurements overall, especially wide
+    sepals
+-   Since sepal width has the strongest loading, PC2 primarily captures
+    sepal width variation
 
 ### Biological interpretation:
 
@@ -1759,19 +1487,10 @@ PC2 helps distinguish:
 
 -   Flowers with narrow sepals and smaller overall size (positive PC2)
 -   Flowers with wide sepals and larger overall size (negative PC2)
--   This dimension helps separate species that have similar PC1 scores but different sepal proportions
+-   This dimension helps separate species that have similar PC1 scores
+    but different sepal proportions
 
 # Step 9: How Well Does PCA Work?
-
-
-
-
-
-
-
-
-
-
 
 
 ::: {.cell}
@@ -1802,26 +1521,17 @@ tibble(
 ```
 
 ::: {.cell-output-display}
-![](17_01_lecture_powerpoint_files/figure-html/pca_effectiveness-1.png){width=672}
+![](17_01_lecture_powerpoint_files/figure-html/pca_effectiveness-1.png){width=480}
 :::
 :::
-
-
-
-
-
-
-
-
-
-
 
 
 # Summary: What We Learned
 
 ## Key Findings:
 
-1.  **Successful dimension reduction**: 4 variables → 2 components explaining \~96% of variance
+1.  **Successful dimension reduction**: 4 variables → 2 components
+    explaining \~96% of variance
 
 2.  **PC1 (72.8% variance)**: Overall flower size
 
@@ -1833,7 +1543,8 @@ tibble(
     -   Sepal width vs. petal dimensions
     -   Separates flower shape types
 
-4.  **Species separation**: PCA naturally groups the three iris species based on their morphological differences
+4.  **Species separation**: PCA naturally groups the three iris species
+    based on their morphological differences
 
 ## PCA Success Criteria Met:
 
@@ -1855,8 +1566,11 @@ tibble(
 
 ## Consider alternatives when:
 
--   Variables are categorical → use MCA (Multiple Correspondence Analysis)
+-   Variables are categorical → use MCA (Multiple Correspondence
+    Analysis)
 -   Focus on **species composition** → use ordination methods like NMDS
--   Want to **classify/predict** → use discriminant analysis or machine learning
+-   Want to **classify/predict** → use discriminant analysis or machine
+    learning
 
-**PCA is excellent for exploring patterns in biological measurements like morphology, physiology, or environmental variables!**
+**PCA is excellent for exploring patterns in biological measurements
+like morphology, physiology, or environmental variables!**

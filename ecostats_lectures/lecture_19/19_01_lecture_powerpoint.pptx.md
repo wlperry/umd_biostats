@@ -6,27 +6,14 @@ metadata-files:
 format:
   html:
     output-file: "19_01_lecture_powerpoint_html.html"
-    downloads: [docx, pptx, typst]  # This creates download links for all three
+    downloads: [docx, pptx]  # This creates download links for all three
   revealjs:
     output-file: "19_01_lecture_powerpoint_slides.html"
   docx:
     output-file: "19_01_lecture_powerpoint.docx"
   pptx:
     output-file: "19_01_lecture_powerpoint.pptx"
-  typst:
-    output-file: "19_01_lecture_powerpoint.pdf"
 ---
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -34,30 +21,25 @@ format:
 
 ## **What is Logistic Regression?**
 
-Logistic regression is used when: - The response variable is **binary** (yes/no, 1/0, present/absent) - Data follows a **binomial distribution** (not normal) - We want to model the **probability** of an outcome
+Logistic regression is used when: - The response variable is **binary**
+(yes/no, 1/0, present/absent) - Data follows a **binomial distribution**
+(not normal) - We want to model the **probability** of an outcome
 
 ## **Today's Example: Lizard Sexual Maturity**
 
-We'll explore the relationship between body length and sexual maturity in female lizards - **Response variable**: Sexual maturity (mature: 1 = yes, 0 = no) - **Predictor variable**: Body length in cm - **Question**: Can we predict the probability of sexual maturity from body size?
+We'll explore the relationship between body length and sexual maturity
+in female lizards - **Response variable**: Sexual maturity (mature: 1 =
+yes, 0 = no) - **Predictor variable**: Body length in cm - **Question**:
+Can we predict the probability of sexual maturity from body size?
 
 ## **Key Difference from Linear Regression**
 
 -   Linear regression: Models the actual values of Y
 -   Logistic regression: Models the probability of Y = 1
--   Uses Generalized Linear Models (GLM) instead of General Linear Models
+-   Uses Generalized Linear Models (GLM) instead of General Linear
+    Models
 
 # Step 1: Load and Explore the Data
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -86,33 +68,12 @@ head(lizards_df)
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Step 2: Initial Data Visualization
 
 ## **Creating a Boxplot**
 
-Let's visualize how body length differs between sexually mature and immature lizards:
-
-
-
-
-
-
-
-
-
-
-
+Let's visualize how body length differs between sexually mature and
+immature lizards:
 
 ::: {.cell}
 
@@ -133,17 +94,6 @@ maturity_boxplot
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 ## **What do we see?**
 
 -   There appears to be a relationship between size and sexual maturity
@@ -155,18 +105,8 @@ maturity_boxplot
 
 ## **Using glm() for Logistic Regression**
 
-The `glm()` function is similar to `lm()` but requires specifying the distribution family:
-
-
-
-
-
-
-
-
-
-
-
+The `glm()` function is similar to `lm()` but requires specifying the
+distribution family:
 
 ::: {.cell}
 
@@ -208,23 +148,13 @@ Number of Fisher Scoring iterations: 6
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 ## **Interpreting the Model Output**
 
 ### **Coefficients:**
 
 -   **Intercept (β₀)**: -5.5847 - The log-odds when length = 0
--   **Slope (β₁)**: 0.2503 - Change in log-odds for each 1 cm increase in length
+-   **Slope (β₁)**: 0.2503 - Change in log-odds for each 1 cm increase
+    in length
 
 ### **P-values:**
 
@@ -234,24 +164,15 @@ Number of Fisher Scoring iterations: 6
 
 ### **Understanding the Slope:**
 
-The positive slope (0.2503) indicates: - Longer lizards are more likely to be sexually mature - For each 1 cm increase in length, the log-odds of maturity increase by 0.2503
+The positive slope (0.2503) indicates: - Longer lizards are more likely
+to be sexually mature - For each 1 cm increase in length, the log-odds
+of maturity increase by 0.2503
 
 # Step 4: Convert Log-Odds to Odds
 
 ## **Making the Results More Interpretable**
 
 Log-odds are hard to interpret. Let's convert to odds:
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -281,31 +202,9 @@ odds_ratio
 ```
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Step 5: Create the Logistic Regression Plot
 
 ## **Visualizing the Probability Curve**
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -350,17 +249,6 @@ logistic_plot
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 ## **What the S-curve tells us:**
 
 -   The red line shows how probability changes with length
@@ -372,18 +260,8 @@ logistic_plot
 
 ## **Using the Model for Prediction**
 
-Let's predict the probability of sexual maturity for specific lizard sizes:
-
-
-
-
-
-
-
-
-
-
-
+Let's predict the probability of sexual maturity for specific lizard
+sizes:
 
 ::: {.cell}
 
@@ -442,17 +320,6 @@ prob_40cm
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 ## **Interpretation:**
 
 -   A 20 cm lizard has about 14% probability of being sexually mature
@@ -463,18 +330,8 @@ prob_40cm
 
 ## **Calculating Pseudo-R2 Values**
 
-Unlike linear regression, logistic regression doesn't have a traditional R². We use pseudo-R² instead:
-
-
-
-
-
-
-
-
-
-
-
+Unlike linear regression, logistic regression doesn't have a traditional
+R². We use pseudo-R² instead:
 
 ::: {.cell}
 
@@ -507,17 +364,6 @@ pseudo_r2
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 ## Interpreting Pseudo-R2 Values
 
 The last three values are the pseudo-R² statistics:
@@ -526,22 +372,12 @@ The last three values are the pseudo-R² statistics:
 -   **r2ML**: Maximum likelihood based R²
 -   **r2CU**: Cragg-Uhler (Nagelkerke) R²
 
-Values around 0.4-0.5 indicate moderate to good fit. Our model explains approximately 40-50% of the variation in sexual maturity status.
+Values around 0.4-0.5 indicate moderate to good fit. Our model explains
+approximately 40-50% of the variation in sexual maturity status.
 
 # Step 8: Additional Diagnostics
 
 ## **Creating a More Detailed Summary Plot**
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -570,17 +406,6 @@ diagnostic_plot
 :::
 :::
 
-
-
-
-
-
-
-
-
-
-
-
 # Summary: Key Takeaways
 
 ## **What We Learned:**
@@ -594,7 +419,8 @@ diagnostic_plot
 
 ## **Our Results:**
 
--   Significant positive relationship between body length and sexual maturity
+-   Significant positive relationship between body length and sexual
+    maturity
 -   Each 1 cm increase in length increases odds of maturity by \~28%
 -   Model explains \~40-50% of variation in maturity status
 -   Can predict probability of maturity for any given length
