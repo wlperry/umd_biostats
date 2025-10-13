@@ -6,20 +6,18 @@ metadata-files:
 format:
   html:
     output-file: "05_03_homework_correlation_regression_html.html"
-  typst:
-    output-file: "05_homeowork_correlation_regression.pdf"
+  docx:
+    output-file: "05_homeowork_correlation_regression.docx"
 ---
-
-
-
-
-
 
 
 
 # Assignment Overview
 
-This homework assignment will test your understanding of correlation and regression analysis using real forest inventory data from European beech (*Fagus sylvatica*) trees. You will apply the statistical concepts from Lectures 9 and 10 to analyze relationships between tree measurements.
+This homework assignment will test your understanding of correlation and
+regression analysis using real forest inventory data from European beech
+(*Fagus sylvatica*) trees. You will apply the statistical concepts from
+Lectures 9 and 10 to analyze relationships between tree measurements.
 
 ## Learning Objectives
 
@@ -33,7 +31,9 @@ By completing this assignment, you will be able to:
 
 ## Data Description
 
-The dataset `fagus_data.csv` contains forest inventory measurements from European beech trees across different regions and time periods. Key variables include:
+The dataset `fagus_data.csv` contains forest inventory measurements from
+European beech trees across different regions and time periods. Key
+variables include:
 
 -   `diameter_mm`: Tree diameter at breast height (millimeters)
 -   `stem_volume_m3`: Calculated stem volume (cubic meters)
@@ -52,16 +52,14 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 ## 1.1 Load and Examine the Data
 
 
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
 # Load the Fagus data from jacobsson_et_al_fagus_data.csv
 ```
 :::
+
+
 
 ::: {.cell}
 
@@ -71,24 +69,12 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 :::
 
 
-
-
-
-
 ## 1.2 Initial Data Cleaning and Preparation
-
-
-
-
 
 
 ::: {.cell}
 
 :::
-
-
-
-
 
 
 ------------------------------------------------------------------------
@@ -100,18 +86,17 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 ::: callout-important
 ## Question 1: Summary Statistics
 
-**Task:** Calculate and interpret summary statistics for the three main continuous variables: diameter, volume, and age.
+**Task:** Calculate and interpret summary statistics for the three main
+continuous variables: diameter, volume, and age.
 
 **Instructions:**
 
--   Use appropriate R functions to calculate mean, median, standard deviation, and quartiles
--   Comment on the distribution shape (symmetric, skewed) based on these statistics
+-   Use appropriate R functions to calculate mean, median, standard
+    deviation, and quartiles
+-   Comment on the distribution shape (symmetric, skewed) based on these
+    statistics
 -   Identify any potential outliers or unusual values
 :::
-
-
-
-
 
 
 ::: {.cell}
@@ -130,16 +115,13 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 :::
 
 
-
-
-
-
 ## 2.2 Graphical Data Exploration
 
 ::: callout-important
 ## Question 2: Data Visualization
 
-**Task:** Create appropriate plots to visualize the distribution of each variable and relationships between variables.
+**Task:** Create appropriate plots to visualize the distribution of each
+variable and relationships between variables.
 
 **Instructions:**
 
@@ -147,10 +129,6 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 -   Create a pairs plot or correlation matrix plot
 -   Comment on distributions and potential relationships
 :::
-
-
-
-
 
 
 ::: {.cell}
@@ -169,10 +147,6 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 :::
 
 
-
-
-
-
 ------------------------------------------------------------------------
 
 # Part 3: Correlation Analysis
@@ -184,15 +158,18 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 
 **Task:** Before conducting the correlation analysis, clearly state:
 
-1.  **Type of analysis:** What type of statistical test are you using and why?
+1.  **Type of analysis:** What type of statistical test are you using
+    and why?
 2.  **Hypotheses:** State your null and alternative hypotheses
 3.  **Assumptions:** List the assumptions for this test
-4.  **Variables:** Identify which variables you're analyzing and their measurement scales
+4.  **Variables:** Identify which variables you're analyzing and their
+    measurement scales
 :::
 
 **Your Answer:**
 
-**Type of Analysis:** \[State whether this is a correlation or regression analysis and explain why this choice is appropriate\]
+**Type of Analysis:** \[State whether this is a correlation or
+regression analysis and explain why this choice is appropriate\]
 
 **Hypotheses:**
 
@@ -207,10 +184,6 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 -   Variable 2: \[Name and describe\]
 
 ## 3.2 Perform Correlation Analysis
-
-
-
-
 
 
 ::: {.cell}
@@ -229,10 +202,6 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 :::
 
 
-
-
-
-
 ## 3.3 Interpret Correlation Results
 
 ::: callout-important
@@ -240,15 +209,19 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 
 **Task:** Interpret your correlation results by addressing:
 
-1.  **Strength and direction:** How strong is the relationship and in what direction?
-2.  **Statistical significance:** Is the correlation statistically significant?
-3.  **Practical significance:** What does this mean biologically/ecologically?
+1.  **Strength and direction:** How strong is the relationship and in
+    what direction?
+2.  **Statistical significance:** Is the correlation statistically
+    significant?
+3.  **Practical significance:** What does this mean
+    biologically/ecologically?
 4.  **Limitations:** What are the limitations of this analysis?
 :::
 
 **Your Interpretation:**
 
-\[Write 4-5 sentences interpreting your correlation results, addressing all the points above\]
+\[Write 4-5 sentences interpreting your correlation results, addressing
+all the points above\]
 
 ------------------------------------------------------------------------
 
@@ -261,17 +234,22 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 
 **Task:** For the regression of diameter on tree age, clearly state:
 
-1.  **Type of analysis:** What type of statistical analysis are you using?
+1.  **Type of analysis:** What type of statistical analysis are you
+    using?
 2.  **Model equation:** Write out your regression model
-3.  **Hypotheses:** State your null and alternative hypotheses about the slope
-4.  **Variables:** Clearly identify your predictor and response variables
+3.  **Hypotheses:** State your null and alternative hypotheses about the
+    slope
+4.  **Variables:** Clearly identify your predictor and response
+    variables
 :::
 
 **Your Answer:**
 
-**Type of Analysis:** \[State this is simple linear regression and explain the goal\]
+**Type of Analysis:** \[State this is simple linear regression and
+explain the goal\]
 
-**Model Equation:** \[Write the regression equation: Y = α + βX + ε, defining each term\]
+**Model Equation:** \[Write the regression equation: Y = α + βX + ε,
+defining each term\]
 
 **Hypotheses:**
 
@@ -284,10 +262,6 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 -   Response (Y): \[Name and describe\]
 
 ## 4.2 Perform Regression Analysis
-
-
-
-
 
 
 ::: {.cell}
@@ -307,15 +281,7 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 :::
 
 
-
-
-
-
 ## 4.3 Test Regression Assumptions
-
-
-
-
 
 
 ::: {.cell}
@@ -335,10 +301,6 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 :::
 
 
-
-
-
-
 ## 4.4 Interpret Regression Results
 
 ::: callout-important
@@ -346,16 +308,20 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 
 **Task:** Provide a complete interpretation of your regression results:
 
-1.  **Parameter estimates:** What are the slope and intercept estimates and their meanings?
-2.  **Statistical significance:** Is the relationship statistically significant?
+1.  **Parameter estimates:** What are the slope and intercept estimates
+    and their meanings?
+2.  **Statistical significance:** Is the relationship statistically
+    significant?
 3.  **Model fit:** How much variance is explained (R²)?
 4.  **Assumptions:** Were the assumptions met? Any concerns?
-5.  **Biological interpretation:** What does this relationship mean for forest ecology?
+5.  **Biological interpretation:** What does this relationship mean for
+    forest ecology?
 :::
 
 **Your Interpretation:**
 
-\[Write a interpretation of your regression results, addressing all points above\]
+\[Write a interpretation of your regression results, addressing all
+points above\]
 
 ------------------------------------------------------------------------
 
@@ -366,7 +332,8 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 ::: callout-important
 ## Question 7: Publication Figure
 
-**Task:** Create a publication-quality figure that effectively displays your regression results.
+**Task:** Create a publication-quality figure that effectively displays
+your regression results.
 
 **Requirements:**
 
@@ -376,10 +343,6 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 -   Include informative title and axis labels
 -   Consider the target audience (scientific journal)
 :::
-
-
-
-
 
 
 ::: {.cell}
@@ -392,19 +355,20 @@ The dataset `fagus_data.csv` contains forest inventory measurements from Europea
 :::
 
 
-
-
-
-
 # Submission Guidelines
 
 ## What to turn in -
 
-1.  a quarto markdown file and dataframe. Note that your code should be able to run with what you turn in.
+1.  a quarto markdown file and dataframe. Note that your code should be
+    able to run with what you turn in.
 
 2.  a self-contained word and html file showing the code and output
 
-3.  annotations in the quarto file that shows or tells what is being done in the r code chunks describing what you are trying to do - credit will be given even if it does not work as long as you detail what you are doing. As we start to move into more statistics you will be expected to interpret the results.
+3.  annotations in the quarto file that shows or tells what is being
+    done in the r code chunks describing what you are trying to do -
+    credit will be given even if it does not work as long as you detail
+    what you are doing. As we start to move into more statistics you
+    will be expected to interpret the results.
 
 ## Points
 

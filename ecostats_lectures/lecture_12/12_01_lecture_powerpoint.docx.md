@@ -203,7 +203,7 @@ SSA is SS of differences between each marginal mean of A and overall
 mean
 
 | Source | SS | df | MS |
-|:-----------------|:-----------------|:-----------------|:-----------------|
+|:---|:---|:---|:---|
 | A | $nq \sum_{i=1}^{p} (\bar{y}_{i.} - \bar{y})^2$ | $p-1$ | $\frac{SS_A}{p-1}$ |
 | B | $np \sum_{j=1}^{q} (\bar{y}_{.j} - \bar{y})^2$ | $q-1$ | $\frac{SS_B}{q-1}$ |
 | AB | $n \sum_{i=1}^{p} \sum_{j=1}^{q} (\bar{y}_{ij} - \bar{y}_{i.} - \bar{y}_{.j} + \bar{y})^2$ | $(p-1)(q-1)$ | $\frac{SS_{AB}}{(p-1)(q-1)}$ |
@@ -306,7 +306,7 @@ F-ratio calculations are different depending on whether factors are
 fixed, random or mixed
 
 | Source | A and B fixed | A and B random | A fixed, B random |
-|:-----------------|:----------------:|:----------------:|:----------------:|
+|:---|:--:|:--:|:--:|
 | A | $\frac{MS_A}{MS_{Residual}}$ | $\frac{MS_A}{MS_{AB}}$ | $\frac{MS_A}{MS_{AB}}$ |
 | B | $\frac{MS_B}{MS_{Residual}}$ | $\frac{MS_B}{MS_{AB}}$ | $\frac{MS_B}{MS_{AB}}$ |
 | AB | $\frac{MS_{AB}}{MS_{Residual}}$ | $\frac{MS_{AB}}{MS_{Residual}}$ | $\frac{MS_{AB}}{MS_{Residual}}$ |

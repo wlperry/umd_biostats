@@ -6,9 +6,10 @@ metadata-files:
 format:
   html:
     output-file: "06_homework_multiple_regression_html.html"
-  typst:
-    output-file: "06_homework_multiple_regression.pdf"
+  docx:
+    output-file: "06_homework_multiple_regression.docx"
 ---
+
 
 ::: {.cell}
 
@@ -17,123 +18,28 @@ format:
 library(patchwork)    # For combining plots
 library(broom)        # For tidy statistical output
 library(car)          # For regression diagnostics
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Loading required package: carData
-```
-
-
-:::
-
-```{.r .cell-code}
 library(lmtest)       # For assumption testing
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Loading required package: zoo
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-
-Attaching package: 'zoo'
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-The following objects are masked from 'package:base':
-
-    as.Date, as.Date.numeric
-```
-
-
-:::
-
-```{.r .cell-code}
 library(corrplot)     # For correlation matrices
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-corrplot 0.95 loaded
-```
-
-
-:::
-
-```{.r .cell-code}
 library(GGally)       # For pairs plots
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Loading required package: ggplot2
-```
-
-
-:::
-
-```{.r .cell-code}
 library(tinytable)    # For simple tables
 library(tidyverse)    # For data manipulation and visualization
-```
 
-::: {.cell-output .cell-output-stderr}
-
-```
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ lubridate 1.9.4     ✔ tibble    3.3.0
-✔ purrr     1.1.0     ✔ tidyr     1.3.1
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stderr}
-
-```
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-✖ dplyr::recode() masks car::recode()
-✖ purrr::some()   masks car::some()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
-
-
-:::
-
-```{.r .cell-code}
 # Set ggplot theme
 theme_set(theme_light())
 ```
 :::
 
 
-
-
-
-
 # Assignment Overview
 
-This homework assignment will test your understanding of **multiple regression analysis** using real lake water quality data from New Zealand. You will analyze the relationships between chlorophyll-a concentrations and nutrient levels in New Zealand lakes, building on the research findings from Abell et al. (2010) on nitrogen and phosphorus limitation in New Zealand freshwater systems. You will apply the statistical concepts from Lecture 11 to understand how multiple predictors influence water quality.
+This homework assignment will test your understanding of **multiple
+regression analysis** using real lake water quality data from New
+Zealand. You will analyze the relationships between chlorophyll-a
+concentrations and nutrient levels in New Zealand lakes, building on the
+research findings from Abell et al. (2010) on nitrogen and phosphorus
+limitation in New Zealand freshwater systems. You will apply the
+statistical concepts from Lecture 11 to understand how multiple
+predictors influence water quality.
 
 ## Learning Objectives
 
@@ -148,17 +54,30 @@ By completing this assignment, you will be able to:
 
 ## Data Description
 
-The dataset `matched_lakes_data.csv` contains water quality measurements from 111 New Zealand lakes. This dataset represents a carefully matched subset of lakes with complete measurements for all variables. Key variables include:
+The dataset `matched_lakes_data.csv` contains water quality measurements
+from 111 New Zealand lakes. This dataset represents a carefully matched
+subset of lakes with complete measurements for all variables. Key
+variables include:
 
--   `chl_a_mg_m3`: Chlorophyll-a concentration (mg/m³) - **Response variable**
--   `tp_mg_m3`: Total phosphorus concentration (mg/m³) - **Predictor variable**
--   `tn_mg_m3`: Total nitrogen concentration (mg/m³) - **Predictor variable**
+-   `chl_a_mg_m3`: Chlorophyll-a concentration (mg/m³) - **Response
+    variable**
+-   `tp_mg_m3`: Total phosphorus concentration (mg/m³) - **Predictor
+    variable**
+-   `tn_mg_m3`: Total nitrogen concentration (mg/m³) - **Predictor
+    variable**
 -   `lake_id`: Unique identifier for each lake
 
 ::: callout-note
 ## Important Background
 
-This dataset builds on the work of Abell et al. (2010), who found that New Zealand lakes show different nutrient limitation patterns compared to European lakes. Chlorophyll-a is a key indicator of algal biomass and water quality in lakes. High chlorophyll concentrations often indicate eutrophication (nutrient enrichment) which can lead to algal blooms and poor water quality. In New Zealand freshwater systems, both phosphorus and nitrogen can act as limiting nutrients, making this an ideal system for studying multiple regression relationships.
+This dataset builds on the work of Abell et al. (2010), who found that
+New Zealand lakes show different nutrient limitation patterns compared
+to European lakes. Chlorophyll-a is a key indicator of algal biomass and
+water quality in lakes. High chlorophyll concentrations often indicate
+eutrophication (nutrient enrichment) which can lead to algal blooms and
+poor water quality. In New Zealand freshwater systems, both phosphorus
+and nitrogen can act as limiting nutrients, making this an ideal system
+for studying multiple regression relationships.
 :::
 
 ------------------------------------------------------------------------
@@ -166,10 +85,6 @@ This dataset builds on the work of Abell et al. (2010), who found that New Zeala
 # Part 1: Data Loading and Initial Exploration
 
 ## 1.1 Load and Examine the Data
-
-
-
-
 
 
 ::: {.cell}
@@ -180,15 +95,7 @@ This dataset builds on the work of Abell et al. (2010), who found that New Zeala
 :::
 
 
-
-
-
-
 ## 1.2 Initial Data Cleaning and Preparation
-
-
-
-
 
 
 ::: {.cell}
@@ -197,10 +104,6 @@ This dataset builds on the work of Abell et al. (2010), who found that New Zeala
 # Check for missing values in key variables
 ```
 :::
-
-
-
-
 
 
 ------------------------------------------------------------------------
@@ -212,14 +115,15 @@ This dataset builds on the work of Abell et al. (2010), who found that New Zeala
 ::: callout-important
 ## Question 1: Summary Statistics
 
-**Task:** Calculate and interpret summary statistics for the three main variables: chlorophyll-a, total phosphorus, and total nitrogen.
+**Task:** Calculate and interpret summary statistics for the three main
+variables: chlorophyll-a, total phosphorus, and total nitrogen.
 
-**Instructions:** - Use appropriate R functions to calculate mean, median, standard deviation, and quartiles - Comment on the distribution shape (symmetric, skewed) based on these statistics - Identify any potential outliers or unusual values - Consider the ecological meaning of these values in the context of New Zealand lakes
+**Instructions:** - Use appropriate R functions to calculate mean,
+median, standard deviation, and quartiles - Comment on the distribution
+shape (symmetric, skewed) based on these statistics - Identify any
+potential outliers or unusual values - Consider the ecological meaning
+of these values in the context of New Zealand lakes
 :::
-
-
-
-
 
 
 ::: {.cell}
@@ -229,16 +133,14 @@ This dataset builds on the work of Abell et al. (2010), who found that New Zeala
 ```
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Check for skewness by comparing mean and median or make a graph
 ```
 :::
-
-
-
-
 
 
 **Interpretation:**
@@ -248,14 +150,14 @@ This dataset builds on the work of Abell et al. (2010), who found that New Zeala
 ::: callout-important
 ## Question 2: Data Visualization
 
-**Task:** Create appropriate plots to visualize the distribution of each variable and relationships between variables.
+**Task:** Create appropriate plots to visualize the distribution of each
+variable and relationships between variables.
 
-**Instructions:** - Create histograms for each continuous variable - Create a pairs plot or correlation matrix plot - Comment on distributions and potential relationships - Consider whether transformations might be needed
+**Instructions:** - Create histograms for each continuous variable -
+Create a pairs plot or correlation matrix plot - Comment on
+distributions and potential relationships - Consider whether
+transformations might be needed
 :::
-
-
-
-
 
 
 ::: {.cell}
@@ -265,16 +167,14 @@ This dataset builds on the work of Abell et al. (2010), who found that New Zeala
 ```
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create pairs plot for the three main variables
 ```
 :::
-
-
-
-
 
 
 **Interpretation:**
@@ -290,28 +190,43 @@ This dataset builds on the work of Abell et al. (2010), who found that New Zeala
 
 **Task:** Before conducting the correlation analysis, clearly state:
 
-1.  **Type of analysis:** What type of statistical test are you using and why?
-2.  **Hypotheses:** State your null and alternative hypotheses for each pair
+1.  **Type of analysis:** What type of statistical test are you using
+    and why?
+2.  **Hypotheses:** State your null and alternative hypotheses for each
+    pair
 3.  **Assumptions:** List the assumptions for this test
-4.  **Variables:** Identify which variables you're analyzing and their measurement scales
-5.  **Ecological predictions:** What relationships do you expect based on New Zealand lake ecology?
+4.  **Variables:** Identify which variables you're analyzing and their
+    measurement scales
+5.  **Ecological predictions:** What relationships do you expect based
+    on New Zealand lake ecology?
 :::
 
-**Type of Analysis:** This is a Pearson correlation analysis to quantify the strength and direction of linear relationships between chlorophyll-a and the two nutrient variables (phosphorus and nitrogen) in New Zealand lakes. Correlation analysis is appropriate as an initial step before multiple regression to understand the bivariate relationships and assess potential multicollinearity between predictors.
+**Type of Analysis:** This is a Pearson correlation analysis to quantify
+the strength and direction of linear relationships between chlorophyll-a
+and the two nutrient variables (phosphorus and nitrogen) in New Zealand
+lakes. Correlation analysis is appropriate as an initial step before
+multiple regression to understand the bivariate relationships and assess
+potential multicollinearity between predictors.
 
 **Hypotheses:** -
 
--   H₀ for chl_a vs tp: ρ = 0 (There is no linear correlation between chlorophyll-a and total phosphorus in New Zealand lakes)
+-   H₀ for chl_a vs tp: ρ = 0 (There is no linear correlation between
+    chlorophyll-a and total phosphorus in New Zealand lakes)
 
--   H₁ for chl_a vs tp: ρ ≠ 0 (There is a significant linear correlation between chlorophyll-a and total phosphorus)
+-   H₁ for chl_a vs tp: ρ ≠ 0 (There is a significant linear correlation
+    between chlorophyll-a and total phosphorus)
 
--   H₀ for chl_a vs tn: ρ = 0 (There is no linear correlation between chlorophyll-a and total nitrogen in New Zealand lakes)
+-   H₀ for chl_a vs tn: ρ = 0 (There is no linear correlation between
+    chlorophyll-a and total nitrogen in New Zealand lakes)
 
--   H₁ for chl_a vs tn: ρ ≠ 0 (There is a significant linear correlation between chlorophyll-a and total nitrogen)
+-   H₁ for chl_a vs tn: ρ ≠ 0 (There is a significant linear correlation
+    between chlorophyll-a and total nitrogen)
 
--   H₀ for tp vs tn: ρ = 0 (There is no linear correlation between total phosphorus and total nitrogen)
+-   H₀ for tp vs tn: ρ = 0 (There is no linear correlation between total
+    phosphorus and total nitrogen)
 
--   H₁ for tp vs tn: ρ ≠ 0 (There is a significant linear correlation between total phosphorus and total nitrogen)
+-   H₁ for tp vs tn: ρ ≠ 0 (There is a significant linear correlation
+    between total phosphorus and total nitrogen)
 
 **Assumptions:**
 
@@ -321,21 +236,21 @@ This dataset builds on the work of Abell et al. (2010), who found that New Zeala
 
 3\. Linear relationship between the variables
 
-4\. Independence of observations (each lake represents an independent sample)
+4\. Independence of observations (each lake represents an independent
+sample)
 
 **Variables:**
 
--   Variable 1: Chlorophyll-a concentration (chl_a_mg_m3) - continuous numerical variable (mg/m³)
+-   Variable 1: Chlorophyll-a concentration (chl_a_mg_m3) - continuous
+    numerical variable (mg/m³)
 
--   Variable 2: Total phosphorus concentration (tp_mg_m3) - continuous numerical variable (mg/m³)
+-   Variable 2: Total phosphorus concentration (tp_mg_m3) - continuous
+    numerical variable (mg/m³)
 
--   Variable 3: Total nitrogen concentration (tn_mg_m3) - continuous numerical variable (mg/m³)
+-   Variable 3: Total nitrogen concentration (tn_mg_m3) - continuous
+    numerical variable (mg/m³)
 
 ## 3.2 Perform Correlation Analysis
-
-
-
-
 
 
 ::: {.cell}
@@ -345,16 +260,14 @@ This dataset builds on the work of Abell et al. (2010), who found that New Zeala
 ```
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Check normality assumptions for correlation
 ```
 :::
-
-
-
-
 
 
 ## 3.3 Interpret Correlation Results
@@ -364,10 +277,14 @@ This dataset builds on the work of Abell et al. (2010), who found that New Zeala
 
 **Task:** Interpret your correlation results by addressing:
 
-1.  **Strength and direction:** How strong are the relationships and in what direction?
-2.  **Statistical significance:** Which correlations are statistically significant?
-3.  **Ecological significance:** What do these relationships mean for New Zealand lake ecology?
-4.  **Multicollinearity concerns:** Are the predictors correlated with each other?
+1.  **Strength and direction:** How strong are the relationships and in
+    what direction?
+2.  **Statistical significance:** Which correlations are statistically
+    significant?
+3.  **Ecological significance:** What do these relationships mean for
+    New Zealand lake ecology?
+4.  **Multicollinearity concerns:** Are the predictors correlated with
+    each other?
 :::
 
 ------------------------------------------------------------------------
@@ -379,16 +296,24 @@ This dataset builds on the work of Abell et al. (2010), who found that New Zeala
 ::: callout-important
 ## Question 5: Multiple Regression Analysis Setup
 
-**Task:** For the multiple regression of chlorophyll on phosphorus and nitrogen, clearly state:
+**Task:** For the multiple regression of chlorophyll on phosphorus and
+nitrogen, clearly state:
 
-1.  **Type of analysis:** What type of statistical analysis are you using?
+1.  **Type of analysis:** What type of statistical analysis are you
+    using?
 2.  **Model equation:** Write out your multiple regression model
 3.  **Hypotheses:** State your null and alternative hypotheses
-4.  **Variables:** Clearly identify your predictors and response variables
-5.  **Biological rationale:** Why use multiple regression for this New Zealand lake question?
+4.  **Variables:** Clearly identify your predictors and response
+    variables
+5.  **Biological rationale:** Why use multiple regression for this New
+    Zealand lake question?
 :::
 
-**Type of Analysis:** This is multiple linear regression analysis to model chlorophyll-a concentration as a function of both total phosphorus and total nitrogen concentrations simultaneously in New Zealand lakes. This approach allows us to assess the independent effects of each nutrient while controlling for the other.
+**Type of Analysis:** This is multiple linear regression analysis to
+model chlorophyll-a concentration as a function of both total phosphorus
+and total nitrogen concentrations simultaneously in New Zealand lakes.
+This approach allows us to assess the independent effects of each
+nutrient while controlling for the other.
 
 **Model Equation:** chl_a_mg_m3 = β₀ + β₁(tp_mg_m3) + β₂(tn_mg_m3) + ε
 
@@ -396,17 +321,15 @@ Where:
 
 -   \- chl_a_mg_m3 = chlorophyll-a concentration (response variable)
 -   \- β₀ = intercept (baseline chlorophyll when both nutrients = 0)
--   \- β₁ = partial slope for phosphorus (change in chlorophyll per unit phosphorus, holding nitrogen constant)
--   \- β₂ = partial slope for nitrogen (change in chlorophyll per unit nitrogen, holding phosphorus constant)
+-   \- β₁ = partial slope for phosphorus (change in chlorophyll per unit
+    phosphorus, holding nitrogen constant)
+-   \- β₂ = partial slope for nitrogen (change in chlorophyll per unit
+    nitrogen, holding phosphorus constant)
 -   \- ε = random error term
 
 **Hypotheses:**
 
 ## 4.2 Perform Multiple Regression Analysis
-
-
-
-
 
 
 ::: {.cell}
@@ -416,12 +339,16 @@ Where:
 ```
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create ANOVA table
 ```
 :::
+
+
 
 ::: {.cell}
 
@@ -432,6 +359,8 @@ Where:
 ```
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -440,10 +369,6 @@ Where:
 # confint_mr_nz_model
 ```
 :::
-
-
-
-
 
 
 **Interpretation of Model Output:**
@@ -457,13 +382,12 @@ Where:
     -   \- Total phosphorus: β₁ = 0.321 (t = 49.0, p \< 0.001)
     -   \- Total nitrogen: β₂ =
 
--   **Multicollinearity:** VIF values of 4.1 for both predictors indicate moderate multicollinearity (VIF \> 3 but \< 10), which is expected given the strong correlation between nutrients but not severe enough to compromise the analysis.
+-   **Multicollinearity:** VIF values of 4.1 for both predictors
+    indicate moderate multicollinearity (VIF \> 3 but \< 10), which is
+    expected given the strong correlation between nutrients but not
+    severe enough to compromise the analysis.
 
 ## 4.3 Test Regression Assumptions
-
-
-
-
 
 
 ::: {.cell}
@@ -476,6 +400,8 @@ Where:
 ```
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -485,21 +411,15 @@ Where:
 :::
 
 
-
-
-
-
 ## 4.4 Transformation of data??
 
 ::: callout-note
 ## Data Transformation
 
-Given the assumption violations and the power-law nature of ecological relationships, we'll apply log transformation to all variables to improve normality and homoscedasticity.
+Given the assumption violations and the power-law nature of ecological
+relationships, we'll apply log transformation to all variables to
+improve normality and homoscedasticity.
 :::
-
-
-
-
 
 
 ::: {.cell}
@@ -509,12 +429,16 @@ Given the assumption violations and the power-law nature of ecological relations
 ```
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create diagnostic plots for log-transformed model
 ```
 :::
+
+
 
 ::: {.cell}
 
@@ -524,17 +448,9 @@ Given the assumption violations and the power-law nature of ecological relations
 :::
 
 
-
-
-
-
 ## 4.5 Model Comparison
 
 ## Compare models using AIC
-
-
-
-
 
 
 ::: {.cell}
@@ -546,44 +462,50 @@ Given the assumption violations and the power-law nature of ecological relations
 :::
 
 
-
-
-
-
 ## 4.6 Interpret Final Multiple Regression Results
 
 ::: callout-important
 ## Question 6: Multiple Regression Interpretation
 
-**Task:** Provide a complete interpretation of your final (log-transformed) multiple regression results:
+**Task:** Provide a complete interpretation of your final
+(log-transformed) multiple regression results:
 
 1.  **Overall model:** Is the overall model statistically significant?
-2.  **Individual predictors:** Which predictors are significant and what are their effects?
-3.  **Parameter estimates:** What are the slope estimates and their meanings?
+2.  **Individual predictors:** Which predictors are significant and what
+    are their effects?
+3.  **Parameter estimates:** What are the slope estimates and their
+    meanings?
 4.  **Model fit:** How much variance is explained (R²)?
 5.  **Assumptions:** Were the assumptions met? Any concerns?
 6.  **Multicollinearity:** Is multicollinearity a problem?
-7.  **Ecological interpretation:** What does this mean for New Zealand lake management?
+7.  **Ecological interpretation:** What does this mean for New Zealand
+    lake management?
 :::
 
 **Final Model Interpretation:**
 
 **Overall Model:**
 
-**Model Equation:** log(chlorophyll) = ???? + ??? × log(phosphorus) + ??? × log(nitrogen)
+**Model Equation:** log(chlorophyll) = ???? + ??? × log(phosphorus) +
+??? × log(nitrogen)
 
 **Individual Predictors:**
 
 -   \- Log total phosphorus:
 -   \- Log total nitrogen:
 
-**Parameter Interpretation:** The coefficients represent elasticities: a 1% increase in phosphorus leads to a ????% increase in chlorophyll, while a 1% increase in nitrogen leads to a ???% increase in chlorophyll, holding the other nutrient constant.
+**Parameter Interpretation:** The coefficients represent elasticities: a
+1% increase in phosphorus leads to a ????% increase in chlorophyll,
+while a 1% increase in nitrogen leads to a ???% increase in chlorophyll,
+holding the other nutrient constant.
 
 what does the above mean?
 
 **Model Fit:** The model explains ???% of variance in log-chlorophyll
 
-**Ecological Interpretation:** Phosphorus has approximately ??? times stronger effect than nitrogen, but both nutrients are highly significant predictors. And what should be controlled
+**Ecological Interpretation:** Phosphorus has approximately ??? times
+stronger effect than nitrogen, but both nutrients are highly significant
+predictors. And what should be controlled
 
 ------------------------------------------------------------------------
 
@@ -594,14 +516,15 @@ what does the above mean?
 ::: callout-important
 ## Question 8: Publication Figure
 
-**Task:** Create a publication-quality figure that effectively displays your multiple regression results.
+**Task:** Create a publication-quality figure that effectively displays
+your multiple regression results.
 
-**Requirements:** - Show the relationship between chlorophyll and both predictors - Consider using multiple panels or 3D visualization - Include model information and fit statistics - Use appropriate colors and themes - Include informative title and axis labels - Consider the target audience (New Zealand water quality managers)
+**Requirements:** - Show the relationship between chlorophyll and both
+predictors - Consider using multiple panels or 3D visualization -
+Include model information and fit statistics - Use appropriate colors
+and themes - Include informative title and axis labels - Consider the
+target audience (New Zealand water quality managers)
 :::
-
-
-
-
 
 
 ::: {.cell}
@@ -609,19 +532,20 @@ what does the above mean?
 :::
 
 
-
-
-
-
 # Submission Guidelines
 
 ## What to turn in -
 
-1.  a quarto markdown file and dataframe. Note that your code should be able to run with what you turn in.
+1.  a quarto markdown file and dataframe. Note that your code should be
+    able to run with what you turn in.
 
 2.  a self-contained word and html file showing the code and output
 
-3.  annotations in the quarto file that shows or tells what is being done in the r code chunks describing what you are trying to do - credit will be given even if it does not work as long as you detail what you are doing. As we start to move into more statistics you will be expected to interpret the results.
+3.  annotations in the quarto file that shows or tells what is being
+    done in the r code chunks describing what you are trying to do -
+    credit will be given even if it does not work as long as you detail
+    what you are doing. As we start to move into more statistics you
+    will be expected to interpret the results.
 
 ## Points
 

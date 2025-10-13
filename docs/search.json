@@ -308,6 +308,97 @@
     "text": "Connection to Regression\nThis is exactly the same calculation as R² in regression: \\[R^2 = \\frac{SS_{regression}}{SS_{total}}\\]"
   },
   {
+    "objectID": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#common-non-parametric-alternatives-to-anova",
+    "href": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#common-non-parametric-alternatives-to-anova",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Common Non-Parametric Alternatives to ANOVA",
+    "text": "Common Non-Parametric Alternatives to ANOVA\nNon-parametric tests make fewer assumptions about the data distribution\n\nKruskal-Wallis Test\n\nNon-parametric alternative to one-way ANOVA\nTests for differences in median ranks\nWorks with ordinal or continuous data\nAssumptions: Independent observations, similar distribution shapes\n\nMood’s Median Test not covered here\n\n\nTests whether medians differ across groups\nMore robust but less powerful than Kruskal-Wallis\nGood for highly skewed data"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#when-to-use-non-parametric-tests",
+    "href": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#when-to-use-non-parametric-tests",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "When to Use Non-Parametric Tests",
+    "text": "When to Use Non-Parametric Tests\nConsider non-parametric tests when:\n\nSample sizes are small\nData are heavily skewed\nOutliers are present and legitimate\nVariances are very unequal\nData are ordinal (ranked)\nAssumptions checks clearly fail\n\nTrade-offs:\n\n✓ Fewer assumptions\n✓ More robust to outliers\n✗ Less statistical power\n✗ Test medians/ranks, not means"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#the-kruskal-wallis-h-test",
+    "href": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#the-kruskal-wallis-h-test",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "The Kruskal-Wallis H Test",
+    "text": "The Kruskal-Wallis H Test\nMost common non-parametric alternative to one-way ANOVA\n\nWhat it does:\n\nRanks all observations from smallest to largest\nCompares the sum of ranks between groups\nTests if groups come from the same distribution\n\nHypotheses:\n\nH₀: All groups have the same distribution (same median)\nH₁: At least one group has a different distribution\n\nTest statistic (H): \\[H = \\frac{12}{N(N+1)} \\sum_{i=1}^{k} n_i (\\bar{R}_i - \\bar{R})^2 - 3(N+1)\\]\nWhere:\n\nN = total sample size\nk = number of groups\n\\(\\bar{R}_i\\) = mean rank for group i\n\\(\\bar{R}\\)= overall mean rank = (N+1)/2\nnᵢ = sample size for group i\nconstant 12 comes from the variance of ranks in a uniform distribution\n\nDistribution: Approximated by χ² with (k-1) degrees of freedom"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#assumptions-of-kruskal-wallis",
+    "href": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#assumptions-of-kruskal-wallis",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Assumptions of Kruskal-Wallis",
+    "text": "Assumptions of Kruskal-Wallis\nMuch more relaxed than parametric ANOVA:\n\nIndependence: Observations must be independent\n\nSame as parametric ANOVA\nStill critical!\n\nSimilar distribution shapes: Groups should have similar distribution shapes (same spread/variance)\n\nIf violated, interprets as differences in distributions generally\nNot just medians\n\nOrdinal or continuous data: Response variable should be at least ordinal\nWhat’s NOT assumed:\n\n✗ Normal distribution\n✗ Equal variances (though helps interpretation)\n✗ Specific distribution shape"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#running-kruskal-wallis-on-original-data",
+    "href": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#running-kruskal-wallis-on-original-data",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Running Kruskal-Wallis on Original Data",
+    "text": "Running Kruskal-Wallis on Original Data\nEven though assumptions are met, let’s compare results:\n\n# Kruskal-Wallis test on original data\nkruskal_original_result &lt;- kruskal.test(\n  phase_shift ~ treatment, \n  data = circ_data\n)\n\n# Display results\nkruskal_original_result\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  phase_shift by treatment\nKruskal-Wallis chi-squared = 9.4231, df = 2, p-value = 0.008991\n\n\nInterpretation: - H = test statistic (chi-squared approximation) - df = degrees of freedom (k - 1 = 3 - 1 = 2) - p-value = 0.0135 (significant at α = 0.05) - Conclusion: At least one group differs from others\nCompare to parametric ANOVA:\n\nanova(circ_model)\n\nAnalysis of Variance Table\n\nResponse: phase_shift\n          Df Sum Sq Mean Sq F value   Pr(&gt;F)   \ntreatment  2 7.2245  3.6122  7.2894 0.004472 **\nResiduals 19 9.4153  0.4955                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#rank-visualization",
+    "href": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#rank-visualization",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Rank Visualization",
+    "text": "Rank Visualization\nHow Kruskal-Wallis works:\n\n\n\n\n\n\n\n\n\nRank Sums:\n\n\n# A tibble: 3 × 4\n  treatment mean_rank sum_rank     n\n  &lt;fct&gt;         &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;\n1 Control       14.6       117     8\n2 Eyes           5.29       37     7\n3 Knees         14.1        99     7"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#non-parametric-test-handles-violations",
+    "href": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#non-parametric-test-handles-violations",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Non-Parametric Test Handles Violations",
+    "text": "Non-Parametric Test Handles Violations\nRunning Kruskal-Wallis on data with assumption violations:\n\n# Kruskal-Wallis test on violated data\nkruskal_violated_result &lt;- kruskal.test(\n  phase_shift_violated ~ treatment, \n  data = violated_circ_df\n)\n\nkruskal_violated_result\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  phase_shift_violated by treatment\nKruskal-Wallis chi-squared = 6.8453, df = 2, p-value = 0.03263\n\n\nCompare parametric ANOVA on same violated data:\n\nanova(violated_model)\n\nAnalysis of Variance Table\n\nResponse: phase_shift_violated\n          Df  Sum Sq Mean Sq F value Pr(&gt;F)  \ntreatment  2  41.806 20.9029  2.8361 0.0836 .\nResiduals 19 140.037  7.3704                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nKey observations: - Both tests still detect differences - Kruskal-Wallis more robust to violations - Parametric test may give misleading results when assumptions violated - Non-parametric test maintains validity"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#pairwise-comparisons-after-significant-kruskal-wallis",
+    "href": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#pairwise-comparisons-after-significant-kruskal-wallis",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Pairwise Comparisons After Significant Kruskal-Wallis",
+    "text": "Pairwise Comparisons After Significant Kruskal-Wallis\nJust like ANOVA, we need post-hoc tests to identify which groups differ:\n\n# Pairwise Wilcoxon rank sum tests with \n# Bonferroni correction\npairwise_original_result &lt;- pairwise.wilcox.test(\n  x = nonparam_circ_df$phase_shift,\n  g = nonparam_circ_df$treatment,\n  p.adjust.method = \"bonferroni\"\n)\n\npairwise_original_result\n\n\n    Pairwise comparisons using Wilcoxon rank sum exact test \n\ndata:  nonparam_circ_df$phase_shift and nonparam_circ_df$treatment \n\n      Control Eyes  \nEyes  0.0037  -     \nKnees 1.0000  0.0787\n\nP value adjustment method: bonferroni \n\n\nInterpretation of p-values: - Control vs Eyes: p = 0.024 (significant) - Control vs Knees: p = 1.000 (not significant) - Eyes vs Knees: p = 0.078 (not significant)\nCommon adjustment methods: - \"bonferroni\": Most conservative - \"holm\": Less conservative than Bonferroni - \"BH\": Benjamini-Hochberg (controls false discovery rate) - \"none\": No adjustment (not recommended)"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#post-hoc-for-violated-data",
+    "href": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#post-hoc-for-violated-data",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Post-Hoc for Violated Data",
+    "text": "Post-Hoc for Violated Data\n\n# Post-hoc tests on violated data\npairwise_violated_result &lt;- pairwise.wilcox.test(\n  x = violated_circ_df$phase_shift_violated,\n  g = violated_circ_df$treatment,\n  p.adjust.method = \"bonferroni\"\n)\n\npairwise_violated_result\n\n\n    Pairwise comparisons using Wilcoxon rank sum exact test \n\ndata:  violated_circ_df$phase_shift_violated and violated_circ_df$treatment \n\n      Control Eyes  \nEyes  0.0037  -     \nKnees 1.0000  1.0000\n\nP value adjustment method: bonferroni \n\n\nComparison table:\n\n\nOriginal Data Pairwise p-values:\n   Control vs Eyes:  0.024 *\n   Control vs Knees: 1.000\n   Eyes vs Knees:    0.078\n\n\nViolated Data Pairwise p-values:\n   Control vs Eyes:  0.015 *\n   Control vs Knees: 1.000\n   Eyes vs Knees:    0.015 *"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#dunns-test-for-multiple-comparisons",
+    "href": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#dunns-test-for-multiple-comparisons",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Dunn’s Test for Multiple Comparisons",
+    "text": "Dunn’s Test for Multiple Comparisons\nDunn’s test is specifically designed for Kruskal-Wallis post-hoc comparisons:\n\nlibrary(FSA)\n\n# Dunn's test on original data\ndunn_original_result &lt;- dunnTest(\n  phase_shift ~ treatment,\n  data = circ_data,\n  method = \"bonferroni\"\n)\n\ndunn_original_result\n\n       Comparison          Z     P.unadj      P.adj\n1  Control - Eyes  2.7789287 0.005453849 0.01636155\n2 Control - Knees  0.1434629 0.885924641 1.00000000\n3    Eyes - Knees -2.5517789 0.010717452 0.03215236\n\n\nAdvantages of Dunn’s test: - Designed specifically for Kruskal-Wallis - Provides Z-statistics in addition to p-values - Multiple adjustment methods available - More appropriate than multiple Wilcoxon tests\nZ-statistic is a standardized test statistic that tells you how many standard deviations an observation or difference is from the expected value (usually zero, meaning “no difference”)."
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#dunns-test-on-violated-data",
+    "href": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#dunns-test-on-violated-data",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Dunn’s Test on Violated Data",
+    "text": "Dunn’s Test on Violated Data\n\n# Dunn's test on violated data\ndunn_violated_result &lt;- dunnTest(\n  phase_shift_violated ~ treatment,\n  data = violated_circ_df,\n  method = \"bonferroni\"\n)\n\ndunn_violated_result\n\n       Comparison         Z     P.unadj      P.adj\n1  Control - Eyes  2.614212 0.008943349 0.02683005\n2 Control - Knees  1.126449 0.259975463 0.77992639\n3    Eyes - Knees -1.440520 0.149720243 0.44916073\n\n\nInterpreting Z-statistics: - Large |Z| values indicate bigger differences - Z &gt; 1.96 approximately equivalent to p &lt; 0.05 - Sign indicates direction of difference"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#how-to-report-kruskal-wallis-results",
+    "href": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#how-to-report-kruskal-wallis-results",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "How to Report Kruskal-Wallis Results",
+    "text": "How to Report Kruskal-Wallis Results\nEssential elements to include:\n\nTest name and purpose\nSample sizes per group\nMedians and IQRs (not means and SDs!)\nTest statistic (H) and degrees of freedom\nP-value\nEffect size\nPost-hoc test results\nConclusion\n\nExample write-up:\n“A Kruskal-Wallis test was conducted to compare the effect of light treatment on circadian rhythm phase shift across three groups: Control (n = 8), Knees (n = 7), and Eyes (n = 7). Median phase shifts were -0.48 hours (IQR = 0.84) for Control, -0.29 hours (IQR = 1.04) for Knees, and -1.48 hours (IQR = 0.66) for Eyes. The test revealed a statistically significant difference in phase shift between the groups, H(2) = 8.66, p = 0.013, ε² = 0.37. Post-hoc pairwise comparisons using Dunn’s test with Bonferroni correction indicated that the Eyes treatment differed significantly from Control (p = 0.024), but no other pairwise differences were significant. These results suggest that light exposure to the eyes has a different effect on circadian rhythm than light to other body parts.”"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#apa-style-reporting",
+    "href": "ecostats_lectures/lecture_11/11_02_lecture_powerpoint_html.html#apa-style-reporting",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "APA Style Reporting",
+    "text": "APA Style Reporting\nIn-text citation format:\n\nThe Kruskal-Wallis test revealed significant differences between treatment groups, H(2) = 8.66, p = .013.\n\nTable format:\n\n\nTable 1. Descriptive Statistics for Phase Shift by Treatment\n\n\n# A tibble: 3 × 6\n  treatment     n Median   IQR   Min   Max\n  &lt;fct&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Control       8 -0.485 0.89  -1.27  0.53\n2 Eyes          7 -1.48  0.675 -2.83 -0.78\n3 Knees         7 -0.29  0.93  -1.61  0.73\n\n\n\n\nNote. IQR = interquartile range.\n\n\nKruskal-Wallis H(2) = 8.66, p = .013, ε² = .37\n\n\nCommon mistakes to avoid:\n\n✗ Reporting means instead of medians\n✗ Using SD instead of IQR\n✗ Not mentioning it’s a non-parametric test\n✗ Forgetting effect size\n✗ Not justifying why non-parametric test used"
+  },
+  {
     "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#multiple-regression",
     "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#multiple-regression",
     "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
@@ -320,6 +411,97 @@
     "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
     "section": "Connection to Regression",
     "text": "Connection to Regression\nThis is exactly the same calculation as R² in regression: \\[R^2 = \\frac{SS_{regression}}{SS_{total}}\\]"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#common-non-parametric-alternatives-to-anova",
+    "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#common-non-parametric-alternatives-to-anova",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Common Non-Parametric Alternatives to ANOVA",
+    "text": "Common Non-Parametric Alternatives to ANOVA\nNon-parametric tests make fewer assumptions about the data distribution\n\nKruskal-Wallis Test\n\nNon-parametric alternative to one-way ANOVA\nTests for differences in median ranks\nWorks with ordinal or continuous data\nAssumptions: Independent observations, similar distribution shapes\n\nMood’s Median Test not covered here\n\n\nTests whether medians differ across groups\nMore robust but less powerful than Kruskal-Wallis\nGood for highly skewed data"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#when-to-use-non-parametric-tests",
+    "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#when-to-use-non-parametric-tests",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "When to Use Non-Parametric Tests",
+    "text": "When to Use Non-Parametric Tests\nConsider non-parametric tests when:\n\nSample sizes are small\nData are heavily skewed\nOutliers are present and legitimate\nVariances are very unequal\nData are ordinal (ranked)\nAssumptions checks clearly fail\n\nTrade-offs:\n\n✓ Fewer assumptions\n✓ More robust to outliers\n✗ Less statistical power\n✗ Test medians/ranks, not means"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#the-kruskal-wallis-h-test",
+    "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#the-kruskal-wallis-h-test",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "The Kruskal-Wallis H Test",
+    "text": "The Kruskal-Wallis H Test\nMost common non-parametric alternative to one-way ANOVA\n\nWhat it does:\n\nRanks all observations from smallest to largest\nCompares the sum of ranks between groups\nTests if groups come from the same distribution\n\nHypotheses:\n\nH₀: All groups have the same distribution (same median)\nH₁: At least one group has a different distribution\n\nTest statistic (H): \\[H = \\frac{12}{N(N+1)} \\sum_{i=1}^{k} n_i (\\bar{R}_i - \\bar{R})^2 - 3(N+1)\\]\nWhere:\n\nN = total sample size\nk = number of groups\n\\(\\bar{R}_i\\) = mean rank for group i\n\\(\\bar{R}\\)= overall mean rank = (N+1)/2\nnᵢ = sample size for group i\nconstant 12 comes from the variance of ranks in a uniform distribution\n\nDistribution: Approximated by χ² with (k-1) degrees of freedom"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#assumptions-of-kruskal-wallis",
+    "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#assumptions-of-kruskal-wallis",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Assumptions of Kruskal-Wallis",
+    "text": "Assumptions of Kruskal-Wallis\nMuch more relaxed than parametric ANOVA:\n\nIndependence: Observations must be independent\n\nSame as parametric ANOVA\nStill critical!\n\nSimilar distribution shapes: Groups should have similar distribution shapes (same spread/variance)\n\nIf violated, interprets as differences in distributions generally\nNot just medians\n\nOrdinal or continuous data: Response variable should be at least ordinal\nWhat’s NOT assumed:\n\n✗ Normal distribution\n✗ Equal variances (though helps interpretation)\n✗ Specific distribution shape"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#running-kruskal-wallis-on-original-data",
+    "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#running-kruskal-wallis-on-original-data",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Running Kruskal-Wallis on Original Data",
+    "text": "Running Kruskal-Wallis on Original Data\nEven though assumptions are met, let’s compare results:\n\n# Kruskal-Wallis test on original data\nkruskal_original_result &lt;- kruskal.test(\n  phase_shift ~ treatment, \n  data = circ_data\n)\n\n# Display results\nkruskal_original_result\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  phase_shift by treatment\nKruskal-Wallis chi-squared = 9.4231, df = 2, p-value = 0.008991\n\n\nInterpretation: - H = test statistic (chi-squared approximation) - df = degrees of freedom (k - 1 = 3 - 1 = 2) - p-value = 0.0135 (significant at α = 0.05) - Conclusion: At least one group differs from others\nCompare to parametric ANOVA:\n\nanova(circ_model)\n\nAnalysis of Variance Table\n\nResponse: phase_shift\n          Df Sum Sq Mean Sq F value   Pr(&gt;F)   \ntreatment  2 7.2245  3.6122  7.2894 0.004472 **\nResiduals 19 9.4153  0.4955                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#rank-visualization",
+    "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#rank-visualization",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Rank Visualization",
+    "text": "Rank Visualization\nHow Kruskal-Wallis works:\n\n\n\n\n\n\n\n\n\nRank Sums:\n\n\n# A tibble: 3 × 4\n  treatment mean_rank sum_rank     n\n  &lt;fct&gt;         &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;\n1 Control       14.6       117     8\n2 Eyes           5.29       37     7\n3 Knees         14.1        99     7"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#non-parametric-test-handles-violations",
+    "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#non-parametric-test-handles-violations",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Non-Parametric Test Handles Violations",
+    "text": "Non-Parametric Test Handles Violations\nRunning Kruskal-Wallis on data with assumption violations:\n\n# Kruskal-Wallis test on violated data\nkruskal_violated_result &lt;- kruskal.test(\n  phase_shift_violated ~ treatment, \n  data = violated_circ_df\n)\n\nkruskal_violated_result\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  phase_shift_violated by treatment\nKruskal-Wallis chi-squared = 6.8453, df = 2, p-value = 0.03263\n\n\nCompare parametric ANOVA on same violated data:\n\nanova(violated_model)\n\nAnalysis of Variance Table\n\nResponse: phase_shift_violated\n          Df  Sum Sq Mean Sq F value Pr(&gt;F)  \ntreatment  2  41.806 20.9029  2.8361 0.0836 .\nResiduals 19 140.037  7.3704                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nKey observations: - Both tests still detect differences - Kruskal-Wallis more robust to violations - Parametric test may give misleading results when assumptions violated - Non-parametric test maintains validity"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#pairwise-comparisons-after-significant-kruskal-wallis",
+    "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#pairwise-comparisons-after-significant-kruskal-wallis",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Pairwise Comparisons After Significant Kruskal-Wallis",
+    "text": "Pairwise Comparisons After Significant Kruskal-Wallis\nJust like ANOVA, we need post-hoc tests to identify which groups differ:\n\n# Pairwise Wilcoxon rank sum tests with \n# Bonferroni correction\npairwise_original_result &lt;- pairwise.wilcox.test(\n  x = nonparam_circ_df$phase_shift,\n  g = nonparam_circ_df$treatment,\n  p.adjust.method = \"bonferroni\"\n)\n\npairwise_original_result\n\n\n    Pairwise comparisons using Wilcoxon rank sum exact test \n\ndata:  nonparam_circ_df$phase_shift and nonparam_circ_df$treatment \n\n      Control Eyes  \nEyes  0.0037  -     \nKnees 1.0000  0.0787\n\nP value adjustment method: bonferroni \n\n\nInterpretation of p-values: - Control vs Eyes: p = 0.024 (significant) - Control vs Knees: p = 1.000 (not significant) - Eyes vs Knees: p = 0.078 (not significant)\nCommon adjustment methods: - \"bonferroni\": Most conservative - \"holm\": Less conservative than Bonferroni - \"BH\": Benjamini-Hochberg (controls false discovery rate) - \"none\": No adjustment (not recommended)"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#post-hoc-for-violated-data",
+    "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#post-hoc-for-violated-data",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Post-Hoc for Violated Data",
+    "text": "Post-Hoc for Violated Data\n\n# Post-hoc tests on violated data\npairwise_violated_result &lt;- pairwise.wilcox.test(\n  x = violated_circ_df$phase_shift_violated,\n  g = violated_circ_df$treatment,\n  p.adjust.method = \"bonferroni\"\n)\n\npairwise_violated_result\n\n\n    Pairwise comparisons using Wilcoxon rank sum exact test \n\ndata:  violated_circ_df$phase_shift_violated and violated_circ_df$treatment \n\n      Control Eyes  \nEyes  0.0037  -     \nKnees 1.0000  1.0000\n\nP value adjustment method: bonferroni \n\n\nComparison table:\n\n\nOriginal Data Pairwise p-values:\n   Control vs Eyes:  0.024 *\n   Control vs Knees: 1.000\n   Eyes vs Knees:    0.078\n\n\nViolated Data Pairwise p-values:\n   Control vs Eyes:  0.015 *\n   Control vs Knees: 1.000\n   Eyes vs Knees:    0.015 *"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#dunns-test-for-multiple-comparisons",
+    "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#dunns-test-for-multiple-comparisons",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Dunn’s Test for Multiple Comparisons",
+    "text": "Dunn’s Test for Multiple Comparisons\nDunn’s test is specifically designed for Kruskal-Wallis post-hoc comparisons:\n\nlibrary(FSA)\n\n# Dunn's test on original data\ndunn_original_result &lt;- dunnTest(\n  phase_shift ~ treatment,\n  data = circ_data,\n  method = \"bonferroni\"\n)\n\ndunn_original_result\n\n       Comparison          Z     P.unadj      P.adj\n1  Control - Eyes  2.7789287 0.005453849 0.01636155\n2 Control - Knees  0.1434629 0.885924641 1.00000000\n3    Eyes - Knees -2.5517789 0.010717452 0.03215236\n\n\nAdvantages of Dunn’s test: - Designed specifically for Kruskal-Wallis - Provides Z-statistics in addition to p-values - Multiple adjustment methods available - More appropriate than multiple Wilcoxon tests\nZ-statistic is a standardized test statistic that tells you how many standard deviations an observation or difference is from the expected value (usually zero, meaning “no difference”)."
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#dunns-test-on-violated-data",
+    "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#dunns-test-on-violated-data",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "Dunn’s Test on Violated Data",
+    "text": "Dunn’s Test on Violated Data\n\n# Dunn's test on violated data\ndunn_violated_result &lt;- dunnTest(\n  phase_shift_violated ~ treatment,\n  data = violated_circ_df,\n  method = \"bonferroni\"\n)\n\ndunn_violated_result\n\n       Comparison         Z     P.unadj      P.adj\n1  Control - Eyes  2.614212 0.008943349 0.02683005\n2 Control - Knees  1.126449 0.259975463 0.77992639\n3    Eyes - Knees -1.440520 0.149720243 0.44916073\n\n\nInterpreting Z-statistics: - Large |Z| values indicate bigger differences - Z &gt; 1.96 approximately equivalent to p &lt; 0.05 - Sign indicates direction of difference"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#how-to-report-kruskal-wallis-results",
+    "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#how-to-report-kruskal-wallis-results",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "How to Report Kruskal-Wallis Results",
+    "text": "How to Report Kruskal-Wallis Results\nEssential elements to include:\n\nTest name and purpose\nSample sizes per group\nMedians and IQRs (not means and SDs!)\nTest statistic (H) and degrees of freedom\nP-value\nEffect size\nPost-hoc test results\nConclusion\n\nExample write-up:\n“A Kruskal-Wallis test was conducted to compare the effect of light treatment on circadian rhythm phase shift across three groups: Control (n = 8), Knees (n = 7), and Eyes (n = 7). Median phase shifts were -0.48 hours (IQR = 0.84) for Control, -0.29 hours (IQR = 1.04) for Knees, and -1.48 hours (IQR = 0.66) for Eyes. The test revealed a statistically significant difference in phase shift between the groups, H(2) = 8.66, p = 0.013, ε² = 0.37. Post-hoc pairwise comparisons using Dunn’s test with Bonferroni correction indicated that the Eyes treatment differed significantly from Control (p = 0.024), but no other pairwise differences were significant. These results suggest that light exposure to the eyes has a different effect on circadian rhythm than light to other body parts.”"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#apa-style-reporting",
+    "href": "ecostats_lectures/lecture_11/11_01_lecture_powerpoint_slides.html#apa-style-reporting",
+    "title": "Lecture 11 - Single factor analysis of variance - ANOVA",
+    "section": "APA Style Reporting",
+    "text": "APA Style Reporting\nIn-text citation format:\n\nThe Kruskal-Wallis test revealed significant differences between treatment groups, H(2) = 8.66, p = .013.\n\nTable format:\n\n\nTable 1. Descriptive Statistics for Phase Shift by Treatment\n\n\n# A tibble: 3 × 6\n  treatment     n Median   IQR   Min   Max\n  &lt;fct&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 Control       8 -0.485 0.89  -1.27  0.53\n2 Eyes          7 -1.48  0.675 -2.83 -0.78\n3 Knees         7 -0.29  0.93  -1.61  0.73\n\n\n\n\nNote. IQR = interquartile range.\n\n\nKruskal-Wallis H(2) = 8.66, p = .013, ε² = .37\n\n\nCommon mistakes to avoid:\n\n✗ Reporting means instead of medians\n✗ Using SD instead of IQR\n✗ Not mentioning it’s a non-parametric test\n✗ Forgetting effect size\n✗ Not justifying why non-parametric test used"
   },
   {
     "objectID": "ecostats_lectures/lecture_11/11_04_how_anova_is_regression_html.html",
@@ -3490,7 +3672,7 @@
     "href": "ecostats_homework/06_homework_multiple_regression_html.html",
     "title": "06_homework_multiple_regression",
     "section": "",
-    "text": "# Load required packages\nlibrary(patchwork)    # For combining plots\nlibrary(broom)        # For tidy statistical output\nlibrary(car)          # For regression diagnostics\n\nLoading required package: carData\n\nlibrary(lmtest)       # For assumption testing\n\nLoading required package: zoo\n\n\n\nAttaching package: 'zoo'\n\n\nThe following objects are masked from 'package:base':\n\n    as.Date, as.Date.numeric\n\nlibrary(corrplot)     # For correlation matrices\n\ncorrplot 0.95 loaded\n\nlibrary(GGally)       # For pairs plots\n\nLoading required package: ggplot2\n\nlibrary(tinytable)    # For simple tables\nlibrary(tidyverse)    # For data manipulation and visualization\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ lubridate 1.9.4     ✔ tibble    3.3.0\n✔ purrr     1.1.0     ✔ tidyr     1.3.1\n\n\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n✖ dplyr::recode() masks car::recode()\n✖ purrr::some()   masks car::some()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n# Set ggplot theme\ntheme_set(theme_light())"
+    "text": "# Load required packages\nlibrary(patchwork)    # For combining plots\nlibrary(broom)        # For tidy statistical output\nlibrary(car)          # For regression diagnostics\nlibrary(lmtest)       # For assumption testing\nlibrary(corrplot)     # For correlation matrices\nlibrary(GGally)       # For pairs plots\nlibrary(tinytable)    # For simple tables\nlibrary(tidyverse)    # For data manipulation and visualization\n\n# Set ggplot theme\ntheme_set(theme_light())"
   },
   {
     "objectID": "ecostats_homework/06_homework_multiple_regression_html.html#learning-objectives",
@@ -5548,7 +5730,35 @@
     "href": "ecostats_lectures/lecture_11/11_02_class_activity.html",
     "title": "Lecture 11 - ANOVA in class",
     "section": "",
-    "text": "# A tibble: 22 × 2\n   treatment phase_shift\n   &lt;chr&gt;           &lt;dbl&gt;\n 1 Control          0.53\n 2 Control          0.36\n 3 Control          0.2 \n 4 Control         -0.37\n 5 Control         -0.6 \n 6 Control         -0.64\n 7 Control         -0.68\n 8 Control         -1.27\n 9 Knees            0.73\n10 Knees            0.31\n# ℹ 12 more rows\n# Plot the data\nc_plot &lt;- ggplot(c_df, aes(x = treatment, y = phase_shift, color = treatment)) +\n  geom_point(position = position_jitter(width=0.1)) +\n  stat_summary(fun = mean, geom = \"point\", size = 5, shape = 18) +\n  stat_summary(fun.data = \"mean_se\", geom = \"errorbar\", width = 0.2) \nc_plot\nAnova Table (Type III tests)\n\nResponse: phase_shift\n            Sum Sq Df F value   Pr(&gt;F)   \n(Intercept) 0.7626  1  1.5389 0.229877   \ntreatment   7.2245  2  7.2894 0.004472 **\nResiduals   9.4153 19                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "# A tibble: 22 × 2\n   treatment phase_shift\n   &lt;chr&gt;           &lt;dbl&gt;\n 1 Control          0.53\n 2 Control          0.36\n 3 Control          0.2 \n 4 Control         -0.37\n 5 Control         -0.6 \n 6 Control         -0.64\n 7 Control         -0.68\n 8 Control         -1.27\n 9 Knees            0.73\n10 Knees            0.31\n# ℹ 12 more rows\n# Plot the data\nc_plot &lt;- ggplot(c_df, aes(x = treatment, y = phase_shift, color = treatment)) +\n  geom_point(position = position_jitter(width=0.1)) +\n  stat_summary(fun = mean, geom = \"point\", size = 5, shape = 18) +\n  stat_summary(fun.data = \"mean_se\", geom = \"errorbar\", width = 0.2) \nc_plot\nCall:\nlm(formula = phase_shift ~ treatment, data = c_df)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-1.27857 -0.36125  0.03857  0.61147  1.06571 \n\nCoefficients:\n               Estimate Std. Error t value Pr(&gt;|t|)   \n(Intercept)    -0.30875    0.24888  -1.241  0.22988   \ntreatmentEyes  -1.24268    0.36433  -3.411  0.00293 **\ntreatmentKnees -0.02696    0.36433  -0.074  0.94178   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.7039 on 19 degrees of freedom\nMultiple R-squared:  0.4342,    Adjusted R-squared:  0.3746 \nF-statistic: 7.289 on 2 and 19 DF,  p-value: 0.004472\n# ANOVA table \nAnova(model_aov)\n\nAnova Table (Type II tests)\n\nResponse: phase_shift\n          Sum Sq Df F value   Pr(&gt;F)   \ntreatment 7.2245  2  7.2894 0.004472 **\nResiduals 9.4153 19                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_class_activity.html#key-concepts",
+    "href": "ecostats_lectures/lecture_11/11_02_class_activity.html#key-concepts",
+    "title": "Lecture 11 - ANOVA in class",
+    "section": "Key Concepts",
+    "text": "Key Concepts\nIn a one-way ANOVA, EMMs are straightforward:\n\nEMMs = Group means (when you have balanced data and no covariates)\nThey represent the “expected” or “predicted” value for each group according to your model\nThey’re called “marginal” because in more complex designs, they’re averaged over (or “marginalized” over) other factors"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_class_activity.html#why-use-emms-instead-of-simple-means",
+    "href": "ecostats_lectures/lecture_11/11_02_class_activity.html#why-use-emms-instead-of-simple-means",
+    "title": "Lecture 11 - ANOVA in class",
+    "section": "Why Use EMMs Instead of Simple Means?",
+    "text": "Why Use EMMs Instead of Simple Means?\nFor one-way ANOVA, you might wonder: “Why not just use group_by() %&gt;% summarize(mean())?”\nHere’s why EMMs are valuable:\n\nConsistency across models: EMMs work the same way whether you have one-way ANOVA, two-way ANOVA, ANCOVA, or more complex designs\nBuilt-in inference: The emmeans package provides standard errors, confidence intervals, and easy comparisons\nAdjusted means: In more complex models (with covariates), EMMs give you adjusted means at meaningful reference points\nProfessional reporting: EMMs are the standard in academic publications"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_class_activity.html#in-one-way-anova-emms-group-means",
+    "href": "ecostats_lectures/lecture_11/11_02_class_activity.html#in-one-way-anova-emms-group-means",
+    "title": "Lecture 11 - ANOVA in class",
+    "section": "In One-Way ANOVA: EMMs = Group Means",
+    "text": "In One-Way ANOVA: EMMs = Group Means\nLet’s verify this by comparing EMMs to simple group means:\n\n# Calculate simple group means\ngroup_means &lt;- c_df %&gt;%\n  group_by(treatment) %&gt;%\n  summarize(\n    sample_mean = mean(phase_shift),\n    sample_sd = sd(phase_shift),\n    n = n()\n  )\n\n# Get EMMs as a data frame\nemm_df &lt;- as.data.frame(emmeans_df)\n\n# Combine for comparison\ncomparison &lt;- group_means %&gt;%\n  left_join(emm_df %&gt;% select(treatment, emmean, SE), \n            by = \"treatment\") %&gt;%\n  mutate(\n    difference = round(sample_mean - emmean, 10)  # Round to show they're identical\n  )\n\ncomparison\n\n# A tibble: 3 × 7\n  treatment sample_mean sample_sd     n emmean    SE difference\n  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;\n1 Control        -0.309     0.618     8 -0.309 0.249          0\n2 Eyes           -1.55      0.706     7 -1.55  0.266          0\n3 Knees          -0.336     0.791     7 -0.336 0.266          0\n\n\nKey insight: In a one-way ANOVA, the EMMs are exactly equal to the group means!"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_class_activity.html#the-mathematical-formula",
+    "href": "ecostats_lectures/lecture_11/11_02_class_activity.html#the-mathematical-formula",
+    "title": "Lecture 11 - ANOVA in class",
+    "section": "The Mathematical Formula",
+    "text": "The Mathematical Formula\nFor one-way ANOVA, the EMM for group \\(j\\) is calculated as:\n\\[\\text{EMM}_j = \\hat{\\beta}_0 + \\hat{\\beta}_j\\]\nWhere: - \\(\\hat{\\beta}_0\\) is the intercept (mean of reference group) - \\(\\hat{\\beta}_j\\) is the coefficient for group \\(j\\) (or 0 for the reference group)\n\ntake home is in this case emmeans = the means\n\npairwise_comparisons &lt;- pairs(emmeans_df, adjust = \"sidak\")\npairwise_comparisons\n\n contrast        estimate    SE df t.ratio p.value\n Control - Eyes     1.243 0.364 19   3.411  0.0088\n Control - Knees    0.027 0.364 19   0.074  0.9998\n Eyes - Knees      -1.216 0.376 19  -3.231  0.0131\n\nP value adjustment: sidak method for 3 tests \n\n\n\nWhat is the ESTIMATE?\n\nThe estimate is the difference between two group means.\nWhat is the SE (Standard Error)?\n\nThe SE is the standard error of the difference between two means.\nIt tells you how much uncertainty there is in your estimate of the difference. The SE depends on:\n\nThe variability within each group (residual variance from your model)\nThe sample sizes of the groups being compared\n\n\nHow They Work Together\n\nThe t-ratio = estimate / SE tells you how many standard errors away from zero your difference is:\n\nControl - Eyes: 1.243 / 0.364 = 3.41 → far from zero → significant!\nControl - Knees: 0.027 / 0.364 = 0.074 → very close to zero → not significant\n\n\n\n\n\n# Letters to indicate groups with similar means\nletter_groups &lt;- multcomp::cld(emmeans_df, Letters = letters, adjust = \"sidak\")\nletter_groups\n\n treatment emmean    SE df lower.CL upper.CL .group\n Eyes      -1.551 0.266 19    -2.25   -0.855  a    \n Knees     -0.336 0.266 19    -1.03    0.361   b   \n Control   -0.309 0.249 19    -0.96    0.343   b   \n\nConfidence level used: 0.95 \nConf-level adjustment: sidak method for 3 estimates \nP value adjustment: sidak method for 3 tests \nsignificance level used: alpha = 0.05 \nNOTE: If two or more means share the same grouping symbol,\n      then we cannot show them to be different.\n      But we also did not show them to be the same."
   },
   {
     "objectID": "ecostats_lectures/lecture_11/11_02_class_activity.html#can-do-in-one-go-as-well",
@@ -5556,6 +5766,48 @@
     "title": "Lecture 11 - ANOVA in class",
     "section": "Can do in one go as well",
     "text": "Can do in one go as well\n\n\n treatment emmean    SE df lower.CL upper.CL .group\n Eyes      -1.551 0.266 19    -2.25   -0.855  a    \n Knees     -0.336 0.266 19    -1.03    0.361   b   \n Control   -0.309 0.249 19    -0.96    0.343   b   \n\nConfidence level used: 0.95 \nConf-level adjustment: sidak method for 3 estimates \nP value adjustment: sidak method for 3 tests \nsignificance level used: alpha = 0.05 \nNOTE: If two or more means share the same grouping symbol,\n      then we cannot show them to be different.\n      But we also did not show them to be the same."
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_class_activity.html#running-kruskal-wallis-on-original-data",
+    "href": "ecostats_lectures/lecture_11/11_02_class_activity.html#running-kruskal-wallis-on-original-data",
+    "title": "Lecture 11 - ANOVA in class",
+    "section": "Running Kruskal-Wallis on Original Data",
+    "text": "Running Kruskal-Wallis on Original Data\nEven though assumptions are met, let’s compare results:\n\n# Kruskal-Wallis test on original data\nkruskal_original_result &lt;- kruskal.test(\n  phase_shift ~ treatment, \n  data = c_df\n)\n\n# Display results\nkruskal_original_result\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  phase_shift by treatment\nKruskal-Wallis chi-squared = 9.4231, df = 2, p-value = 0.008991"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_class_activity.html#non-parametric-test-handles-violations",
+    "href": "ecostats_lectures/lecture_11/11_02_class_activity.html#non-parametric-test-handles-violations",
+    "title": "Lecture 11 - ANOVA in class",
+    "section": "Non-Parametric Test Handles Violations",
+    "text": "Non-Parametric Test Handles Violations\nRunning Kruskal-Wallis on data with assumption violations:\n\n# Kruskal-Wallis test on violated data\nkruskal_violated_result &lt;- kruskal.test(\n  phase_shift_violated ~ treatment, \n  data = v_circ_df\n)\n\nkruskal_violated_result\n\n\n    Kruskal-Wallis rank sum test\n\ndata:  phase_shift_violated by treatment\nKruskal-Wallis chi-squared = 11.282, df = 2, p-value = 0.00355\n\n\nCompare parametric ANOVA on same violated data:\n\nanova(violated_model)\n\nAnalysis of Variance Table\n\nResponse: phase_shift_violated\n          Df  Sum Sq Mean Sq F value Pr(&gt;F)  \ntreatment  2  41.806 20.9029  2.8361 0.0836 .\nResiduals 19 140.037  7.3704                 \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nKey observations: - Both tests still detect differences - Kruskal-Wallis more robust to violations - Parametric test may give misleading results when assumptions violated - Non-parametric test maintains validity"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_class_activity.html#pairwise-comparisons-after-significant-kruskal-wallis",
+    "href": "ecostats_lectures/lecture_11/11_02_class_activity.html#pairwise-comparisons-after-significant-kruskal-wallis",
+    "title": "Lecture 11 - ANOVA in class",
+    "section": "Pairwise Comparisons After Significant Kruskal-Wallis",
+    "text": "Pairwise Comparisons After Significant Kruskal-Wallis\nJust like ANOVA, we need post-hoc tests to identify which groups differ:\n\n# Pairwise Wilcoxon rank sum tests with \n# Bonferroni correction\npairwise_original_result &lt;- pairwise.wilcox.test(\n  x = v_circ_df$phase_shift,\n  g = v_circ_df$treatment,\n  p.adjust.method = \"bonferroni\"\n)\n\npairwise_original_result\n\n\n    Pairwise comparisons using Wilcoxon rank sum exact test \n\ndata:  v_circ_df$phase_shift and v_circ_df$treatment \n\n      Control Eyes  \nEyes  0.0037  -     \nKnees 1.0000  0.0787\n\nP value adjustment method: bonferroni \n\n\nInterpretation of p-values: - Control vs Eyes: p = 0.024 (significant) - Control vs Knees: p = 1.000 (not significant) - Eyes vs Knees: p = 0.078 (not significant)\nCommon adjustment methods: - \"bonferroni\": Most conservative - \"holm\": Less conservative than Bonferroni - \"BH\": Benjamini-Hochberg (controls false discovery rate) - \"none\": No adjustment (not recommended)"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_class_activity.html#post-hoc-for-violated-data",
+    "href": "ecostats_lectures/lecture_11/11_02_class_activity.html#post-hoc-for-violated-data",
+    "title": "Lecture 11 - ANOVA in class",
+    "section": "Post-Hoc for Violated Data",
+    "text": "Post-Hoc for Violated Data\n\n# Post-hoc tests on violated data\npairwise_violated_result &lt;- pairwise.wilcox.test(\n  x = v_circ_df$phase_shift_violated,\n  g = v_circ_df$treatment,\n  p.adjust.method = \"bonferroni\"\n)\n\npairwise_violated_result\n\n\n    Pairwise comparisons using Wilcoxon rank sum exact test \n\ndata:  v_circ_df$phase_shift_violated and v_circ_df$treatment \n\n      Control Eyes   \nEyes  0.00093 -      \nKnees 1.00000 0.05245\n\nP value adjustment method: bonferroni"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_class_activity.html#dunns-test-for-multiple-comparisons",
+    "href": "ecostats_lectures/lecture_11/11_02_class_activity.html#dunns-test-for-multiple-comparisons",
+    "title": "Lecture 11 - ANOVA in class",
+    "section": "Dunn’s Test for Multiple Comparisons",
+    "text": "Dunn’s Test for Multiple Comparisons\nDunn’s test is specifically designed for Kruskal-Wallis post-hoc comparisons:\n\nlibrary(FSA)\n\n# Dunn's test on original data\ndunn_original_result &lt;- dunnTest(\n  phase_shift ~ treatment,\n  data = c_df,\n  method = \"bonferroni\"\n)\n\ndunn_original_result\n\n       Comparison          Z     P.unadj      P.adj\n1  Control - Eyes  2.7789287 0.005453849 0.01636155\n2 Control - Knees  0.1434629 0.885924641 1.00000000\n3    Eyes - Knees -2.5517789 0.010717452 0.03215236\n\n\nAdvantages of Dunn’s test: - Designed specifically for Kruskal-Wallis - Provides Z-statistics in addition to p-values - Multiple adjustment methods available - More appropriate than multiple Wilcoxon tests\nZ-statistic is a standardized test statistic that tells you how many standard deviations an observation or difference is from the expected value (usually zero, meaning “no difference”)."
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_11/11_02_class_activity.html#dunns-test-on-violated-data",
+    "href": "ecostats_lectures/lecture_11/11_02_class_activity.html#dunns-test-on-violated-data",
+    "title": "Lecture 11 - ANOVA in class",
+    "section": "Dunn’s Test on Violated Data",
+    "text": "Dunn’s Test on Violated Data\n\n# Dunn's test on violated data\ndunn_violated_result &lt;- dunnTest(\n  phase_shift_violated ~ treatment,\n  data = v_circ_df,\n  method = \"bonferroni\"\n)\n\nWarning: treatment was coerced to a factor.\n\ndunn_violated_result\n\nDunn (1964) Kruskal-Wallis multiple comparison\n\n\n  p-values adjusted with the Bonferroni method.\n\n\n       Comparison          Z     P.unadj       P.adj\n1  Control - Eyes  3.2411980 0.001190285 0.003570855\n2 Control - Knees  0.7332546 0.463403147 1.000000000\n3    Eyes - Knees -2.4283057 0.015169551 0.045508653\n\n\nInterpreting Z-statistics: - Large |Z| values indicate bigger differences - Z &gt; 1.96 approximately equivalent to p &lt; 0.05 - Sign indicates direction of difference"
   },
   {
     "objectID": "ecostats_lectures/lecture_02/02_01_lecture_powerpoint_slides.html#the-objectives",

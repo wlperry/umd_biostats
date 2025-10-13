@@ -6,18 +6,9 @@ metadata-files:
 format:
   html:
     output-file: "02_02_class_activity.html"
-  typst:
-    output-file: "02_02_class_activity.pdf"  
   docx:
     output-file: "02_02_class_activity.docx"
 ---
-
-
-
-
-
-
-
 
 # In-class Activity 2: Data Visualization
 
@@ -118,13 +109,6 @@ format:
 
 ## Exercise 1: Now to load the libraries
 
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -137,22 +121,8 @@ format:
 ```
 :::
 
-
-
-
-
-
-
-
 Each script you run from then on you will load the libraries from within
 the package.
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -166,26 +136,12 @@ library(patchwork)
 ```
 :::
 
-
-
-
-
-
-
-
 ## Exercise 2: Loading and Examining Data
 
 Now like we did before with x and y we will do this with a spreadsheet
 from a CSV file or excel file
 
 We are going to work with the same data we did in the last class.
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -219,21 +175,7 @@ dbl (2): tree_no, length_mm
 ```
 :::
 
-
-
-
-
-
-
-
 ## Exercise 3: Examining Data
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -329,13 +271,6 @@ summary(p_df)
 :::
 :::
 
-
-
-
-
-
-
-
 ### Questions to Consider:
 
 1.  What variables are in our dataset?
@@ -349,13 +284,6 @@ summary(p_df)
 Let's create some simple visualizations to explore our data:
 
 ### Exercise 2: Creating a Histogram
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -385,13 +313,6 @@ p_df %>%
 :::
 :::
 
-
-
-
-
-
-
-
 ### Key Insights from Histograms:
 
 The histogram helps us understand: - The overall distribution of needle
@@ -401,13 +322,6 @@ Presence of any unusual values or outliers
 ### Exercise 3: Creating Multiple Plot Types
 
 Let's explore different ways to visualize the same data:
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -436,13 +350,6 @@ box_plot + violin_plot + dot_plot
 :::
 :::
 
-
-
-
-
-
-
-
 ### Questions to Consider:
 
 1.  Which plot type best reveals patterns in our data?
@@ -455,13 +362,6 @@ Now let's build more sophisticated visualizations by adding layers one
 at a time:
 
 ### Exercise 4: Building a Layered Plot
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -491,13 +391,6 @@ p4 <- p3 +
 :::
 :::
 
-
-
-
-
-
-
-
 ### Discussion Points:
 
 -   How does each layer contribute to the story our data is telling?
@@ -509,13 +402,6 @@ p4 <- p3 +
 ## Part 4: Customizing Plots for Publication
 
 ### Exercise 5: Adding customization
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -553,24 +439,10 @@ color_plot
 :::
 :::
 
-
-
-
-
-
-
-
 Let's create a publication-quality figure by customizing colors, labels,
 and themes:
 
 ### Exercise 6: Creating a Publication-Ready Plot
-
-
-
-
-
-
-
 
 ::: {.cell}
 
@@ -609,13 +481,6 @@ publication_plot
 :::
 :::
 
-
-
-
-
-
-
-
 ### Customization Elements:
 
 1.  **Plot Elements**:
@@ -637,13 +502,6 @@ publication_plot
 
 Finally, let's create a publication-ready multi-panel figure:
 
-
-
-
-
-
-
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -658,13 +516,6 @@ color_plot +
 ![](02_02_class_activity_files/figure-html/multi-panel-1.png){width=960}
 :::
 :::
-
-
-
-
-
-
-
 
 ``` r
 # we can add this to remove things
