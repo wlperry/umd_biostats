@@ -931,8 +931,8 @@ The Main Post-Hoc Tests
     -   Best choice for: similar situations to Bonferroni, gives
         slightly more power
 -   Dunnett's Test
--   Specifically for comparing treatment groups to control
--   More powerful than other tests
+    -   Specifically for comparing treatment groups to control
+    -   More powerful than other tests
 
 The key tradeoff is between power (ability to detect real differences)
 and Type I error control (avoiding false positives). More conservative
@@ -1147,18 +1147,19 @@ the knees, impacts circadian rhythm phase shifts."
 ::: {.column width="60%"}
 ## Common Non-Parametric Alternatives to ANOVA
 
-**Non-parametric tests make fewer assumptions about the data distribution**
+**Non-parametric tests make fewer assumptions about the data
+distribution**
 
-1. **Kruskal-Wallis Test**
-   - Non-parametric alternative to one-way ANOVA
-   - Tests for differences in median ranks
-   - Works with ordinal or continuous data
-   - Assumptions: Independent observations, similar distribution shapes
-
+1.  **Kruskal-Wallis Test**
+    -   Non-parametric alternative to one-way ANOVA
+    -   Tests for differences in median ranks
+    -   Works with ordinal or continuous data
+    -   Assumptions: Independent observations, similar distribution
+        shapes
 2.  **Mood's Median Test** not covered here
-   - Tests whether medians differ across groups
-   - More robust but less powerful than Kruskal-Wallis
-   - Good for highly skewed data
+    -   Tests whether medians differ across groups
+    -   More robust but less powerful than Kruskal-Wallis
+    -   Good for highly skewed data
 :::
 
 ::: {.column width="40%"}
@@ -1166,22 +1167,21 @@ the knees, impacts circadian rhythm phase shifts."
 
 **Consider non-parametric tests when:**
 
-- Sample sizes are small
-- Data are heavily skewed
-- Outliers are present and legitimate
-- Variances are very unequal
-- Data are ordinal (ranked)
-- Assumptions checks clearly fail
+-   Sample sizes are small
+-   Data are heavily skewed
+-   Outliers are present and legitimate
+-   Variances are very unequal
+-   Data are ordinal (ranked)
+-   Assumptions checks clearly fail
 
 **Trade-offs:**
 
-- ✓ Fewer assumptions
-- ✓ More robust to outliers
-- ✗ Less statistical power
-- ✗ Test medians/ranks, not means
+-   [x] Fewer assumptions
+-   [x] More robust to outliers
+-   ✗ Less statistical power
+-   ✗ Test medians/ranks, not means
 :::
 :::::
-
 
 # Kruskal-Wallis Test: Overview
 
@@ -1191,27 +1191,24 @@ the knees, impacts circadian rhythm phase shifts."
 
 **Most common non-parametric alternative to one-way ANOVA**
 
-- **What it does:**
-   - Ranks all observations from smallest to largest
-   - Compares the sum of ranks between groups
-   - Tests if groups come from the same distribution
-
-- **Hypotheses:**
-   - **H₀**: All groups have the same distribution (same median)
-   - **H₁**: At least one group has a different distribution
-
-- **Test statistic (H):**
-$$H = \frac{12}{N(N+1)} \sum_{i=1}^{k} n_i (\bar{R}_i - \bar{R})^2 - 3(N+1)$$
-
-- Where:
-  - N = total sample size
-  - k = number of groups
-  - $\bar{R}_i$ = mean rank for group i
-  - $\bar{R}$= overall mean rank = (N+1)/2
-  - nᵢ = sample size for group i
-  - constant 12 comes from the variance of ranks in a uniform distribution
-
-- **Distribution:** Approximated by χ² with (k-1) degrees of freedom
+-   **What it does:**
+    -   Ranks all observations from smallest to largest
+    -   Compares the sum of ranks between groups
+    -   Tests if groups come from the same distribution
+-   **Hypotheses:**
+    -   **H₀**: All groups have the same distribution (same median)
+    -   **H₁**: At least one group has a different distribution
+-   **Test statistic (H):**
+    $$H = \frac{12}{N(N+1)} \sum_{i=1}^{k} n_i (\bar{R}_i - \bar{R})^2 - 3(N+1)$$
+-   Where:
+    -   N = total sample size
+    -   k = number of groups
+    -   $\bar{R}_i$ = mean rank for group i
+    -   $\bar{R}$= overall mean rank = (N+1)/2
+    -   nᵢ = sample size for group i
+    -   constant 12 comes from the variance of ranks in a uniform
+        distribution
+-   **Distribution:** Approximated by χ² with (k-1) degrees of freedom
 :::
 
 ::: {.column width="40%"}
@@ -1219,24 +1216,20 @@ $$H = \frac{12}{N(N+1)} \sum_{i=1}^{k} n_i (\bar{R}_i - \bar{R})^2 - 3(N+1)$$
 
 **Much more relaxed than parametric ANOVA:**
 
-- **Independence**: Observations must be independent
-
-   - Same as parametric ANOVA
-   - Still critical!
-
-- **Similar distribution shapes**: Groups should have similar distribution shapes (same spread/variance)
-
-   - If violated, interprets as differences in distributions generally
-   - Not just medians
-
-- **Ordinal or continuous data**: Response variable should be at least ordinal
-
-- **What's NOT assumed:**
-
-   - ✗ Normal distribution
-   - ✗ Equal variances (though helps interpretation)
-   - ✗ Specific distribution shape
-   
+-   **Independence**: Observations must be independent
+    -   Same as parametric ANOVA
+    -   Still critical!
+-   **Similar distribution shapes**: Groups should have similar
+    distribution shapes (same spread/variance)
+    -   If violated, interprets as differences in distributions
+        generally
+    -   Not just medians
+-   **Ordinal or continuous data**: Response variable should be at least
+    ordinal
+-   **What's NOT assumed:**
+    -   ✗ Normal distribution
+    -   ✗ Equal variances (though helps interpretation)
+    -   ✗ Specific distribution shape
 :::
 :::::
 
@@ -1244,7 +1237,7 @@ $$H = \frac{12}{N(N+1)} \sum_{i=1}^{k} n_i (\bar{R}_i - \bar{R})^2 - 3(N+1)$$
 
 ::::: columns
 ::: {.column width="60%"}
-###  Creating Data That Violates Assumptions
+### Creating Data That Violates Assumptions
 
 **Let's create a modified dataset with clear violations:**
 
@@ -1274,9 +1267,10 @@ violated_model <- lm(phase_shift_violated ~ treatment,
 
 
 **What we changed:**
-- Increased variance in Knees group
-- Added extreme outliers to Eyes group
-- Created unequal variances and non-normality
+
+-   \- Increased variance in Knees group
+-   \- Added extreme outliers to Eyes group
+-   \- Created unequal variances and non-normality
 :::
 
 ::: {.column width="40%"}
@@ -1289,14 +1283,7 @@ ggplot(violated_circ_df,
            color = treatment)) +
   geom_jitter(width = 0.2, alpha = 0.7, size = 3) +
   geom_boxplot(alpha = 0.3, outlier.shape = NA) +
-geom_jitter(width = 0.2, alpha = 0.7, size = 3)
-```
-
-::: {.cell-output-display}
-![](11_01_lecture_powerpoint_files/figure-pptx/violated_data_plot-1.png)
-:::
-
-```{.r .cell-code}
+geom_jitter(width = 0.2, alpha = 0.7, size = 3)+
   theme_minimal() +
   labs(title = "Modified Data with Violations",
        subtitle = "Median with IQR",
@@ -1304,372 +1291,13 @@ geom_jitter(width = 0.2, alpha = 0.7, size = 3)
        y = "Phase Shift (hours)") 
 ```
 
-::: {.cell-output .cell-output-stdout}
-
-```
-<theme> List of 147
- $ line                            : <ggplot2::element_line>
-  ..@ colour       : chr "black"
-  ..@ linewidth    : num 0.5
-  ..@ linetype     : num 1
-  ..@ lineend      : chr "butt"
-  ..@ linejoin     : chr "round"
-  ..@ arrow        : logi FALSE
-  ..@ arrow.fill   : chr "black"
-  ..@ inherit.blank: logi TRUE
- $ rect                            : <ggplot2::element_rect>
-  ..@ fill         : chr "white"
-  ..@ colour       : chr "black"
-  ..@ linewidth    : num 0.5
-  ..@ linetype     : num 1
-  ..@ linejoin     : chr "round"
-  ..@ inherit.blank: logi TRUE
- $ text                            : <ggplot2::element_text>
-  ..@ family       : chr ""
-  ..@ face         : chr "plain"
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : chr "black"
-  ..@ size         : num 11
-  ..@ hjust        : num 0.5
-  ..@ vjust        : num 0.5
-  ..@ angle        : num 0
-  ..@ lineheight   : num 0.9
-  ..@ margin       : <ggplot2::margin> num [1:4] 0 0 0 0
-  ..@ debug        : logi FALSE
-  ..@ inherit.blank: logi TRUE
- $ title                           : chr "Modified Data with Violations"
- $ point                           : <ggplot2::element_point>
-  ..@ colour       : chr "black"
-  ..@ shape        : num 19
-  ..@ size         : num 1.5
-  ..@ fill         : chr "white"
-  ..@ stroke       : num 0.5
-  ..@ inherit.blank: logi TRUE
- $ polygon                         : <ggplot2::element_polygon>
-  ..@ fill         : chr "white"
-  ..@ colour       : chr "black"
-  ..@ linewidth    : num 0.5
-  ..@ linetype     : num 1
-  ..@ linejoin     : chr "round"
-  ..@ inherit.blank: logi TRUE
- $ geom                            : <ggplot2::element_geom>
-  ..@ ink        : chr "black"
-  ..@ paper      : chr "white"
-  ..@ accent     : chr "#3366FF"
-  ..@ linewidth  : num 0.5
-  ..@ borderwidth: num 0.5
-  ..@ linetype   : int 1
-  ..@ bordertype : int 1
-  ..@ family     : chr ""
-  ..@ fontsize   : num 3.87
-  ..@ pointsize  : num 1.5
-  ..@ pointshape : num 19
-  ..@ colour     : NULL
-  ..@ fill       : NULL
- $ spacing                         : 'simpleUnit' num 5.5points
-  ..- attr(*, "unit")= int 8
- $ margins                         : <ggplot2::margin> num [1:4] 5.5 5.5 5.5 5.5
- $ aspect.ratio                    : NULL
- $ axis.title                      : NULL
- $ axis.title.x                    : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : NULL
-  ..@ size         : NULL
-  ..@ hjust        : NULL
-  ..@ vjust        : num 1
-  ..@ angle        : NULL
-  ..@ lineheight   : NULL
-  ..@ margin       : <ggplot2::margin> num [1:4] 2.75 0 0 0
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ axis.title.x.top                : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : NULL
-  ..@ size         : NULL
-  ..@ hjust        : NULL
-  ..@ vjust        : num 0
-  ..@ angle        : NULL
-  ..@ lineheight   : NULL
-  ..@ margin       : <ggplot2::margin> num [1:4] 0 0 2.75 0
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ axis.title.x.bottom             : NULL
- $ axis.title.y                    : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : NULL
-  ..@ size         : NULL
-  ..@ hjust        : NULL
-  ..@ vjust        : num 1
-  ..@ angle        : num 90
-  ..@ lineheight   : NULL
-  ..@ margin       : <ggplot2::margin> num [1:4] 0 2.75 0 0
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ axis.title.y.left               : NULL
- $ axis.title.y.right              : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : NULL
-  ..@ size         : NULL
-  ..@ hjust        : NULL
-  ..@ vjust        : num 1
-  ..@ angle        : num -90
-  ..@ lineheight   : NULL
-  ..@ margin       : <ggplot2::margin> num [1:4] 0 0 0 2.75
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ axis.text                       : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : chr "#4D4D4DFF"
-  ..@ size         : 'rel' num 0.8
-  ..@ hjust        : NULL
-  ..@ vjust        : NULL
-  ..@ angle        : NULL
-  ..@ lineheight   : NULL
-  ..@ margin       : NULL
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ axis.text.x                     : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : NULL
-  ..@ size         : NULL
-  ..@ hjust        : NULL
-  ..@ vjust        : num 1
-  ..@ angle        : NULL
-  ..@ lineheight   : NULL
-  ..@ margin       : <ggplot2::margin> num [1:4] 2.2 0 0 0
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ axis.text.x.top                 : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : NULL
-  ..@ size         : NULL
-  ..@ hjust        : NULL
-  ..@ vjust        : NULL
-  ..@ angle        : NULL
-  ..@ lineheight   : NULL
-  ..@ margin       : <ggplot2::margin> num [1:4] 0 0 4.95 0
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ axis.text.x.bottom              : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : NULL
-  ..@ size         : NULL
-  ..@ hjust        : NULL
-  ..@ vjust        : NULL
-  ..@ angle        : NULL
-  ..@ lineheight   : NULL
-  ..@ margin       : <ggplot2::margin> num [1:4] 4.95 0 0 0
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ axis.text.y                     : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : NULL
-  ..@ size         : NULL
-  ..@ hjust        : num 1
-  ..@ vjust        : NULL
-  ..@ angle        : NULL
-  ..@ lineheight   : NULL
-  ..@ margin       : <ggplot2::margin> num [1:4] 0 2.2 0 0
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ axis.text.y.left                : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : NULL
-  ..@ size         : NULL
-  ..@ hjust        : NULL
-  ..@ vjust        : NULL
-  ..@ angle        : NULL
-  ..@ lineheight   : NULL
-  ..@ margin       : <ggplot2::margin> num [1:4] 0 4.95 0 0
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ axis.text.y.right               : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : NULL
-  ..@ size         : NULL
-  ..@ hjust        : NULL
-  ..@ vjust        : NULL
-  ..@ angle        : NULL
-  ..@ lineheight   : NULL
-  ..@ margin       : <ggplot2::margin> num [1:4] 0 0 0 4.95
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ axis.text.theta                 : NULL
- $ axis.text.r                     : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : NULL
-  ..@ size         : NULL
-  ..@ hjust        : num 0.5
-  ..@ vjust        : NULL
-  ..@ angle        : NULL
-  ..@ lineheight   : NULL
-  ..@ margin       : <ggplot2::margin> num [1:4] 0 2.2 0 2.2
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ axis.ticks                      : <ggplot2::element_blank>
- $ axis.ticks.x                    : NULL
- $ axis.ticks.x.top                : NULL
- $ axis.ticks.x.bottom             : NULL
- $ axis.ticks.y                    : NULL
- $ axis.ticks.y.left               : NULL
- $ axis.ticks.y.right              : NULL
- $ axis.ticks.theta                : NULL
- $ axis.ticks.r                    : NULL
- $ axis.minor.ticks.x.top          : NULL
- $ axis.minor.ticks.x.bottom       : NULL
- $ axis.minor.ticks.y.left         : NULL
- $ axis.minor.ticks.y.right        : NULL
- $ axis.minor.ticks.theta          : NULL
- $ axis.minor.ticks.r              : NULL
- $ axis.ticks.length               : 'rel' num 0.5
- $ axis.ticks.length.x             : NULL
- $ axis.ticks.length.x.top         : NULL
- $ axis.ticks.length.x.bottom      : NULL
- $ axis.ticks.length.y             : NULL
- $ axis.ticks.length.y.left        : NULL
- $ axis.ticks.length.y.right       : NULL
- $ axis.ticks.length.theta         : NULL
- $ axis.ticks.length.r             : NULL
- $ axis.minor.ticks.length         : 'rel' num 0.75
- $ axis.minor.ticks.length.x       : NULL
- $ axis.minor.ticks.length.x.top   : NULL
- $ axis.minor.ticks.length.x.bottom: NULL
- $ axis.minor.ticks.length.y       : NULL
- $ axis.minor.ticks.length.y.left  : NULL
- $ axis.minor.ticks.length.y.right : NULL
- $ axis.minor.ticks.length.theta   : NULL
- $ axis.minor.ticks.length.r       : NULL
- $ axis.line                       : <ggplot2::element_blank>
- $ axis.line.x                     : NULL
- $ axis.line.x.top                 : NULL
- $ axis.line.x.bottom              : NULL
- $ axis.line.y                     : NULL
- $ axis.line.y.left                : NULL
- $ axis.line.y.right               : NULL
- $ axis.line.theta                 : NULL
- $ axis.line.r                     : NULL
- $ legend.background               : <ggplot2::element_blank>
- $ legend.margin                   : NULL
- $ legend.spacing                  : 'rel' num 2
- $ legend.spacing.x                : NULL
- $ legend.spacing.y                : NULL
- $ legend.key                      : <ggplot2::element_blank>
- $ legend.key.size                 : 'simpleUnit' num 1.2lines
-  ..- attr(*, "unit")= int 3
- $ legend.key.height               : NULL
- $ legend.key.width                : NULL
- $ legend.key.spacing              : NULL
- $ legend.key.spacing.x            : NULL
- $ legend.key.spacing.y            : NULL
- $ legend.key.justification        : NULL
- $ legend.frame                    : NULL
- $ legend.ticks                    : NULL
- $ legend.ticks.length             : 'rel' num 0.2
- $ legend.axis.line                : NULL
- $ legend.text                     : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : NULL
-  ..@ size         : 'rel' num 0.8
-  ..@ hjust        : NULL
-  ..@ vjust        : NULL
-  ..@ angle        : NULL
-  ..@ lineheight   : NULL
-  ..@ margin       : NULL
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ legend.text.position            : NULL
- $ legend.title                    : <ggplot2::element_text>
-  ..@ family       : NULL
-  ..@ face         : NULL
-  ..@ italic       : chr NA
-  ..@ fontweight   : num NA
-  ..@ fontwidth    : num NA
-  ..@ colour       : NULL
-  ..@ size         : NULL
-  ..@ hjust        : num 0
-  ..@ vjust        : NULL
-  ..@ angle        : NULL
-  ..@ lineheight   : NULL
-  ..@ margin       : NULL
-  ..@ debug        : NULL
-  ..@ inherit.blank: logi TRUE
- $ legend.title.position           : NULL
- $ legend.position                 : chr "right"
- $ legend.position.inside          : NULL
- $ legend.direction                : NULL
- $ legend.byrow                    : NULL
- $ legend.justification            : chr "center"
- $ legend.justification.top        : NULL
- $ legend.justification.bottom     : NULL
- $ legend.justification.left       : NULL
- $ legend.justification.right      : NULL
- $ legend.justification.inside     : NULL
-  [list output truncated]
- @ complete: logi TRUE
- @ validate: logi TRUE
-```
-
-
+::: {.cell-output-display}
+![](11_01_lecture_powerpoint_files/figure-pptx/violated_data_plot-1.png)
 :::
 :::
 
 :::
 :::::
-
 
 # Checking Violated Data Assumptions
 
@@ -1677,7 +1305,8 @@ geom_jitter(width = 0.2, alpha = 0.7, size = 3)
 ::: {.column width="50%"}
 ### Normality Test on Violated Data
 
-**Clear violation:** p < 0.05, points deviate from line
+**Clear violation:** p \< 0.05, points deviate from line
+
 
 ::: {.cell}
 
@@ -1708,14 +1337,14 @@ W = 0.89473, p-value = 0.02335
 :::
 :::
 
-
 :::
 
 ::: {.column width="50%"}
 ### Variance Test on Violated Data
-- ok having issues making it not homogeoeous 
 
-**Clear violation:** p < 0.05, unequal variances evident
+-   ok having issues making it not homogeoeous
+
+**Clear violation:** p \< 0.05, unequal variances evident
 
 
 ::: {.cell}
@@ -1747,11 +1376,8 @@ group  2  1.5618 0.2355
 :::
 :::
 
-
-
 :::
 :::::
-
 
 # Performing the Kruskal-Wallis Test
 
@@ -1790,13 +1416,13 @@ Kruskal-Wallis chi-squared = 9.4231, df = 2, p-value = 0.008991
 :::
 
 
-**Interpretation:**
-- H = test statistic (chi-squared approximation)
-- df = degrees of freedom (k - 1 = 3 - 1 = 2)
-- p-value = 0.0135 (significant at α = 0.05)
-- Conclusion: At least one group differs from others
+**Interpretation:** - H = test statistic (chi-squared approximation) -
+df = degrees of freedom (k - 1 = 3 - 1 = 2) - p-value = 0.0135
+(significant at α = 0.05) - Conclusion: At least one group differs from
+others
 
 **Compare to parametric ANOVA:**
+
 
 ::: {.cell}
 
@@ -1844,6 +1470,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 **Rank Sums:**
 
+
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
@@ -1862,7 +1489,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 :::
 :::::
-
 
 # Kruskal-Wallis on Violated Data
 
@@ -1927,11 +1553,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-**Key observations:**
-- Both tests still detect differences
-- Kruskal-Wallis more robust to violations
-- Parametric test may give misleading results when assumptions violated
-- Non-parametric test maintains validity
+-   **Key observations:**
+    -   \- Both tests still detect differences
+
+    -   \- Kruskal-Wallis more robust to violations
+
+    -   \- Parametric test may give misleading results when assumptions
+        violated
+
+    -   \- Non-parametric test maintains validity
 :::
 
 ::: {.column width="40%"}
@@ -1943,11 +1573,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-**Why Kruskal-Wallis is robust:**
-- Uses ranks instead of raw values
-- Outliers affect ranks minimally
-- Unequal variances less problematic
-- No distribution assumptions needed
+-   **Why Kruskal-Wallis is robust:**
+    -   \- Uses ranks instead of raw values
+    -   \- Outliers affect ranks minimally
+    -   \- Unequal variances less problematic
+    -   \- No distribution assumptions needed
 :::
 :::::
 
@@ -1957,7 +1587,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ::: {.column width="60%"}
 ## Pairwise Comparisons After Significant Kruskal-Wallis
 
-**Just like ANOVA, we need post-hoc tests to identify which groups differ:**
+**Just like ANOVA, we need post-hoc tests to identify which groups
+differ:**
 
 
 ::: {.cell}
@@ -1994,16 +1625,15 @@ P value adjustment method: bonferroni
 :::
 
 
-**Interpretation of p-values:**
-- Control vs Eyes: p = 0.024 (significant)
-- Control vs Knees: p = 1.000 (not significant)
-- Eyes vs Knees: p = 0.078 (not significant)
-
-**Common adjustment methods:**
-- `"bonferroni"`: Most conservative
-- `"holm"`: Less conservative than Bonferroni
-- `"BH"`: Benjamini-Hochberg (controls false discovery rate)
-- `"none"`: No adjustment (not recommended)
+-   **Interpretation of p-values:**
+    -   \- Control vs Eyes: p = 0.024 (significant)
+    -   \- Control vs Knees: p = 1.000 (not significant)
+    -   \- Eyes vs Knees: p = 0.078 (not significant)
+-   **Common adjustment methods:**
+    -   \- `"bonferroni"`: Most conservative
+    -   \- `"holm"`: Less conservative than Bonferroni
+    -   \- `"BH"`: Benjamini-Hochberg (controls false discovery rate)
+    -   \- `"none"`: No adjustment (not recommended)
 :::
 
 ::: {.column width="40%"}
@@ -2081,8 +1711,8 @@ Violated Data Pairwise p-values:
 ::: {.column width="60%"}
 ## Dunn's Test for Multiple Comparisons
 
-**Dunn's test is specifically designed for Kruskal-Wallis post-hoc comparisons:**
-
+**Dunn's test is specifically designed for Kruskal-Wallis post-hoc
+comparisons:**
 
 
 ::: {.cell}
@@ -2114,13 +1744,14 @@ dunn_original_result
 :::
 
 
-**Advantages of Dunn's test:**
-- Designed specifically for Kruskal-Wallis
-- Provides Z-statistics in addition to p-values
-- Multiple adjustment methods available
-- More appropriate than multiple Wilcoxon tests
-
-Z-statistic is a standardized test statistic that tells you how many standard deviations an observation or difference is from the expected value (usually zero, meaning "no difference").
+-   **Advantages of Dunn's test:**
+    -   Designed specifically for Kruskal-Wallis
+    -   Provides Z-statistics in addition to p-values
+    -   Multiple adjustment methods available
+    -   More appropriate than multiple Wilcoxon tests
+-   Z-statistic is a standardized test statistic that tells you how many
+    standard deviations an observation or difference is from the
+    expected value (usually zero, meaning "no difference").
 :::
 
 ::: {.column width="40%"}
@@ -2154,14 +1785,14 @@ dunn_violated_result
 :::
 
 
-**Interpreting Z-statistics:**
-- Large |Z| values indicate bigger differences
-- Z > 1.96 approximately equivalent to p < 0.05
-- Sign indicates direction of difference
+-   **Interpreting Z-statistics:**
+    -   \- Large \|Z\| values indicate bigger differences
+
+    -   \- Z \> 1.96 approximately equivalent to p \< 0.05
+
+    -   \- Sign indicates direction of difference
 :::
 :::::
-
-
 
 # Reporting Non-Parametric Results
 
@@ -2171,18 +1802,29 @@ dunn_violated_result
 
 **Essential elements to include:**
 
-1. Test name and purpose
-2. Sample sizes per group
-3. Medians and IQRs (not means and SDs!)
-4. Test statistic (H) and degrees of freedom
-5. P-value
-6. Effect size
-7. Post-hoc test results
-8. Conclusion
+1.  Test name and purpose
+2.  Sample sizes per group
+3.  Medians and IQRs (not means and SDs!)
+4.  Test statistic (H) and degrees of freedom
+5.  P-value
+6.  Effect size
+7.  Post-hoc test results
+8.  Conclusion
 
 **Example write-up:**
 
-"A Kruskal-Wallis test was conducted to compare the effect of light treatment on circadian rhythm phase shift across three groups: Control (n = 8), Knees (n = 7), and Eyes (n = 7). Median phase shifts were -0.48 hours (IQR = 0.84) for Control, -0.29 hours (IQR = 1.04) for Knees, and -1.48 hours (IQR = 0.66) for Eyes. The test revealed a statistically significant difference in phase shift between the groups, H(2) = 8.66, p = 0.013, ε² = 0.37. Post-hoc pairwise comparisons using Dunn's test with Bonferroni correction indicated that the Eyes treatment differed significantly from Control (p = 0.024), but no other pairwise differences were significant. These results suggest that light exposure to the eyes has a different effect on circadian rhythm than light to other body parts."
+"A Kruskal-Wallis test was conducted to compare the effect of light
+treatment on circadian rhythm phase shift across three groups: Control
+(n = 8), Knees (n = 7), and Eyes (n = 7). Median phase shifts were -0.48
+hours (IQR = 0.84) for Control, -0.29 hours (IQR = 1.04) for Knees, and
+-1.48 hours (IQR = 0.66) for Eyes. The test revealed a statistically
+significant difference in phase shift between the groups, H(2) = 8.66, p
+= 0.013, ε² = 0.37. Post-hoc pairwise comparisons using Dunn's test with
+Bonferroni correction indicated that the Eyes treatment differed
+significantly from Control (p = 0.024), but no other pairwise
+differences were significant. These results suggest that light exposure
+to the eyes has a different effect on circadian rhythm than light to
+other body parts."
 :::
 
 ::: {.column width="40%"}
@@ -2190,7 +1832,8 @@ dunn_violated_result
 
 **In-text citation format:**
 
-> The Kruskal-Wallis test revealed significant differences between treatment groups, H(2) = 8.66, p = .013.
+> The Kruskal-Wallis test revealed significant differences between
+> treatment groups, H(2) = 8.66, p = .013.
 
 **Table format:**
 
@@ -2243,10 +1886,10 @@ Kruskal-Wallis H(2) = 8.66, p = .013, ε² = .37
 
 **Common mistakes to avoid:**
 
-- ✗ Reporting means instead of medians
-- ✗ Using SD instead of IQR
-- ✗ Not mentioning it's a non-parametric test
-- ✗ Forgetting effect size
-- ✗ Not justifying why non-parametric test used
+-   ✗ Reporting means instead of medians
+-   ✗ Using SD instead of IQR
+-   ✗ Not mentioning it's a non-parametric test
+-   ✗ Forgetting effect size
+-   ✗ Not justifying why non-parametric test used
 :::
 :::::

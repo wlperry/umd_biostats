@@ -11,8 +11,41 @@ format:
 ---
 
 
+::: {.cell}
+
+```{.r .cell-code}
+#| message: false
+#| warning: false
+
+library(performance)
+library(FSA)
+library(ggfortify)
+library(car)         # functions for regression diagnostics, ANOVA, and VIF
+library(emmeans)     # calculates and compares adjusted means from statistical models
+library(patchwork)   # Combines multiple ggplot2 plots into a single composite figure
+library(broom)       # Converts statistical model outputs into tidy data frames
+library(tidyverse)   # includes ggplot2, dplyr, tidyr, etc.
+```
+:::
+
+
 
 ::: {.cell}
+
+```{.r .cell-code}
+#| message: false
+#| warning: false
+#| paged-print: false
+c_df <- tibble(
+  treatment = rep(c("Control", "Knees", "Eyes"), times = c(8, 7, 7)),
+  phase_shift = c(0.53, 0.36, 0.20, -0.37, -0.60, -0.64, -0.68, -1.27,  # Control
+                 0.73, 0.31, 0.03, -0.29, -0.56, -0.96, -1.61,          # Knees
+                 -0.78, -0.86, -1.35, -1.48, -1.52, -2.04, -2.83)       # Eyes
+)
+
+c_df
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -36,6 +69,7 @@ format:
 :::
 :::
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -54,6 +88,16 @@ c_plot
 
 
 ::: {.cell}
+
+```{.r .cell-code}
+#| paged-print: false
+
+# Fit ANOVA model_aov
+model_aov <- lm(phase_shift ~ treatment, data = c_df)
+
+summary(model_aov)
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -172,6 +216,31 @@ Levene's test of homogeneity of variance
 
 
 ::: {.cell}
+
+```{.r .cell-code}
+#| message: false
+#| warning: false
+#| paged-print: false
+
+## Using the car package to check assumptions
+# Levene's test for homogeneity of variance
+levene_test <- leveneTest(phase_shift ~ treatment, data = c_df)
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+Warning in leveneTest.default(y = y, group = group, ...): group coerced to
+factor.
+```
+
+
+:::
+
+```{.r .cell-code}
+levene_test 
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -195,6 +264,18 @@ Shapiro-Wilk Normality Test
 
 
 ::: {.cell}
+
+```{.r .cell-code}
+#| message: false
+#| warning: false
+#| paged-print: false
+
+
+# Normality test of residuals
+shapiro_test <- shapiro.test(residuals(model_aov))
+shapiro_test 
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -245,26 +326,36 @@ Confidence level used: 0.95
 
 # What Are Estimated Marginal Means?
 
-**Estimated Marginal Means (EMMs)**, also called **least-squares means**, are model-based predictions of group means that come from your fitted statistical model rather than directly from your raw data.
+**Estimated Marginal Means (EMMs)**, also called **least-squares
+means**, are model-based predictions of group means that come from your
+fitted statistical model rather than directly from your raw data.
 
 ## Key Concepts
 
 In a **one-way ANOVA**, EMMs are straightforward:
 
-- **EMMs = Group means** (when you have balanced data and no covariates)
-- They represent the "expected" or "predicted" value for each group according to your model
-- They're called "marginal" because in more complex designs, they're averaged over (or "marginalized" over) other factors
+-   **EMMs = Group means** (when you have balanced data and no
+    covariates)
+-   They represent the "expected" or "predicted" value for each group
+    according to your model
+-   They're called "marginal" because in more complex designs, they're
+    averaged over (or "marginalized" over) other factors
 
 ## Why Use EMMs Instead of Simple Means?
 
-For one-way ANOVA, you might wonder: "Why not just use `group_by() %>% summarize(mean())`?" 
+For one-way ANOVA, you might wonder: "Why not just use
+`group_by() %>% summarize(mean())`?"
 
 Here's why EMMs are valuable:
 
-1. **Consistency across models**: EMMs work the same way whether you have one-way ANOVA, two-way ANOVA, ANCOVA, or more complex designs
-2. **Built-in inference**: The `emmeans` package provides standard errors, confidence intervals, and easy comparisons
-3. **Adjusted means**: In more complex models (with covariates), EMMs give you adjusted means at meaningful reference points
-4. **Professional reporting**: EMMs are the standard in academic publications
+1.  **Consistency across models**: EMMs work the same way whether you
+    have one-way ANOVA, two-way ANOVA, ANCOVA, or more complex designs
+2.  **Built-in inference**: The `emmeans` package provides standard
+    errors, confidence intervals, and easy comparisons
+3.  **Adjusted means**: In more complex models (with covariates), EMMs
+    give you adjusted means at meaningful reference points
+4.  **Professional reporting**: EMMs are the standard in academic
+    publications
 
 # How Are EMMs Calculated?
 
@@ -315,7 +406,8 @@ comparison
 :::
 
 
-**Key insight**: In a one-way ANOVA, the EMMs are **exactly equal** to the group means!
+**Key insight**: In a one-way ANOVA, the EMMs are **exactly equal** to
+the group means!
 
 ## The Mathematical Formula
 
@@ -323,9 +415,9 @@ For one-way ANOVA, the EMM for group $j$ is calculated as:
 
 $$\text{EMM}_j = \hat{\beta}_0 + \hat{\beta}_j$$
 
-Where:
-- $\hat{\beta}_0$ is the intercept (mean of reference group)
-- $\hat{\beta}_j$ is the coefficient for group $j$ (or 0 for the reference group)
+Where: - $\hat{\beta}_0$ is the intercept (mean of reference group) -
+$\hat{\beta}_j$ is the coefficient for group $j$ (or 0 for the reference
+group)
 
 ### take home is in this case emmeans = the means
 
@@ -353,25 +445,31 @@ P value adjustment: sidak method for 3 tests
 :::
 
 
-- What is the ESTIMATE?
+-   What is the ESTIMATE?
 
-  - The estimate is the **difference between two group means**.
+    -   The estimate is the **difference between two group means**.
 
-   - What is the SE (Standard Error)?
+    -   What is the SE (Standard Error)?
 
-      - The SE is the **standard error of the difference** between two means.
-      - It tells you how much uncertainty there is in your estimate of the difference. The SE depends on:
+        -   The SE is the **standard error of the difference** between
+            two means.
 
-          - The variability within each group (residual variance from your model)
-          - The sample sizes of the groups being compared
+        -   It tells you how much uncertainty there is in your estimate
+            of the difference. The SE depends on:
 
-  - How They Work Together
-  
-    - The t-ratio = estimate / SE tells you how many standard errors away from zero your difference is:
+            -   The variability within each group (residual variance
+                from your model)
+            -   The sample sizes of the groups being compared
 
-      - Control - Eyes: 1.243 / 0.364 = 3.41 → far from zero → significant!
-      - Control - Knees: 0.027 / 0.364 = 0.074 → very close to zero → not significant
+    -   How They Work Together
 
+        -   The t-ratio = estimate / SE tells you how many standard
+            errors away from zero your difference is:
+
+            -   Control - Eyes: 1.243 / 0.364 = 3.41 → far from zero →
+                significant!
+            -   Control - Knees: 0.027 / 0.364 = 0.074 → very close to
+                zero → not significant
 
 
 ::: {.cell}
@@ -408,6 +506,19 @@ NOTE: If two or more means share the same grouping symbol,
 
 
 ::: {.cell}
+
+```{.r .cell-code}
+#| message: false
+#| warning: false
+#| paged-print: false
+
+# Using emmeans package for post-hoc comparisons
+# Compact letter display (grouping)
+cld_result <- emmeans(model_aov, "treatment") %>% 
+  multcomp::cld(Letters = letters, adjust = "sidak")
+cld_result
+```
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -461,6 +572,33 @@ Warning: `aes_()` was deprecated in ggplot2 3.0.0.
 
 
 ::: {.cell}
+
+```{.r .cell-code}
+#| message: false
+#| warning: false
+#| paged-print: false
+
+# Using emmeans package for post-hoc comparisons
+# Visualize the results
+emmip(model_aov, ~ treatment, CIs = TRUE) +
+  theme_minimal() +
+  labs(title = "Estimated Marginal Means with 95% CIs",
+       x = "Treatment",
+       y = "Estimated Phase Shift")
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+Warning: `aes_()` was deprecated in ggplot2 3.0.0.
+ℹ Please use tidy evaluation idioms with `aes()`
+ℹ The deprecated feature was likely used in the emmeans package.
+  Please report the issue at <https://github.com/rvlenth/emmeans/issues>.
+```
+
+
+:::
+
 ::: {.cell-output-display}
 ![](11_02_class_activity_files/figure-html/unnamed-chunk-12-1.png){width=336}
 :::
@@ -574,9 +712,27 @@ violated_model <- lm(phase_shift_violated ~ treatment,
 
 
 ::: {.cell}
+
+```{.r .cell-code}
+ggplot(v_circ_df, 
+       aes(x = treatment, y = phase_shift_violated, 
+           color = treatment)) +
+  geom_jitter(width = 0.2, alpha = 0.7, size = 3) +
+  geom_boxplot(alpha = 0.3, outlier.shape = NA) +
+geom_jitter(width = 0.2, alpha = 0.7, size = 3)
+```
+
 ::: {.cell-output-display}
 ![](11_02_class_activity_files/figure-html/unnamed-chunk-15-1.png){width=336}
 :::
+
+```{.r .cell-code}
+  theme_minimal() +
+  labs(title = "Modified Data with Violations",
+       subtitle = "Median with IQR",
+       x = "Light Treatment",
+       y = "Phase Shift (hours)") 
+```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -967,6 +1123,14 @@ W = 0.7246, p-value = 4.091e-05
 
 
 ::: {.cell}
+
+```{.r .cell-code}
+# Q-Q plot
+qqnorm(resid(violated_model), 
+       main = "Q-Q Plot: Violated Data")
+qqline(resid(violated_model), col = "red", lwd = 2)
+```
+
 ::: {.cell-output-display}
 ![](11_02_class_activity_files/figure-html/violated_normality_plot-1.png){width=336}
 :::
@@ -1071,8 +1235,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-# Kruskal-Wallis on Violated Data
 
+# Kruskal-Wallis on Violated Data
 
 ## Non-Parametric Test Handles Violations
 
@@ -1121,9 +1285,9 @@ anova(violated_model)
 Analysis of Variance Table
 
 Response: phase_shift_violated
-          Df  Sum Sq Mean Sq F value Pr(>F)  
-treatment  2  41.806 20.9029  2.8361 0.0836 .
-Residuals 19 140.037  7.3704                 
+          Df Sum Sq Mean Sq F value  Pr(>F)  
+treatment  2 52.190 26.0951  5.5781 0.01242 *
+Residuals 19 88.884  4.6781                  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -1133,12 +1297,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-**Key observations:**
-- Both tests still detect differences
-- Kruskal-Wallis more robust to violations
-- Parametric test may give misleading results when assumptions violated
-- Non-parametric test maintains validity
-
+**Key observations:** - Both tests still detect differences -
+Kruskal-Wallis more robust to violations - Parametric test may give
+misleading results when assumptions violated - Non-parametric test
+maintains validity
 
 # Post-Hoc Tests for Kruskal-Wallis
 
@@ -1146,7 +1308,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ::: {.column width="60%"}
 ## Pairwise Comparisons After Significant Kruskal-Wallis
 
-**Just like ANOVA, we need post-hoc tests to identify which groups differ:**
+**Just like ANOVA, we need post-hoc tests to identify which groups
+differ:**
 
 
 ::: {.cell}
@@ -1183,16 +1346,14 @@ P value adjustment method: bonferroni
 :::
 
 
-**Interpretation of p-values:**
-- Control vs Eyes: p = 0.024 (significant)
-- Control vs Knees: p = 1.000 (not significant)
-- Eyes vs Knees: p = 0.078 (not significant)
+**Interpretation of p-values:** - Control vs Eyes: p = 0.024
+(significant) - Control vs Knees: p = 1.000 (not significant) - Eyes vs
+Knees: p = 0.078 (not significant)
 
-**Common adjustment methods:**
-- `"bonferroni"`: Most conservative
-- `"holm"`: Less conservative than Bonferroni
-- `"BH"`: Benjamini-Hochberg (controls false discovery rate)
-- `"none"`: No adjustment (not recommended)
+**Common adjustment methods:** - `"bonferroni"`: Most conservative -
+`"holm"`: Less conservative than Bonferroni - `"BH"`: Benjamini-Hochberg
+(controls false discovery rate) - `"none"`: No adjustment (not
+recommended)
 :::
 
 ::: {.column width="40%"}
@@ -1231,7 +1392,6 @@ P value adjustment method: bonferroni
 :::
 :::
 
-
 :::
 :::::
 
@@ -1241,13 +1401,16 @@ P value adjustment method: bonferroni
 ::: {.column width="60%"}
 ## Dunn's Test for Multiple Comparisons
 
-**Dunn's test is specifically designed for Kruskal-Wallis post-hoc comparisons:**
-
+**Dunn's test is specifically designed for Kruskal-Wallis post-hoc
+comparisons:**
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
+#| message: false
+#| warning: false
+
 library(FSA)
 
 # Dunn's test on original data
@@ -1256,9 +1419,38 @@ dunn_original_result <- dunnTest(
   data = c_df,
   method = "bonferroni"
 )
+```
 
+::: {.cell-output .cell-output-stderr}
+
+```
+Warning: treatment was coerced to a factor.
+```
+
+
+:::
+
+```{.r .cell-code}
 dunn_original_result
 ```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+Dunn (1964) Kruskal-Wallis multiple comparison
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+  p-values adjusted with the Bonferroni method.
+```
+
+
+:::
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1274,13 +1466,14 @@ dunn_original_result
 :::
 
 
-**Advantages of Dunn's test:**
-- Designed specifically for Kruskal-Wallis
-- Provides Z-statistics in addition to p-values
-- Multiple adjustment methods available
-- More appropriate than multiple Wilcoxon tests
+**Advantages of Dunn's test:** - Designed specifically for
+Kruskal-Wallis - Provides Z-statistics in addition to p-values -
+Multiple adjustment methods available - More appropriate than multiple
+Wilcoxon tests
 
-Z-statistic is a standardized test statistic that tells you how many standard deviations an observation or difference is from the expected value (usually zero, meaning "no difference").
+Z-statistic is a standardized test statistic that tells you how many
+standard deviations an observation or difference is from the expected
+value (usually zero, meaning "no difference").
 :::
 
 ::: {.column width="40%"}
@@ -1290,6 +1483,8 @@ Z-statistic is a standardized test statistic that tells you how many standard de
 ::: {.cell}
 
 ```{.r .cell-code}
+#| paged-print: false
+
 # Dunn's test on violated data
 dunn_violated_result <- dunnTest(
   phase_shift_violated ~ treatment,
@@ -1343,48 +1538,61 @@ Dunn (1964) Kruskal-Wallis multiple comparison
 :::
 
 
-**Interpreting Z-statistics:**
-- Large |Z| values indicate bigger differences
-- Z > 1.96 approximately equivalent to p < 0.05
-- Sign indicates direction of difference
+**Interpreting Z-statistics:** - Large \|Z\| values indicate bigger
+differences - Z \> 1.96 approximately equivalent to p \< 0.05 - Sign
+indicates direction of difference
 :::
 :::::
 
-
 # Which post F test to use?
-- Wilcoxon Rank-Sum Test (Mann-Whitney U)
 
-  - What it does: Pairwise comparisons between two groups at a time
-  - Ranking: Re-ranks data separately for each pair of groups being compared
-  - Use case: When you want simple pairwise comparisons
-  - Correction: Typically uses Bonferroni or other p-value adjustments
-  - Code: pairwise.wilcox.test()
-  
-      - `rpairwise.wilcox.test(v_circ_df$phase_shift_violated, 
-                     v_circ_df$treatment,
-                     p.adjust.method = "bonferroni")`
-- Dunn's Test
+-   Wilcoxon Rank-Sum Test (Mann-Whitney U)
 
-  - What it does: Pairwise comparisons specifically designed for Kruskal-Wallis
-  - Ranking: Uses the same overall ranking from the original Kruskal-Wallis test
-  - Use case: The "official" post-hoc for Kruskal-Wallis
-  - Correction: Multiple options (Bonferroni, Holm, BH, etc.)
-  - Code: Requires dunn.test or FSA package
+    -   What it does: Pairwise comparisons between two groups at a time
 
-  - `rlibrary(FSA)
-dunnTest(phase_shift_violated ~ treatment, 
-         data = v_circ_df,
-         method = "bonferroni")`
+    -   Ranking: Re-ranks data separately for each pair of groups being
+        compared
 
-- Which to use?
-  - Use Dunn's test because:
+    -   Use case: When you want simple pairwise comparisons
 
-    - ✅ It's the proper follow-up to Kruskal-Wallis
-    - ✅ Maintains consistency with the overall K-W test ranking
-    - ✅ More statistically appropriate for the omnibus test you ran
-    - ✅ Standard in published research
+    -   Correction: Typically uses Bonferroni or other p-value
+        adjustments
 
-  - Wilcoxon is fine for simple two-group comparisons, but when you've already done Kruskal-Wallis (a 3+ group test),       - Dunn's is the standard choice.
+    -   Code: pairwise.wilcox.test()
 
-  - Think of it this way: Kruskal-Wallis ranks ALL your data once. 
-  - Dunn's test uses those same ranks. Wilcoxon throws away that information and re-ranks for each pair. 
+        -   `rpairwise.wilcox.test(v_circ_df$phase_shift_violated,                   v_circ_df$treatment,                  p.adjust.method = "bonferroni")`
+
+-   Dunn's Test
+
+    -   What it does: Pairwise comparisons specifically designed for
+        Kruskal-Wallis
+
+    -   Ranking: Uses the same overall ranking from the original
+        Kruskal-Wallis test
+
+    -   Use case: The "official" post-hoc for Kruskal-Wallis
+
+    -   Correction: Multiple options (Bonferroni, Holm, BH, etc.)
+
+    -   Code: Requires dunn.test or FSA package
+
+    -   `rlibrary(FSA) dunnTest(phase_shift_violated ~ treatment,         data = v_circ_df,        method = "bonferroni")`
+
+-   Which to use?
+
+    -   Use Dunn's test because:
+
+        -   ✅ It's the proper follow-up to Kruskal-Wallis
+        -   ✅ Maintains consistency with the overall K-W test ranking
+        -   ✅ More statistically appropriate for the omnibus test you
+            ran
+        -   ✅ Standard in published research
+
+    -   Wilcoxon is fine for simple two-group comparisons, but when
+        you've already done Kruskal-Wallis (a 3+ group test), - Dunn's
+        is the standard choice.
+
+    -   Think of it this way: Kruskal-Wallis ranks ALL your data once.
+
+    -   Dunn's test uses those same ranks. Wilcoxon throws away that
+        information and re-ranks for each pair.
