@@ -79,7 +79,7 @@ format:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-2737690912.png){width="256"}
+![](images/clipboard-2737690912.png){width="286"}
 :::
 :::::
 
@@ -96,7 +96,7 @@ format:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1252866044.png){width="432"}
+![](images/clipboard-1252866044.png){width="332"}
 :::
 :::::
 
@@ -126,23 +126,6 @@ effect - $\varepsilon_{ijk}$ = random error
 ::: {.column width="40%"}
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Load required packages
-library(palmerpenguins)
-library(emmeans)
-library(car)
-library(broom)
-library(tidyverse)
-# Load the penguin data
-p_df <- penguins %>%
-  filter(!is.na(body_mass_g), 
-         !is.na(sex),
-         !is.na(species)) %>%
-  select(species, sex, body_mass_g)
-head(p_df)
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -175,20 +158,6 @@ samples per cell
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Check original sample sizes
-original_n <- p_df %>%
-  count(species, sex) %>%
-  arrange(species, sex)
-
-p_df %>%
-  count(species, sex) %>%
-  pivot_wider(names_from = sex, 
-              values_from = n,
-              values_fill = 0) 
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -209,13 +178,6 @@ p_df %>%
 ::: {.column width="40%"}
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Find minimum sample size
-min_n <- min(original_n$n)
-print(paste("Minimum n =", min_n))
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -224,23 +186,6 @@ print(paste("Minimum n =", min_n))
 
 
 :::
-
-```{.r .cell-code}
-# Create balanced dataset
-set.seed(123) # for reproducibility
-balanced_df <- p_df %>%
-  group_by(species, sex) %>%
-  sample_n(min_n) %>%
-  ungroup()
-
-# Verify balanced design
-balanced_n <- balanced_df %>% 
-  count(species, sex) %>%
-  pivot_wider(names_from = sex, 
-              values_from = n,
-              values_fill = 0) 
-balanced_n
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -268,23 +213,6 @@ balanced_n
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Calculate group means and SDs
-summary_df <- balanced_df %>%
-  group_by(species, sex) %>%
-  summarise(
-    n = sum(!is.na(body_mass_g)),
-    mean_mass = mean(body_mass_g),
-    sd_mass = sd(body_mass_g),
-    se_mass = sd_mass/sqrt(n),
-    .groups = 'drop'
-  ) %>%
-  arrange(species, sex)
-
-print(summary_df)
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -308,14 +236,6 @@ print(summary_df)
 ::: {.column width="40%"}
 
 ::: {.cell}
-
-```{.r .cell-code}
-p_box_plot <- balanced_df %>% 
-  ggplot(aes(species, body_mass_g, fill=sex))+
-  geom_boxplot()
-p_box_plot
-```
-
 ::: {.cell-output-display}
 ![](12_01_lecture_powerpoint_files/figure-pptx/box_plot-1.png)
 :::
@@ -748,13 +668,6 @@ F-statistic: 242.4 on 5 and 198 DF,  p-value: < 2.2e-16
 ::: {.column width="40%"}
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Type III ANOVA table using car::Anova
-anova_type3 <- Anova(anova_model, type = "III")
-print("Type III Sums of Squares ANOVA:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -763,10 +676,6 @@ print("Type III Sums of Squares ANOVA:")
 
 
 :::
-
-```{.r .cell-code}
-print(anova_type3)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -809,20 +718,6 @@ here for consistency with the next analysis.
 ::: {.column width="40%"}
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Calculate effect sizes (eta-squared)
-ss_total <- sum(anova_type3$`Sum Sq`[2:4]) + 
-            anova_type3$`Sum Sq`[5]
-
-eta_squared_df <- data.frame(
-  Effect = c("Species", "Sex", "Interaction"),
-  Eta_Squared = anova_type3$`Sum Sq`[2:4] / ss_total
-)
-
-print("Effect Sizes (Eta-squared):")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -831,10 +726,6 @@ print("Effect Sizes (Eta-squared):")
 
 
 :::
-
-```{.r .cell-code}
-print(eta_squared_df)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -856,28 +747,6 @@ print(eta_squared_df)
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Create diagnostic plots
-par(mfrow = c(2, 2))
-
-# 1. Residuals vs Fitted
-residuals_plot <- plot(anova_model, which = 1,
-                       main = "Residuals vs Fitted")
-
-# 2. Q-Q plot
-qq_plot <- plot(anova_model, which = 2,
-               main = "Normal Q-Q")
-
-# 3. Scale-Location
-scale_plot <- plot(anova_model, which = 3,
-                   main = "Scale-Location")
-
-# 4. Residuals vs Leverage
-leverage_plot <- plot(anova_model, which = 5,
-                     main = "Residuals vs Leverage")
-```
-
 ::: {.cell-output-display}
 ![](12_01_lecture_powerpoint_files/figure-pptx/diagnostics-1.png)
 :::
@@ -893,13 +762,6 @@ leverage_plot <- plot(anova_model, which = 5,
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Normality test
-shapiro_test <- shapiro.test(residuals(anova_model))
-print("Shapiro-Wilk Normality Test:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -908,10 +770,6 @@ print("Shapiro-Wilk Normality Test:")
 
 
 :::
-
-```{.r .cell-code}
-print(shapiro_test)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -926,13 +784,6 @@ W = 0.99612, p-value = 0.8886
 
 :::
 
-```{.r .cell-code}
-# Homogeneity of variance
-levene_test <- leveneTest(body_mass_g ~ species * sex,
-                          data = balanced_df)
-print("Levene's Test for Homogeneity:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -941,10 +792,6 @@ print("Levene's Test for Homogeneity:")
 
 
 :::
-
-```{.r .cell-code}
-print(levene_test)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -957,20 +804,6 @@ group   5  0.7841 0.5622
 
 
 :::
-
-```{.r .cell-code}
-# Check for outliers
-outliers_df <- balanced_df %>%
-  mutate(
-    fitted = fitted(anova_model),
-    residuals = residuals(anova_model),
-    std_resid = rstandard(anova_model)
-  ) %>%
-  filter(abs(std_resid) > 3)
-
-print(paste("Number of outliers (|z| > 3):",
-            nrow(outliers_df)))
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1138,13 +971,6 @@ interaction
 
 ::: {.cell}
 
-```{.r .cell-code}
-# Get estimated marginal means for the interaction
-emm_interaction <- emmeans(anova_model, ~ species * sex)  # Replace factor1 and factor2 with your actual factor names
-
-# Pairwise comparisons with Tukey adjustment
-pairs_interaction <- pairs(emm_interaction, adjust = "tukey")
-```
 :::
 
 
@@ -1152,23 +978,6 @@ pairs_interaction <- pairs(emm_interaction, adjust = "tukey")
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Get compact letter display (cld)
-cld_interaction <- multcomp::cld(emm_interaction, 
-                       Letters = letters,
-                       adjust = "sidak")
-
-# Display the results
-# print(cld_interaction)
-
-cld_df <- as.data.frame(cld_interaction) %>%
-  arrange(species, sex)  # Sort by estimated marginal mean
-
-# View the results with means and grouping letters
-print(cld_df)
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1226,16 +1035,6 @@ But parameter estimation differs!
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Check sample sizes - naturally unbalanced
-unbalanced_n <- p_df %>%
-  count(species, sex) %>%
-  arrange(species, sex)
-
-print("Unbalanced sample sizes:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1244,10 +1043,6 @@ print("Unbalanced sample sizes:")
 
 
 :::
-
-```{.r .cell-code}
-print(unbalanced_n)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1266,16 +1061,6 @@ print(unbalanced_n)
 
 :::
 
-```{.r .cell-code}
-# Calculate total N and imbalance ratio
-total_n <- sum(unbalanced_n$n)
-max_n <- max(unbalanced_n$n)
-min_n <- min(unbalanced_n$n)
-imbalance_ratio <- max_n / min_n
-
-print(paste("Total N =", total_n))
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1284,10 +1069,6 @@ print(paste("Total N =", total_n))
 
 
 :::
-
-```{.r .cell-code}
-print(paste("Imbalance ratio =", round(imbalance_ratio, 2)))
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1306,27 +1087,6 @@ print(paste("Imbalance ratio =", round(imbalance_ratio, 2)))
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Create sample size plot
-imbalance_plot <- ggplot(unbalanced_n, 
-       aes(x = species, y = n, fill = sex)) +
-  geom_col(position = "dodge") +
-  geom_text(aes(label = n), 
-            position = position_dodge(0.9),
-            vjust = -0.5) +
-  scale_fill_manual(values = c("#1f78b4", "#b2df8a")) +
-  labs(title = "Sample Sizes by Group",
-       subtitle = "Unbalanced Design",
-       x = "Species", 
-       y = "Sample Size",
-       fill = "Sex") +
-  theme_minimal() +
-  theme(legend.position = "top")
-
-print(imbalance_plot)
-```
-
 ::: {.cell-output-display}
 ![](12_01_lecture_powerpoint_files/figure-pptx/visualize_imbalance-1.png)
 :::
@@ -1343,16 +1103,6 @@ print(imbalance_plot)
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Type I SS - Order matters!
-# Model 1: Species then Sex
-model1_type1 <- lm(body_mass_g ~ species + sex + species:sex,
-                   data = p_df)
-anova1_type1 <- anova(model1_type1)
-print("Type I SS (Species → Sex → Interaction):")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1361,10 +1111,6 @@ print("Type I SS (Species → Sex → Interaction):")
 
 
 :::
-
-```{.r .cell-code}
-print(anova1_type1)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1384,14 +1130,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 :::
 
-```{.r .cell-code}
-# Model 2: Sex then Species (different order)
-model2_type1 <- lm(body_mass_g ~ sex + species + sex:species,
-                   data = p_df)
-anova2_type1 <- anova(model2_type1)
-print("\nType I SS (Sex → Species → Interaction):")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1400,10 +1138,6 @@ print("\nType I SS (Sex → Species → Interaction):")
 
 
 :::
-
-```{.r .cell-code}
-print(anova2_type1)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1423,18 +1157,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 :::
 
-```{.r .cell-code}
-# Compare SS for main effects
-ss_comparison_df <- data.frame(
-  Effect = c("Species", "Sex"),
-  Order1_SS = c(anova1_type1$`Sum Sq`[1], 
-                anova1_type1$`Sum Sq`[2]),
-  Order2_SS = c(anova2_type1$`Sum Sq`[2], 
-                anova2_type1$`Sum Sq`[1])
-)
-print("\nType I SS depends on order:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1443,10 +1165,6 @@ print("\nType I SS depends on order:")
 
 
 :::
-
-```{.r .cell-code}
-print(ss_comparison_df)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1489,20 +1207,6 @@ factors are correlated - Not invariant to coding
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Set contrasts for Type III SS
-options(contrasts = c("contr.sum", "contr.poly"))
-
-# Fit model for Type III SS
-model_u <- lm(body_mass_g ~ species * sex, 
-              data = p_df)
-
-# Type III ANOVA
-anova_type3_u <- Anova(model_u, type = "III")
-print("Type III Sums of Squares:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1511,10 +1215,6 @@ print("Type III Sums of Squares:")
 
 
 :::
-
-```{.r .cell-code}
-print(anova_type3_u)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1535,11 +1235,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 :::
 
-```{.r .cell-code}
-# Compare with Type I
-print("\nComparison of F-values:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1548,15 +1243,6 @@ print("\nComparison of F-values:")
 
 
 :::
-
-```{.r .cell-code}
-comparison_f_df <- data.frame(
-  Effect = c("Species", "Sex", "Interaction"),
-  Type_I_F = round(anova1_type1$`F value`[1:3], 2),
-  Type_III_F = round(anova_type3_u$`F value`[2:4], 2)
-)
-print(comparison_f_df)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1590,20 +1276,6 @@ orthogonal - Requires careful interpretation
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Calculate effect sizes
-ss_total_u <- sum(anova_type3_u$`Sum Sq`[-1])
-
-eta_squared_p_df <- data.frame(
-  Effect = c("Species", "Sex", "Interaction"),
-  Eta_Squared = round(
-    anova_type3_u$`Sum Sq`[2:4] / ss_total_u, 
-    4)
-)
-print("Effect Sizes (Type III):")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1612,10 +1284,6 @@ print("Effect Sizes (Type III):")
 
 
 :::
-
-```{.r .cell-code}
-print(eta_squared_p_df)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1641,13 +1309,6 @@ print(eta_squared_p_df)
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Grand mean
-grand_mean <- mean(p_df$body_mass_g)
-print(paste("Grand mean:", round(grand_mean, 1)))
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1656,12 +1317,6 @@ print(paste("Grand mean:", round(grand_mean, 1)))
 
 
 :::
-
-```{.r .cell-code}
-# Total SS
-ss_total_manual <- sum((p_df$body_mass_g - grand_mean)^2)
-print(paste("Total SS:", round(ss_total_manual, 0)))
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1672,17 +1327,6 @@ print(paste("Total SS:", round(ss_total_manual, 0)))
 
 :::
 
-```{.r .cell-code}
-# Between-group SS (full model)
-group_means_df <- p_df %>%
-  group_by(species, sex) %>%
-  mutate(group_mean = mean(body_mass_g)) %>%
-  ungroup()
-
-ss_between <- sum((group_means_df$group_mean - grand_mean)^2)
-print(paste("Between-groups SS:", round(ss_between, 0)))
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1692,13 +1336,6 @@ print(paste("Between-groups SS:", round(ss_between, 0)))
 
 :::
 
-```{.r .cell-code}
-# Within-group SS (Error SS)
-ss_within <- sum((group_means_df$body_mass_g - 
-                  group_means_df$group_mean)^2)
-print(paste("Within-groups SS:", round(ss_within, 0)))
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1707,12 +1344,6 @@ print(paste("Within-groups SS:", round(ss_within, 0)))
 
 
 :::
-
-```{.r .cell-code}
-# Verify: Total = Between + Within
-print(paste("Check: Between + Within =", 
-            round(ss_between + ss_within, 0)))
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1731,18 +1362,6 @@ print(paste("Check: Between + Within =",
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# For Type I SS (sequential)
-# SS for species (ignoring sex)
-species_only_model <- lm(body_mass_g ~ species, 
-                         data = p_df)
-ss_species_only <- sum((fitted(species_only_model) - 
-                       grand_mean)^2)
-print(paste("SS(Species alone):", 
-            round(ss_species_only, 0)))
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1751,16 +1370,6 @@ print(paste("SS(Species alone):",
 
 
 :::
-
-```{.r .cell-code}
-# SS for sex (ignoring species)  
-sex_only_model <- lm(body_mass_g ~ sex, 
-                     data = p_df)
-ss_sex_only <- sum((fitted(sex_only_model) - 
-                   grand_mean)^2)
-print(paste("SS(Sex alone):", 
-            round(ss_sex_only, 0)))
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1771,13 +1380,6 @@ print(paste("SS(Sex alone):",
 
 :::
 
-```{.r .cell-code}
-# Note: These don't add up to between SS
-# because effects are not orthogonal!
-print(paste("Sum of main effects:", 
-            round(ss_species_only + ss_sex_only, 0)))
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1787,11 +1389,6 @@ print(paste("Sum of main effects:",
 
 :::
 
-```{.r .cell-code}
-print(paste("Actual between SS:", 
-            round(ss_between, 0)))
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1800,12 +1397,6 @@ print(paste("Actual between SS:",
 
 
 :::
-
-```{.r .cell-code}
-print(paste("Difference (due to correlation):", 
-            round(ss_between - 
-                  (ss_species_only + ss_sex_only), 0)))
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1826,15 +1417,6 @@ print(paste("Difference (due to correlation):",
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# EMMs for main effects
-species_emm_u <- emmeans(model_u, ~ species)
-sex_emm_u <- emmeans(model_u, ~ sex)
-
-print("Species EMMs (model-based):")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1843,10 +1425,6 @@ print("Species EMMs (model-based):")
 
 
 :::
-
-```{.r .cell-code}
-print(species_emm_u)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1863,10 +1441,6 @@ Confidence level used: 0.95
 
 :::
 
-```{.r .cell-code}
-print("\nSex EMMs (model-based):")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1875,10 +1449,6 @@ print("\nSex EMMs (model-based):")
 
 
 :::
-
-```{.r .cell-code}
-print(sex_emm_u)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1893,15 +1463,6 @@ Confidence level used: 0.95
 
 
 :::
-
-```{.r .cell-code}
-# Get estimated marginal means for the interaction
-emm_interaction_u <- emmeans(model_u, ~ species * sex)  # Replace factor1 and factor2 with your actual factor names
-
-# Pairwise comparisons with Tukey adjustment
-pairs_interaction_u <- pairs(emm_interaction, adjust = "tukey")
-pairs_interaction_u
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1935,23 +1496,6 @@ P value adjustment: tukey method for comparing a family of 6 estimates
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Get compact letter display (cld)
-cld_interaction_u <- multcomp::cld(emm_interaction_u, 
-                       Letters = letters,
-                       adjust = "sidak")
-
-# Display the results
-# print(cld_interaction)
-
-cld_df_u <- as.data.frame(cld_interaction_u) %>%
-  arrange(species, sex)  # Sort by estimated marginal mean
-
-# View the results with means and grouping letters
-print(cld_df_u)
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1985,14 +1529,6 @@ NOTE: If two or more means share the same grouping symbol,
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Pairwise comparisons for species
-species_pairs_u <- pairs(species_emm_u, 
-                         adjust = "tukey")
-print("Species pairwise comparisons (Tukey):")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -2001,10 +1537,6 @@ print("Species pairwise comparisons (Tukey):")
 
 
 :::
-
-```{.r .cell-code}
-print(species_pairs_u)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -2021,13 +1553,6 @@ P value adjustment: tukey method for comparing a family of 3 estimates
 
 :::
 
-```{.r .cell-code}
-# Effect of sex within each species
-sex_by_species_emm <- emmeans(model_u, ~ sex | species)
-sex_effects_df <- pairs(sex_by_species_emm)
-print("\nSex effect within each species:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -2036,10 +1561,6 @@ print("\nSex effect within each species:")
 
 
 :::
-
-```{.r .cell-code}
-print(sex_effects_df)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -2068,30 +1589,6 @@ species = Gentoo:
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Test if sex effect differs across species
-interaction_test <- emmeans(model_u, 
-                            pairwise ~ sex | species)
-
-# Extract contrasts
-contrasts_df <- as.data.frame(interaction_test$contrasts)
-
-# Calculate difference in sex effects
-sex_diff_adelie <- contrasts_df[1, "estimate"]
-sex_diff_chinstrap <- contrasts_df[2, "estimate"]
-sex_diff_gentoo <- contrasts_df[3, "estimate"]
-
-interaction_summary_df <- data.frame(
-  Species = c("Adelie", "Chinstrap", "Gentoo"),
-  Sex_Effect = round(c(sex_diff_adelie, 
-                       sex_diff_chinstrap,
-                       sex_diff_gentoo), 0)
-)
-
-print("Sex effect (Male - Female) by species:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -2100,10 +1597,6 @@ print("Sex effect (Male - Female) by species:")
 
 
 :::
-
-```{.r .cell-code}
-print(interaction_summary_df)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -2117,11 +1610,6 @@ print(interaction_summary_df)
 
 :::
 
-```{.r .cell-code}
-# Test if these differ significantly
-print("\nInteraction interpretation:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -2130,14 +1618,6 @@ print("\nInteraction interpretation:")
 
 
 :::
-
-```{.r .cell-code}
-if(anova_type3_u$`Pr(>F)`[4] < 0.05) {
-  print("Sex effects differ across species")
-} else {
-  print("Sex effects similar across species")
-}
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -2160,33 +1640,6 @@ if(anova_type3_u$`Pr(>F)`[4] < 0.05) {
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Diagnostic plots
-par(mfrow = c(2, 2))
-
-# Residuals vs Fitted
-plot(model_u, which = 1,
-     main = "Residuals vs Fitted")
-
-# Q-Q plot
-plot(model_u, which = 2,
-     main = "Normal Q-Q")
-
-# Scale-Location  
-plot(model_u, which = 3,
-     main = "Scale-Location")
-
-# Residuals by group
-plot(fitted(model_u), residuals(model_u),
-     col = as.numeric(interaction(p_df$species, 
-                                  p_df$sex)),
-     main = "Residuals by Group",
-     xlab = "Fitted values",
-     ylab = "Residuals")
-abline(h = 0, lty = 2)
-```
-
 ::: {.cell-output-display}
 ![](12_01_lecture_powerpoint_files/figure-pptx/diagnostics_unbalanced-1.png)
 :::
@@ -2199,13 +1652,6 @@ abline(h = 0, lty = 2)
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Normality test
-shapiro_u <- shapiro.test(residuals(model_u))
-print("Shapiro-Wilk test:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -2214,10 +1660,6 @@ print("Shapiro-Wilk test:")
 
 
 :::
-
-```{.r .cell-code}
-print(shapiro_u)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -2232,14 +1674,6 @@ W = 0.99776, p-value = 0.9367
 
 :::
 
-```{.r .cell-code}
-# Homogeneity of variance
-levene_u <- leveneTest(body_mass_g ~ species * sex,
-                       data = p_df,
-                       center = median)
-print("\nLevene's test:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -2248,10 +1682,6 @@ print("\nLevene's test:")
 
 
 :::
-
-```{.r .cell-code}
-print(levene_u)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -2265,24 +1695,6 @@ group   5  1.3908 0.2272
 
 :::
 
-```{.r .cell-code}
-# Check residuals by group
-residual_summary_df <- p_df %>%
-  mutate(
-    residuals = residuals(model_u),
-    fitted = fitted(model_u)
-  ) %>%
-  group_by(species, sex) %>%
-  summarise(
-    n = n(),
-    mean_resid = mean(residuals),
-    sd_resid = sd(residuals),
-    .groups = 'drop'
-  )
-
-print("\nResidual SD by group:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -2291,11 +1703,6 @@ print("\nResidual SD by group:")
 
 
 :::
-
-```{.r .cell-code}
-print(residual_summary_df[, c("species", "sex", 
-                              "sd_resid")])
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -2326,32 +1733,6 @@ print(residual_summary_df[, c("species", "sex",
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Load balanced results (simulated)
-set.seed(123)
-b_df <- p_df %>%
-  group_by(species, sex) %>%
-  sample_n(34) %>%
-  ungroup()
-
-# Fit balanced model
-options(contrasts = c("contr.sum", "contr.poly"))
-model_b <- lm(body_mass_g ~ species * sex, data = b_df)
-anova_b <- Anova(model_b, type = "III")
-
-# Create comparison table
-comparison_results_df <- data.frame(
-  Effect = c("Species", "Sex", "Interaction"),
-  Balanced_F = round(anova_b$`F value`[2:4], 2),
-  Balanced_p = round(anova_b$`Pr(>F)`[2:4], 4),
-  Unbalanced_F = round(anova_type3_u$`F value`[2:4], 2),
-  Unbalanced_p = round(anova_type3_u$`Pr(>F)`[2:4], 4)
-)
-
-print("Balanced vs Unbalanced Results:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -2360,10 +1741,6 @@ print("Balanced vs Unbalanced Results:")
 
 
 :::
-
-```{.r .cell-code}
-print(comparison_results_df)
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -2377,11 +1754,6 @@ print(comparison_results_df)
 
 :::
 
-```{.r .cell-code}
-# Compare power
-print("\nSample sizes:")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -2390,10 +1762,6 @@ print("\nSample sizes:")
 
 
 :::
-
-```{.r .cell-code}
-print(paste("Balanced total N:", nrow(b_df)))
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -2404,10 +1772,6 @@ print(paste("Balanced total N:", nrow(b_df)))
 
 :::
 
-```{.r .cell-code}
-print(paste("Unbalanced total N:", nrow(p_df)))
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -2416,12 +1780,6 @@ print(paste("Unbalanced total N:", nrow(p_df)))
 
 
 :::
-
-```{.r .cell-code}
-print(paste("Data discarded:", 
-            nrow(p_df) - nrow(b_df), 
-            "observations"))
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -2440,40 +1798,6 @@ print(paste("Data discarded:",
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Combine EMMs from both analyses
-emm_b <- as.data.frame(emmeans(model_b, ~ species))
-emm_u <- as.data.frame(emmeans(model_u, ~ species))
-
-comparison_plot_df <- data.frame(
-  Species = rep(levels(as.factor(p_df$species)), 2),
-  Design = rep(c("Balanced", "Unbalanced"), 
-               each = 3),
-  EMM = c(as.numeric(emm_b$emmean),
-          as.numeric(emm_u$emmean)),
-  SE = c(as.numeric(emm_b$SE),
-         as.numeric(emm_u$SE))
-)
-
-comparison_plot <- ggplot(comparison_plot_df, 
-       aes(x = Species, y = EMM, 
-           color = Design, group = Design)) +
-  geom_point(position = position_dodge(0.3), 
-             size = 3) +
-  geom_errorbar(aes(ymin = EMM - SE, 
-                    ymax = EMM + SE),
-                position = position_dodge(0.3),
-                width = 0.2) +
-  labs(title = "EMMs: Balanced vs Unbalanced",
-       y = "Estimated Marginal Mean (g)",
-       color = "Design") +
-  theme_minimal() +
-  theme(legend.position = "top")
-
-print(comparison_plot)
-```
-
 ::: {.cell-output-display}
 ![](12_01_lecture_powerpoint_files/figure-pptx/visual_comparison-1.png)
 :::

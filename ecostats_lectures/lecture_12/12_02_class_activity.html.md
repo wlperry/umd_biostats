@@ -1,5 +1,5 @@
 ---
-title: "Lecture 12 - Factorial ANOVA of Limpet Egg Production"
+title: "Lecture 12 - Factorial ANOVA of Penguin Mass"
 author: "Bill Perry"
 metadata-files:
   - ../../_templates/activities.yml

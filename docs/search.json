@@ -1570,287 +1570,287 @@
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "",
     "text": "The set up and data overview\n\n# Load required packages\nlibrary(palmerpenguins) # has the data for penguins and they are cute\nlibrary(car)       # For Levene's test and Type III SS\nlibrary(emmeans)   # For estimated marginal means\nlibrary(broom)     # For tidying model outputs\nlibrary(patchwork) # For combining plots\nlibrary(tidyverse)\n\n# Set theme for plots\ntheme_set(theme_light(base_size = 12))\n\n\np_df &lt;- penguins %&gt;%\n  select(spp = species, sex, body_mass_g) %&gt;% \n  rename(mass_g = body_mass_g)\nhead(p_df)\n\n# A tibble: 6 × 3\n  spp    sex    mass_g\n  &lt;fct&gt;  &lt;fct&gt;   &lt;int&gt;\n1 Adelie male     3750\n2 Adelie female   3800\n3 Adelie female   3250\n4 Adelie &lt;NA&gt;       NA\n5 Adelie female   3450\n6 Adelie male     3650\n\n\n\n# Check for missing values\np_df %&gt;% \n  summarise_all(~sum(is.na(.))) \n\n# A tibble: 1 × 3\n    spp   sex mass_g\n  &lt;int&gt; &lt;int&gt;  &lt;int&gt;\n1     0    11      2\n\n\n\n# Load the penguin data\np_df &lt;- p_df %&gt;%\n  filter(!is.na(mass_g), \n         !is.na(sex),\n         !is.na(spp)) \n\n# View the first few rows\nhead(p_df)\n\n# A tibble: 6 × 3\n  spp    sex    mass_g\n  &lt;fct&gt;  &lt;fct&gt;   &lt;int&gt;\n1 Adelie male     3750\n2 Adelie female   3800\n3 Adelie female   3250\n4 Adelie female   3450\n5 Adelie male     3650\n6 Adelie female   3625\n\n\n\n# Summary statistics\np_df %&gt;%\n  group_by(spp, sex) %&gt;%\n  summarise(\n    mean_mass = mean(mass_g, na.rm=TRUE),\n    sd_mass = sd(mass_g, na.rm=TRUE),\n    n = sum(!is.na(mass_g)),\n    se_mass = sd_mass/n^.5,\n    .groups = 'drop'\n  )\n\n# A tibble: 6 × 6\n  spp       sex    mean_mass sd_mass     n se_mass\n  &lt;fct&gt;     &lt;fct&gt;      &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;\n1 Adelie    female     3369.    269.    73    31.5\n2 Adelie    male       4043.    347.    73    40.6\n3 Chinstrap female     3527.    285.    34    48.9\n4 Chinstrap male       3939.    362.    34    62.1\n5 Gentoo    female     4680.    282.    58    37.0\n6 Gentoo    male       5485.    313.    61    40.1"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#anova-assumptions",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#anova-assumptions",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "ANOVA Assumptions",
     "text": "ANOVA Assumptions\nIn the factorial ANOVA, we need to check several assumptions after fitting the model:\n\nIndependence of observations\nNormality of residuals\nHomogeneity of variances\nHomoscedascidity\n\nFit the model\n\n# Set contrasts for Type III SS\noptions(contrasts = c(\"contr.sum\", \"contr.poly\"))\n\n# Fit the factorial ANOVA using linear model (lm) instead of aov\npb_model &lt;- lm(mass_g ~ spp * sex, data = pb_df)\n\n# View the model summary to see coefficients, standard errors, etc.\nsummary(pb_model)\n\n\nCall:\nlm(formula = mass_g ~ spp * sex, data = pb_df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-827.21 -178.13    6.25  175.00  861.03 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  4175.86      21.23 196.727  &lt; 2e-16 ***\nspp1         -484.31      30.02 -16.134  &lt; 2e-16 ***\nspp2         -442.77      30.02 -14.750  &lt; 2e-16 ***\nsex1         -328.31      21.23 -15.467  &lt; 2e-16 ***\nspp1:sex1     -28.68      30.02  -0.955    0.341    \nspp2:sex1     122.43      30.02   4.078 6.57e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 303.2 on 198 degrees of freedom\nMultiple R-squared:  0.8596,    Adjusted R-squared:  0.856 \nF-statistic: 242.4 on 5 and 198 DF,  p-value: &lt; 2.2e-16\n\n\n\nAnova(pb_model, type = 3)\n\nAnova Table (Type III tests)\n\nResponse: mass_g\n                Sum Sq  Df    F value    Pr(&gt;F)    \n(Intercept) 3557308900   1 38701.5271 &lt; 2.2e-16 ***\nspp           87725999   2   477.2049 &lt; 2.2e-16 ***\nsex           21988483   1   239.2224 &lt; 2.2e-16 ***\nspp:sex        1672776   2     9.0994 0.0001657 ***\nResiduals     18199467 198                         \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#assumptions",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#assumptions",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "ASSUMPTIONS",
     "text": "ASSUMPTIONS\n\n# Create diagnostic plots\npar(mfrow = c(2, 2))\nplot(pb_model)\n\n\n\n\n\n\n\npar(mfrow = c(1, 1))"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Check for Normality of Residuals",
     "text": "Check for Normality of Residuals\n\n# Extract residuals from the model\npb_resid_df &lt;- augment(pb_model)\n\n# Create Q-Q plot of residuals\nggplot(pb_resid_df, aes(sample = .resid)) +\n  stat_qq() +\n  stat_qq_line() +\n  labs(title = \"Q-Q Plot of Residuals\",\n       x = \"Theoretical Quantiles\",\n       y = \"Sample Quantiles\")"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals-1",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals-1",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Check for Normality of Residuals",
     "text": "Check for Normality of Residuals\n\n# Histogram of residuals\nggplot(pb_resid_df, aes(x = .resid)) +\n  geom_histogram(bins = 15, fill = \"snow\", color = \"black\") +\n  labs(title = \"Histogram of Residuals\",\n       x = \"Residuals\",\n       y = \"Count\")"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals-2",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals-2",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Check for Normality of Residuals",
     "text": "Check for Normality of Residuals\n\n# Shapiro-Wilk test for normality\nshapiro.test(pb_model$residuals)\n\n\n    Shapiro-Wilk normality test\n\ndata:  pb_model$residuals\nW = 0.99612, p-value = 0.8886\n\n# or\nshapiro.test(residuals(pb_model))\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(pb_model)\nW = 0.99612, p-value = 0.8886"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-homogeneity-of-variances",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-homogeneity-of-variances",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Check for homogeneity of variances",
     "text": "Check for homogeneity of variances\n\n# Residuals vs. fitted values plot\nggplot(pb_resid_df, aes(x = .fitted, y = .resid)) +\n  geom_point() +\n  geom_hline(yintercept = 0, linetype = \"dashed\", color = \"red\") +\n  labs(title = \"Residuals vs Fitted Values\",\n       x = \"Fitted Values\",\n       y = \"Residuals\")"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-homogeneity-of-variances-1",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-homogeneity-of-variances-1",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Check for homogeneity of variances",
     "text": "Check for homogeneity of variances\n\n# Add residuals to original data for plotting\npb_resid_group_df &lt;- pb_df %&gt;%\n  mutate(residuals = residuals(pb_model))\n\n# Residuals by group\nggplot(pb_resid_group_df, aes(x = interaction(spp, sex), y = residuals)) +\n  geom_boxplot() +\n  labs(title = \"Residuals by Group\",\n       x = \"Species:Sex Combination\",\n       y = \"Residuals\") +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\n# Get estimated marginal means from the linear model\n# Main effect of species\nsppb_emm &lt;- emmeans(pb_model, ~ spp)\nsppb_emm\n\n spp       emmean   SE  df lower.CL upper.CL\n Adelie      3692 36.8 198     3619     3764\n Chinstrap   3733 36.8 198     3661     3806\n Gentoo      5103 36.8 198     5030     5175\n\nResults are averaged over the levels of: sex \nConfidence level used: 0.95 \n\npairs(sppb_emm)\n\n contrast           estimate SE  df t.ratio p.value\n Adelie - Chinstrap    -41.5 52 198  -0.799  0.7041\n Adelie - Gentoo     -1411.4 52 198 -27.145  &lt;.0001\n Chinstrap - Gentoo  -1369.9 52 198 -26.346  &lt;.0001\n\nResults are averaged over the levels of: sex \nP value adjustment: tukey method for comparing a family of 3 estimates"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-1",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-1",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\nplot(sppb_emm)"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-2",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-2",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\n# Main effect of sex\nsexb_emm &lt;- emmeans(pb_model, ~ sex)\nsexb_emm\n\n sex    emmean SE  df lower.CL upper.CL\n female   3848 30 198     3788     3907\n male     4504 30 198     4445     4563\n\nResults are averaged over the levels of: spp \nConfidence level used: 0.95 \n\npairs(sexb_emm)\n\n contrast      estimate   SE  df t.ratio p.value\n female - male     -657 42.5 198 -15.467  &lt;.0001\n\nResults are averaged over the levels of: spp"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-3",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-3",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\n# Main effect of sex\nplot(sexb_emm)"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-4",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-4",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\n# Interaction effects\ninteractionb_emm &lt;- emmeans(pb_model, ~ spp * sex)\ninteractionb_emm\n\n spp       sex    emmean SE  df lower.CL upper.CL\n Adelie    female   3335 52 198     3232     3437\n Chinstrap female   3527 52 198     3425     3630\n Gentoo    female   4681 52 198     4578     4783\n Adelie    male     4049 52 198     3946     4151\n Chinstrap male     3939 52 198     3836     4042\n Gentoo    male     5525 52 198     5422     5628\n\nConfidence level used: 0.95 \n\n\n\n# Compare to raw means\npb_df %&gt;%\n  group_by(spp, sex) %&gt;%\n  summarise(\n    raw_mean = mean(mass_g),\n    .groups = 'drop'\n  ) %&gt;%\n  pivot_wider(names_from = sex, values_from = raw_mean)\n\n# A tibble: 3 × 3\n  spp       female  male\n  &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt;\n1 Adelie     3335. 4049.\n2 Chinstrap  3527. 3939.\n3 Gentoo     4681. 5525 \n\n\n\npairs(interactionb_emm)\n\n contrast                          estimate   SE  df t.ratio p.value\n Adelie female - Chinstrap female      -193 73.5 198  -2.620  0.0973\n Adelie female - Gentoo female        -1346 73.5 198 -18.310  &lt;.0001\n Adelie female - Adelie male           -714 73.5 198  -9.710  &lt;.0001\n Adelie female - Chinstrap male        -604 73.5 198  -8.220  &lt;.0001\n Adelie female - Gentoo male          -2190 73.5 198 -29.789  &lt;.0001\n Chinstrap female - Gentoo female     -1154 73.5 198 -15.690  &lt;.0001\n Chinstrap female - Adelie male        -521 73.5 198  -7.090  &lt;.0001\n Chinstrap female - Chinstrap male     -412 73.5 198  -5.600  &lt;.0001\n Chinstrap female - Gentoo male       -1998 73.5 198 -27.169  &lt;.0001\n Gentoo female - Adelie male            632 73.5 198   8.600  &lt;.0001\n Gentoo female - Chinstrap male         742 73.5 198  10.090  &lt;.0001\n Gentoo female - Gentoo male           -844 73.5 198 -11.480  &lt;.0001\n Adelie male - Chinstrap male           110 73.5 198   1.490  0.6711\n Adelie male - Gentoo male            -1476 73.5 198 -20.079  &lt;.0001\n Chinstrap male - Gentoo male         -1586 73.5 198 -21.569  &lt;.0001\n\nP value adjustment: tukey method for comparing a family of 6 estimates \n\n\n\n# Get compact letter display (cld)\ncldb_interaction &lt;- multcomp::cld(interactionb_emm, \n                       Letters = letters,\n                       adjust = \"sidak\")\n\n# Display the results\n# print(cld_interaction)\n\ncldb_df &lt;- as.data.frame(cldb_interaction) %&gt;%\n  arrange(spp, sex)  # Sort by estimated marginal mean\n\n# View the results with means and grouping letters\nprint(cldb_df)\n\n spp       sex      emmean       SE  df lower.CL upper.CL .group\n Adelie    female 3334.559 51.99448 198 3196.378 3472.740  a    \n Adelie    male   4048.529 51.99448 198 3910.349 4186.710   b   \n Chinstrap female 3527.206 51.99448 198 3389.025 3665.387  a    \n Chinstrap male   3938.971 51.99448 198 3800.790 4077.151   b   \n Gentoo    female 4680.882 51.99448 198 4542.702 4819.063    c  \n Gentoo    male   5525.000 51.99448 198 5386.819 5663.181     d \n\nConfidence level used: 0.95 \nConf-level adjustment: sidak method for 6 estimates \nP value adjustment: sidak method for 15 tests \nsignificance level used: alpha = 0.05 \nNOTE: If two or more means share the same grouping symbol,\n      then we cannot show them to be different.\n      But we also did not show them to be the same."
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-5",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-5",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\n# Interaction plot with confidence intervals\nemmip(pb_model, sex ~ spp, CIs = TRUE) +\n  labs(title = \"Interaction Plot\",\n       x = \"Species\",\n       y = \"Body Mass (g)\")"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-6",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-6",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\n# Convert emmeans object to data frame\ninteractionb_df &lt;- as.data.frame(interactionb_emm)\ninteractionb_df\n\n spp       sex      emmean       SE  df lower.CL upper.CL\n Adelie    female 3334.559 51.99448 198 3232.025 3437.093\n Chinstrap female 3527.206 51.99448 198 3424.672 3629.740\n Gentoo    female 4680.882 51.99448 198 4578.348 4783.416\n Adelie    male   4048.529 51.99448 198 3945.995 4151.063\n Chinstrap male   3938.971 51.99448 198 3836.437 4041.505\n Gentoo    male   5525.000 51.99448 198 5422.466 5627.534\n\nConfidence level used: 0.95"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#this-is-a-plot-you-might-produce-for-publication",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#this-is-a-plot-you-might-produce-for-publication",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "This is a plot you might produce for publication",
     "text": "This is a plot you might produce for publication\n\n# Publication-quality plot with model predictions\n# Convert emmeans object to data frame\npubb_interaction_df &lt;- as.data.frame(interactionb_emm)\n\n# Create enhanced plot with model predictions\npubb_plot &lt;- ggplot(pubb_interaction_df, aes(x = spp, y = emmean, \n                                       color = sex, group = sex)) +\n  # Add lines connecting the means\n  geom_line(linewidth = 1,\n            position = position_dodge(width = 0.2)) +\n  # Add points at each mean\n  geom_point(size = 3,\n            position = position_dodge(width = 0.2)) +\n  # Add error bars showing standard error\n  geom_errorbar(aes(ymin = emmean - SE, ymax = emmean + SE), \n                width = 0.2,\n                position = position_dodge(width = 0.2)) +\n  # Simple labels\n  labs(\n    x = \"Species\",\n    y = \"Body Mass (g)\",\n    color = \"Sex\"\n  ) +\n  theme_light()\n\npubb_plot"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#type-i-sums-of-squares-sequential",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#type-i-sums-of-squares-sequential",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Type I Sums of Squares (Sequential)",
     "text": "Type I Sums of Squares (Sequential)\n\n# Type I SS - order matters!\n# This is the default in R's anova() function\ntype1b_anova &lt;- anova(pb_model)\ntype1b_anova\n\nAnalysis of Variance Table\n\nResponse: mass_g\n           Df   Sum Sq  Mean Sq  F value    Pr(&gt;F)    \nspp         2 87725999 43862999 477.2049 &lt; 2.2e-16 ***\nsex         1 21988483 21988483 239.2224 &lt; 2.2e-16 ***\nspp:sex     2  1672776   836388   9.0994 0.0001657 ***\nResiduals 198 18199467    91916                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nType I SS tests effects in the order they appear in the model. Each term is adjusted for terms that appear before it in the model."
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#type-ii-sums-of-squares",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#type-ii-sums-of-squares",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Type II Sums of Squares",
     "text": "Type II Sums of Squares\n\n# Type II SS - each main effect adjusted for other main effects\n# but not for interactions\ntype2b_anova &lt;- Anova(pb_model, type = 2)\ntype2b_anova\n\nAnova Table (Type II tests)\n\nResponse: mass_g\n            Sum Sq  Df  F value    Pr(&gt;F)    \nspp       87725999   2 477.2049 &lt; 2.2e-16 ***\nsex       21988483   1 239.2224 &lt; 2.2e-16 ***\nspp:sex    1672776   2   9.0994 0.0001657 ***\nResiduals 18199467 198                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nType II SS tests each main effect after adjusting for other main effects, but not for the interaction. This is appropriate when interactions are not significant."
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#type-iii-sums-of-squares",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#type-iii-sums-of-squares",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Type III Sums of Squares",
     "text": "Type III Sums of Squares\n\n# Type III SS - each effect adjusted for all other effects\n# This is what we used earlier\ntype3b_anova &lt;- Anova(pb_model, type = 3)\ntype3b_anova\n\nAnova Table (Type III tests)\n\nResponse: mass_g\n                Sum Sq  Df    F value    Pr(&gt;F)    \n(Intercept) 3557308900   1 38701.5271 &lt; 2.2e-16 ***\nspp           87725999   2   477.2049 &lt; 2.2e-16 ***\nsex           21988483   1   239.2224 &lt; 2.2e-16 ***\nspp:sex        1672776   2     9.0994 0.0001657 ***\nResiduals     18199467 198                         \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nType III SS tests each effect after adjusting for all other effects in the model. This is the most conservative approach and is commonly used in unbalanced designs."
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#comparing-the-three-types",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#comparing-the-three-types",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Comparing the Three Types",
     "text": "Comparing the Three Types\n\n# Create a comparison table of F-values\nssb_comparison_df &lt;- data.frame(\n  Effect = c(\"Species\", \"Sex\", \"Species:Sex\"),\n  Typeb_I_F = round(type1b_anova$`F value`[1:3], 2),\n  Typeb_II_F = round(type2b_anova$`F value`[2:4], 2),\n  Typeb_III_F = round(type3b_anova$`F value`[2:4], 2)\n)\n\nssb_comparison_df\n\n       Effect Typeb_I_F Typeb_II_F Typeb_III_F\n1     Species    477.20     239.22      477.20\n2         Sex    239.22       9.10      239.22\n3 Species:Sex      9.10         NA        9.10\n\n\n\n# Create a comparison table of p-values\npb_comparison_df &lt;- data.frame(\n  Effect = c(\"Species\", \"Sex\", \"Species:Sex\"),\n  Typeb_I_p = round(type1b_anova$`Pr(&gt;F)`[1:3], 4),\n  Typeb_II_p = round(type2b_anova$`Pr(&gt;F)`[2:4], 4),\n  Typeb_III_p = round(type3b_anova$`Pr(&gt;F)`[2:4], 4)\n)\n\npb_comparison_df\n\n       Effect Typeb_I_p Typeb_II_p Typeb_III_p\n1     Species     0e+00      0e+00       0e+00\n2         Sex     0e+00      2e-04       0e+00\n3 Species:Sex     2e-04         NA       2e-04"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#when-does-it-matter",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#when-does-it-matter",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "When Does It Matter?",
     "text": "When Does It Matter?\nThe choice of SS type matters most when:\n\nUnbalanced designs: When sample sizes differ across groups\nCorrelated predictors: When predictors are not orthogonal\nInteractions present: When there are significant interactions\n\nFor balanced designs (equal sample sizes in all cells), all three types give the same results for main effects."
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#anova-assumptions-1",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#anova-assumptions-1",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "ANOVA Assumptions",
     "text": "ANOVA Assumptions\nIn the factorial ANOVA, we need to check several assumptions after fitting the model:\n\nIndependence of observations\nNormality of residuals\nHomogeneity of variances\n\nFit the model\n\n# Fit the factorial ANOVA using linear model (lm) instead of aov\npu_model &lt;- lm(mass_g ~ spp * sex, data = p_df)\n\n# View the model summary to see coefficients, standard errors, etc.\nsummary(pu_model)\n\n\nCall:\nlm(formula = mass_g ~ spp * sex, data = p_df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-827.21 -213.97   11.03  206.51  861.03 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  4173.85      17.85 233.799  &lt; 2e-16 ***\nspp1         -467.68      23.18 -20.177  &lt; 2e-16 ***\nspp2         -440.76      28.07 -15.702  &lt; 2e-16 ***\nsex1         -315.25      17.85 -17.659  &lt; 2e-16 ***\nspp1:sex1     -22.08      23.18  -0.952 0.341589    \nspp2:sex1     109.37      28.07   3.896 0.000118 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 309.4 on 327 degrees of freedom\nMultiple R-squared:  0.8546,    Adjusted R-squared:  0.8524 \nF-statistic: 384.3 on 5 and 327 DF,  p-value: &lt; 2.2e-16\n\n\n\nAnova(pu_model, type = 3)\n\nAnova Table (Type III tests)\n\nResponse: mass_g\n                Sum Sq  Df   F value    Pr(&gt;F)    \n(Intercept) 5232595969   1 54661.828 &lt; 2.2e-16 ***\nspp          143001222   2   746.924 &lt; 2.2e-16 ***\nsex           29851220   1   311.838 &lt; 2.2e-16 ***\nspp:sex        1676557   2     8.757 0.0001973 ***\nResiduals     31302628 327                        \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#assumptions-1",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#assumptions-1",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "ASSUMPTIONS",
     "text": "ASSUMPTIONS\n\n# Create diagnostic plots\npar(mfrow = c(2, 2))\nplot(pu_model)\n\n\n\n\n\n\n\npar(mfrow = c(1, 1))"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals-3",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals-3",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Check for Normality of Residuals",
     "text": "Check for Normality of Residuals\n\n# Extract residuals from the model\npu_resid_df &lt;- augment(pu_model)\n\n# Create Q-Q plot of residuals\nggplot(pu_resid_df, aes(sample = .resid)) +\n  stat_qq() +\n  stat_qq_line() +\n  labs(title = \"Q-Q Plot of Residuals\",\n       x = \"Theoretical Quantiles\",\n       y = \"Sample Quantiles\")"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals-4",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals-4",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Check for Normality of Residuals",
     "text": "Check for Normality of Residuals\n\n# Histogram of residuals\nggplot(pu_resid_df, aes(x = .resid)) +\n  geom_histogram(bins = 15, fill = \"snow\", color = \"black\") +\n  labs(title = \"Histogram of Residuals\",\n       x = \"Residuals\",\n       y = \"Count\")"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals-5",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals-5",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Check for Normality of Residuals",
     "text": "Check for Normality of Residuals\n\n# Shapiro-Wilk test for normality\nshapiro.test(pu_model$residuals)\n\n\n    Shapiro-Wilk normality test\n\ndata:  pu_model$residuals\nW = 0.99776, p-value = 0.9367"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-homogeneity-of-variances-2",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-homogeneity-of-variances-2",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Check for homogeneity of variances",
     "text": "Check for homogeneity of variances\n\n# Residuals vs. fitted values plot\nggplot(pu_resid_df, aes(x = .fitted, y = .resid)) +\n  geom_point() +\n  geom_hline(yintercept = 0, linetype = \"dashed\", color = \"red\") +\n  labs(title = \"Residuals vs Fitted Values\",\n       x = \"Fitted Values\",\n       y = \"Residuals\")"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-homogeneity-of-variances-3",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-homogeneity-of-variances-3",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Check for homogeneity of variances",
     "text": "Check for homogeneity of variances\n\n# Add residuals to original data for plotting\npu_resid_group_df &lt;- p_df %&gt;%\n  mutate(residuals = residuals(pu_model))\n\n# Residuals by group\nggplot(pu_resid_group_df, aes(x = interaction(spp, sex), y = residuals)) +\n  geom_boxplot() +\n  labs(title = \"Residuals by Group\",\n       x = \"Species:Sex Combination\",\n       y = \"Residuals\") +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-7",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-7",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\n# Get estimated marginal means from the linear model\n# Main effect of species\nsppu_emm &lt;- emmeans(pu_model, ~ spp)\nsppu_emm\n\n spp       emmean   SE  df lower.CL upper.CL\n Adelie      3706 25.6 327     3656     3757\n Chinstrap   3733 37.5 327     3659     3807\n Gentoo      5082 28.4 327     5026     5138\n\nResults are averaged over the levels of: sex \nConfidence level used: 0.95 \n\npairs(sppu_emm)\n\n contrast           estimate   SE  df t.ratio p.value\n Adelie - Chinstrap    -26.9 45.4 327  -0.593  0.8241\n Adelie - Gentoo     -1376.1 38.2 327 -36.007  &lt;.0001\n Chinstrap - Gentoo  -1349.2 47.0 327 -28.682  &lt;.0001\n\nResults are averaged over the levels of: sex \nP value adjustment: tukey method for comparing a family of 3 estimates"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-8",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-8",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\nplot(sppu_emm)"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-9",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-9",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\n# Main effect of sex\nsexu_emm &lt;- emmeans(pu_model, ~ sex)\nsexu_emm\n\n sex    emmean   SE  df lower.CL upper.CL\n female   3859 25.3 327     3809     3908\n male     4489 25.2 327     4440     4539\n\nResults are averaged over the levels of: spp \nConfidence level used: 0.95 \n\npairs(sexu_emm)\n\n contrast      estimate   SE  df t.ratio p.value\n female - male     -631 35.7 327 -17.659  &lt;.0001\n\nResults are averaged over the levels of: spp"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-10",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-10",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\n# Main effect of sex\nplot(sexu_emm)"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-11",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-11",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\n# Interaction effects\ninteractionu_emm &lt;- emmeans(pu_model, ~ spp * sex)\ninteractionu_emm\n\n spp       sex    emmean   SE  df lower.CL upper.CL\n Adelie    female   3369 36.2 327     3298     3440\n Chinstrap female   3527 53.1 327     3423     3632\n Gentoo    female   4680 40.6 327     4600     4760\n Adelie    male     4043 36.2 327     3972     4115\n Chinstrap male     3939 53.1 327     3835     4043\n Gentoo    male     5485 39.6 327     5407     5563\n\nConfidence level used: 0.95 \n\n# ~ species | sex - Gets species means conditional on each sex level separately. \n# This is useful for simple effects \n# (e.g., \"Is there a species effect within males? Within females?\") \n# but it's not the same as the interaction.\n\n\n# Compare to raw means\np_df %&gt;%\n  group_by(spp, sex) %&gt;%\n  summarise(\n    raw_mean = mean(mass_g),\n    .groups = 'drop'\n  ) %&gt;%\n  pivot_wider(names_from = sex, values_from = raw_mean)\n\n# A tibble: 3 × 3\n  spp       female  male\n  &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt;\n1 Adelie     3369. 4043.\n2 Chinstrap  3527. 3939.\n3 Gentoo     4680. 5485.\n\n\n\n# Get compact letter display (cld)\ncldu_interaction &lt;- multcomp::cld(interactionu_emm, \n                       Letters = letters,\n                       adjust = \"sidak\")\n\n# Display the results\n# print(cld_interaction)\n\ncldu_df &lt;- as.data.frame(cldu_interaction) %&gt;%\n  arrange(spp, sex)  # Sort by estimated marginal mean\n\n# View the results with means and grouping letters\nprint(cldu_df)"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-12",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-12",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\n# Interaction plot with confidence intervals\nemmip(pu_model, sex ~ spp, CIs = TRUE) +\n  labs(title = \"Interaction Plot\",\n       x = \"Species\",\n       y = \"Body Mass (g)\")"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-13",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#estimated-marginal-means-and-effects-13",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Estimated Marginal Means and Effects",
     "text": "Estimated Marginal Means and Effects\n\n# Convert emmeans object to data frame\ninteractionu_df &lt;- as.data.frame(interactionu_emm)\ninteractionu_df\n\n spp       sex      emmean       SE  df lower.CL upper.CL\n Adelie    female 3368.836 36.21222 327 3297.597 3440.074\n Chinstrap female 3527.206 53.06120 327 3422.821 3631.590\n Gentoo    female 4679.741 40.62586 327 4599.820 4759.662\n Adelie    male   4043.493 36.21222 327 3972.255 4114.731\n Chinstrap male   3938.971 53.06120 327 3834.586 4043.355\n Gentoo    male   5484.836 39.61427 327 5406.905 5562.767\n\nConfidence level used: 0.95"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#this-is-a-plot-you-might-produce-for-publication-1",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#this-is-a-plot-you-might-produce-for-publication-1",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "This is a plot you might produce for publication",
     "text": "This is a plot you might produce for publication\n\n# Publication-quality plot with model predictions\n# Convert emmeans object to data frame\npub_interaction_df &lt;- as.data.frame(interactionu_emm)\n\n# Create enhanced plot with model predictions\npub_plot &lt;- ggplot(pub_interaction_df, aes(x = spp, y = emmean, \n                                       color = sex, group = sex)) +\n  # Add lines connecting the means\n  geom_line(linewidth = 1,\n            position = position_dodge(width = 0.2)) +\n  # Add points at each mean\n  geom_point(size = 3,\n            position = position_dodge(width = 0.2)) +\n  # Add error bars showing standard error\n  geom_errorbar(aes(ymin = emmean - SE, ymax = emmean + SE), \n                width = 0.2,\n                position = position_dodge(width = 0.2)) +\n  # Simple labels\n  labs(\n    x = \"Species\",\n    y = \"Body Mass (g)\",\n    color = \"Sex\"\n  ) +\n  theme_light()\n\npub_plot"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#type-i-sums-of-squares-sequential-1",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#type-i-sums-of-squares-sequential-1",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Type I Sums of Squares (Sequential)",
     "text": "Type I Sums of Squares (Sequential)\n\n# Type I SS - order matters!\n# This is the default in R's anova() function\ntype1_anova &lt;- anova(pu_model)\ntype1_anova\n\nAnalysis of Variance Table\n\nResponse: mass_g\n           Df    Sum Sq  Mean Sq F value    Pr(&gt;F)    \nspp         2 145190219 72595110 758.358 &lt; 2.2e-16 ***\nsex         1  37090262 37090262 387.460 &lt; 2.2e-16 ***\nspp:sex     2   1676557   838278   8.757 0.0001973 ***\nResiduals 327  31302628    95727                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nType I SS tests effects in the order they appear in the model. Each term is adjusted for terms that appear before it in the model."
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#type-ii-sums-of-squares-1",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#type-ii-sums-of-squares-1",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Type II Sums of Squares",
     "text": "Type II Sums of Squares\n\n# Type II SS - each main effect adjusted for other main effects\n# but not for interactions\ntype2_anova &lt;- Anova(pu_model, type = 2)\ntype2_anova\n\nAnova Table (Type II tests)\n\nResponse: mass_g\n             Sum Sq  Df F value    Pr(&gt;F)    \nspp       143401584   2 749.016 &lt; 2.2e-16 ***\nsex        37090262   1 387.460 &lt; 2.2e-16 ***\nspp:sex     1676557   2   8.757 0.0001973 ***\nResiduals  31302628 327                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nType II SS tests each main effect after adjusting for other main effects, but not for the interaction. This is appropriate when interactions are not significant."
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#type-iii-sums-of-squares-1",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#type-iii-sums-of-squares-1",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Type III Sums of Squares",
     "text": "Type III Sums of Squares\n\n# Type III SS - each effect adjusted for all other effects\n# This is what we used earlier\ntype3_anova &lt;- Anova(pu_model, type = 3)\ntype3_anova\n\nAnova Table (Type III tests)\n\nResponse: mass_g\n                Sum Sq  Df   F value    Pr(&gt;F)    \n(Intercept) 5232595969   1 54661.828 &lt; 2.2e-16 ***\nspp          143001222   2   746.924 &lt; 2.2e-16 ***\nsex           29851220   1   311.838 &lt; 2.2e-16 ***\nspp:sex        1676557   2     8.757 0.0001973 ***\nResiduals     31302628 327                        \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nType III SS tests each effect after adjusting for all other effects in the model. This is the most conservative approach and is commonly used in unbalanced designs."
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#comparing-the-three-types-1",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#comparing-the-three-types-1",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "Comparing the Three Types",
     "text": "Comparing the Three Types\n\n# Create a comparison table of F-values\nss_comparison_df &lt;- data.frame(\n  Effect = c(\"Species\", \"Sex\", \"Species:Sex\"),\n  Type_I_F = round(type1_anova$`F value`[1:3], 2),\n  Type_II_F = round(type2_anova$`F value`[2:4], 2),\n  Type_III_F = round(type3_anova$`F value`[2:4], 2)\n)\n\nss_comparison_df\n\n       Effect Type_I_F Type_II_F Type_III_F\n1     Species   758.36    387.46     746.92\n2         Sex   387.46      8.76     311.84\n3 Species:Sex     8.76        NA       8.76\n\n\n\n# Create a comparison table of p-values\np_comparison_df &lt;- data.frame(\n  Effect = c(\"Species\", \"Sex\", \"Species:Sex\"),\n  Type_I_p = round(type1_anova$`Pr(&gt;F)`[1:3], 4),\n  Type_II_p = round(type2_anova$`Pr(&gt;F)`[2:4], 4),\n  Type_III_p = round(type3_anova$`Pr(&gt;F)`[2:4], 4)\n)\n\np_comparison_df\n\n       Effect Type_I_p Type_II_p Type_III_p\n1     Species    0e+00     0e+00      0e+00\n2         Sex    0e+00     2e-04      0e+00\n3 Species:Sex    2e-04        NA      2e-04"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#when-does-it-matter-1",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#when-does-it-matter-1",
-    "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
+    "title": "Lecture 12 - Factorial ANOVA of Penguin Mass",
     "section": "When Does It Matter?",
     "text": "When Does It Matter?\nThe choice of SS type matters most when:\n\nUnbalanced designs: When sample sizes differ across groups\nCorrelated predictors: When predictors are not orthogonal\nInteractions present: When there are significant interactions\n\nFor balanced designs (equal sample sizes in all cells), all three types give the same results for main effects."
   },
@@ -4407,7 +4407,7 @@
     "href": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#summary-statistics-by-groups",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Summary Statistics by Groups",
-    "text": "Summary Statistics by Groups\n\n# Calculate group means and SDs\nsummary_df &lt;- balanced_df %&gt;%\n  group_by(species, sex) %&gt;%\n  summarise(\n    n = sum(!is.na(body_mass_g)),\n    mean_mass = mean(body_mass_g),\n    sd_mass = sd(body_mass_g),\n    se_mass = sd_mass/sqrt(n),\n    .groups = 'drop'\n  ) %&gt;%\n  arrange(species, sex)\n\nprint(summary_df)\n\n# A tibble: 6 × 6\n  species   sex        n mean_mass sd_mass se_mass\n  &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 Adelie    female    34     3335.    260.    44.5\n2 Adelie    male      34     4049.    318.    54.5\n3 Chinstrap female    34     3527.    285.    48.9\n4 Chinstrap male      34     3939.    362.    62.1\n5 Gentoo    female    34     4681.    309.    53.0\n6 Gentoo    male      34     5525     274.    47.0"
+    "text": "Summary Statistics by Groups\n\n\n# A tibble: 6 × 6\n  species   sex        n mean_mass sd_mass se_mass\n  &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 Adelie    female    34     3335.    260.    44.5\n2 Adelie    male      34     4049.    318.    54.5\n3 Chinstrap female    34     3527.    285.    48.9\n4 Chinstrap male      34     3939.    362.    62.1\n5 Gentoo    female    34     4681.    309.    53.0\n6 Gentoo    male      34     5525     274.    47.0"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#fitting-the-model",
@@ -4435,14 +4435,14 @@
     "href": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#visualizing-imbalance",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Visualizing Imbalance",
-    "text": "Visualizing Imbalance\n\n# Create sample size plot\nimbalance_plot &lt;- ggplot(unbalanced_n, \n       aes(x = species, y = n, fill = sex)) +\n  geom_col(position = \"dodge\") +\n  geom_text(aes(label = n), \n            position = position_dodge(0.9),\n            vjust = -0.5) +\n  scale_fill_manual(values = c(\"#1f78b4\", \"#b2df8a\")) +\n  labs(title = \"Sample Sizes by Group\",\n       subtitle = \"Unbalanced Design\",\n       x = \"Species\", \n       y = \"Sample Size\",\n       fill = \"Sex\") +\n  theme_minimal() +\n  theme(legend.position = \"top\")\n\nprint(imbalance_plot)"
+    "text": "Visualizing Imbalance"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#type-i-sequential-ss",
     "href": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#type-i-sequential-ss",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Type I (Sequential) SS",
-    "text": "Type I (Sequential) SS\n\n# Type I SS - Order matters!\n# Model 1: Species then Sex\nmodel1_type1 &lt;- lm(body_mass_g ~ species + sex + species:sex,\n                   data = p_df)\nanova1_type1 &lt;- anova(model1_type1)\nprint(\"Type I SS (Species → Sex → Interaction):\")\n\n[1] \"Type I SS (Species → Sex → Interaction):\"\n\nprint(anova1_type1)\n\nAnalysis of Variance Table\n\nResponse: body_mass_g\n             Df    Sum Sq  Mean Sq F value    Pr(&gt;F)    \nspecies       2 145190219 72595110 758.358 &lt; 2.2e-16 ***\nsex           1  37090262 37090262 387.460 &lt; 2.2e-16 ***\nspecies:sex   2   1676557   838278   8.757 0.0001973 ***\nResiduals   327  31302628    95727                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Model 2: Sex then Species (different order)\nmodel2_type1 &lt;- lm(body_mass_g ~ sex + species + sex:species,\n                   data = p_df)\nanova2_type1 &lt;- anova(model2_type1)\nprint(\"\\nType I SS (Sex → Species → Interaction):\")\n\n[1] \"\\nType I SS (Sex → Species → Interaction):\"\n\nprint(anova2_type1)\n\nAnalysis of Variance Table\n\nResponse: body_mass_g\n             Df    Sum Sq  Mean Sq F value    Pr(&gt;F)    \nsex           1  38878897 38878897 406.145 &lt; 2.2e-16 ***\nspecies       2 143401584 71700792 749.016 &lt; 2.2e-16 ***\nsex:species   2   1676557   838278   8.757 0.0001973 ***\nResiduals   327  31302628    95727                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Compare SS for main effects\nss_comparison_df &lt;- data.frame(\n  Effect = c(\"Species\", \"Sex\"),\n  Order1_SS = c(anova1_type1$`Sum Sq`[1], \n                anova1_type1$`Sum Sq`[2]),\n  Order2_SS = c(anova2_type1$`Sum Sq`[2], \n                anova2_type1$`Sum Sq`[1])\n)\nprint(\"\\nType I SS depends on order:\")\n\n[1] \"\\nType I SS depends on order:\"\n\nprint(ss_comparison_df)\n\n   Effect Order1_SS Order2_SS\n1 Species 145190219 143401584\n2     Sex  37090262  38878897"
+    "text": "Type I (Sequential) SS\n\n\n[1] \"Type I SS (Species → Sex → Interaction):\"\n\n\nAnalysis of Variance Table\n\nResponse: body_mass_g\n             Df    Sum Sq  Mean Sq F value    Pr(&gt;F)    \nspecies       2 145190219 72595110 758.358 &lt; 2.2e-16 ***\nsex           1  37090262 37090262 387.460 &lt; 2.2e-16 ***\nspecies:sex   2   1676557   838278   8.757 0.0001973 ***\nResiduals   327  31302628    95727                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n[1] \"\\nType I SS (Sex → Species → Interaction):\"\n\n\nAnalysis of Variance Table\n\nResponse: body_mass_g\n             Df    Sum Sq  Mean Sq F value    Pr(&gt;F)    \nsex           1  38878897 38878897 406.145 &lt; 2.2e-16 ***\nspecies       2 143401584 71700792 749.016 &lt; 2.2e-16 ***\nsex:species   2   1676557   838278   8.757 0.0001973 ***\nResiduals   327  31302628    95727                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n[1] \"\\nType I SS depends on order:\"\n\n\n   Effect Order1_SS Order2_SS\n1 Species 145190219 143401584\n2     Sex  37090262  38878897"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#how-type-i-ss-works",
@@ -4456,56 +4456,56 @@
     "href": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#type-iii-marginal-ss",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Type III (Marginal) SS",
-    "text": "Type III (Marginal) SS\n\n# Set contrasts for Type III SS\noptions(contrasts = c(\"contr.sum\", \"contr.poly\"))\n\n# Fit model for Type III SS\nmodel_u &lt;- lm(body_mass_g ~ species * sex, \n              data = p_df)\n\n# Type III ANOVA\nanova_type3_u &lt;- Anova(model_u, type = \"III\")\nprint(\"Type III Sums of Squares:\")\n\n[1] \"Type III Sums of Squares:\"\n\nprint(anova_type3_u)\n\nAnova Table (Type III tests)\n\nResponse: body_mass_g\n                Sum Sq  Df   F value    Pr(&gt;F)    \n(Intercept) 5232595969   1 54661.828 &lt; 2.2e-16 ***\nspecies      143001222   2   746.924 &lt; 2.2e-16 ***\nsex           29851220   1   311.838 &lt; 2.2e-16 ***\nspecies:sex    1676557   2     8.757 0.0001973 ***\nResiduals     31302628 327                        \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Compare with Type I\nprint(\"\\nComparison of F-values:\")\n\n[1] \"\\nComparison of F-values:\"\n\ncomparison_f_df &lt;- data.frame(\n  Effect = c(\"Species\", \"Sex\", \"Interaction\"),\n  Type_I_F = round(anova1_type1$`F value`[1:3], 2),\n  Type_III_F = round(anova_type3_u$`F value`[2:4], 2)\n)\nprint(comparison_f_df)\n\n       Effect Type_I_F Type_III_F\n1     Species   758.36     746.92\n2         Sex   387.46     311.84\n3 Interaction     8.76       8.76"
+    "text": "Type III (Marginal) SS\n\n\n[1] \"Type III Sums of Squares:\"\n\n\nAnova Table (Type III tests)\n\nResponse: body_mass_g\n                Sum Sq  Df   F value    Pr(&gt;F)    \n(Intercept) 5232595969   1 54661.828 &lt; 2.2e-16 ***\nspecies      143001222   2   746.924 &lt; 2.2e-16 ***\nsex           29851220   1   311.838 &lt; 2.2e-16 ***\nspecies:sex    1676557   2     8.757 0.0001973 ***\nResiduals     31302628 327                        \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n[1] \"\\nComparison of F-values:\"\n\n\n       Effect Type_I_F Type_III_F\n1     Species   758.36     746.92\n2         Sex   387.46     311.84\n3 Interaction     8.76       8.76"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#how-type-iii-ss-works",
     "href": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#how-type-iii-ss-works",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "How Type III SS Works",
-    "text": "How Type III SS Works\nMarginal decomposition:\nEach effect tested after adjusting for all others: - SS(Species|Sex,Interaction) - SS(Sex|Species,Interaction) - SS(Interaction|Species,Sex)\nAdvantages: - Order invariant - Tests hypotheses about unweighted means - Standard in most software\nDisadvantages: - Lower power with missing cells - Tests may not be orthogonal - Requires careful interpretation\n\n# Calculate effect sizes\nss_total_u &lt;- sum(anova_type3_u$`Sum Sq`[-1])\n\neta_squared_p_df &lt;- data.frame(\n  Effect = c(\"Species\", \"Sex\", \"Interaction\"),\n  Eta_Squared = round(\n    anova_type3_u$`Sum Sq`[2:4] / ss_total_u, \n    4)\n)\nprint(\"Effect Sizes (Type III):\")\n\n[1] \"Effect Sizes (Type III):\"\n\nprint(eta_squared_p_df)\n\n       Effect Eta_Squared\n1     Species      0.6947\n2         Sex      0.1450\n3 Interaction      0.0081"
+    "text": "How Type III SS Works\nMarginal decomposition:\nEach effect tested after adjusting for all others: - SS(Species|Sex,Interaction) - SS(Sex|Species,Interaction) - SS(Interaction|Species,Sex)\nAdvantages: - Order invariant - Tests hypotheses about unweighted means - Standard in most software\nDisadvantages: - Lower power with missing cells - Tests may not be orthogonal - Requires careful interpretation\n\n\n[1] \"Effect Sizes (Type III):\"\n\n\n       Effect Eta_Squared\n1     Species      0.6947\n2         Sex      0.1450\n3 Interaction      0.0081"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#computing-ss-step-by-step",
     "href": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#computing-ss-step-by-step",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Computing SS Step-by-Step",
-    "text": "Computing SS Step-by-Step\n\n# Grand mean\ngrand_mean &lt;- mean(p_df$body_mass_g)\nprint(paste(\"Grand mean:\", round(grand_mean, 1)))\n\n[1] \"Grand mean: 4207.1\"\n\n# Total SS\nss_total_manual &lt;- sum((p_df$body_mass_g - grand_mean)^2)\nprint(paste(\"Total SS:\", round(ss_total_manual, 0)))\n\n[1] \"Total SS: 215259666\"\n\n# Between-group SS (full model)\ngroup_means_df &lt;- p_df %&gt;%\n  group_by(species, sex) %&gt;%\n  mutate(group_mean = mean(body_mass_g)) %&gt;%\n  ungroup()\n\nss_between &lt;- sum((group_means_df$group_mean - grand_mean)^2)\nprint(paste(\"Between-groups SS:\", round(ss_between, 0)))\n\n[1] \"Between-groups SS: 183957038\"\n\n# Within-group SS (Error SS)\nss_within &lt;- sum((group_means_df$body_mass_g - \n                  group_means_df$group_mean)^2)\nprint(paste(\"Within-groups SS:\", round(ss_within, 0)))\n\n[1] \"Within-groups SS: 31302628\"\n\n# Verify: Total = Between + Within\nprint(paste(\"Check: Between + Within =\", \n            round(ss_between + ss_within, 0)))\n\n[1] \"Check: Between + Within = 215259666\""
+    "text": "Computing SS Step-by-Step\n\n\n[1] \"Grand mean: 4207.1\"\n\n\n[1] \"Total SS: 215259666\"\n\n\n[1] \"Between-groups SS: 183957038\"\n\n\n[1] \"Within-groups SS: 31302628\"\n\n\n[1] \"Check: Between + Within = 215259666\""
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#decomposing-between-group-ss",
     "href": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#decomposing-between-group-ss",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Decomposing Between-Group SS",
-    "text": "Decomposing Between-Group SS\n\n# For Type I SS (sequential)\n# SS for species (ignoring sex)\nspecies_only_model &lt;- lm(body_mass_g ~ species, \n                         data = p_df)\nss_species_only &lt;- sum((fitted(species_only_model) - \n                       grand_mean)^2)\nprint(paste(\"SS(Species alone):\", \n            round(ss_species_only, 0)))\n\n[1] \"SS(Species alone): 145190219\"\n\n# SS for sex (ignoring species)  \nsex_only_model &lt;- lm(body_mass_g ~ sex, \n                     data = p_df)\nss_sex_only &lt;- sum((fitted(sex_only_model) - \n                   grand_mean)^2)\nprint(paste(\"SS(Sex alone):\", \n            round(ss_sex_only, 0)))\n\n[1] \"SS(Sex alone): 38878897\"\n\n# Note: These don't add up to between SS\n# because effects are not orthogonal!\nprint(paste(\"Sum of main effects:\", \n            round(ss_species_only + ss_sex_only, 0)))\n\n[1] \"Sum of main effects: 184069116\"\n\nprint(paste(\"Actual between SS:\", \n            round(ss_between, 0)))\n\n[1] \"Actual between SS: 183957038\"\n\nprint(paste(\"Difference (due to correlation):\", \n            round(ss_between - \n                  (ss_species_only + ss_sex_only), 0)))\n\n[1] \"Difference (due to correlation): -112078\""
+    "text": "Decomposing Between-Group SS\n\n\n[1] \"SS(Species alone): 145190219\"\n\n\n[1] \"SS(Sex alone): 38878897\"\n\n\n[1] \"Sum of main effects: 184069116\"\n\n\n[1] \"Actual between SS: 183957038\"\n\n\n[1] \"Difference (due to correlation): -112078\""
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#model-diagnostics",
     "href": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#model-diagnostics",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Model Diagnostics",
-    "text": "Model Diagnostics\n\n# Diagnostic plots\npar(mfrow = c(2, 2))\n\n# Residuals vs Fitted\nplot(model_u, which = 1,\n     main = \"Residuals vs Fitted\")\n\n# Q-Q plot\nplot(model_u, which = 2,\n     main = \"Normal Q-Q\")\n\n# Scale-Location  \nplot(model_u, which = 3,\n     main = \"Scale-Location\")\n\n# Residuals by group\nplot(fitted(model_u), residuals(model_u),\n     col = as.numeric(interaction(p_df$species, \n                                  p_df$sex)),\n     main = \"Residuals by Group\",\n     xlab = \"Fitted values\",\n     ylab = \"Residuals\")\nabline(h = 0, lty = 2)"
+    "text": "Model Diagnostics"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#assumption-tests",
     "href": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#assumption-tests",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Assumption Tests",
-    "text": "Assumption Tests\n\n# Normality test\nshapiro_u &lt;- shapiro.test(residuals(model_u))\nprint(\"Shapiro-Wilk test:\")\n\n[1] \"Shapiro-Wilk test:\"\n\nprint(shapiro_u)\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(model_u)\nW = 0.99776, p-value = 0.9367\n\n# Homogeneity of variance\nlevene_u &lt;- leveneTest(body_mass_g ~ species * sex,\n                       data = p_df,\n                       center = median)\nprint(\"\\nLevene's test:\")\n\n[1] \"\\nLevene's test:\"\n\nprint(levene_u)\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value Pr(&gt;F)\ngroup   5  1.3908 0.2272\n      327               \n\n# Check residuals by group\nresidual_summary_df &lt;- p_df %&gt;%\n  mutate(\n    residuals = residuals(model_u),\n    fitted = fitted(model_u)\n  ) %&gt;%\n  group_by(species, sex) %&gt;%\n  summarise(\n    n = n(),\n    mean_resid = mean(residuals),\n    sd_resid = sd(residuals),\n    .groups = 'drop'\n  )\n\nprint(\"\\nResidual SD by group:\")\n\n[1] \"\\nResidual SD by group:\"\n\nprint(residual_summary_df[, c(\"species\", \"sex\", \n                              \"sd_resid\")])\n\n# A tibble: 6 × 3\n  species   sex    sd_resid\n  &lt;fct&gt;     &lt;fct&gt;     &lt;dbl&gt;\n1 Adelie    female     269.\n2 Adelie    male       347.\n3 Chinstrap female     285.\n4 Chinstrap male       362.\n5 Gentoo    female     282.\n6 Gentoo    male       313."
+    "text": "Assumption Tests\n\n\n[1] \"Shapiro-Wilk test:\"\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(model_u)\nW = 0.99776, p-value = 0.9367\n\n\n[1] \"\\nLevene's test:\"\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value Pr(&gt;F)\ngroup   5  1.3908 0.2272\n      327               \n\n\n[1] \"\\nResidual SD by group:\"\n\n\n# A tibble: 6 × 3\n  species   sex    sd_resid\n  &lt;fct&gt;     &lt;fct&gt;     &lt;dbl&gt;\n1 Adelie    female     269.\n2 Adelie    male       347.\n3 Chinstrap female     285.\n4 Chinstrap male       362.\n5 Gentoo    female     282.\n6 Gentoo    male       313."
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#side-by-side-comparison",
     "href": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#side-by-side-comparison",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Side-by-Side Comparison",
-    "text": "Side-by-Side Comparison\n\n# Load balanced results (simulated)\nset.seed(123)\nb_df &lt;- p_df %&gt;%\n  group_by(species, sex) %&gt;%\n  sample_n(34) %&gt;%\n  ungroup()\n\n# Fit balanced model\noptions(contrasts = c(\"contr.sum\", \"contr.poly\"))\nmodel_b &lt;- lm(body_mass_g ~ species * sex, data = b_df)\nanova_b &lt;- Anova(model_b, type = \"III\")\n\n# Create comparison table\ncomparison_results_df &lt;- data.frame(\n  Effect = c(\"Species\", \"Sex\", \"Interaction\"),\n  Balanced_F = round(anova_b$`F value`[2:4], 2),\n  Balanced_p = round(anova_b$`Pr(&gt;F)`[2:4], 4),\n  Unbalanced_F = round(anova_type3_u$`F value`[2:4], 2),\n  Unbalanced_p = round(anova_type3_u$`Pr(&gt;F)`[2:4], 4)\n)\n\nprint(\"Balanced vs Unbalanced Results:\")\n\n[1] \"Balanced vs Unbalanced Results:\"\n\nprint(comparison_results_df)\n\n       Effect Balanced_F Balanced_p Unbalanced_F Unbalanced_p\n1     Species     477.20      0e+00       746.92        0e+00\n2         Sex     239.22      0e+00       311.84        0e+00\n3 Interaction       9.10      2e-04         8.76        2e-04\n\n# Compare power\nprint(\"\\nSample sizes:\")\n\n[1] \"\\nSample sizes:\"\n\nprint(paste(\"Balanced total N:\", nrow(b_df)))\n\n[1] \"Balanced total N: 204\"\n\nprint(paste(\"Unbalanced total N:\", nrow(p_df)))\n\n[1] \"Unbalanced total N: 333\"\n\nprint(paste(\"Data discarded:\", \n            nrow(p_df) - nrow(b_df), \n            \"observations\"))\n\n[1] \"Data discarded: 129 observations\""
+    "text": "Side-by-Side Comparison\n\n\n[1] \"Balanced vs Unbalanced Results:\"\n\n\n       Effect Balanced_F Balanced_p Unbalanced_F Unbalanced_p\n1     Species     477.20      0e+00       746.92        0e+00\n2         Sex     239.22      0e+00       311.84        0e+00\n3 Interaction       9.10      2e-04         8.76        2e-04\n\n\n[1] \"\\nSample sizes:\"\n\n\n[1] \"Balanced total N: 204\"\n\n\n[1] \"Unbalanced total N: 333\"\n\n\n[1] \"Data discarded: 129 observations\""
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#visual-comparison",
     "href": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#visual-comparison",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Visual Comparison",
-    "text": "Visual Comparison\n\n# Combine EMMs from both analyses\nemm_b &lt;- as.data.frame(emmeans(model_b, ~ species))\nemm_u &lt;- as.data.frame(emmeans(model_u, ~ species))\n\ncomparison_plot_df &lt;- data.frame(\n  Species = rep(levels(as.factor(p_df$species)), 2),\n  Design = rep(c(\"Balanced\", \"Unbalanced\"), \n               each = 3),\n  EMM = c(as.numeric(emm_b$emmean),\n          as.numeric(emm_u$emmean)),\n  SE = c(as.numeric(emm_b$SE),\n         as.numeric(emm_u$SE))\n)\n\ncomparison_plot &lt;- ggplot(comparison_plot_df, \n       aes(x = Species, y = EMM, \n           color = Design, group = Design)) +\n  geom_point(position = position_dodge(0.3), \n             size = 3) +\n  geom_errorbar(aes(ymin = EMM - SE, \n                    ymax = EMM + SE),\n                position = position_dodge(0.3),\n                width = 0.2) +\n  labs(title = \"EMMs: Balanced vs Unbalanced\",\n       y = \"Estimated Marginal Mean (g)\",\n       color = \"Design\") +\n  theme_minimal() +\n  theme(legend.position = \"top\")\n\nprint(comparison_plot)"
+    "text": "Visual Comparison"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html",
@@ -4526,7 +4526,7 @@
     "href": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#summary-statistics-by-groups",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Summary Statistics by Groups",
-    "text": "Summary Statistics by Groups\n\n# Calculate group means and SDs\nsummary_df &lt;- balanced_df %&gt;%\n  group_by(species, sex) %&gt;%\n  summarise(\n    n = sum(!is.na(body_mass_g)),\n    mean_mass = mean(body_mass_g),\n    sd_mass = sd(body_mass_g),\n    se_mass = sd_mass/sqrt(n),\n    .groups = 'drop'\n  ) %&gt;%\n  arrange(species, sex)\n\nprint(summary_df)\n\n# A tibble: 6 × 6\n  species   sex        n mean_mass sd_mass se_mass\n  &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 Adelie    female    34     3335.    260.    44.5\n2 Adelie    male      34     4049.    318.    54.5\n3 Chinstrap female    34     3527.    285.    48.9\n4 Chinstrap male      34     3939.    362.    62.1\n5 Gentoo    female    34     4681.    309.    53.0\n6 Gentoo    male      34     5525     274.    47.0"
+    "text": "Summary Statistics by Groups\n\n\n# A tibble: 6 × 6\n  species   sex        n mean_mass sd_mass se_mass\n  &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1 Adelie    female    34     3335.    260.    44.5\n2 Adelie    male      34     4049.    318.    54.5\n3 Chinstrap female    34     3527.    285.    48.9\n4 Chinstrap male      34     3939.    362.    62.1\n5 Gentoo    female    34     4681.    309.    53.0\n6 Gentoo    male      34     5525     274.    47.0"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#fitting-the-model",
@@ -4554,14 +4554,14 @@
     "href": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#visualizing-imbalance",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Visualizing Imbalance",
-    "text": "Visualizing Imbalance\n\n# Create sample size plot\nimbalance_plot &lt;- ggplot(unbalanced_n, \n       aes(x = species, y = n, fill = sex)) +\n  geom_col(position = \"dodge\") +\n  geom_text(aes(label = n), \n            position = position_dodge(0.9),\n            vjust = -0.5) +\n  scale_fill_manual(values = c(\"#1f78b4\", \"#b2df8a\")) +\n  labs(title = \"Sample Sizes by Group\",\n       subtitle = \"Unbalanced Design\",\n       x = \"Species\", \n       y = \"Sample Size\",\n       fill = \"Sex\") +\n  theme_minimal() +\n  theme(legend.position = \"top\")\n\nprint(imbalance_plot)"
+    "text": "Visualizing Imbalance"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#type-i-sequential-ss",
     "href": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#type-i-sequential-ss",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Type I (Sequential) SS",
-    "text": "Type I (Sequential) SS\n\n# Type I SS - Order matters!\n# Model 1: Species then Sex\nmodel1_type1 &lt;- lm(body_mass_g ~ species + sex + species:sex,\n                   data = p_df)\nanova1_type1 &lt;- anova(model1_type1)\nprint(\"Type I SS (Species → Sex → Interaction):\")\n\n[1] \"Type I SS (Species → Sex → Interaction):\"\n\nprint(anova1_type1)\n\nAnalysis of Variance Table\n\nResponse: body_mass_g\n             Df    Sum Sq  Mean Sq F value    Pr(&gt;F)    \nspecies       2 145190219 72595110 758.358 &lt; 2.2e-16 ***\nsex           1  37090262 37090262 387.460 &lt; 2.2e-16 ***\nspecies:sex   2   1676557   838278   8.757 0.0001973 ***\nResiduals   327  31302628    95727                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Model 2: Sex then Species (different order)\nmodel2_type1 &lt;- lm(body_mass_g ~ sex + species + sex:species,\n                   data = p_df)\nanova2_type1 &lt;- anova(model2_type1)\nprint(\"\\nType I SS (Sex → Species → Interaction):\")\n\n[1] \"\\nType I SS (Sex → Species → Interaction):\"\n\nprint(anova2_type1)\n\nAnalysis of Variance Table\n\nResponse: body_mass_g\n             Df    Sum Sq  Mean Sq F value    Pr(&gt;F)    \nsex           1  38878897 38878897 406.145 &lt; 2.2e-16 ***\nspecies       2 143401584 71700792 749.016 &lt; 2.2e-16 ***\nsex:species   2   1676557   838278   8.757 0.0001973 ***\nResiduals   327  31302628    95727                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Compare SS for main effects\nss_comparison_df &lt;- data.frame(\n  Effect = c(\"Species\", \"Sex\"),\n  Order1_SS = c(anova1_type1$`Sum Sq`[1], \n                anova1_type1$`Sum Sq`[2]),\n  Order2_SS = c(anova2_type1$`Sum Sq`[2], \n                anova2_type1$`Sum Sq`[1])\n)\nprint(\"\\nType I SS depends on order:\")\n\n[1] \"\\nType I SS depends on order:\"\n\nprint(ss_comparison_df)\n\n   Effect Order1_SS Order2_SS\n1 Species 145190219 143401584\n2     Sex  37090262  38878897"
+    "text": "Type I (Sequential) SS\n\n\n[1] \"Type I SS (Species → Sex → Interaction):\"\n\n\nAnalysis of Variance Table\n\nResponse: body_mass_g\n             Df    Sum Sq  Mean Sq F value    Pr(&gt;F)    \nspecies       2 145190219 72595110 758.358 &lt; 2.2e-16 ***\nsex           1  37090262 37090262 387.460 &lt; 2.2e-16 ***\nspecies:sex   2   1676557   838278   8.757 0.0001973 ***\nResiduals   327  31302628    95727                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n[1] \"\\nType I SS (Sex → Species → Interaction):\"\n\n\nAnalysis of Variance Table\n\nResponse: body_mass_g\n             Df    Sum Sq  Mean Sq F value    Pr(&gt;F)    \nsex           1  38878897 38878897 406.145 &lt; 2.2e-16 ***\nspecies       2 143401584 71700792 749.016 &lt; 2.2e-16 ***\nsex:species   2   1676557   838278   8.757 0.0001973 ***\nResiduals   327  31302628    95727                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n[1] \"\\nType I SS depends on order:\"\n\n\n   Effect Order1_SS Order2_SS\n1 Species 145190219 143401584\n2     Sex  37090262  38878897"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#how-type-i-ss-works",
@@ -4575,56 +4575,56 @@
     "href": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#type-iii-marginal-ss",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Type III (Marginal) SS",
-    "text": "Type III (Marginal) SS\n\n# Set contrasts for Type III SS\noptions(contrasts = c(\"contr.sum\", \"contr.poly\"))\n\n# Fit model for Type III SS\nmodel_u &lt;- lm(body_mass_g ~ species * sex, \n              data = p_df)\n\n# Type III ANOVA\nanova_type3_u &lt;- Anova(model_u, type = \"III\")\nprint(\"Type III Sums of Squares:\")\n\n[1] \"Type III Sums of Squares:\"\n\nprint(anova_type3_u)\n\nAnova Table (Type III tests)\n\nResponse: body_mass_g\n                Sum Sq  Df   F value    Pr(&gt;F)    \n(Intercept) 5232595969   1 54661.828 &lt; 2.2e-16 ***\nspecies      143001222   2   746.924 &lt; 2.2e-16 ***\nsex           29851220   1   311.838 &lt; 2.2e-16 ***\nspecies:sex    1676557   2     8.757 0.0001973 ***\nResiduals     31302628 327                        \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Compare with Type I\nprint(\"\\nComparison of F-values:\")\n\n[1] \"\\nComparison of F-values:\"\n\ncomparison_f_df &lt;- data.frame(\n  Effect = c(\"Species\", \"Sex\", \"Interaction\"),\n  Type_I_F = round(anova1_type1$`F value`[1:3], 2),\n  Type_III_F = round(anova_type3_u$`F value`[2:4], 2)\n)\nprint(comparison_f_df)\n\n       Effect Type_I_F Type_III_F\n1     Species   758.36     746.92\n2         Sex   387.46     311.84\n3 Interaction     8.76       8.76"
+    "text": "Type III (Marginal) SS\n\n\n[1] \"Type III Sums of Squares:\"\n\n\nAnova Table (Type III tests)\n\nResponse: body_mass_g\n                Sum Sq  Df   F value    Pr(&gt;F)    \n(Intercept) 5232595969   1 54661.828 &lt; 2.2e-16 ***\nspecies      143001222   2   746.924 &lt; 2.2e-16 ***\nsex           29851220   1   311.838 &lt; 2.2e-16 ***\nspecies:sex    1676557   2     8.757 0.0001973 ***\nResiduals     31302628 327                        \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n[1] \"\\nComparison of F-values:\"\n\n\n       Effect Type_I_F Type_III_F\n1     Species   758.36     746.92\n2         Sex   387.46     311.84\n3 Interaction     8.76       8.76"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#how-type-iii-ss-works",
     "href": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#how-type-iii-ss-works",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "How Type III SS Works",
-    "text": "How Type III SS Works\nMarginal decomposition:\nEach effect tested after adjusting for all others: - SS(Species|Sex,Interaction) - SS(Sex|Species,Interaction) - SS(Interaction|Species,Sex)\nAdvantages: - Order invariant - Tests hypotheses about unweighted means - Standard in most software\nDisadvantages: - Lower power with missing cells - Tests may not be orthogonal - Requires careful interpretation\n\n# Calculate effect sizes\nss_total_u &lt;- sum(anova_type3_u$`Sum Sq`[-1])\n\neta_squared_p_df &lt;- data.frame(\n  Effect = c(\"Species\", \"Sex\", \"Interaction\"),\n  Eta_Squared = round(\n    anova_type3_u$`Sum Sq`[2:4] / ss_total_u, \n    4)\n)\nprint(\"Effect Sizes (Type III):\")\n\n[1] \"Effect Sizes (Type III):\"\n\nprint(eta_squared_p_df)\n\n       Effect Eta_Squared\n1     Species      0.6947\n2         Sex      0.1450\n3 Interaction      0.0081"
+    "text": "How Type III SS Works\nMarginal decomposition:\nEach effect tested after adjusting for all others: - SS(Species|Sex,Interaction) - SS(Sex|Species,Interaction) - SS(Interaction|Species,Sex)\nAdvantages: - Order invariant - Tests hypotheses about unweighted means - Standard in most software\nDisadvantages: - Lower power with missing cells - Tests may not be orthogonal - Requires careful interpretation\n\n\n[1] \"Effect Sizes (Type III):\"\n\n\n       Effect Eta_Squared\n1     Species      0.6947\n2         Sex      0.1450\n3 Interaction      0.0081"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#computing-ss-step-by-step",
     "href": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#computing-ss-step-by-step",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Computing SS Step-by-Step",
-    "text": "Computing SS Step-by-Step\n\n# Grand mean\ngrand_mean &lt;- mean(p_df$body_mass_g)\nprint(paste(\"Grand mean:\", round(grand_mean, 1)))\n\n[1] \"Grand mean: 4207.1\"\n\n# Total SS\nss_total_manual &lt;- sum((p_df$body_mass_g - grand_mean)^2)\nprint(paste(\"Total SS:\", round(ss_total_manual, 0)))\n\n[1] \"Total SS: 215259666\"\n\n# Between-group SS (full model)\ngroup_means_df &lt;- p_df %&gt;%\n  group_by(species, sex) %&gt;%\n  mutate(group_mean = mean(body_mass_g)) %&gt;%\n  ungroup()\n\nss_between &lt;- sum((group_means_df$group_mean - grand_mean)^2)\nprint(paste(\"Between-groups SS:\", round(ss_between, 0)))\n\n[1] \"Between-groups SS: 183957038\"\n\n# Within-group SS (Error SS)\nss_within &lt;- sum((group_means_df$body_mass_g - \n                  group_means_df$group_mean)^2)\nprint(paste(\"Within-groups SS:\", round(ss_within, 0)))\n\n[1] \"Within-groups SS: 31302628\"\n\n# Verify: Total = Between + Within\nprint(paste(\"Check: Between + Within =\", \n            round(ss_between + ss_within, 0)))\n\n[1] \"Check: Between + Within = 215259666\""
+    "text": "Computing SS Step-by-Step\n\n\n[1] \"Grand mean: 4207.1\"\n\n\n[1] \"Total SS: 215259666\"\n\n\n[1] \"Between-groups SS: 183957038\"\n\n\n[1] \"Within-groups SS: 31302628\"\n\n\n[1] \"Check: Between + Within = 215259666\""
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#decomposing-between-group-ss",
     "href": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#decomposing-between-group-ss",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Decomposing Between-Group SS",
-    "text": "Decomposing Between-Group SS\n\n# For Type I SS (sequential)\n# SS for species (ignoring sex)\nspecies_only_model &lt;- lm(body_mass_g ~ species, \n                         data = p_df)\nss_species_only &lt;- sum((fitted(species_only_model) - \n                       grand_mean)^2)\nprint(paste(\"SS(Species alone):\", \n            round(ss_species_only, 0)))\n\n[1] \"SS(Species alone): 145190219\"\n\n# SS for sex (ignoring species)  \nsex_only_model &lt;- lm(body_mass_g ~ sex, \n                     data = p_df)\nss_sex_only &lt;- sum((fitted(sex_only_model) - \n                   grand_mean)^2)\nprint(paste(\"SS(Sex alone):\", \n            round(ss_sex_only, 0)))\n\n[1] \"SS(Sex alone): 38878897\"\n\n# Note: These don't add up to between SS\n# because effects are not orthogonal!\nprint(paste(\"Sum of main effects:\", \n            round(ss_species_only + ss_sex_only, 0)))\n\n[1] \"Sum of main effects: 184069116\"\n\nprint(paste(\"Actual between SS:\", \n            round(ss_between, 0)))\n\n[1] \"Actual between SS: 183957038\"\n\nprint(paste(\"Difference (due to correlation):\", \n            round(ss_between - \n                  (ss_species_only + ss_sex_only), 0)))\n\n[1] \"Difference (due to correlation): -112078\""
+    "text": "Decomposing Between-Group SS\n\n\n[1] \"SS(Species alone): 145190219\"\n\n\n[1] \"SS(Sex alone): 38878897\"\n\n\n[1] \"Sum of main effects: 184069116\"\n\n\n[1] \"Actual between SS: 183957038\"\n\n\n[1] \"Difference (due to correlation): -112078\""
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#model-diagnostics",
     "href": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#model-diagnostics",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Model Diagnostics",
-    "text": "Model Diagnostics\n\n# Diagnostic plots\npar(mfrow = c(2, 2))\n\n# Residuals vs Fitted\nplot(model_u, which = 1,\n     main = \"Residuals vs Fitted\")\n\n# Q-Q plot\nplot(model_u, which = 2,\n     main = \"Normal Q-Q\")\n\n# Scale-Location  \nplot(model_u, which = 3,\n     main = \"Scale-Location\")\n\n# Residuals by group\nplot(fitted(model_u), residuals(model_u),\n     col = as.numeric(interaction(p_df$species, \n                                  p_df$sex)),\n     main = \"Residuals by Group\",\n     xlab = \"Fitted values\",\n     ylab = \"Residuals\")\nabline(h = 0, lty = 2)"
+    "text": "Model Diagnostics"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#assumption-tests",
     "href": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#assumption-tests",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Assumption Tests",
-    "text": "Assumption Tests\n\n# Normality test\nshapiro_u &lt;- shapiro.test(residuals(model_u))\nprint(\"Shapiro-Wilk test:\")\n\n[1] \"Shapiro-Wilk test:\"\n\nprint(shapiro_u)\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(model_u)\nW = 0.99776, p-value = 0.9367\n\n# Homogeneity of variance\nlevene_u &lt;- leveneTest(body_mass_g ~ species * sex,\n                       data = p_df,\n                       center = median)\nprint(\"\\nLevene's test:\")\n\n[1] \"\\nLevene's test:\"\n\nprint(levene_u)\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value Pr(&gt;F)\ngroup   5  1.3908 0.2272\n      327               \n\n# Check residuals by group\nresidual_summary_df &lt;- p_df %&gt;%\n  mutate(\n    residuals = residuals(model_u),\n    fitted = fitted(model_u)\n  ) %&gt;%\n  group_by(species, sex) %&gt;%\n  summarise(\n    n = n(),\n    mean_resid = mean(residuals),\n    sd_resid = sd(residuals),\n    .groups = 'drop'\n  )\n\nprint(\"\\nResidual SD by group:\")\n\n[1] \"\\nResidual SD by group:\"\n\nprint(residual_summary_df[, c(\"species\", \"sex\", \n                              \"sd_resid\")])\n\n# A tibble: 6 × 3\n  species   sex    sd_resid\n  &lt;fct&gt;     &lt;fct&gt;     &lt;dbl&gt;\n1 Adelie    female     269.\n2 Adelie    male       347.\n3 Chinstrap female     285.\n4 Chinstrap male       362.\n5 Gentoo    female     282.\n6 Gentoo    male       313."
+    "text": "Assumption Tests\n\n\n[1] \"Shapiro-Wilk test:\"\n\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(model_u)\nW = 0.99776, p-value = 0.9367\n\n\n[1] \"\\nLevene's test:\"\n\n\nLevene's Test for Homogeneity of Variance (center = median)\n       Df F value Pr(&gt;F)\ngroup   5  1.3908 0.2272\n      327               \n\n\n[1] \"\\nResidual SD by group:\"\n\n\n# A tibble: 6 × 3\n  species   sex    sd_resid\n  &lt;fct&gt;     &lt;fct&gt;     &lt;dbl&gt;\n1 Adelie    female     269.\n2 Adelie    male       347.\n3 Chinstrap female     285.\n4 Chinstrap male       362.\n5 Gentoo    female     282.\n6 Gentoo    male       313."
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#side-by-side-comparison",
     "href": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#side-by-side-comparison",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Side-by-Side Comparison",
-    "text": "Side-by-Side Comparison\n\n# Load balanced results (simulated)\nset.seed(123)\nb_df &lt;- p_df %&gt;%\n  group_by(species, sex) %&gt;%\n  sample_n(34) %&gt;%\n  ungroup()\n\n# Fit balanced model\noptions(contrasts = c(\"contr.sum\", \"contr.poly\"))\nmodel_b &lt;- lm(body_mass_g ~ species * sex, data = b_df)\nanova_b &lt;- Anova(model_b, type = \"III\")\n\n# Create comparison table\ncomparison_results_df &lt;- data.frame(\n  Effect = c(\"Species\", \"Sex\", \"Interaction\"),\n  Balanced_F = round(anova_b$`F value`[2:4], 2),\n  Balanced_p = round(anova_b$`Pr(&gt;F)`[2:4], 4),\n  Unbalanced_F = round(anova_type3_u$`F value`[2:4], 2),\n  Unbalanced_p = round(anova_type3_u$`Pr(&gt;F)`[2:4], 4)\n)\n\nprint(\"Balanced vs Unbalanced Results:\")\n\n[1] \"Balanced vs Unbalanced Results:\"\n\nprint(comparison_results_df)\n\n       Effect Balanced_F Balanced_p Unbalanced_F Unbalanced_p\n1     Species     477.20      0e+00       746.92        0e+00\n2         Sex     239.22      0e+00       311.84        0e+00\n3 Interaction       9.10      2e-04         8.76        2e-04\n\n# Compare power\nprint(\"\\nSample sizes:\")\n\n[1] \"\\nSample sizes:\"\n\nprint(paste(\"Balanced total N:\", nrow(b_df)))\n\n[1] \"Balanced total N: 204\"\n\nprint(paste(\"Unbalanced total N:\", nrow(p_df)))\n\n[1] \"Unbalanced total N: 333\"\n\nprint(paste(\"Data discarded:\", \n            nrow(p_df) - nrow(b_df), \n            \"observations\"))\n\n[1] \"Data discarded: 129 observations\""
+    "text": "Side-by-Side Comparison\n\n\n[1] \"Balanced vs Unbalanced Results:\"\n\n\n       Effect Balanced_F Balanced_p Unbalanced_F Unbalanced_p\n1     Species     477.20      0e+00       746.92        0e+00\n2         Sex     239.22      0e+00       311.84        0e+00\n3 Interaction       9.10      2e-04         8.76        2e-04\n\n\n[1] \"\\nSample sizes:\"\n\n\n[1] \"Balanced total N: 204\"\n\n\n[1] \"Unbalanced total N: 333\"\n\n\n[1] \"Data discarded: 129 observations\""
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#visual-comparison",
     "href": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#visual-comparison",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Visual Comparison",
-    "text": "Visual Comparison\n\n# Combine EMMs from both analyses\nemm_b &lt;- as.data.frame(emmeans(model_b, ~ species))\nemm_u &lt;- as.data.frame(emmeans(model_u, ~ species))\n\ncomparison_plot_df &lt;- data.frame(\n  Species = rep(levels(as.factor(p_df$species)), 2),\n  Design = rep(c(\"Balanced\", \"Unbalanced\"), \n               each = 3),\n  EMM = c(as.numeric(emm_b$emmean),\n          as.numeric(emm_u$emmean)),\n  SE = c(as.numeric(emm_b$SE),\n         as.numeric(emm_u$SE))\n)\n\ncomparison_plot &lt;- ggplot(comparison_plot_df, \n       aes(x = Species, y = EMM, \n           color = Design, group = Design)) +\n  geom_point(position = position_dodge(0.3), \n             size = 3) +\n  geom_errorbar(aes(ymin = EMM - SE, \n                    ymax = EMM + SE),\n                position = position_dodge(0.3),\n                width = 0.2) +\n  labs(title = \"EMMs: Balanced vs Unbalanced\",\n       y = \"Estimated Marginal Mean (g)\",\n       color = \"Design\") +\n  theme_minimal() +\n  theme(legend.position = \"top\")\n\nprint(comparison_plot)"
+    "text": "Visual Comparison"
   },
   {
     "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#review",
