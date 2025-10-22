@@ -1593,14 +1593,14 @@
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals",
     "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
     "section": "Check for Normality of Residuals",
-    "text": "Check for Normality of Residuals\n\n# Extract residuals from the model\npu_resid_df &lt;- augment(pb_model)\n\n# Create Q-Q plot of residuals\nggplot(pu_resid_df, aes(sample = .resid)) +\n  stat_qq() +\n  stat_qq_line() +\n  labs(title = \"Q-Q Plot of Residuals\",\n       x = \"Theoretical Quantiles\",\n       y = \"Sample Quantiles\")"
+    "text": "Check for Normality of Residuals\n\n# Extract residuals from the model\npb_resid_df &lt;- augment(pb_model)\n\n# Create Q-Q plot of residuals\nggplot(pb_resid_df, aes(sample = .resid)) +\n  stat_qq() +\n  stat_qq_line() +\n  labs(title = \"Q-Q Plot of Residuals\",\n       x = \"Theoretical Quantiles\",\n       y = \"Sample Quantiles\")"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals-1",
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals-1",
     "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
     "section": "Check for Normality of Residuals",
-    "text": "Check for Normality of Residuals\n\n# Histogram of residuals\nggplot(pu_resid_df, aes(x = .resid)) +\n  geom_histogram(bins = 15, fill = \"snow\", color = \"black\") +\n  labs(title = \"Histogram of Residuals\",\n       x = \"Residuals\",\n       y = \"Count\")"
+    "text": "Check for Normality of Residuals\n\n# Histogram of residuals\nggplot(pb_resid_df, aes(x = .resid)) +\n  geom_histogram(bins = 15, fill = \"snow\", color = \"black\") +\n  labs(title = \"Histogram of Residuals\",\n       x = \"Residuals\",\n       y = \"Count\")"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-normality-of-residuals-2",
@@ -1614,7 +1614,7 @@
     "href": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-homogeneity-of-variances",
     "title": "Lecture 12 - Factorial ANOVA of Limpet Egg Production",
     "section": "Check for homogeneity of variances",
-    "text": "Check for homogeneity of variances\n\n# Residuals vs. fitted values plot\nggplot(pu_resid_df, aes(x = .fitted, y = .resid)) +\n  geom_point() +\n  geom_hline(yintercept = 0, linetype = \"dashed\", color = \"red\") +\n  labs(title = \"Residuals vs Fitted Values\",\n       x = \"Fitted Values\",\n       y = \"Residuals\")"
+    "text": "Check for homogeneity of variances\n\n# Residuals vs. fitted values plot\nggplot(pb_resid_df, aes(x = .fitted, y = .resid)) +\n  geom_point() +\n  geom_hline(yintercept = 0, linetype = \"dashed\", color = \"red\") +\n  labs(title = \"Residuals vs Fitted Values\",\n       x = \"Fitted Values\",\n       y = \"Residuals\")"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_class_activity.html#check-for-homogeneity-of-variances-1",

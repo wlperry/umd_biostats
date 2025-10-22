@@ -390,10 +390,10 @@ par(mfrow = c(1, 1))
 
 ```{.r .cell-code}
 # Extract residuals from the model
-pu_resid_df <- augment(pb_model)
+pb_resid_df <- augment(pb_model)
 
 # Create Q-Q plot of residuals
-ggplot(pu_resid_df, aes(sample = .resid)) +
+ggplot(pb_resid_df, aes(sample = .resid)) +
   stat_qq() +
   stat_qq_line() +
   labs(title = "Q-Q Plot of Residuals",
@@ -416,7 +416,7 @@ ggplot(pu_resid_df, aes(sample = .resid)) +
 
 ```{.r .cell-code}
 # Histogram of residuals
-ggplot(pu_resid_df, aes(x = .resid)) +
+ggplot(pb_resid_df, aes(x = .resid)) +
   geom_histogram(bins = 15, fill = "snow", color = "black") +
   labs(title = "Histogram of Residuals",
        x = "Residuals",
@@ -507,7 +507,7 @@ group   5  0.7841 0.5622
 
 ```{.r .cell-code}
 # Residuals vs. fitted values plot
-ggplot(pu_resid_df, aes(x = .fitted, y = .resid)) +
+ggplot(pb_resid_df, aes(x = .fitted, y = .resid)) +
   geom_point() +
   geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
   labs(title = "Residuals vs Fitted Values",
