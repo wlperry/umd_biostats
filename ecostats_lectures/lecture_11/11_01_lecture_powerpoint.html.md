@@ -21,7 +21,7 @@ format:
 
 ::::: columns
 ::: {.column width="60%"}
-## **Multiple Regression**
+### **Multiple Regression**
 
 -   MLR model
 -   Regression parameters
@@ -134,7 +134,7 @@ What if response continuous and predictor(s) categorical?
 # **Lecture 12:** ANOVA as Regression
 
 ::: callout-tip
-# ANOVA as Regression
+### ANOVA as Regression
 
 With one categorical variable, ANOVA is equivalent to regression with
 dummy variables.
@@ -336,7 +336,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 :::: {.column width="40%"}
 ::: callout-important
-# Key Connection to Regression
+### Key Connection to Regression
 
 -   This is the same partitioning we saw in regression analysis:
 
@@ -442,7 +442,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 # **Lecture 12:** ANOVA vs Regression Tables
 
 ::: callout-important
-# Comparing ANOVA and Regression Tables
+### Comparing ANOVA and Regression Tables
 
 An ANOVA table compared to a regression table:
 
@@ -798,7 +798,7 @@ ANOVA and regression share virtually identical assumptions because they
 are both linear models:
 
 | Assumption | ANOVA | Regression |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | Linearity | Each group has its own mean; effects are additive (no interaction in one-way ANOVA) | Relationship between X and Y is linear |
 | Normality | Residuals are normal | Residuals are normal |
 | Equal variance | Variance is the same across all groups | Variance is the same across all X values |
@@ -1145,7 +1145,7 @@ the knees, impacts circadian rhythm phase shifts."
 
 ::::: columns
 ::: {.column width="60%"}
-## Common Non-Parametric Alternatives to ANOVA
+### Common Non-Parametric Alternatives to ANOVA
 
 **Non-parametric tests make fewer assumptions about the data
 distribution**
@@ -1163,7 +1163,7 @@ distribution**
 :::
 
 ::: {.column width="40%"}
-## When to Use Non-Parametric Tests
+### When to Use Non-Parametric Tests
 
 **Consider non-parametric tests when:**
 
@@ -1187,32 +1187,32 @@ distribution**
 
 ::::: columns
 ::: {.column width="60%"}
-## The Kruskal-Wallis H Test
+### The Kruskal-Wallis H Test
 
-**Most common non-parametric alternative to one-way ANOVA**
-
--   **What it does:**
-    -   Ranks all observations from smallest to largest
-    -   Compares the sum of ranks between groups
-    -   Tests if groups come from the same distribution
--   **Hypotheses:**
-    -   **H₀**: All groups have the same distribution (same median)
-    -   **H₁**: At least one group has a different distribution
--   **Test statistic (H):**
-    $$H = \frac{12}{N(N+1)} \sum_{i=1}^{k} n_i (\bar{R}_i - \bar{R})^2 - 3(N+1)$$
--   Where:
-    -   N = total sample size
-    -   k = number of groups
-    -   $\bar{R}_i$ = mean rank for group i
-    -   $\bar{R}$= overall mean rank = (N+1)/2
-    -   nᵢ = sample size for group i
-    -   constant 12 comes from the variance of ranks in a uniform
-        distribution
--   **Distribution:** Approximated by χ² with (k-1) degrees of freedom
+-   **Most common non-parametric alternative to one-way ANOVA**
+    -   **What it does:**
+        -   Ranks all observations from smallest to largest
+        -   Compares the sum of ranks between groups
+        -   Tests if groups come from the same distribution
+    -   **Hypotheses:**
+        -   **H₀**: All groups have the same distribution (same median)
+        -   **H₁**: At least one group has a different distribution
+    -   **Test statistic (H):**
+        $H = \frac{12}{N(N+1)} \sum_{i=1}^{k} n_i (\bar{R}_i - \bar{R})^2 - 3(N+1)$
+    -   Where:
+        -   N = total sample size
+        -   k = number of groups
+        -   $\bar{R}_i$ = mean rank for group i
+        -   $\bar{R}$= overall mean rank = (N+1)/2
+        -   nᵢ = sample size for group i
+        -   constant 12 comes from the variance of ranks in a uniform
+            distribution
+    -   **Distribution:** Approximated by χ² with (k-1) degrees of
+        freedom
 :::
 
 ::: {.column width="40%"}
-## Assumptions of Kruskal-Wallis
+### Assumptions of Kruskal-Wallis
 
 **Much more relaxed than parametric ANOVA:**
 
@@ -1276,21 +1276,6 @@ violated_model <- lm(phase_shift_violated ~ treatment,
 ::: {.column width="40%"}
 
 ::: {.cell}
-
-```{.r .cell-code}
-ggplot(violated_circ_df, 
-       aes(x = treatment, y = phase_shift_violated, 
-           color = treatment)) +
-  geom_jitter(width = 0.2, alpha = 0.7, size = 3) +
-  geom_boxplot(alpha = 0.3, outlier.shape = NA) +
-geom_jitter(width = 0.2, alpha = 0.7, size = 3)+
-  theme_minimal() +
-  labs(title = "Modified Data with Violations",
-       subtitle = "Median with IQR",
-       x = "Light Treatment",
-       y = "Phase Shift (hours)") 
-```
-
 ::: {.cell-output-display}
 ![](11_01_lecture_powerpoint_files/figure-html/violated_data_plot-1.png){width=480}
 :::
@@ -1309,12 +1294,6 @@ geom_jitter(width = 0.2, alpha = 0.7, size = 3)+
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Shapiro-Wilk test on residuals
-shapiro.test(resid(violated_model))
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1343,18 +1322,10 @@ W = 0.89473, p-value = 0.02335
 ### Variance Test on Violated Data
 
 -   ok having issues making it not homogeoeous
-
-**Clear violation:** p \< 0.05, unequal variances evident
+-   **Clear violation:** p \< 0.05, unequal variances evident
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Levene's test
-leveneTest(phase_shift_violated ~ treatment, 
-           data = violated_circ_df)
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1383,7 +1354,7 @@ group  2  1.5618 0.2355
 
 ::::: columns
 ::: {.column width="60%"}
-## Running Kruskal-Wallis on Original Data
+### Running Kruskal-Wallis on Original Data
 
 **Even though assumptions are met, let's compare results:**
 
@@ -1394,9 +1365,7 @@ group  2  1.5618 0.2355
 # Kruskal-Wallis test on original data
 kruskal_original_result <- kruskal.test(
   phase_shift ~ treatment, 
-  data = circ_data
-)
-
+  data = circ_data)
 # Display results
 kruskal_original_result
 ```
@@ -1425,11 +1394,6 @@ others
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-anova(circ_model)
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1450,7 +1414,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 ::: {.column width="40%"}
-## Rank Visualization
+### Rank Visualization
 
 **How Kruskal-Wallis works:**
 
@@ -1494,7 +1458,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ::::: columns
 ::: {.column width="60%"}
-## Non-Parametric Test Handles Violations
+### Non-Parametric Test Handles Violations
 
 **Running Kruskal-Wallis on data with assumption violations:**
 
@@ -1505,9 +1469,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 # Kruskal-Wallis test on violated data
 kruskal_violated_result <- kruskal.test(
   phase_shift_violated ~ treatment, 
-  data = violated_circ_df
-)
-
+  data = violated_circ_df)
 kruskal_violated_result
 ```
 
@@ -1526,15 +1488,8 @@ Kruskal-Wallis chi-squared = 6.8453, df = 2, p-value = 0.03263
 :::
 
 
-**Compare parametric ANOVA on same violated data:**
-
 
 ::: {.cell}
-
-```{.r .cell-code}
-anova(violated_model)
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1554,14 +1509,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 -   **Key observations:**
-    -   \- Both tests still detect differences
-
-    -   \- Kruskal-Wallis more robust to violations
-
-    -   \- Parametric test may give misleading results when assumptions
+    -   Both tests still detect differences
+    -   Kruskal-Wallis more robust to violations
+    -   Parametric test may give misleading results when assumptions
         violated
-
-    -   \- Non-parametric test maintains validity
+    -   Non-parametric test maintains validity
 :::
 
 ::: {.column width="40%"}
@@ -1585,26 +1537,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ::::: columns
 ::: {.column width="60%"}
-## Pairwise Comparisons After Significant Kruskal-Wallis
+### Pairwise Comparisons After Significant Kruskal-Wallis
 
 **Just like ANOVA, we need post-hoc tests to identify which groups
 differ:**
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Pairwise Wilcoxon rank sum tests with 
-# Bonferroni correction
-pairwise_original_result <- pairwise.wilcox.test(
-  x = nonparam_circ_df$phase_shift,
-  g = nonparam_circ_df$treatment,
-  p.adjust.method = "bonferroni"
-)
-
-pairwise_original_result
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1637,7 +1576,7 @@ P value adjustment method: bonferroni
 :::
 
 ::: {.column width="40%"}
-## Post-Hoc for Violated Data
+### Post-Hoc for Violated Data
 
 
 ::: {.cell}
@@ -1709,7 +1648,7 @@ Violated Data Pairwise p-values:
 
 ::::: columns
 ::: {.column width="60%"}
-## Dunn's Test for Multiple Comparisons
+### Dunn's Test for Multiple Comparisons
 
 **Dunn's test is specifically designed for Kruskal-Wallis post-hoc
 comparisons:**
@@ -1718,15 +1657,11 @@ comparisons:**
 ::: {.cell}
 
 ```{.r .cell-code}
-library(FSA)
-
 # Dunn's test on original data
 dunn_original_result <- dunnTest(
   phase_shift ~ treatment,
   data = circ_data,
-  method = "bonferroni"
-)
-
+  method = "bonferroni")
 dunn_original_result
 ```
 
@@ -1755,7 +1690,7 @@ dunn_original_result
 :::
 
 ::: {.column width="40%"}
-## Dunn's Test on Violated Data
+### Dunn's Test on Violated Data
 
 
 ::: {.cell}
@@ -1796,39 +1731,31 @@ dunn_violated_result
 
 # Reporting Non-Parametric Results
 
-::::: columns
-::: {.column width="60%"}
-## How to Report Kruskal-Wallis Results
+### How to Report Kruskal-Wallis Results
 
 **Essential elements to include:**
 
 1.  Test name and purpose
 2.  Sample sizes per group
 3.  Medians and IQRs (not means and SDs!)
-4.  Test statistic (H) and degrees of freedom
-5.  P-value
-6.  Effect size
-7.  Post-hoc test results
-8.  Conclusion
+4.  Test statistic (H) and degrees of freedom, P-value, Effect size
+5.  Post-hoc test results
+6.  Conclusion
 
-**Example write-up:**
+**Example write-up:** "A Kruskal-Wallis test was conducted to compare
+the effect of light treatment on circadian rhythm phase shift across
+three groups: Control (n = 8), Knees (n = 7), and Eyes (n = 7). Median
+phase shifts were -0.48 hours (IQR = 0.84) for Control, -0.29 hours (IQR
+= 1.04) for Knees, and -1.48 hours (IQR = 0.66) for Eyes. The test
+revealed a statistically significant difference in phase shift between
+the groups, H(2) = 8.66, p = 0.013, ε² = 0.37. Post-hoc pairwise
+comparisons using Dunn's test with Bonferroni correction indicated that
+the Eyes treatment differed significantly from Control (p = 0.024), but
+no other pairwise differences were significant. These results suggest
+that light exposure to the eyes has a different effect on circadian
+rhythm than light to other body parts."
 
-"A Kruskal-Wallis test was conducted to compare the effect of light
-treatment on circadian rhythm phase shift across three groups: Control
-(n = 8), Knees (n = 7), and Eyes (n = 7). Median phase shifts were -0.48
-hours (IQR = 0.84) for Control, -0.29 hours (IQR = 1.04) for Knees, and
--1.48 hours (IQR = 0.66) for Eyes. The test revealed a statistically
-significant difference in phase shift between the groups, H(2) = 8.66, p
-= 0.013, ε² = 0.37. Post-hoc pairwise comparisons using Dunn's test with
-Bonferroni correction indicated that the Eyes treatment differed
-significantly from Control (p = 0.024), but no other pairwise
-differences were significant. These results suggest that light exposure
-to the eyes has a different effect on circadian rhythm than light to
-other body parts."
-:::
-
-::: {.column width="40%"}
-## APA Style Reporting
+# APA Style Reporting
 
 **In-text citation format:**
 
@@ -1843,6 +1770,11 @@ other body parts."
 
 ```
 Table 1. Descriptive Statistics for Phase Shift by Treatment
+
+ 
+
+Note. IQR = interquartile range.
+ Kruskal-Wallis H(2) = 8.66, p = .013
 ```
 
 
@@ -1861,35 +1793,11 @@ Table 1. Descriptive Statistics for Phase Shift by Treatment
 
 
 :::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-
-Note. IQR = interquartile range.
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Kruskal-Wallis H(2) = 8.66, p = .013, ε² = .37
-```
-
-
-:::
 :::
 
 
 **Common mistakes to avoid:**
 
--   ✗ Reporting means instead of medians
--   ✗ Using SD instead of IQR
+-   ✗ Reporting means instead of medians & Using SD instead of IQR
 -   ✗ Not mentioning it's a non-parametric test
--   ✗ Forgetting effect size
 -   ✗ Not justifying why non-parametric test used
-:::
-:::::

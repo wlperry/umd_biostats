@@ -4727,8 +4727,8 @@ font-size: 24px !important;
 <h1>Lecture 11: Review</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<section id="multiple-regression" class="level2">
-<h2 class="anchored" data-anchor-id="multiple-regression"><strong>Multiple Regression</strong></h2>
+<section id="multiple-regression" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-regression"><strong>Multiple Regression</strong></h3>
 <ul>
 <li>MLR model</li>
 <li>Regression parameters</li>
@@ -5897,8 +5897,8 @@ NOTE: If two or more means share the same grouping symbol,
 <h1>Overview of Non-Parametric Tests</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<section id="common-non-parametric-alternatives-to-anova" class="level2">
-<h2 class="anchored" data-anchor-id="common-non-parametric-alternatives-to-anova">Common Non-Parametric Alternatives to ANOVA</h2>
+<section id="common-non-parametric-alternatives-to-anova" class="level3">
+<h3 class="anchored" data-anchor-id="common-non-parametric-alternatives-to-anova">Common Non-Parametric Alternatives to ANOVA</h3>
 <p><strong>Non-parametric tests make fewer assumptions about the data distribution</strong></p>
 <ol type="1">
 <li><strong>Kruskal-Wallis Test</strong>
@@ -5917,8 +5917,8 @@ NOTE: If two or more means share the same grouping symbol,
 </ol>
 </section>
 </div><div class="column" style="width:40%;">
-<section id="when-to-use-non-parametric-tests" class="level2">
-<h2 class="anchored" data-anchor-id="when-to-use-non-parametric-tests">When to Use Non-Parametric Tests</h2>
+<section id="when-to-use-non-parametric-tests" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-non-parametric-tests">When to Use Non-Parametric Tests</h3>
 <p><strong>Consider non-parametric tests when:</strong></p>
 <ul>
 <li>Sample sizes are small</li>
@@ -5943,9 +5943,10 @@ NOTE: If two or more means share the same grouping symbol,
 <h1>Kruskal-Wallis Test: Overview</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<section id="the-kruskal-wallis-h-test" class="level2">
-<h2 class="anchored" data-anchor-id="the-kruskal-wallis-h-test">The Kruskal-Wallis H Test</h2>
-<p><strong>Most common non-parametric alternative to one-way ANOVA</strong></p>
+<section id="the-kruskal-wallis-h-test" class="level3">
+<h3 class="anchored" data-anchor-id="the-kruskal-wallis-h-test">The Kruskal-Wallis H Test</h3>
+<ul>
+<li><strong>Most common non-parametric alternative to one-way ANOVA</strong>
 <ul>
 <li><strong>What it does:</strong>
 <ul>
@@ -5958,7 +5959,7 @@ NOTE: If two or more means share the same grouping symbol,
 <li><strong>H₀</strong>: All groups have the same distribution (same median)</li>
 <li><strong>H₁</strong>: At least one group has a different distribution</li>
 </ul></li>
-<li><strong>Test statistic (H):</strong> <span class="math display">\[H = \frac{12}{N(N+1)} \sum_{i=1}^{k} n_i (\bar{R}_i - \bar{R})^2 - 3(N+1)\]</span></li>
+<li><strong>Test statistic (H):</strong> <span class="math inline">\(H = \frac{12}{N(N+1)} \sum_{i=1}^{k} n_i (\bar{R}_i - \bar{R})^2 - 3(N+1)\)</span></li>
 <li>Where:
 <ul>
 <li>N = total sample size</li>
@@ -5969,11 +5970,12 @@ NOTE: If two or more means share the same grouping symbol,
 <li>constant 12 comes from the variance of ranks in a uniform distribution</li>
 </ul></li>
 <li><strong>Distribution:</strong> Approximated by χ² with (k-1) degrees of freedom</li>
+</ul></li>
 </ul>
 </section>
 </div><div class="column" style="width:40%;">
-<section id="assumptions-of-kruskal-wallis" class="level2">
-<h2 class="anchored" data-anchor-id="assumptions-of-kruskal-wallis">Assumptions of Kruskal-Wallis</h2>
+<section id="assumptions-of-kruskal-wallis" class="level3">
+<h3 class="anchored" data-anchor-id="assumptions-of-kruskal-wallis">Assumptions of Kruskal-Wallis</h3>
 <p><strong>Much more relaxed than parametric ANOVA:</strong></p>
 <ul>
 <li><strong>Independence</strong>: Observations must be independent
@@ -6033,17 +6035,6 @@ NOTE: If two or more means share the same grouping symbol,
 </section>
 </div><div class="column" style="width:40%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(violated_circ_df, </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> treatment, <span class="at">y =</span> phase_shift_violated, </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> treatment)) <span class="sc">+</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Modified Data with Violations&quot;</span>,</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Median with IQR&quot;</span>,</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Light Treatment&quot;</span>,</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Phase Shift (hours)&quot;</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -6063,8 +6054,6 @@ NOTE: If two or more means share the same grouping symbol,
 <h3 class="anchored" data-anchor-id="normality-test-on-violated-data">Normality Test on Violated Data</h3>
 <p><strong>Clear violation:</strong> p &lt; 0.05, points deviate from line</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Shapiro-Wilk test on residuals</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">resid</span>(violated_model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -6088,12 +6077,9 @@ W = 0.89473, p-value = 0.02335</code></pre>
 <h3 class="anchored" data-anchor-id="variance-test-on-violated-data">Variance Test on Violated Data</h3>
 <ul>
 <li>ok having issues making it not homogeoeous</li>
+<li><strong>Clear violation:</strong> p &lt; 0.05, unequal variances evident</li>
 </ul>
-<p><strong>Clear violation:</strong> p &lt; 0.05, unequal variances evident</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Levene&#39;s test</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(phase_shift_violated <span class="sc">~</span> treatment, </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">data =</span> violated_circ_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Levene&#39;s Test for Homogeneity of Variance (center = median)
       Df F value Pr(&gt;F)
@@ -6118,18 +6104,16 @@ group  2  1.5618 0.2355
 <h1>Performing the Kruskal-Wallis Test</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<section id="running-kruskal-wallis-on-original-data" class="level2">
-<h2 class="anchored" data-anchor-id="running-kruskal-wallis-on-original-data">Running Kruskal-Wallis on Original Data</h2>
+<section id="running-kruskal-wallis-on-original-data" class="level3">
+<h3 class="anchored" data-anchor-id="running-kruskal-wallis-on-original-data">Running Kruskal-Wallis on Original Data</h3>
 <p><strong>Even though assumptions are met, let’s compare results:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kruskal-Wallis test on original data</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>kruskal_original_result <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  phase_shift <span class="sc">~</span> treatment, </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> circ_data</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Display results</span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>kruskal_original_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kruskal-Wallis test on original data</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>kruskal_original_result <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  phase_shift <span class="sc">~</span> treatment, </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> circ_data)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Display results</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>kruskal_original_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Kruskal-Wallis rank sum test
@@ -6141,7 +6125,6 @@ Kruskal-Wallis chi-squared = 9.4231, df = 2, p-value = 0.008991</code></pre>
 <p><strong>Interpretation:</strong> - H = test statistic (chi-squared approximation) - df = degrees of freedom (k - 1 = 3 - 1 = 2) - p-value = 0.0135 (significant at α = 0.05) - Conclusion: At least one group differs from others</p>
 <p><strong>Compare to parametric ANOVA:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(circ_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -6155,8 +6138,8 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </div>
 </section>
 </div><div class="column" style="width:40%;">
-<section id="rank-visualization" class="level2">
-<h2 class="anchored" data-anchor-id="rank-visualization">Rank Visualization</h2>
+<section id="rank-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="rank-visualization">Rank Visualization</h3>
 <p><strong>How Kruskal-Wallis works:</strong></p>
 <div class="cell">
 <div class="cell-output-display">
@@ -6186,17 +6169,15 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <h1>Kruskal-Wallis on Violated Data</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<section id="non-parametric-test-handles-violations" class="level2">
-<h2 class="anchored" data-anchor-id="non-parametric-test-handles-violations">Non-Parametric Test Handles Violations</h2>
+<section id="non-parametric-test-handles-violations" class="level3">
+<h3 class="anchored" data-anchor-id="non-parametric-test-handles-violations">Non-Parametric Test Handles Violations</h3>
 <p><strong>Running Kruskal-Wallis on data with assumption violations:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kruskal-Wallis test on violated data</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>kruskal_violated_result <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  phase_shift_violated <span class="sc">~</span> treatment, </span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> violated_circ_df</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>kruskal_violated_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kruskal-Wallis test on violated data</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>kruskal_violated_result <span class="ot">&lt;-</span> <span class="fu">kruskal.test</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  phase_shift_violated <span class="sc">~</span> treatment, </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> violated_circ_df)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>kruskal_violated_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Kruskal-Wallis rank sum test
@@ -6205,9 +6186,7 @@ data:  phase_shift_violated by treatment
 Kruskal-Wallis chi-squared = 6.8453, df = 2, p-value = 0.03263</code></pre>
 </div>
 </div>
-<p><strong>Compare parametric ANOVA on same violated data:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(violated_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -6222,10 +6201,10 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <ul>
 <li><strong>Key observations:</strong>
 <ul>
-<li><p>- Both tests still detect differences</p></li>
-<li><p>- Kruskal-Wallis more robust to violations</p></li>
-<li><p>- Parametric test may give misleading results when assumptions violated</p></li>
-<li><p>- Non-parametric test maintains validity</p></li>
+<li>Both tests still detect differences</li>
+<li>Kruskal-Wallis more robust to violations</li>
+<li>Parametric test may give misleading results when assumptions violated</li>
+<li>Non-parametric test maintains validity</li>
 </ul></li>
 </ul>
 </section>
@@ -6255,19 +6234,10 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <h1>Post-Hoc Tests for Kruskal-Wallis</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<section id="pairwise-comparisons-after-significant-kruskal-wallis" class="level2">
-<h2 class="anchored" data-anchor-id="pairwise-comparisons-after-significant-kruskal-wallis">Pairwise Comparisons After Significant Kruskal-Wallis</h2>
+<section id="pairwise-comparisons-after-significant-kruskal-wallis" class="level3">
+<h3 class="anchored" data-anchor-id="pairwise-comparisons-after-significant-kruskal-wallis">Pairwise Comparisons After Significant Kruskal-Wallis</h3>
 <p><strong>Just like ANOVA, we need post-hoc tests to identify which groups differ:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise Wilcoxon rank sum tests with </span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Bonferroni correction</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>pairwise_original_result <span class="ot">&lt;-</span> <span class="fu">pairwise.wilcox.test</span>(</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> nonparam_circ_df<span class="sc">$</span>phase_shift,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">g =</span> nonparam_circ_df<span class="sc">$</span>treatment,</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>pairwise_original_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pairwise comparisons using Wilcoxon rank sum exact test 
@@ -6298,17 +6268,17 @@ P value adjustment method: bonferroni </code></pre>
 </ul>
 </section>
 </div><div class="column" style="width:40%;">
-<section id="post-hoc-for-violated-data" class="level2">
-<h2 class="anchored" data-anchor-id="post-hoc-for-violated-data">Post-Hoc for Violated Data</h2>
+<section id="post-hoc-for-violated-data" class="level3">
+<h3 class="anchored" data-anchor-id="post-hoc-for-violated-data">Post-Hoc for Violated Data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Post-hoc tests on violated data</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>pairwise_violated_result <span class="ot">&lt;-</span> <span class="fu">pairwise.wilcox.test</span>(</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> violated_circ_df<span class="sc">$</span>phase_shift_violated,</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">g =</span> violated_circ_df<span class="sc">$</span>treatment,</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>pairwise_violated_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Post-hoc tests on violated data</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>pairwise_violated_result <span class="ot">&lt;-</span> <span class="fu">pairwise.wilcox.test</span>(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> violated_circ_df<span class="sc">$</span>phase_shift_violated,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">g =</span> violated_circ_df<span class="sc">$</span>treatment,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">p.adjust.method =</span> <span class="st">&quot;bonferroni&quot;</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>pairwise_violated_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pairwise comparisons using Wilcoxon rank sum exact test 
@@ -6345,20 +6315,16 @@ P value adjustment method: bonferroni </code></pre>
 <h1>Dunn’s Test: Alternative Post-Hoc</h1>
 <div class="columns">
 <div class="column" style="width:60%;">
-<section id="dunns-test-for-multiple-comparisons" class="level2">
-<h2 class="anchored" data-anchor-id="dunns-test-for-multiple-comparisons">Dunn’s Test for Multiple Comparisons</h2>
+<section id="dunns-test-for-multiple-comparisons" class="level3">
+<h3 class="anchored" data-anchor-id="dunns-test-for-multiple-comparisons">Dunn’s Test for Multiple Comparisons</h3>
 <p><strong>Dunn’s test is specifically designed for Kruskal-Wallis post-hoc comparisons:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FSA)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Dunn&#39;s test on original data</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>dunn_original_result <span class="ot">&lt;-</span> <span class="fu">dunnTest</span>(</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  phase_shift <span class="sc">~</span> treatment,</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> circ_data,</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>dunn_original_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dunn&#39;s test on original data</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>dunn_original_result <span class="ot">&lt;-</span> <span class="fu">dunnTest</span>(</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  phase_shift <span class="sc">~</span> treatment,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> circ_data,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>dunn_original_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Comparison          Z     P.unadj      P.adj
 1  Control - Eyes  2.7789287 0.005453849 0.01636155
@@ -6378,17 +6344,17 @@ P value adjustment method: bonferroni </code></pre>
 </ul>
 </section>
 </div><div class="column" style="width:40%;">
-<section id="dunns-test-on-violated-data" class="level2">
-<h2 class="anchored" data-anchor-id="dunns-test-on-violated-data">Dunn’s Test on Violated Data</h2>
+<section id="dunns-test-on-violated-data" class="level3">
+<h3 class="anchored" data-anchor-id="dunns-test-on-violated-data">Dunn’s Test on Violated Data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dunn&#39;s test on violated data</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>dunn_violated_result <span class="ot">&lt;-</span> <span class="fu">dunnTest</span>(</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  phase_shift_violated <span class="sc">~</span> treatment,</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> violated_circ_df,</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>dunn_violated_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dunn&#39;s test on violated data</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>dunn_violated_result <span class="ot">&lt;-</span> <span class="fu">dunnTest</span>(</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  phase_shift_violated <span class="sc">~</span> treatment,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> violated_circ_df,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;bonferroni&quot;</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>dunn_violated_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       Comparison         Z     P.unadj      P.adj
 1  Control - Eyes  2.614212 0.008943349 0.02683005
@@ -6410,27 +6376,22 @@ P value adjustment method: bonferroni </code></pre>
 </section>
 <section id="reporting-non-parametric-results" class="level1">
 <h1>Reporting Non-Parametric Results</h1>
-<div class="columns">
-<div class="column" style="width:60%;">
-<section id="how-to-report-kruskal-wallis-results" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-report-kruskal-wallis-results">How to Report Kruskal-Wallis Results</h2>
+<section id="how-to-report-kruskal-wallis-results" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-report-kruskal-wallis-results">How to Report Kruskal-Wallis Results</h3>
 <p><strong>Essential elements to include:</strong></p>
 <ol type="1">
 <li>Test name and purpose</li>
 <li>Sample sizes per group</li>
 <li>Medians and IQRs (not means and SDs!)</li>
-<li>Test statistic (H) and degrees of freedom</li>
-<li>P-value</li>
-<li>Effect size</li>
+<li>Test statistic (H) and degrees of freedom, P-value, Effect size</li>
 <li>Post-hoc test results</li>
 <li>Conclusion</li>
 </ol>
-<p><strong>Example write-up:</strong></p>
-<p>“A Kruskal-Wallis test was conducted to compare the effect of light treatment on circadian rhythm phase shift across three groups: Control (n = 8), Knees (n = 7), and Eyes (n = 7). Median phase shifts were -0.48 hours (IQR = 0.84) for Control, -0.29 hours (IQR = 1.04) for Knees, and -1.48 hours (IQR = 0.66) for Eyes. The test revealed a statistically significant difference in phase shift between the groups, H(2) = 8.66, p = 0.013, ε² = 0.37. Post-hoc pairwise comparisons using Dunn’s test with Bonferroni correction indicated that the Eyes treatment differed significantly from Control (p = 0.024), but no other pairwise differences were significant. These results suggest that light exposure to the eyes has a different effect on circadian rhythm than light to other body parts.”</p>
+<p><strong>Example write-up:</strong> “A Kruskal-Wallis test was conducted to compare the effect of light treatment on circadian rhythm phase shift across three groups: Control (n = 8), Knees (n = 7), and Eyes (n = 7). Median phase shifts were -0.48 hours (IQR = 0.84) for Control, -0.29 hours (IQR = 1.04) for Knees, and -1.48 hours (IQR = 0.66) for Eyes. The test revealed a statistically significant difference in phase shift between the groups, H(2) = 8.66, p = 0.013, ε² = 0.37. Post-hoc pairwise comparisons using Dunn’s test with Bonferroni correction indicated that the Eyes treatment differed significantly from Control (p = 0.024), but no other pairwise differences were significant. These results suggest that light exposure to the eyes has a different effect on circadian rhythm than light to other body parts.”</p>
 </section>
-</div><div class="column" style="width:40%;">
-<section id="apa-style-reporting" class="level2">
-<h2 class="anchored" data-anchor-id="apa-style-reporting">APA Style Reporting</h2>
+</section>
+<section id="apa-style-reporting" class="level1">
+<h1>APA Style Reporting</h1>
 <p><strong>In-text citation format:</strong></p>
 <blockquote class="blockquote">
 <p>The Kruskal-Wallis test revealed significant differences between treatment groups, H(2) = 8.66, p = .013.</p>
@@ -6438,7 +6399,12 @@ P value adjustment method: bonferroni </code></pre>
 <p><strong>Table format:</strong></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Table 1. Descriptive Statistics for Phase Shift by Treatment</code></pre>
+<pre><code>Table 1. Descriptive Statistics for Phase Shift by Treatment
+
+ 
+
+Note. IQR = interquartile range.
+ Kruskal-Wallis H(2) = 8.66, p = .013</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 6
@@ -6448,26 +6414,13 @@ P value adjustment method: bonferroni </code></pre>
 2 Eyes          7 -1.48  0.675 -2.83 -0.78
 3 Knees         7 -0.29  0.93  -1.61  0.73</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-
-Note. IQR = interquartile range.</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Kruskal-Wallis H(2) = 8.66, p = .013, ε² = .37</code></pre>
-</div>
 </div>
 <p><strong>Common mistakes to avoid:</strong></p>
 <ul>
-<li>✗ Reporting means instead of medians</li>
-<li>✗ Using SD instead of IQR</li>
+<li>✗ Reporting means instead of medians &amp; Using SD instead of IQR</li>
 <li>✗ Not mentioning it’s a non-parametric test</li>
-<li>✗ Forgetting effect size</li>
 <li>✗ Not justifying why non-parametric test used</li>
 </ul>
-</section>
-</div>
-</div>
 
 
 </section>

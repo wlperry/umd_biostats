@@ -5,7 +5,7 @@ metadata-files:
   - ../../_templates/activities.yml
 format:
   html:
-      output-file: "11_02_class_activity.html"
+    output-file: "11_02_class_activity.html"
   docx:
     output-file: "11_02_class_activity.docx"
 ---
