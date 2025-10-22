@@ -4400,7 +4400,7 @@
     "href": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#factorial-designs",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Factorial Designs",
-    "text": "Factorial Designs\nTwo-way ANOVA examines:\n\nMain effect of Factor A (Species)\nMain effect of Factor B (Sex)\nInteraction between A × B\nBalanced design: equal sample sizes in all cells\nType III sums of squares for unbiased estimates - if balanced it does not matter\n\nStatistical Model: \\[Y_{ijk} = \\mu + \\alpha_i + \\beta_j + (\\alpha\\beta)_{ij} + \\varepsilon_{ijk}\\]\nWhere: - \\(\\mu\\) = grand mean - \\(\\alpha_i\\) = effect of species i - \\(\\beta_j\\) = effect of sex j - \\((\\alpha\\beta)_{ij}\\) = interaction effect - \\(\\varepsilon_{ijk}\\) = random error"
+    "text": "Factorial Designs\nTwo-way ANOVA examines:\n\nMain effect of Factor A (Species)\nMain effect of Factor B (Sex)\nInteraction between A × B\nBalanced design: equal sample sizes in all cells\nType III sums of squares for unbiased estimates - if balanced it does not matter\n\nStatistical Mode \\(Y_{ijk} = \\mu + \\alpha_i + \\beta_j + (\\alpha\\beta)_{ij} + \\varepsilon_{ijk}\\)\n\nWhere:\n\n\\(\\mu\\) = grand mean\n\\(\\alpha_i\\) = effect of species i\n\\(\\beta_j\\) = effect of sex j\n\\((\\alpha\\beta)_{ij}\\) = interaction effect\n\\(\\varepsilon_{ijk}\\) = random error"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_01_factorial_anova_slides.html#summary-statistics-by-groups",
@@ -4519,7 +4519,7 @@
     "href": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#factorial-designs",
     "title": "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced",
     "section": "Factorial Designs",
-    "text": "Factorial Designs\nTwo-way ANOVA examines:\n\nMain effect of Factor A (Species)\nMain effect of Factor B (Sex)\nInteraction between A × B\nBalanced design: equal sample sizes in all cells\nType III sums of squares for unbiased estimates - if balanced it does not matter\n\nStatistical Model: \\[Y_{ijk} = \\mu + \\alpha_i + \\beta_j + (\\alpha\\beta)_{ij} + \\varepsilon_{ijk}\\]\nWhere: - \\(\\mu\\) = grand mean - \\(\\alpha_i\\) = effect of species i - \\(\\beta_j\\) = effect of sex j - \\((\\alpha\\beta)_{ij}\\) = interaction effect - \\(\\varepsilon_{ijk}\\) = random error"
+    "text": "Factorial Designs\nTwo-way ANOVA examines:\n\nMain effect of Factor A (Species)\nMain effect of Factor B (Sex)\nInteraction between A × B\nBalanced design: equal sample sizes in all cells\nType III sums of squares for unbiased estimates - if balanced it does not matter\n\nStatistical Mode \\(Y_{ijk} = \\mu + \\alpha_i + \\beta_j + (\\alpha\\beta)_{ij} + \\varepsilon_{ijk}\\)\n\nWhere:\n\n\\(\\mu\\) = grand mean\n\\(\\alpha_i\\) = effect of species i\n\\(\\beta_j\\) = effect of sex j\n\\((\\alpha\\beta)_{ij}\\) = interaction effect\n\\(\\varepsilon_{ijk}\\) = random error"
   },
   {
     "objectID": "ecostats_lectures/lecture_12/12_02_lecture_powerpoint_html.html#summary-statistics-by-groups",

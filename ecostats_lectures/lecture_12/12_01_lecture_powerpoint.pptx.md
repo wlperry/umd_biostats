@@ -115,12 +115,15 @@ Two-way ANOVA examines:
 -   Type III sums of squares for unbiased estimates - if balanced it
     does not matter
 
-Statistical Model:
-$$Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$$
+Statistical Mode  $Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$
 
-Where: - $\mu$ = grand mean - $\alpha_i$ = effect of species i -
-$\beta_j$ = effect of sex j - $(\alpha\beta)_{ij}$ = interaction
-effect - $\varepsilon_{ijk}$ = random error
+-   Where:
+
+    -    $\mu$ = grand mean
+    -    $\alpha_i$ = effect of species i
+    -    $\beta_j$ = effect of sex j
+    -    $(\alpha\beta)_{ij}$ = interaction effect
+    -    $\varepsilon_{ijk}$ = random error
 :::
 
 ::: {.column width="40%"}
@@ -153,7 +156,7 @@ effect - $\varepsilon_{ijk}$ = random error
 ::: {.column width="60%"}
 ### Balancing the Penguin Data
 
-The dataframe of penguins is unbalanced - meaning that there are unequal
+The dataframe of penguins is unbalanced - there are unequal
 samples per cell
 
 
@@ -261,24 +264,23 @@ Model 1 ANOVA:
 ### $$y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$$
 
 -   $y_{ijk}$: value of the k~th~ observation from jth and ith
-    combination of B and A (fecundity on 2nd plate, in "8 per plate"
-    density in summer)
--   µ: overall mean (overall fecundity)
+    combination of B and A (sex m of species y)
+-   µ: overall mean (overall mass)
 -   αi: effect of the ith level of A, pooling across all levels of B:
-    µi- µ (difference between average fecundity in all "8 per plate"
-    treatments and overall mean)
+    µi- µ (difference between average mass in all "males "
+    for species x and overall mean)
 
 # Interaction Effects
 
 ### $$y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$$
 
 -   Βj: effect of jth level of B, pooling across all levels of A: µj- µ
-    (difference between average fecundity in all winter treatments and
+    (difference between average mass in all males treatments and
     overall mean)
 -   (αβ)ij: effect of interaction of ith level of A and jth level of B
     (µij - µi - µj + µ).
-    -   Does effect of B depend on level of A? (is effect of density
-        different in winter and summer?)
+    -   Does effect of B depend on level of A? (is effect of sex
+        different in the 3 species?)
 
 # Model Types and Interpretation
 
@@ -297,11 +299,10 @@ Model 1 ANOVA:
 
 ::::: columns
 ::: {.column width="60%"}
--   Before we go further we need to define what estimated marginal means
-    are
--   Balanced data - it is just the means of the groups... easy
--   Unbalanced data - it is the mean of cells that represent the lowest
-    average of the groups
+-   Before we go further we need to define what estimated marginal means are
+
+  -   Balanced data - it is just the means of the groups... easy
+  -   Unbalanced data - it is the mean of cells that represent the lowest average of the groups
 
 
 ::: {.cell}
@@ -411,11 +412,10 @@ Model 1 ANOVA:
 
 ::::: columns
 ::: {.column width="60%"}
--   Before we go further we need to define what estimated marginal means
-    are
--   Balanced data - it is just the means of the groups... easy
--   Unbalanced data - it is the mean of cells that represent the lowest
-    average of the groups
+-   Before we go further we need to define what estimated marginal means are
+
+  -   Balanced data - it is just the means of the groups... easy
+  -   Unbalanced data - it is the mean of cells that represent the lowest average of the groups
 
 
 ::: {.cell}
