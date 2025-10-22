@@ -16,7 +16,7 @@ format:
     output-file: "12_01_lecture_powerpoint.pptx"
 ---
 
-# Lecture 12: Review
+# Lecture 11: Review
 
 ::::: columns
 ::: {.column width="60%"}
@@ -47,7 +47,7 @@ format:
 -   very common in ecology
 -   can have more factors (e.g., 3-way ANOVA) but interpretation gets
     very challenging...
--   Most multifactor designs: are factorail or nested
+-   Most multifactor designs: are factorial or nested
 -   We will cover a 2 Factor Anova - this could be fertilizer and
     sunlight for plant biomass produced...
     -   each can have an effect independently
@@ -55,7 +55,7 @@ format:
     -   in this example...
         -   a low light and high light treatment might affect biomass
 
-        -   fertilizer also might affect plat biomass
+        -   fertilizer also might affect plant biomass
 
         -   but when you have higher light the high fertilizer treatment
             may grow better than expected
@@ -129,15 +129,15 @@ effect - $\varepsilon_{ijk}$ = random error
 ::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 6 × 3
-  species sex    body_mass_g
-  <fct>   <fct>        <int>
-1 Adelie  male          3750
-2 Adelie  female        3800
-3 Adelie  female        3250
-4 Adelie  female        3450
-5 Adelie  male          3650
-6 Adelie  female        3625
+# A tibble: 6 × 6
+  species   sex        n mean_mass sd_mass se_mass
+  <fct>     <fct>  <int>     <dbl>   <dbl>   <dbl>
+1 Adelie    female    73     3369.    269.    31.5
+2 Adelie    male      73     4043.    347.    40.6
+3 Chinstrap female    34     3527.    285.    48.9
+4 Chinstrap male      34     3939.    362.    62.1
+5 Gentoo    female    58     4680.    282.    37.0
+6 Gentoo    male      61     5485.    313.    40.1
 ```
 
 
