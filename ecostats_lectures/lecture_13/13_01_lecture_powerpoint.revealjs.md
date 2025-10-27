@@ -1,5 +1,5 @@
 ---
-title: "Lecture 13 - Multifactor ANOVA"
+title: "Lecture 13 - Nested ANOVA"
 author: "Bill Perry"
 metadata-files:
   - ../../_templates/lectures.yml
@@ -33,7 +33,7 @@ Multifactor ANOVA
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1642768928.png){width="420"}
+![](images/clipboard-1642768928.png){width="244"}
 :::
 :::::
 
@@ -55,7 +55,7 @@ Most multifactor designs: nested or factorial
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1173869376.png){width="500"}
+![](images/clipboard-1173869376.png){width="164"}
 :::
 :::::
 
@@ -70,7 +70,7 @@ Consider two factors: A and B
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-758019042.png){width="500"}
+![](images/clipboard-758019042.png){width="234"}
 :::
 :::::
 

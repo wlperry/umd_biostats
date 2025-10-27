@@ -1857,49 +1857,49 @@
   {
     "objectID": "ecostats_lectures/lecture_13/13_02_lecture_powerpoint_html.html",
     "href": "ecostats_lectures/lecture_13/13_02_lecture_powerpoint_html.html",
-    "title": "Lecture 13 - Multifactor ANOVA",
+    "title": "Lecture 13 - Nested ANOVA",
     "section": "",
     "text": "Multifactor ANOVA\n\nExample\nLinear model\nAnalysis of variance\nNull hypotheses\nInteractions and main effects\nUnequal sample size\nAssumptions"
   },
   {
     "objectID": "ecostats_lectures/lecture_13/13_02_lecture_powerpoint_html.html#y_ijk-mu-alpha_i-beta_ji-varepsilon_ijk",
     "href": "ecostats_lectures/lecture_13/13_02_lecture_powerpoint_html.html#y_ijk-mu-alpha_i-beta_ji-varepsilon_ijk",
-    "title": "Lecture 13 - Multifactor ANOVA",
+    "title": "Lecture 13 - Nested ANOVA",
     "section": "\\[y_{ijk} = \\mu + \\alpha_i + \\beta_{j(i)} + \\varepsilon_{ijk}\\]",
     "text": "\\[y_{ijk} = \\mu + \\alpha_i + \\beta_{j(i)} + \\varepsilon_{ijk}\\]\nWhere:\n\n\\(y_{ijk}\\) is the response variable\n\nvalue of the k-th replicate in j-th level of B in the i-th level of A\n(algal biomass in 3rd quadrat, in 2nd patch in low grazing treatment)\n\n\\(\\mu\\) is the overall mean\n\n(overall average algal biomass)"
   },
   {
     "objectID": "ecostats_lectures/lecture_13/13_02_lecture_powerpoint_html.html#y_ijk-mu-alpha_i-beta_ji-varepsilon_ijk-1",
     "href": "ecostats_lectures/lecture_13/13_02_lecture_powerpoint_html.html#y_ijk-mu-alpha_i-beta_ji-varepsilon_ijk-1",
-    "title": "Lecture 13 - Multifactor ANOVA",
+    "title": "Lecture 13 - Nested ANOVA",
     "section": "\\[y_{ijk} = \\mu + \\alpha_i + \\beta_{j(i)} + \\varepsilon_{ijk}\\]",
     "text": "\\[y_{ijk} = \\mu + \\alpha_i + \\beta_{j(i)} + \\varepsilon_{ijk}\\]\n\n\\(\\alpha_i\\) is the fixed effect of factor \\(i\\)\n(difference between average biomass in all low grazing level quadrats and overall mean)\n\\(\\beta_{j(i)}\\) is the random effect of factor \\(j\\) nested within factor \\(i\\)\nusually random variable, measuring variance among all possible levels of B within each level of A\n(variance among all possible patches that may have been used in the low grazing treatment)"
   },
   {
     "objectID": "ecostats_lectures/lecture_13/13_02_lecture_powerpoint_html.html#y_ijk-mu-alpha_i-beta_ji-varepsilon_ijk-2",
     "href": "ecostats_lectures/lecture_13/13_02_lecture_powerpoint_html.html#y_ijk-mu-alpha_i-beta_ji-varepsilon_ijk-2",
-    "title": "Lecture 13 - Multifactor ANOVA",
+    "title": "Lecture 13 - Nested ANOVA",
     "section": "\\[y_{ijk} = \\mu + \\alpha_i + \\beta_{j(i)} + \\varepsilon_{ijk}\\]",
     "text": "\\[y_{ijk} = \\mu + \\alpha_i + \\beta_{j(i)} + \\varepsilon_{ijk}\\]\n\n\\(\\varepsilon_{ijk}\\) is the error term\nαi: is the effect of the ith level of A: µi- µ\nunexplained variance associated with the kth replicate in jth level of B in the ith level of A\n(difference bw observed algal biomass in 3rd quadrat in 2nd patch in low grazing treatment and predicted biomass - average biomass in 2nd patch in low grazing treatment)"
   },
   {
     "objectID": "ecostats_lectures/lecture_13/13_01_lecture_powerpoint_slides.html#y_ijk-mu-alpha_i-beta_ji-varepsilon_ijk",
     "href": "ecostats_lectures/lecture_13/13_01_lecture_powerpoint_slides.html#y_ijk-mu-alpha_i-beta_ji-varepsilon_ijk",
-    "title": "Lecture 13 - Multifactor ANOVA",
+    "title": "Lecture 13 - Nested ANOVA",
     "section": "\\[y_{ijk} = \\mu + \\alpha_i + \\beta_{j(i)} + \\varepsilon_{ijk}\\]",
     "text": "\\[y_{ijk} = \\mu + \\alpha_i + \\beta_{j(i)} + \\varepsilon_{ijk}\\]\nWhere:\n\n\\(y_{ijk}\\) is the response variable\n\nvalue of the k-th replicate in j-th level of B in the i-th level of A\n(algal biomass in 3rd quadrat, in 2nd patch in low grazing treatment)\n\n\\(\\mu\\) is the overall mean\n\n(overall average algal biomass)"
   },
   {
     "objectID": "ecostats_lectures/lecture_13/13_01_lecture_powerpoint_slides.html#y_ijk-mu-alpha_i-beta_ji-varepsilon_ijk-1",
     "href": "ecostats_lectures/lecture_13/13_01_lecture_powerpoint_slides.html#y_ijk-mu-alpha_i-beta_ji-varepsilon_ijk-1",
-    "title": "Lecture 13 - Multifactor ANOVA",
+    "title": "Lecture 13 - Nested ANOVA",
     "section": "\\[y_{ijk} = \\mu + \\alpha_i + \\beta_{j(i)} + \\varepsilon_{ijk}\\]",
     "text": "\\[y_{ijk} = \\mu + \\alpha_i + \\beta_{j(i)} + \\varepsilon_{ijk}\\]\n\n\\(\\alpha_i\\) is the fixed effect of factor \\(i\\)\n(difference between average biomass in all low grazing level quadrats and overall mean)\n\\(\\beta_{j(i)}\\) is the random effect of factor \\(j\\) nested within factor \\(i\\)\nusually random variable, measuring variance among all possible levels of B within each level of A\n(variance among all possible patches that may have been used in the low grazing treatment)"
   },
   {
     "objectID": "ecostats_lectures/lecture_13/13_01_lecture_powerpoint_slides.html#y_ijk-mu-alpha_i-beta_ji-varepsilon_ijk-2",
     "href": "ecostats_lectures/lecture_13/13_01_lecture_powerpoint_slides.html#y_ijk-mu-alpha_i-beta_ji-varepsilon_ijk-2",
-    "title": "Lecture 13 - Multifactor ANOVA",
+    "title": "Lecture 13 - Nested ANOVA",
     "section": "\\[y_{ijk} = \\mu + \\alpha_i + \\beta_{j(i)} + \\varepsilon_{ijk}\\]",
     "text": "\\[y_{ijk} = \\mu + \\alpha_i + \\beta_{j(i)} + \\varepsilon_{ijk}\\]\n\n\\(\\varepsilon_{ijk}\\) is the error term\nαi: is the effect of the ith level of A: µi- µ\nunexplained variance associated with the kth replicate in jth level of B in the ith level of A\n(difference bw observed algal biomass in 3rd quadrat in 2nd patch in low grazing treatment and predicted biomass - average biomass in 2nd patch in low grazing treatment)"
   },
