@@ -75,11 +75,13 @@ format:
 ### Consider two factors:
 
 -   Factorial/crossed:
-    -   every level of B in every level of A
+    -   every level of B in every level of A\
+
+        ![](images/clipboard-1581875934.png){width="316"}
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-2737690912.png){width="286"}
+![](images/clipboard-2737690912.png){width="345"}
 :::
 :::::
 
@@ -96,7 +98,7 @@ format:
 :::
 
 ::: {.column width="40%"}
-![](images/clipboard-1252866044.png){width="332"}
+![](images/clipboard-1252866044.png){width="495"}
 :::
 :::::
 
@@ -114,16 +116,6 @@ Two-way ANOVA examines:
 -   Balanced design: equal sample sizes in all cells
 -   Type III sums of squares for unbiased estimates - if balanced it
     does not matter
-
-Statistical Mode  $Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$
-
--   Where:
-
-    -    $\mu$ = grand mean
-    -    $\alpha_i$ = effect of species i
-    -    $\beta_j$ = effect of sex j
-    -    $(\alpha\beta)_{ij}$ = interaction effect
-    -    $\varepsilon_{ijk}$ = random error
 :::
 
 ::: {.column width="40%"}
@@ -156,8 +148,8 @@ Statistical Mode  $Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \va
 ::: {.column width="60%"}
 ### Balancing the Penguin Data
 
-The dataframe of penguins is unbalanced - there are unequal
-samples per cell
+The dataframe of penguins is unbalanced - there are unequal samples per
+cell
 
 
 ::: {.cell}
@@ -205,6 +197,21 @@ samples per cell
 :::
 :::
 
+
+Statistical Mode
+$Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$
+
+Where:
+
+$\mu$ = grand mean
+
+$\alpha_i$ = effect of species i
+
+$\beta_j$ = effect of sex j
+
+$(\alpha\beta)_{ij}$ = interaction effect
+
+$\varepsilon_{ijk}$ = random error
 :::
 :::::
 
@@ -267,16 +274,16 @@ Model 1 ANOVA:
     combination of B and A (sex m of species y)
 -   µ: overall mean (overall mass)
 -   αi: effect of the ith level of A, pooling across all levels of B:
-    µi- µ (difference between average mass in all "males "
-    for species x and overall mean)
+    µi- µ (difference between average mass in all "males " for species x
+    and overall mean)
 
 # Interaction Effects
 
 ### $$y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$$
 
 -   Βj: effect of jth level of B, pooling across all levels of A: µj- µ
-    (difference between average mass in all males treatments and
-    overall mean)
+    (difference between average mass in all males treatments and overall
+    mean)
 -   (αβ)ij: effect of interaction of ith level of A and jth level of B
     (µij - µi - µj + µ).
     -   Does effect of B depend on level of A? (is effect of sex
@@ -299,10 +306,13 @@ Model 1 ANOVA:
 
 ::::: columns
 ::: {.column width="60%"}
--   Before we go further we need to define what estimated marginal means are
+-   Before we go further we need to define what estimated marginal means
+    are
 
-  -   Balanced data - it is just the means of the groups... easy
-  -   Unbalanced data - it is the mean of cells that represent the lowest average of the groups
+-   Balanced data - it is just the means of the groups... easy
+
+-   Unbalanced data - it is the mean of cells that represent the lowest
+    average of the groups
 
 
 ::: {.cell}
@@ -328,13 +338,7 @@ Model 1 ANOVA:
 
 
 :::
-:::
 
-:::
-
-::: {.column width="40%"}
-
-::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -357,11 +361,17 @@ Model 1 ANOVA:
 
 
 :::
+:::
 
+:::
+
+::: {.column width="40%"}
+
+::: {.cell}
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "\nEstimated Marginal Means for Species (CORRECT):"
+[1] "Estimated Marginal Means for Species (CORRECT):"
 ```
 
 
@@ -412,10 +422,13 @@ Model 1 ANOVA:
 
 ::::: columns
 ::: {.column width="60%"}
--   Before we go further we need to define what estimated marginal means are
+-   Before we go further we need to define what estimated marginal means
+    are
 
-  -   Balanced data - it is just the means of the groups... easy
-  -   Unbalanced data - it is the mean of cells that represent the lowest average of the groups
+-   Balanced data - it is just the means of the groups... easy
+
+-   Unbalanced data - it is the mean of cells that represent the lowest
+    average of the groups
 
 
 ::: {.cell}
@@ -520,88 +533,122 @@ Model 1 ANOVA:
 
 # ANOVA Table Structure
 
--   SStotal = SSA + SSB + SSAB+ SSresidual = (Y - Grand Mean Y)\^2
--   SSresidual = (Y - Yhat)\^2 or the difference between each
-    observation and the appropriate cell mean, summed over all
-    observations
+-   SStotal = SSA + SSB + SSAB + SSresidual
+-   SStotal = (Y - Grand Mean Y)\^2
+-   SSresidual = (Y -Yhat)\^2 or the difference between each observation
+    and the appropriate cell mean, summed over all observations
 
+::: {style="font-size: 1.4em;"}
 | Source | SS | df | MS |
 |:-----------------|:-----------------|:-----------------|:-----------------|
-| A | $nq \sum_{i=1}^{p} (\bar{y}_{i.} - \bar{y})^2$ | $p-1$ | $\frac{SS_A}{p-1}$ |
-| B | $np \sum_{j=1}^{q} (\bar{y}_{.j} - \bar{y})^2$ | $q-1$ | $\frac{SS_B}{q-1}$ |
-| AB | $n \sum_{i=1}^{p} \sum_{j=1}^{q} (\bar{y}_{ij} - \bar{y}_{i.} - \bar{y}_{.j} + \bar{y})^2$ | $(p-1)(q-1)$ | $\frac{SS_{AB}}{(p-1)(q-1)}$ |
-| Residual | $\sum_{i=1}^{p} \sum_{j=1}^{q} \sum_{k=1}^{n} (y_{ijk} - \bar{y}_{ij})^2$ | $pq(n-1)$ | $\frac{SS_{\text{Residual}}}{pq(n-1)}$ |
-| Total | $\sum_{i=1}^{p} \sum_{j=1}^{q} \sum_{k=1}^{n} (y_{ijk} - \bar{y})^2$ | $pqn-1$ |  |
+| A | $nq \sum_{i=1
+            }^{p} (\bar
+            {y}_{i.} -
+            \bar{y})^2$ | $p-1$ | $\frac{SS_A}
+                                           {p-1}$ |
+| B | $np \sum_{j=1
+            }^{q} (\bar
+            {y}_{.j} -
+            \bar{y})^2$ | $q-1$ | $\frac{SS_B}
+                                           {q-1}$ |
+| AB | $n \sum_{i=1
+            }^{p} \sum_{
+            j=1}^{q} (\ 
+            bar{y}_{ij}
+            - \bar{y}_
+            {i.} - \bar
+            {y}_{.j} +
+            \bar{y})^2$ | $(p-1)(q-1)$ | $\frac{SS_{AB
+                                           }}{(p-1)(q-1)
+                                           }$ |
+| Residual | $\sum_{i=1}
+            ^{p} \sum_{
+            j=1}^{q}
+            \sum_{k=1}^{
+            n} (y_{ijk}
+            - \bar{y}_{
+            ij})^2$ | $pq(n-1)$ | $\frac{SS_{\ 
+                                           text{Residual
+                                           }}}{pq(n-1)}$ |
+| Total | $\sum_{i=1}
+            ^{p} \sum_{
+            j=1}^{q}
+            \sum_{k=1}^{
+            n} (y_{ijk}
+            - \bar{y})^2$ | $pqn-1$ |  |
+
+: {tbl-colwidths="\[10,40,15,15\]"}
+:::
 
 # SSA: Factor A Effects
 
-SSA is SS of differences between each marginal mean of A and overall
-mean
+-   SSA is SS of differences between each marginal mean of A and overall
+    mean
+-   If A is species then get the emmeans for factor A down and subtract
+    from overall mean
 
-If A is species then get the emmeans for factor A down and subtract from
-overall mean
+![](images/clipboard-4218970939.png){width=80%}
 
-![](images/clipboard-4218970939.png){width="500"}
-
-![](images/clipboard-4251414171.png){width="474"}
+![](images/clipboard-4251414171.png){width=80%}
 
 # SSB: Factor B Effects
 
-SSB is SS of differences between each marginal mean of B and overall
-mean
+-   SSB is SS of differences between each marginal mean of B and overall
+    mean
+-   If B is sex then get the emmeans for factor B across and subtract
+    from overall mean
 
-If B is sex then get the emmeans for factor B across and subtract from
-overall mean
+![](images/clipboard-4218970939.png){width=80%}
 
-![](images/clipboard-4218970939.png){width="500"}
-
-![](images/clipboard-4251414171.png){width="474"}
+![](images/clipboard-4251414171.png){width=80%}
 
 # SSAB: Interaction Effects
 
-SSAB is SS of cell means minus marginal means plus overall mean
+-   SSAB is SS of cell means minus marginal means plus overall mean
 
-![](images/clipboard-3485990288.png){width="500"}
+![](images/clipboard-3485990288.png){width=80%}
 
-![](images/clipboard-4251414171.png){width="474"}
+![](images/clipboard-4251414171.png){width=80%}
 
 # F-ratio Calculations
 
-SS converted to MS;
-
-F-ratio calculations are different depending on whether factors are
-fixed, random or mixed
+::: {style="font-size: 1.4em;"}
+-   SS converted to MS;
+-   F-ratio calculations are different depending on whether factors are
+    fixed, random or mixed
 
 | Source | A and B fixed | A and B random | A fixed, B random |
-|:-----------------|:----------------:|:----------------:|:----------------:|
-| A | $\frac{MS_A}{MS_{Residual}}$ | $\frac{MS_A}{MS_{AB}}$ | $\frac{MS_A}{MS_{AB}}$ |
-| B | $\frac{MS_B}{MS_{Residual}}$ | $\frac{MS_B}{MS_{AB}}$ | $\frac{MS_B}{MS_{AB}}$ |
-| AB | $\frac{MS_{AB}}{MS_{Residual}}$ | $\frac{MS_{AB}}{MS_{Residual}}$ | $\frac{MS_{AB}}{MS_{Residual}}$ |
+|:-----------------|:-----------------|:-----------------|:-----------------|
+| A | $\frac{MS_A}{MS_{
+          Residual}}$ | $\frac{MS_A}{MS_{AB}}$ | $\frac{MS_A}{MS_{AB}}$ |
+| B | $\frac{MS_B}{MS_{
+          Residual}}$ | $\frac{MS_B}{MS_{AB}}$ | $\frac{MS_B}{MS_{AB}}$ |
+| AB | $\frac{MS_{AB}}{MS_{
+          Residual}}$ | $\frac{MS_{AB}}{MS_{
+                                 Residual}}$ | $\frac{MS_{AB}}{MS_{
+                                                          Residual}}$ |
+:::
 
 # Hypotheses: Fixed Factors
 
-3 hypotheses are tested in a two-way factorial ANOVA:
-
-A, B, A\*B Both factors fixed:
-
--   Ho(A): µ1= µ2= µ3=…. µi= µp (no diff. in marginal means of A,
-    pooling across all levels of B)
--   Ho(B): µ1= µ2= µ3=…. µj= µq (no diff. in marginal means of B,
-    pooling across all levels of A)
--   Ho(AB): µij- µi - µj + µ = 0 (no effect of interaction)
+-   3 hypotheses are tested in a two-way factorial ANOVA:
+-   A, B, A\*B Both factors fixed:
+    -   Ho(A): µ1= µ2= µ3=…. µi= µp (no diff. in marginal means of A,
+        pooling across all levels of B)
+    -   Ho(B): µ1= µ2= µ3=…. µj= µq (no diff. in marginal means of B,
+        pooling across all levels of A)
+    -   Ho(AB): µij- µi - µj + µ = 0 (no effect of interaction)
 
 # Hypotheses: Mixed Model
 
-3 hypotheses are tested in a two-way factorial ANOVA: A, B, A\*B
-
-One fixed, one random:
-
--   Ho(A): µ1= µ2= µ3=…. µi= µp (no diff. in marginal means of A,
-    pooling across all levels of B)
--   Ho(B): σB2= 0 (no added variance due to levels of B that could have
-    been used)
--   Ho(AB): σAB2= 0 (no added variance due to interaction between all
-    levels of A and B that could have been used)
+-   3 hypotheses are tested in a two-way factorial ANOVA: A, B, A\*B
+-   One fixed, one random:
+    -   Ho(A): µ1= µ2= µ3=…. µi= µp (no diff. in marginal means of A,
+        pooling across all levels of B)
+    -   Ho(B): σB2= 0 (no added variance due to levels of B that could
+        have been used)
+    -   Ho(AB): σAB2= 0 (no added variance due to interaction between
+        all levels of A and B that could have been used)
 
 # Example Study Details
 
@@ -610,13 +657,12 @@ One fixed, one random:
 So lets try the example with the penguin data that is in the package
 penguin
 
-Effect of species and sex on body_mass_g
-
--   3 species (factor A)
--   2 sexes (factor B)
--   34 replicates in each cell
--   This analysis examines the effects of species and sex on the body
-    mass of penguins.
+-   Effect of species and sex on body_mass_g
+    -   3 species (factor A)
+    -   2 sexes (factor B)
+    -   34 replicates in each cell
+    -   This analysis examines the effects of species and sex on the
+        body mass of penguins.
 :::
 
 ::: {.column width="40%"}
@@ -743,22 +789,27 @@ here for consistency with the next analysis.
 :::
 :::::
 
+
+
+
+
 # Checking Model Assumptions
-
-
-::: {.cell}
-::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-pptx/diagnostics-1.png)
-:::
+::::: columns
+::: {.column width="50%"}
+Assumption Plots
 :::
 
+::: {.column width="50%"}
+![should be the plot of the 4 assumption plots](images/assumpt_1.jpg){fig-align="center"}
+
+:::
+:::::
 
 # Formal Tests
 
 -   These are the formal tests of
-
-    -   normality of residuuals
-    -   homogenetiy of variances
+    -   normality of residuals
+    -   homogeneity of variances
 
 
 ::: {.cell}
@@ -827,7 +878,7 @@ group   5  0.7841 0.5622
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Species EMMs:"
+Species EMMs:
 ```
 
 
@@ -848,10 +899,11 @@ Confidence level used: 0.95
 
 :::
 
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Sex EMMs:"
+Sex EMMs:
 ```
 
 
@@ -871,10 +923,11 @@ Confidence level used: 0.95
 
 :::
 
+
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Species by Sex EMMs:"
+Species by Sex EMMs:
 ```
 
 
@@ -965,8 +1018,8 @@ P value adjustment: tukey method for comparing a family of 3 estimates
 
 # Post F Test of the interaction
 
-What we need to do if the interaction is significant it test the overall
-interaction
+What we need to do if the interaction is significant is to test the
+overall interaction and ignore the main effects!!!
 
 
 ::: {.cell}
@@ -1019,12 +1072,18 @@ NOTE: If two or more means share the same grouping symbol,
 ::: {.column width="60%"}
 The Challenge of Unbalanced Data
 
-Real-world data is often unbalanced: - Unequal sample sizes across
-groups - Missing data patterns - Natural variation in sampling
+-   Real-world data is often unbalanced:
+    -   Unequal sample sizes across groups
 
-Key Issues: - Type I, II, and III SS give different results - Order of
-terms matters for Type I SS - Marginal means ≠ Simple averages -
-Interpretation becomes complex
+    -   Missing data patterns
+
+    -   Natural variation in sampling
+-   Key Issues:
+    -   Type I, II, and III SS give different results
+
+    -   Order of terms matters for Type I SS
+
+    -   Marginal means ≠ Simple averages Interpretation becomes complex
 
 Statistical Model (same as balanced):
 $$Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$$
@@ -1133,7 +1192,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "\nType I SS (Sex → Species → Interaction):"
+[1] "Type I SS (Sex → Species → Interaction):"
 ```
 
 
@@ -1160,7 +1219,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "\nType I SS depends on order:"
+[1] "Type I SS depends on order:"
 ```
 
 
@@ -1189,13 +1248,19 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 2.  **Second term** gets SS after removing first
 3.  **Third term** gets SS after removing first two
 
-**Example calculation:** - SS(Species) = reduction in SS from null to
-species-only model - SS(Sex\|Species) = additional reduction adding
-sex - SS(Interaction\|Species,Sex) = additional reduction adding
-interaction
+-   **Example calculation:**
+    -   SS(Species) = reduction in SS from null to species-only model
 
-**Problems with unbalanced data:** - Order dependency - Biased if
-factors are correlated - Not invariant to coding
+    -   SS(Sex\|Species) = additional reduction adding sex
+
+    -   SS(Interaction\|Species,Sex) = additional reduction adding
+        interaction
+-   **Problems with unbalanced data:**
+    -   Order dependency
+
+    -   Biased if factors are correlated
+
+    -   Not invariant to coding
 :::
 :::::
 
@@ -1238,7 +1303,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "\nComparison of F-values:"
+[1] "Comparison of F-values:"
 ```
 
 
@@ -1262,17 +1327,21 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ::: {.column width="40%"}
 ## How Type III SS Works
 
-**Marginal decomposition:**
+-   **Marginal decomposition:**
+    -   Each effect tested after adjusting for all others:
+        -   SS(Species\|Sex,Interaction)
+        -   SS(Sex\|Species,Interaction)
+        -   SS(Interaction\|Species,Sex)
+-   **Advantages:**
+    -   Order invariant
+    -   Tests hypotheses about unweighted means
+    -   Standard in most software
+-   **Disadvantages:**
+    -   Lower power with missing cells
 
-Each effect tested after adjusting for all others: -
-SS(Species\|Sex,Interaction) - SS(Sex\|Species,Interaction) -
-SS(Interaction\|Species,Sex)
+    -   Tests may not be orthogonal
 
-**Advantages:** - Order invariant - Tests hypotheses about unweighted
-means - Standard in most software
-
-**Disadvantages:** - Lower power with missing cells - Tests may not be
-orthogonal - Requires careful interpretation
+    -   Requires careful interpretation
 
 
 ::: {.cell}
