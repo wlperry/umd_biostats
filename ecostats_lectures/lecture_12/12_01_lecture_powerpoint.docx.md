@@ -2,6 +2,11 @@
 title: "Lecture 12 - Factorial ANOVA of Penguin Mass Balanced"
 author: "Bill Perry"
 
+
+knitr:
+  opts_chunk:
+    paged.print: true
+    collapse: true
 metadata-files:
   - ../../_templates/lectures.yml
 format:
@@ -121,22 +126,18 @@ Two-way ANOVA examines:
 ::: {.column width="40%"}
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 6 × 6
-  species   sex        n mean_mass sd_mass se_mass
-  <fct>     <fct>  <int>     <dbl>   <dbl>   <dbl>
-1 Adelie    female    73     3369.    269.    31.5
-2 Adelie    male      73     4043.    347.    40.6
-3 Chinstrap female    34     3527.    285.    48.9
-4 Chinstrap male      34     3939.    362.    62.1
-5 Gentoo    female    58     4680.    282.    37.0
-6 Gentoo    male      61     5485.    313.    40.1
+## # A tibble: 6 × 6
+##   species   sex        n mean_mass sd_mass se_mass
+##   <fct>     <fct>  <int>     <dbl>   <dbl>   <dbl>
+## 1 Adelie    female    73     3369.    269.    31.5
+## 2 Adelie    male      73     4043.    347.    40.6
+## 3 Chinstrap female    34     3527.    285.    48.9
+## 4 Chinstrap male      34     3939.    362.    62.1
+## 5 Gentoo    female    58     4680.    282.    37.0
+## 6 Gentoo    male      61     5485.    313.    40.1
 ```
-
-
-:::
 :::
 
 :::
@@ -153,19 +154,15 @@ cell
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 3 × 3
-  species   female  male
-  <fct>      <int> <int>
-1 Adelie        73    73
-2 Chinstrap     34    34
-3 Gentoo        58    61
+## # A tibble: 3 × 3
+##   species   female  male
+##   <fct>      <int> <int>
+## 1 Adelie        73    73
+## 2 Chinstrap     34    34
+## 3 Gentoo        58    61
 ```
-
-
-:::
 :::
 
 :::
@@ -173,28 +170,16 @@ cell
 ::: {.column width="40%"}
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Minimum n = 34"
+## Minimum n = 34
+## # A tibble: 3 × 3
+##   species   female  male
+##   <fct>      <int> <int>
+## 1 Adelie        34    34
+## 2 Chinstrap     34    34
+## 3 Gentoo        34    34
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 3 × 3
-  species   female  male
-  <fct>      <int> <int>
-1 Adelie        34    34
-2 Chinstrap     34    34
-3 Gentoo        34    34
-```
-
-
-:::
 :::
 
 
@@ -223,22 +208,18 @@ $\varepsilon_{ijk}$ = random error
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-# A tibble: 6 × 6
-  species   sex        n mean_mass sd_mass se_mass
-  <fct>     <fct>  <int>     <dbl>   <dbl>   <dbl>
-1 Adelie    female    34     3335.    260.    44.5
-2 Adelie    male      34     4049.    318.    54.5
-3 Chinstrap female    34     3527.    285.    48.9
-4 Chinstrap male      34     3939.    362.    62.1
-5 Gentoo    female    34     4681.    309.    53.0
-6 Gentoo    male      34     5525     274.    47.0
+## # A tibble: 6 × 6
+##   species   sex        n mean_mass sd_mass se_mass
+##   <fct>     <fct>  <int>     <dbl>   <dbl>   <dbl>
+## 1 Adelie    female    34     3335.    260.    44.5
+## 2 Adelie    male      34     4049.    318.    54.5
+## 3 Chinstrap female    34     3527.    285.    48.9
+## 4 Chinstrap male      34     3939.    362.    62.1
+## 5 Gentoo    female    34     4681.    309.    53.0
+## 6 Gentoo    male      34     5525     274.    47.0
 ```
-
-
-:::
 :::
 
 :::
@@ -316,51 +297,25 @@ Model 1 ANOVA:
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Combined table with means and counts:"
+## Combined table with means and counts:
+## # A tibble: 3 × 5
+##   species   female_mean male_mean female_n male_n
+##   <fct>           <dbl>     <dbl>    <int>  <int>
+## 1 Adelie          3369.     4043.       73     73
+## 2 Chinstrap       3527.     3939.       34     34
+## 3 Gentoo          4680.     5485.       58     61
+## 
+## 
+## Regular means (WRONG for marginal means):
+## # A tibble: 3 × 3
+##   species   total_n regular_mean
+##   <fct>       <int>        <dbl>
+## 1 Adelie        146        3706.
+## 2 Chinstrap      68        3733.
+## 3 Gentoo        119        5092.
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 3 × 5
-  species   female_mean male_mean female_n male_n
-  <fct>           <dbl>     <dbl>    <int>  <int>
-1 Adelie          3369.     4043.       73     73
-2 Chinstrap       3527.     3939.       34     34
-3 Gentoo          4680.     5485.       58     61
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "\nRegular means (WRONG for marginal means):"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 3 × 3
-  species   total_n regular_mean
-  <fct>       <int>        <dbl>
-1 Adelie        146        3706.
-2 Chinstrap      68        3733.
-3 Gentoo        119        5092.
-```
-
-
-:::
 :::
 
 :::
@@ -368,51 +323,25 @@ Model 1 ANOVA:
 ::: {.column width="40%"}
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Estimated Marginal Means for Species (CORRECT):"
+## Estimated Marginal Means for Species (CORRECT):
+## # A tibble: 3 × 3
+##   species   emm_mean calculation                   
+##   <fct>        <dbl> <chr>                         
+## 1 Adelie       3706. (3368.8 + 4043.5) / 2 = 3706.2
+## 2 Chinstrap    3733. (3527.2 + 3939) / 2 = 3733.1  
+## 3 Gentoo       5082. (4679.7 + 5484.8) / 2 = 5082.3
+## 
+## 
+## Comparison showing EMM calculation:
+## # A tibble: 3 × 6
+##   species   cell_mean_female cell_mean_male species_emm regular_mean difference
+##   <fct>                <dbl>          <dbl>       <dbl>        <dbl>      <dbl>
+## 1 Adelie               3369.          4043.       3706.        3706.   4.55e-13
+## 2 Chinstrap            3527.          3939.       3733.        3733.   0       
+## 3 Gentoo               4680.          5485.       5082.        5092.  -1.01e+ 1
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 3 × 3
-  species   emm_mean calculation                   
-  <fct>        <dbl> <chr>                         
-1 Adelie       3706. (3368.8 + 4043.5) / 2 = 3706.2
-2 Chinstrap    3733. (3527.2 + 3939) / 2 = 3733.1  
-3 Gentoo       5082. (4679.7 + 5484.8) / 2 = 5082.3
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "\nComparison showing EMM calculation:"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 3 × 6
-  species   cell_mean_female cell_mean_male species_emm regular_mean difference
-  <fct>                <dbl>          <dbl>       <dbl>        <dbl>      <dbl>
-1 Adelie               3369.          4043.       3706.        3706.   4.55e-13
-2 Chinstrap            3527.          3939.       3733.        3733.   0       
-3 Gentoo               4680.          5485.       5082.        5092.  -1.01e+ 1
-```
-
-
-:::
 :::
 
 :::
@@ -432,28 +361,16 @@ Model 1 ANOVA:
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Combined table with means and counts:"
+## Combined table with means and counts:
+## # A tibble: 3 × 5
+##   species   female_mean male_mean female_n male_n
+##   <fct>           <dbl>     <dbl>    <int>  <int>
+## 1 Adelie          3369.     4043.       73     73
+## 2 Chinstrap       3527.     3939.       34     34
+## 3 Gentoo          4680.     5485.       58     61
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 3 × 5
-  species   female_mean male_mean female_n male_n
-  <fct>           <dbl>     <dbl>    <int>  <int>
-1 Adelie          3369.     4043.       73     73
-2 Chinstrap       3527.     3939.       34     34
-3 Gentoo          4680.     5485.       58     61
-```
-
-
-:::
 :::
 
 :::
@@ -461,71 +378,31 @@ Model 1 ANOVA:
 ::: {.column width="40%"}
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "\nRegular means sex (WRONG for marginal means):"
+## 
+## Regular means sex (WRONG for marginal means):
+## # A tibble: 2 × 3
+##   sex    total_n regular_mean
+##   <fct>    <int>        <dbl>
+## 1 female     165        3862.
+## 2 male       168        4546.
+## 
+## 
+## Estimated Marginal Means for Sex (CORRECT):
+## # A tibble: 2 × 3
+##   sex    emm_mean calculation                            
+##   <fct>     <dbl> <chr>                                  
+## 1 female    3859. (3368.8 + 3527.2 + 4679.7) / 3 = 3858.6
+## 2 male      4489. (4043.5 + 3939 + 5484.8) / 3 = 4489.1
+## \n
+## Comparison showing difference between regular and marginal means:
+## # A tibble: 2 × 5
+##   sex    total_n regular_mean emm_mean difference
+##   <fct>    <int>        <dbl>    <dbl>      <dbl>
+## 1 female     165        3862.    3859.      -3.68
+## 2 male       168        4546.    4489.     -56.6
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 2 × 3
-  sex    total_n regular_mean
-  <fct>    <int>        <dbl>
-1 female     165        3862.
-2 male       168        4546.
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "\nEstimated Marginal Means for Sex (CORRECT):"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 2 × 3
-  sex    emm_mean calculation                            
-  <fct>     <dbl> <chr>                                  
-1 female    3859. (3368.8 + 3527.2 + 4679.7) / 3 = 3858.6
-2 male      4489. (4043.5 + 3939 + 5484.8) / 3 = 4489.1  
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "\nComparison showing difference between regular and marginal means:"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 2 × 5
-  sex    total_n regular_mean emm_mean difference
-  <fct>    <int>        <dbl>    <dbl>      <dbl>
-1 female     165        3862.    3859.      -3.68
-2 male       168        4546.    4489.     -56.6 
-```
-
-
-:::
 :::
 
 :::
@@ -587,9 +464,9 @@ Model 1 ANOVA:
 -   If A is species then get the emmeans for factor A down and subtract
     from overall mean
 
-![](images/clipboard-4218970939.png){width=80%}
+![](images/clipboard-4218970939.png){width="75%"}
 
-![](images/clipboard-4251414171.png){width=80%}
+![](images/clipboard-4251414171.png){width="75%"}
 
 # SSB: Factor B Effects
 
@@ -598,17 +475,17 @@ Model 1 ANOVA:
 -   If B is sex then get the emmeans for factor B across and subtract
     from overall mean
 
-![](images/clipboard-4218970939.png){width=80%}
+![](images/clipboard-4218970939.png){width="75%"}
 
-![](images/clipboard-4251414171.png){width=80%}
+![](images/clipboard-4251414171.png){width="75%"}
 
 # SSAB: Interaction Effects
 
 -   SSAB is SS of cell means minus marginal means plus overall mean
 
-![](images/clipboard-3485990288.png){width=80%}
+![](images/clipboard-3485990288.png){width="70%"}
 
-![](images/clipboard-4251414171.png){width=80%}
+![](images/clipboard-4251414171.png){width="70%"}
 
 # F-ratio Calculations
 
@@ -678,35 +555,31 @@ penguin
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-
-Call:
-lm(formula = body_mass_g ~ species * sex, data = balanced_df)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--827.21 -178.13    6.25  175.00  861.03 
-
-Coefficients:
-              Estimate Std. Error t value Pr(>|t|)    
-(Intercept)    4175.86      21.23 196.727  < 2e-16 ***
-species1       -484.31      30.02 -16.134  < 2e-16 ***
-species2       -442.77      30.02 -14.750  < 2e-16 ***
-sex1           -328.31      21.23 -15.467  < 2e-16 ***
-species1:sex1   -28.68      30.02  -0.955    0.341    
-species2:sex1   122.43      30.02   4.078 6.57e-05 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 303.2 on 198 degrees of freedom
-Multiple R-squared:  0.8596,	Adjusted R-squared:  0.856 
-F-statistic: 242.4 on 5 and 198 DF,  p-value: < 2.2e-16
+## 
+## Call:
+## lm(formula = body_mass_g ~ species * sex, data = balanced_df)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -827.21 -178.13    6.25  175.00  861.03 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)    4175.86      21.23 196.727  < 2e-16 ***
+## species1       -484.31      30.02 -16.134  < 2e-16 ***
+## species2       -442.77      30.02 -14.750  < 2e-16 ***
+## sex1           -328.31      21.23 -15.467  < 2e-16 ***
+## species1:sex1   -28.68      30.02  -0.955    0.341    
+## species2:sex1   122.43      30.02   4.078 6.57e-05 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 303.2 on 198 degrees of freedom
+## Multiple R-squared:  0.8596,	Adjusted R-squared:  0.856 
+## F-statistic: 242.4 on 5 and 198 DF,  p-value: < 2.2e-16
 ```
-
-
-:::
 :::
 
 :::
@@ -714,33 +587,21 @@ F-statistic: 242.4 on 5 and 198 DF,  p-value: < 2.2e-16
 ::: {.column width="40%"}
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Type III Sums of Squares ANOVA:"
+## Type III Sums of Squares ANOVA:
+## Anova Table (Type III tests)
+## 
+## Response: body_mass_g
+##                 Sum Sq  Df    F value    Pr(>F)    
+## (Intercept) 3557308900   1 38701.5271 < 2.2e-16 ***
+## species       87725999   2   477.2049 < 2.2e-16 ***
+## sex           21988483   1   239.2224 < 2.2e-16 ***
+## species:sex    1672776   2     9.0994 0.0001657 ***
+## Residuals     18199467 198                         
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Anova Table (Type III tests)
-
-Response: body_mass_g
-                Sum Sq  Df    F value    Pr(>F)    
-(Intercept) 3557308900   1 38701.5271 < 2.2e-16 ***
-species       87725999   2   477.2049 < 2.2e-16 ***
-sex           21988483   1   239.2224 < 2.2e-16 ***
-species:sex    1672776   2     9.0994 0.0001657 ***
-Residuals     18199467 198                         
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
-:::
 :::
 
 :::
@@ -764,26 +625,14 @@ here for consistency with the next analysis.
 ::: {.column width="40%"}
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Effect Sizes (Eta-squared):"
+## Effect Sizes (Eta-squared):
+##        Effect Eta_Squared
+## 1     Species  0.67696748
+## 2         Sex  0.16968160
+## 3 Interaction  0.01290854
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-       Effect Eta_Squared
-1     Species  0.67696748
-2         Sex  0.16968160
-3 Interaction  0.01290854
-```
-
-
-:::
 :::
 
 :::
@@ -791,17 +640,16 @@ here for consistency with the next analysis.
 
 
 
-
-
 # Checking Model Assumptions
+
 ::::: columns
 ::: {.column width="50%"}
 Assumption Plots
 :::
 
 ::: {.column width="50%"}
-![should be the plot of the 4 assumption plots](images/assumpt_1.jpg){fig-align="center"}
-
+![should be the plot of the 4 assumption
+plots](images/assumpt_1.jpg){fig-align="center"}
 :::
 :::::
 
@@ -813,57 +661,21 @@ Assumption Plots
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Shapiro-Wilk Normality Test:"
+## Shapiro-Wilk Normality Test:
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  residuals(anova_model)
+## W = 0.99612, p-value = 0.8886
+## Levene's Test for Homogeneity:
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value Pr(>F)
+## group   5  0.7841 0.5622
+##       198
+## Number of outliers (|z| > 3): 0
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Shapiro-Wilk normality test
-
-data:  residuals(anova_model)
-W = 0.99612, p-value = 0.8886
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Levene's Test for Homogeneity:"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Levene's Test for Homogeneity of Variance (center = median)
-       Df F value Pr(>F)
-group   5  0.7841 0.5622
-      198               
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Number of outliers (|z| > 3): 0"
-```
-
-
-:::
 :::
 
 
@@ -875,80 +687,34 @@ group   5  0.7841 0.5622
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-Species EMMs:
+## Species EMMs:
+##  species   emmean   SE  df lower.CL upper.CL
+##  Adelie      3692 36.8 198     3619     3764
+##  Chinstrap   3733 36.8 198     3661     3806
+##  Gentoo      5103 36.8 198     5030     5175
+## 
+## Results are averaged over the levels of: sex 
+## Confidence level used: 0.95
+## Sex EMMs:
+##  sex    emmean SE  df lower.CL upper.CL
+##  female   3848 30 198     3788     3907
+##  male     4504 30 198     4445     4563
+## 
+## Results are averaged over the levels of: species 
+## Confidence level used: 0.95
+## Species by Sex EMMs:
+##  species   sex    emmean SE  df lower.CL upper.CL
+##  Adelie    female   3335 52 198     3232     3437
+##  Chinstrap female   3527 52 198     3425     3630
+##  Gentoo    female   4681 52 198     4578     4783
+##  Adelie    male     4049 52 198     3946     4151
+##  Chinstrap male     3939 52 198     3836     4042
+##  Gentoo    male     5525 52 198     5422     5628
+## 
+## Confidence level used: 0.95
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
- species   emmean   SE  df lower.CL upper.CL
- Adelie      3692 36.8 198     3619     3764
- Chinstrap   3733 36.8 198     3661     3806
- Gentoo      5103 36.8 198     5030     5175
-
-Results are averaged over the levels of: sex 
-Confidence level used: 0.95 
-```
-
-
-:::
-
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Sex EMMs:
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
- sex    emmean SE  df lower.CL upper.CL
- female   3848 30 198     3788     3907
- male     4504 30 198     4445     4563
-
-Results are averaged over the levels of: species 
-Confidence level used: 0.95 
-```
-
-
-:::
-
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Species by Sex EMMs:
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
- species   sex    emmean SE  df lower.CL upper.CL
- Adelie    female   3335 52 198     3232     3437
- Chinstrap female   3527 52 198     3425     3630
- Gentoo    female   4681 52 198     4578     4783
- Adelie    male     4049 52 198     3946     4151
- Chinstrap male     3939 52 198     3836     4042
- Gentoo    male     5525 52 198     5422     5628
-
-Confidence level used: 0.95 
-```
-
-
-:::
 :::
 
 :::
@@ -958,59 +724,31 @@ Confidence level used: 0.95
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Species pairwise comparisons:"
+## [1] "Species pairwise comparisons:\n"
+##  contrast           estimate SE  df t.ratio p.value
+##  Adelie - Chinstrap    -41.5 52 198  -0.799  0.7041
+##  Adelie - Gentoo     -1411.4 52 198 -27.145  <.0001
+##  Chinstrap - Gentoo  -1369.9 52 198 -26.346  <.0001
+## 
+## Results are averaged over the levels of: sex 
+## P value adjustment: tukey method for comparing a family of 3 estimates
+## [1] "Species comparisons within sex:"
+## sex = female:
+##  contrast           estimate   SE  df t.ratio p.value
+##  Adelie - Chinstrap     -193 73.5 198  -2.620  0.0256
+##  Adelie - Gentoo       -1346 73.5 198 -18.310  <.0001
+##  Chinstrap - Gentoo    -1154 73.5 198 -15.690  <.0001
+## 
+## sex = male:
+##  contrast           estimate   SE  df t.ratio p.value
+##  Adelie - Chinstrap      110 73.5 198   1.490  0.2979
+##  Adelie - Gentoo       -1476 73.5 198 -20.079  <.0001
+##  Chinstrap - Gentoo    -1586 73.5 198 -21.569  <.0001
+## 
+## P value adjustment: tukey method for comparing a family of 3 estimates
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
- contrast           estimate SE  df t.ratio p.value
- Adelie - Chinstrap    -41.5 52 198  -0.799  0.7041
- Adelie - Gentoo     -1411.4 52 198 -27.145  <.0001
- Chinstrap - Gentoo  -1369.9 52 198 -26.346  <.0001
-
-Results are averaged over the levels of: sex 
-P value adjustment: tukey method for comparing a family of 3 estimates 
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Species comparisons within sex:"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-sex = female:
- contrast           estimate   SE  df t.ratio p.value
- Adelie - Chinstrap     -193 73.5 198  -2.620  0.0256
- Adelie - Gentoo       -1346 73.5 198 -18.310  <.0001
- Chinstrap - Gentoo    -1154 73.5 198 -15.690  <.0001
-
-sex = male:
- contrast           estimate   SE  df t.ratio p.value
- Adelie - Chinstrap      110 73.5 198   1.490  0.2979
- Adelie - Gentoo       -1476 73.5 198 -20.079  <.0001
- Chinstrap - Gentoo    -1586 73.5 198 -21.569  <.0001
-
-P value adjustment: tukey method for comparing a family of 3 estimates 
-```
-
-
-:::
 :::
 
 :::
@@ -1031,33 +769,30 @@ overall interaction and ignore the main effects!!!
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
- species   sex      emmean       SE  df lower.CL upper.CL .group
- Adelie    female 3334.559 51.99448 198 3196.378 3472.740  a    
- Adelie    male   4048.529 51.99448 198 3910.349 4186.710   b   
- Chinstrap female 3527.206 51.99448 198 3389.025 3665.387  a    
- Chinstrap male   3938.971 51.99448 198 3800.790 4077.151   b   
- Gentoo    female 4680.882 51.99448 198 4542.702 4819.063    c  
- Gentoo    male   5525.000 51.99448 198 5386.819 5663.181     d 
-
-Confidence level used: 0.95 
-Conf-level adjustment: sidak method for 6 estimates 
-P value adjustment: sidak method for 15 tests 
-significance level used: alpha = 0.05 
-NOTE: If two or more means share the same grouping symbol,
-      then we cannot show them to be different.
-      But we also did not show them to be the same. 
+##  species   sex      emmean       SE  df lower.CL upper.CL .group
+##  Adelie    female 3334.559 51.99448 198 3196.378 3472.740  a    
+##  Adelie    male   4048.529 51.99448 198 3910.349 4186.710   b   
+##  Chinstrap female 3527.206 51.99448 198 3389.025 3665.387  a    
+##  Chinstrap male   3938.971 51.99448 198 3800.790 4077.151   b   
+##  Gentoo    female 4680.882 51.99448 198 4542.702 4819.063    c  
+##  Gentoo    male   5525.000 51.99448 198 5386.819 5663.181     d 
+## 
+## Confidence level used: 0.95 
+## Conf-level adjustment: sidak method for 6 estimates 
+## P value adjustment: sidak method for 15 tests 
+## significance level used: alpha = 0.05 
+## NOTE: If two or more means share the same grouping symbol,
+##       then we cannot show them to be different.
+##       But we also did not show them to be the same.
 ```
-
-
-:::
 :::
 
 
 # interaction plot
 
+::: panel
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -1065,6 +800,7 @@ NOTE: If two or more means share the same grouping symbol,
 :::
 :::
 
+:::
 
 # Introduction to Unbalanced Designs
 
@@ -1074,15 +810,11 @@ The Challenge of Unbalanced Data
 
 -   Real-world data is often unbalanced:
     -   Unequal sample sizes across groups
-
     -   Missing data patterns
-
     -   Natural variation in sampling
 -   Key Issues:
     -   Type I, II, and III SS give different results
-
     -   Order of terms matters for Type I SS
-
     -   Marginal means ≠ Simple averages Interpretation becomes complex
 
 Statistical Model (same as balanced):
@@ -1090,53 +822,25 @@ $$Y_{ijk} = \mu + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \varepsilon_{ijk}$$
 
 But parameter estimation differs!
 
-# Data Preparation - Using Natural Unbalanced Data
+### Data Preparation - Using Natural Unbalanced Data
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Unbalanced sample sizes:"
+## [1] "Unbalanced sample sizes:"
+## # A tibble: 6 × 3
+##   species   sex        n
+##   <fct>     <fct>  <int>
+## 1 Adelie    female    73
+## 2 Adelie    male      73
+## 3 Chinstrap female    34
+## 4 Chinstrap male      34
+## 5 Gentoo    female    58
+## 6 Gentoo    male      61
+## [1] "Total N = 333"
+## [1] "Imbalance ratio = 2.15"
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 6 × 3
-  species   sex        n
-  <fct>     <fct>  <int>
-1 Adelie    female    73
-2 Adelie    male      73
-3 Chinstrap female    34
-4 Chinstrap male      34
-5 Gentoo    female    58
-6 Gentoo    male      61
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Total N = 333"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Imbalance ratio = 2.15"
-```
-
-
-:::
 :::
 
 :::
@@ -1162,79 +866,39 @@ But parameter estimation differs!
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Type I SS (Species → Sex → Interaction):"
+## Type I SS (Species → Sex → Interaction):
+## Analysis of Variance Table
+## 
+## Response: body_mass_g
+##              Df    Sum Sq  Mean Sq F value    Pr(>F)    
+## species       2 145190219 72595110 758.358 < 2.2e-16 ***
+## sex           1  37090262 37090262 387.460 < 2.2e-16 ***
+## species:sex   2   1676557   838278   8.757 0.0001973 ***
+## Residuals   327  31302628    95727                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Type I SS (Sex → Species → Interaction):
+## Analysis of Variance Table
+## 
+## Response: body_mass_g
+##              Df    Sum Sq  Mean Sq F value    Pr(>F)    
+## sex           1  38878897 38878897 406.145 < 2.2e-16 ***
+## species       2 143401584 71700792 749.016 < 2.2e-16 ***
+## sex:species   2   1676557   838278   8.757 0.0001973 ***
+## Residuals   327  31302628    95727                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## 
+## Type I SS depends on order:
+##    Effect Order1_SS Order2_SS
+## 1 Species 145190219 143401584
+## 2     Sex  37090262  38878897
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Analysis of Variance Table
-
-Response: body_mass_g
-             Df    Sum Sq  Mean Sq F value    Pr(>F)    
-species       2 145190219 72595110 758.358 < 2.2e-16 ***
-sex           1  37090262 37090262 387.460 < 2.2e-16 ***
-species:sex   2   1676557   838278   8.757 0.0001973 ***
-Residuals   327  31302628    95727                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Type I SS (Sex → Species → Interaction):"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Analysis of Variance Table
-
-Response: body_mass_g
-             Df    Sum Sq  Mean Sq F value    Pr(>F)    
-sex           1  38878897 38878897 406.145 < 2.2e-16 ***
-species       2 143401584 71700792 749.016 < 2.2e-16 ***
-sex:species   2   1676557   838278   8.757 0.0001973 ***
-Residuals   327  31302628    95727                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Type I SS depends on order:"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-   Effect Order1_SS Order2_SS
-1 Species 145190219 143401584
-2     Sex  37090262  38878897
-```
-
-
-:::
 :::
 
 :::
@@ -1250,16 +914,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 -   **Example calculation:**
     -   SS(Species) = reduction in SS from null to species-only model
-
     -   SS(Sex\|Species) = additional reduction adding sex
-
     -   SS(Interaction\|Species,Sex) = additional reduction adding
         interaction
 -   **Problems with unbalanced data:**
     -   Order dependency
-
     -   Biased if factors are correlated
-
     -   Not invariant to coding
 :::
 :::::
@@ -1272,54 +932,26 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Type III Sums of Squares:"
+## [1] "Type III Sums of Squares:"
+## Anova Table (Type III tests)
+## 
+## Response: body_mass_g
+##                 Sum Sq  Df   F value    Pr(>F)    
+## (Intercept) 5232595969   1 54661.828 < 2.2e-16 ***
+## species      143001222   2   746.924 < 2.2e-16 ***
+## sex           29851220   1   311.838 < 2.2e-16 ***
+## species:sex    1676557   2     8.757 0.0001973 ***
+## Residuals     31302628 327                        
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## [1] "Comparison of F-values:"
+##        Effect Type_I_F Type_III_F
+## 1     Species   758.36     746.92
+## 2         Sex   387.46     311.84
+## 3 Interaction     8.76       8.76
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Anova Table (Type III tests)
-
-Response: body_mass_g
-                Sum Sq  Df   F value    Pr(>F)    
-(Intercept) 5232595969   1 54661.828 < 2.2e-16 ***
-species      143001222   2   746.924 < 2.2e-16 ***
-sex           29851220   1   311.838 < 2.2e-16 ***
-species:sex    1676557   2     8.757 0.0001973 ***
-Residuals     31302628 327                        
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Comparison of F-values:"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-       Effect Type_I_F Type_III_F
-1     Species   758.36     746.92
-2         Sex   387.46     311.84
-3 Interaction     8.76       8.76
-```
-
-
-:::
 :::
 
 :::
@@ -1345,26 +977,14 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Effect Sizes (Type III):"
+## [1] "Effect Sizes (Type III):"
+##        Effect Eta_Squared
+## 1     Species      0.6947
+## 2         Sex      0.1450
+## 3 Interaction      0.0081
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-       Effect Eta_Squared
-1     Species      0.6947
-2         Sex      0.1450
-3 Interaction      0.0081
-```
-
-
-:::
 :::
 
 :::
@@ -1378,50 +998,14 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Grand mean: 4207.1"
+## [1] "Grand mean: 4207.1"
+## [1] "Total SS: 215259666"
+## [1] "Between-groups SS: 183957038"
+## [1] "Within-groups SS: 31302628"
+## [1] "Check: Between + Within = 215259666"
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Total SS: 215259666"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Between-groups SS: 183957038"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Within-groups SS: 31302628"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Check: Between + Within = 215259666"
-```
-
-
-:::
 :::
 
 :::
@@ -1431,50 +1015,18 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "SS(Species alone): 145190219"
+## SS(Species alone): 145190219
+## SS(Sex alone): 38878897
+## 
+## 
+## Sum of main effects: 184069116
+## Actual between SS: 183957038
+## 
+## 
+## Difference (due to correlation): -112078
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "SS(Sex alone): 38878897"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Sum of main effects: 184069116"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Actual between SS: 183957038"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Difference (due to correlation): -112078"
-```
-
-
-:::
 :::
 
 :::
@@ -1486,78 +1038,44 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Species EMMs (model-based):"
+## Species EMMs (model-based):
+##  species   emmean   SE  df lower.CL upper.CL
+##  Adelie      3706 25.6 327     3656     3757
+##  Chinstrap   3733 37.5 327     3659     3807
+##  Gentoo      5082 28.4 327     5026     5138
+## 
+## Results are averaged over the levels of: sex 
+## Confidence level used: 0.95
+## 
+## 
+## Sex EMMs (model-based):
+##  sex    emmean   SE  df lower.CL upper.CL
+##  female   3859 25.3 327     3809     3908
+##  male     4489 25.2 327     4440     4539
+## 
+## Results are averaged over the levels of: species 
+## Confidence level used: 0.95
+##  contrast                          estimate   SE  df t.ratio p.value
+##  Adelie female - Chinstrap female      -193 73.5 198  -2.620  0.0973
+##  Adelie female - Gentoo female        -1346 73.5 198 -18.310  <.0001
+##  Adelie female - Adelie male           -714 73.5 198  -9.710  <.0001
+##  Adelie female - Chinstrap male        -604 73.5 198  -8.220  <.0001
+##  Adelie female - Gentoo male          -2190 73.5 198 -29.789  <.0001
+##  Chinstrap female - Gentoo female     -1154 73.5 198 -15.690  <.0001
+##  Chinstrap female - Adelie male        -521 73.5 198  -7.090  <.0001
+##  Chinstrap female - Chinstrap male     -412 73.5 198  -5.600  <.0001
+##  Chinstrap female - Gentoo male       -1998 73.5 198 -27.169  <.0001
+##  Gentoo female - Adelie male            632 73.5 198   8.600  <.0001
+##  Gentoo female - Chinstrap male         742 73.5 198  10.090  <.0001
+##  Gentoo female - Gentoo male           -844 73.5 198 -11.480  <.0001
+##  Adelie male - Chinstrap male           110 73.5 198   1.490  0.6711
+##  Adelie male - Gentoo male            -1476 73.5 198 -20.079  <.0001
+##  Chinstrap male - Gentoo male         -1586 73.5 198 -21.569  <.0001
+## 
+## P value adjustment: tukey method for comparing a family of 6 estimates
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
- species   emmean   SE  df lower.CL upper.CL
- Adelie      3706 25.6 327     3656     3757
- Chinstrap   3733 37.5 327     3659     3807
- Gentoo      5082 28.4 327     5026     5138
-
-Results are averaged over the levels of: sex 
-Confidence level used: 0.95 
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "\nSex EMMs (model-based):"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
- sex    emmean   SE  df lower.CL upper.CL
- female   3859 25.3 327     3809     3908
- male     4489 25.2 327     4440     4539
-
-Results are averaged over the levels of: species 
-Confidence level used: 0.95 
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
- contrast                          estimate   SE  df t.ratio p.value
- Adelie female - Chinstrap female      -193 73.5 198  -2.620  0.0973
- Adelie female - Gentoo female        -1346 73.5 198 -18.310  <.0001
- Adelie female - Adelie male           -714 73.5 198  -9.710  <.0001
- Adelie female - Chinstrap male        -604 73.5 198  -8.220  <.0001
- Adelie female - Gentoo male          -2190 73.5 198 -29.789  <.0001
- Chinstrap female - Gentoo female     -1154 73.5 198 -15.690  <.0001
- Chinstrap female - Adelie male        -521 73.5 198  -7.090  <.0001
- Chinstrap female - Chinstrap male     -412 73.5 198  -5.600  <.0001
- Chinstrap female - Gentoo male       -1998 73.5 198 -27.169  <.0001
- Gentoo female - Adelie male            632 73.5 198   8.600  <.0001
- Gentoo female - Chinstrap male         742 73.5 198  10.090  <.0001
- Gentoo female - Gentoo male           -844 73.5 198 -11.480  <.0001
- Adelie male - Chinstrap male           110 73.5 198   1.490  0.6711
- Adelie male - Gentoo male            -1476 73.5 198 -20.079  <.0001
- Chinstrap male - Gentoo male         -1586 73.5 198 -21.569  <.0001
-
-P value adjustment: tukey method for comparing a family of 6 estimates 
-```
-
-
-:::
 :::
 
 
@@ -1565,28 +1083,24 @@ P value adjustment: tukey method for comparing a family of 6 estimates
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
- species   sex      emmean       SE  df lower.CL upper.CL .group
- Adelie    female 3368.836 36.21222 327 3272.980 3464.692  a    
- Adelie    male   4043.493 36.21222 327 3947.637 4139.349   b   
- Chinstrap female 3527.206 53.06120 327 3386.749 3667.662  a    
- Chinstrap male   3938.971 53.06120 327 3798.514 4079.427   b   
- Gentoo    female 4679.741 40.62586 327 4572.202 4787.281    c  
- Gentoo    male   5484.836 39.61427 327 5379.975 5589.698     d 
-
-Confidence level used: 0.95 
-Conf-level adjustment: sidak method for 6 estimates 
-P value adjustment: sidak method for 15 tests 
-significance level used: alpha = 0.05 
-NOTE: If two or more means share the same grouping symbol,
-      then we cannot show them to be different.
-      But we also did not show them to be the same. 
+##  species   sex      emmean       SE  df lower.CL upper.CL .group
+##  Adelie    female 3368.836 36.21222 327 3272.980 3464.692  a    
+##  Adelie    male   4043.493 36.21222 327 3947.637 4139.349   b   
+##  Chinstrap female 3527.206 53.06120 327 3386.749 3667.662  a    
+##  Chinstrap male   3938.971 53.06120 327 3798.514 4079.427   b   
+##  Gentoo    female 4679.741 40.62586 327 4572.202 4787.281    c  
+##  Gentoo    male   5484.836 39.61427 327 5379.975 5589.698     d 
+## 
+## Confidence level used: 0.95 
+## Conf-level adjustment: sidak method for 6 estimates 
+## P value adjustment: sidak method for 15 tests 
+## significance level used: alpha = 0.05 
+## NOTE: If two or more means share the same grouping symbol,
+##       then we cannot show them to be different.
+##       But we also did not show them to be the same.
 ```
-
-
-:::
 :::
 
 
@@ -1598,57 +1112,31 @@ NOTE: If two or more means share the same grouping symbol,
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Species pairwise comparisons (Tukey):"
+## Species pairwise comparisons (Tukey):
+##  contrast           estimate   SE  df t.ratio p.value
+##  Adelie - Chinstrap    -26.9 45.4 327  -0.593  0.8241
+##  Adelie - Gentoo     -1376.1 38.2 327 -36.007  <.0001
+##  Chinstrap - Gentoo  -1349.2 47.0 327 -28.682  <.0001
+## 
+## Results are averaged over the levels of: sex 
+## P value adjustment: tukey method for comparing a family of 3 estimates
+## 
+## 
+## Sex effect within each species:
+## species = Adelie:
+##  contrast      estimate   SE  df t.ratio p.value
+##  female - male     -675 51.2 327 -13.174  <.0001
+## 
+## species = Chinstrap:
+##  contrast      estimate   SE  df t.ratio p.value
+##  female - male     -412 75.0 327  -5.487  <.0001
+## 
+## species = Gentoo:
+##  contrast      estimate   SE  df t.ratio p.value
+##  female - male     -805 56.7 327 -14.188  <.0001
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
- contrast           estimate   SE  df t.ratio p.value
- Adelie - Chinstrap    -26.9 45.4 327  -0.593  0.8241
- Adelie - Gentoo     -1376.1 38.2 327 -36.007  <.0001
- Chinstrap - Gentoo  -1349.2 47.0 327 -28.682  <.0001
-
-Results are averaged over the levels of: sex 
-P value adjustment: tukey method for comparing a family of 3 estimates 
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "\nSex effect within each species:"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-species = Adelie:
- contrast      estimate   SE  df t.ratio p.value
- female - male     -675 51.2 327 -13.174  <.0001
-
-species = Chinstrap:
- contrast      estimate   SE  df t.ratio p.value
- female - male     -412 75.0 327  -5.487  <.0001
-
-species = Gentoo:
- contrast      estimate   SE  df t.ratio p.value
- female - male     -805 56.7 327 -14.188  <.0001
-```
-
-
-:::
 :::
 
 :::
@@ -1658,44 +1146,18 @@ species = Gentoo:
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Sex effect (Male - Female) by species:"
+## Sex effect (Male - Female) by species:
+##     Species Sex_Effect
+## 1    Adelie       -675
+## 2 Chinstrap       -412
+## 3    Gentoo       -805
+## 
+## 
+## Interaction interpretation:
+## [1] "Sex effects differ across species"
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-    Species Sex_Effect
-1    Adelie       -675
-2 Chinstrap       -412
-3    Gentoo       -805
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "\nInteraction interpretation:"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Sex effects differ across species"
-```
-
-
-:::
 :::
 
 :::
@@ -1721,74 +1183,30 @@ species = Gentoo:
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Shapiro-Wilk test:"
+## [1] "Shapiro-Wilk test:"
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  residuals(model_u)
+## W = 0.99776, p-value = 0.9367
+## [1] "\nLevene's test:"
+## Levene's Test for Homogeneity of Variance (center = median)
+##        Df F value Pr(>F)
+## group   5  1.3908 0.2272
+##       327
+## [1] "\nResidual SD by group:"
+## # A tibble: 6 × 3
+##   species   sex    sd_resid
+##   <fct>     <fct>     <dbl>
+## 1 Adelie    female     269.
+## 2 Adelie    male       347.
+## 3 Chinstrap female     285.
+## 4 Chinstrap male       362.
+## 5 Gentoo    female     282.
+## 6 Gentoo    male       313.
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-	Shapiro-Wilk normality test
-
-data:  residuals(model_u)
-W = 0.99776, p-value = 0.9367
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "\nLevene's test:"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Levene's Test for Homogeneity of Variance (center = median)
-       Df F value Pr(>F)
-group   5  1.3908 0.2272
-      327               
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "\nResidual SD by group:"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 6 × 3
-  species   sex    sd_resid
-  <fct>     <fct>     <dbl>
-1 Adelie    female     269.
-2 Adelie    male       347.
-3 Chinstrap female     285.
-4 Chinstrap male       362.
-5 Gentoo    female     282.
-6 Gentoo    male       313.
-```
-
-
-:::
 :::
 
 :::
@@ -1802,62 +1220,20 @@ group   5  1.3908 0.2272
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-[1] "Balanced vs Unbalanced Results:"
+## Balanced vs Unbalanced Results:
+##        Effect Balanced_F Balanced_p Unbalanced_F Unbalanced_p
+## 1     Species     477.20      0e+00       746.92        0e+00
+## 2         Sex     239.22      0e+00       311.84        0e+00
+## 3 Interaction       9.10      2e-04         8.76        2e-04
+## 
+## 
+## Sample sizes:
+## Balanced total N: 204
+## Unbalanced total N: 333
+## Data discarded: 129 observations
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-       Effect Balanced_F Balanced_p Unbalanced_F Unbalanced_p
-1     Species     477.20      0e+00       746.92        0e+00
-2         Sex     239.22      0e+00       311.84        0e+00
-3 Interaction       9.10      2e-04         8.76        2e-04
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "\nSample sizes:"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Balanced total N: 204"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Unbalanced total N: 333"
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "Data discarded: 129 observations"
-```
-
-
-:::
 :::
 
 :::
