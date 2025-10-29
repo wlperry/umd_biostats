@@ -228,7 +228,7 @@ $\varepsilon_{ijk}$ = random error
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-revealjs/box_plot-1.png){width=576}
+![](12_01_lecture_powerpoint_files/figure-html/box_plot-1.png){width=480}
 :::
 :::
 
@@ -417,7 +417,7 @@ Model 1 ANOVA:
 
 ::: {style="font-size: 1.4em;"}
 | Source | SS | df | MS |
-|:-----------------|:-----------------|:-----------------|:-----------------|
+|:---|:---|:---|:---|
 | A | $nq \sum_{i=1
             }^{p} (\bar
             {y}_{i.} -
@@ -495,7 +495,7 @@ Model 1 ANOVA:
     fixed, random or mixed
 
 | Source | A and B fixed | A and B random | A fixed, B random |
-|:-----------------|:-----------------|:-----------------|:-----------------|
+|:---|:---|:---|:---|
 | A | $\frac{MS_A}{MS_{
           Residual}}$ | $\frac{MS_A}{MS_{AB}}$ | $\frac{MS_A}{MS_{AB}}$ |
 | B | $\frac{MS_B}{MS_{
@@ -796,7 +796,7 @@ overall interaction and ignore the main effects!!!
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-revealjs/interaction_plot-1.png){width=576}
+![](12_01_lecture_powerpoint_files/figure-html/interaction_plot-1.png){width=480}
 :::
 :::
 
@@ -851,7 +851,7 @@ But parameter estimation differs!
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-revealjs/visualize_imbalance-1.png){width=576}
+![](12_01_lecture_powerpoint_files/figure-html/visualize_imbalance-1.png){width=480}
 :::
 :::
 
@@ -1172,7 +1172,7 @@ But parameter estimation differs!
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-revealjs/diagnostics_unbalanced-1.png){width=384}
+![](12_01_lecture_powerpoint_files/figure-html/diagnostics_unbalanced-1.png){width=384}
 :::
 :::
 
@@ -1244,7 +1244,7 @@ But parameter estimation differs!
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](12_01_lecture_powerpoint_files/figure-revealjs/visual_comparison-1.png){width=576}
+![](12_01_lecture_powerpoint_files/figure-html/visual_comparison-1.png){width=480}
 :::
 :::
 

@@ -417,7 +417,7 @@ Model 1 ANOVA:
 
 ::: {style="font-size: 1.4em;"}
 | Source | SS | df | MS |
-|:-----------------|:-----------------|:-----------------|:-----------------|
+|:---|:---|:---|:---|
 | A | $nq \sum_{i=1
             }^{p} (\bar
             {y}_{i.} -
@@ -495,7 +495,7 @@ Model 1 ANOVA:
     fixed, random or mixed
 
 | Source | A and B fixed | A and B random | A fixed, B random |
-|:-----------------|:-----------------|:-----------------|:-----------------|
+|:---|:---|:---|:---|
 | A | $\frac{MS_A}{MS_{
           Residual}}$ | $\frac{MS_A}{MS_{AB}}$ | $\frac{MS_A}{MS_{AB}}$ |
 | B | $\frac{MS_B}{MS_{

@@ -1,6 +1,10 @@
 ---
 title: "Lecture 13 - Class Activity Multifactor ANOVA"
 author: "Bill Perry"
+knitr:
+  opts_chunk:
+    paged.print: false
+    collapse: true
 metadata-files:
   - ../../_templates/activities.yml
 format:
@@ -14,49 +18,63 @@ format:
 
 # Lecture 13: Data Overview
 
-The dataframe contains r nrow(urchin_df) observations with the following
-variables:
+-   The dataframe contains observations with the following variables:
+    -   patch: Random patches (1-16) where treatments were applied
+    -   treat: Urchin density treatment - none, low, medium, high
+    -   QUAD: Replicate quadrats within each pathc:treatment combination
+    -   algae: Percentage cover of filamentous algae (response variable)
 
--   treat: Urchin density treatment (Control, 66% Density, 33% Density,
-    Removed)
--   patch: Random patches (1-16) where treatments were applied
--   QUAD: Replicate quadrats within each treatment-patch combination
--   algae: Percentage cover of filamentous algae (response variable)
 
-::: {.cell}
+::: {.cell collapese='true'}
 
 ```{.r .cell-code}
 # Summary statistics
-summary_stats <- urchin_df %>%
+summary_stats <- u_df %>%
   group_by(treat) %>%
   summarise(
-    n = n(),
-    mean = mean(algae),
-    sd = sd(algae),
+    n = sum(!is.na(algae)),
+    mean = mean(algae, na.rm=TRUE),
+    sd = sd(algae, na.rm=TRUE),
     se = sd / sqrt(n),
-    min = min(algae),
-    max = max(algae),
+    min = min(algae, na.rm=TRUE),
+    max = max(algae, na.rm=TRUE),
     .groups = 'drop'
   )
 
 summary_stats
+## # A tibble: 4 × 7
+##   treat      n  mean    sd    se   min   max
+##   <fct>  <int> <dbl> <dbl> <dbl> <dbl> <dbl>
+## 1 none      20  39.2 28.7  6.41      0    83
+## 2 low       20  21.6 25.1  5.62      0    79
+## 3 medium    20  19   25.7  5.74      0    71
+## 4 high      20   1.3  3.18 0.711     0    13
+```
+:::
+
+
+# Plots
+
+
+::: {.cell collapese='true'}
+
+```{.r .cell-code}
+
+dodge_position <- position_dodge(width = 0.3)
+
+u_df %>% 
+  ggplot(aes(treat, algae, color = patch ))+
+  stat_summary(fun = "mean", geom="point",
+               position = dodge_position)+
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = 0.2,
+               position = dodge_position)
 ```
 
-::: {.cell-output .cell-output-stdout}
-
-```
-# A tibble: 4 × 7
-  treat       n  mean    sd    se   min   max
-  <fct>   <int> <dbl> <dbl> <dbl> <dbl> <dbl>
-1 control    20   1.3  3.18 0.711     0    13
-2 dens_33    20  21.6 25.1  5.62      0    79
-3 dens_66    20  19   25.7  5.74      0    71
-4 removal    20  39.2 28.7  6.41      0    83
-```
-
-
+::: {.cell-output-display}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-1-1.png){width=336}
 :::
 :::
+
 
 # Nested ANOVA Analysis
 
@@ -66,209 +84,184 @@ where the effect of patches must be considered within each treatment.
 Following the approach used in Quinn & Keough (2002), we'll use a
 traditional nested ANOVA.
 
-::: {.cell}
+# nested Anova wiht base R
+
+
+::: {.cell collapese='true'}
 
 ```{.r .cell-code}
+
 # other ways using aov built in
 # This will give you the correct F-test using PATCH within TREAT as error term
-model_aov <- aov(algae ~ treat + Error(treat:patch), data = urchin_df)
+nested_model <- aov(algae ~ treat + Error(treat:patch), data = u_df)
+summary(nested_model)
+## 
+## Error: treat:patch
+##           Df Sum Sq Mean Sq F value Pr(>F)  
+## treat      3  14429    4810   2.717 0.0913 .
+## Residuals 12  21242    1770                 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Error: Within
+##           Df Sum Sq Mean Sq F value Pr(>F)
+## Residuals 64  19110   298.6
 ```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning in aov(algae ~ treat + Error(treat:patch), data = urchin_df): Error()
-model is singular
-```
-
-
 :::
+
+
+# Nested ANOVA with AFEX package
+
+-   Using afex package (recommended for unbalanced designs)
+-   The afex package is specifically designed for ANOVA with Type III SS
+    -   handles nested designs well
+
+
+::: {.cell collapese='true'}
 
 ```{.r .cell-code}
-summary(model_aov)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-Error: treat:patch
-          Df Sum Sq Mean Sq F value Pr(>F)  
-treat      3  14429    4810   2.717 0.0913 .
-Residuals 12  21242    1770                 
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Error: Within
-          Df Sum Sq Mean Sq F value Pr(>F)
-Residuals 64  19110   298.6               
-```
-
-
-:::
-:::
-
-::: {.cell}
-
-```{.r .cell-code}
-# Using afex package (recommended for unbalanced designs)
-# The afex package is specifically designed for ANOVA with Type III SS and handles nested designs well:
-
-urchin_df$treat <- as.factor(urchin_df$treat)
-# urchin_df$PATCH_NESTED <- as.factor(urchin_df$PATCH)
 
 # This works and gives you the correct answer
 model_afx <- aov_car(algae ~ treat + Error(patch), 
-                     data = urchin_df,
-                     fun_aggregate = mean) # note this is not the best but would work as its less powerful
-```
+                     data = u_df) # note this is not the best but would work as its less powerful
 
-::: {.cell-output .cell-output-stderr}
-
-```
-Contrasts set to contr.sum for the following variables: treat
-```
-
-
-:::
-
-```{.r .cell-code}
+# ,fun_aggregate = mean
 summary(model_afx)
+## Anova Table (Type 3 tests)
+## 
+## Response: algae
+##       num Df den Df    MSE      F     ges  Pr(>F)  
+## treat      3     12 354.03 2.7171 0.40451 0.09126 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Anova Table (Type 3 tests)
-
-Response: algae
-      num Df den Df    MSE      F     ges  Pr(>F)  
-treat      3     12 354.03 2.7171 0.40451 0.09126 .
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
-:::
 :::
 
-::: {.cell}
+
+# Mixed Model ANOVA with random efffects
+
+-   BOBYQA (Bound Optimization BY Quadratic Approximation)
+    -   optimization algorithm used in mixed-effects modeling
+    -   finds the best parameter values that maximize the likelihood
+        function
+    -   especially useful when fitting complex models
+
+
+::: {.cell collapese='true'}
 
 ```{.r .cell-code}
-library(lmerTest)
+
 # Fit the model with treatment as fixed effect and patch nested within treatment as random
-nested_model <- lmer(algae ~ treat + (1|treat:patch), data = urchin_df,
+mixed_model <- lmer(algae ~ treat + (1|patch), data = u_df,
                     control = lmerControl(optimizer = "bobyqa",
                                          optCtrl = list(maxfun = 2e5)))
-# BOBYQA (Bound Optimization BY Quadratic Approximation) is an optimization algorithm used in mixed-effects modeling to find the best parameter values that maximize the likelihood function. It's especially useful when fitting complex models like the ones you're working with in your nested ANOVA analysis.
-
 # Model summary
-summary(nested_model)
+summary(mixed_model)
+## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+## lmerModLmerTest]
+## Formula: algae ~ treat + (1 | patch)
+##    Data: u_df
+## Control: lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 200000))
+## 
+## REML criterion at convergence: 684.9
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -1.9808 -0.3106 -0.1093  0.2831  2.5910 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  patch    (Intercept) 294.3    17.16   
+##  Residual             298.6    17.28   
+## Number of obs: 80, groups:  patch, 16
+## 
+## Fixed effects:
+##             Estimate Std. Error     df t value Pr(>|t|)   
+## (Intercept)   20.262      4.704 12.000   4.308  0.00102 **
+## treat1        18.938      8.147 12.000   2.324  0.03846 * 
+## treat2         1.287      8.147 12.000   0.158  0.87707   
+## treat3        -1.263      8.147 12.000  -0.155  0.87943   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Correlation of Fixed Effects:
+##        (Intr) treat1 treat2
+## treat1  0.000              
+## treat2  0.000 -0.333       
+## treat3  0.000 -0.333 -0.333
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Linear mixed model fit by REML. t-tests use Satterthwaite's method [
-lmerModLmerTest]
-Formula: algae ~ treat + (1 | treat:patch)
-   Data: urchin_df
-Control: lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 200000))
-
-REML criterion at convergence: 682.2
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--1.9808 -0.3106 -0.1093  0.2831  2.5910 
-
-Random effects:
- Groups      Name        Variance Std.Dev.
- treat:patch (Intercept) 294.3    17.16   
- Residual                298.6    17.28   
-Number of obs: 80, groups:  treat:patch, 16
-
-Fixed effects:
-             Estimate Std. Error     df t value Pr(>|t|)  
-(Intercept)     1.300      9.408 12.000   0.138   0.8924  
-treatdens_33   20.250     13.305 12.000   1.522   0.1539  
-treatdens_66   17.700     13.305 12.000   1.330   0.2081  
-treatremoval   37.900     13.305 12.000   2.849   0.0147 *
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Correlation of Fixed Effects:
-            (Intr) trt_33 trt_66
-treatdns_33 -0.707              
-treatdns_66 -0.707  0.500       
-treatremovl -0.707  0.500  0.500
-```
-
-
 :::
+
+
+# Mixed Model ANOVA with Random Effects
+
+-   **METHOD 1 - the F-distribution with estimated degrees of freedom**
+    -   Accounts for the uncertainty in variance component estimation
+    -   More conservative (higher p-values)
+    -   Better for small samples
+-   **METHOD 2 - the Chi Square**
+    -   Assumes variance components are known (not estimated)
+    -   More liberal (lower p-values)
+    -   Assumes large samples
+-   **Relationship between these tests is**
+    -   Chi-square = F × numerator df
+-   **Why Different Results?**
+    -   F-test accounts for denominator df (12 in your case) - reflects
+        sample size
+    -   Chi-square assumes infinite denominator df - assumes large
+        samples
+-   **Rule of Thumb**
+    -   under 100 observations or \< 20 random effect levels: Use F-test
+    -   over 500 observations and \> 50 random effect levels: Chi-square
+        is okay
+    -   In between: F-test is safer
+
+
+::: {.cell collapese='true'}
 
 ```{.r .cell-code}
+
 # Type III ANOVA with F-statistics (not chi-square) using Satterthwaite's method
 # The issue was that you had "type = F" which should be "test.statistic = 'F'"
-anova_result <- anova(nested_model, type = 3, ddf = "Satterthwaite")
-print(anova_result)
+satt_result <- Anova(mixed_model, type = 3, 
+                      test.statistic = "F",
+                      ddf = "Satterthwaite")
+print(satt_result)
+## Analysis of Deviance Table (Type III Wald F tests with Kenward-Roger df)
+## 
+## Response: algae
+##                   F Df Df.res   Pr(>F)   
+## (Intercept) 18.5551  1     12 0.001018 **
+## treat        2.7171  3     12 0.091262 . 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Type III Analysis of Variance Table with Satterthwaite's method
-      Sum Sq Mean Sq NumDF DenDF F value  Pr(>F)  
-treat   2434  811.33     3    12  2.7171 0.09126 .
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
 :::
+
+
+# Alternative method to do the mixed model ANOVA
+
+
+::: {.cell}
 
 ```{.r .cell-code}
 # Alternative using car package
 # The parameter is "test.statistic", not "type"
-anova_car <- Anova(nested_model, type = 3, test.statistic = "F")
+anova_car <- Anova(mixed_model, 
+                   type = 3, 
+                   test.statistic = "Chisq")
 print(anova_car)
+## Analysis of Deviance Table (Type III Wald chisquare tests)
+## 
+## Response: algae
+##               Chisq Df Pr(>Chisq)    
+## (Intercept) 18.5551  1 0.00001651 ***
+## treat        8.1513  3    0.04299 *  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Analysis of Deviance Table (Type III Wald F tests with Kenward-Roger df)
-
-Response: algae
-                 F Df Df.res  Pr(>F)  
-(Intercept) 0.0191  1     12 0.89239  
-treat       2.7171  3     12 0.09126 .
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
 :::
 
-```{.r .cell-code}
-# You could also try with the simpler model structure
-simple_model <- lmer(algae ~ treat + (1|patch), data = urchin_df)
-model_satterwait <- anova(simple_model, type = 3, ddf = "Satterthwaite")
-model_satterwait
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Type III Analysis of Variance Table with Satterthwaite's method
-      Sum Sq Mean Sq NumDF DenDF F value  Pr(>F)  
-treat   2434  811.33     3    12  2.7171 0.09126 .
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
-:::
-:::
 
 # Lecture 13: ANOVA Results
 
@@ -285,25 +278,116 @@ Where:
 -   \- $\epsilon_{ijk}$ is the residual error for quadrat $k$ in patch
     $j$ within treatment $i$
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
-model_satterwait
+
+satt_result
+## Analysis of Deviance Table (Type III Wald F tests with Kenward-Roger df)
+## 
+## Response: algae
+##                   F Df Df.res   Pr(>F)   
+## (Intercept) 18.5551  1     12 0.001018 **
+## treat        2.7171  3     12 0.091262 . 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+:::
+
+
+# Lecture 13 Assumption Tests
+
+Creates all 4 diagnostic plots automatically
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# 2. Simulate residuals from the fitted mixed-effects model
+# We set a seed for reproducibility of the simulation
+set.seed(123) 
+simulation_output <- simulateResiduals(fittedModel = mixed_model, 
+                                         # Number of simulations, 500 is a good number
+                                       plot = FALSE) # We will plot this manually in the next step
+
+# 3. Create the diagnostic plots
+# Create only the Q-Q uniformity plot
+plotQQunif(simulation_output)
 ```
 
-::: {.cell-output .cell-output-stdout}
-
-```
-Type III Analysis of Variance Table with Satterthwaite's method
-      Sum Sq Mean Sq NumDF DenDF F value  Pr(>F)  
-treat   2434  811.33     3    12  2.7171 0.09126 .
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
+::: {.cell-output-display}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=336}
 :::
 :::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Create only the residuals vs. predicted values plot
+plotResiduals(simulation_output)
+```
+
+::: {.cell-output-display}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-6-1.png){width=336}
+:::
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# 4. Optional: Perform formal tests for dispersion and outliers
+# These results are also shown on the plot, but you can run them separately
+testDispersion(simulation_output)
+```
+
+::: {.cell-output-display}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-7-1.png){width=336}
+:::
+
+```
+## 
+## 	DHARMa nonparametric dispersion test via sd of residuals fitted vs.
+## 	simulated
+## 
+## data:  simulationOutput
+## dispersion = 0.89422, p-value = 0.72
+## alternative hypothesis: two.sided
+```
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+testOutliers(simulation_output)
+```
+
+::: {.cell-output-display}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-8-1.png){width=336}
+:::
+
+```
+## 
+## 	DHARMa outlier test based on exact binomial test with approximate
+## 	expectations
+## 
+## data:  simulation_output
+## outliers at both margin(s) = 0, observations = 80, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.007968127
+## 95 percent confidence interval:
+##  0.00000000 0.04506404
+## sample estimates:
+## frequency of outliers (expected: 0.00796812749003984 ) 
+##                                                      0
+```
+:::
+
 
 # Lecture 13: Post-hoc Comparisons
 
@@ -313,6 +397,7 @@ differences between treatments to understand patterns in the data.
 However, we should interpret these with caution given the lack of
 statistical significance at the α = 0.05 level.
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -320,55 +405,42 @@ statistical significance at the α = 0.05 level.
 emm <- emmeans(nested_model, ~ treat)
 
 summary(emm)
+##  treat  emmean   SE df lower.CL upper.CL
+##  none     39.2 9.41 12    18.70     59.7
+##  low      21.6 9.41 12     1.05     42.0
+##  medium   19.0 9.41 12    -1.50     39.5
+##  high      1.3 9.41 12   -19.20     21.8
+## 
+## Warning: EMMs are biased unless design is perfectly balanced 
+## Confidence level used: 0.95
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
- treat   emmean   SE df lower.CL upper.CL
- control    1.3 9.41 12   -19.20     21.8
- dens_33   21.6 9.41 12     1.05     42.0
- dens_66   19.0 9.41 12    -1.50     39.5
- removal   39.2 9.41 12    18.70     59.7
-
-Degrees-of-freedom method: kenward-roger 
-Confidence level used: 0.95 
-```
-
-
 :::
-:::
+
 
 # Lecture 13: Tukey Pairwise Comparisons
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Pairwise comparisons with Tukey adjustment
-pairs <- pairs(emm, adjust = "tukey")
+pairs <- pairs(emm, adjust = "sidak")
 pairs
+##  contrast      estimate   SE df t.ratio p.value
+##  none - low       17.65 13.3 12   1.327  0.7557
+##  none - medium    20.20 13.3 12   1.518  0.6356
+##  none - high      37.90 13.3 12   2.849  0.0848
+##  low - medium      2.55 13.3 12   0.192  1.0000
+##  low - high       20.25 13.3 12   1.522  0.6331
+##  medium - high    17.70 13.3 12   1.330  0.7534
+## 
+## P value adjustment: sidak method for 6 tests
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
- contrast          estimate   SE df t.ratio p.value
- control - dens_33   -20.25 13.3 12  -1.522  0.4553
- control - dens_66   -17.70 13.3 12  -1.330  0.5625
- control - removal   -37.90 13.3 12  -2.849  0.0615
- dens_33 - dens_66     2.55 13.3 12   0.192  0.9974
- dens_33 - removal   -17.65 13.3 12  -1.327  0.5646
- dens_66 - removal   -20.20 13.3 12  -1.518  0.4573
-
-Degrees-of-freedom method: kenward-roger 
-P value adjustment: tukey method for comparing a family of 4 estimates 
-```
-
-
 :::
-:::
+
 
 # Lecture 13: Letter Display
+
 
 ::: {.cell}
 
@@ -377,29 +449,22 @@ P value adjustment: tukey method for comparing a family of 4 estimates
 cld <- multcomp::cld(emm, alpha = 0.05, Letters = letters)
 
 cld
+##  treat  emmean   SE df lower.CL upper.CL .group
+##  high      1.3 9.41 12   -19.20     21.8  a    
+##  medium   19.0 9.41 12    -1.50     39.5  a    
+##  low      21.6 9.41 12     1.05     42.0  a    
+##  none     39.2 9.41 12    18.70     59.7  a    
+## 
+## Warning: EMMs are biased unless design is perfectly balanced 
+## Confidence level used: 0.95 
+## P value adjustment: tukey method for comparing a family of 4 estimates 
+## significance level used: alpha = 0.05 
+## NOTE: If two or more means share the same grouping symbol,
+##       then we cannot show them to be different.
+##       But we also did not show them to be the same.
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
- treat   emmean   SE df lower.CL upper.CL .group
- control    1.3 9.41 12   -19.20     21.8  a    
- dens_66   19.0 9.41 12    -1.50     39.5  a    
- dens_33   21.6 9.41 12     1.05     42.0  a    
- removal   39.2 9.41 12    18.70     59.7  a    
-
-Degrees-of-freedom method: kenward-roger 
-Confidence level used: 0.95 
-P value adjustment: tukey method for comparing a family of 4 estimates 
-significance level used: alpha = 0.05 
-NOTE: If two or more means share the same grouping symbol,
-      then we cannot show them to be different.
-      But we also did not show them to be the same. 
-```
-
-
 :::
-:::
+
 
 ::: {.callout-important appearance="simple"}
 Interpretation of Treatment Comparisons The mean algae cover for the
@@ -419,11 +484,12 @@ treatment effect.
 For valid inference from ANOVA, several assumptions must be met. We test
 these assumptions below.
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Extract residuals
-residuals <- residuals(nested_model)
+residuals <- residuals(mixed_model)
 
 # QQ plot
 qq_plot <- ggplot(data.frame(residuals = residuals), aes(sample = residuals)) +
@@ -442,27 +508,19 @@ hist_plot <- ggplot(data.frame(residuals = residuals), aes(x = residuals)) +
        x = "Residuals",
        y = "Frequency")
 
-# Residuals vs. Fitted plot
-fitted_values <- fitted(nested_model)
-resid_plot <- ggplot(data.frame(fitted = fitted_values, residuals = residuals), 
-                    aes(x = fitted, y = residuals)) +
-  geom_point() +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
-  # theme_cowplot() +
-  labs(title = "Residuals vs. Fitted Values",
-       x = "Fitted Values",
-       y = "Residuals")
 
 # Combine plots
-qq_plot + hist_plot + resid_plot + plot_layout(ncol = 3)
+qq_plot + hist_plot + plot_layout(ncol = 2)
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/unnamed-chunk-5-1.png){width=336}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-12-1.png){width=336}
 :::
 :::
 
+
 # Lecture 13: Levenes Test for Homogeneity of Variance
+
 
 ::: {.cell}
 
@@ -470,24 +528,17 @@ qq_plot + hist_plot + resid_plot + plot_layout(ncol = 3)
 # 2. Homogeneity of Variance
 # Levene's test
 # Levene's test for homogeneity of variance
-levene_test <- leveneTest(algae ~ treat, data = urchin_df)
+levene_test <- leveneTest(algae ~ treat, data = u_df)
 levene_test
+## Levene's Test for Homogeneity of Variance (center = median)
+##       Df F value     Pr(>F)    
+## group  3  8.1694 0.00008785 ***
+##       76                       
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Levene's Test for Homogeneity of Variance (center = median)
-      Df F value     Pr(>F)    
-group  3  8.1694 0.00008785 ***
-      76                       
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
 :::
-:::
+
 
 ::: {.callout-important appearance="simple"}
 Interpretation of Assumption Tests The Q-Q plot shows some deviation
@@ -504,11 +555,12 @@ values, confirming the heteroscedasticity.
 
 # Lecture 13: Visualization
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create boxplot
-ggplot_boxplot <- ggplot(urchin_df, aes(x = treat, y = algae, fill = treat)) +
+ggplot_boxplot <- ggplot(u_df, aes(x = treat, y = algae, fill = treat)) +
   geom_boxplot(alpha = 0.7, outlier.shape = NA) +
   geom_jitter(width = 0.2, alpha = 0.4, size = 1) +
   scale_fill_viridis_d(option = "D", end = 0.85) +
@@ -531,13 +583,15 @@ print(ggplot_boxplot)
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/unnamed-chunk-7-1.png){width=336}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-14-1.png){width=336}
 :::
 :::
+
 
 # Lecture 13: Means Plot
 
 -   text
+
 
 ::: {.cell}
 
@@ -565,9 +619,10 @@ print(means_plot)
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/unnamed-chunk-8-1.png){width=336}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-15-1.png){width=336}
 :::
 :::
+
 
 # Lecture 13: Discussion
 
@@ -619,81 +674,73 @@ quadrat $k$ in patch $j$ within treatment $i$
 
 In `lme4`, this model is specified as
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Fit the mixed model
-mixed_model <- lmer(algae ~ treat + (1|treat:patch), data = urchin_df)
+mixed_model <- lmer(algae ~ treat + (1|patch), data = u_df)
 
 # Display model summary
 summary(mixed_model)
+## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+## lmerModLmerTest]
+## Formula: algae ~ treat + (1 | patch)
+##    Data: u_df
+## 
+## REML criterion at convergence: 684.9
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -1.9808 -0.3106 -0.1093  0.2831  2.5910 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  patch    (Intercept) 294.3    17.16   
+##  Residual             298.6    17.28   
+## Number of obs: 80, groups:  patch, 16
+## 
+## Fixed effects:
+##             Estimate Std. Error     df t value Pr(>|t|)   
+## (Intercept)   20.263      4.704 12.000   4.308  0.00102 **
+## treat1        18.938      8.147 12.000   2.324  0.03846 * 
+## treat2         1.287      8.147 12.000   0.158  0.87707   
+## treat3        -1.263      8.147 12.000  -0.155  0.87943   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Correlation of Fixed Effects:
+##        (Intr) treat1 treat2
+## treat1  0.000              
+## treat2  0.000 -0.333       
+## treat3  0.000 -0.333 -0.333
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Linear mixed model fit by REML. t-tests use Satterthwaite's method [
-lmerModLmerTest]
-Formula: algae ~ treat + (1 | treat:patch)
-   Data: urchin_df
-
-REML criterion at convergence: 682.2
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--1.9808 -0.3106 -0.1093  0.2831  2.5910 
-
-Random effects:
- Groups      Name        Variance Std.Dev.
- treat:patch (Intercept) 294.3    17.16   
- Residual                298.6    17.28   
-Number of obs: 80, groups:  treat:patch, 16
-
-Fixed effects:
-             Estimate Std. Error     df t value Pr(>|t|)  
-(Intercept)     1.300      9.408 12.000   0.138   0.8924  
-treatdens_33   20.250     13.305 12.000   1.522   0.1539  
-treatdens_66   17.700     13.305 12.000   1.330   0.2081  
-treatremoval   37.900     13.305 12.000   2.849   0.0147 *
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Correlation of Fixed Effects:
-            (Intr) trt_33 trt_66
-treatdns_33 -0.707              
-treatdns_66 -0.707  0.500       
-treatremovl -0.707  0.500  0.500
-```
-
-
 :::
-:::
+
 
 ## ANOVA Table
 
 The ANOVA table for the mixed model:
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
+
 # Get ANOVA table with Type III tests
-anova_table <- anova(mixed_model, type = 3)
+anova_table <- Anova(mixed_model, type = 3, test.statistic = "F")
 print(anova_table)
+## Analysis of Deviance Table (Type III Wald F tests with Kenward-Roger df)
+## 
+## Response: algae
+##                   F Df Df.res   Pr(>F)   
+## (Intercept) 18.5551  1     12 0.001018 **
+## treat        2.7171  3     12 0.091262 . 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Type III Analysis of Variance Table with Satterthwaite's method
-      Sum Sq Mean Sq NumDF DenDF F value  Pr(>F)  
-treat   2434  811.33     3    12  2.7171 0.09126 .
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
 :::
-:::
+
 
 # Assumption Testing
 
@@ -702,27 +749,24 @@ We test these assumptions below.
 
 ## Normality of Residuals
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
-# QQ plot of residuals
-qqnorm(resid(mixed_model))
-qqline(resid(mixed_model))
-```
 
-::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/normality-1.png){width=336}
-:::
-
-```{.r .cell-code}
 # Histogram of residuals
 hist(resid(mixed_model), main = "Histogram of Residuals",
      xlab = "Residuals", breaks = 15)
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/normality-2.png){width=336}
+![](13_02_class_activity_files/figure-html/normality-1.png){width=336}
 :::
+:::
+
+
+
+::: {.cell}
 
 ```{.r .cell-code}
 # More advanced residual diagnostics using DHARMa
@@ -731,11 +775,13 @@ plot(sim_residuals)
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/normality-3.png){width=336}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-16-1.png){width=336}
 :::
 :::
 
+
 ## Homogeneity of Variance
+
 
 ::: {.cell}
 
@@ -752,28 +798,23 @@ abline(h = 0, lty = 2, col = "red")
 :::
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Levene's test for homogeneity of variance
-levene_test <- leveneTest(algae ~ treat, data = urchin_df)
+levene_test <- leveneTest(algae ~ treat, data = u_df)
 levene_test
+## Levene's Test for Homogeneity of Variance (center = median)
+##       Df F value     Pr(>F)    
+## group  3  8.1694 0.00008785 ***
+##       76                       
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Levene's Test for Homogeneity of Variance (center = median)
-      Df F value     Pr(>F)    
-group  3  8.1694 0.00008785 ***
-      76                       
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
 :::
-:::
+
 
 # Post-hoc Comparisons
 
@@ -781,30 +822,25 @@ Although the main effect of treatment was not significant in the nested
 ANOVA (p = xxxxx), we can still examine the mean differences between
 treatments to understand patterns in the data.
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Calculate estimated marginal means
 emm <- emmeans(mixed_model, ~ treat)
 emm
+##  treat  emmean   SE df lower.CL upper.CL
+##  none     39.2 9.41 12    18.70     59.7
+##  low      21.6 9.41 12     1.05     42.0
+##  medium   19.0 9.41 12    -1.50     39.5
+##  high      1.3 9.41 12   -19.20     21.8
+## 
+## Degrees-of-freedom method: kenward-roger 
+## Confidence level used: 0.95
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
- treat   emmean   SE df lower.CL upper.CL
- control    1.3 9.41 12   -19.20     21.8
- dens_33   21.6 9.41 12     1.05     42.0
- dens_66   19.0 9.41 12    -1.50     39.5
- removal   39.2 9.41 12    18.70     59.7
-
-Degrees-of-freedom method: kenward-roger 
-Confidence level used: 0.95 
-```
-
-
 :::
-:::
+
+
 
 ::: {.cell}
 
@@ -812,26 +848,20 @@ Confidence level used: 0.95
 # Pairwise comparisons with Tukey adjustment
 pairs <- pairs(emm, adjust = "tukey")
 pairs
+##  contrast      estimate   SE df t.ratio p.value
+##  none - low       17.65 13.3 12   1.327  0.5646
+##  none - medium    20.20 13.3 12   1.518  0.4573
+##  none - high      37.90 13.3 12   2.849  0.0615
+##  low - medium      2.55 13.3 12   0.192  0.9974
+##  low - high       20.25 13.3 12   1.522  0.4553
+##  medium - high    17.70 13.3 12   1.330  0.5625
+## 
+## Degrees-of-freedom method: kenward-roger 
+## P value adjustment: tukey method for comparing a family of 4 estimates
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
- contrast          estimate   SE df t.ratio p.value
- control - dens_33   -20.25 13.3 12  -1.522  0.4553
- control - dens_66   -17.70 13.3 12  -1.330  0.5625
- control - removal   -37.90 13.3 12  -2.849  0.0615
- dens_33 - dens_66     2.55 13.3 12   0.192  0.9974
- dens_33 - removal   -17.65 13.3 12  -1.327  0.5646
- dens_66 - removal   -20.20 13.3 12  -1.518  0.4573
-
-Degrees-of-freedom method: kenward-roger 
-P value adjustment: tukey method for comparing a family of 4 estimates 
-```
-
-
 :::
-:::
+
+
 
 ::: {.cell}
 
@@ -839,37 +869,31 @@ P value adjustment: tukey method for comparing a family of 4 estimates
 # Compact letter display
 cld <- multcomp::cld(emm, alpha = 0.05, Letters = letters)
 cld
+##  treat  emmean   SE df lower.CL upper.CL .group
+##  high      1.3 9.41 12   -19.20     21.8  a    
+##  medium   19.0 9.41 12    -1.50     39.5  a    
+##  low      21.6 9.41 12     1.05     42.0  a    
+##  none     39.2 9.41 12    18.70     59.7  a    
+## 
+## Degrees-of-freedom method: kenward-roger 
+## Confidence level used: 0.95 
+## P value adjustment: tukey method for comparing a family of 4 estimates 
+## significance level used: alpha = 0.05 
+## NOTE: If two or more means share the same grouping symbol,
+##       then we cannot show them to be different.
+##       But we also did not show them to be the same.
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
- treat   emmean   SE df lower.CL upper.CL .group
- control    1.3 9.41 12   -19.20     21.8  a    
- dens_66   19.0 9.41 12    -1.50     39.5  a    
- dens_33   21.6 9.41 12     1.05     42.0  a    
- removal   39.2 9.41 12    18.70     59.7  a    
-
-Degrees-of-freedom method: kenward-roger 
-Confidence level used: 0.95 
-P value adjustment: tukey method for comparing a family of 4 estimates 
-significance level used: alpha = 0.05 
-NOTE: If two or more means share the same grouping symbol,
-      then we cannot show them to be different.
-      But we also did not show them to be the same. 
-```
-
-
 :::
-:::
+
 
 # Visualization
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create boxplot with jittered points
-ggplot_boxplot <- ggplot(urchin_df, aes(x = treat, y = algae, fill = treat)) +
+ggplot_boxplot <- ggplot(u_df, aes(x = treat, y = algae, fill = treat)) +
   geom_boxplot(alpha = 0.7, outlier.shape = NA) +
   geom_jitter(width = 0.2, alpha = 0.4, size = 1) +
   scale_fill_viridis_d(option = "D", end = 0.85) +
@@ -905,8 +929,11 @@ means_plot <- ggplot(summary_stats, aes(x = treat, y = mean, group = 1)) +
     axis.text = element_text(size = 10),
     plot.caption = element_text(hjust = 0, face = "italic", size = 10)
   )
+
 ```
 :::
+
+
 
 ::: {.cell}
 
@@ -916,9 +943,11 @@ ggplot_boxplot
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/unnamed-chunk-12-1.png){width=336}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-20-1.png){width=336}
 :::
 :::
+
+
 
 ::: {.cell}
 
@@ -927,9 +956,11 @@ means_plot
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/unnamed-chunk-13-1.png){width=336}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-21-1.png){width=336}
 :::
 :::
+
+
 
 ::: {.cell}
 
@@ -939,9 +970,10 @@ ggplot_boxplot + means_plot + plot_layout(ncol = 1)
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-html/unnamed-chunk-14-1.png){width=576}
+![](13_02_class_activity_files/figure-html/unnamed-chunk-22-1.png){width=576}
 :::
 :::
+
 
 # Comparison with Traditional Nested ANOVA
 
