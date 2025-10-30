@@ -307,7 +307,7 @@ The linear model for a nested design is:
 
 ### The linear model for a nested design is:
 
-###  $y_{ijk} = \mu + \alpha_i + \beta_{j(i)} + \varepsilon_{ijk}$
+### $y_{ijk} = \mu + \alpha_i + \beta_{j(i)} + \varepsilon_{ijk}$
 
 -   where:
     -   $\varepsilon_{ijk}$ is the error term
@@ -527,13 +527,15 @@ with:
 :::::
 
 # Plots
+
 ::: {.panel column="screen"}
 
 ::: {.cell}
 
 ```{.r .cell-code}
 u_df %>% ggplot(aes(treat, algae)) +
-  stat_summary(fun = "mean", geom="point") 
+  stat_summary(aes(treat, algae),fun = "mean", geom="point", size = 3) +
+  geom_point(aes(color=as.factor(patch)), position = position_dodge2(width=0.3))
 ```
 
 ::: {.cell-output-display}
@@ -542,7 +544,6 @@ u_df %>% ggplot(aes(treat, algae)) +
 :::
 
 :::
-
 
 # Manual nested ANOVA
 

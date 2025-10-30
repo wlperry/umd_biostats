@@ -18,11 +18,14 @@ format:
 
 # Lecture 13: Data Overview
 
--   The dataframe contains observations with the following variables:
-    -   patch: Random patches (1-16) where treatments were applied
-    -   treat: Urchin density treatment - none, low, medium, high
-    -   QUAD: Replicate quadrats within each pathc:treatment combination
-    -   algae: Percentage cover of filamentous algae (response variable)
+-   The **u_df** dataframe contains observations with the following
+    variables:
+    -   **patch**: Random patches (1-16) where treatments were applied
+    -   **treat**: Urchin density treatment - none, low, medium, high
+    -   **quad**: Replicate quadrats within each patch: treatment
+        combination
+    -   **algae**: Percentage cover of filamentous algae (response
+        variable)
 
 
 ::: {.cell collapese='true'}
@@ -84,7 +87,7 @@ where the effect of patches must be considered within each treatment.
 Following the approach used in Quinn & Keough (2002), we'll use a
 traditional nested ANOVA.
 
-# nested Anova wiht base R
+# nested Anova with base R
 
 
 ::: {.cell collapese='true'}
@@ -138,13 +141,49 @@ summary(model_afx)
 :::
 
 
-# Mixed Model ANOVA with random efffects
+# Mixed Model ANOVA with random effects
 
 -   BOBYQA (Bound Optimization BY Quadratic Approximation)
     -   optimization algorithm used in mixed-effects modeling
     -   finds the best parameter values that maximize the likelihood
         function
     -   especially useful when fitting complex models
+-   So the way to code
+    -   fixed effects is to put in the variable name
+    -   **random effects can be coded in a range of ways**
+        -   samples within a larger grouping - treatment and
+            subsample...
+        -   ![](images/paste-1.png){width="357"}
+        -   **RANDOM INTERCEPT - FIXED SLOPE - `+ (1|random)`**
+            -   so color \~ fixed + (1\|group)
+        -   **RANDOM INTERCEPT - RANDOM SLOPE - `+ (fixed|random)`**
+            -   so color \~ fixed + (fixed\|group)
+            -   equivalent to `algae ~ treat + (1 + fixed | random)`
+    -   **Nested Design** - such that a sample can exist only within a
+        larger grouping
+    -   ![](images/paste-2.png){width="478"}
+        -   **RANDOM INTERCEPT - FIXED SLOPE -**
+            `y ~ color + (1|green_box/grey_box)`
+        -   `y ~ color + (1 | greenbox) + (1 | green_box:grey_box)`. It
+            models random variation in the intercept for each patch, and
+            also for each quadrat within each patch
+        -   **RANDOM INTERCEPT - RANDOM SLOPE**
+            `y ~ color + (color|green_box/grey_box)`
+    -   Fully crossed design
+        -   ![](images/paste-3.png){width="492"}
+            -   crossed design **random intercept and random slope**
+                -   y \~ color + (1 \| green_box) + (1 \| gray_box)
+            -   crossed design **random intercept and random slope** \
+                `y~ color + (color|green_box) + (color|gray_box)`
+                -   `(color | green_box)` is shorthand for
+                    `(1 + color | green_box)`. This part of the formula
+                    specifies a random intercept and a random slope for
+                    the `color` variable within the levels of
+                    `green_box`.
+                -   `(color | gray_box)` is shorthand for
+                    `(1 + color | gray_box)`. Similarly, this specifies
+                    a random intercept and a random slope for `color`
+                    within the levels of `gray_box`
 
 
 ::: {.cell collapese='true'}
@@ -153,17 +192,19 @@ summary(model_afx)
 
 # Fit the model with treatment as fixed effect and patch nested within treatment as random
 mixed_model <- lmer(algae ~ treat + (1|patch), data = u_df,
-                    control = lmerControl(optimizer = "bobyqa",
-                                         optCtrl = list(maxfun = 2e5)))
+                    control = lmerControl(calc.derivs = FALSE) # can speed up and help convergence
+                    # control = lmerControl(optimizer = "bobyqa",
+                    #                      optCtrl = list(maxfun = 2e5))
+                    )
 # Model summary
 summary(mixed_model)
 ## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
 ## lmerModLmerTest]
 ## Formula: algae ~ treat + (1 | patch)
 ##    Data: u_df
-## Control: lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 200000))
+## Control: lmerControl(calc.derivs = FALSE)
 ## 
-## REML criterion at convergence: 684.9
+## REML criterion at convergence: 682.2
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
@@ -176,19 +217,19 @@ summary(mixed_model)
 ## Number of obs: 80, groups:  patch, 16
 ## 
 ## Fixed effects:
-##             Estimate Std. Error     df t value Pr(>|t|)   
-## (Intercept)   20.262      4.704 12.000   4.308  0.00102 **
-## treat1        18.938      8.147 12.000   2.324  0.03846 * 
-## treat2         1.287      8.147 12.000   0.158  0.87707   
-## treat3        -1.263      8.147 12.000  -0.155  0.87943   
+##             Estimate Std. Error      df t value Pr(>|t|)   
+## (Intercept)   39.200      9.408  12.000   4.167  0.00131 **
+## treatlow     -17.650     13.305  12.000  -1.327  0.20934   
+## treatmedium  -20.200     13.305  12.000  -1.518  0.15485   
+## treathigh    -37.900     13.305  12.000  -2.849  0.01466 * 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Correlation of Fixed Effects:
-##        (Intr) treat1 treat2
-## treat1  0.000              
-## treat2  0.000 -0.333       
-## treat3  0.000 -0.333 -0.333
+##             (Intr) tretlw trtmdm
+## treatlow    -0.707              
+## treatmedium -0.707  0.500       
+## treathigh   -0.707  0.500  0.500
 ```
 :::
 
@@ -389,6 +430,76 @@ testOutliers(simulation_output)
 :::
 
 
+
+::: {.cell}
+
+```{.r .cell-code}
+plot(mixed_model, type = c("p", "smooth"))
+```
+
+::: {.cell-output-display}
+![](13_02_class_activity_files/figure-docx/unnamed-chunk-9-1.jpeg)
+:::
+:::
+
+
+# Cooks influence plot using car
+
+this will tell you if there are outliers greater than the standard 0.5
+cooks distance
+
+
+::: {.cell}
+
+```{.r .cell-code}
+car::influencePlot(mixed_model)
+```
+
+::: {.cell-output-display}
+![](13_02_class_activity_files/figure-docx/unnamed-chunk-10-1.jpeg)
+:::
+
+```
+##       StudRes       Hat       CookD
+## 21 -0.2703807 0.1746972 0.003868692
+## 22 -0.6525887 0.1746972 0.022536776
+## 27  2.8520641 0.1746972 0.430458531
+## 59  2.4228103 0.1746972 0.310635855
+```
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+dotwhisker::dwplot(mixed_model, effects = "fixed") + geom_vline(xintercept = 0, color="darkblue", linewidth = 1)
+## Warning: Using the `size` aesthetic with geom_segment was deprecated in ggplot2 3.4.0.
+## ℹ Please use the `linewidth` aesthetic instead.
+## ℹ The deprecated feature was likely used in the dotwhisker package.
+##   Please report the issue at <https://github.com/fsolt/dotwhisker/issues>.
+```
+
+::: {.cell-output-display}
+![](13_02_class_activity_files/figure-docx/unnamed-chunk-11-1.jpeg)
+:::
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+VarCorr(mixed_model)
+##  Groups   Name        Std.Dev.
+##  patch    (Intercept) 17.156  
+##  Residual             17.280
+
+# allFit(mixed_model)
+```
+:::
+
+
 # Lecture 13: Post-hoc Comparisons
 
 Although the main effect of treatment was not significant in the nested
@@ -479,80 +590,6 @@ likely contributed to the lack of statistical significance for the
 treatment effect.
 :::
 
-# Lecture 13: ANOVA Assumptions Testing
-
-For valid inference from ANOVA, several assumptions must be met. We test
-these assumptions below.
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Extract residuals
-residuals <- residuals(mixed_model)
-
-# QQ plot
-qq_plot <- ggplot(data.frame(residuals = residuals), aes(sample = residuals)) +
-  stat_qq() +
-  stat_qq_line() +
-  # theme_cowplot() +
-  labs(title = "Normal Q-Q Plot of Residuals",
-       x = "Theoretical Quantiles",
-       y = "Sample Quantiles")
-
-# Histogram of residuals
-hist_plot <- ggplot(data.frame(residuals = residuals), aes(x = residuals)) +
-  geom_histogram(bins = 15, fill = "lightblue", color = "black") +
-  # theme_cowplot() +
-  labs(title = "Histogram of Residuals",
-       x = "Residuals",
-       y = "Frequency")
-
-
-# Combine plots
-qq_plot + hist_plot + plot_layout(ncol = 2)
-```
-
-::: {.cell-output-display}
-![](13_02_class_activity_files/figure-docx/unnamed-chunk-12-1.jpeg)
-:::
-:::
-
-
-# Lecture 13: Levenes Test for Homogeneity of Variance
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# 2. Homogeneity of Variance
-# Levene's test
-# Levene's test for homogeneity of variance
-levene_test <- leveneTest(algae ~ treat, data = u_df)
-levene_test
-## Levene's Test for Homogeneity of Variance (center = median)
-##       Df F value     Pr(>F)    
-## group  3  8.1694 0.00008785 ***
-##       76                       
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-:::
-
-
-::: {.callout-important appearance="simple"}
-Interpretation of Assumption Tests The Q-Q plot shows some deviation
-from normality, particularly in the tails, and Levene's test indicates
-significant heterogeneity of variances across treatments (F = (xxxxx).
-As noted by Quinn & Keough (2002), there were "large differences in
-within-cell variances" in this dataset, and transformations (including
-arcsin) did not improve variance homogeneity. However, ANOVA is
-generally robust to heteroscedasticity with balanced designs, which is
-why they chose to analyze untransformed data. The residuals vs. fitted
-plot also shows a pattern of increasing variance with increasing fitted
-values, confirming the heteroscedasticity.
-:::
-
 # Lecture 13: Visualization
 
 
@@ -583,7 +620,7 @@ print(ggplot_boxplot)
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-docx/unnamed-chunk-14-1.jpeg)
+![](13_02_class_activity_files/figure-docx/unnamed-chunk-16-1.jpeg)
 :::
 :::
 
@@ -619,7 +656,7 @@ print(means_plot)
 ```
 
 ::: {.cell-output-display}
-![](13_02_class_activity_files/figure-docx/unnamed-chunk-15-1.jpeg)
+![](13_02_class_activity_files/figure-docx/unnamed-chunk-17-1.jpeg)
 :::
 :::
 
@@ -653,328 +690,6 @@ manipulations may be context-dependent and influenced by local
 environmental conditions.
 :::
 
-# THE ALTERNATE WAY AND BETTER!!!
-
-# Mixed Model Analysis
-
-In this experimental design, patch is nested within treat because each
-patch received only one treatment level. This hierarchical design is
-well-suited for analysis using linear mixed-effects models.
-
-## Model Specification
-
-We'll use the following model specification:
-
-$algae_{ijk} = \mu + \alpha_i + \beta_{j(i)} + \epsilon_{ijk}$
-
-Where: - $\mu$ is the overall mean - $\alpha_i$ is the fixed effect of
-treatment $i$ - $\beta_{j(i)}$ is the random effect of patch $j$ nested
-within treatment $i$ - $\epsilon_{ijk}$ is the residual error for
-quadrat $k$ in patch $j$ within treatment $i$
-
-In `lme4`, this model is specified as
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Fit the mixed model
-mixed_model <- lmer(algae ~ treat + (1|patch), data = u_df)
-
-# Display model summary
-summary(mixed_model)
-## Linear mixed model fit by REML. t-tests use Satterthwaite's method [
-## lmerModLmerTest]
-## Formula: algae ~ treat + (1 | patch)
-##    Data: u_df
-## 
-## REML criterion at convergence: 684.9
-## 
-## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -1.9808 -0.3106 -0.1093  0.2831  2.5910 
-## 
-## Random effects:
-##  Groups   Name        Variance Std.Dev.
-##  patch    (Intercept) 294.3    17.16   
-##  Residual             298.6    17.28   
-## Number of obs: 80, groups:  patch, 16
-## 
-## Fixed effects:
-##             Estimate Std. Error     df t value Pr(>|t|)   
-## (Intercept)   20.263      4.704 12.000   4.308  0.00102 **
-## treat1        18.938      8.147 12.000   2.324  0.03846 * 
-## treat2         1.287      8.147 12.000   0.158  0.87707   
-## treat3        -1.263      8.147 12.000  -0.155  0.87943   
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Correlation of Fixed Effects:
-##        (Intr) treat1 treat2
-## treat1  0.000              
-## treat2  0.000 -0.333       
-## treat3  0.000 -0.333 -0.333
-```
-:::
-
-
-## ANOVA Table
-
-The ANOVA table for the mixed model:
-
-
-::: {.cell}
-
-```{.r .cell-code}
-
-# Get ANOVA table with Type III tests
-anova_table <- Anova(mixed_model, type = 3, test.statistic = "F")
-print(anova_table)
-## Analysis of Deviance Table (Type III Wald F tests with Kenward-Roger df)
-## 
-## Response: algae
-##                   F Df Df.res   Pr(>F)   
-## (Intercept) 18.5551  1     12 0.001018 **
-## treat        2.7171  3     12 0.091262 . 
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-:::
-
-
-# Assumption Testing
-
-For valid inference from mixed models, several assumptions must be met.
-We test these assumptions below.
-
-## Normality of Residuals
-
-
-::: {.cell}
-
-```{.r .cell-code}
-
-# Histogram of residuals
-hist(resid(mixed_model), main = "Histogram of Residuals",
-     xlab = "Residuals", breaks = 15)
-```
-
-::: {.cell-output-display}
-![](13_02_class_activity_files/figure-docx/normality-1.jpeg)
-:::
-:::
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# More advanced residual diagnostics using DHARMa
-sim_residuals <- simulateResiduals(fittedModel = mixed_model)
-plot(sim_residuals)
-```
-
-::: {.cell-output-display}
-![](13_02_class_activity_files/figure-docx/unnamed-chunk-16-1.jpeg)
-:::
-:::
-
-
-## Homogeneity of Variance
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Residuals vs. fitted values plot
-plot(fitted(mixed_model), resid(mixed_model),
-     xlab = "Fitted Values", ylab = "Residuals",
-     main = "Residuals vs. Fitted Values")
-abline(h = 0, lty = 2, col = "red")
-```
-
-::: {.cell-output-display}
-![](13_02_class_activity_files/figure-docx/homogeneity-1.jpeg)
-:::
-:::
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Levene's test for homogeneity of variance
-levene_test <- leveneTest(algae ~ treat, data = u_df)
-levene_test
-## Levene's Test for Homogeneity of Variance (center = median)
-##       Df F value     Pr(>F)    
-## group  3  8.1694 0.00008785 ***
-##       76                       
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-:::
-
-
-# Post-hoc Comparisons
-
-Although the main effect of treatment was not significant in the nested
-ANOVA (p = xxxxx), we can still examine the mean differences between
-treatments to understand patterns in the data.
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Calculate estimated marginal means
-emm <- emmeans(mixed_model, ~ treat)
-emm
-##  treat  emmean   SE df lower.CL upper.CL
-##  none     39.2 9.41 12    18.70     59.7
-##  low      21.6 9.41 12     1.05     42.0
-##  medium   19.0 9.41 12    -1.50     39.5
-##  high      1.3 9.41 12   -19.20     21.8
-## 
-## Degrees-of-freedom method: kenward-roger 
-## Confidence level used: 0.95
-```
-:::
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Pairwise comparisons with Tukey adjustment
-pairs <- pairs(emm, adjust = "tukey")
-pairs
-##  contrast      estimate   SE df t.ratio p.value
-##  none - low       17.65 13.3 12   1.327  0.5646
-##  none - medium    20.20 13.3 12   1.518  0.4573
-##  none - high      37.90 13.3 12   2.849  0.0615
-##  low - medium      2.55 13.3 12   0.192  0.9974
-##  low - high       20.25 13.3 12   1.522  0.4553
-##  medium - high    17.70 13.3 12   1.330  0.5625
-## 
-## Degrees-of-freedom method: kenward-roger 
-## P value adjustment: tukey method for comparing a family of 4 estimates
-```
-:::
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Compact letter display
-cld <- multcomp::cld(emm, alpha = 0.05, Letters = letters)
-cld
-##  treat  emmean   SE df lower.CL upper.CL .group
-##  high      1.3 9.41 12   -19.20     21.8  a    
-##  medium   19.0 9.41 12    -1.50     39.5  a    
-##  low      21.6 9.41 12     1.05     42.0  a    
-##  none     39.2 9.41 12    18.70     59.7  a    
-## 
-## Degrees-of-freedom method: kenward-roger 
-## Confidence level used: 0.95 
-## P value adjustment: tukey method for comparing a family of 4 estimates 
-## significance level used: alpha = 0.05 
-## NOTE: If two or more means share the same grouping symbol,
-##       then we cannot show them to be different.
-##       But we also did not show them to be the same.
-```
-:::
-
-
-# Visualization
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Create boxplot with jittered points
-ggplot_boxplot <- ggplot(u_df, aes(x = treat, y = algae, fill = treat)) +
-  geom_boxplot(alpha = 0.7, outlier.shape = NA) +
-  geom_jitter(width = 0.2, alpha = 0.4, size = 1) +
-  scale_fill_viridis_d(option = "D", end = 0.85) +
-  labs(
-    title = "Urchin Density effect on Algae Cover",
-    x = "Urchin Density ",
-    y = "Algae Cover (%)",
-    caption = "Figure 1: Boxplots showing the distribution of algal cover across urchin density.\nDespite visual differences, the treatment effect was not statistically significant (p = 0.091)."
-  ) +
-  theme_minimal() +
-  theme(
-    legend.position = "none",
-    plot.title = element_text(face = "bold", size = 14),
-    axis.title = element_text(face = "bold", size = 12),
-    axis.text = element_text(size = 10),
-    plot.caption = element_text(hjust = 0, face = "italic", size = 10)
-  )
-
-# Create means plot with error bars
-means_plot <- ggplot(summary_stats, aes(x = treat, y = mean, group = 1)) +
-  geom_point(size = 3, shape = 21, fill = "white") +
-  geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = 0.2) +
-  labs(
-    title = "Mean Algae Cover by Urchin Density",
-    x = "Urchin Density",
-    y = "Algae Cover (%)",
-    caption = "Figure 2: Mean (± SE) percentage cover of algae across urchin density treatments."
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(face = "bold", size = 14),
-    axis.title = element_text(face = "bold", size = 12),
-    axis.text = element_text(size = 10),
-    plot.caption = element_text(hjust = 0, face = "italic", size = 10)
-  )
-
-```
-:::
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Display plots
-ggplot_boxplot
-```
-
-::: {.cell-output-display}
-![](13_02_class_activity_files/figure-docx/unnamed-chunk-20-1.jpeg)
-:::
-:::
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-means_plot
-```
-
-::: {.cell-output-display}
-![](13_02_class_activity_files/figure-docx/unnamed-chunk-21-1.jpeg)
-:::
-:::
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Combined plot using patchwork
-ggplot_boxplot + means_plot + plot_layout(ncol = 1)
-```
-
-::: {.cell-output-display}
-![](13_02_class_activity_files/figure-docx/unnamed-chunk-22-1.jpeg)
-:::
-:::
-
-
 # Comparison with Traditional Nested ANOVA
 
 The linear mixed model approach provides similar results to the
@@ -985,9 +700,6 @@ diagnostic tools available through packages like DHARMa.
 The mixed model approach confirms that:
 
 1.  Treatment effects are not significant (p = 0.091)
-2.  Patches within treatments show significant variation (p \< 0.001)
-3.  The variance components are similar to those from the traditional
-    approach
 
 In both methods, the key ecological finding is the strong spatial
 heterogeneity in algal cover that overrides the grazing effect of
