@@ -34,8 +34,6 @@ format:
     -   Normality of Residuals
     -   Independence
 
-
-
 # Lecture 14: GLM Overview
 
 ### Overview
@@ -323,9 +321,8 @@ in the coefficient values and overall model statistics.
 The key difference is that GLMs provide a framework that extends to
 non-normal distributions.
 
-
-
 # GLM with Poisson Distribution: Setup
+
 ::::: columns
 ::: {.column width="60%"}
 **Poisson GLMs** are appropriate for **count data**. The Poisson
@@ -382,32 +379,20 @@ rounded quarter-mile time and the number of cylinders:
 ::::: columns
 ::: {.column width="60%"}
 **Poisson GLMs** are appropriate for **count data**. The Poisson
-distribution assumes that the variance equals the mean.
-
--   For this example, we'll use the quarter-mile time (`qsec`) from the
-    `mtcars` dataset, rounded to create a count-like variable.
--   With the natural log link, coefficients represent **multiplicative
-    effects**:
-    -   A coefficient of β means: for each 1-unit increase in X, the
-        response is multiplied by exp(β)
-
-    -   For small β, exp(β) ≈ 1 + β, so β × 100% gives approximate
-        percentage change
-
+distribution assumes that the variance equals the mean.\
+- Use the quarter-mile time (`qsec`) from the `mtcars` dataset, rounded
+to create a count-like variable. - With the natural log link,
+coefficients represent **multiplicative effects**:\
+- A coefficient of β means: for each 1-unit increase in X, the response
+is multiplied by exp(β)\
+- For small β, exp(β) ≈ 1 + β, so β × 100% gives approximate percentage
+change\
 Now let's fit a Poisson GLM to model the relationship between the
 rounded quarter-mile time and the number of cylinders:
+`model_poisson <- glm(qsec_round ~ cyl, family = poisson(link = "log"), data = mtcars_count)`
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Fit a Poisson GLM
-model_poisson <- glm(qsec_round ~ cyl, 
-                     family = poisson(link = "log"), data = mtcars_count)
-# Look at the model summary
-summary(model_poisson)
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -509,7 +494,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
 :::
 
 ::: {.column width="40%"}
@@ -587,7 +571,6 @@ NOTE: If two or more means share the same grouping symbol,
 :::
 
 ::: {.column width="40%"}
-
 ### Interpreting Poisson GLM Coefficients
 
 -   In a Poisson GLM with a log link function:
@@ -599,12 +582,12 @@ NOTE: If two or more means share the same grouping symbol,
 
     -   For example, `exp(coef)` = 0.90 means the expected count is 90%
         of the reference level
-
 :::
 :::::
 
 # Checking Model Assumptions with DHARMa
-:::{.panel}
+
+::: {.column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -614,7 +597,6 @@ NOTE: If two or more means share the same grouping symbol,
 
 :::
 
-
 # Dealing with Overdispersion in Count Data
 
 ::::: columns
@@ -622,19 +604,10 @@ NOTE: If two or more means share the same grouping symbol,
 When count data shows more variability than expected under a Poisson
 distribution (variance \> mean), we may need to use a negative binomial
 model instead.
+`model_nb <- glm.nb(qsec_round ~ cyl, data = mtcars_count)`
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# If we detected overdispersion, we could fit a negative binomial model
-# This is just for demonstration - our data may not actually need this
-# Fit negative binomial model
-model_nb <- glm.nb(qsec_round ~ cyl, data = mtcars_count)
-# Compare summaries
-summary(model_nb)
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -731,7 +704,7 @@ Based on the example from Polis et al. (1998), we'll model the
 presence/absence of lizards (*Uta*) on islands in the Gulf of California
 based on perimeter/area ratio.
 
-::: {.panel}
+::: {.panel column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -739,16 +712,15 @@ based on perimeter/area ratio.
 :::
 :::
 
-
 :::
 
 # Example: Lizard Presence on Islands
 
 Based on the example from Polis et al. (1998), we'll model the
 presence/absence of lizards (*Uta*) on islands in the Gulf of California
-based on perimeter/area ratio. 
+based on perimeter/area ratio.
 
-:::{.panel}
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -789,7 +761,6 @@ Number of Fisher Scoring iterations: 6
 
 :::
 :::
-
 
 :::
 
@@ -868,7 +839,7 @@ presence) change with a unit increase in the predictor.
     event
 -   If odds ratio = 1: No effect of predictor on odds of event
 
-::: {.panel}
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -879,26 +850,16 @@ odds_ratio <- exp(coef_lizard)
 ci <- exp(confint(lizard_model, "pa_ratio"))
 
 # Display results
-cat("Odds Ratio:", round(odds_ratio, 3), "\n")
+cat("Odds Ratio:", round(odds_ratio, 3), "\n\n",
+"95% CI:", round(ci[1], 3), "to", round(ci[2], 3), "\n")
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Odds Ratio: 0 
-```
+Odds Ratio: 0.861 
 
-
-:::
-
-```{.r .cell-code}
-cat("95% CI:", round(ci[1], 3), "to", round(ci[2], 3), "\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-95% CI: 0 to Inf 
+ 95% CI: 0.753 to 0.932 
 ```
 
 
@@ -911,7 +872,8 @@ cat("95% CI:", round(ci[1], 3), "to", round(ci[2], 3), "\n")
 
 There are several ways to assess the goodness-of-fit for logistic
 regression models:
-:::{.panel}
+
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -1082,7 +1044,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 # Multiple Logistic Regression: Odds Ratios
 
 Let's calculate odds ratios and confidence intervals for all predictors:
-:::{.panel}
+::: {.panel column="screen"}
+
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -1098,11 +1061,12 @@ shrub_cover shrub_cover    1.2129 (1.0645, 1.7909)
 :::
 :::
 
+
 :::
 
 # Visualizing Multiple Logistic Regression
 
-:::{.panel}
+::: {.panel column="screen"}
 For multiple predictors, we can visualize the effect of each predictor
 while holding others constant at their mean or median values.
 
@@ -1129,13 +1093,15 @@ Logistic regression has several key assumptions:
 4.  No multicollinearity (when multiple predictors are used)
 
 Let's check the diagnostics for our multiple logistic regression model:
-:::{.panel}
+::: {.panel column="screen"}
+
 
 ::: {.cell}
 ::: {.cell-output-display}
 ![](14_01_lecture_powerpoint_files/figure-docx/diagnostics-1.png)
 :::
 :::
+
 
 :::
 
@@ -1225,7 +1191,8 @@ Specificity: 0.833
 Let's create a publication-quality figure for our multiple logistic
 regression model and show how we would write up the results for a
 scientific publication.
-:::{.panel}
+
+::: {.panel column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -1277,7 +1244,6 @@ species.
 
 # Relationship Between GLMs and ANOVAs
 
-
 ### GLMs and ANOVAs: The Connection
 
 General linear models (including ANOVAs and standard regression) are
@@ -1291,12 +1257,11 @@ special cases of Generalized Linear Models where:
 
     -   A Gaussian GLM with an identity link and a categorical predictor
 
-
-
 # Demonstrating ANOVA-GLM Equivalence
 
 Let's demonstrate this equivalence:
-:::{.panel}
+
+::: {.panel column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -1315,8 +1280,6 @@ Let's demonstrate this equivalence:
 :::
 
 :::
-
-
 
 # Assumptions and Diagnostics Summary
 
@@ -1341,7 +1304,6 @@ Let's demonstrate this equivalence:
     -   Binary response variable
     -   Linear relationship between predictors and log odds
     -   Adequate sample size relative to number of parameters
-
 :::
 
 ::: {.column width="60%"}

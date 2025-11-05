@@ -539,7 +539,7 @@ u_df %>% ggplot(aes(treat, algae)) +
 ```
 
 ::: {.cell-output-display}
-![](13_01_lecture_powerpoint_files/figure-html/unnamed-chunk-1-1.png){width=480}
+![](13_01_lecture_powerpoint_files/figure-revealjs/unnamed-chunk-1-1.png){width=576}
 :::
 :::
 
@@ -996,7 +996,7 @@ to the marginal statistical significance for the treatment effect.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](13_01_lecture_powerpoint_files/figure-html/diagnostic_plots-1.png){width=480}
+![](13_01_lecture_powerpoint_files/figure-revealjs/diagnostic_plots-1.png){width=576}
 :::
 :::
 
@@ -1050,7 +1050,7 @@ with increasing fitted values, confirming the heteroscedasticity.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](13_01_lecture_powerpoint_files/figure-html/boxplot-1.png){width=480}
+![](13_01_lecture_powerpoint_files/figure-revealjs/boxplot-1.png){width=576}
 :::
 :::
 
@@ -1062,7 +1062,7 @@ with increasing fitted values, confirming the heteroscedasticity.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](13_01_lecture_powerpoint_files/figure-html/means_plot-1.png){width=480}
+![](13_01_lecture_powerpoint_files/figure-revealjs/means_plot-1.png){width=576}
 :::
 :::
 

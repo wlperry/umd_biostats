@@ -34,8 +34,6 @@ format:
     -   Normality of Residuals
     -   Independence
 
-
-
 # Lecture 14: GLM Overview
 
 ### Overview
@@ -83,7 +81,7 @@ categorical/multinomial response variables, using maximum likelihood
 
 ::: {.cell}
 ::: {.cell-output-display}
-![Examples of distributions in the exponential family](14_01_lecture_powerpoint_files/figure-html/glm-distributions-1.png){width=480}
+![Examples of distributions in the exponential family](14_01_lecture_powerpoint_files/figure-revealjs/glm-distributions-1.png){width=576}
 :::
 :::
 
@@ -153,7 +151,7 @@ Let's look at the summary of our Gaussian GLM:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/summary-gaussian_2-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/summary-gaussian_2-1.png){width=576}
 :::
 :::
 
@@ -305,7 +303,7 @@ Visualizing the results:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/gaussian-plot-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/gaussian-plot-1.png){width=576}
 :::
 :::
 
@@ -323,9 +321,8 @@ in the coefficient values and overall model statistics.
 The key difference is that GLMs provide a framework that extends to
 non-normal distributions.
 
-
-
 # GLM with Poisson Distribution: Setup
+
 ::::: columns
 ::: {.column width="60%"}
 **Poisson GLMs** are appropriate for **count data**. The Poisson
@@ -370,7 +367,7 @@ rounded quarter-mile time and the number of cylinders:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/unnamed-chunk-1-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/unnamed-chunk-1-1.png){width=576}
 :::
 :::
 
@@ -382,32 +379,20 @@ rounded quarter-mile time and the number of cylinders:
 ::::: columns
 ::: {.column width="60%"}
 **Poisson GLMs** are appropriate for **count data**. The Poisson
-distribution assumes that the variance equals the mean.
-
--   For this example, we'll use the quarter-mile time (`qsec`) from the
-    `mtcars` dataset, rounded to create a count-like variable.
--   With the natural log link, coefficients represent **multiplicative
-    effects**:
-    -   A coefficient of β means: for each 1-unit increase in X, the
-        response is multiplied by exp(β)
-
-    -   For small β, exp(β) ≈ 1 + β, so β × 100% gives approximate
-        percentage change
-
+distribution assumes that the variance equals the mean.\
+- Use the quarter-mile time (`qsec`) from the `mtcars` dataset, rounded
+to create a count-like variable. - With the natural log link,
+coefficients represent **multiplicative effects**:\
+- A coefficient of β means: for each 1-unit increase in X, the response
+is multiplied by exp(β)\
+- For small β, exp(β) ≈ 1 + β, so β × 100% gives approximate percentage
+change\
 Now let's fit a Poisson GLM to model the relationship between the
 rounded quarter-mile time and the number of cylinders:
+`model_poisson <- glm(qsec_round ~ cyl, family = poisson(link = "log"), data = mtcars_count)`
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Fit a Poisson GLM
-model_poisson <- glm(qsec_round ~ cyl, 
-                     family = poisson(link = "log"), data = mtcars_count)
-# Look at the model summary
-summary(model_poisson)
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -509,7 +494,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-
 :::
 
 ::: {.column width="40%"}
@@ -580,14 +564,13 @@ NOTE: If two or more means share the same grouping symbol,
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/poisson-plot-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/poisson-plot-1.png){width=576}
 :::
 :::
 
 :::
 
 ::: {.column width="40%"}
-
 ### Interpreting Poisson GLM Coefficients
 
 -   In a Poisson GLM with a log link function:
@@ -599,21 +582,20 @@ NOTE: If two or more means share the same grouping symbol,
 
     -   For example, `exp(coef)` = 0.90 means the expected count is 90%
         of the reference level
-
 :::
 :::::
 
 # Checking Model Assumptions with DHARMa
-:::{.panel}
+
+::: {.column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/poisson-diagnostics-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/poisson-diagnostics-1.png){width=576}
 :::
 :::
 
 :::
-
 
 # Dealing with Overdispersion in Count Data
 
@@ -622,19 +604,10 @@ NOTE: If two or more means share the same grouping symbol,
 When count data shows more variability than expected under a Poisson
 distribution (variance \> mean), we may need to use a negative binomial
 model instead.
+`model_nb <- glm.nb(qsec_round ~ cyl, data = mtcars_count)`
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# If we detected overdispersion, we could fit a negative binomial model
-# This is just for demonstration - our data may not actually need this
-# Fit negative binomial model
-model_nb <- glm.nb(qsec_round ~ cyl, data = mtcars_count)
-# Compare summaries
-summary(model_nb)
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -681,7 +654,7 @@ Let's compare the predictions from both models:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/compare-models-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/compare-models-1.png){width=576}
 :::
 :::
 
@@ -718,7 +691,7 @@ linear function that can range from -∞ to +∞.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/logistic-curve-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/logistic-curve-1.png){width=576}
 :::
 :::
 
@@ -731,14 +704,13 @@ Based on the example from Polis et al. (1998), we'll model the
 presence/absence of lizards (*Uta*) on islands in the Gulf of California
 based on perimeter/area ratio.
 
-::: {.panel}
+::: {.panel column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/lizard-data-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/lizard-data-1.png){width=576}
 :::
 :::
-
 
 :::
 
@@ -746,9 +718,9 @@ based on perimeter/area ratio.
 
 Based on the example from Polis et al. (1998), we'll model the
 presence/absence of lizards (*Uta*) on islands in the Gulf of California
-based on perimeter/area ratio. 
+based on perimeter/area ratio.
 
-:::{.panel}
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -790,7 +762,6 @@ Number of Fisher Scoring iterations: 6
 :::
 :::
 
-
 :::
 
 # Lizard Example: Visualization and Testing
@@ -802,7 +773,7 @@ Let's visualize the data and the fitted model:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/lizard-plot-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/lizard-plot-1.png){width=576}
 :::
 :::
 
@@ -841,8 +812,8 @@ Analysis of Deviance Table
 Model 1: uta_present ~ 1
 Model 2: uta_present ~ pa_ratio
   Resid. Df Resid. Dev Df Deviance  Pr(>Chi)    
-1        18     26.287                          
-2        17      0.000  1   26.287 2.943e-07 ***
+1        29     41.455                          
+2        28     19.090  1   22.365 2.254e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -868,7 +839,7 @@ presence) change with a unit increase in the predictor.
     event
 -   If odds ratio = 1: No effect of predictor on odds of event
 
-::: {.panel}
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -879,26 +850,16 @@ odds_ratio <- exp(coef_lizard)
 ci <- exp(confint(lizard_model, "pa_ratio"))
 
 # Display results
-cat("Odds Ratio:", round(odds_ratio, 3), "\n")
+cat("Odds Ratio:", round(odds_ratio, 3), "\n\n",
+"95% CI:", round(ci[1], 3), "to", round(ci[2], 3), "\n")
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Odds Ratio: 0 
-```
+Odds Ratio: 0.861 
 
-
-:::
-
-```{.r .cell-code}
-cat("95% CI:", round(ci[1], 3), "to", round(ci[2], 3), "\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-95% CI: 0 to Inf 
+ 95% CI: 0.753 to 0.932 
 ```
 
 
@@ -911,7 +872,8 @@ cat("95% CI:", round(ci[1], 3), "to", round(ci[2], 3), "\n")
 
 There are several ways to assess the goodness-of-fit for logistic
 regression models:
-:::{.panel}
+
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -1082,7 +1044,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 # Multiple Logistic Regression: Odds Ratios
 
 Let's calculate odds ratios and confidence intervals for all predictors:
-:::{.panel}
+::: {.panel column="screen"}
+
 
 ::: {.cell}
 ::: {.cell-output .cell-output-stdout}
@@ -1098,11 +1061,12 @@ shrub_cover shrub_cover    1.2129 (1.0645, 1.7909)
 :::
 :::
 
+
 :::
 
 # Visualizing Multiple Logistic Regression
 
-:::{.panel}
+::: {.panel column="screen"}
 For multiple predictors, we can visualize the effect of each predictor
 while holding others constant at their mean or median values.
 
@@ -1113,7 +1077,7 @@ mean values.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/visualize-effects-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/visualize-effects-1.png){width=576}
 :::
 :::
 
@@ -1129,13 +1093,15 @@ Logistic regression has several key assumptions:
 4.  No multicollinearity (when multiple predictors are used)
 
 Let's check the diagnostics for our multiple logistic regression model:
-:::{.panel}
+::: {.panel column="screen"}
+
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/diagnostics-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/diagnostics-1.png){width=576}
 :::
 :::
+
 
 :::
 
@@ -1225,11 +1191,12 @@ Specificity: 0.833
 Let's create a publication-quality figure for our multiple logistic
 regression model and show how we would write up the results for a
 scientific publication.
-:::{.panel}
+
+::: {.panel column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/publication-figure-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/publication-figure-1.png){width=576}
 :::
 :::
 
@@ -1277,7 +1244,6 @@ species.
 
 # Relationship Between GLMs and ANOVAs
 
-
 ### GLMs and ANOVAs: The Connection
 
 General linear models (including ANOVAs and standard regression) are
@@ -1291,30 +1257,27 @@ special cases of Generalized Linear Models where:
 
     -   A Gaussian GLM with an identity link and a categorical predictor
 
-
-
 # Demonstrating ANOVA-GLM Equivalence
 
 Let's demonstrate this equivalence:
-:::{.panel}
+
+::: {.panel column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
 
 ```{=html}
-<div class="tabwid"><style>.cl-051e133a{}.cl-051ac25c{font-family:'Helvetica';font-size:10pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-051ac270{font-family:'Helvetica';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-051c22be{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-051c22c8{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-051c2ffc{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-051c2ffd{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-051c3006{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-051c3007{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-051c3008{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-051c3010{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-051c3011{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-051c3012{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-051e133a'><thead><tr style="overflow-wrap:break-word;"><th class="cl-051c2ffc"><p class="cl-051c22be"><span class="cl-051ac25c">Term</span></p></th><th class="cl-051c2ffd"><p class="cl-051c22c8"><span class="cl-051ac25c">Linear.Regression</span></p></th><th class="cl-051c2ffd"><p class="cl-051c22c8"><span class="cl-051ac25c">Gaussian.GLM</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-051c3006"><p class="cl-051c22be"><span class="cl-051ac270">(Intercept)</span></p></td><td class="cl-051c3007"><p class="cl-051c22c8"><span class="cl-051ac270">26.664</span></p></td><td class="cl-051c3007"><p class="cl-051c22c8"><span class="cl-051ac270">26.664</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-051c3008"><p class="cl-051c22be"><span class="cl-051ac270">cyl6</span></p></td><td class="cl-051c3010"><p class="cl-051c22c8"><span class="cl-051ac270">-6.921</span></p></td><td class="cl-051c3010"><p class="cl-051c22c8"><span class="cl-051ac270">-6.921</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-051c3011"><p class="cl-051c22be"><span class="cl-051ac270">cyl8</span></p></td><td class="cl-051c3012"><p class="cl-051c22c8"><span class="cl-051ac270">-11.564</span></p></td><td class="cl-051c3012"><p class="cl-051c22c8"><span class="cl-051ac270">-11.564</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-4d8de0be{}.cl-4d8a3f18{font-family:'Helvetica';font-size:10pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-4d8a3f2c{font-family:'Helvetica';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-4d8bbe7e{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-4d8bbe88{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-4d8bcc0c{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d8bcc0d{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d8bcc16{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d8bcc17{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d8bcc18{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d8bcc19{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d8bcc20{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d8bcc21{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-4d8de0be'><thead><tr style="overflow-wrap:break-word;"><th class="cl-4d8bcc0c"><p class="cl-4d8bbe7e"><span class="cl-4d8a3f18">Term</span></p></th><th class="cl-4d8bcc0d"><p class="cl-4d8bbe88"><span class="cl-4d8a3f18">Linear.Regression</span></p></th><th class="cl-4d8bcc0d"><p class="cl-4d8bbe88"><span class="cl-4d8a3f18">Gaussian.GLM</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-4d8bcc16"><p class="cl-4d8bbe7e"><span class="cl-4d8a3f2c">(Intercept)</span></p></td><td class="cl-4d8bcc17"><p class="cl-4d8bbe88"><span class="cl-4d8a3f2c">26.664</span></p></td><td class="cl-4d8bcc17"><p class="cl-4d8bbe88"><span class="cl-4d8a3f2c">26.664</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4d8bcc18"><p class="cl-4d8bbe7e"><span class="cl-4d8a3f2c">cyl6</span></p></td><td class="cl-4d8bcc19"><p class="cl-4d8bbe88"><span class="cl-4d8a3f2c">-6.921</span></p></td><td class="cl-4d8bcc19"><p class="cl-4d8bbe88"><span class="cl-4d8a3f2c">-6.921</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4d8bcc20"><p class="cl-4d8bbe7e"><span class="cl-4d8a3f2c">cyl8</span></p></td><td class="cl-4d8bcc21"><p class="cl-4d8bbe88"><span class="cl-4d8a3f2c">-11.564</span></p></td><td class="cl-4d8bcc21"><p class="cl-4d8bbe88"><span class="cl-4d8a3f2c">-11.564</span></p></td></tr></tbody></table></div>
 ```
 
 :::
 
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/anova-glm-comparison-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/anova-glm-comparison-1.png){width=576}
 :::
 :::
 
 :::
-
-
 
 # Assumptions and Diagnostics Summary
 
@@ -1339,7 +1302,6 @@ Let's demonstrate this equivalence:
     -   Binary response variable
     -   Linear relationship between predictors and log odds
     -   Adequate sample size relative to number of parameters
-
 :::
 
 ::: {.column width="60%"}
@@ -1349,7 +1311,7 @@ model:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/diagnostic-summary-1.png){width=384}
+![](14_01_lecture_powerpoint_files/figure-revealjs/diagnostic-summary-1.png){width=384}
 :::
 :::
 
