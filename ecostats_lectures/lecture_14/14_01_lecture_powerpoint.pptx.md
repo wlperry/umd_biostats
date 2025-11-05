@@ -17,30 +17,28 @@ format:
 ---
 
 
+::: {.cell}
+
+:::
+
 
 # Lecture 13: Review of ANOVAs
 
-::::: columns
-::: {.column width="60%"}
-## Review
+### Review
 
 -   ANOVA
 -   Factorial ANOVA
 -   Nested ANOVA
 -   ASSUMPTIONS OF ALL
-    -   Homogeneity of variance - Levenes or Bartlets Test
+    -   Homogeneity of variance - Levenes or Bartletts Test
     -   Normality of Residuals
     -   Independence
-:::
 
-::: {.column width="40%"}
-NEED IMAGE FOR REVIEW
-:::
-:::::
+
 
 # Lecture 14: GLM Overview
 
-## Overview
+### Overview
 
 General Linear Models GLM
 
@@ -54,7 +52,7 @@ General Linear Models GLM
 
 Logistic Regression
 
--   when the outcome is yes or no
+-   when the outcome is yes or no or categorical
 
 # Overview of Generalized Linear Models (GLMs)
 
@@ -82,17 +80,19 @@ categorical/multinomial response variables, using maximum likelihood
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
 ::: {.cell-output-display}
 ![Examples of distributions in the exponential family](14_01_lecture_powerpoint_files/figure-pptx/glm-distributions-1.png)
 :::
 :::
+
 :::
 :::::
 
 # The Three Elements of a GLM
 
-GLMs consist of three components:
+### GLMs consist of three components:
 
 1.  **Random component**: The response variable and its probability
     distribution (from exponential family: normal, binomial, Poisson)
@@ -105,7 +105,7 @@ GLMs consist of three components:
 
 $$g(\mu) = \beta_0 + \beta_1X_1 + \beta_2X_2...$$
 
-::: callout-note
+::: {.callout-important appearance="simple"}
 ## Link Functions and Distributions
 
 | Distribution | Common Link Function | Formula                      |
@@ -127,13 +127,55 @@ Let's compare a standard linear model and a Gaussian GLM using the
 `mtcars` dataset, modeling miles per gallon (mpg) by the number of
 cylinders (cyl).
 
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+```
+
+
+:::
+:::
+
+:::
+
+::: {.column width="40%"}
+Let's look at the summary of our Gaussian GLM:
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](14_01_lecture_powerpoint_files/figure-pptx/summary-gaussian_2-1.png)
+:::
+:::
+
+:::
+:::::
+
+# GLM with Gaussian (Normal) Distribution: Setup
+
+::::: columns
+::: {.column width="60%"}
+The simplest form of GLM uses a normal (Gaussian) distribution with an
+identity link function. This is equivalent to standard linear
+regression.
+
+Let's compare a standard linear model and a Gaussian GLM using the
+`mtcars` dataset, modeling miles per gallon (mpg) by the number of
+cylinders (cyl).
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
-# Convert cylinders to a factor
-mtcars <- mtcars %>%
-  mutate(cyl = factor(cyl))
-
 # Fit a standard linear model
 model_lm <- lm(mpg ~ cyl, data = mtcars)
 
@@ -146,19 +188,39 @@ model_gaussian <- glm(mpg ~ cyl,
 coef_lm <- coefficients(model_lm)
 coef_glm <- coefficients(model_gaussian)
 
-# Check if they're the same
-all.equal(coef_lm, coef_glm)
+# # Check if they're the same
+# all.equal(coef_lm, coef_glm)
+summary(model_lm)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-[1] TRUE
+
+Call:
+lm(formula = mpg ~ cyl, data = mtcars)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.2636 -1.8357  0.0286  1.3893  7.2364 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  26.6636     0.9718  27.437  < 2e-16 ***
+cyl6         -6.9208     1.5583  -4.441 0.000119 ***
+cyl8        -11.5636     1.2986  -8.905 8.57e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.223 on 29 degrees of freedom
+Multiple R-squared:  0.7325,	Adjusted R-squared:  0.714 
+F-statistic:  39.7 on 2 and 29 DF,  p-value: 4.979e-09
 ```
 
 
 :::
 :::
+
 :::
 
 ::: {.column width="40%"}
@@ -236,108 +298,108 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ::: {.column width="40%"}
 Visualizing the results:
 
+
 ::: {.cell}
-
-```{.r .cell-code}
-# Get estimated means
-emm_gaussian <- emmeans(model_gaussian, ~ cyl)
-emm_df <- as.data.frame(emm_gaussian)
-
-# Create plot of data with estimated means
-ggplot() +
-  # Plot raw data
-  geom_jitter(data = mtcars, 
-              aes(x = cyl, y = mpg), 
-              width = 0.2, 
-              alpha = 0.5) +
-  # Add estimated means with confidence intervals
-  geom_point(data = emm_df, 
-             aes(x = cyl, y = emmean), 
-             size = 4, color = "red") +
-  geom_errorbar(data = emm_df, 
-                aes(x = cyl, 
-                    ymin = lower.CL, 
-                    ymax = upper.CL), 
-                width = 0.2, 
-                color = "red") +
-  labs(title = "Effect of Cylinders on MPG",
-       subtitle = "Red points show estimated means with 95% CIs",
-       x = "Number of Cylinders",
-       y = "Miles Per Gallon") +
-  theme_minimal()
-```
-
 ::: {.cell-output-display}
 ![](14_01_lecture_powerpoint_files/figure-pptx/gaussian-plot-1.png)
 :::
 :::
+
 :::
 :::::
 
 # Equivalence of Linear Models and Gaussian GLMs
 
-::: callout-important
-## Equivalence of Linear Models and Gaussian GLMs
+### Equivalence of Linear Models and Gaussian GLMs
 
-When we use a Gaussian distribution with an identity link, GLM gives
-identical results to standard linear regression. This can be seen in the
-coefficient values and overall model statistics.
+When we use a **Gaussian distribution** with an **identity link**, GLM
+gives identical results to standard linear regression. This can be seen
+in the coefficient values and overall model statistics.
 
 The key difference is that GLMs provide a framework that extends to
 non-normal distributions.
+
+
+
+# GLM with Poisson Distribution: Setup
+::::: columns
+::: {.column width="60%"}
+**Poisson GLMs** are appropriate for **count data**. The Poisson
+distribution assumes that the variance equals the mean.
+
+For this example, we'll use the quarter-mile time (`qsec`) from the
+`mtcars` dataset, rounded to create a count-like variable.
+
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+                   cyl  qsec qsec_round
+Mazda RX4            6 16.46         16
+Mazda RX4 Wag        6 17.02         17
+Datsun 710           4 18.61         19
+Hornet 4 Drive       6 19.44         19
+Hornet Sportabout    8 17.02         17
+Valiant              6 20.22         20
+Duster 360           8 15.84         16
+Merc 240D            4 20.00         20
+Merc 230             4 22.90         23
+Merc 280             6 18.30         18
+Merc 280C            6 18.90         19
+Merc 450SE           8 17.40         17
+Merc 450SL           8 17.60         18
+Merc 450SLC          8 18.00         18
+Cadillac Fleetwood   8 17.98         18
+```
+
+
 :::
+:::
+
+
+Now let's fit a Poisson GLM to model the relationship between the
+rounded quarter-mile time and the number of cylinders:
+:::
+
+::: {.column width="40%"}
+
+::: {.cell}
+::: {.cell-output-display}
+![](14_01_lecture_powerpoint_files/figure-pptx/unnamed-chunk-1-1.png)
+:::
+:::
+
+:::
+:::::
 
 # GLM with Poisson Distribution: Setup
 
 ::::: columns
 ::: {.column width="60%"}
-Poisson GLMs are appropriate for count data. The Poisson distribution
-assumes that the variance equals the mean.
+**Poisson GLMs** are appropriate for **count data**. The Poisson
+distribution assumes that the variance equals the mean.
 
-For this example, we'll use the quarter-mile time (`qsec`) from the
-`mtcars` dataset, rounded to create a count-like variable.
+-   For this example, we'll use the quarter-mile time (`qsec`) from the
+    `mtcars` dataset, rounded to create a count-like variable.
+-   With the natural log link, coefficients represent **multiplicative
+    effects**:
+    -   A coefficient of β means: for each 1-unit increase in X, the
+        response is multiplied by exp(β)
 
-::: {.cell}
-
-```{.r .cell-code}
-# Prepare data for Poisson model
-mtcars_count <- mtcars %>%
-  mutate(
-    cyl = factor(cyl),
-    qsec_round = round(qsec)  # Create a count-like variable
-  )
-
-# Look at the first few rows
-head(mtcars_count[, c("cyl", "qsec", "qsec_round")])
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-                  cyl  qsec qsec_round
-Mazda RX4           6 16.46         16
-Mazda RX4 Wag       6 17.02         17
-Datsun 710          4 18.61         19
-Hornet 4 Drive      6 19.44         19
-Hornet Sportabout   8 17.02         17
-Valiant             6 20.22         20
-```
-
-
-:::
-:::
+    -   For small β, exp(β) ≈ 1 + β, so β × 100% gives approximate
+        percentage change
 
 Now let's fit a Poisson GLM to model the relationship between the
 rounded quarter-mile time and the number of cylinders:
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Fit a Poisson GLM
 model_poisson <- glm(qsec_round ~ cyl, 
-                     family = poisson(link = "log"), 
-                     data = mtcars_count)
-
+                     family = poisson(link = "log"), data = mtcars_count)
 # Look at the model summary
 summary(model_poisson)
 ```
@@ -370,23 +432,28 @@ Number of Fisher Scoring iterations: 3
 
 :::
 :::
+
 :::
 
 ::: {.column width="40%"}
 Let's check for overdispersion, which is common in count data:
 
+-   Should be close to 1 for a well-fitting Poisson model
+-   If \> 1.5, may indicate overdispersion
+    -   **What is Underdispersion?**
+        -   In a Poisson model, we expect the variance to equal the
+            mean. The dispersion parameter measures the ratio of
+            observed variance to expected variance:
+            -   **Dispersion ≈ 1**: Good fit (variance = mean, as
+                Poisson assumes)
+
+            -   **Dispersion \> 1**: Overdispersion (variance \> mean)
+
+            -   **Dispersion \< 1**: **Underdispersion** (variance \<
+                mean)
+
+
 ::: {.cell}
-
-```{.r .cell-code}
-# Calculate dispersion parameter
-dispersion_poisson <- sum(residuals(model_poisson, 
-                             type = "pearson")^2) / 
-                     model_poisson$df.residual
-
-# Print dispersion parameter
-cat("Dispersion parameter:", round(dispersion_poisson, 2), "\n")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -395,91 +462,154 @@ Dispersion parameter: 0.12
 
 
 :::
+:::
+
+:::
+:::::
+
+# GLM with Poisson Distribution: Setup
+
+::::: columns
+::: {.column width="60%"}
+-   **Poisson GLMs** are appropriate for **count data**. The Poisson
+    distribution assumes that the variance equals the mean.
+-   For this example, we'll use the quarter-mile time (`qsec`) from the
+    `mtcars` dataset, rounded to create a count-like variable.
+-   Now let's fit a Poisson GLM to model the relationship between the
+    rounded quarter-mile time and the number of cylinders:
+
+
+::: {.cell}
 
 ```{.r .cell-code}
-# Should be close to 1 for a well-fitting Poisson model
-# If > 1.5, may indicate overdispersion
+# Fit a Poisson GLM
+Anova(model_poisson, type = 3, test.statistic = "F")
 ```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Analysis of Deviance Table (Type III tests)
+
+Response: qsec_round
+Error estimate based on Pearson residuals 
+
+          Sum Sq Df F values   Pr(>F)    
+cyl       2.2493  2   9.4854 0.000677 ***
+Residuals 3.4384 29                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
 :::
+:::
+
+
+:::
+
+::: {.column width="40%"}
+Let's check the emmeans and pairwise comparisons
+
+
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
+
+```
+ cyl rate   SE  df asymp.LCL asymp.UCL
+ 4   19.3 1.32 Inf      16.8      22.0
+ 6   17.9 1.60 Inf      15.0      21.3
+ 8   16.7 1.09 Inf      14.7      19.0
+
+Confidence level used: 0.95 
+Intervals are back-transformed from the log scale 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+ contrast    ratio     SE  df null z.ratio p.value
+ cyl6 / cyl4 0.927 0.1040 Inf    1  -0.676  0.8740
+ cyl8 / cyl4 0.867 0.0822 Inf    1  -1.502  0.3484
+ cyl8 / cyl6 0.936 0.1040 Inf    1  -0.597  0.9092
+
+P value adjustment: sidak method for 3 tests 
+Tests are performed on the log scale 
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+ cyl rate   SE  df asymp.LCL asymp.UCL .group
+ 8   16.7 1.09 Inf      14.3      19.5  a    
+ 6   17.9 1.60 Inf      14.4      22.1  a    
+ 4   19.3 1.32 Inf      16.4      22.7  a    
+
+Confidence level used: 0.95 
+Conf-level adjustment: sidak method for 3 estimates 
+Intervals are back-transformed from the log scale 
+P value adjustment: sidak method for 3 tests 
+Tests are performed on the log scale 
+significance level used: alpha = 0.05 
+NOTE: If two or more means share the same grouping symbol,
+      then we cannot show them to be different.
+      But we also did not show them to be the same. 
+```
+
+
+:::
+:::
+
 :::
 :::::
 
 # Poisson GLM: Visualization and Interpretation
 
-:::::: columns
+::::: columns
 ::: {.column width="60%"}
+
 ::: {.cell}
-
-```{.r .cell-code}
-# Get estimated means on the response scale
-emm_poisson <- emmeans(model_poisson, ~ cyl, type = "response")
-emm_poisson_df <- as.data.frame(emm_poisson)
-
-# Create visualization
-ggplot() +
-  # Plot raw data
-  geom_jitter(data = mtcars_count, 
-              aes(x = cyl, y = qsec_round), 
-              width = 0.2, 
-              alpha = 0.5) +
-  # Add estimated means with confidence intervals
-  geom_point(data = emm_poisson_df, 
-             aes(x = cyl, y = rate), 
-             size = 4, color = "blue") +
-  geom_errorbar(data = emm_poisson_df, 
-                aes(x = cyl, 
-                    ymin = asymp.LCL, 
-                    ymax = asymp.UCL), 
-                width = 0.2, 
-                color = "blue") +
-  labs(title = "Effect of Cylinders on Quarter-Mile Time",
-       subtitle = "Poisson GLM with log link",
-       x = "Number of Cylinders",
-       y = "Quarter-Mile Time (rounded)") +
-  theme_minimal()
-```
-
 ::: {.cell-output-display}
 ![](14_01_lecture_powerpoint_files/figure-pptx/poisson-plot-1.png)
 :::
 :::
+
 :::
 
-:::: {.column width="40%"}
-::: callout-tip
-## Interpreting Poisson GLM Coefficients
+::: {.column width="40%"}
 
-In a Poisson GLM with a log link function:
+### Interpreting Poisson GLM Coefficients
 
-1.  The coefficients represent changes in the **log** of the expected
-    count
+-   In a Poisson GLM with a log link function:
+    -   The coefficients represent changes in the **log** of the
+        expected count
 
-2.  When exponentiated (`exp(coef)`), they represent multiplicative
-    effects
+    -   When exponentiated (`exp(coef)`), they represent multiplicative
+        effects
 
-3.  For example, `exp(coef)` = 0.90 means the expected count is 90% of
-    the reference level
+    -   For example, `exp(coef)` = 0.90 means the expected count is 90%
+        of the reference level
+
 :::
-::::
-::::::
+:::::
 
 # Checking Model Assumptions with DHARMa
+:::{.panel}
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Simulate residuals using DHARMa
-set.seed(123) # For reproducibility
-simulation_poisson <- simulateResiduals(fittedModel = model_poisson, n = 1000)
-
-# Plot diagnostic plots
-plot(simulation_poisson)
-```
-
 ::: {.cell-output-display}
 ![](14_01_lecture_powerpoint_files/figure-pptx/poisson-diagnostics-1.png)
 :::
 :::
+
+:::
+
 
 # Dealing with Overdispersion in Count Data
 
@@ -489,15 +619,14 @@ When count data shows more variability than expected under a Poisson
 distribution (variance \> mean), we may need to use a negative binomial
 model instead.
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # If we detected overdispersion, we could fit a negative binomial model
 # This is just for demonstration - our data may not actually need this
-
 # Fit negative binomial model
 model_nb <- glm.nb(qsec_round ~ cyl, data = mtcars_count)
-
 # Compare summaries
 summary(model_nb)
 ```
@@ -507,7 +636,7 @@ summary(model_nb)
 ```
 
 Call:
-glm.nb(formula = qsec_round ~ cyl, data = mtcars_count, init.theta = 2935650.009, 
+glm.nb(formula = qsec_round ~ cyl, data = mtcars_count, init.theta = 2935507.581, 
     link = log)
 
 Coefficients:
@@ -518,7 +647,7 @@ cyl8        -0.14243    0.09482  -1.502    0.133
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Negative Binomial(2935650) family taken to be 1)
+(Dispersion parameter for Negative Binomial(2935508) family taken to be 1)
 
     Null deviance: 5.6979  on 31  degrees of freedom
 Residual deviance: 3.4486  on 29  degrees of freedom
@@ -526,8 +655,8 @@ AIC: 162.62
 
 Number of Fisher Scoring iterations: 1
 
-              Theta:  2935650 
-          Std. Err.:  121368753 
+              Theta:  2935508 
+          Std. Err.:  121363169 
 Warning while fitting theta: iteration limit reached 
 
  2 x log-likelihood:  -154.616 
@@ -537,6 +666,7 @@ Warning while fitting theta: iteration limit reached
 :::
 :::
 
+
 The negative binomial model includes an additional dispersion parameter
 (theta) that allows the variance to be larger than the mean.
 :::
@@ -544,29 +674,13 @@ The negative binomial model includes an additional dispersion parameter
 ::: {.column width="40%"}
 Let's compare the predictions from both models:
 
+
 ::: {.cell}
-
-```{.r .cell-code}
-# Create predictions from both models
-mtcars_count$pred_poisson <- predict(model_poisson, 
-                                    type = "response")
-mtcars_count$pred_nb <- predict(model_nb, 
-                               type = "response")
-
-# Compare predictions
-ggplot(mtcars_count) +
-  geom_point(aes(x = pred_poisson, y = pred_nb, color = cyl)) +
-  geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
-  labs(title = "Comparison of Poisson and Negative Binomial Predictions",
-       x = "Poisson Predictions",
-       y = "Negative Binomial Predictions") +
-  theme_minimal()
-```
-
 ::: {.cell-output-display}
 ![](14_01_lecture_powerpoint_files/figure-pptx/compare-models-1.png)
 :::
 :::
+
 :::
 :::::
 
@@ -582,9 +696,11 @@ Let's examine the simple logistic regression model:
 
 $$\pi(x) = \frac{e^{\beta_0 + \beta_1 x}}{1 + e^{\beta_0 + \beta_1 x}}$$
 
-Where: - $\pi(x)$ is the probability that Y = 1 given X = x - $\beta_0$
-is the intercept - $\beta_1$ is the slope (rate of change in $\pi(x)$
-for a unit change in X)
+-   Where:
+    -   $\pi(x)$ is the probability that Y = 1 given X = x
+    -   $\beta_0$ is the intercept
+    -   $\beta_1$ is the slope (rate of change in $\pi(x)$ for a unit
+        change in X)
 
 To linearize this relationship, we use the logit link function:
 
@@ -595,36 +711,13 @@ linear function that can range from -∞ to +∞.
 :::
 
 ::: {.column width="40%"}
+
 ::: {.cell}
-
-```{.r .cell-code}
-# Create data for sigmoid curve
-sigmoid_data <- data.frame(
-  x = seq(-6, 6, length.out = 100)
-)
-sigmoid_data$p <- 1 / (1 + exp(-sigmoid_data$x))
-
-# Plot the sigmoid curve
-ggplot(sigmoid_data, aes(x, p)) +
-  geom_line(linewidth = 1.2, color = "darkblue") +
-  geom_hline(yintercept = c(0, 0.5, 1), 
-             linetype = "dashed", 
-             color = "gray50") +
-  geom_vline(xintercept = 0, 
-             linetype = "dashed", 
-             color = "gray50") +
-  labs(title = "Logistic Function",
-       subtitle = "Mapping from linear predictor to probability",
-       x = "Linear predictor (β₀ + β₁x)",
-       y = "Probability π(x)") +
-  scale_y_continuous(breaks = seq(0, 1, 0.25)) +
-  theme_minimal()
-```
-
 ::: {.cell-output-display}
 ![](14_01_lecture_powerpoint_files/figure-pptx/logistic-curve-1.png)
 :::
 :::
+
 :::
 :::::
 
@@ -634,18 +727,28 @@ Based on the example from Polis et al. (1998), we'll model the
 presence/absence of lizards (*Uta*) on islands in the Gulf of California
 based on perimeter/area ratio.
 
+::: {.panel}
+
+::: {.cell}
+::: {.cell-output-display}
+![](14_01_lecture_powerpoint_files/figure-pptx/lizard-data-1.png)
+:::
+:::
+
+
+:::
+
+# Example: Lizard Presence on Islands
+
+Based on the example from Polis et al. (1998), we'll model the
+presence/absence of lizards (*Uta*) on islands in the Gulf of California
+based on perimeter/area ratio. 
+
+:::{.panel}
+
 ::: {.cell}
 
 ```{.r .cell-code}
-# Create a simulated dataset based on the described study
-set.seed(123)
-island_data <- data.frame(
-  island_id = 1:19,
-  pa_ratio = c(5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 10, 15, 20, 25, 30),
-  uta_present = c(1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0)
-) %>%
-  mutate(uta_present = factor(uta_present, levels = c(0, 1), labels = c("Absent", "Present")))
-
 # Fit the logistic regression model
 lizard_model <- glm(uta_present ~ pa_ratio, 
                     data = island_data, 
@@ -664,21 +767,26 @@ glm(formula = uta_present ~ pa_ratio, family = binomial(link = "logit"),
     data = island_data)
 
 Coefficients:
-              Estimate Std. Error z value Pr(>|z|)
-(Intercept)    241.039 191755.596   0.001    0.999
-pa_ratio        -8.766   6965.289  -0.001    0.999
+            Estimate Std. Error z value Pr(>|z|)   
+(Intercept)   5.9374     2.1297   2.788  0.00530 **
+pa_ratio     -0.1493     0.0517  -2.887  0.00388 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 2.6287e+01  on 18  degrees of freedom
-Residual deviance: 2.4292e-09  on 17  degrees of freedom
-AIC: 4
+    Null deviance: 41.455  on 29  degrees of freedom
+Residual deviance: 19.090  on 28  degrees of freedom
+AIC: 23.09
 
-Number of Fisher Scoring iterations: 25
+Number of Fisher Scoring iterations: 6
 ```
 
 
 :::
+:::
+
+
 :::
 
 # Lizard Example: Visualization and Testing
@@ -687,43 +795,13 @@ Number of Fisher Scoring iterations: 25
 ::: {.column width="60%"}
 Let's visualize the data and the fitted model:
 
+
 ::: {.cell}
-
-```{.r .cell-code}
-# Create a dataframe for predictions
-pred_data <- data.frame(
-  pa_ratio = seq(min(island_data$pa_ratio), 
-                max(island_data$pa_ratio), 
-                length.out = 100)
-)
-
-# Get predicted probabilities
-pred_data$prob <- predict(lizard_model, 
-                         newdata = pred_data, 
-                         type = "response")
-
-# Plot
-ggplot() +
-  # Add jittered points for observed data
-  geom_jitter(data = island_data, 
-              aes(x = pa_ratio, y = as.numeric(uta_present) - 1),
-              height = 0.05, width = 0, alpha = 0.7) +
-  # Add predicted probability curve
-  geom_line(data = pred_data, 
-            aes(x = pa_ratio, y = prob), 
-            color = "blue", size = 1) +
-  # Add confidence intervals (optional)
-  labs(title = "Probability of Uta Presence vs. Perimeter/Area Ratio",
-       x = "Perimeter/Area Ratio",
-       y = "Probability of Presence") +
-  scale_y_continuous(limits = c(0, 1)) +
-  theme_minimal()
-```
-
 ::: {.cell-output-display}
 ![](14_01_lecture_powerpoint_files/figure-pptx/lizard-plot-1.png)
 :::
 :::
+
 :::
 
 ::: {.column width="40%"}
@@ -772,8 +850,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # Interpreting the Odds Ratio
 
-::: callout-note
-## Working with Odds Ratios
+### Working with Odds Ratios
 
 The odds ratio represents how the odds of the event (e.g., lizard
 presence) change with a unit increase in the predictor.
@@ -784,8 +861,8 @@ presence) change with a unit increase in the predictor.
 -   If odds ratio \< 1: Increasing the predictor decreases the odds of
     event
 -   If odds ratio = 1: No effect of predictor on odds of event
-:::
 
+::: {.panel}
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -820,11 +897,13 @@ cat("95% CI:", round(ci[1], 3), "to", round(ci[2], 3), "\n")
 
 :::
 :::
+:::
 
 # Assessing Model Fit
 
 There are several ways to assess the goodness-of-fit for logistic
 regression models:
+:::{.panel}
 
 ::: {.cell}
 
@@ -837,14 +916,11 @@ regression models:
 pearson_resid <- residuals(lizard_model, type = "pearson")
 pearson_chi2 <- sum(pearson_resid^2)
 df_resid <- lizard_model$df.residual
-
 # Calculate deviance
 deviance_g2 <- lizard_model$deviance
 null_deviance <- lizard_model$null.deviance
-
 # Calculate McFadden's pseudo-R²
 r2_mcfadden <- 1 - (deviance_g2 / null_deviance)
-
 # Display results
 cat("Pearson χ²:", round(pearson_chi2, 3), "on", df_resid, "df, p =", 
     round(1 - pchisq(pearson_chi2, df_resid), 3), "\n")
@@ -853,7 +929,7 @@ cat("Pearson χ²:", round(pearson_chi2, 3), "on", df_resid, "df, p =",
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Pearson χ²: 0 on 17 df, p = 1 
+Pearson χ²: 18.58 on 28 df, p = 0.911 
 ```
 
 
@@ -867,7 +943,7 @@ cat("Deviance G²:", round(deviance_g2, 3), "on", df_resid, "df, p =",
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Deviance G²: 0 on 17 df, p = 1 
+Deviance G²: 19.09 on 28 df, p = 0.895 
 ```
 
 
@@ -880,11 +956,13 @@ cat("McFadden's R²:", round(r2_mcfadden, 3), "\n")
 ::: {.cell-output .cell-output-stdout}
 
 ```
-McFadden's R²: 1 
+McFadden's R²: 0.54 
 ```
 
 
 :::
+:::
+
 :::
 
 # Multiple Logistic Regression: Setup
@@ -902,41 +980,8 @@ predictor variables.
 Let's create a simulated dataset based on the Bolger et al. (1997) study
 of the presence/absence of native rodents in canyon fragments.
 
+
 ::: {.cell}
-
-```{.r .cell-code}
-# Simulate data for the rodent example
-set.seed(123)
-n <- 25  # 25 canyon fragments
-
-# Create predictor variables
-fragment_data <- data.frame(
-  fragment_id = paste0("F", 1:n),
-  distance = runif(n, 0, 3000),            # Distance to source canyon (m)
-  age = runif(n, 5, 80),                   # Years since isolation
-  shrub_cover = runif(n, 10, 100)          # Percentage shrub cover
-)
-
-# Generate response variable (rodent presence)
-# Higher probability with higher shrub cover, slight effect of age
-linear_pred <- -5 + 0.0001*fragment_data$distance + 
-               0.02*fragment_data$age + 
-               0.09*fragment_data$shrub_cover
-prob <- 1 / (1 + exp(-linear_pred))
-fragment_data$rodent_present <- rbinom(n, 1, prob)
-fragment_data$rodent_present <- factor(fragment_data$rodent_present, 
-                                      levels = c(0, 1), 
-                                      labels = c("Absent", "Present"))
-
-# Fit multiple logistic regression model
-rodent_model <- glm(rodent_present ~ distance + age + shrub_cover, 
-                    data = fragment_data, 
-                    family = binomial(link = "logit"))
-
-# Model summary
-summary(rodent_model)
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -966,22 +1011,15 @@ Number of Fisher Scoring iterations: 8
 
 :::
 :::
+
 :::
 
 ::: {.column width="40%"}
 To test the significance of individual predictors, we can use likelihood
 ratio tests comparing nested models:
 
+
 ::: {.cell}
-
-```{.r .cell-code}
-# Test distance
-model_no_distance <- glm(rodent_present ~ age + shrub_cover, 
-                         data = fragment_data, 
-                         family = binomial(link = "logit"))
-anova(model_no_distance, rodent_model, test = "Chisq")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -997,14 +1035,6 @@ Model 2: rodent_present ~ distance + age + shrub_cover
 
 :::
 
-```{.r .cell-code}
-# Test age
-model_no_age <- glm(rodent_present ~ distance + shrub_cover, 
-                    data = fragment_data, 
-                    family = binomial(link = "logit"))
-anova(model_no_age, rodent_model, test = "Chisq")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1019,14 +1049,6 @@ Model 2: rodent_present ~ distance + age + shrub_cover
 
 
 :::
-
-```{.r .cell-code}
-# Test shrub cover
-model_no_shrub <- glm(rodent_present ~ distance + age, 
-                      data = fragment_data, 
-                      family = binomial(link = "logit"))
-anova(model_no_shrub, rodent_model, test = "Chisq")
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1045,133 +1067,49 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 :::
 :::
+
 :::
 :::::
 
 # Multiple Logistic Regression: Odds Ratios
 
 Let's calculate odds ratios and confidence intervals for all predictors:
+:::{.panel}
 
 ::: {.cell}
+::: {.cell-output .cell-output-stdout}
 
-```{.r .cell-code}
-# Calculate odds ratios and CIs
-coefs <- coef(rodent_model)[-1]  # Exclude intercept
-odds_ratios <- exp(coefs)
-ci <- exp(confint(rodent_model)[-1, ])  # Exclude intercept
-
-# Create a data frame for display
-or_df <- data.frame(
-  Predictor = names(coefs),
-  OddsRatio = odds_ratios,
-  LowerCI = ci[, 1],
-  UpperCI = ci[, 2]
-)
-
-# Display formatted table
-or_df %>%
-  mutate(across(where(is.numeric), round, 4)) %>%
-  mutate(CI = paste0("(", LowerCI, ", ", UpperCI, ")")) %>%
-  dplyr::select(Predictor, OddsRatio, CI) %>%
-  flextable()
 ```
-
-::: {.cell-output-display}
-
-``````{=openxml}
-<p:graphicFrame xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"><p:nvGraphicFramePr><p:cNvPr id="599988959" name=""/><p:cNvGraphicFramePr><a:graphicFrameLocks noGrp="true"/></p:cNvGraphicFramePr><p:nvPr/></p:nvGraphicFramePr><p:xfrm rot="0"><a:off x="914400" y="1828800"/><a:ext cx="9144000" cy="5486400"/></p:xfrm><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/table"><a:tbl><a:tblPr/><a:tblGrid><a:gridCol w="685800"/><a:gridCol w="685800"/><a:gridCol w="685800"/></a:tblGrid><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>Predictor</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>OddsRatio</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>CI</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>distance</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>1.0021</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>(0.9994, 1.0069)</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>age</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>1.0712</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>(0.9721, 1.2577)</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>shrub_cover</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>1.2129</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>(1.0645, 1.7909)</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr></a:tbl></a:graphicData></a:graphic></p:graphicFrame>
-``````
+              Predictor OddsRatio               CI
+distance       distance    1.0021 (0.9994, 1.0069)
+age                 age    1.0712 (0.9721, 1.2577)
+shrub_cover shrub_cover    1.2129 (1.0645, 1.7909)
+```
 
 
 :::
+:::
+
 :::
 
 # Visualizing Multiple Logistic Regression
 
-::::: columns
-::: {.column width="60%"}
+:::{.panel}
 For multiple predictors, we can visualize the effect of each predictor
 while holding others constant at their mean or median values.
 
+This visualization shows the effect of each predictor on the probability
+of rodent presence, while holding the other predictors constant at their
+mean values.
+
+
 ::: {.cell}
-
-```{.r .cell-code}
-# Create a function to generate prediction data for one variable
-predict_for_var <- function(var_name, model, data) {
-  # Create grid of values for the variable of interest
-  pred_df <- data.frame(
-    x = seq(min(data[[var_name]]), max(data[[var_name]]), length.out = 100)
-  )
-  names(pred_df) <- var_name
-  
-  # Add mean values for other predictors
-  for (other_var in c("distance", "age", "shrub_cover")) {
-    if (other_var != var_name) {
-      pred_df[[other_var]] <- mean(data[[other_var]])
-    }
-  }
-  
-  # Add predictions
-  pred_df$prob <- predict(model, newdata = pred_df, type = "response")
-  
-  return(pred_df)
-}
-
-# Generate prediction data for each variable
-pred_distance <- predict_for_var("distance", rodent_model, fragment_data)
-pred_age <- predict_for_var("age", rodent_model, fragment_data)
-pred_shrub <- predict_for_var("shrub_cover", rodent_model, fragment_data)
-
-# Create plots
-p1 <- ggplot() +
-  geom_rug(data = fragment_data, 
-           aes(x = distance, y = as.numeric(rodent_present) - 1),
-           sides = "b", alpha = 0.7) +
-  geom_line(data = pred_distance, aes(x = distance, y = prob), 
-            color = "darkred", size = 1) +
-  labs(title = "Effect of Distance",
-       x = "Distance to Source (m)",
-       y = "Probability of Presence") +
-  theme_minimal()
-
-p2 <- ggplot() +
-  geom_rug(data = fragment_data, 
-           aes(x = age, y = as.numeric(rodent_present) - 1),
-           sides = "b", alpha = 0.7) +
-  geom_line(data = pred_age, aes(x = age, y = prob), 
-            color = "darkgreen", size = 1) +
-  labs(title = "Effect of Age",
-       x = "Years Since Isolation",
-       y = "Probability of Presence") +
-  theme_minimal()
-
-p3 <- ggplot() +
-  geom_rug(data = fragment_data, 
-           aes(x = shrub_cover, y = as.numeric(rodent_present) - 1),
-           sides = "b", alpha = 0.7) +
-  geom_line(data = pred_shrub, aes(x = shrub_cover, y = prob), 
-            color = "darkblue", size = 1) +
-  labs(title = "Effect of Shrub Cover",
-       x = "Shrub Cover (%)",
-       y = "Probability of Presence") +
-  theme_minimal()
-
-# Combine plots
-p1 + p2 + p3
-```
-
 ::: {.cell-output-display}
 ![](14_01_lecture_powerpoint_files/figure-pptx/visualize-effects-1.png)
 :::
 :::
-:::
 
-::: {.column width="40%"}
-This visualization shows the effect of each predictor on the probability
-of rodent presence, while holding the other predictors constant at their
-mean values.
 :::
-:::::
 
 # Assumptions and Diagnostics of Logistic Regression
 
@@ -1183,53 +1121,14 @@ Logistic regression has several key assumptions:
 4.  No multicollinearity (when multiple predictors are used)
 
 Let's check the diagnostics for our multiple logistic regression model:
+:::{.panel}
 
 ::: {.cell}
-
-```{.r .cell-code}
-# 1. Check for linearity between predictors and log odds
-# Use bins of X variables and plot log odds
-check_linearity <- function(model, data, var) {
-  # Create bins of predictor
-  n_bins <- 5
-  data$bin <- cut(data[[var]], breaks = n_bins)
-  
-  # Calculate log odds for each bin
-  bin_summary <- data %>%
-    group_by(bin) %>%
-    summarize(
-      n = n(),
-      mean_var = mean(!!sym(var)),
-      successes = sum(rodent_present == "Present"),
-      failures = sum(rodent_present == "Absent")
-    ) %>%
-    mutate(
-      p = successes / n,
-      logodds = log(p / (1 - p))
-    )
-  
-  # Create plot
-  ggplot(bin_summary, aes(x = mean_var, y = logodds)) +
-    geom_point(size = 3) +
-    geom_smooth(method = "lm", se = FALSE, color = "red") +
-    labs(title = paste("Linearity Check:", var),
-         x = var,
-         y = "Log Odds") +
-    theme_minimal()
-}
-
-# Create diagnostic plots for each variable
-p1 <- check_linearity(rodent_model, fragment_data, "distance")
-p2 <- check_linearity(rodent_model, fragment_data, "age")
-p3 <- check_linearity(rodent_model, fragment_data, "shrub_cover")
-
-# Arrange the plots
-p1 / p2 / p3
-```
-
 ::: {.cell-output-display}
 ![](14_01_lecture_powerpoint_files/figure-pptx/diagnostics-1.png)
 :::
+:::
+
 :::
 
 # Model Comparison and Selection
@@ -1245,70 +1144,30 @@ parsimonious model. We can use:
 
 Let's compare models and calculate AIC values:
 
+
 ::: {.cell}
+::: {.cell-output .cell-output-stdout}
 
-```{.r .cell-code}
-# Calculate AIC for our models
-models <- list(
-  "Full" = rodent_model,
-  "No Distance" = model_no_distance,
-  "No Age" = model_no_age,
-  "No Shrub" = model_no_shrub,
-  "Intercept Only" = glm(rodent_present ~ 1, 
-                        data = fragment_data, 
-                        family = binomial)
-)
-
-# Calculate AIC and BIC
-model_comparison <- data.frame(
-  Model = names(models),
-  Parameters = sapply(models, function(m) length(coef(m))),
-  AIC = sapply(models, AIC),
-  BIC = sapply(models, BIC),
-  Deviance = sapply(models, function(m) m$deviance)
-)
-
-# Show model comparison table
-model_comparison %>%
-  arrange(AIC) %>%
-  mutate(across(where(is.numeric), round, 2)) %>%
-  flextable()
+```
+                        Model Parameters   AIC   BIC Deviance
+No Age                 No Age          3 17.05 20.71    11.05
+Full                     Full          4 17.27 22.15     9.27
+No Distance       No Distance          3 17.38 21.04    11.38
+Intercept Only Intercept Only          1 29.55 30.77    27.55
+No Shrub             No Shrub          3 32.73 36.39    26.73
 ```
 
-::: {.cell-output-display}
-
-``````{=openxml}
-<p:graphicFrame xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"><p:nvGraphicFramePr><p:cNvPr id="332823540" name=""/><p:cNvGraphicFramePr><a:graphicFrameLocks noGrp="true"/></p:cNvGraphicFramePr><p:nvPr/></p:nvGraphicFramePr><p:xfrm rot="0"><a:off x="914400" y="1828800"/><a:ext cx="9144000" cy="5486400"/></p:xfrm><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/table"><a:tbl><a:tblPr/><a:tblGrid><a:gridCol w="685800"/><a:gridCol w="685800"/><a:gridCol w="685800"/><a:gridCol w="685800"/><a:gridCol w="685800"/></a:tblGrid><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>Model</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>Parameters</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>AIC</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>BIC</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>Deviance</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>No Age</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>3</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>17.05</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>20.71</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>11.05</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>Full</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>4</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>17.27</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>22.15</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>9.27</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>No Distance</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>3</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>17.38</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>21.04</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>11.38</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>Intercept Only</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>1</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>29.55</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>30.77</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>27.55</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>No Shrub</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>3</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>32.73</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>36.39</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>26.73</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr></a:tbl></a:graphicData></a:graphic></p:graphicFrame>
-``````
-
 
 :::
 :::
+
 :::
 
 ::: {.column width="40%"}
 We can also evaluate the predictive performance of our model:
 
+
 ::: {.cell}
-
-```{.r .cell-code}
-# Get predictions
-predicted_probs <- predict(rodent_model, type = "response")
-predicted_class <- ifelse(predicted_probs > 0.5, "Present", "Absent")
-
-# Create confusion matrix
-true_class <- fragment_data$rodent_present
-conf_matrix <- table(Predicted = predicted_class, Actual = true_class)
-
-# Calculate metrics
-accuracy <- sum(diag(conf_matrix)) / sum(conf_matrix)
-sensitivity <- conf_matrix["Present", "Present"] / sum(conf_matrix[, "Present"])
-specificity <- conf_matrix["Absent", "Absent"] / sum(conf_matrix[, "Absent"])
-
-# Display results
-conf_matrix
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1321,10 +1180,6 @@ Predicted Absent Present
 
 :::
 
-```{.r .cell-code}
-cat("\nAccuracy:", round(accuracy, 3), "\n")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1335,10 +1190,6 @@ Accuracy: 0.88
 
 :::
 
-```{.r .cell-code}
-cat("Sensitivity:", round(sensitivity, 3), "\n")
-```
-
 ::: {.cell-output .cell-output-stdout}
 
 ```
@@ -1347,10 +1198,6 @@ Sensitivity: 0.895
 
 
 :::
-
-```{.r .cell-code}
-cat("Specificity:", round(specificity, 3), "\n")
-```
 
 ::: {.cell-output .cell-output-stdout}
 
@@ -1361,6 +1208,7 @@ Specificity: 0.833
 
 :::
 :::
+
 :::
 :::::
 
@@ -1369,77 +1217,19 @@ Specificity: 0.833
 Let's create a publication-quality figure for our multiple logistic
 regression model and show how we would write up the results for a
 scientific publication.
+:::{.panel}
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Create a more polished visualization for shrub cover effect
-polished_pred <- predict_for_var("shrub_cover", rodent_model, fragment_data)
-
-# Calculate confidence intervals
-pred_se <- predict(rodent_model, 
-                  newdata = polished_pred, 
-                  type = "link", 
-                  se.fit = TRUE)
-
-# Convert to data frame with CIs
-ci_data <- data.frame(
-  shrub_cover = polished_pred$shrub_cover,
-  fit = pred_se$fit,
-  se = pred_se$se.fit
-)
-
-# Calculate upper and lower bounds of CI on link scale
-ci_data$lower_link <- ci_data$fit - 1.96 * ci_data$se
-ci_data$upper_link <- ci_data$fit + 1.96 * ci_data$se
-
-# Transform back to probability scale
-ci_data$prob <- plogis(ci_data$fit)
-ci_data$lower_prob <- plogis(ci_data$lower_link)
-ci_data$upper_prob <- plogis(ci_data$upper_link)
-
-# Create plot
-ggplot() +
-  # Add jittered points for raw data
-  geom_jitter(data = fragment_data, 
-             aes(x = shrub_cover, 
-                 y = as.numeric(rodent_present == "Present")),
-             width = 0, height = 0.05, alpha = 0.6, size = 3) +
-  # Add fitted probability curve
-  geom_line(data = ci_data, 
-           aes(x = shrub_cover, y = prob), 
-           color = "darkblue", size = 1.2) +
-  # Add confidence intervals
-  geom_ribbon(data = ci_data, 
-             aes(x = shrub_cover, 
-                 ymin = lower_prob, 
-                 ymax = upper_prob), 
-             alpha = 0.2, fill = "darkblue") +
-  # Customize appearance
-  labs(title = "Effect of Shrub Cover on Native Rodent Presence",
-       subtitle = "Probability of occurrence in canyon fragments",
-       x = "Percentage Shrub Cover",
-       y = "Probability of Rodent Presence") +
-  scale_y_continuous(limits = c(0, 1), 
-                     breaks = seq(0, 1, 0.2)) +
-  theme_minimal(base_size = 14) +
-  theme(
-    plot.title = element_text(face = "bold"),
-    axis.title = element_text(face = "bold"),
-    legend.position = "none",
-    panel.grid.minor = element_blank(),
-    panel.border = element_rect(fill = NA, color = "gray80")
-  )
-```
-
 ::: {.cell-output-display}
 ![](14_01_lecture_powerpoint_files/figure-pptx/publication-figure-1.png)
 :::
 :::
 
+:::
+
 # Scientific Write-Up Example
 
-::: callout-note
+::: {.callout-important appearance="simple"}
 ## Scientific Write-Up Example
 
 **Results**
@@ -1479,8 +1269,8 @@ species.
 
 # Relationship Between GLMs and ANOVAs
 
-::: callout-important
-## GLMs and ANOVAs: The Connection
+
+### GLMs and ANOVAs: The Connection
 
 General linear models (including ANOVAs and standard regression) are
 special cases of Generalized Linear Models where:
@@ -1488,108 +1278,61 @@ special cases of Generalized Linear Models where:
 1.  The response variable follows a normal distribution
 2.  The link function is the identity function
 
-Therefore, a one-way ANOVA is equivalent to: - A linear regression with
-a categorical predictor - A Gaussian GLM with an identity link and a
-categorical predictor
-:::
+-   Therefore, a one-way ANOVA is equivalent to:
+    -   A linear regression with a categorical predictor
+
+    -   A Gaussian GLM with an identity link and a categorical predictor
+
+
 
 # Demonstrating ANOVA-GLM Equivalence
 
 Let's demonstrate this equivalence:
+:::{.panel}
 
 ::: {.cell}
-
-```{.r .cell-code}
-# 1. Standard ANOVA
-anova_model <- aov(mpg ~ cyl, data = mtcars)
-
-# 2. Linear regression
-lm_model <- lm(mpg ~ cyl, data = mtcars)
-
-# 3. Gaussian GLM
-glm_model <- glm(mpg ~ cyl, family = gaussian(link = "identity"), data = mtcars)
-
-# Compare coefficients
-coef_comparison <- data.frame(
-  Term = names(coef(lm_model)),
-  `Linear Regression` = coef(lm_model),
-  `Gaussian GLM` = coef(glm_model)
-)
-
-# Display the comparison
-coef_comparison %>%
-  mutate(across(where(is.numeric), round, 3)) %>%
-  flextable()
-```
-
 ::: {.cell-output-display}
 
 ``````{=openxml}
-<p:graphicFrame xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"><p:nvGraphicFramePr><p:cNvPr id="482902397" name=""/><p:cNvGraphicFramePr><a:graphicFrameLocks noGrp="true"/></p:cNvGraphicFramePr><p:nvPr/></p:nvGraphicFramePr><p:xfrm rot="0"><a:off x="914400" y="1828800"/><a:ext cx="9144000" cy="5486400"/></p:xfrm><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/table"><a:tbl><a:tblPr/><a:tblGrid><a:gridCol w="685800"/><a:gridCol w="685800"/><a:gridCol w="685800"/></a:tblGrid><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>Term</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>Linear.Regression</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>Gaussian.GLM</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>(Intercept)</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>26.664</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>26.664</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>cyl6</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>-6.921</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>-6.921</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>cyl8</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>-11.564</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>-11.564</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr></a:tbl></a:graphicData></a:graphic></p:graphicFrame>
+<p:graphicFrame xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main"><p:nvGraphicFramePr><p:cNvPr id="488613033" name=""/><p:cNvGraphicFramePr><a:graphicFrameLocks noGrp="true"/></p:cNvGraphicFramePr><p:nvPr/></p:nvGraphicFramePr><p:xfrm rot="0"><a:off x="914400" y="1828800"/><a:ext cx="9144000" cy="5486400"/></p:xfrm><a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/table"><a:tbl><a:tblPr/><a:tblGrid><a:gridCol w="685800"/><a:gridCol w="685800"/><a:gridCol w="685800"/></a:tblGrid><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none" strike="noStrike"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>Term</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none" strike="noStrike"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>Linear.Regression</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="1" u="none" strike="noStrike"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>Gaussian.GLM</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none" strike="noStrike"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>(Intercept)</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none" strike="noStrike"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>26.664</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none" strike="noStrike"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>26.664</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none" strike="noStrike"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>cyl6</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none" strike="noStrike"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>-6.921</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none" strike="noStrike"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>-6.921</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr><a:tr h="228600"><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="l" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none" strike="noStrike"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>cyl8</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none" strike="noStrike"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>-11.564</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc><a:tc><a:txBody><a:bodyPr/><a:lstStyle/><a:p><a:pPr algn="r" marL="38100" marR="38100"><a:lnSpc><a:spcPct val="100000"/></a:lnSpc><a:spcBef><a:spcPts val="300" /></a:spcBef><a:spcAft><a:spcPts val="300" /></a:spcAft><a:buNone/></a:pPr><a:r><a:rPr cap="none" sz="1000" i="0" b="0" u="none" strike="noStrike"><a:solidFill><a:srgbClr val="000000"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:latin typeface="Helvetica"/><a:cs typeface="Helvetica"/><a:ea typeface="Helvetica"/><a:sym typeface="Helvetica"/></a:rPr><a:t>-11.564</a:t></a:r></a:p></a:txBody><a:tcPr anchor="ctr" marB="38100" marT="38100" marR="0" marL="0"><a:lnL algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnL><a:lnR algn="ctr" cmpd="sng" cap="flat" w="0"><a:noFill/><a:prstDash val="solid"/></a:lnR><a:lnT algn="ctr" cmpd="sng" cap="flat" w="9525"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnT><a:lnB algn="ctr" cmpd="sng" cap="flat" w="19050"><a:solidFill><a:srgbClr val="666666"><a:alpha val="100000"/></a:srgbClr></a:solidFill><a:prstDash val="solid"/></a:lnB><a:solidFill><a:srgbClr val="FFFFFF"><a:alpha val="0"/></a:srgbClr></a:solidFill></a:tcPr></a:tc></a:tr></a:tbl></a:graphicData></a:graphic></p:graphicFrame>
 ``````
 
 
 :::
-
-```{.r .cell-code}
-# Compare ANOVA tables
-anova_aov <- anova(anova_model)
-anova_lm <- anova(lm_model)
-anova_glm <- anova(glm_model)
-
-# Create visualization showing the three approaches
-# Use the same data and estimated means
-ggplot() +
-  # Plot raw data
-  geom_boxplot(data = mtcars, 
-              aes(x = cyl, y = mpg, group = cyl),
-              alpha = 0.3, width = 0.5) +
-  geom_jitter(data = mtcars, 
-             aes(x = cyl, y = mpg),
-             width = 0.1, alpha = 0.6) +
-  # Add fitted values from each model
-  geom_point(data = emmeans(lm_model, ~cyl) %>% data.frame(),
-            aes(x = cyl, y = emmean), 
-            color = "red", size = 3, shape = 17) +
-  geom_point(data = emmeans(glm_model, ~cyl) %>% data.frame(),
-            aes(x = cyl, y = emmean), 
-            color = "blue", size = 3, shape = 15) +
-  # Add legend for model types
-  annotate("text", x = "8", y = 30, 
-          label = "Red triangles: Linear Regression\nBlue squares: Gaussian GLM", 
-          hjust = 1, size = 3.5) +
-  labs(title = "Comparison of Models: ANOVA, Linear Regression, and Gaussian GLM",
-       subtitle = "All three approaches yield identical results",
-       x = "Number of Cylinders",
-       y = "Miles Per Gallon") +
-  theme_minimal()
-```
 
 ::: {.cell-output-display}
 ![](14_01_lecture_powerpoint_files/figure-pptx/anova-glm-comparison-1.png)
 :::
 :::
 
+:::
+
+
+
 # Assumptions and Diagnostics Summary
 
 ::::: columns
 ::: {.column width="40%"}
-Generalized Linear Models have different assumptions depending on the
-specific distribution and link function used:
+### Generalized Linear Models have different assumptions depending on the specific distribution and link function used:
 
-**All GLMs:** - Independence of observations - Correct specification of
-the link function - Correct specification of the variance structure - No
-influential outliers - No multicollinearity among predictors
+-   **All GLMs:**
+    -   Independence of observations
+    -   Correct specification of the link function
+    -   Correct specification of the variance structure
+    -   No influential outliers
+    -   No multicollinearity among predictors
+-   **Gaussian GLMs (including linear regression):**
+    -   Normality of residuals
+    -   Homogeneity of variance
+-   **Poisson GLMs:**
+    -   Count data (non-negative integers)
+    -   Mean equals variance (if overdispersed, consider negative
+        binomial)
+-   **Logistic GLMs:**
+    -   Binary response variable
+    -   Linear relationship between predictors and log odds
+    -   Adequate sample size relative to number of parameters
 
-**Gaussian GLMs (including linear regression):** - Normality of
-residuals - Homogeneity of variance
-
-**Poisson GLMs:** - Count data (non-negative integers) - Mean equals
-variance (if overdispersed, consider negative binomial)
-
-**Logistic GLMs:** - Binary response variable - Linear relationship
-between predictors and log odds - Adequate sample size relative to
-number of parameters
 :::
 
 ::: {.column width="60%"}
@@ -1598,45 +1341,6 @@ model:
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Create diagnostic plots for the rodent model
-par(mfrow = c(2, 2))
-
-# 1. Residuals vs fitted
-plot(fitted(rodent_model), residuals(rodent_model, type = "pearson"),
-     main = "Residuals vs Fitted",
-     xlab = "Fitted Values (predicted probabilities)",
-     ylab = "Pearson Residuals",
-     pch = 16)
-abline(h = 0, lty = 2)
-
-# 2. Leverage
-leverage <- hatvalues(rodent_model)
-plot(leverage, residuals(rodent_model, type = "pearson"),
-     main = "Residuals vs Leverage",
-     xlab = "Leverage",
-     ylab = "Pearson Residuals",
-     pch = 16)
-abline(h = 0, lty = 2)
-
-# 3. Cook's distance
-cook <- cooks.distance(rodent_model)
-plot(cook, main = "Cook's Distance",
-     ylab = "Cook's Distance",
-     pch = 16)
-abline(h = 4/length(cook), lty = 2, col = "red")  # Rule of thumb threshold
-
-# 4. Observed vs Predicted probabilities
-plot(predicted_probs, 
-     as.numeric(fragment_data$rodent_present) - 1,
-     main = "Observed vs Predicted",
-     xlab = "Predicted Probability",
-     ylab = "Observed (0/1)",
-     pch = 16)
-curve(I, from = 0, to = 1, add = TRUE, col = "red")
-```
-
 ::: {.cell-output-display}
 ![](14_01_lecture_powerpoint_files/figure-pptx/diagnostic-summary-1.png)
 :::
