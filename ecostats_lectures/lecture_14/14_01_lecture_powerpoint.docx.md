@@ -3,6 +3,12 @@ title: "Lecture 14 - Generalized Linear Models"
 author: "Bill Perry"
 metadata-files:
   - ../../_templates/lectures.yml
+execute: 
+  collapse: true
+knitr:
+  opts_chunk:
+    paged.print: false
+    collapse: true
 format:
   html:
     output-file: "14_02_lecture_powerpoint_html.html"
@@ -54,7 +60,7 @@ Logistic Regression
 
 # Overview of Generalized Linear Models (GLMs)
 
-::::: columns
+::: columns
 ::: {.column width="60%"}
 General linear models assume normal distribution of response variables
 and residuals. However, many types of biological data don't meet this
@@ -86,13 +92,13 @@ categorical/multinomial response variables, using maximum likelihood
 :::
 
 :::
-:::::
+:::
 
 # The Three Elements of a GLM
 
 ### GLMs consist of three components:
 
-1.  **Random component**: The response variable and its probability
+1.  **Response component**: The response variable and its probability
     distribution (from exponential family: normal, binomial, Poisson)
 
 2.  **Systematic component**: The predictor variable(s) in the model,
@@ -115,32 +121,43 @@ $$g(\mu) = \beta_0 + \beta_1X_1 + \beta_2X_2...$$
 
 # GLM with Gaussian (Normal) Distribution: Setup
 
-::::: columns
+::: columns
 ::: {.column width="60%"}
 The simplest form of GLM uses a normal (Gaussian) distribution with an
-identity link function. This is equivalent to standard linear
-regression.
+identity link function. This is equivalent to standard ANOVA
 
-Let's compare a standard linear model and a Gaussian GLM using the
-`mtcars` dataset, modeling miles per gallon (mpg) by the number of
-cylinders (cyl).
+Let's compare a standard linear model and a Gaussian GLM \### Island
+Biogeography Data
+
+The `gala` dataset from the `faraway` package contains data on 30
+Galapagos islands, testing MacArthur-Wilson's theory of island
+biogeography.
+
+**Variables in the dataset:** - `Species` - Number of plant species
+(count data) - `Endemics` - Number of endemic species (count data) -
+`Area` - Island area (km²) - `Elevation` - Maximum elevation (m) -
+`Nearest` - Distance to nearest island (km) - `Scruz` - Distance to
+Santa Cruz island (km) - `Adjacent` - Area of adjacent island (km²)
+
+We'll use this dataset throughout to demonstrate different GLM types
+with biologically meaningful examples.
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
-Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+##              Species Endemics  Area Elevation Nearest size_category
+## Baltra            58       23 25.09       346     0.6        Medium
+## Bartolome         31       21  1.24       109     0.6        Medium
+## Caldwell           3        3  0.21       114     2.8         Small
+## Champion          25        9  0.10        46     1.9         Small
+## Coamano            2        1  0.05        77     1.9         Small
+## Daphne.Major      18       11  0.34       119     8.0         Small
+## Daphne.Minor      24        0  0.08        93     6.0         Small
+## Darwin            10        7  2.33       168    34.1        Medium
+## Eden               8        4  0.03        71     0.4         Small
+## Enderby            2        2  0.18       112     2.6         Small
 ```
-
-
-:::
 :::
 
 :::
@@ -156,7 +173,7 @@ Let's look at the summary of our Gaussian GLM:
 :::
 
 :::
-:::::
+:::
 
 # GLM with Gaussian (Normal) Distribution: Setup
 
@@ -167,97 +184,120 @@ identity link function. This is equivalent to standard linear
 regression.
 
 Let's compare a standard linear model and a Gaussian GLM using the
-`mtcars` dataset, modeling miles per gallon (mpg) by the number of
-cylinders (cyl).
+Galapagos dataset, modeling endemic species richness by island size
+category.
 
 
 ::: {.cell}
+::: {.cell-output-display}
 
-```{.r .cell-code}
-# Fit a standard linear model
-model_lm <- lm(mpg ~ cyl, data = mtcars)
-
-# Fit a Gaussian GLM
-model_gaussian <- glm(mpg ~ cyl, 
-                       data = mtcars, 
-                       family = gaussian(link = "identity"))
-
-# Compare the coefficients
-coef_lm <- coefficients(model_lm)
-coef_glm <- coefficients(model_gaussian)
-
-# # Check if they're the same
-# all.equal(coef_lm, coef_glm)
-summary(model_lm)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-Call:
-lm(formula = mpg ~ cyl, data = mtcars)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--5.2636 -1.8357  0.0286  1.3893  7.2364 
-
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  26.6636     0.9718  27.437  < 2e-16 ***
-cyl6         -6.9208     1.5583  -4.441 0.000119 ***
-cyl8        -11.5636     1.2986  -8.905 8.57e-10 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 3.223 on 29 degrees of freedom
-Multiple R-squared:  0.7325,	Adjusted R-squared:  0.714 
-F-statistic:  39.7 on 2 and 29 DF,  p-value: 4.979e-09
-```
-
-
++----------+-------+---------------+-----------+
+| Endemics | Area  | size_category | Elevation |
++==========+=======+===============+===========+
+| 23       | 25.09 | Medium        | 346       |
++----------+-------+---------------+-----------+
+| 21       | 1.24  | Medium        | 109       |
++----------+-------+---------------+-----------+
+| 3        | 0.21  | Small         | 114       |
++----------+-------+---------------+-----------+
+| 9        | 0.10  | Small         | 46        |
++----------+-------+---------------+-----------+
+| 1        | 0.05  | Small         | 77        |
++----------+-------+---------------+-----------+
+| 11       | 0.34  | Small         | 119       |
++----------+-------+---------------+-----------+
+| 0        | 0.08  | Small         | 93        |
++----------+-------+---------------+-----------+
+| 7        | 2.33  | Medium        | 168       |
++----------+-------+---------------+-----------+
 :::
 :::
 
 :::
 
 ::: {.column width="40%"}
+Let's visualize endemic species by island size:
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](14_01_lecture_powerpoint_files/figure-docx/summarygaussian_2a-1.png)
+:::
+:::
+
+:::
+:::::
+
+# GLM with Gaussian (Normal) Distribution: Setup
+
+::::: columns
+::: {.column .scrollable width="50%"}
+The simplest form of GLM uses a normal (Gaussian) distribution with an
+identity link function. This is equivalent to standard linear
+regression.
+
+Let's compare a standard linear model and a Gaussian GLM using the
+Galapagos dataset, modeling endemic species richness by island size
+category.
+
+
+
+
+::: {.cell}
+
+```
+## 
+## Call:
+## lm(formula = Endemics ~ size_category, data = gala)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -42.857  -4.386  -0.762   6.940  29.143 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)            5.636      4.402    1.28   0.2113    
+## size_categoryMedium   16.030      6.095    2.63   0.0139 *  
+## size_categoryLarge    60.221      7.059    8.53 3.82e-09 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 14.6 on 27 degrees of freedom
+## Multiple R-squared:  0.7343,	Adjusted R-squared:  0.7146 
+## F-statistic: 37.31 on 2 and 27 DF,  p-value: 1.697e-08
+```
+:::
+
+:::
+
+::: {.column .scrollable width="50%"}
 Let's look at the summary of our Gaussian GLM:
 
 
 ::: {.cell}
 
-```{.r .cell-code}
-summary(model_gaussian)
 ```
-
-::: {.cell-output .cell-output-stdout}
-
+## 
+## Call:
+## glm(formula = Endemics ~ size_category, family = gaussian(link = "identity"), 
+##     data = gala)
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)            5.636      4.402    1.28   0.2113    
+## size_categoryMedium   16.030      6.095    2.63   0.0139 *  
+## size_categoryLarge    60.221      7.059    8.53 3.82e-09 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for gaussian family taken to be 213.1878)
+## 
+##     Null deviance: 21662.7  on 29  degrees of freedom
+## Residual deviance:  5756.1  on 27  degrees of freedom
+## AIC: 250.84
+## 
+## Number of Fisher Scoring iterations: 2
 ```
-
-Call:
-glm(formula = mpg ~ cyl, family = gaussian(link = "identity"), 
-    data = mtcars)
-
-Coefficients:
-            Estimate Std. Error t value Pr(>|t|)    
-(Intercept)  26.6636     0.9718  27.437  < 2e-16 ***
-cyl6         -6.9208     1.5583  -4.441 0.000119 ***
-cyl8        -11.5636     1.2986  -8.905 8.57e-10 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for gaussian family taken to be 10.38837)
-
-    Null deviance: 1126.05  on 31  degrees of freedom
-Residual deviance:  301.26  on 29  degrees of freedom
-AIC: 170.56
-
-Number of Fisher Scoring iterations: 2
-```
-
-
-:::
 :::
 
 :::
@@ -267,32 +307,35 @@ Number of Fisher Scoring iterations: 2
 
 ::::: columns
 ::: {.column width="60%"}
-Now let's perform an ANOVA on our GLM model using the `car` package:
+Now let's perform an ANOVA on our LM and GLM model using the `car`
+package:
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
+Anova(model_lm, type = "III", test = "F")
+## Anova Table (Type III tests)
+## 
+## Response: Endemics
+##                Sum Sq Df F value    Pr(>F)    
+## (Intercept)     349.5  1  1.6392    0.2113    
+## size_category 15906.6  2 37.3066 1.697e-08 ***
+## Residuals      5756.1 27                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Anova(model_gaussian, type = "III", test = "F")
+## Analysis of Deviance Table (Type III tests)
+## 
+## Response: Endemics
+## Error estimate based on Pearson residuals 
+## 
+##                Sum Sq Df F values    Pr(>F)    
+## size_category 15906.6  2   37.307 1.697e-08 ***
+## Residuals      5756.1 27                       
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Analysis of Deviance Table (Type III tests)
-
-Response: mpg
-Error estimate based on Pearson residuals 
-
-          Sum Sq Df F values    Pr(>F)    
-cyl       824.78  2   39.697 4.979e-09 ***
-Residuals 301.26 29                       
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
-:::
 :::
 
 :::
@@ -324,51 +367,95 @@ non-normal distributions.
 # GLM with Poisson Distribution: Setup
 
 ::::: columns
-::: {.column width="60%"}
-**Poisson GLMs** are appropriate for **count data**. The Poisson
-distribution assumes that the variance equals the mean.
+::: {.column width="50%"}
+-   **Poisson GLMs** Poisson model used when response variable is
+    **count data**:
+    -   Number of species on an island
+    -   Number of parasites in a host
+    -   Number of bird nests in a plot
+    -   Number of seeds produced by a plant
+-   The Poisson distribution assumes:
+    -   Counts are non-negative integers (0, 1, 2, 3, ...)
+    -   The mean equals the variance
+    -   Events occur independently
+-   **Key consideration:** If variance \> mean (overdispersion),
+    consider negative binomial regression instead.
+-   Now let's fit a Poisson GLM to model the relationship between the
+    rounded quarter-mile time and the number of cylinders:
 
-For this example, we'll use the quarter-mile time (`qsec`) from the
-`mtcars` dataset, rounded to create a count-like variable.
+### Fit Poisson GLM with size_category as predictor
+:::
+
+::: {.column width="50%"}
+
+::: {.cell}
+
+```{.r .cell-code}
+model_poisson_gala <- glm(Species ~ size_category, 
+                          data = gala,
+                          family = poisson(link = "log"))
+summary(model_poisson_gala)
+## 
+## Call:
+## glm(formula = Species ~ size_category, family = poisson(link = "log"), 
+##     data = gala)
+## 
+## Coefficients:
+##                     Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)          2.67101    0.07930   33.68   <2e-16 ***
+## size_categoryMedium  1.33784    0.08833   15.15   <2e-16 ***
+## size_categoryLarge   2.84300    0.08285   34.31   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 3510.73  on 29  degrees of freedom
+## Residual deviance:  939.74  on 27  degrees of freedom
+## AIC: 1106.6
+## 
+## Number of Fisher Scoring iterations: 5
+```
+:::
+
+:::
+:::::
+
+# GLM with Poisson Distribution: Setup
+
+::::: columns
+::: {.column width="50%"}
+Does island size category, as a whole, have a statistically significant
+effect on the number of plant species?
+
+-   `test = "LR"`: important part!
+    -   normal ANOVA (with a Gaussian/normal distribution) test is an
+        F-test.
+    -   GLM (like Poisson) can't use F-test in the same way
+        -   use a Likelihood Ratio (LR) test
+        -   LR test statistically compares fit of full model (the one
+            with size_category) to simpler null model (one without
+            size_category)
+        -   LR test tells us if it is significant
+
+:::
+
+::: {.column width="50%"}
+Test overall effect of size_category
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
+```{.r .cell-code}
+Anova(model_poisson_gala, type = "III", test = "LR")
+## Analysis of Deviance Table (Type III tests)
+## 
+## Response: Species
+##               LR Chisq Df Pr(>Chisq)    
+## size_category     2571  2  < 2.2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-                   cyl  qsec qsec_round
-Mazda RX4            6 16.46         16
-Mazda RX4 Wag        6 17.02         17
-Datsun 710           4 18.61         19
-Hornet 4 Drive       6 19.44         19
-Hornet Sportabout    8 17.02         17
-Valiant              6 20.22         20
-Duster 360           8 15.84         16
-Merc 240D            4 20.00         20
-Merc 230             4 22.90         23
-Merc 280             6 18.30         18
-Merc 280C            6 18.90         19
-Merc 450SE           8 17.40         17
-Merc 450SL           8 17.60         18
-Merc 450SLC          8 18.00         18
-Cadillac Fleetwood   8 17.98         18
-```
-
-
-:::
-:::
-
-
-Now let's fit a Poisson GLM to model the relationship between the
-rounded quarter-mile time and the number of cylinders:
-:::
-
-::: {.column width="40%"}
-
-::: {.cell}
-::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-1-1.png)
-:::
 :::
 
 :::
@@ -379,79 +466,80 @@ rounded quarter-mile time and the number of cylinders:
 ::::: columns
 ::: {.column width="60%"}
 **Poisson GLMs** are appropriate for **count data**. The Poisson
-distribution assumes that the variance equals the mean.\
-- Use the quarter-mile time (`qsec`) from the `mtcars` dataset, rounded
-to create a count-like variable. - With the natural log link,
-coefficients represent **multiplicative effects**:\
-- A coefficient of β means: for each 1-unit increase in X, the response
-is multiplied by exp(β)\
-- For small β, exp(β) ≈ 1 + β, so β × 100% gives approximate percentage
-change\
-Now let's fit a Poisson GLM to model the relationship between the
-rounded quarter-mile time and the number of cylinders:
-`model_poisson <- glm(qsec_round ~ cyl, family = poisson(link = "log"), data = mtcars_count)`
+distribution assumes that the variance equals the mean.
+
+-   Use the quarter-mile time (`qsec`) from the `mtcars` dataset,
+    rounded to create a count-like variable.
+-   With the natural log link, coefficients represent **multiplicative
+    effects**:
+-   A coefficient of β means: for each 1-unit increase in X, the
+    response is multiplied by exp(β)
+-   For small β, exp(β) ≈ 1 + β, so β × 100% gives approximate
+    percentage change
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-
-Call:
-glm(formula = qsec_round ~ cyl, family = poisson(link = "log"), 
-    data = mtcars_count)
-
-Coefficients:
-            Estimate Std. Error z value Pr(>|z|)    
-(Intercept)  2.95869    0.06868  43.079   <2e-16 ***
-cyl6        -0.07629    0.11277  -0.676    0.499    
-cyl8        -0.14243    0.09482  -1.502    0.133    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for poisson family taken to be 1)
-
-    Null deviance: 5.6979  on 31  degrees of freedom
-Residual deviance: 3.4487  on 29  degrees of freedom
-AIC: 160.62
-
-Number of Fisher Scoring iterations: 3
+## 
+## Call:
+## glm(formula = Species ~ size_category, family = poisson(link = "log"), 
+##     data = gala)
+## 
+## Coefficients:
+##                     Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)          2.67101    0.07930   33.68   <2e-16 ***
+## size_categoryMedium  1.33784    0.08833   15.15   <2e-16 ***
+## size_categoryLarge   2.84300    0.08285   34.31   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 3510.73  on 29  degrees of freedom
+## Residual deviance:  939.74  on 27  degrees of freedom
+## AIC: 1106.6
+## 
+## Number of Fisher Scoring iterations: 5
 ```
-
-
-:::
 :::
 
 :::
 
 ::: {.column width="40%"}
-Let's check for overdispersion, which is common in count data:
+-   Let's check for overdispersion, which is common in count data:
 
 -   Should be close to 1 for a well-fitting Poisson model
+
 -   If \> 1.5, may indicate overdispersion
+
     -   **What is Underdispersion?**
         -   In a Poisson model, we expect the variance to equal the
             mean. The dispersion parameter measures the ratio of
             observed variance to expected variance:
             -   **Dispersion ≈ 1**: Good fit (variance = mean, as
                 Poisson assumes)
-
             -   **Dispersion \> 1**: Overdispersion (variance \> mean)
-
             -   **Dispersion \< 1**: **Underdispersion** (variance \<
                 mean)
+    -   a dispersion parameter this large is a warning
+    -   our data more variable than a Poisson model expects
+    -   use a Negative Binomial model
 
 
-::: {.cell}
-::: {.cell-output .cell-output-stdout}
-
-```
-Dispersion parameter: 0.12 
-```
-
-
-:::
-:::
+    ::: {.cell}
+    
+    ```{.r .cell-code}
+    # Calculate the dispersion parameter
+    # (Pearson's Chi-Squared statistic / residual degrees of freedom)
+    dispersion_gala <- sum(residuals(model_poisson_gala, type = "pearson")^2) / 
+                       model_poisson_gala$df.residual
+    
+    # Print dispersion parameter
+    cat("Dispersion parameter:", round(dispersion_gala, 2), "\n")
+    ## Dispersion parameter: 32.9
+    ```
+    :::
 
 :::
 :::::
@@ -462,36 +550,25 @@ Dispersion parameter: 0.12
 ::: {.column width="60%"}
 -   **Poisson GLMs** are appropriate for **count data**. The Poisson
     distribution assumes that the variance equals the mean.
--   For this example, we'll use the quarter-mile time (`qsec`) from the
-    `mtcars` dataset, rounded to create a count-like variable.
--   Now let's fit a Poisson GLM to model the relationship between the
-    rounded quarter-mile time and the number of cylinders:
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-# Fit a Poisson GLM
-Anova(model_poisson, type = 3, test.statistic = "F")
+# 1. Calculate Estimated Marginal Means (EMMs)
+# type = "response" converts the log-means back to the "Species count" scale
+emm_gala <- emmeans(model_poisson_gala, 
+                    specs = ~ size_category,
+                    type = "response")
+print(emm_gala)
+##  size_category  rate   SE  df asymp.LCL asymp.UCL
+##  Small          14.5 1.15 Inf      12.4      16.9
+##  Medium         55.1 2.14 Inf      51.0      59.4
+##  Large         248.1 5.95 Inf     236.7     260.1
+## 
+## Confidence level used: 0.95 
+## Intervals are back-transformed from the log scale
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Analysis of Deviance Table (Type III tests)
-
-Response: qsec_round
-Error estimate based on Pearson residuals 
-
-          Sum Sq Df F values   Pr(>F)    
-cyl       2.2493  2   9.4854 0.000677 ***
-Residuals 3.4384 29                      
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
-:::
 :::
 
 :::
@@ -501,58 +578,31 @@ Let's check the emmeans and pairwise comparisons
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
- cyl rate   SE  df asymp.LCL asymp.UCL
- 4   19.3 1.32 Inf      16.8      22.0
- 6   17.9 1.60 Inf      15.0      21.3
- 8   16.7 1.09 Inf      14.7      19.0
-
-Confidence level used: 0.95 
-Intervals are back-transformed from the log scale 
+##  contrast        ratio      SE  df null z.ratio p.value
+##  Small / Medium 0.2624 0.02320 Inf    1 -15.146  <.0001
+##  Small / Large  0.0583 0.00483 Inf    1 -34.313  <.0001
+##  Medium / Large 0.2220 0.01010 Inf    1 -32.935  <.0001
+## 
+## P value adjustment: tukey method for comparing a family of 3 estimates 
+## Tests are performed on the log scale
+##  size_category  rate   SE  df asymp.LCL asymp.UCL .group
+##  Small          14.5 1.15 Inf      12.4      16.9  a    
+##  Medium         55.1 2.14 Inf      51.0      59.4   b   
+##  Large         248.1 5.95 Inf     236.7     260.1    c  
+## 
+## Confidence level used: 0.95 
+## Intervals are back-transformed from the log scale 
+## P value adjustment: tukey method for comparing a family of 3 estimates 
+## Tests are performed on the log scale 
+## significance level used: alpha = 0.05 
+## NOTE: If two or more means share the same grouping symbol,
+##       then we cannot show them to be different.
+##       But we also did not show them to be the same.
 ```
-
-
 :::
 
-::: {.cell-output .cell-output-stdout}
-
-```
- contrast    ratio     SE  df null z.ratio p.value
- cyl6 / cyl4 0.927 0.1040 Inf    1  -0.676  0.8740
- cyl8 / cyl4 0.867 0.0822 Inf    1  -1.502  0.3484
- cyl8 / cyl6 0.936 0.1040 Inf    1  -0.597  0.9092
-
-P value adjustment: sidak method for 3 tests 
-Tests are performed on the log scale 
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
- cyl rate   SE  df asymp.LCL asymp.UCL .group
- 8   16.7 1.09 Inf      14.3      19.5  a    
- 6   17.9 1.60 Inf      14.4      22.1  a    
- 4   19.3 1.32 Inf      16.4      22.7  a    
-
-Confidence level used: 0.95 
-Conf-level adjustment: sidak method for 3 estimates 
-Intervals are back-transformed from the log scale 
-P value adjustment: sidak method for 3 tests 
-Tests are performed on the log scale 
-significance level used: alpha = 0.05 
-NOTE: If two or more means share the same grouping symbol,
-      then we cannot show them to be different.
-      But we also did not show them to be the same. 
-```
-
-
-:::
-:::
 
 :::
 :::::
@@ -561,12 +611,16 @@ NOTE: If two or more means share the same grouping symbol,
 
 ::::: columns
 ::: {.column width="60%"}
+-   Plot raw data and our emmeans results
 
-::: {.cell}
-::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-docx/poisson-plot-1.png)
-:::
-:::
+    -   shows the model's predictions on top of the real data
+
+
+    ::: {.cell}
+    ::: {.cell-output-display}
+    ![](14_01_lecture_powerpoint_files/figure-docx/poisson-plot-1.png)
+    :::
+    :::
 
 :::
 
@@ -576,22 +630,21 @@ NOTE: If two or more means share the same grouping symbol,
 -   In a Poisson GLM with a log link function:
     -   The coefficients represent changes in the **log** of the
         expected count
-
     -   When exponentiated (`exp(coef)`), they represent multiplicative
         effects
-
     -   For example, `exp(coef)` = 0.90 means the expected count is 90%
         of the reference level
+
 :::
 :::::
 
 # Checking Model Assumptions with DHARMa
 
-::: {.column="screen"}
+::: {.panel column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-docx/poisson-diagnostics-1.png)
+![](14_01_lecture_powerpoint_files/figure-docx/gala-poisson-diagnostics-1.png)
 :::
 :::
 
@@ -602,50 +655,50 @@ NOTE: If two or more means share the same grouping symbol,
 ::::: columns
 ::: {.column width="60%"}
 When count data shows more variability than expected under a Poisson
-distribution (variance \> mean), we may need to use a negative binomial
-model instead.
+distribution (variance \> mean), may need to use negative binomial model
 `model_nb <- glm.nb(qsec_round ~ cyl, data = mtcars_count)`
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-
-Call:
-glm.nb(formula = qsec_round ~ cyl, data = mtcars_count, init.theta = 2935507.581, 
-    link = log)
-
-Coefficients:
-            Estimate Std. Error z value Pr(>|z|)    
-(Intercept)  2.95869    0.06868  43.079   <2e-16 ***
-cyl6        -0.07629    0.11277  -0.676    0.499    
-cyl8        -0.14243    0.09482  -1.502    0.133    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for Negative Binomial(2935508) family taken to be 1)
-
-    Null deviance: 5.6979  on 31  degrees of freedom
-Residual deviance: 3.4486  on 29  degrees of freedom
-AIC: 162.62
-
-Number of Fisher Scoring iterations: 1
-
-              Theta:  2935508 
-          Std. Err.:  121363169 
-Warning while fitting theta: iteration limit reached 
-
- 2 x log-likelihood:  -154.616 
+## 
+## Call:
+## glm.nb(formula = Species ~ size_category, data = gala, init.theta = 1.709503171, 
+##     link = log)
+## 
+## Coefficients:
+##                     Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)           2.6710     0.2439  10.953  < 2e-16 ***
+## size_categoryMedium   1.3378     0.3313   4.039 5.37e-05 ***
+## size_categoryLarge    2.8430     0.3790   7.502 6.28e-14 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for Negative Binomial(1.7095) family taken to be 1)
+## 
+##     Null deviance: 90.168  on 29  degrees of freedom
+## Residual deviance: 32.932  on 27  degrees of freedom
+## AIC: 297.35
+## 
+## Number of Fisher Scoring iterations: 1
+## 
+## 
+##               Theta:  1.710 
+##           Std. Err.:  0.449 
+## 
+##  2 x log-likelihood:  -289.348
 ```
-
-
-:::
 :::
 
 
-The negative binomial model includes an additional dispersion parameter
-(theta) that allows the variance to be larger than the mean.
+-   negative binomial model includes a dispersion parameter (theta)
+    -   allows the variance to be larger than the mean
+    -   standard errors bigger because NB model accounts for high
+        variability (overdispersion)
+    -   estimates dispersion parameter 'Theta' (or 1/theta)
+    -   how it models the overdispersion.    
+
 :::
 
 ::: {.column width="40%"}
@@ -654,7 +707,7 @@ Let's compare the predictions from both models:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-docx/compare-models-1.png)
+![](14_01_lecture_powerpoint_files/figure-docx/gala-compare-models-1.png)
 :::
 :::
 
@@ -732,34 +785,26 @@ lizard_model <- glm(uta_present ~ pa_ratio,
 
 # Model summary
 summary(lizard_model)
+## 
+## Call:
+## glm(formula = uta_present ~ pa_ratio, family = binomial(link = "logit"), 
+##     data = island_data)
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)   
+## (Intercept)   5.9374     2.1297   2.788  0.00530 **
+## pa_ratio     -0.1493     0.0517  -2.887  0.00388 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 41.455  on 29  degrees of freedom
+## Residual deviance: 19.090  on 28  degrees of freedom
+## AIC: 23.09
+## 
+## Number of Fisher Scoring iterations: 6
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-Call:
-glm(formula = uta_present ~ pa_ratio, family = binomial(link = "logit"), 
-    data = island_data)
-
-Coefficients:
-            Estimate Std. Error z value Pr(>|z|)   
-(Intercept)   5.9374     2.1297   2.788  0.00530 **
-pa_ratio     -0.1493     0.0517  -2.887  0.00388 **
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 41.455  on 29  degrees of freedom
-Residual deviance: 19.090  on 28  degrees of freedom
-AIC: 23.09
-
-Number of Fisher Scoring iterations: 6
-```
-
-
-:::
 :::
 
 :::
@@ -795,31 +840,20 @@ There are two common ways to test this hypothesis:
 ::: {.cell}
 
 ```{.r .cell-code}
-# Reduced model (intercept only)
 reduced_model <- glm(uta_present ~ 1, 
                      data = island_data, 
                      family = binomial(link = "logit"))
-
-# Likelihood ratio test
 anova(reduced_model, lizard_model, test = "Chisq")
+## Analysis of Deviance Table
+## 
+## Model 1: uta_present ~ 1
+## Model 2: uta_present ~ pa_ratio
+##   Resid. Df Resid. Dev Df Deviance  Pr(>Chi)    
+## 1        29     41.455                          
+## 2        28     19.090  1   22.365 2.254e-06 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Analysis of Deviance Table
-
-Model 1: uta_present ~ 1
-Model 2: uta_present ~ pa_ratio
-  Resid. Df Resid. Dev Df Deviance  Pr(>Chi)    
-1        18     26.287                          
-2        17      0.000  1   26.287 2.943e-07 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
-:::
 :::
 
 :::
@@ -838,32 +872,29 @@ presence) change with a unit increase in the predictor.
 -   If odds ratio \< 1: Increasing the predictor decreases the odds of
     event
 -   If odds ratio = 1: No effect of predictor on odds of event
-
+-   For every one-unit increase in island's Perimeter/Area Ratio - odds
+    of finding a lizard present multiplied by 0.898
+-   the odds decrease by 10.2% (which is 1 - 0.898) for every one-unit
+    increase in the P/A ratio
+-   entire interval is below 1.0, you can be confident the relationship
+    is negative: more P/A ratio means lower odds of lizards 
+    
+    
+    
 ::: {.panel column="screen"}
 
 ::: {.cell}
 
 ```{.r .cell-code}
-# Calculate odds ratio and confidence interval
 coef_lizard <- coef(lizard_model)[2]  # Extract slope coefficient
 odds_ratio <- exp(coef_lizard)
 ci <- exp(confint(lizard_model, "pa_ratio"))
-
-# Display results
 cat("Odds Ratio:", round(odds_ratio, 3), "\n\n",
 "95% CI:", round(ci[1], 3), "to", round(ci[2], 3), "\n")
+## Odds Ratio: 0.861 
+## 
+##  95% CI: 0.753 to 0.932
 ```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Odds Ratio: 0.861 
-
- 95% CI: 0.753 to 0.932 
-```
-
-
-:::
 :::
 
 :::
@@ -877,60 +908,31 @@ regression models:
 
 ::: {.cell}
 
-```{.r .cell-code}
-# Calculate Hosmer-Lemeshow statistic
-# This would normally require an additional package like 'ResourceSelection'
-# Instead, we'll use a simpler approximation and other diagnostics
-
-# Calculate Pearson residuals
-pearson_resid <- residuals(lizard_model, type = "pearson")
-pearson_chi2 <- sum(pearson_resid^2)
-df_resid <- lizard_model$df.residual
-# Calculate deviance
-deviance_g2 <- lizard_model$deviance
-null_deviance <- lizard_model$null.deviance
-# Calculate McFadden's pseudo-R²
-r2_mcfadden <- 1 - (deviance_g2 / null_deviance)
-# Display results
-cat("Pearson χ²:", round(pearson_chi2, 3), "on", df_resid, "df, p =", 
-    round(1 - pchisq(pearson_chi2, df_resid), 3), "\n")
 ```
-
-::: {.cell-output .cell-output-stdout}
-
+## 
+## 
+## Pearson χ²: 18.58 on 28 df, p = 0.911
+## 
+## 
+## Deviance G²: 19.09 on 28 df, p = 0.895
+## 
+## 
+## McFadden's R²: 0.54
+## # R2 for Logistic Regression
+##   Tjur's R2: 0.588
+## fitting null model for pseudo-r2
+##         llh     llhNull          G2    McFadden        r2ML        r2CU 
+##  -9.5450726 -20.7276993  22.3652534   0.5395016   0.5255070   0.7017187
+## # A tibble: 1 × 8
+##   null.deviance df.null logLik   AIC   BIC deviance df.residual  nobs
+##           <dbl>   <int>  <dbl> <dbl> <dbl>    <dbl>       <int> <int>
+## 1          41.5      29  -9.55  23.1  25.9     19.1          28    30
+## 
+## 	Hosmer and Lemeshow goodness of fit (GOF) test
+## 
+## data:  lizard_model$y, fitted(lizard_model)
+## X-squared = 2.4032, df = 8, p-value = 0.9661
 ```
-Pearson χ²: 18.58 on 28 df, p = 0.911 
-```
-
-
-:::
-
-```{.r .cell-code}
-cat("Deviance G²:", round(deviance_g2, 3), "on", df_resid, "df, p =", 
-    round(1 - pchisq(deviance_g2, df_resid), 3), "\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Deviance G²: 19.09 on 28 df, p = 0.895 
-```
-
-
-:::
-
-```{.r .cell-code}
-cat("McFadden's R²:", round(r2_mcfadden, 3), "\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-McFadden's R²: 0.54 
-```
-
-
-:::
 :::
 
 :::
@@ -938,7 +940,7 @@ McFadden's R²: 0.54
 # Multiple Logistic Regression: Setup
 
 ::::: columns
-::: {.column width="60%"}
+::: {.column width="50%"}
 Logistic regression can be extended to include multiple predictors. The
 model becomes:
 
@@ -952,90 +954,66 @@ of the presence/absence of native rodents in canyon fragments.
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-
-Call:
-glm(formula = rodent_present ~ distance + age + shrub_cover, 
-    family = binomial(link = "logit"), data = fragment_data)
-
-Coefficients:
-              Estimate Std. Error z value Pr(>|z|)  
-(Intercept) -12.278261   7.911491  -1.552   0.1207  
-distance      0.002062   0.001716   1.202   0.2294  
-age           0.068744   0.059665   1.152   0.2493  
-shrub_cover   0.193001   0.116035   1.663   0.0963 .
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 27.5540  on 24  degrees of freedom
-Residual deviance:  9.2737  on 21  degrees of freedom
-AIC: 17.274
-
-Number of Fisher Scoring iterations: 8
+## 
+## Call:
+## glm(formula = rodent_present ~ distance + age + shrub_cover, 
+##     family = binomial(link = "logit"), data = fragment_data)
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(>|z|)  
+## (Intercept) -12.278261   7.911491  -1.552   0.1207  
+## distance      0.002062   0.001716   1.202   0.2294  
+## age           0.068744   0.059665   1.152   0.2493  
+## shrub_cover   0.193001   0.116035   1.663   0.0963 .
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 27.5540  on 24  degrees of freedom
+## Residual deviance:  9.2737  on 21  degrees of freedom
+## AIC: 17.274
+## 
+## Number of Fisher Scoring iterations: 8
 ```
-
-
-:::
 :::
 
 :::
 
-::: {.column width="40%"}
+::: {.column width="50%"}
 To test the significance of individual predictors, we can use likelihood
 ratio tests comparing nested models:
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-Analysis of Deviance Table
-
-Model 1: rodent_present ~ age + shrub_cover
-Model 2: rodent_present ~ distance + age + shrub_cover
-  Resid. Df Resid. Dev Df Deviance Pr(>Chi)
-1        22    11.3831                     
-2        21     9.2737  1   2.1094   0.1464
+## Analysis of Deviance Table
+## 
+## Model 1: rodent_present ~ age + shrub_cover
+## Model 2: rodent_present ~ distance + age + shrub_cover
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1        22    11.3831                     
+## 2        21     9.2737  1   2.1094   0.1464
+## Analysis of Deviance Table
+## 
+## Model 1: rodent_present ~ distance + shrub_cover
+## Model 2: rodent_present ~ distance + age + shrub_cover
+##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+## 1        22    11.0533                     
+## 2        21     9.2737  1   1.7796   0.1822
+## Analysis of Deviance Table
+## 
+## Model 1: rodent_present ~ distance + age
+## Model 2: rodent_present ~ distance + age + shrub_cover
+##   Resid. Df Resid. Dev Df Deviance  Pr(>Chi)    
+## 1        22    26.7315                          
+## 2        21     9.2737  1   17.458 2.938e-05 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Analysis of Deviance Table
-
-Model 1: rodent_present ~ distance + shrub_cover
-Model 2: rodent_present ~ distance + age + shrub_cover
-  Resid. Df Resid. Dev Df Deviance Pr(>Chi)
-1        22    11.0533                     
-2        21     9.2737  1   1.7796   0.1822
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Analysis of Deviance Table
-
-Model 1: rodent_present ~ distance + age
-Model 2: rodent_present ~ distance + age + shrub_cover
-  Resid. Df Resid. Dev Df Deviance  Pr(>Chi)    
-1        22    26.7315                          
-2        21     9.2737  1   17.458 2.938e-05 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-```
-
-
-:::
 :::
 
 :::
@@ -1043,24 +1021,19 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # Multiple Logistic Regression: Odds Ratios
 
-Let's calculate odds ratios and confidence intervals for all predictors:
+Let's calculate odds ratios and confidence intervals for all predictors.
+
 ::: {.panel column="screen"}
 
-
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-              Predictor OddsRatio               CI
-distance       distance    1.0021 (0.9994, 1.0069)
-age                 age    1.0712 (0.9721, 1.2577)
-shrub_cover shrub_cover    1.2129 (1.0645, 1.7909)
+##               Predictor OddsRatio               CI
+## distance       distance    1.0021 (0.9994, 1.0069)
+## age                 age    1.0712 (0.9721, 1.2577)
+## shrub_cover shrub_cover    1.2129 (1.0645, 1.7909)
 ```
-
-
 :::
-:::
-
 
 :::
 
@@ -1085,6 +1058,8 @@ mean values.
 
 # Assumptions and Diagnostics of Logistic Regression
 
+::: columns
+::: {.column width="50%"}
 Logistic regression has several key assumptions:
 
 1.  Independence of observations
@@ -1093,8 +1068,9 @@ Logistic regression has several key assumptions:
 4.  No multicollinearity (when multiple predictors are used)
 
 Let's check the diagnostics for our multiple logistic regression model:
-::: {.panel column="screen"}
+:::
 
+::: {.column width="50%"}
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -1102,12 +1078,12 @@ Let's check the diagnostics for our multiple logistic regression model:
 :::
 :::
 
-
+:::
 :::
 
 # Model Comparison and Selection
 
-::::: columns
+::: columns
 ::: {.column width="60%"}
 When working with multiple predictors, we often want to find the most
 parsimonious model. We can use:
@@ -1120,19 +1096,15 @@ Let's compare models and calculate AIC values:
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-                        Model Parameters   AIC   BIC Deviance
-No Age                 No Age          3 17.05 20.71    11.05
-Full                     Full          4 17.27 22.15     9.27
-No Distance       No Distance          3 17.38 21.04    11.38
-Intercept Only Intercept Only          1 29.55 30.77    27.55
-No Shrub             No Shrub          3 32.73 36.39    26.73
+##                         Model Parameters   AIC   BIC Deviance
+## No Age                 No Age          3 17.05 20.71    11.05
+## Full                     Full          4 17.27 22.15     9.27
+## No Distance       No Distance          3 17.38 21.04    11.38
+## Intercept Only Intercept Only          1 29.55 30.77    27.55
+## No Shrub             No Shrub          3 32.73 36.39    26.73
 ```
-
-
-:::
 :::
 
 :::
@@ -1142,49 +1114,21 @@ We can also evaluate the predictive performance of our model:
 
 
 ::: {.cell}
-::: {.cell-output .cell-output-stdout}
 
 ```
-         Actual
-Predicted Absent Present
-  Absent       5       2
-  Present      1      17
+##          Actual
+## Predicted Absent Present
+##   Absent       5       2
+##   Present      1      17
+## 
+## Accuracy: 0.88
+## Sensitivity: 0.895
+## Specificity: 0.833
 ```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-
-Accuracy: 0.88 
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Sensitivity: 0.895 
-```
-
-
-:::
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Specificity: 0.833 
-```
-
-
-:::
 :::
 
 :::
-:::::
+:::
 
 # Publication-Quality Figure
 
@@ -1227,6 +1171,12 @@ showed significant relationships with rodent presence.
 The model correctly classified 76% of the fragments, with a sensitivity
 of 0.77 and a specificity of 0.75. Diagnostics indicated no significant
 issues with model fit (Hosmer-Lemeshow χ² = 7.31, df = 8, p = 0.504).
+:::
+
+# Scientific Write-Up Example
+
+::: {.callout-important appearance="simple"}
+## Scientific Write-Up Example
 
 **Discussion**
 
@@ -1268,7 +1218,7 @@ Let's demonstrate this equivalence:
 
 ``````{=openxml}
 
-<w:tbl xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><w:tblPr><w:tblLayout w:type="fixed"/><w:jc w:val="center"/><w:tblLook w:firstRow="1" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/></w:tblPr><w:tblGrid><w:gridCol w:w="1080"/><w:gridCol w:w="1080"/><w:gridCol w:w="1080"/></w:tblGrid><w:tr><w:trPr><w:trHeight w:val="360" w:hRule="auto"/><w:tblHeader/></w:trPr>header1<w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="left"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="true"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="true"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">Term</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="true"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="true"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">Linear.Regression</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="true"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="true"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">Gaussian.GLM</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:trHeight w:val="360" w:hRule="auto"/></w:trPr>body1<w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="left"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">(Intercept)</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">26.664</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">26.664</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:trHeight w:val="360" w:hRule="auto"/></w:trPr>body2<w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="left"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">cyl6</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">-6.921</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">-6.921</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:trHeight w:val="360" w:hRule="auto"/></w:trPr>body3<w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="left"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">cyl8</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">-11.564</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">-11.564</w:t></w:r></w:p></w:tc></w:tr></w:tbl>
+<w:tbl xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><w:tblPr><w:tblLayout w:type="fixed"/><w:jc w:val="center"/><w:tblLook w:firstRow="1" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/></w:tblPr><w:tblGrid><w:gridCol w:w="1080"/><w:gridCol w:w="1080"/><w:gridCol w:w="1080"/></w:tblGrid><w:tr><w:trPr><w:trHeight w:val="360" w:hRule="auto"/><w:tblHeader/></w:trPr>header1<w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="left"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="true"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="true"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">Term</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="true"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="true"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">Linear.Regression</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="true"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="true"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">Gaussian.GLM</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:trHeight w:val="360" w:hRule="auto"/></w:trPr>body1<w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="left"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">(Intercept)</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">37.885</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">37.885</w:t></w:r></w:p></w:tc></w:tr><w:tr><w:trPr><w:trHeight w:val="360" w:hRule="auto"/></w:trPr>body2<w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="left"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">cyl</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">-2.876</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcBorders><w:bottom w:val="single" w:sz="12" w:space="0" w:color="666666"/><w:top w:val="single" w:sz="6" w:space="0" w:color="666666"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:tcBorders><w:shd w:val="clear" w:color="auto" w:fill="FFFFFF"/><w:tcMar><w:top w:w="0" w:type="dxa"/><w:bottom w:w="0" w:type="dxa"/><w:left w:w="0" w:type="dxa"/><w:right w:w="0" w:type="dxa"/></w:tcMar><w:vAlign w:val="center"/></w:tcPr><w:p><w:pPr><w:jc w:val="right"/><w:pBdr><w:bottom w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:top w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:left w:val="none" w:sz="0" w:space="0" w:color="000000"/><w:right w:val="none" w:sz="0" w:space="0" w:color="000000"/></w:pBdr><w:spacing w:after="60" w:before="60" w:line="240"/><w:ind w:left="60" w:right="60" w:firstLine="0" w:firstLineChars="0"/><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr></w:pPr><w:r xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"><w:rPr><w:rFonts w:ascii="Helvetica" w:hAnsi="Helvetica" w:eastAsia="Helvetica" w:cs="Helvetica"/><w:i w:val="false"/><w:b w:val="false"/><w:u w:val="none"/><w:strike w:val="false"/><w:sz w:val="20"/><w:szCs w:val="20"/><w:color w:val="000000"/></w:rPr><w:t xml:space="preserve">-2.876</w:t></w:r></w:p></w:tc></w:tr></w:tbl>
 ``````
 
 
@@ -1284,29 +1234,33 @@ Let's demonstrate this equivalence:
 # Assumptions and Diagnostics Summary
 
 ::::: columns
-::: {.column width="40%"}
-### Generalized Linear Models have different assumptions depending on the specific distribution and link function used:
+::: {.column width="60%"}
+-   Generalized Linear Models- assumptions depend on distribution+link
+    function used:
 
 -   **All GLMs:**
-    -   Independence of observations
-    -   Correct specification of the link function
-    -   Correct specification of the variance structure
-    -   No influential outliers
-    -   No multicollinearity among predictors
+
+    -   Independence of observations, No outliers, No Multicolinearity
+    -   Correct specification of the link function /variance structure
+
 -   **Gaussian GLMs (including linear regression):**
+
     -   Normality of residuals
     -   Homogeneity of variance
+
 -   **Poisson GLMs:**
+
     -   Count data (non-negative integers)
-    -   Mean equals variance (if overdispersed, consider negative
-        binomial)
+    -   Mean equals variance - overdispersed = negative binomial)
+
 -   **Logistic GLMs:**
+
     -   Binary response variable
     -   Linear relationship between predictors and log odds
     -   Adequate sample size relative to number of parameters
 :::
 
-::: {.column width="60%"}
+::: {.column width="40%"}
 The following R code checks some common diagnostics for our logistic
 model:
 
@@ -1325,25 +1279,23 @@ model:
 Generalized Linear Models (GLMs) provide a powerful and flexible
 framework for analyzing a wide range of data types in biology:
 
-1.  **Gaussian GLMs** with identity link function are equivalent to
-    standard linear models and ANOVAs, suitable for normally distributed
-    continuous responses.
-
+1.  **Gaussian GLMs** with identity link function equivalent to standard
+    linear models and ANOVAs
 2.  **Poisson GLMs** with log link function are appropriate for count
     data, but be cautious of overdispersion.
+3.  **Negative Binomial** works with overdispersed data
+4.  **Logistic GLMs** with logit link function are useful for binary
+    responses - probability of success or presence.
 
-3.  **Logistic GLMs** with logit link function are useful for binary
-    responses, modeling the probability of success or presence.
+-   Key advantages of GLMs include:
+    -   Handle various response variables beyond normal distributions
+    -   Unified framework for linear modeling
+    -   Flexibility in specifying the link function to match the data
+        structure
+    -   Interpretable parameters, though interpretation differs by model
+        type
 
-Key advantages of GLMs include:
-
--   Ability to handle various types of response variables beyond normal
-    distributions
--   Unified framework for linear modeling
--   Flexibility in specifying the link function to match the data
-    structure
--   Interpretable parameters, though interpretation differs by model
-    type
+# Summary and Conclusions
 
 When working with GLMs:
 
