@@ -10,11 +10,13 @@ format:
     output-file: "14_02_class_activity.docx"
 ---
 
+# THE SETUP
+
 
 
 # Lecture 14: Generalized Linear Models Activity
 
-### Generalized Linear Models (GLMs) extend linear models to handle different types of response variables:
+## Generalized Linear Models (GLMs) extend linear models to handle different types of response variables:
 
 -   **Normal distribution**: Continuous data (like regular
     ANOVA/regression)
@@ -32,6 +34,8 @@ format:
     categorical)
 3.  **Link function**: Connects expected value of Y to predictor
     variables
+
+------------------------------------------------------------------------
 
 # How to approach the problem
 
@@ -51,60 +55,65 @@ format:
 -   **Graphical display of results:** highlighting the data and
     statistics
 
-# Part 1: Gaussian GLM (equivalent to normal ANOVA)
+------------------------------------------------------------------------
+
+# Part 1: Gaussian GLM 
 
 The simplest form of GLM uses a normal (Gaussian) distribution with an
 identity link function. This is equivalent to standard ANOVA
 
 Let's compare a standard linear model and a Gaussian GLM
 
-#### Island Biogeography Data
+## Island Biogeography Data
 
 The `gala` dataframe from the `faraway` package contains data on 30
 Galapagos islands, testing MacArthur-Wilson's theory of island
 biogeography.
 
 -   **Variables in the dataframe:**
-    -   `Species`Number of plant species (count data)
-    -   `Endemics`Number of endemic species (count data)
-    -   `Area`Island area (km²)
-    -   `Elevation -`Maximum elevation (m)
+    -   `spp`Number of plant species (count data)
+    -   `endemics`Number of endemic species (count data)
+    -   `area`Island area (km²)
+    -   `elevation -`Maximum elevation (m)
     -   `Nearest` - Distance to nearest island (km)
-    -   `Scruz` - Distance to Santa Cruz island (km)
-    -   `Adjacent` - Area of adjacent island (km²)
+    -   `scruz` - Distance to Santa Cruz island (km)
+    -   `adjacent` - area of adjacent island (km²)
 
-### The data - variable types
+## The data - variable types
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create a categorical variable for demonstration
-gala <- gala %>%
-  mutate(size_category = case_when(
-    Area < 1 ~ "Small",
-    Area >= 1 & Area < 100 ~ "Medium",
-    Area >= 100 ~ "Large"
+g_df <- gala %>% clean_names() %>%
+  rename(spp = species) %>% 
+  mutate(size_cat = case_when(
+    area < 1 ~ "small",
+    area >= 1 & area < 100 ~ "medium",
+    area >= 100 ~ "large"
   ),
-  size_category = factor(size_category, levels = c("Small", "Medium", "Large")))
+  size_cat = factor(size_cat, levels = c("small", "medium", "large")))
 
-head(gala %>% dplyr::select(-Scruz, -Adjacent), 10)
+g_df <- g_df %>% filter(area < 3000)
+
+head(g_df %>% dplyr::select(-scruz, -adjacent), 10)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-             Species Endemics  Area Elevation Nearest size_category
-Baltra            58       23 25.09       346     0.6        Medium
-Bartolome         31       21  1.24       109     0.6        Medium
-Caldwell           3        3  0.21       114     2.8         Small
-Champion          25        9  0.10        46     1.9         Small
-Coamano            2        1  0.05        77     1.9         Small
-Daphne.Major      18       11  0.34       119     8.0         Small
-Daphne.Minor      24        0  0.08        93     6.0         Small
-Darwin            10        7  2.33       168    34.1        Medium
-Eden               8        4  0.03        71     0.4         Small
-Enderby            2        2  0.18       112     2.6         Small
+             spp endemics  area elevation nearest size_cat
+Baltra        58       23 25.09       346     0.6   medium
+Bartolome     31       21  1.24       109     0.6   medium
+Caldwell       3        3  0.21       114     2.8    small
+Champion      25        9  0.10        46     1.9    small
+Coamano        2        1  0.05        77     1.9    small
+Daphne.Major  18       11  0.34       119     8.0    small
+Daphne.Minor  24        0  0.08        93     6.0    small
+Darwin        10        7  2.33       168    34.1   medium
+Eden           8        4  0.03        71     0.4    small
+Enderby        2        2  0.18       112     2.6    small
 ```
 
 
@@ -112,13 +121,13 @@ Enderby            2        2  0.18       112     2.6         Small
 :::
 
 
-# Data completeness
+## Data completeness
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-gala %>% skim()
+g_df %>% skim()
 ```
 
 ::: {.cell-output-display}
@@ -128,7 +137,7 @@ Table: Data summary
 |                         |           |
 |:------------------------|:----------|
 |Name                     |Piped data |
-|Number of rows           |30         |
+|Number of rows           |29         |
 |Number of columns        |8          |
 |_______________________  |           |
 |Column type frequency:   |           |
@@ -142,27 +151,27 @@ Table: Data summary
 
 |skim_variable | n_missing| complete_rate|ordered | n_unique|top_counts               |
 |:-------------|---------:|-------------:|:-------|--------:|:------------------------|
-|size_category |         0|             1|FALSE   |        3|Med: 12, Sma: 11, Lar: 7 |
+|size_cat      |         0|             1|FALSE   |        3|med: 12, sma: 11, lar: 6 |
 
 
 **Variable type: numeric**
 
 |skim_variable | n_missing| complete_rate|   mean|     sd|    p0|   p25|    p50|    p75|    p100|hist  |
 |:-------------|---------:|-------------:|------:|------:|-----:|-----:|------:|------:|-------:|:-----|
-|Species       |         0|             1|  85.23| 114.63|  2.00| 13.00|  42.00|  96.00|  444.00|▇▂▁▁▁ |
-|Endemics      |         0|             1|  26.10|  27.33|  0.00|  7.25|  18.00|  32.25|   95.00|▇▅▁▁▂ |
-|Area          |         0|             1| 261.71| 864.11|  0.01|  0.26|   2.59|  59.24| 4669.32|▇▁▁▁▁ |
-|Elevation     |         0|             1| 368.03| 421.60| 25.00| 97.75| 192.00| 435.25| 1707.00|▇▁▂▁▁ |
-|Nearest       |         0|             1|  10.06|  14.27|  0.20|  0.80|   3.05|  10.02|   47.40|▇▁▁▂▁ |
-|Scruz         |         0|             1|  56.98|  68.03|  0.00| 11.02|  46.65|  81.08|  290.20|▇▃▁▁▁ |
-|Adjacent      |         0|             1| 261.10| 864.52|  0.03|  0.52|   2.59|  59.24| 4669.32|▇▁▁▁▁ |
+|spp           |         0|             1|  76.21| 105.25|  2.00| 12.00|  40.00|  93.00|  444.00|▇▂▁▁▁ |
+|endemics      |         0|             1|  23.93|  25.05|  0.00|  7.00|  17.00|  30.00|   95.00|▇▅▁▁▁ |
+|area          |         0|             1| 109.72| 235.81|  0.01|  0.23|   2.33|  58.27|  903.82|▇▁▁▁▁ |
+|elevation     |         0|             1| 321.86| 343.31| 25.00| 94.00| 186.00| 367.00| 1494.00|▇▂▂▁▁ |
+|nearest       |         0|             1|  10.38|  14.42|  0.20|  1.10|   3.30|  10.70|   47.40|▇▁▁▂▁ |
+|scruz         |         0|             1|  57.97|  69.01|  0.00| 10.70|  47.40|  85.90|  290.20|▇▃▁▁▁ |
+|adjacent      |         0|             1| 248.22| 876.89|  0.03|  0.52|   2.33|  58.27| 4669.32|▇▁▁▁▁ |
 
 
 :::
 :::
 
 
-# Look at structure of the data graphically:
+## Data graphically
 
 
 ::: {.cell}
@@ -172,11 +181,11 @@ Table: Data summary
 #| warning: false
 #| paged-print: false
 
-ggplot(gala, aes(x = Species)) +
+ggplot(g_df, aes(x = spp)) +
   geom_histogram(binwidth = 25, fill = "darkblue", color = "black") +
-  labs(title = "Distribution of Species Richness",
+  labs(title = "Distribution of species Richness",
        subtitle = "Galapagos Islands",
-       x = "Number of Plant Species",
+       x = "Number of Plant species",
        y = "Number of Islands") +
   theme_minimal()
 ```
@@ -187,17 +196,17 @@ ggplot(gala, aes(x = Species)) +
 :::
 
 
-# Look at data by size category
+## Data graphically as size categories
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-ggplot(gala, aes(x = size_category, y = Species, fill = size_category)) +
+ggplot(g_df, aes(x = size_cat, y = spp, fill = size_cat)) +
   geom_boxplot(color = "darkblue") +
-  labs(title = "Distribution of Species Richness",
+  labs(title = "Distribution of species Richness",
        subtitle = "Galapagos Islands",
-       x = "Number of Plant Species",
+       x = "Number of Plant species",
        y = "Number of Islands") +
   theme_minimal()
 ```
@@ -217,15 +226,15 @@ Let's compare a standard linear model and a Gaussian GLM using the
 Galapagos dataset, modeling endemic species richness by island size
 category.
 
-# The linear model summary
+## Linear model the old way
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Fit a standard linear model
-model_lm <- lm(Endemics ~ size_category, data = gala)
-summary(model_lm)
+lm_model <- lm(endemics ~ size_cat, data = g_df)
+summary(lm_model)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -233,23 +242,23 @@ summary(model_lm)
 ```
 
 Call:
-lm(formula = Endemics ~ size_category, data = gala)
+lm(formula = endemics ~ size_cat, data = g_df)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--42.857  -4.386  -0.762   6.940  29.143 
+-39.000  -4.636  -0.667   6.333  33.000 
 
 Coefficients:
-                    Estimate Std. Error t value      Pr(>|t|)    
-(Intercept)            5.636      4.402    1.28        0.2113    
-size_categoryMedium   16.030      6.095    2.63        0.0139 *  
-size_categoryLarge    60.221      7.059    8.53 0.00000000382 ***
+               Estimate Std. Error t value     Pr(>|t|)    
+(Intercept)       5.636      4.236   1.331       0.1948    
+size_catmedium   16.030      5.864   2.734       0.0111 *  
+size_catlarge    56.364      7.130   7.905 0.0000000221 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 14.6 on 27 degrees of freedom
-Multiple R-squared:  0.7343,	Adjusted R-squared:  0.7146 
-F-statistic: 37.31 on 2 and 27 DF,  p-value: 0.00000001697
+Residual standard error: 14.05 on 26 degrees of freedom
+Multiple R-squared:  0.708,	Adjusted R-squared:  0.6855 
+F-statistic: 31.51 on 2 and 26 DF,  p-value: 0.0000001124
 ```
 
 
@@ -257,13 +266,13 @@ F-statistic: 37.31 on 2 and 27 DF,  p-value: 0.00000001697
 :::
 
 
-# The ANOVA model
+## The ANOVA model
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-Anova(model_lm, type = 3 )
+Anova(lm_model, type = 3 )
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -271,11 +280,11 @@ Anova(model_lm, type = 3 )
 ```
 Anova Table (Type III tests)
 
-Response: Endemics
-               Sum Sq Df F value        Pr(>F)    
-(Intercept)     349.5  1  1.6392        0.2113    
-size_category 15906.6  2 37.3066 0.00000001697 ***
-Residuals      5756.1 27                          
+Response: endemics
+             Sum Sq Df F value       Pr(>F)    
+(Intercept)   349.5  1  1.7707       0.1948    
+size_cat    12438.6  2 31.5135 0.0000001124 ***
+Residuals    5131.2 26                         
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -285,17 +294,17 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-# The Gaussian GLM model
+## The Gaussian GLM model
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Fit a Gaussian GLM
-model_gaussian <- glm(Endemics ~ size_category,  data = gala, 
+gauss_model <- glm(endemics ~ size_cat,  data = g_df, 
                        family = gaussian(link = "identity"))
 
-summary(model_gaussian)
+summary(gauss_model)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -303,22 +312,22 @@ summary(model_gaussian)
 ```
 
 Call:
-glm(formula = Endemics ~ size_category, family = gaussian(link = "identity"), 
-    data = gala)
+glm(formula = endemics ~ size_cat, family = gaussian(link = "identity"), 
+    data = g_df)
 
 Coefficients:
-                    Estimate Std. Error t value      Pr(>|t|)    
-(Intercept)            5.636      4.402    1.28        0.2113    
-size_categoryMedium   16.030      6.095    2.63        0.0139 *  
-size_categoryLarge    60.221      7.059    8.53 0.00000000382 ***
+               Estimate Std. Error t value     Pr(>|t|)    
+(Intercept)       5.636      4.236   1.331       0.1948    
+size_catmedium   16.030      5.864   2.734       0.0111 *  
+size_catlarge    56.364      7.130   7.905 0.0000000221 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for gaussian family taken to be 213.1878)
+(Dispersion parameter for gaussian family taken to be 197.3543)
 
-    Null deviance: 21662.7  on 29  degrees of freedom
-Residual deviance:  5756.1  on 27  degrees of freedom
-AIC: 250.84
+    Null deviance: 17569.9  on 28  degrees of freedom
+Residual deviance:  5131.2  on 26  degrees of freedom
+AIC: 240.4
 
 Number of Fisher Scoring iterations: 2
 ```
@@ -328,13 +337,13 @@ Number of Fisher Scoring iterations: 2
 :::
 
 
-# GLM ANOVA
+## GLM ANOVA
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-Anova(model_gaussian, type = "III", test = "F")
+Anova(gauss_model, type = "III", test = "F")
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -342,12 +351,12 @@ Anova(model_gaussian, type = "III", test = "F")
 ```
 Analysis of Deviance Table (Type III tests)
 
-Response: Endemics
+Response: endemics
 Error estimate based on Pearson residuals 
 
-               Sum Sq Df F values        Pr(>F)    
-size_category 15906.6  2   37.307 0.00000001697 ***
-Residuals      5756.1 27                           
+           Sum Sq Df F values       Pr(>F)    
+size_cat  12438.6  2   31.514 0.0000001124 ***
+Residuals  5131.2 26                          
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -357,19 +366,33 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-# Assumption Tests of Both Models
+## Assumption Tests of Both Models
+
+### Linear model assumptions
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create diagnostic plots
-par(mfrow = c(2, 2))
-plot(model_lm)
+par(mfrow = c(1, 1))
+plot(lm_model)
 ```
 
 ::: {.cell-output-display}
 ![](14_02_class_activity_files/figure-html/unnamed-chunk-7-1.png){width=576}
+:::
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-7-2.png){width=576}
+:::
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-7-3.png){width=576}
+:::
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-7-4.png){width=576}
 :::
 
 ```{.r .cell-code}
@@ -378,13 +401,15 @@ par(mfrow = c(1, 1))
 :::
 
 
+### GLM ASSUMPTIONS
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create diagnostic plots
 # par(mfrow = c(2, 2))
-plot(model_gaussian)
+plot(gauss_model)
 ```
 
 ::: {.cell-output-display}
@@ -415,7 +440,7 @@ plot(model_gaussian)
 ::: {.cell}
 
 ```{.r .cell-code}
-shapiro.test(residuals(model_lm))
+shapiro.test(residuals(lm_model))
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -424,8 +449,8 @@ shapiro.test(residuals(model_lm))
 
 	Shapiro-Wilk normality test
 
-data:  residuals(model_lm)
-W = 0.92782, p-value = 0.04298
+data:  residuals(lm_model)
+W = 0.94396, p-value = 0.1273
 ```
 
 
@@ -439,7 +464,7 @@ W = 0.92782, p-value = 0.04298
 ::: {.cell}
 
 ```{.r .cell-code}
-shapiro.test(residuals(model_gaussian))
+shapiro.test(residuals(gauss_model))
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -448,8 +473,8 @@ shapiro.test(residuals(model_gaussian))
 
 	Shapiro-Wilk normality test
 
-data:  residuals(model_gaussian)
-W = 0.92782, p-value = 0.04298
+data:  residuals(gauss_model)
+W = 0.94396, p-value = 0.1273
 ```
 
 
@@ -463,7 +488,7 @@ W = 0.92782, p-value = 0.04298
 ::: {.cell}
 
 ```{.r .cell-code}
-leveneTest(Endemics ~ size_category,  data = gala)
+leveneTest(endemics ~ size_cat,  data = g_df)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -471,8 +496,8 @@ leveneTest(Endemics ~ size_category,  data = gala)
 ```
 Levene's Test for Homogeneity of Variance (center = median)
       Df F value   Pr(>F)   
-group  2  6.8514 0.003922 **
-      27                    
+group  2  7.9881 0.001975 **
+      26                    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -482,24 +507,69 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-# Emmeans Linear Model
+Dharma Assumption Test
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# 1. Simulate residuals
+# (This is the standard first step for all DHARMa diagnostics)
+sim_gauss_res <- simulateResiduals(fittedModel = gauss_model, n = 1000)
+
+# 2. Test for dispersion
+# This will provide a p-value and the ratio
+testDispersion(sim_gauss_res)
+```
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-12-1.png){width=336}
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	DHARMa nonparametric dispersion test via sd of residuals fitted vs.
+	simulated
+
+data:  simulationOutput
+dispersion = 0.93779, p-value = 0.882
+alternative hypothesis: two.sided
+```
+
+
+:::
+
+```{.r .cell-code}
+# Plot diagnostic plots
+plot(sim_gauss_res)
+```
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-12-2.png){width=336}
+:::
+:::
+
+
+## Emmeans Linear Model
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Calculate estimated marginal means
-lm_emmeans <- emmeans(model_lm, ~ size_category)
+lm_emmeans <- emmeans(lm_model, ~ size_cat)
 lm_emmeans
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
- size_category emmean   SE df lower.CL upper.CL
- Small           5.64 4.40 27     -3.4     14.7
- Medium         21.67 4.21 27     13.0     30.3
- Large          65.86 5.52 27     54.5     77.2
+ size_cat emmean   SE df lower.CL upper.CL
+ small      5.64 4.24 26    -3.07     14.3
+ medium    21.67 4.06 26    13.33     30.0
+ large     62.00 5.74 26    50.21     73.8
 
 Confidence level used: 0.95 
 ```
@@ -509,13 +579,103 @@ Confidence level used: 0.95
 :::
 
 
+## Emmeans GLM Mode
+
 
 ::: {.cell}
 
+```{.r .cell-code}
+# Calculate estimated marginal means
+gauss_emmeans <- emmeans(gauss_model, ~ size_cat)
+gauss_emmeans
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+ size_cat emmean   SE df lower.CL upper.CL
+ small      5.64 4.24 26    -3.07     14.3
+ medium    21.67 4.06 26    13.33     30.0
+ large     62.00 5.74 26    50.21     73.8
+
+Confidence level used: 0.95 
+```
+
+
+:::
 :::
 
 
-# GLM with Poisson Distribution: regression
+### Pairs LM
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# # Pairwise comparisons with Sidak correction
+lm_pairs <- pairs(lm_emmeans, adjust = "sidak")
+lm_pairs
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+ contrast       estimate   SE df t.ratio p.value
+ small - medium    -16.0 5.86 26  -2.734  0.0330
+ small - large     -56.4 7.13 26  -7.905  <.0001
+ medium - large    -40.3 7.02 26  -5.742  <.0001
+
+P value adjustment: sidak method for 3 tests 
+```
+
+
+:::
+:::
+
+
+### Pairs GLM
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# # Pairwise comparisons with Sidak correction
+gauss_pairs <- pairs(gauss_emmeans, adjust = "sidak")
+gauss_pairs
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+ contrast       estimate   SE df t.ratio p.value
+ small - medium    -16.0 5.86 26  -2.734  0.0330
+ small - large     -56.4 7.13 26  -7.905  <.0001
+ medium - large    -40.3 7.02 26  -5.742  <.0001
+
+P value adjustment: sidak method for 3 tests 
+```
+
+
+:::
+:::
+
+
+### Plot of GLM
+
+
+::: {.cell}
+
+```{.r .cell-code}
+plot(gauss_emmeans, comparisons = TRUE)
+```
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-17-1.png){width=336}
+:::
+:::
+
+
+# GLM ANOVA with Poisson Distribution
 
 -   **Poisson GLMs** Poisson model used when response variable is
     **count data**:
@@ -532,16 +692,16 @@ Confidence level used: 0.95
 -   Now let's fit a Poisson GLM to model the relationship between the
     rounded quarter-mile time and the number of cylinders:
 
-## Fit Poisson GLM with size_category as predictor
+## Fit Poisson GLM with size_cat as predictor
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-model_poisson_gala <- glm(Species ~ size_category, 
-                          data = gala,
+poiss_model <- glm(spp ~ size_cat, 
+                          data = g_df,
                           family = poisson(link = "log"))
-summary(model_poisson_gala)
+summary(poiss_model)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -549,22 +709,22 @@ summary(model_poisson_gala)
 ```
 
 Call:
-glm(formula = Species ~ size_category, family = poisson(link = "log"), 
-    data = gala)
+glm(formula = spp ~ size_cat, family = poisson(link = "log"), 
+    data = g_df)
 
 Coefficients:
-                    Estimate Std. Error z value Pr(>|z|)    
-(Intercept)          2.67101    0.07930   33.68   <2e-16 ***
-size_categoryMedium  1.33784    0.08833   15.15   <2e-16 ***
-size_categoryLarge   2.84300    0.08285   34.31   <2e-16 ***
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)     2.67101    0.07930   33.68   <2e-16 ***
+size_catmedium  1.33784    0.08833   15.15   <2e-16 ***
+size_catlarge   2.77429    0.08372   33.14   <2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 3510.73  on 29  degrees of freedom
-Residual deviance:  939.74  on 27  degrees of freedom
-AIC: 1106.6
+    Null deviance: 3031.18  on 28  degrees of freedom
+Residual deviance:  898.03  on 26  degrees of freedom
+AIC: 1057.2
 
 Number of Fisher Scoring iterations: 5
 ```
@@ -574,10 +734,10 @@ Number of Fisher Scoring iterations: 5
 :::
 
 
-# GLM with Poisson Distribution: Setup
+## GLM with Poisson Distribution: Setup
 
-Does island size category, as a whole, have a statistically significant
-effect on the number of plant species?
+**Does island size category, as a whole, have a statistically
+significant effect on the number of plant species?**
 
 -   `test = "LR"`: important part!
     -   normal ANOVA (with a Gaussian/normal distribution) test is an
@@ -585,15 +745,14 @@ effect on the number of plant species?
     -   GLM (like Poisson) can't use F-test in the same way
         -   use a Likelihood Ratio (LR) test
         -   LR test statistically compares fit of full model (the one
-            with size_category) to simpler null model (one without
-            size_category)
+            with size_cat) to simpler null model (one without size_cat)
         -   LR test tells us if it is significant
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
-Anova(model_poisson_gala, type = "III", test = "LR")
+Anova(poiss_model, type = "III", test = "LR")
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -601,9 +760,9 @@ Anova(model_poisson_gala, type = "III", test = "LR")
 ```
 Analysis of Deviance Table (Type III tests)
 
-Response: Species
-              LR Chisq Df Pr(>Chisq)    
-size_category     2571  2  < 2.2e-16 ***
+Response: spp
+         LR Chisq Df Pr(>Chisq)    
+size_cat   2133.2  2  < 2.2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -613,7 +772,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-# Let's check for overdispersion, which is common in count data:
+## Let's check for overdispersion, which is common in count data:
 
 -   Should be close to 1 for a well-fitting Poisson model
 
@@ -636,32 +795,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ::: {.cell}
 
 ```{.r .cell-code}
-# Calculate the dispersion parameter
-# (Pearson's Chi-Squared statistic / residual degrees of freedom)
-dispersion_gala <- sum(residuals(model_poisson_gala, type = "pearson")^2) / 
-                   model_poisson_gala$df.residual
-
-# Print dispersion parameter
-cat("Dispersion parameter:", round(dispersion_gala, 2), "\n")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Dispersion parameter: 32.9 
-```
-
-
-:::
-:::
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Just pass your model to the function
-performance::check_overdispersion(model_poisson_gala)
+# Pass your model to the function
+performance::check_overdispersion(poiss_model)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -669,8 +804,8 @@ performance::check_overdispersion(model_poisson_gala)
 ```
 # Overdispersion test
 
-       dispersion ratio =  32.900
-  Pearson's Chi-Squared = 888.308
+       dispersion ratio =  33.525
+  Pearson's Chi-Squared = 871.642
                 p-value = < 0.001
 ```
 
@@ -688,13 +823,15 @@ Overdispersion detected.
 :::
 
 
+### DHARMA assumption plots
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # 1. Simulate residuals
 # (This is the standard first step for all DHARMa diagnostics)
-sim_res <- simulateResiduals(fittedModel = model_poisson_gala, n = 1000)
+sim_res <- simulateResiduals(fittedModel = poiss_model, n = 1000)
 
 # 2. Test for dispersion
 # This will provide a p-value and the ratio
@@ -702,7 +839,7 @@ testDispersion(sim_res)
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/unnamed-chunk-17-1.png){width=336}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-21-1.png){width=336}
 :::
 
 ::: {.cell-output .cell-output-stdout}
@@ -713,7 +850,7 @@ testDispersion(sim_res)
 	simulated
 
 data:  simulationOutput
-dispersion = 53.462, p-value < 2.2e-16
+dispersion = 55.559, p-value < 2.2e-16
 alternative hypothesis: two.sided
 ```
 
@@ -726,32 +863,59 @@ plot(sim_res)
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/unnamed-chunk-17-2.png){width=336}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-21-2.png){width=336}
 :::
 :::
 
 
-# Emmeans
+### WHY DOES THE SHAPIRO TEST NOT WORK???
+
+this you should consider - well it shouldn't but it does this time .
+dang it...
+
+
+::: {.cell}
+
+```{.r .cell-code}
+shapiro.test(residuals(poiss_model))
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  residuals(poiss_model)
+W = 0.98973, p-value = 0.9909
+```
+
+
+:::
+:::
+
+
+## Poisson GLM Emmeans
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # 1. Calculate Estimated Marginal Means (EMMs)
-# type = "response" converts the log-means back to the "Species count" scale
-emm_gala <- emmeans(model_poisson_gala, 
-                    specs = ~ size_category,
+# type = "response" converts the log-means back to the "species count" scale
+pois_emm <- emmeans(poiss_model, 
+                    specs = ~ size_cat,
                     type = "response")
-print(emm_gala)
+print(pois_emm)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
- size_category  rate   SE  df asymp.LCL asymp.UCL
- Small          14.5 1.15 Inf      12.4      16.9
- Medium         55.1 2.14 Inf      51.0      59.4
- Large         248.1 5.95 Inf     236.7     260.1
+ size_cat  rate   SE  df asymp.LCL asymp.UCL
+ small     14.5 1.15 Inf      12.4      16.9
+ medium    55.1 2.14 Inf      51.0      59.4
+ large    231.7 6.21 Inf     219.8     244.2
 
 Confidence level used: 0.95 
 Intervals are back-transformed from the log scale 
@@ -762,23 +926,25 @@ Intervals are back-transformed from the log scale
 :::
 
 
+## POISSON GLM Pairs Plots 
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # 2. Pairwise Comparisons
 # Compares all pairs: Small-Medium, Small-Large, Medium-Large
-pairs_gala <- pairs(emm_gala, adjust = "tukey")
-print(pairs_gala)
+pois_pairs <- pairs(pois_emm, adjust = "tukey")
+print(pois_pairs)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
  contrast        ratio      SE  df null z.ratio p.value
- Small / Medium 0.2624 0.02320 Inf    1 -15.146  <.0001
- Small / Large  0.0583 0.00483 Inf    1 -34.313  <.0001
- Medium / Large 0.2220 0.01010 Inf    1 -32.935  <.0001
+ small / medium 0.2624 0.02320 Inf    1 -15.146  <.0001
+ small / large  0.0624 0.00522 Inf    1 -33.139  <.0001
+ medium / large 0.2378 0.01120 Inf    1 -30.403  <.0001
 
 P value adjustment: tukey method for comparing a family of 3 estimates 
 Tests are performed on the log scale 
@@ -790,19 +956,19 @@ Tests are performed on the log scale
 ```{.r .cell-code}
 # 3. Compact Letter Display (CLD)
 # The easiest way to see the groupings
-cld_gala <- multcomp::cld(emm_gala, 
+pois_cld <- multcomp::cld(pois_emm, 
                           Letters = letters,  
                           alpha = 0.05)
-print(cld_gala)
+print(pois_cld)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
- size_category  rate   SE  df asymp.LCL asymp.UCL .group
- Small          14.5 1.15 Inf      12.4      16.9  a    
- Medium         55.1 2.14 Inf      51.0      59.4   b   
- Large         248.1 5.95 Inf     236.7     260.1    c  
+ size_cat  rate   SE  df asymp.LCL asymp.UCL .group
+ small     14.5 1.15 Inf      12.4      16.9  a    
+ medium    55.1 2.14 Inf      51.0      59.4   b   
+ large    231.7 6.21 Inf     219.8     244.2    c  
 
 Confidence level used: 0.95 
 Intervals are back-transformed from the log scale 
@@ -819,37 +985,36 @@ NOTE: If two or more means share the same grouping symbol,
 :::
 
 
+Poisson GLM Plot
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
-#| paged-print: false
-
-
 # 1. Get the estimated means and CIs into a dataframe
-emm_gala_df <- as.data.frame(emm_gala)
+emm_poiss_df <- as.data.frame(pois_emm)
 
 # 2. Create visualization
 ggplot() +
   # Plot raw data (jittered so we can see the points)
-  geom_jitter(data = gala,
-              aes(x = size_category, y = Species),
+  geom_jitter(data = g_df,
+              aes(x = size_cat, y = spp),
               width = 0.2, # Spreads points horizontally
               alpha = 0.5) +
   # Add estimated means (points)
-  geom_point(data = emm_gala_df, 
-             aes(x = size_category, y = rate), # 'rate' is the mean
+  geom_point(data = emm_poiss_df, 
+             aes(x = size_cat, y = rate), # 'rate' is the mean
              size = 4, color = "blue") +
   # Add confidence intervals (error bars)
-  geom_errorbar(data = emm_gala_df, 
-                aes(x = size_category, 
+  geom_errorbar(data = emm_poiss_df, 
+                aes(x = size_cat, 
                     ymin = asymp.LCL, # Lower Confidence Limit
                     ymax = asymp.UCL), # Upper Confidence Limit
                 width = 0.2, color = "blue", linewidth = 1) +
-  labs(title = "Species Richness by Island Size Category",
+  labs(title = "species Richness by Island Size Category",
        subtitle = "Poisson GLM predictions (on the response scale)",
        x = "Island Size Category",
-       y = "Number of Plant Species") +
+       y = "Number of Plant species") +
   theme_minimal()
 ```
 
@@ -859,7 +1024,7 @@ ggplot() +
 :::
 
 
-# Negative Binomial GLM
+# Negative Binomial GLM ANOVA
 
 -   Dealing with Overdispersion in Count Data
     -   count data shows more variability than expected under a Poisson
@@ -880,29 +1045,29 @@ ggplot() +
 ```
 
 Call:
-glm.nb(formula = Species ~ size_category, data = gala, init.theta = 1.709503171, 
+glm.nb(formula = spp ~ size_cat, data = g_df, init.theta = 1.660219232, 
     link = log)
 
 Coefficients:
-                    Estimate Std. Error z value             Pr(>|z|)    
-(Intercept)           2.6710     0.2439  10.953 < 0.0000000000000002 ***
-size_categoryMedium   1.3378     0.3313   4.039   0.0000537409833037 ***
-size_categoryLarge    2.8430     0.3790   7.502   0.0000000000000628 ***
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      2.6710     0.2471  10.810  < 2e-16 ***
+size_catmedium   1.3378     0.3358   3.984 6.77e-05 ***
+size_catlarge    2.7743     0.4027   6.889 5.60e-12 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-(Dispersion parameter for Negative Binomial(1.7095) family taken to be 1)
+(Dispersion parameter for Negative Binomial(1.6602) family taken to be 1)
 
-    Null deviance: 90.168  on 29  degrees of freedom
-Residual deviance: 32.932  on 27  degrees of freedom
-AIC: 297.35
+    Null deviance: 81.681  on 28  degrees of freedom
+Residual deviance: 31.824  on 26  degrees of freedom
+AIC: 283.97
 
 Number of Fisher Scoring iterations: 1
 
-              Theta:  1.710 
-          Std. Err.:  0.449 
+              Theta:  1.660 
+          Std. Err.:  0.442 
 
- 2 x log-likelihood:  -289.348 
+ 2 x log-likelihood:  -275.972 
 ```
 
 
@@ -917,24 +1082,50 @@ Number of Fisher Scoring iterations: 1
 
 ```{.r .cell-code}
 # 1. Simulate residuals
-sim_res_nb <- simulateResiduals(fittedModel = model_nb_gala)
+nb_sim_res <- simulateResiduals(fittedModel = nb_model)
 
 # 2. Plot the diagnostics
-plot(sim_res_nb)
+plot(nb_sim_res)
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/unnamed-chunk-18-1.png){width=336}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-23-1.png){width=336}
 :::
 :::
 
+
+### Note Shapiro test does not work
+
+
+::: {.cell}
+
+```{.r .cell-code}
+shapiro.test(residuals(nb_model))
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  residuals(nb_model)
+W = 0.94501, p-value = 0.1357
+```
+
+
+:::
+:::
+
+
+## Overdispersion
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # This will test if there is *still* significant overdispersion
-check_overdispersion(model_nb_gala)
+check_overdispersion(nb_model)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -942,8 +1133,8 @@ check_overdispersion(model_nb_gala)
 ```
 # Overdispersion test
 
- dispersion ratio = 0.487
-          p-value = 0.416
+ dispersion ratio = 0.586
+          p-value = 0.632
 ```
 
 
@@ -967,9 +1158,9 @@ No overdispersion detected.
 
 ```{.r .cell-code}
 # Get the overall Anova (Type III Likelihood Ratio test)
-anova_nb <- Anova(model_nb_gala, type = "III", test = "LR")
+nb_anova <- Anova(nb_model, type = "III", test = "LR")
 
-print(anova_nb)
+print(nb_anova)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -977,9 +1168,9 @@ print(anova_nb)
 ```
 Analysis of Deviance Table (Type III tests)
 
-Response: Species
-              LR Chisq Df Pr(>Chisq)    
-size_category   57.237  2  3.726e-13 ***
+Response: spp
+         LR Chisq Df Pr(>Chisq)    
+size_cat   49.858  2  1.491e-11 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -994,18 +1185,18 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ```{.r .cell-code}
 # 1. Calculate the Estimated Marginal Means on the "response" scale
-emmeans_nb <- emmeans(model_nb_gala, spec = ~ size_category, type = "response")
+nb_emmeans <- emmeans(nb_model, spec = ~ size_cat, type = "response")
 
-print(emmeans_nb)
+print(nb_emmeans)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
- size_category response    SE  df asymp.LCL asymp.UCL
- Small             14.5  3.52 Inf      8.96      23.3
- Medium            55.1 12.30 Inf     35.50      85.5
- Large            248.1 72.00 Inf    140.54     438.1
+ size_cat response    SE  df asymp.LCL asymp.UCL
+ small        14.5  3.57 Inf      8.91      23.5
+ medium       55.1 12.50 Inf     35.27      86.0
+ large       231.7 73.70 Inf    124.22     432.0
 
 Confidence level used: 0.95 
 Intervals are back-transformed from the log scale 
@@ -1023,18 +1214,18 @@ Intervals are back-transformed from the log scale
 
 ```{.r .cell-code}
 # 2. Run pairwise comparisons on those means
-pairs_nb <- pairs(emmeans_nb)
+nb_pairs <- pairs(nb_emmeans)
 
-print(pairs_nb)
+print(nb_pairs)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
  contrast        ratio     SE  df null z.ratio p.value
- Small / Medium 0.2624 0.0869 Inf    1  -4.039  0.0002
- Small / Large  0.0583 0.0221 Inf    1  -7.502  <.0001
- Medium / Large 0.2220 0.0814 Inf    1  -4.106  0.0001
+ small / medium 0.2624 0.0881 Inf    1  -3.984  0.0002
+ small / large  0.0624 0.0251 Inf    1  -6.889  <.0001
+ medium / large 0.2378 0.0929 Inf    1  -3.675  0.0007
 
 P value adjustment: tukey method for comparing a family of 3 estimates 
 Tests are performed on the log scale 
@@ -1050,18 +1241,18 @@ Tests are performed on the log scale
 
 ```{.r .cell-code}
 # 3. Get the Compact Letter Display (CLD)
-cld_nb <- multcomp::cld(emmeans_nb, Letters = letters)
+nb_cld  <- multcomp::cld(nb_emmeans, Letters = letters)
 
-print(cld_nb)
+print(nb_cld)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
- size_category response    SE  df asymp.LCL asymp.UCL .group
- Small             14.5  3.52 Inf      8.96      23.3  a    
- Medium            55.1 12.30 Inf     35.50      85.5   b   
- Large            248.1 72.00 Inf    140.54     438.1    c  
+ size_cat response    SE  df asymp.LCL asymp.UCL .group
+ small        14.5  3.57 Inf      8.91      23.5  a    
+ medium       55.1 12.50 Inf     35.27      86.0   b   
+ large       231.7 73.70 Inf    124.22     432.0    c  
 
 Confidence level used: 0.95 
 Intervals are back-transformed from the log scale 
@@ -1074,6 +1265,713 @@ NOTE: If two or more means share the same grouping symbol,
 ```
 
 
+:::
+:::
+
+
+# REGRESSIONS------
+
+# Generalized Linear Models (GLMs) extend linear models to handle different types of response variables:
+
+-   Normal distribution: Continuous data (like regular ANOVA/regression)
+-   Poisson distribution: Count data
+-   Binomial distribution: Binary data (presence/absence,
+    success/failure)
+-   Gamma distribution: Positive continuous data
+-   Negative binomial: Overdispersed count data
+
+# Gaussian GLM (equivalent to simple linear regression)
+
+The simplest form of GLM uses a normal (Gaussian) distribution with an
+identity link function. This is equivalent to a standard linear
+regression.
+
+Let's compare a standard linear model and a Gaussian GLM.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# 1. Distribution of Endemic Species
+p1 <- ggplot(g_df, aes(x = endemics)) +
+  geom_histogram(binwidth = 10, fill = "darkblue", color = "black") +
+  labs(title = "Distribution of Endemic Species",
+       x = "Number of Endemic Species",
+       y = "Number of Islands") +
+  theme_minimal()
+
+# 2. Distribution of All Species
+p2 <- ggplot(g_df, aes(x = spp)) +
+  geom_histogram(binwidth = 25, fill = "darkgreen", color = "black") +
+  labs(title = "Distribution of All Species",
+       x = "Number of Plant Species",
+       y = "Number of Islands") +
+  theme_minimal()
+
+# 3. Endemics vs Area (for Gaussian model)
+p3 <- ggplot(g_df, aes(x = area, y = endemics)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  labs(title = "Endemic Species vs. Island Area",
+       x = "Area (km²)",
+       y = "Number of Endemic Species") +
+  theme_minimal()
+
+# 4. Species vs Area (for Poisson/NB models)
+p4 <- ggplot(g_df, aes(x = area, y = spp)) +
+  geom_point() +
+  labs(title = "All Species vs. Island Area",
+       x = "Area (km²)",
+       y = "Number of Plant Species") +
+  theme_minimal()
+
+# Combine plots
+(p1 + p2) / (p3 + p4)
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+`geom_smooth()` using formula = 'y ~ x'
+```
+
+
+:::
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-30-1.png){width=336}
+:::
+:::
+
+
+# GLM with Gaussian (Normal) Distribution: Setup
+
+We will model the continuous endemics variable as a function of the
+continuous area variable. This is a simple linear regression. We compare
+the lm() function with the glm() function using family = gaussian.
+
+# The linear model summary
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Fit a standard linear model
+lm_reg_model <- lm(endemics ~ area, data = g_df)
+summary(lm_reg_model)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+Call:
+lm(formula = endemics ~ area, data = g_df)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-34.690 -10.366  -2.612   6.528  43.733 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 14.36338    2.99342   4.798 5.24e-05 ***
+area         0.08720    0.01168   7.468 4.93e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 14.57 on 27 degrees of freedom
+Multiple R-squared:  0.6738,	Adjusted R-squared:  0.6617 
+F-statistic: 55.77 on 1 and 27 DF,  p-value: 4.929e-08
+```
+
+
+:::
+:::
+
+
+# The ANOVA model
+
+This table gives the F-statistic for the overall model, which in a
+simple linear regression, tests the same hypothesis as the t-test for
+the area slope.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+Anova(lm_reg_model, type = 3 )
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Anova Table (Type III tests)
+
+Response: endemics
+             Sum Sq Df F value    Pr(>F)    
+(Intercept)  4887.1  1  23.024 5.237e-05 ***
+area        11838.8  1  55.775 4.929e-08 ***
+Residuals    5731.0 27                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+:::
+:::
+
+
+# The Gaussian GLM model
+
+Note the estimates and p-values are identical to the lm() output.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Fit a Gaussian GLM
+gauss_reg_model <- glm(endemics ~ area,  data = g_df, 
+                   family = gaussian(link = "identity"))
+
+summary(gauss_reg_model)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+Call:
+glm(formula = endemics ~ area, family = gaussian(link = "identity"), 
+    data = g_df)
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 14.36338    2.99342   4.798 5.24e-05 ***
+area         0.08720    0.01168   7.468 4.93e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for gaussian family taken to be 212.261)
+
+    Null deviance: 17570  on 28  degrees of freedom
+Residual deviance:  5731  on 27  degrees of freedom
+AIC: 241.6
+
+Number of Fisher Scoring iterations: 2
+```
+
+
+:::
+:::
+
+
+# GLM ANOVA
+
+Again, this F-test is identical to the one from the lm() model.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+Anova(gauss_reg_model, type = "III", test = "F")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Analysis of Deviance Table (Type III tests)
+
+Response: endemics
+Error estimate based on Pearson residuals 
+
+          Sum Sq Df F values    Pr(>F)    
+area       11839  1   55.775 4.929e-08 ***
+Residuals   5731 27                       
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+:::
+:::
+
+
+# Assumption Tests of Both Models
+
+The diagnostic plots for lm_model and gauss_model will be identical.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Create diagnostic plots for lm()
+par(mfrow = c(1, 1))
+plot(lm_reg_model)
+```
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-35-1.png){width=576}
+:::
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-35-2.png){width=576}
+:::
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-35-3.png){width=576}
+:::
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-35-4.png){width=576}
+:::
+
+```{.r .cell-code}
+par(mfrow = c(1, 1))
+```
+:::
+
+
+# Shapiro-Wilk Test (Normality of Residuals)
+
+
+::: {.cell}
+
+```{.r .cell-code}
+shapiro.test(residuals(lm_reg_model))
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  residuals(lm_reg_model)
+W = 0.93735, p-value = 0.08547
+```
+
+
+:::
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+shapiro.test(residuals(gauss_reg_model))
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  residuals(gauss_reg_model)
+W = 0.93735, p-value = 0.08547
+```
+
+
+:::
+:::
+
+
+# GLM Regression with Poisson Distribution
+
+-   Poisson GLMs are used when the response variable is count data.
+-   We will now model the total number of species (spp) as a function of
+    island area.
+-   The Poisson distribution assumes the mean equals the variance.
+-   Key consideration: If variance \> mean (overdispersion), we should
+    use a negative binomial model instead.
+-   Fit Poisson GLM with area as predictor
+
+
+::: {.cell}
+
+```{.r .cell-code}
+poiss_reg_model <- glm(spp ~ area, 
+                   data = g_df,
+                   family = poisson(link = "log"))
+summary(poiss_reg_model)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+Call:
+glm(formula = spp ~ area, family = poisson(link = "log"), data = g_df)
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) 3.737e+00  3.022e-02  123.66   <2e-16 ***
+area        2.693e-03  5.759e-05   46.76   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 3031.2  on 28  degrees of freedom
+Residual deviance: 1229.5  on 27  degrees of freedom
+AIC: 1386.6
+
+Number of Fisher Scoring iterations: 5
+```
+
+
+:::
+:::
+
+
+# GLM with Poisson Distribution: ANOVA
+
+Does island area, as a whole, have a statistically significant effect on
+the number of plant species? We use a Likelihood Ratio (LR) test.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+Anova(poiss_reg_model, type = "III", test = "LR")
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Analysis of Deviance Table (Type III tests)
+
+Response: spp
+     LR Chisq Df Pr(>Chisq)    
+area   1801.7  1  < 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+:::
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Calculate the dispersion parameter
+# A simpler check
+performance::check_overdispersion(poiss_reg_model)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# Overdispersion test
+
+       dispersion ratio =   52.256
+  Pearson's Chi-Squared = 1410.899
+                p-value =  < 0.001
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+Overdispersion detected.
+```
+
+
+:::
+:::
+
+
+# DHARMa Residual Diagnostics
+
+We can use the DHARMa package to check model assumptions. The Q-Q plot
+clearly shows the model fits poorly.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# 1. Simulate residuals
+sim_pois_res <- simulateResiduals(fittedModel = poiss_reg_model, n = 1000)
+
+# 2. Test for dispersion
+testDispersion(sim_pois_res)
+```
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-41-1.png){width=336}
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	DHARMa nonparametric dispersion test via sd of residuals fitted vs.
+	simulated
+
+data:  simulationOutput
+dispersion = 48.199, p-value < 2.2e-16
+alternative hypothesis: two.sided
+```
+
+
+:::
+
+```{.r .cell-code}
+# Plot diagnostic plots
+plot(sim_pois_res)
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+qu = 0.25, log(sigma) = -2.941789 : outer Newton did not converge fully.
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+qu = 0.25, log(sigma) = -2.915169 : outer Newton did not converge fully.
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+qu = 0.25, log(sigma) = -2.999691 : outer Newton did not converge fully.
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stderr}
+
+```
+qu = 0.75, log(sigma) = -3.59874 : outer Newton did not converge fully.
+```
+
+
+:::
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-41-2.png){width=336}
+:::
+:::
+
+
+# Plotting the Poisson Regression
+
+Even though the model is a poor fit, we can visualize its prediction.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+ggplot(g_df, aes(x = area, y = spp)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "glm", 
+              method.args = list(family = "poisson"),
+              se = TRUE, 
+              color = "blue") +
+  labs(title = "Species Richness by Island Area",
+       subtitle = "Poisson GLM regression line",
+       x = "Island Area (km²)",
+       y = "Number of Plant Species") +
+  theme_minimal()
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+`geom_smooth()` using formula = 'y ~ x'
+```
+
+
+:::
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-42-1.png){width=336}
+:::
+:::
+
+
+# Negative Binomial GLM Regression
+
+Used to handle overdispersed count data.
+
+The negative binomial model includes a dispersion parameter (theta) to
+account for the variance being larger than the mean.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+nb_reg_model <- glm.nb(spp ~ area, data = g_df)
+summary(nb_reg_model)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+Call:
+glm.nb(formula = spp ~ area, data = g_df, init.theta = 1.098629663, 
+    link = log)
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept) 3.6082304  0.1987610   18.15  < 2e-16 ***
+area        0.0033531  0.0007672    4.37 1.24e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for Negative Binomial(1.0986) family taken to be 1)
+
+    Null deviance: 55.178  on 28  degrees of freedom
+Residual deviance: 32.695  on 27  degrees of freedom
+AIC: 295.08
+
+Number of Fisher Scoring iterations: 1
+
+              Theta:  1.099 
+          Std. Err.:  0.271 
+
+ 2 x log-likelihood:  -289.083 
+```
+
+
+:::
+:::
+
+
+# NB Assumption Diagnostics (DHARMa)
+
+The DHARMa residual plot looks much better. The Q-Q plot is nearly on
+the line, and the residual vs. predicted plot shows no strong pattern.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# 1. Simulate residuals
+nb_sim_reg_res <- simulateResiduals(fittedModel = nb_reg_model)
+
+# 2. Plot the diagnostics
+plot(nb_sim_reg_res)
+```
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-44-1.png){width=336}
+:::
+:::
+
+
+# Overdispersion Check
+
+The check_overdispersion test on the DHARMa residuals shows no remaining
+overdispersion (p = 0.816). This model successfully handled the issue.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+testDispersion(nb_sim_reg_res)
+```
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-45-1.png){width=336}
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	DHARMa nonparametric dispersion test via sd of residuals fitted vs.
+	simulated
+
+data:  simulationOutput
+dispersion = 0.27162, p-value = 0.488
+alternative hypothesis: two.sided
+```
+
+
+:::
+:::
+
+
+# ANOVA GLM Negative Binomial
+
+We again use a Likelihood Ratio (LR) test to get the overall p-value for
+the area predictor.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Get the overall Anova (Type III Likelihood Ratio test)
+nb_reg_anova <- Anova(nb_reg_model, type = "III", test = "LR")
+
+print(nb_anova)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Analysis of Deviance Table (Type III tests)
+
+Response: spp
+         LR Chisq Df Pr(>Chisq)    
+size_cat   49.858  2  1.491e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+:::
+:::
+
+
+# Plotting the Negative Binomial Regression
+
+This plot shows the fitted line from our final, best-fitting model.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+ggplot(g_df, aes(x = area, y = spp)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(method = "glm.nb",
+              se = FALSE,
+              color = "purple") +
+  labs(title = "Species Richness by Island Area",
+       subtitle = "Negative Binomial GLM regression line",
+       x = "Island Area (km²)",
+       y = "Number of Plant Species") +
+  theme_minimal()
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+`geom_smooth()` using formula = 'y ~ x'
+```
+
+
+:::
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-47-1.png){width=336}
 :::
 :::
 
@@ -1133,8 +2031,8 @@ ggplot() +
   geom_point(data = island_data, 
               aes(x = pa_ratio, y = uta_present),
               position = position_dodge2(width=.1), alpha = 0.7) +
-  labs(title = "Probability of Uta Presence vs. Perimeter/Area Ratio",
-       x = "Perimeter/Area Ratio",
+  labs(title = "Probability of Uta Presence vs. Perimeter/area Ratio",
+       x = "Perimeter/area Ratio",
        y = "Probability of Presence") +
   scale_y_continuous(limits = c(0, 1)) +
   theme_minimal()
@@ -1226,8 +2124,8 @@ ggplot() +
             aes(x = pa_ratio, y = prob), 
             color = "blue", size = 1) +
   # Add confidence intervals (optional)
-  labs(title = "Probability of Uta Presence vs. Perimeter/Area Ratio",
-       x = "Perimeter/Area Ratio",
+  labs(title = "Probability of Uta Presence vs. Perimeter/area Ratio",
+       x = "Perimeter/area Ratio",
        y = "Probability of Presence") +
   scale_y_continuous(limits = c(0, 1)) +
   theme_minimal()
@@ -1302,7 +2200,7 @@ presence) change with a unit increase in the predictor.
 -   If odds ratio \< 1: Increasing the predictor decreases the odds of
     event
 -   If odds ratio = 1: No effect of predictor on odds of event
--   For every one-unit increase in island's Perimeter/Area Ratio - odds
+-   For every one-unit increase in island's Perimeter/area Ratio - odds
     of finding a lizard present multiplied by 0.898
 -   the odds decrease by 10.2% (which is 1 - 0.898) for every one-unit
     increase in the P/A ratio
@@ -1508,7 +2406,7 @@ check_model(lizard_model, residual_type = "normal")
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/unnamed-chunk-27-1.png){width=576}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-51-1.png){width=576}
 :::
 :::
 
@@ -1531,12 +2429,12 @@ sim_res <- simulateResiduals(fittedModel = lizard_model)
 # 2. Plot residuals against the predictor
 # DHARMa has a specific function for this
 plotResiduals(sim_res, lizard_model$model$pa_ratio, 
-              xlab = "Perimeter/Area Ratio", 
+              xlab = "Perimeter/area Ratio", 
               main = "DHARMa Residuals vs. Predictor")
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/unnamed-chunk-28-1.png){width=336}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-52-1.png){width=336}
 :::
 :::
 

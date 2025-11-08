@@ -4102,39 +4102,158 @@
     "text": "These are the really helpful links I use a lot\nStackoverflow - a site that has a lot of good resources\nR Companion - this is a great stats site with a lot of well done tests\nR4DataScience - this is the book by Grolemund and Whickham that is really good\nA fun site is BlueSky and use #rstats\nStill adding\n\n\n\n Back to top"
   },
   {
-    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html",
-    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html",
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#generalized-linear-models-glms-extend-linear-models-to-handle-different-types-of-response-variables",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#generalized-linear-models-glms-extend-linear-models-to-handle-different-types-of-response-variables",
     "title": "Lecture 14 - Generalized Linear Models",
-    "section": "",
-    "text": "Normal distribution: Continuous data (like regular ANOVA/regression)\nPoisson distribution: Count data\nBinomial distribution: Binary data (presence/absence, success/failure)\nGamma distribution: Positive continuous data\nNegative binomial: Overdispersed count data\n\n\n\n\n\nRandom component: The response variable and its probability distribution\nSystematic component: The predictor variables (continuous or categorical)\nLink function: Connects expected value of Y to predictor variables"
+    "section": "Generalized Linear Models (GLMs) extend linear models to handle different types of response variables:",
+    "text": "Generalized Linear Models (GLMs) extend linear models to handle different types of response variables:\n\nNormal distribution: Continuous data (like regular ANOVA/regression)\nPoisson distribution: Count data\nBinomial distribution: Binary data (presence/absence, success/failure)\nGamma distribution: Positive continuous data\nNegative binomial: Overdispersed count data"
   },
   {
     "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#the-three-components-of-glms",
     "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#the-three-components-of-glms",
     "title": "Lecture 14 - Generalized Linear Models",
-    "section": "",
-    "text": "Random component: The response variable and its probability distribution\nSystematic component: The predictor variables (continuous or categorical)\nLink function: Connects expected value of Y to predictor variables"
+    "section": "The Three Components of GLMs",
+    "text": "The Three Components of GLMs\n\nRandom component: The response variable and its probability distribution\nSystematic component: The predictor variables (continuous or categorical)\nLink function: Connects expected value of Y to predictor variables"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#island-biogeography-data",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#island-biogeography-data",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "Island Biogeography Data",
+    "text": "Island Biogeography Data\nThe gala dataframe from the faraway package contains data on 30 Galapagos islands, testing MacArthur-Wilson’s theory of island biogeography.\n\nVariables in the dataframe:\n\nsppNumber of plant species (count data)\nendemicsNumber of endemic species (count data)\nareaIsland area (km²)\nelevation -Maximum elevation (m)\nNearest - Distance to nearest island (km)\nscruz - Distance to Santa Cruz island (km)\nadjacent - area of adjacent island (km²)"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#the-data---variable-types",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#the-data---variable-types",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "The data - variable types",
+    "text": "The data - variable types\n\n# Create a categorical variable for demonstration\ng_df &lt;- gala %&gt;% clean_names() %&gt;%\n  rename(spp = species) %&gt;% \n  mutate(size_cat = case_when(\n    area &lt; 1 ~ \"small\",\n    area &gt;= 1 & area &lt; 100 ~ \"medium\",\n    area &gt;= 100 ~ \"large\"\n  ),\n  size_cat = factor(size_cat, levels = c(\"small\", \"medium\", \"large\")))\n\ng_df &lt;- g_df %&gt;% filter(area &lt; 3000)\n\nhead(g_df %&gt;% dplyr::select(-scruz, -adjacent), 10)\n\n             spp endemics  area elevation nearest size_cat\nBaltra        58       23 25.09       346     0.6   medium\nBartolome     31       21  1.24       109     0.6   medium\nCaldwell       3        3  0.21       114     2.8    small\nChampion      25        9  0.10        46     1.9    small\nCoamano        2        1  0.05        77     1.9    small\nDaphne.Major  18       11  0.34       119     8.0    small\nDaphne.Minor  24        0  0.08        93     6.0    small\nDarwin        10        7  2.33       168    34.1   medium\nEden           8        4  0.03        71     0.4    small\nEnderby        2        2  0.18       112     2.6    small"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#data-completeness",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#data-completeness",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "Data completeness",
+    "text": "Data completeness\n\ng_df %&gt;% skim()\n\n\nData summary\n\n\nName\nPiped data\n\n\nNumber of rows\n29\n\n\nNumber of columns\n8\n\n\n_______________________\n\n\n\nColumn type frequency:\n\n\n\nfactor\n1\n\n\nnumeric\n7\n\n\n________________________\n\n\n\nGroup variables\nNone\n\n\n\nVariable type: factor\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nordered\nn_unique\ntop_counts\n\n\n\n\nsize_cat\n0\n1\nFALSE\n3\nmed: 12, sma: 11, lar: 6\n\n\n\nVariable type: numeric\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nskim_variable\nn_missing\ncomplete_rate\nmean\nsd\np0\np25\np50\np75\np100\nhist\n\n\n\n\nspp\n0\n1\n76.21\n105.25\n2.00\n12.00\n40.00\n93.00\n444.00\n▇▂▁▁▁\n\n\nendemics\n0\n1\n23.93\n25.05\n0.00\n7.00\n17.00\n30.00\n95.00\n▇▅▁▁▁\n\n\narea\n0\n1\n109.72\n235.81\n0.01\n0.23\n2.33\n58.27\n903.82\n▇▁▁▁▁\n\n\nelevation\n0\n1\n321.86\n343.31\n25.00\n94.00\n186.00\n367.00\n1494.00\n▇▂▂▁▁\n\n\nnearest\n0\n1\n10.38\n14.42\n0.20\n1.10\n3.30\n10.70\n47.40\n▇▁▁▂▁\n\n\nscruz\n0\n1\n57.97\n69.01\n0.00\n10.70\n47.40\n85.90\n290.20\n▇▃▁▁▁\n\n\nadjacent\n0\n1\n248.22\n876.89\n0.03\n0.52\n2.33\n58.27\n4669.32\n▇▁▁▁▁"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#data-graphically",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#data-graphically",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "Data graphically",
+    "text": "Data graphically\n\n#| message: false\n#| warning: false\n#| paged-print: false\n\nggplot(g_df, aes(x = spp)) +\n  geom_histogram(binwidth = 25, fill = \"darkblue\", color = \"black\") +\n  labs(title = \"Distribution of species Richness\",\n       subtitle = \"Galapagos Islands\",\n       x = \"Number of Plant species\",\n       y = \"Number of Islands\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#data-graphically-as-size-categories",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#data-graphically-as-size-categories",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "Data graphically as size categories",
+    "text": "Data graphically as size categories\n\nggplot(g_df, aes(x = size_cat, y = spp, fill = size_cat)) +\n  geom_boxplot(color = \"darkblue\") +\n  labs(title = \"Distribution of species Richness\",\n       subtitle = \"Galapagos Islands\",\n       x = \"Number of Plant species\",\n       y = \"Number of Islands\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#linear-model-the-old-way",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#linear-model-the-old-way",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "Linear model the old way",
+    "text": "Linear model the old way\n\n# Fit a standard linear model\nlm_model &lt;- lm(endemics ~ size_cat, data = g_df)\nsummary(lm_model)\n\n\nCall:\nlm(formula = endemics ~ size_cat, data = g_df)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-39.000  -4.636  -0.667   6.333  33.000 \n\nCoefficients:\n               Estimate Std. Error t value     Pr(&gt;|t|)    \n(Intercept)       5.636      4.236   1.331       0.1948    \nsize_catmedium   16.030      5.864   2.734       0.0111 *  \nsize_catlarge    56.364      7.130   7.905 0.0000000221 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 14.05 on 26 degrees of freedom\nMultiple R-squared:  0.708, Adjusted R-squared:  0.6855 \nF-statistic: 31.51 on 2 and 26 DF,  p-value: 0.0000001124"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#the-anova-model",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#the-anova-model",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "The ANOVA model",
+    "text": "The ANOVA model\n\nAnova(lm_model, type = 3 )\n\nAnova Table (Type III tests)\n\nResponse: endemics\n             Sum Sq Df F value       Pr(&gt;F)    \n(Intercept)   349.5  1  1.7707       0.1948    \nsize_cat    12438.6  2 31.5135 0.0000001124 ***\nResiduals    5131.2 26                         \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#the-gaussian-glm-model",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#the-gaussian-glm-model",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "The Gaussian GLM model",
+    "text": "The Gaussian GLM model\n\n# Fit a Gaussian GLM\ngauss_model &lt;- glm(endemics ~ size_cat,  data = g_df, \n                       family = gaussian(link = \"identity\"))\n\nsummary(gauss_model)\n\n\nCall:\nglm(formula = endemics ~ size_cat, family = gaussian(link = \"identity\"), \n    data = g_df)\n\nCoefficients:\n               Estimate Std. Error t value     Pr(&gt;|t|)    \n(Intercept)       5.636      4.236   1.331       0.1948    \nsize_catmedium   16.030      5.864   2.734       0.0111 *  \nsize_catlarge    56.364      7.130   7.905 0.0000000221 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for gaussian family taken to be 197.3543)\n\n    Null deviance: 17569.9  on 28  degrees of freedom\nResidual deviance:  5131.2  on 26  degrees of freedom\nAIC: 240.4\n\nNumber of Fisher Scoring iterations: 2"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#glm-anova",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#glm-anova",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "GLM ANOVA",
+    "text": "GLM ANOVA\n\nAnova(gauss_model, type = \"III\", test = \"F\")\n\nAnalysis of Deviance Table (Type III tests)\n\nResponse: endemics\nError estimate based on Pearson residuals \n\n           Sum Sq Df F values       Pr(&gt;F)    \nsize_cat  12438.6  2   31.514 0.0000001124 ***\nResiduals  5131.2 26                          \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#assumption-tests-of-both-models",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#assumption-tests-of-both-models",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "Assumption Tests of Both Models",
+    "text": "Assumption Tests of Both Models\n\nLinear model assumptions\n\n# Create diagnostic plots\npar(mfrow = c(1, 1))\nplot(lm_model)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\npar(mfrow = c(1, 1))\n\n\n\nGLM ASSUMPTIONS\n\n# Create diagnostic plots\n# par(mfrow = c(2, 2))\nplot(gauss_model)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# par(mfrow = c(1, 1))\n\n\n\nShapiro Wilk Test Linear Model\n\nshapiro.test(residuals(lm_model))\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(lm_model)\nW = 0.94396, p-value = 0.1273\n\n\n\n\nShapiro Test Gaussian Model\n\nshapiro.test(residuals(gauss_model))\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(gauss_model)\nW = 0.94396, p-value = 0.1273"
   },
   {
     "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#levenes-test",
     "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#levenes-test",
     "title": "Lecture 14 - Generalized Linear Models",
     "section": "Levenes Test",
-    "text": "Levenes Test\n\nleveneTest(Endemics ~ size_category,  data = gala)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value   Pr(&gt;F)   \ngroup  2  6.8514 0.003922 **\n      27                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "Levenes Test\n\nleveneTest(endemics ~ size_cat,  data = g_df)\n\nLevene's Test for Homogeneity of Variance (center = median)\n      Df F value   Pr(&gt;F)   \ngroup  2  7.9881 0.001975 **\n      26                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nDharma Assumption Test\n\n# 1. Simulate residuals\n# (This is the standard first step for all DHARMa diagnostics)\nsim_gauss_res &lt;- simulateResiduals(fittedModel = gauss_model, n = 1000)\n\n# 2. Test for dispersion\n# This will provide a p-value and the ratio\ntestDispersion(sim_gauss_res)\n\n\n\n\n\n\n\n\n\n    DHARMa nonparametric dispersion test via sd of residuals fitted vs.\n    simulated\n\ndata:  simulationOutput\ndispersion = 0.93779, p-value = 0.882\nalternative hypothesis: two.sided\n\n# Plot diagnostic plots\nplot(sim_gauss_res)"
   },
   {
-    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#fit-poisson-glm-with-size_category-as-predictor",
-    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#fit-poisson-glm-with-size_category-as-predictor",
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#emmeans-linear-model",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#emmeans-linear-model",
     "title": "Lecture 14 - Generalized Linear Models",
-    "section": "Fit Poisson GLM with size_category as predictor",
-    "text": "Fit Poisson GLM with size_category as predictor\n\nmodel_poisson_gala &lt;- glm(Species ~ size_category, \n                          data = gala,\n                          family = poisson(link = \"log\"))\nsummary(model_poisson_gala)\n\n\nCall:\nglm(formula = Species ~ size_category, family = poisson(link = \"log\"), \n    data = gala)\n\nCoefficients:\n                    Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)          2.67101    0.07930   33.68   &lt;2e-16 ***\nsize_categoryMedium  1.33784    0.08833   15.15   &lt;2e-16 ***\nsize_categoryLarge   2.84300    0.08285   34.31   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for poisson family taken to be 1)\n\n    Null deviance: 3510.73  on 29  degrees of freedom\nResidual deviance:  939.74  on 27  degrees of freedom\nAIC: 1106.6\n\nNumber of Fisher Scoring iterations: 5"
+    "section": "Emmeans Linear Model",
+    "text": "Emmeans Linear Model\n\n# Calculate estimated marginal means\nlm_emmeans &lt;- emmeans(lm_model, ~ size_cat)\nlm_emmeans\n\n size_cat emmean   SE df lower.CL upper.CL\n small      5.64 4.24 26    -3.07     14.3\n medium    21.67 4.06 26    13.33     30.0\n large     62.00 5.74 26    50.21     73.8\n\nConfidence level used: 0.95"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#emmeans-glm-mode",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#emmeans-glm-mode",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "Emmeans GLM Mode",
+    "text": "Emmeans GLM Mode\n\n# Calculate estimated marginal means\ngauss_emmeans &lt;- emmeans(gauss_model, ~ size_cat)\ngauss_emmeans\n\n size_cat emmean   SE df lower.CL upper.CL\n small      5.64 4.24 26    -3.07     14.3\n medium    21.67 4.06 26    13.33     30.0\n large     62.00 5.74 26    50.21     73.8\n\nConfidence level used: 0.95 \n\n\n\nPairs LM\n\n# # Pairwise comparisons with Sidak correction\nlm_pairs &lt;- pairs(lm_emmeans, adjust = \"sidak\")\nlm_pairs\n\n contrast       estimate   SE df t.ratio p.value\n small - medium    -16.0 5.86 26  -2.734  0.0330\n small - large     -56.4 7.13 26  -7.905  &lt;.0001\n medium - large    -40.3 7.02 26  -5.742  &lt;.0001\n\nP value adjustment: sidak method for 3 tests \n\n\n\n\nPairs GLM\n\n# # Pairwise comparisons with Sidak correction\ngauss_pairs &lt;- pairs(gauss_emmeans, adjust = \"sidak\")\ngauss_pairs\n\n contrast       estimate   SE df t.ratio p.value\n small - medium    -16.0 5.86 26  -2.734  0.0330\n small - large     -56.4 7.13 26  -7.905  &lt;.0001\n medium - large    -40.3 7.02 26  -5.742  &lt;.0001\n\nP value adjustment: sidak method for 3 tests \n\n\n\n\nPlot of GLM\n\nplot(gauss_emmeans, comparisons = TRUE)"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#fit-poisson-glm-with-size_cat-as-predictor",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#fit-poisson-glm-with-size_cat-as-predictor",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "Fit Poisson GLM with size_cat as predictor",
+    "text": "Fit Poisson GLM with size_cat as predictor\n\npoiss_model &lt;- glm(spp ~ size_cat, \n                          data = g_df,\n                          family = poisson(link = \"log\"))\nsummary(poiss_model)\n\n\nCall:\nglm(formula = spp ~ size_cat, family = poisson(link = \"log\"), \n    data = g_df)\n\nCoefficients:\n               Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)     2.67101    0.07930   33.68   &lt;2e-16 ***\nsize_catmedium  1.33784    0.08833   15.15   &lt;2e-16 ***\nsize_catlarge   2.77429    0.08372   33.14   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for poisson family taken to be 1)\n\n    Null deviance: 3031.18  on 28  degrees of freedom\nResidual deviance:  898.03  on 26  degrees of freedom\nAIC: 1057.2\n\nNumber of Fisher Scoring iterations: 5"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#glm-with-poisson-distribution-setup",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#glm-with-poisson-distribution-setup",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "GLM with Poisson Distribution: Setup",
+    "text": "GLM with Poisson Distribution: Setup\nDoes island size category, as a whole, have a statistically significant effect on the number of plant species?\n\ntest = \"LR\": important part!\n\nnormal ANOVA (with a Gaussian/normal distribution) test is an F-test.\nGLM (like Poisson) can’t use F-test in the same way\n\nuse a Likelihood Ratio (LR) test\nLR test statistically compares fit of full model (the one with size_cat) to simpler null model (one without size_cat)\nLR test tells us if it is significant\n\n\n\n\nAnova(poiss_model, type = \"III\", test = \"LR\")\n\nAnalysis of Deviance Table (Type III tests)\n\nResponse: spp\n         LR Chisq Df Pr(&gt;Chisq)    \nsize_cat   2133.2  2  &lt; 2.2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#lets-check-for-overdispersion-which-is-common-in-count-data",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#lets-check-for-overdispersion-which-is-common-in-count-data",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "Let’s check for overdispersion, which is common in count data:",
+    "text": "Let’s check for overdispersion, which is common in count data:\n\nShould be close to 1 for a well-fitting Poisson model\nIf &gt; 1.5, may indicate overdispersion\n\nWhat is Underdispersion?\n\nIn a Poisson model, we expect the variance to equal the mean. The dispersion parameter measures the ratio of observed variance to expected variance:\n\nDispersion ≈ 1: Good fit (variance = mean, as Poisson assumes)\nDispersion &gt; 1: Overdispersion (variance &gt; mean)\nDispersion &lt; 1: Underdispersion (variance &lt; mean)\n\n\na dispersion parameter this large is a warning\nour data more variable than a Poisson model expects\nuse a Negative Binomial model\n\n\n\n# Pass your model to the function\nperformance::check_overdispersion(poiss_model)\n\n# Overdispersion test\n\n       dispersion ratio =  33.525\n  Pearson's Chi-Squared = 871.642\n                p-value = &lt; 0.001\n\n\nOverdispersion detected.\n\n\n\nDHARMA assumption plots\n\n# 1. Simulate residuals\n# (This is the standard first step for all DHARMa diagnostics)\nsim_res &lt;- simulateResiduals(fittedModel = poiss_model, n = 1000)\n\n# 2. Test for dispersion\n# This will provide a p-value and the ratio\ntestDispersion(sim_res)\n\n\n\n\n\n\n\n\n\n    DHARMa nonparametric dispersion test via sd of residuals fitted vs.\n    simulated\n\ndata:  simulationOutput\ndispersion = 55.559, p-value &lt; 2.2e-16\nalternative hypothesis: two.sided\n\n# Plot diagnostic plots\nplot(sim_res)\n\n\n\n\n\n\n\n\n\n\nWHY DOES THE SHAPIRO TEST NOT WORK???\nthis you should consider - well it shouldn’t but it does this time . dang it…\n\nshapiro.test(residuals(poiss_model))\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(poiss_model)\nW = 0.98973, p-value = 0.9909"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#poisson-glm-emmeans",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#poisson-glm-emmeans",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "Poisson GLM Emmeans",
+    "text": "Poisson GLM Emmeans\n\n# 1. Calculate Estimated Marginal Means (EMMs)\n# type = \"response\" converts the log-means back to the \"species count\" scale\npois_emm &lt;- emmeans(poiss_model, \n                    specs = ~ size_cat,\n                    type = \"response\")\nprint(pois_emm)\n\n size_cat  rate   SE  df asymp.LCL asymp.UCL\n small     14.5 1.15 Inf      12.4      16.9\n medium    55.1 2.14 Inf      51.0      59.4\n large    231.7 6.21 Inf     219.8     244.2\n\nConfidence level used: 0.95 \nIntervals are back-transformed from the log scale"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#poisson-glm-pairs-plots",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#poisson-glm-pairs-plots",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "POISSON GLM Pairs Plots",
+    "text": "POISSON GLM Pairs Plots\n\n# 2. Pairwise Comparisons\n# Compares all pairs: Small-Medium, Small-Large, Medium-Large\npois_pairs &lt;- pairs(pois_emm, adjust = \"tukey\")\nprint(pois_pairs)\n\n contrast        ratio      SE  df null z.ratio p.value\n small / medium 0.2624 0.02320 Inf    1 -15.146  &lt;.0001\n small / large  0.0624 0.00522 Inf    1 -33.139  &lt;.0001\n medium / large 0.2378 0.01120 Inf    1 -30.403  &lt;.0001\n\nP value adjustment: tukey method for comparing a family of 3 estimates \nTests are performed on the log scale \n\n# 3. Compact Letter Display (CLD)\n# The easiest way to see the groupings\npois_cld &lt;- multcomp::cld(pois_emm, \n                          Letters = letters,  \n                          alpha = 0.05)\nprint(pois_cld)\n\n size_cat  rate   SE  df asymp.LCL asymp.UCL .group\n small     14.5 1.15 Inf      12.4      16.9  a    \n medium    55.1 2.14 Inf      51.0      59.4   b   \n large    231.7 6.21 Inf     219.8     244.2    c  \n\nConfidence level used: 0.95 \nIntervals are back-transformed from the log scale \nP value adjustment: tukey method for comparing a family of 3 estimates \nTests are performed on the log scale \nsignificance level used: alpha = 0.05 \nNOTE: If two or more means share the same grouping symbol,\n      then we cannot show them to be different.\n      But we also did not show them to be the same. \n\n\nPoisson GLM Plot\n\n# 1. Get the estimated means and CIs into a dataframe\nemm_poiss_df &lt;- as.data.frame(pois_emm)\n\n# 2. Create visualization\nggplot() +\n  # Plot raw data (jittered so we can see the points)\n  geom_jitter(data = g_df,\n              aes(x = size_cat, y = spp),\n              width = 0.2, # Spreads points horizontally\n              alpha = 0.5) +\n  # Add estimated means (points)\n  geom_point(data = emm_poiss_df, \n             aes(x = size_cat, y = rate), # 'rate' is the mean\n             size = 4, color = \"blue\") +\n  # Add confidence intervals (error bars)\n  geom_errorbar(data = emm_poiss_df, \n                aes(x = size_cat, \n                    ymin = asymp.LCL, # Lower Confidence Limit\n                    ymax = asymp.UCL), # Upper Confidence Limit\n                width = 0.2, color = \"blue\", linewidth = 1) +\n  labs(title = \"species Richness by Island Size Category\",\n       subtitle = \"Poisson GLM predictions (on the response scale)\",\n       x = \"Island Size Category\",\n       y = \"Number of Plant species\") +\n  theme_minimal()"
   },
   {
     "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#assumptions",
     "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#assumptions",
     "title": "Lecture 14 - Generalized Linear Models",
     "section": "Assumptions",
-    "text": "Assumptions\n\n# 1. Simulate residuals\nsim_res_nb &lt;- simulateResiduals(fittedModel = model_nb_gala)\n\n# 2. Plot the diagnostics\nplot(sim_res_nb)\n\n\n\n\n\n\n\n\n\n# This will test if there is *still* significant overdispersion\ncheck_overdispersion(model_nb_gala)\n\n# Overdispersion test\n\n dispersion ratio = 0.487\n          p-value = 0.416\n\n\nNo overdispersion detected."
+    "text": "Assumptions\n\n# 1. Simulate residuals\nnb_sim_res &lt;- simulateResiduals(fittedModel = nb_model)\n\n# 2. Plot the diagnostics\nplot(nb_sim_res)\n\n\n\n\n\n\n\n\n\nNote Shapiro test does not work\n\nshapiro.test(residuals(nb_model))\n\n\n    Shapiro-Wilk normality test\n\ndata:  residuals(nb_model)\nW = 0.94501, p-value = 0.1357"
+  },
+  {
+    "objectID": "ecostats_lectures/lecture_14/14_02_class_activity.html#overdispersion",
+    "href": "ecostats_lectures/lecture_14/14_02_class_activity.html#overdispersion",
+    "title": "Lecture 14 - Generalized Linear Models",
+    "section": "Overdispersion",
+    "text": "Overdispersion\n\n# This will test if there is *still* significant overdispersion\ncheck_overdispersion(nb_model)\n\n# Overdispersion test\n\n dispersion ratio = 0.586\n          p-value = 0.632\n\n\nNo overdispersion detected."
   },
   {
     "objectID": "ecostats_lectures/lecture_13/13_02_class_activity.html",
