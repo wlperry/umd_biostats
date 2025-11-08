@@ -60,7 +60,7 @@ Logistic Regression
 
 # Overview of Generalized Linear Models (GLMs)
 
-::: columns
+::::: columns
 ::: {.column width="60%"}
 General linear models assume normal distribution of response variables
 and residuals. However, many types of biological data don't meet this
@@ -92,7 +92,7 @@ categorical/multinomial response variables, using maximum likelihood
 :::
 
 :::
-:::
+:::::
 
 # The Three Elements of a GLM
 
@@ -121,7 +121,7 @@ $$g(\mu) = \beta_0 + \beta_1X_1 + \beta_2X_2...$$
 
 # GLM with Gaussian (Normal) Distribution: Setup
 
-::: columns
+::::: columns
 ::: {.column width="60%"}
 The simplest form of GLM uses a normal (Gaussian) distribution with an
 identity link function. This is equivalent to standard ANOVA
@@ -133,11 +133,19 @@ The `gala` dataset from the `faraway` package contains data on 30
 Galapagos islands, testing MacArthur-Wilson's theory of island
 biogeography.
 
-**Variables in the dataset:** - `Species` - Number of plant species
-(count data) - `Endemics` - Number of endemic species (count data) -
-`Area` - Island area (km²) - `Elevation` - Maximum elevation (m) -
-`Nearest` - Distance to nearest island (km) - `Scruz` - Distance to
-Santa Cruz island (km) - `Adjacent` - Area of adjacent island (km²)
+-   **Variables in the dataset:**
+    -   `Species`
+    -   Number of plant species (count data)
+    -   `Endemics`
+    -   Number of endemic species (count data)
+    -   `Area`
+    -   Island area (km²)
+    -   `Elevation`
+    -   Maximum elevation (m)
+    -   `Nearest`
+    -   Distance to nearest island (km)
+    -   `Scruz` - Distance to Santa Cruz island (km)
+    -   `Adjacent` - Area of adjacent island (km²)
 
 We'll use this dataset throughout to demonstrate different GLM types
 with biologically meaningful examples.
@@ -173,7 +181,7 @@ Let's look at the summary of our Gaussian GLM:
 :::
 
 :::
-:::
+:::::
 
 # GLM with Gaussian (Normal) Distribution: Setup
 
@@ -516,7 +524,6 @@ effect on the number of plant species?
             with size_category) to simpler null model (one without
             size_category)
         -   LR test tells us if it is significant
-
 :::
 
 ::: {.column width="50%"}
@@ -606,19 +613,19 @@ distribution assumes that the variance equals the mean.
     -   use a Negative Binomial model
 
 
-    ::: {.cell}
-    
-    ```{.r .cell-code}
-    # Calculate the dispersion parameter
-    # (Pearson's Chi-Squared statistic / residual degrees of freedom)
-    dispersion_gala <- sum(residuals(model_poisson_gala, type = "pearson")^2) / 
-                       model_poisson_gala$df.residual
-    
-    # Print dispersion parameter
-    cat("Dispersion parameter:", round(dispersion_gala, 2), "\n")
-    ## Dispersion parameter: 32.9
-    ```
-    :::
+::: {.cell}
+
+```{.r .cell-code}
+# Calculate the dispersion parameter
+# (Pearson's Chi-Squared statistic / residual degrees of freedom)
+dispersion_gala <- sum(residuals(model_poisson_gala, type = "pearson")^2) / 
+                   model_poisson_gala$df.residual
+
+# Print dispersion parameter
+cat("Dispersion parameter:", round(dispersion_gala, 2), "\n")
+## Dispersion parameter: 32.9
+```
+:::
 
 :::
 :::::
@@ -682,7 +689,6 @@ Let's check the emmeans and pairwise comparisons
 ```
 :::
 
-
 :::
 :::::
 
@@ -695,11 +701,11 @@ Let's check the emmeans and pairwise comparisons
     -   shows the model's predictions on top of the real data
 
 
-    ::: {.cell}
-    ::: {.cell-output-display}
-    ![](14_01_lecture_powerpoint_files/figure-revealjs/poisson-plot-1.png){width=576}
-    :::
-    :::
+::: {.cell}
+::: {.cell-output-display}
+![](14_01_lecture_powerpoint_files/figure-revealjs/poisson-plot-1.png){width=576}
+:::
+:::
 
 :::
 
@@ -713,7 +719,6 @@ Let's check the emmeans and pairwise comparisons
         effects
     -   For example, `exp(coef)` = 0.90 means the expected count is 90%
         of the reference level
-
 :::
 :::::
 
@@ -776,8 +781,7 @@ distribution (variance \> mean), may need to use negative binomial model
     -   standard errors bigger because NB model accounts for high
         variability (overdispersion)
     -   estimates dispersion parameter 'Theta' (or 1/theta)
-    -   how it models the overdispersion.    
-
+    -   how it models the overdispersion.
 :::
 
 ::: {.column width="40%"}
@@ -956,10 +960,8 @@ presence) change with a unit increase in the predictor.
 -   the odds decrease by 10.2% (which is 1 - 0.898) for every one-unit
     increase in the P/A ratio
 -   entire interval is below 1.0, you can be confident the relationship
-    is negative: more P/A ratio means lower odds of lizards 
-    
-    
-    
+    is negative: more P/A ratio means lower odds of lizards
+
 ::: {.panel column="screen"}
 
 ::: {.cell}
@@ -1137,7 +1139,7 @@ mean values.
 
 # Assumptions and Diagnostics of Logistic Regression
 
-::: columns
+::::: columns
 ::: {.column width="50%"}
 Logistic regression has several key assumptions:
 
@@ -1158,11 +1160,11 @@ Let's check the diagnostics for our multiple logistic regression model:
 :::
 
 :::
-:::
+:::::
 
 # Model Comparison and Selection
 
-::: columns
+::::: columns
 ::: {.column width="60%"}
 When working with multiple predictors, we often want to find the most
 parsimonious model. We can use:
@@ -1207,7 +1209,7 @@ We can also evaluate the predictive performance of our model:
 :::
 
 :::
-:::
+:::::
 
 # Publication-Quality Figure
 

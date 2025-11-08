@@ -1857,7 +1857,23 @@ Bill Perry
 <p>The simplest form of GLM uses a normal (Gaussian) distribution with an identity link function. This is equivalent to standard ANOVA</p>
 <p>Let’s compare a standard linear model and a Gaussian GLM ### Island Biogeography Data</p>
 <p>The <code>gala</code> dataset from the <code>faraway</code> package contains data on 30 Galapagos islands, testing MacArthur-Wilson’s theory of island biogeography.</p>
-<p><strong>Variables in the dataset:</strong> - <code>Species</code> - Number of plant species (count data) - <code>Endemics</code> - Number of endemic species (count data) - <code>Area</code> - Island area (km²) - <code>Elevation</code> - Maximum elevation (m) - <code>Nearest</code> - Distance to nearest island (km) - <code>Scruz</code> - Distance to Santa Cruz island (km) - <code>Adjacent</code> - Area of adjacent island (km²)</p>
+<ul>
+<li><strong>Variables in the dataset:</strong>
+<ul>
+<li><code>Species</code></li>
+<li>Number of plant species (count data)</li>
+<li><code>Endemics</code></li>
+<li>Number of endemic species (count data)</li>
+<li><code>Area</code></li>
+<li>Island area (km²)</li>
+<li><code>Elevation</code></li>
+<li>Maximum elevation (m)</li>
+<li><code>Nearest</code></li>
+<li>Distance to nearest island (km)</li>
+<li><code>Scruz</code> - Distance to Santa Cruz island (km)</li>
+<li><code>Adjacent</code> - Area of adjacent island (km²)</li>
+</ul></li>
+</ul>
 <p>We’ll use this dataset throughout to demonstrate different GLM types with biologically meaningful examples.</p>
 <div class="cell">
 <pre><code>##              Species Endemics  Area Elevation Nearest size_category
@@ -2663,6 +2679,7 @@ line-height: 1.2;
 <li>a dispersion parameter this large is a warning</li>
 <li>our data more variable than a Poisson model expects</li>
 <li>use a Negative Binomial model</li>
+</ul></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Calculate the dispersion parameter</span></span>
@@ -2673,8 +2690,7 @@ line-height: 1.2;
 <span id="cb8-6"><a></a><span class="co"># Print dispersion parameter</span></span>
 <span id="cb8-7"><a></a><span class="fu">cat</span>(<span class="st">&quot;Dispersion parameter:&quot;</span>, <span class="fu">round</span>(dispersion_gala, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
 <span id="cb8-8"><a></a><span class="do">## Dispersion parameter: 32.9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
-</ul>
+</div>
 </div></div>
 </section>
 
@@ -2738,6 +2754,7 @@ line-height: 1.2;
 <li><p>Plot raw data and our emmeans results</p>
 <ul>
 <li>shows the model’s predictions on top of the real data</li>
+</ul></li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -2747,8 +2764,7 @@ line-height: 1.2;
 </figure>
 </div>
 </div>
-</div></li>
-</ul>
+</div>
 </div><div class="column" style="width:40%;">
 <h3 id="interpreting-poisson-glm-coefficients">Interpreting Poisson GLM Coefficients</h3>
 <ul>

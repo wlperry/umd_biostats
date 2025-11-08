@@ -1,5 +1,5 @@
 ---
-title: "Lecture 14 - Class Activity Multifactor ANOVA"
+title: "Lecture 14 - Generalized Linear Models"
 author: "Bill Perry"
 metadata-files:
   - ../../_templates/activities.yml
@@ -12,10 +12,9 @@ format:
 
 
 
-# Lecture 14: Generalized Linear Models Overview
+# Lecture 14: Generalized Linear Models Activity
 
-Generalized Linear Models (GLMs) extend linear models to handle
-different types of response variables:
+### Generalized Linear Models (GLMs) extend linear models to handle different types of response variables:
 
 -   **Normal distribution**: Continuous data (like regular
     ANOVA/regression)
@@ -34,34 +33,47 @@ different types of response variables:
 3.  **Link function**: Connects expected value of Y to predictor
     variables
 
-# Part 1: Gaussian GLM (equivalent to normal ANOVA)
+# How to approach the problem
 
-Let's start with a familiar example using the mtcars dataset to show
-that Gaussian GLMs are equivalent to regular linear models.
+-   **What is the question?**
+    -   unclear data mining can lead to lost time
+-   **Data Variable type**: what does the data look like - types of
+    variable read in
+-   **Data Completeness**: Is there a lot of sparcity
+-   **Data Structure**: what does the data look like graphically
+-   **Model Choice:** what is the right model to analyze the data to
+    answer your question
+-   **Model Run:** run model - summary
+-   **Model Assumptions**: test early before you get excited and bend
+    the rules
+-   **Model Statistics** : run the final stats
+-   Model Followup tests: post F pairwise comparisons or others
+-   **Graphical display of results:** highlighting the data and
+    statistics
+
+# Part 1: Gaussian GLM (equivalent to normal ANOVA)
 
 The simplest form of GLM uses a normal (Gaussian) distribution with an
 identity link function. This is equivalent to standard ANOVA
 
-Let's compare a standard linear model and a Gaussian GLM \### Island
-Biogeography Data
+Let's compare a standard linear model and a Gaussian GLM
 
-The `gala` dataset from the `faraway` package contains data on 30
+#### Island Biogeography Data
+
+The `gala` dataframe from the `faraway` package contains data on 30
 Galapagos islands, testing MacArthur-Wilson's theory of island
 biogeography.
 
--   **Variables in the dataset:**
-    -   `Species`
-    -   Number of plant species (count data)
-    -   `Endemics`
-    -   Number of endemic species (count data)
-    -   `Area`
-    -   Island area (km²)
-    -   `Elevation`
-    -   Maximum elevation (m)
-    -   `Nearest`
-    -   Distance to nearest island (km)
+-   **Variables in the dataframe:**
+    -   `Species`Number of plant species (count data)
+    -   `Endemics`Number of endemic species (count data)
+    -   `Area`Island area (km²)
+    -   `Elevation -`Maximum elevation (m)
+    -   `Nearest` - Distance to nearest island (km)
     -   `Scruz` - Distance to Santa Cruz island (km)
     -   `Adjacent` - Area of adjacent island (km²)
+
+### The data - variable types
 
 
 ::: {.cell}
@@ -100,12 +112,98 @@ Enderby            2        2  0.18       112     2.6         Small
 :::
 
 
-Let's look at the summary of our Gaussian GLM:
+# Data completeness
 
 
 ::: {.cell}
+
+```{.r .cell-code}
+gala %>% skim()
+```
+
+::: {.cell-output-display}
+
+Table: Data summary
+
+|                         |           |
+|:------------------------|:----------|
+|Name                     |Piped data |
+|Number of rows           |30         |
+|Number of columns        |8          |
+|_______________________  |           |
+|Column type frequency:   |           |
+|factor                   |1          |
+|numeric                  |7          |
+|________________________ |           |
+|Group variables          |None       |
+
+
+**Variable type: factor**
+
+|skim_variable | n_missing| complete_rate|ordered | n_unique|top_counts               |
+|:-------------|---------:|-------------:|:-------|--------:|:------------------------|
+|size_category |         0|             1|FALSE   |        3|Med: 12, Sma: 11, Lar: 7 |
+
+
+**Variable type: numeric**
+
+|skim_variable | n_missing| complete_rate|   mean|     sd|    p0|   p25|    p50|    p75|    p100|hist  |
+|:-------------|---------:|-------------:|------:|------:|-----:|-----:|------:|------:|-------:|:-----|
+|Species       |         0|             1|  85.23| 114.63|  2.00| 13.00|  42.00|  96.00|  444.00|▇▂▁▁▁ |
+|Endemics      |         0|             1|  26.10|  27.33|  0.00|  7.25|  18.00|  32.25|   95.00|▇▅▁▁▂ |
+|Area          |         0|             1| 261.71| 864.11|  0.01|  0.26|   2.59|  59.24| 4669.32|▇▁▁▁▁ |
+|Elevation     |         0|             1| 368.03| 421.60| 25.00| 97.75| 192.00| 435.25| 1707.00|▇▁▂▁▁ |
+|Nearest       |         0|             1|  10.06|  14.27|  0.20|  0.80|   3.05|  10.02|   47.40|▇▁▁▂▁ |
+|Scruz         |         0|             1|  56.98|  68.03|  0.00| 11.02|  46.65|  81.08|  290.20|▇▃▁▁▁ |
+|Adjacent      |         0|             1| 261.10| 864.52|  0.03|  0.52|   2.59|  59.24| 4669.32|▇▁▁▁▁ |
+
+
+:::
+:::
+
+
+# Look at structure of the data graphically:
+
+
+::: {.cell}
+
+```{.r .cell-code}
+#| message: false
+#| warning: false
+#| paged-print: false
+
+ggplot(gala, aes(x = Species)) +
+  geom_histogram(binwidth = 25, fill = "darkblue", color = "black") +
+  labs(title = "Distribution of Species Richness",
+       subtitle = "Galapagos Islands",
+       x = "Number of Plant Species",
+       y = "Number of Islands") +
+  theme_minimal()
+```
+
 ::: {.cell-output-display}
 ![](14_02_class_activity_files/figure-html/summary-gaussian_2-1.png){width=336}
+:::
+:::
+
+
+# Look at data by size category
+
+
+::: {.cell}
+
+```{.r .cell-code}
+ggplot(gala, aes(x = size_category, y = Species, fill = size_category)) +
+  geom_boxplot(color = "darkblue") +
+  labs(title = "Distribution of Species Richness",
+       subtitle = "Galapagos Islands",
+       x = "Number of Plant Species",
+       y = "Number of Islands") +
+  theme_minimal()
+```
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-2-1.png){width=336}
 :::
 :::
 
@@ -113,14 +211,13 @@ Let's look at the summary of our Gaussian GLM:
 # GLM with Gaussian (Normal) Distribution: Setup
 
 The simplest form of GLM uses a normal (Gaussian) distribution with an
-identity link function. This is equivalent to standard linear
-regression.
+identity link function. This is equivalent to standard linear model
 
 Let's compare a standard linear model and a Gaussian GLM using the
 Galapagos dataset, modeling endemic species richness by island size
 category.
 
-### The linear model
+# The linear model summary
 
 
 ::: {.cell}
@@ -160,7 +257,7 @@ F-statistic: 37.31 on 2 and 27 DF,  p-value: 0.00000001697
 :::
 
 
-### The Anova
+# The ANOVA model
 
 
 ::: {.cell}
@@ -188,7 +285,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-# The gaussian GLM model
+# The Gaussian GLM model
 
 
 ::: {.cell}
@@ -231,7 +328,7 @@ Number of Fisher Scoring iterations: 2
 :::
 
 
-### the GLAM Anova
+# GLM ANOVA
 
 
 ::: {.cell}
@@ -260,7 +357,165 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-# GLM with Poisson Distribution: Setup
+# Assumption Tests of Both Models
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Create diagnostic plots
+par(mfrow = c(2, 2))
+plot(model_lm)
+```
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-7-1.png){width=576}
+:::
+
+```{.r .cell-code}
+par(mfrow = c(1, 1))
+```
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Create diagnostic plots
+# par(mfrow = c(2, 2))
+plot(model_gaussian)
+```
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-8-1.png){width=576}
+:::
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-8-2.png){width=576}
+:::
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-8-3.png){width=576}
+:::
+
+::: {.cell-output-display}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-8-4.png){width=576}
+:::
+
+```{.r .cell-code}
+# par(mfrow = c(1, 1))
+```
+:::
+
+
+### Shapiro Wilk Test Linear Model
+
+
+::: {.cell}
+
+```{.r .cell-code}
+shapiro.test(residuals(model_lm))
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  residuals(model_lm)
+W = 0.92782, p-value = 0.04298
+```
+
+
+:::
+:::
+
+
+### Shapiro Test Gaussian Model
+
+
+::: {.cell}
+
+```{.r .cell-code}
+shapiro.test(residuals(model_gaussian))
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  residuals(model_gaussian)
+W = 0.92782, p-value = 0.04298
+```
+
+
+:::
+:::
+
+
+## Levenes Test
+
+
+::: {.cell}
+
+```{.r .cell-code}
+leveneTest(Endemics ~ size_category,  data = gala)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Levene's Test for Homogeneity of Variance (center = median)
+      Df F value   Pr(>F)   
+group  2  6.8514 0.003922 **
+      27                    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+
+:::
+:::
+
+
+# Emmeans Linear Model
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Calculate estimated marginal means
+lm_emmeans <- emmeans(model_lm, ~ size_category)
+lm_emmeans
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+ size_category emmean   SE df lower.CL upper.CL
+ Small           5.64 4.40 27     -3.4     14.7
+ Medium         21.67 4.21 27     13.0     30.3
+ Large          65.86 5.52 27     54.5     77.2
+
+Confidence level used: 0.95 
+```
+
+
+:::
+:::
+
+
+
+::: {.cell}
+
+:::
+
+
+# GLM with Poisson Distribution: regression
 
 -   **Poisson GLMs** Poisson model used when response variable is
     **count data**:
@@ -277,7 +532,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 -   Now let's fit a Poisson GLM to model the relationship between the
     rounded quarter-mile time and the number of cylinders:
 
-### Fit Poisson GLM with size_category as predictor
+## Fit Poisson GLM with size_category as predictor
 
 
 ::: {.cell}
@@ -298,10 +553,10 @@ glm(formula = Species ~ size_category, family = poisson(link = "log"),
     data = gala)
 
 Coefficients:
-                    Estimate Std. Error z value            Pr(>|z|)    
-(Intercept)          2.67101    0.07930   33.68 <0.0000000000000002 ***
-size_categoryMedium  1.33784    0.08833   15.15 <0.0000000000000002 ***
-size_categoryLarge   2.84300    0.08285   34.31 <0.0000000000000002 ***
+                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)          2.67101    0.07930   33.68   <2e-16 ***
+size_categoryMedium  1.33784    0.08833   15.15   <2e-16 ***
+size_categoryLarge   2.84300    0.08285   34.31   <2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -319,8 +574,8 @@ Number of Fisher Scoring iterations: 5
 :::
 
 
-
 # GLM with Poisson Distribution: Setup
+
 Does island size category, as a whole, have a statistically significant
 effect on the number of plant species?
 
@@ -333,8 +588,7 @@ effect on the number of plant species?
             with size_category) to simpler null model (one without
             size_category)
         -   LR test tells us if it is significant
-        
-        
+
 
 ::: {.cell}
 
@@ -348,8 +602,8 @@ Anova(model_poisson_gala, type = "III", test = "LR")
 Analysis of Deviance Table (Type III tests)
 
 Response: Species
-              LR Chisq Df            Pr(>Chisq)    
-size_category     2571  2 < 0.00000000000000022 ***
+              LR Chisq Df Pr(>Chisq)    
+size_category     2571  2  < 2.2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -358,7 +612,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-        
+
 # Let's check for overdispersion, which is common in count data:
 
 -   Should be close to 1 for a well-fitting Poisson model
@@ -376,8 +630,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
                 mean)
     -   a dispersion parameter this large is a warning
     -   our data more variable than a Poisson model expects
-    -   use a Negative Binomial model        
-        
+    -   use a Negative Binomial model
+
 
 ::: {.cell}
 
@@ -401,8 +655,7 @@ Dispersion parameter: 32.9
 :::
 :::
 
-        
-        
+
 
 ::: {.cell}
 
@@ -435,6 +688,7 @@ Overdispersion detected.
 :::
 
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -448,7 +702,7 @@ testDispersion(sim_res)
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/unnamed-chunk-8-1.png){width=336}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-17-1.png){width=336}
 :::
 
 ::: {.cell-output .cell-output-stdout}
@@ -459,7 +713,7 @@ testDispersion(sim_res)
 	simulated
 
 data:  simulationOutput
-dispersion = 53.462, p-value < 0.00000000000000022
+dispersion = 53.462, p-value < 2.2e-16
 alternative hypothesis: two.sided
 ```
 
@@ -472,12 +726,11 @@ plot(sim_res)
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/unnamed-chunk-8-2.png){width=336}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-17-2.png){width=336}
 :::
 :::
 
 
-        
 # Emmeans
 
 
@@ -508,7 +761,7 @@ Intervals are back-transformed from the log scale
 :::
 :::
 
-        
+
 
 ::: {.cell}
 
@@ -567,7 +820,6 @@ NOTE: If two or more means share the same grouping symbol,
 
 
 
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -609,17 +861,17 @@ ggplot() +
 
 # Negative Binomial GLM
 
-- Dealing with Overdispersion in Count Data
-  - count data shows more variability than expected under a Poisson
-distribution (variance \> mean
-  - need to use negative binomial model
-  - `model_nb <- glm.nb(qsec_round ~ cyl, data = mtcars_count)`
+-   Dealing with Overdispersion in Count Data
+    -   count data shows more variability than expected under a Poisson
+        distribution (variance \> mean
+    -   need to use negative binomial model
+    -   `model_nb <- glm.nb(qsec_round ~ cyl, data = mtcars_count)`
 -   negative binomial model includes a dispersion parameter (theta)
-  -   allows the variance to be larger than the mean
-  -   standard errors bigger because NB model accounts for high
-      variability (overdispersion)
-  -   estimates dispersion parameter 'Theta' (or 1/theta)
-  -   how it models the overdispersion.
+-   allows the variance to be larger than the mean
+-   standard errors bigger because NB model accounts for high
+    variability (overdispersion)
+-   estimates dispersion parameter 'Theta' (or 1/theta)
+-   how it models the overdispersion.
 
 
 ::: {.cell}
@@ -660,6 +912,7 @@ Number of Fisher Scoring iterations: 1
 
 ## Assumptions
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -671,9 +924,10 @@ plot(sim_res_nb)
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/unnamed-chunk-9-1.png){width=336}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-18-1.png){width=336}
 :::
 :::
+
 
 
 ::: {.cell}
@@ -706,9 +960,8 @@ No overdispersion detected.
 :::
 
 
-
-
 # ANOVA GLM Negative Binmial
+
 
 ::: {.cell}
 
@@ -725,8 +978,8 @@ print(anova_nb)
 Analysis of Deviance Table (Type III tests)
 
 Response: Species
-              LR Chisq Df         Pr(>Chisq)    
-size_category   57.237  2 0.0000000000003726 ***
+              LR Chisq Df Pr(>Chisq)    
+size_category   57.237  2  3.726e-13 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -762,7 +1015,9 @@ Intervals are back-transformed from the log scale
 :::
 :::
 
-### Pairwise 
+
+### Pairwise
+
 
 ::: {.cell}
 
@@ -788,7 +1043,6 @@ Tests are performed on the log scale
 
 :::
 :::
-
 
 
 
@@ -822,7 +1076,6 @@ NOTE: If two or more means share the same grouping symbol,
 
 :::
 :::
-
 
 
 # Logistic Regression
@@ -872,7 +1125,6 @@ island_data <- data.frame(
 
 
 
-
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -892,7 +1144,6 @@ ggplot() +
 ![](14_02_class_activity_files/figure-html/lizard_plot-1.png){width=336}
 :::
 :::
-
 
 
 # Example: Lizard Presence on Islands
@@ -941,7 +1192,6 @@ Number of Fisher Scoring iterations: 6
 
 :::
 :::
-
 
 
 # Lizard Example: Visualization and Testing
@@ -999,7 +1249,6 @@ Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 :::
 
 
-
 We want to test the null hypothesis that β₁ = 0, meaning there's no
 relationship between P/A ratio and lizard presence.
 
@@ -1040,8 +1289,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-
-
 # Interpreting the Odds Ratio
 
 ### Working with Odds Ratios
@@ -1061,8 +1308,6 @@ presence) change with a unit increase in the predictor.
     increase in the P/A ratio
 -   entire interval is below 1.0, you can be confident the relationship
     is negative: more P/A ratio means lower odds of lizards
-
-
 
 
 ::: {.cell}
@@ -1135,7 +1380,9 @@ Uncertainty intervals (profile-likelihood) and p-values (two-tailed)
 :::
 
 
-This gives you the odds ratio (in the estimate column) and the exponentiated CIs (conf.low, conf.high) for all terms in your model, all in one clean table.
+This gives you the odds ratio (in the estimate column) and the
+exponentiated CIs (conf.low, conf.high) for all terms in your model, all
+in one clean table.
 
 
 ::: {.cell}
@@ -1160,7 +1407,6 @@ tidy(lizard_model, exponentiate = TRUE, conf.int = TRUE)
 
 :::
 :::
-
 
 
 # Assessing Model Fit
@@ -1230,22 +1476,29 @@ X-squared = 2.4032, df = 8, p-value = 0.9661
 :::
 
 
-Logistic regression has different and generally fewer assumptions to test than standard linear regression.
+Logistic regression has different and generally fewer assumptions to
+test than standard linear regression.
 
-- The main "assumptions" for logistic regression are:
+-   The main "assumptions" for logistic regression are:
 
-  - Binary Outcome: The dependent variable must be binary (0/1) or proportional (e.g., number of successes / number of trials). Your uta_present is 0/1, so this is met.
+    -   Binary Outcome: The dependent variable must be binary (0/1) or
+        proportional (e.g., number of successes / number of trials).
+        Your uta_present is 0/1, so this is met.
 
-  - Independence of Observations: Each observation (each island) must be independent. This is a study design assumption.
+    -   Independence of Observations: Each observation (each island)
+        must be independent. This is a study design assumption.
 
-  - Linearity of the Logit: This is the most important one to test. It assumes a linear relationship between any continuous predictors and the log-odds (logit) of the outcome.
+    -   Linearity of the Logit: This is the most important one to test.
+        It assumes a linear relationship between any continuous
+        predictors and the log-odds (logit) of the outcome.
 
-  - No (or little) Multicollinearity: If you have multiple predictors, they shouldn't be highly correlated with each other.
-  
-  
-1. Linearity of the Logit (The Most Important Check)
-continuous predictor (pa_ratio) has a linear relationship with the log-odds of the outcome
-looking for a flat, non-curved line.
+    -   No (or little) Multicollinearity: If you have multiple
+        predictors, they shouldn't be highly correlated with each other.
+
+1.  Linearity of the Logit (The Most Important Check) continuous
+    predictor (pa_ratio) has a linear relationship with the log-odds of
+    the outcome looking for a flat, non-curved line.
+
 
 ::: {.cell}
 
@@ -1255,12 +1508,18 @@ check_model(lizard_model, residual_type = "normal")
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/unnamed-chunk-18-1.png){width=576}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-27-1.png){width=576}
 :::
 :::
 
-DHARMa is excellent for GLMs. It simulates residuals and plots them against predictors. This is a very robust way to check for all kinds of model misfit, including non-linearity.
-plotResiduals function will show three quantile regression lines. You want all three (the solid red one and two dashed ones) to be flat and near 0.5. If they are sloped or curved, it indicates a pattern that your model missed (i.e., non-linearity).
+
+DHARMa is excellent for GLMs. It simulates residuals and plots them
+against predictors. This is a very robust way to check for all kinds of
+model misfit, including non-linearity. plotResiduals function will show
+three quantile regression lines. You want all three (the solid red one
+and two dashed ones) to be flat and near 0.5. If they are sloped or
+curved, it indicates a pattern that your model missed (i.e.,
+non-linearity).
 
 
 ::: {.cell}
@@ -1277,22 +1536,24 @@ plotResiduals(sim_res, lizard_model$model$pa_ratio,
 ```
 
 ::: {.cell-output-display}
-![](14_02_class_activity_files/figure-html/unnamed-chunk-19-1.png){width=336}
+![](14_02_class_activity_files/figure-html/unnamed-chunk-28-1.png){width=336}
 :::
 :::
 
 
-2. Multicollinearity only with 2 or more predictors
+2.  Multicollinearity only with 2 or more predictors
 
-if you did have more predictors (e.g., pa_ratio and island_area), you would test it like this:
+if you did have more predictors (e.g., pa_ratio and island_area), you
+would test it like this:
 
+3.  Overall Model Fit (Goodness-of-Fit) This isn't an "assumption" so
+    much as a check that the model as a whole is adequate. You already
+    have the two main tests in your file!
 
-
-3. Overall Model Fit (Goodness-of-Fit)
-This isn't an "assumption" so much as a check that the model as a whole is adequate. You already have the two main tests in your file!
-
-Hosmer-Lemeshow Test (from your code)
-Interpretation: For this test, a GOOD model has a non-significant p-value (p > 0.05). This means your model's predicted probabilities are not significantly different from the observed probabilities in the data, which is what you want.
+Hosmer-Lemeshow Test (from your code) Interpretation: For this test, a
+GOOD model has a non-significant p-value (p \> 0.05). This means your
+model's predicted probabilities are not significantly different from the
+observed probabilities in the data, which is what you want.
 
 
 ::: {.cell}
@@ -1318,17 +1579,4 @@ X-squared = 2.4032, df = 8, p-value = 0.9661
 
 :::
 :::
-
-
-
-
-
-
-
-
-
-
-
-
-
 
