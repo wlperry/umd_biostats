@@ -123,6 +123,15 @@ Enderby        2        2  0.18       112     2.6    small
 
 ## Data completeness
 
+### The Formula for Geometric Mean (GM)
+
+-   The geometric mean is the *n*-th root of the *product* of *n*
+    numbers.^2^
+
+-   For a set of numbers $x_1, x_2, ..., x_n$, the formula is:
+
+-   $GM = \sqrt[n]{x_1 \cdot x_2 \cdot \dots \cdot x_n}$
+
 
 ::: {.cell}
 

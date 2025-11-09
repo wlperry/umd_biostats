@@ -1801,6 +1801,62 @@ Bill Perry
 </div></div>
 </section>
 
+<section id="example-comparison-of-logged-response-variable-and-glm" class="title-slide slide level1 center">
+<h1>Example comparison of logged response variable and GLM</h1>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Simulate data that students might log-transform</span></span>
+<span id="cb1-2"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-3"><a></a>treatment_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-4"><a></a>  <span class="at">treatment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>), <span class="at">each =</span> <span class="dv">20</span>),</span>
+<span id="cb1-5"><a></a>  <span class="at">biomass =</span> <span class="fu">c</span>(<span class="fu">rlnorm</span>(<span class="dv">20</span>, <span class="at">meanlog =</span> <span class="dv">2</span>, <span class="at">sdlog =</span> <span class="fl">0.5</span>),</span>
+<span id="cb1-6"><a></a>              <span class="fu">rlnorm</span>(<span class="dv">20</span>, <span class="at">meanlog =</span> <span class="fl">2.5</span>, <span class="at">sdlog =</span> <span class="fl">0.5</span>),</span>
+<span id="cb1-7"><a></a>              <span class="fu">rlnorm</span>(<span class="dv">20</span>, <span class="at">meanlog =</span> <span class="dv">3</span>, <span class="at">sdlog =</span> <span class="fl">0.5</span>))</span>
+<span id="cb1-8"><a></a>)</span>
+<span id="cb1-9"><a></a></span>
+<span id="cb1-10"><a></a><span class="co"># Approach 1: Log transformation + ANOVA</span></span>
+<span id="cb1-11"><a></a>model_log <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(biomass) <span class="sc">~</span> treatment, <span class="at">data =</span> treatment_data)</span>
+<span id="cb1-12"><a></a></span>
+<span id="cb1-13"><a></a><span class="co"># Approach 2: Gamma GLM with log link</span></span>
+<span id="cb1-14"><a></a>model_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(biomass <span class="sc">~</span> treatment, </span>
+<span id="cb1-15"><a></a>                 <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>), </span>
+<span id="cb1-16"><a></a>                 <span class="at">data =</span> treatment_data)</span>
+<span id="cb1-17"><a></a></span>
+<span id="cb1-18"><a></a><span class="co"># Compare predictions on original scale</span></span>
+<span id="cb1-19"><a></a><span class="fu">cat</span>(<span class="st">&quot;logged response variable</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
+<span id="cb1-20"><a></a><span class="do">## logged response variable</span></span>
+<span id="cb1-21"><a></a><span class="fu">emmeans</span>(model_log, <span class="sc">~</span>treatment, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)  <span class="co"># Geometric means</span></span>
+<span id="cb1-22"><a></a><span class="do">##  treatment response    SE df lower.CL upper.CL</span></span>
+<span id="cb1-23"><a></a><span class="do">##  Control       7.93 0.818 57     6.45     9.75</span></span>
+<span id="cb1-24"><a></a><span class="do">##  High         21.18 2.180 57    17.23    26.04</span></span>
+<span id="cb1-25"><a></a><span class="do">##  Low          11.87 1.220 57     9.66    14.60</span></span>
+<span id="cb1-26"><a></a><span class="do">## </span></span>
+<span id="cb1-27"><a></a><span class="do">## Confidence level used: 0.95 </span></span>
+<span id="cb1-28"><a></a><span class="do">## Intervals are back-transformed from the log scale</span></span>
+<span id="cb1-29"><a></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
+<span id="cb1-30"><a></a><span class="fu">cat</span>(<span class="st">&quot;using glm opn original scale</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
+<span id="cb1-31"><a></a><span class="do">## using glm opn original scale</span></span>
+<span id="cb1-32"><a></a><span class="fu">emmeans</span>(model_glm, <span class="sc">~</span>treatment, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)  <span class="co"># Arithmetic means</span></span>
+<span id="cb1-33"><a></a><span class="do">##  treatment response    SE df lower.CL upper.CL</span></span>
+<span id="cb1-34"><a></a><span class="do">##  Control       8.86 0.939 57     7.16     11.0</span></span>
+<span id="cb1-35"><a></a><span class="do">##  High         23.73 2.520 57    19.19     29.3</span></span>
+<span id="cb1-36"><a></a><span class="do">##  Low          12.84 1.360 57    10.39     15.9</span></span>
+<span id="cb1-37"><a></a><span class="do">## </span></span>
+<span id="cb1-38"><a></a><span class="do">## Confidence level used: 0.95 </span></span>
+<span id="cb1-39"><a></a><span class="do">## Intervals are back-transformed from the log scale</span></span>
+<span id="cb1-40"><a></a></span>
+<span id="cb1-41"><a></a><span class="co"># Show how the interpretation differs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
 <section class="scrollable">
 <section id="the-three-elements-of-a-glm" class="title-slide slide level1 center">
 <h1>The Three Elements of a GLM</h1>
@@ -2539,27 +2595,27 @@ family = gaussian(link = “identity”))</li>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="fu">Anova</span>(model_lm, <span class="at">type =</span> <span class="st">&quot;III&quot;</span>, <span class="at">test =</span> <span class="st">&quot;F&quot;</span>)</span>
-<span id="cb4-2"><a></a><span class="do">## Anova Table (Type III tests)</span></span>
-<span id="cb4-3"><a></a><span class="do">## </span></span>
-<span id="cb4-4"><a></a><span class="do">## Response: Endemics</span></span>
-<span id="cb4-5"><a></a><span class="do">##                Sum Sq Df F value    Pr(&gt;F)    </span></span>
-<span id="cb4-6"><a></a><span class="do">## (Intercept)     349.5  1  1.6392    0.2113    </span></span>
-<span id="cb4-7"><a></a><span class="do">## size_category 15906.6  2 37.3066 1.697e-08 ***</span></span>
-<span id="cb4-8"><a></a><span class="do">## Residuals      5756.1 27                      </span></span>
-<span id="cb4-9"><a></a><span class="do">## ---</span></span>
-<span id="cb4-10"><a></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb4-11"><a></a><span class="fu">Anova</span>(model_gaussian, <span class="at">type =</span> <span class="st">&quot;III&quot;</span>, <span class="at">test =</span> <span class="st">&quot;F&quot;</span>)</span>
-<span id="cb4-12"><a></a><span class="do">## Analysis of Deviance Table (Type III tests)</span></span>
-<span id="cb4-13"><a></a><span class="do">## </span></span>
-<span id="cb4-14"><a></a><span class="do">## Response: Endemics</span></span>
-<span id="cb4-15"><a></a><span class="do">## Error estimate based on Pearson residuals </span></span>
-<span id="cb4-16"><a></a><span class="do">## </span></span>
-<span id="cb4-17"><a></a><span class="do">##                Sum Sq Df F values    Pr(&gt;F)    </span></span>
-<span id="cb4-18"><a></a><span class="do">## size_category 15906.6  2   37.307 1.697e-08 ***</span></span>
-<span id="cb4-19"><a></a><span class="do">## Residuals      5756.1 27                       </span></span>
-<span id="cb4-20"><a></a><span class="do">## ---</span></span>
-<span id="cb4-21"><a></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">Anova</span>(model_lm, <span class="at">type =</span> <span class="st">&quot;III&quot;</span>, <span class="at">test =</span> <span class="st">&quot;F&quot;</span>)</span>
+<span id="cb5-2"><a></a><span class="do">## Anova Table (Type III tests)</span></span>
+<span id="cb5-3"><a></a><span class="do">## </span></span>
+<span id="cb5-4"><a></a><span class="do">## Response: Endemics</span></span>
+<span id="cb5-5"><a></a><span class="do">##                Sum Sq Df F value    Pr(&gt;F)    </span></span>
+<span id="cb5-6"><a></a><span class="do">## (Intercept)     349.5  1  1.6392    0.2113    </span></span>
+<span id="cb5-7"><a></a><span class="do">## size_category 15906.6  2 37.3066 1.697e-08 ***</span></span>
+<span id="cb5-8"><a></a><span class="do">## Residuals      5756.1 27                      </span></span>
+<span id="cb5-9"><a></a><span class="do">## ---</span></span>
+<span id="cb5-10"><a></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb5-11"><a></a><span class="fu">Anova</span>(model_gaussian, <span class="at">type =</span> <span class="st">&quot;III&quot;</span>, <span class="at">test =</span> <span class="st">&quot;F&quot;</span>)</span>
+<span id="cb5-12"><a></a><span class="do">## Analysis of Deviance Table (Type III tests)</span></span>
+<span id="cb5-13"><a></a><span class="do">## </span></span>
+<span id="cb5-14"><a></a><span class="do">## Response: Endemics</span></span>
+<span id="cb5-15"><a></a><span class="do">## Error estimate based on Pearson residuals </span></span>
+<span id="cb5-16"><a></a><span class="do">## </span></span>
+<span id="cb5-17"><a></a><span class="do">##                Sum Sq Df F values    Pr(&gt;F)    </span></span>
+<span id="cb5-18"><a></a><span class="do">## size_category 15906.6  2   37.307 1.697e-08 ***</span></span>
+<span id="cb5-19"><a></a><span class="do">## Residuals      5756.1 27                       </span></span>
+<span id="cb5-20"><a></a><span class="do">## ---</span></span>
+<span id="cb5-21"><a></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:40%;">
 <p>Visualizing the results:</p>
@@ -2610,31 +2666,46 @@ family = gaussian(link = “identity”))</li>
 </ul>
 <h3 id="fit-poisson-glm-with-size_category-as-predictor">Fit Poisson GLM with size_category as predictor</h3>
 </div><div class="column" style="width:50%;">
+<ul>
+<li>model is predicting the natural logarithm (log) of the expected species count</li>
+<li>exponentiate them (i.e., calculate <span class="math inline">\(e^{\text{coefficient}}\)</span> or exp(coefficient).</li>
+<li>converts the additive log-counts back into a multiplicative effect on the actual species count</li>
+<li>exp(2.67101) = 14.45 species on a “Small” island</li>
+<li>exp(1.33784) = 3.81
+<ul>
+<li>“Medium” island predicted to have 3.81x more species than “Small” island, on average</li>
+</ul></li>
+<li>exp(2.84300) = 17.17
+<ul>
+<li>“Large” island is predicted to have 17.17 times more species than a “Small” island, on average</li>
+</ul></li>
+<li>Dispersion - Divide the deviance by its df: <span class="math inline">\(939.74 / 27 \approx\)</span> 34.8</li>
+</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>model_poisson_gala <span class="ot">&lt;-</span> <span class="fu">glm</span>(Species <span class="sc">~</span> size_category, </span>
-<span id="cb5-2"><a></a>                          <span class="at">data =</span> gala,</span>
-<span id="cb5-3"><a></a>                          <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>))</span>
-<span id="cb5-4"><a></a><span class="fu">summary</span>(model_poisson_gala)</span>
-<span id="cb5-5"><a></a><span class="do">## </span></span>
-<span id="cb5-6"><a></a><span class="do">## Call:</span></span>
-<span id="cb5-7"><a></a><span class="do">## glm(formula = Species ~ size_category, family = poisson(link = &quot;log&quot;), </span></span>
-<span id="cb5-8"><a></a><span class="do">##     data = gala)</span></span>
-<span id="cb5-9"><a></a><span class="do">## </span></span>
-<span id="cb5-10"><a></a><span class="do">## Coefficients:</span></span>
-<span id="cb5-11"><a></a><span class="do">##                     Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span id="cb5-12"><a></a><span class="do">## (Intercept)          2.67101    0.07930   33.68   &lt;2e-16 ***</span></span>
-<span id="cb5-13"><a></a><span class="do">## size_categoryMedium  1.33784    0.08833   15.15   &lt;2e-16 ***</span></span>
-<span id="cb5-14"><a></a><span class="do">## size_categoryLarge   2.84300    0.08285   34.31   &lt;2e-16 ***</span></span>
-<span id="cb5-15"><a></a><span class="do">## ---</span></span>
-<span id="cb5-16"><a></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
-<span id="cb5-17"><a></a><span class="do">## </span></span>
-<span id="cb5-18"><a></a><span class="do">## (Dispersion parameter for poisson family taken to be 1)</span></span>
-<span id="cb5-19"><a></a><span class="do">## </span></span>
-<span id="cb5-20"><a></a><span class="do">##     Null deviance: 3510.73  on 29  degrees of freedom</span></span>
-<span id="cb5-21"><a></a><span class="do">## Residual deviance:  939.74  on 27  degrees of freedom</span></span>
-<span id="cb5-22"><a></a><span class="do">## AIC: 1106.6</span></span>
-<span id="cb5-23"><a></a><span class="do">## </span></span>
-<span id="cb5-24"><a></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>model_poisson_gala <span class="ot">&lt;-</span> <span class="fu">glm</span>(Species <span class="sc">~</span> size_category, </span>
+<span id="cb6-2"><a></a>                          <span class="at">data =</span> gala,</span>
+<span id="cb6-3"><a></a>                          <span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>))</span>
+<span id="cb6-4"><a></a><span class="fu">summary</span>(model_poisson_gala)</span>
+<span id="cb6-5"><a></a><span class="do">## </span></span>
+<span id="cb6-6"><a></a><span class="do">## Call:</span></span>
+<span id="cb6-7"><a></a><span class="do">## glm(formula = Species ~ size_category, family = poisson(link = &quot;log&quot;), </span></span>
+<span id="cb6-8"><a></a><span class="do">##     data = gala)</span></span>
+<span id="cb6-9"><a></a><span class="do">## </span></span>
+<span id="cb6-10"><a></a><span class="do">## Coefficients:</span></span>
+<span id="cb6-11"><a></a><span class="do">##                     Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb6-12"><a></a><span class="do">## (Intercept)          2.67101    0.07930   33.68   &lt;2e-16 ***</span></span>
+<span id="cb6-13"><a></a><span class="do">## size_categoryMedium  1.33784    0.08833   15.15   &lt;2e-16 ***</span></span>
+<span id="cb6-14"><a></a><span class="do">## size_categoryLarge   2.84300    0.08285   34.31   &lt;2e-16 ***</span></span>
+<span id="cb6-15"><a></a><span class="do">## ---</span></span>
+<span id="cb6-16"><a></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span>
+<span id="cb6-17"><a></a><span class="do">## </span></span>
+<span id="cb6-18"><a></a><span class="do">## (Dispersion parameter for poisson family taken to be 1)</span></span>
+<span id="cb6-19"><a></a><span class="do">## </span></span>
+<span id="cb6-20"><a></a><span class="do">##     Null deviance: 3510.73  on 29  degrees of freedom</span></span>
+<span id="cb6-21"><a></a><span class="do">## Residual deviance:  939.74  on 27  degrees of freedom</span></span>
+<span id="cb6-22"><a></a><span class="do">## AIC: 1106.6</span></span>
+<span id="cb6-23"><a></a><span class="do">## </span></span>
+<span id="cb6-24"><a></a><span class="do">## Number of Fisher Scoring iterations: 5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div></section>
@@ -2658,14 +2729,14 @@ family = gaussian(link = “identity”))</li>
 </div><div class="column" style="width:50%;">
 <p>Test overall effect of size_category</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">Anova</span>(model_poisson_gala, <span class="at">type =</span> <span class="st">&quot;III&quot;</span>, <span class="at">test =</span> <span class="st">&quot;LR&quot;</span>)</span>
-<span id="cb6-2"><a></a><span class="do">## Analysis of Deviance Table (Type III tests)</span></span>
-<span id="cb6-3"><a></a><span class="do">## </span></span>
-<span id="cb6-4"><a></a><span class="do">## Response: Species</span></span>
-<span id="cb6-5"><a></a><span class="do">##               LR Chisq Df Pr(&gt;Chisq)    </span></span>
-<span id="cb6-6"><a></a><span class="do">## size_category     2571  2  &lt; 2.2e-16 ***</span></span>
-<span id="cb6-7"><a></a><span class="do">## ---</span></span>
-<span id="cb6-8"><a></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">Anova</span>(model_poisson_gala, <span class="at">type =</span> <span class="st">&quot;III&quot;</span>, <span class="at">test =</span> <span class="st">&quot;LR&quot;</span>)</span>
+<span id="cb7-2"><a></a><span class="do">## Analysis of Deviance Table (Type III tests)</span></span>
+<span id="cb7-3"><a></a><span class="do">## </span></span>
+<span id="cb7-4"><a></a><span class="do">## Response: Species</span></span>
+<span id="cb7-5"><a></a><span class="do">##               LR Chisq Df Pr(&gt;Chisq)    </span></span>
+<span id="cb7-6"><a></a><span class="do">## size_category     2571  2  &lt; 2.2e-16 ***</span></span>
+<span id="cb7-7"><a></a><span class="do">## ---</span></span>
+<span id="cb7-8"><a></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
 </section>
@@ -2724,14 +2795,14 @@ family = gaussian(link = “identity”))</li>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co"># Calculate the dispersion parameter</span></span>
-<span id="cb8-2"><a></a><span class="co"># (Pearson&#39;s Chi-Squared statistic / residual degrees of freedom)</span></span>
-<span id="cb8-3"><a></a>dispersion_gala <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(model_poisson_gala, <span class="at">type =</span> <span class="st">&quot;pearson&quot;</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> </span>
-<span id="cb8-4"><a></a>                   model_poisson_gala<span class="sc">$</span>df.residual</span>
-<span id="cb8-5"><a></a></span>
-<span id="cb8-6"><a></a><span class="co"># Print dispersion parameter</span></span>
-<span id="cb8-7"><a></a><span class="fu">cat</span>(<span class="st">&quot;Dispersion parameter:&quot;</span>, <span class="fu">round</span>(dispersion_gala, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb8-8"><a></a><span class="do">## Dispersion parameter: 32.9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Calculate the dispersion parameter</span></span>
+<span id="cb9-2"><a></a><span class="co"># (Pearson&#39;s Chi-Squared statistic / residual degrees of freedom)</span></span>
+<span id="cb9-3"><a></a>dispersion_gala <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">residuals</span>(model_poisson_gala, <span class="at">type =</span> <span class="st">&quot;pearson&quot;</span>)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> </span>
+<span id="cb9-4"><a></a>                   model_poisson_gala<span class="sc">$</span>df.residual</span>
+<span id="cb9-5"><a></a></span>
+<span id="cb9-6"><a></a><span class="co"># Print dispersion parameter</span></span>
+<span id="cb9-7"><a></a><span class="fu">cat</span>(<span class="st">&quot;Dispersion parameter:&quot;</span>, <span class="fu">round</span>(dispersion_gala, <span class="dv">2</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb9-8"><a></a><span class="do">## Dispersion parameter: 32.9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
 </section>
@@ -2744,19 +2815,19 @@ family = gaussian(link = “identity”))</li>
 <li><strong>Poisson GLMs</strong> are appropriate for <strong>count data</strong>. The Poisson distribution assumes that the variance equals the mean.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># 1. Calculate Estimated Marginal Means (EMMs)</span></span>
-<span id="cb9-2"><a></a><span class="co"># type = &quot;response&quot; converts the log-means back to the &quot;Species count&quot; scale</span></span>
-<span id="cb9-3"><a></a>emm_gala <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model_poisson_gala, </span>
-<span id="cb9-4"><a></a>                    <span class="at">specs =</span> <span class="sc">~</span> size_category,</span>
-<span id="cb9-5"><a></a>                    <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb9-6"><a></a><span class="fu">print</span>(emm_gala)</span>
-<span id="cb9-7"><a></a><span class="do">##  size_category  rate   SE  df asymp.LCL asymp.UCL</span></span>
-<span id="cb9-8"><a></a><span class="do">##  Small          14.5 1.15 Inf      12.4      16.9</span></span>
-<span id="cb9-9"><a></a><span class="do">##  Medium         55.1 2.14 Inf      51.0      59.4</span></span>
-<span id="cb9-10"><a></a><span class="do">##  Large         248.1 5.95 Inf     236.7     260.1</span></span>
-<span id="cb9-11"><a></a><span class="do">## </span></span>
-<span id="cb9-12"><a></a><span class="do">## Confidence level used: 0.95 </span></span>
-<span id="cb9-13"><a></a><span class="do">## Intervals are back-transformed from the log scale</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co"># 1. Calculate Estimated Marginal Means (EMMs)</span></span>
+<span id="cb10-2"><a></a><span class="co"># type = &quot;response&quot; converts the log-means back to the &quot;Species count&quot; scale</span></span>
+<span id="cb10-3"><a></a>emm_gala <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(model_poisson_gala, </span>
+<span id="cb10-4"><a></a>                    <span class="at">specs =</span> <span class="sc">~</span> size_category,</span>
+<span id="cb10-5"><a></a>                    <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb10-6"><a></a><span class="fu">print</span>(emm_gala)</span>
+<span id="cb10-7"><a></a><span class="do">##  size_category  rate   SE  df asymp.LCL asymp.UCL</span></span>
+<span id="cb10-8"><a></a><span class="do">##  Small          14.5 1.15 Inf      12.4      16.9</span></span>
+<span id="cb10-9"><a></a><span class="do">##  Medium         55.1 2.14 Inf      51.0      59.4</span></span>
+<span id="cb10-10"><a></a><span class="do">##  Large         248.1 5.95 Inf     236.7     260.1</span></span>
+<span id="cb10-11"><a></a><span class="do">## </span></span>
+<span id="cb10-12"><a></a><span class="do">## Confidence level used: 0.95 </span></span>
+<span id="cb10-13"><a></a><span class="do">## Intervals are back-transformed from the log scale</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:40%;">
 <p>Let’s check the emmeans and pairwise comparisons</p>
@@ -2824,9 +2895,9 @@ family = gaussian(link = “identity”))</li>
 <p>Model Type R Code (Example) Interpretation of β₁ GLM (Log-Link) glm(Y ~ X, family = poisson) A 1-unit change in X multiplies the mean of Y by exp(β₁). lm (Log-Response) lm(log(Y) ~ X) A 1-unit change in X multiplies the median of Y by exp(β₁). lm (Log-Log) lm(log(Y) ~ log(X)) A 1% change in</p>
 <table class="caption-top">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 34%">
-<col style="width: 40%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -2924,62 +2995,6 @@ family = gaussian(link = “identity”))</li>
 </div>
 </div>
 </div></div>
-</section>
-
-<section id="example-comparison-of-logged-response-variable-and-glm" class="title-slide slide level1 center">
-<h1>Example comparison of logged response variable and GLM</h1>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># Simulate data that students might log-transform</span></span>
-<span id="cb12-2"><a></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb12-3"><a></a>treatment_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb12-4"><a></a>  <span class="at">treatment =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>), <span class="at">each =</span> <span class="dv">20</span>),</span>
-<span id="cb12-5"><a></a>  <span class="at">biomass =</span> <span class="fu">c</span>(<span class="fu">rlnorm</span>(<span class="dv">20</span>, <span class="at">meanlog =</span> <span class="dv">2</span>, <span class="at">sdlog =</span> <span class="fl">0.5</span>),</span>
-<span id="cb12-6"><a></a>              <span class="fu">rlnorm</span>(<span class="dv">20</span>, <span class="at">meanlog =</span> <span class="fl">2.5</span>, <span class="at">sdlog =</span> <span class="fl">0.5</span>),</span>
-<span id="cb12-7"><a></a>              <span class="fu">rlnorm</span>(<span class="dv">20</span>, <span class="at">meanlog =</span> <span class="dv">3</span>, <span class="at">sdlog =</span> <span class="fl">0.5</span>))</span>
-<span id="cb12-8"><a></a>)</span>
-<span id="cb12-9"><a></a></span>
-<span id="cb12-10"><a></a><span class="co"># Approach 1: Log transformation + ANOVA</span></span>
-<span id="cb12-11"><a></a>model_log <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(biomass) <span class="sc">~</span> treatment, <span class="at">data =</span> treatment_data)</span>
-<span id="cb12-12"><a></a></span>
-<span id="cb12-13"><a></a><span class="co"># Approach 2: Gamma GLM with log link</span></span>
-<span id="cb12-14"><a></a>model_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(biomass <span class="sc">~</span> treatment, </span>
-<span id="cb12-15"><a></a>                 <span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>), </span>
-<span id="cb12-16"><a></a>                 <span class="at">data =</span> treatment_data)</span>
-<span id="cb12-17"><a></a></span>
-<span id="cb12-18"><a></a><span class="co"># Compare predictions on original scale</span></span>
-<span id="cb12-19"><a></a><span class="fu">cat</span>(<span class="st">&quot;logged response variable</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
-<span id="cb12-20"><a></a><span class="do">## logged response variable</span></span>
-<span id="cb12-21"><a></a><span class="fu">emmeans</span>(model_log, <span class="sc">~</span>treatment, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)  <span class="co"># Geometric means</span></span>
-<span id="cb12-22"><a></a><span class="do">##  treatment response    SE df lower.CL upper.CL</span></span>
-<span id="cb12-23"><a></a><span class="do">##  Control       7.93 0.818 57     6.45     9.75</span></span>
-<span id="cb12-24"><a></a><span class="do">##  High         21.18 2.180 57    17.23    26.04</span></span>
-<span id="cb12-25"><a></a><span class="do">##  Low          11.87 1.220 57     9.66    14.60</span></span>
-<span id="cb12-26"><a></a><span class="do">## </span></span>
-<span id="cb12-27"><a></a><span class="do">## Confidence level used: 0.95 </span></span>
-<span id="cb12-28"><a></a><span class="do">## Intervals are back-transformed from the log scale</span></span>
-<span id="cb12-29"><a></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
-<span id="cb12-30"><a></a><span class="fu">cat</span>(<span class="st">&quot;using glm opn original scale</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
-<span id="cb12-31"><a></a><span class="do">## using glm opn original scale</span></span>
-<span id="cb12-32"><a></a><span class="fu">emmeans</span>(model_glm, <span class="sc">~</span>treatment, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)  <span class="co"># Arithmetic means</span></span>
-<span id="cb12-33"><a></a><span class="do">##  treatment response    SE df lower.CL upper.CL</span></span>
-<span id="cb12-34"><a></a><span class="do">##  Control       8.86 0.939 57     7.16     11.0</span></span>
-<span id="cb12-35"><a></a><span class="do">##  High         23.73 2.520 57    19.19     29.3</span></span>
-<span id="cb12-36"><a></a><span class="do">##  Low          12.84 1.360 57    10.39     15.9</span></span>
-<span id="cb12-37"><a></a><span class="do">## </span></span>
-<span id="cb12-38"><a></a><span class="do">## Confidence level used: 0.95 </span></span>
-<span id="cb12-39"><a></a><span class="do">## Intervals are back-transformed from the log scale</span></span>
-<span id="cb12-40"><a></a></span>
-<span id="cb12-41"><a></a><span class="co"># Show how the interpretation differs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
 </section>
 
 <section id="logistic-regression---introduction" class="title-slide slide level1 center">

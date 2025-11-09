@@ -95,6 +95,59 @@ categorical/multinomial response variables, using maximum likelihood
 :::
 :::::
 
+# Example comparison of logged response variable and GLM
+
+::: {.callout-important appearance="simple"}
+
+::: {.cell}
+
+```{.r .cell-code}
+# Simulate data that students might log-transform
+set.seed(123)
+treatment_data <- data.frame(
+  treatment = rep(c("Control", "Low", "High"), each = 20),
+  biomass = c(rlnorm(20, meanlog = 2, sdlog = 0.5),
+              rlnorm(20, meanlog = 2.5, sdlog = 0.5),
+              rlnorm(20, meanlog = 3, sdlog = 0.5))
+)
+
+# Approach 1: Log transformation + ANOVA
+model_log <- lm(log(biomass) ~ treatment, data = treatment_data)
+
+# Approach 2: Gamma GLM with log link
+model_glm <- glm(biomass ~ treatment, 
+                 family = Gamma(link = "log"), 
+                 data = treatment_data)
+
+# Compare predictions on original scale
+cat("logged response variable\n\n")
+## logged response variable
+emmeans(model_log, ~treatment, type = "response")  # Geometric means
+##  treatment response    SE df lower.CL upper.CL
+##  Control       7.93 0.818 57     6.45     9.75
+##  High         21.18 2.180 57    17.23    26.04
+##  Low          11.87 1.220 57     9.66    14.60
+## 
+## Confidence level used: 0.95 
+## Intervals are back-transformed from the log scale
+cat("\n\n")
+cat("using glm opn original scale\n\n")
+## using glm opn original scale
+emmeans(model_glm, ~treatment, type = "response")  # Arithmetic means
+##  treatment response    SE df lower.CL upper.CL
+##  Control       8.86 0.939 57     7.16     11.0
+##  High         23.73 2.520 57    19.19     29.3
+##  Low          12.84 1.360 57    10.39     15.9
+## 
+## Confidence level used: 0.95 
+## Intervals are back-transformed from the log scale
+
+# Show how the interpretation differs
+```
+:::
+
+:::
+
 # The Three Elements of a GLM
 
 ### GLMs consist of three components:
@@ -380,7 +433,7 @@ residuals ($\sigma$)
             predictors. It's your baseline, or the total amount of
             variation in the data to be explained
     -   Residual deviance
-        -    conceptually the same as the "Model Sum of Squares" in an
+        -   conceptually the same as the "Model Sum of Squares" in an
             ANOVA
 
         -   Null Deviance tells you your `size_category` predictor is
@@ -515,6 +568,22 @@ is why a Poisson model works**]{.underline}
 :::
 
 ::: {.column width="50%"}
+-   model is predicting the natural logarithm (log) of the expected
+    species count
+-   exponentiate them (i.e., calculate $e^{\text{coefficient}}$ or
+    exp(coefficient).
+-   converts the additive log-counts back into a multiplicative effect
+    on the actual species count
+-   exp(2.67101) = 14.45 species on a "Small" island
+-   exp(1.33784) = 3.81
+    -   "Medium" island predicted to have 3.81x more species than
+        "Small" island, on average
+-   exp(2.84300) = 17.17
+    -   "Large" island is predicted to have 17.17 times more species
+        than a "Small" island, on average
+-   Dispersion - Divide the deviance by its df: $939.74 / 27 \approx$
+    34.8
+
 
 ::: {.cell}
 
@@ -772,7 +841,7 @@ multiplies the median of Y by exp(β₁). lm (Log-Log) lm(log(Y) \~ log(X))
 A 1% change in
 
 | Model Type | R Code (Example) | Interpretation of β₁ |
-|------------------|-------------------------|-----------------------------|
+|----|----|----|
 | GLM (Log-Link) | `glm(Y ~ X, family = poisson)` | A 1-unit change in X multiplies the mean of Y by exp(β₁). |
 | lm (Log-Response) | `lm(log(Y) ~ X)` | A 1-unit change in X multiplies the median of Y by exp(β₁). |
 | lm (Log-Log) | `lm(log(Y) ~ log(X))` | A 1% change in X is associated with a β₁% change in Y. |
@@ -851,59 +920,6 @@ Let's compare the predictions from both models:
 
 :::
 :::::
-
-# Example comparison of logged response variable and GLM
-
-::: {.callout-important appearance="simple"}
-
-::: {.cell}
-
-```{.r .cell-code}
-# Simulate data that students might log-transform
-set.seed(123)
-treatment_data <- data.frame(
-  treatment = rep(c("Control", "Low", "High"), each = 20),
-  biomass = c(rlnorm(20, meanlog = 2, sdlog = 0.5),
-              rlnorm(20, meanlog = 2.5, sdlog = 0.5),
-              rlnorm(20, meanlog = 3, sdlog = 0.5))
-)
-
-# Approach 1: Log transformation + ANOVA
-model_log <- lm(log(biomass) ~ treatment, data = treatment_data)
-
-# Approach 2: Gamma GLM with log link
-model_glm <- glm(biomass ~ treatment, 
-                 family = Gamma(link = "log"), 
-                 data = treatment_data)
-
-# Compare predictions on original scale
-cat("logged response variable\n\n")
-## logged response variable
-emmeans(model_log, ~treatment, type = "response")  # Geometric means
-##  treatment response    SE df lower.CL upper.CL
-##  Control       7.93 0.818 57     6.45     9.75
-##  High         21.18 2.180 57    17.23    26.04
-##  Low          11.87 1.220 57     9.66    14.60
-## 
-## Confidence level used: 0.95 
-## Intervals are back-transformed from the log scale
-cat("\n\n")
-cat("using glm opn original scale\n\n")
-## using glm opn original scale
-emmeans(model_glm, ~treatment, type = "response")  # Arithmetic means
-##  treatment response    SE df lower.CL upper.CL
-##  Control       8.86 0.939 57     7.16     11.0
-##  High         23.73 2.520 57    19.19     29.3
-##  Low          12.84 1.360 57    10.39     15.9
-## 
-## Confidence level used: 0.95 
-## Intervals are back-transformed from the log scale
-
-# Show how the interpretation differs
-```
-:::
-
-:::
 
 # Logistic Regression - Introduction
 
