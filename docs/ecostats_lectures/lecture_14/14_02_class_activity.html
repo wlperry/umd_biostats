@@ -5108,8 +5108,8 @@ W = 0.94396, p-value = 0.1273</code></pre>
 </div>
 </section>
 </section>
-<section id="levenes-test" class="level2">
-<h2 class="anchored" data-anchor-id="levenes-test">Levenes Test</h2>
+<section id="levenes-test---this-is-why-a-poisson-model-fits" class="level2">
+<h2 class="anchored" data-anchor-id="levenes-test---this-is-why-a-poisson-model-fits">Levenes Test - this is why a Poisson Model fits</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leveneTest</span>(endemics <span class="sc">~</span> size_cat,  <span class="at">data =</span> g_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -5121,7 +5121,9 @@ group  2  7.9881 0.001975 **
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
 </div>
-<p>Dharma Assumption Test</p>
+</section>
+<section id="dharma-assumption-test" class="level2">
+<h2 class="anchored" data-anchor-id="dharma-assumption-test">Dharma Assumption Test</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Simulate residuals</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (This is the standard first step for all DHARMa diagnostics)</span></span>

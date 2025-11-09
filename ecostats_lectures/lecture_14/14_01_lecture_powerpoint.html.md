@@ -37,15 +37,16 @@ format:
 -   Nested ANOVA
 -   ASSUMPTIONS OF ALL
     -   Homogeneity of variance - Levenes or Bartletts Test
+
     -   Normality of Residuals
+
     -   Independence
 
 # Lecture 14: GLM Overview
 
 ### Overview
 
-General Linear Models GLM
-
+-   General Linear Models GLM
 -   Essentially the same as before while using defined distributions
     -   Normal
     -   Lognormal
@@ -53,10 +54,8 @@ General Linear Models GLM
     -   Poisson
     -   Gamma
     -   Negative binomial
-
-Logistic Regression
-
--   when the outcome is yes or no or categorical
+-   Logistic Regression
+    -   when the outcome is yes or no or categorical
 
 # Overview of Generalized Linear Models (GLMs)
 
@@ -64,8 +63,10 @@ Logistic Regression
 ::: {.column width="60%"}
 General linear models assume normal distribution of response variables
 and residuals. However, many types of biological data don't meet this
-assumption. Generalized Linear Models (GLMs) allow for a wider range of
-probability distributions for the response variable.
+assumption.
+
+Generalized Linear Models (GLMs) allow for a wider range of probability
+distributions for the response variable.
 
 GLMs allow all types of "exponential family" distributions:
 
@@ -87,7 +88,7 @@ categorical/multinomial response variables, using maximum likelihood
 
 ::: {.cell}
 ::: {.cell-output-display}
-![Examples of distributions in the exponential family](14_01_lecture_powerpoint_files/figure-revealjs/glm-distributions-1.png){width=576}
+![Examples of distributions in the exponential family](14_01_lecture_powerpoint_files/figure-html/glm-distributions-1.png){width=576}
 :::
 :::
 
@@ -100,10 +101,8 @@ categorical/multinomial response variables, using maximum likelihood
 
 1.  **Response component**: The response variable and its probability
     distribution (from exponential family: normal, binomial, Poisson)
-
 2.  **Systematic component**: The predictor variable(s) in the model,
     which can be continuous or categorical
-
 3.  **Link function**: Connects expected value of Y to predictor
     variables
 
@@ -176,7 +175,7 @@ Let's look at the summary of our Gaussian GLM:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/summary-gaussian_2-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/summary-gaussian_2-1.png){width=480}
 :::
 :::
 
@@ -244,52 +243,52 @@ category.
         
         <tbody>
                 <tr>
-                  <td data-row="1" data-col="1">23</td>
-                  <td data-row="1" data-col="2">25.09</td>
-                  <td data-row="1" data-col="3">Medium</td>
-                  <td data-row="1" data-col="4">346</td>
+                  <td data-row="1" data-col="1">89</td>
+                  <td data-row="1" data-col="2">4669.32</td>
+                  <td data-row="1" data-col="3">Large</td>
+                  <td data-row="1" data-col="4">1707</td>
                 </tr>
                 <tr>
-                  <td data-row="2" data-col="1">21</td>
-                  <td data-row="2" data-col="2">1.24</td>
-                  <td data-row="2" data-col="3">Medium</td>
-                  <td data-row="2" data-col="4">109</td>
+                  <td data-row="2" data-col="1">95</td>
+                  <td data-row="2" data-col="2">903.82</td>
+                  <td data-row="2" data-col="3">Large</td>
+                  <td data-row="2" data-col="4">864</td>
                 </tr>
                 <tr>
-                  <td data-row="3" data-col="1">3</td>
-                  <td data-row="3" data-col="2">0.21</td>
-                  <td data-row="3" data-col="3">Small</td>
-                  <td data-row="3" data-col="4">114</td>
+                  <td data-row="3" data-col="1">35</td>
+                  <td data-row="3" data-col="2">634.49</td>
+                  <td data-row="3" data-col="3">Large</td>
+                  <td data-row="3" data-col="4">1494</td>
                 </tr>
                 <tr>
-                  <td data-row="4" data-col="1">9</td>
-                  <td data-row="4" data-col="2">0.10</td>
-                  <td data-row="4" data-col="3">Small</td>
-                  <td data-row="4" data-col="4">46</td>
+                  <td data-row="4" data-col="1">81</td>
+                  <td data-row="4" data-col="2">572.33</td>
+                  <td data-row="4" data-col="3">Large</td>
+                  <td data-row="4" data-col="4">906</td>
                 </tr>
                 <tr>
-                  <td data-row="5" data-col="1">1</td>
-                  <td data-row="5" data-col="2">0.05</td>
-                  <td data-row="5" data-col="3">Small</td>
-                  <td data-row="5" data-col="4">77</td>
+                  <td data-row="5" data-col="1">65</td>
+                  <td data-row="5" data-col="2">551.62</td>
+                  <td data-row="5" data-col="3">Large</td>
+                  <td data-row="5" data-col="4">716</td>
                 </tr>
                 <tr>
-                  <td data-row="6" data-col="1">11</td>
-                  <td data-row="6" data-col="2">0.34</td>
-                  <td data-row="6" data-col="3">Small</td>
-                  <td data-row="6" data-col="4">119</td>
+                  <td data-row="6" data-col="1">73</td>
+                  <td data-row="6" data-col="2">170.92</td>
+                  <td data-row="6" data-col="3">Large</td>
+                  <td data-row="6" data-col="4">640</td>
                 </tr>
                 <tr>
-                  <td data-row="7" data-col="1">0</td>
-                  <td data-row="7" data-col="2">0.08</td>
-                  <td data-row="7" data-col="3">Small</td>
-                  <td data-row="7" data-col="4">93</td>
+                  <td data-row="7" data-col="1">23</td>
+                  <td data-row="7" data-col="2">129.49</td>
+                  <td data-row="7" data-col="3">Large</td>
+                  <td data-row="7" data-col="4">343</td>
                 </tr>
                 <tr>
-                  <td data-row="8" data-col="1">7</td>
-                  <td data-row="8" data-col="2">2.33</td>
+                  <td data-row="8" data-col="1">37</td>
+                  <td data-row="8" data-col="2">59.56</td>
                   <td data-row="8" data-col="3">Medium</td>
-                  <td data-row="8" data-col="4">168</td>
+                  <td data-row="8" data-col="4">777</td>
                 </tr>
         </tbody>
       </table>
@@ -308,7 +307,7 @@ Let's visualize endemic species by island size:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/summarygaussian_2a-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/summarygaussian_2a-1.png){width=480}
 :::
 :::
 
@@ -326,6 +325,17 @@ regression.
 Let's compare a standard linear model and a Gaussian GLM using the
 Galapagos dataset, modeling endemic species richness by island size
 category.
+
+-   Fit a standard linear model
+    -   model_lm \<- lm(Endemics \~ size_category,\
+        data = gala)
+-   Fit a Gaussian GLM
+    -   model_gaussian \<- glm(Endemics \~ size_category,\
+        data = gala,\
+        family = gaussian(link = "identity"))
+
+**Residual Standard Error**. This is the standard deviation of the
+residuals ($\sigma$)
 
 
 
@@ -358,7 +368,23 @@ category.
 :::
 
 ::: {.column .scrollable width="50%"}
-Let's look at the summary of our Gaussian GLM:
+-   Let's look at the summary of our Gaussian GLM:
+    -   Dispersion parameter
+        -   **variance of the residuals** ($\sigma^2$)
+    -   Null deviance
+        -   This is the error (deviance) of the "Null" or
+            "Intercept-Only" model
+
+        -   how much error you have when you try to predict the number
+            of endemics using *only* the overall average, without any
+            predictors. It's your baseline, or the total amount of
+            variation in the data to be explained
+    -   Residual deviance
+        -    conceptually the same as the "Model Sum of Squares" in an
+            ANOVA
+
+        -   Null Deviance tells you your `size_category` predictor is
+            *very* useful for explaining the number of endemics.
 
 
 ::: {.cell}
@@ -394,8 +420,20 @@ Let's look at the summary of our Gaussian GLM:
 
 ::::: columns
 ::: {.column width="60%"}
-Now let's perform an ANOVA on our LM and GLM model using the `car`
-package:
+-   Now let's perform an ANOVA on our LM and GLM model using the `car`
+    package:
+    -   **Residual Standard Error**. This is the standard deviation of
+        the residuals ($\sigma$)
+
+    -   **Residual Deviance divided by its degrees of freedom**: 5756.1
+        / 27 = 213.1878
+
+    -   In this context, "Sum Sq" (Sum of Squares) and "Deviance" are
+        the same thing.
+
+    -   **"Pearson residuals" are essentially the same as the regular
+        residuals** (observed - predicted) that you get from a standard
+        `lm()`
 
 
 ::: {.cell}
@@ -433,7 +471,7 @@ Visualizing the results:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/gaussian-plot-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/gaussian-plot-1.png){width=480}
 :::
 :::
 
@@ -450,6 +488,9 @@ in the coefficient values and overall model statistics.
 
 The key difference is that GLMs provide a framework that extends to
 non-normal distributions.
+
+[**Note when we look at Heteroscedascidity (SP) cone of despair - this
+is why a Poisson model works**]{.underline}
 
 # GLM with Poisson Distribution: Setup
 
@@ -703,7 +744,7 @@ Let's check the emmeans and pairwise comparisons
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/poisson-plot-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/poisson-plot-1.png){width=480}
 :::
 :::
 
@@ -722,13 +763,27 @@ Let's check the emmeans and pairwise comparisons
 :::
 :::::
 
+# Comparison of interpretation
+
+Model Type R Code (Example) Interpretation of β₁ GLM (Log-Link) glm(Y \~
+X, family = poisson) A 1-unit change in X multiplies the mean of Y by
+exp(β₁). lm (Log-Response) lm(log(Y) \~ X) A 1-unit change in X
+multiplies the median of Y by exp(β₁). lm (Log-Log) lm(log(Y) \~ log(X))
+A 1% change in
+
+| Model Type | R Code (Example) | Interpretation of β₁ |
+|------------------|-------------------------|-----------------------------|
+| GLM (Log-Link) | `glm(Y ~ X, family = poisson)` | A 1-unit change in X multiplies the mean of Y by exp(β₁). |
+| lm (Log-Response) | `lm(log(Y) ~ X)` | A 1-unit change in X multiplies the median of Y by exp(β₁). |
+| lm (Log-Log) | `lm(log(Y) ~ log(X))` | A 1% change in X is associated with a β₁% change in Y. |
+
 # Checking Model Assumptions with DHARMa
 
 ::: {.panel column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/gala-poisson-diagnostics-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/gala-poisson-diagnostics-1.png){width=576}
 :::
 :::
 
@@ -790,12 +845,65 @@ Let's compare the predictions from both models:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/gala-compare-models-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/gala-compare-models-1.png){width=480}
 :::
 :::
 
 :::
 :::::
+
+# Example comparison of logged response variable and GLM
+
+::: {.callout-important appearance="simple"}
+
+::: {.cell}
+
+```{.r .cell-code}
+# Simulate data that students might log-transform
+set.seed(123)
+treatment_data <- data.frame(
+  treatment = rep(c("Control", "Low", "High"), each = 20),
+  biomass = c(rlnorm(20, meanlog = 2, sdlog = 0.5),
+              rlnorm(20, meanlog = 2.5, sdlog = 0.5),
+              rlnorm(20, meanlog = 3, sdlog = 0.5))
+)
+
+# Approach 1: Log transformation + ANOVA
+model_log <- lm(log(biomass) ~ treatment, data = treatment_data)
+
+# Approach 2: Gamma GLM with log link
+model_glm <- glm(biomass ~ treatment, 
+                 family = Gamma(link = "log"), 
+                 data = treatment_data)
+
+# Compare predictions on original scale
+cat("logged response variable\n\n")
+## logged response variable
+emmeans(model_log, ~treatment, type = "response")  # Geometric means
+##  treatment response    SE df lower.CL upper.CL
+##  Control       7.93 0.818 57     6.45     9.75
+##  High         21.18 2.180 57    17.23    26.04
+##  Low          11.87 1.220 57     9.66    14.60
+## 
+## Confidence level used: 0.95 
+## Intervals are back-transformed from the log scale
+cat("\n\n")
+cat("using glm opn original scale\n\n")
+## using glm opn original scale
+emmeans(model_glm, ~treatment, type = "response")  # Arithmetic means
+##  treatment response    SE df lower.CL upper.CL
+##  Control       8.86 0.939 57     7.16     11.0
+##  High         23.73 2.520 57    19.19     29.3
+##  Low          12.84 1.360 57    10.39     15.9
+## 
+## Confidence level used: 0.95 
+## Intervals are back-transformed from the log scale
+
+# Show how the interpretation differs
+```
+:::
+
+:::
 
 # Logistic Regression - Introduction
 
@@ -827,7 +935,7 @@ linear function that can range from -∞ to +∞.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/logistic-curve-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/logistic-curve-1.png){width=480}
 :::
 :::
 
@@ -844,7 +952,7 @@ based on perimeter/area ratio.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/lizard-data-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/lizard-data-1.png){width=480}
 :::
 :::
 
@@ -901,7 +1009,7 @@ Let's visualize the data and the fitted model:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/lizard-plot-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/lizard-plot-1.png){width=480}
 :::
 :::
 
@@ -1131,7 +1239,7 @@ mean values.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/visualize-effects-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/visualize-effects-1.png){width=576}
 :::
 :::
 
@@ -1155,7 +1263,7 @@ Let's check the diagnostics for our multiple logistic regression model:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/diagnostics-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/diagnostics-1.png){width=576}
 :::
 :::
 
@@ -1221,7 +1329,7 @@ scientific publication.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/publication-figure-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/publication-figure-1.png){width=480}
 :::
 :::
 
@@ -1298,13 +1406,13 @@ Let's demonstrate this equivalence:
 ::: {.cell-output-display}
 
 ```{=html}
-<div class="tabwid"><style>.cl-dd44dac6{}.cl-dd40dbc4{font-family:'Helvetica';font-size:10pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-dd40dbec{font-family:'Helvetica';font-size:10pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-dd429a22{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-dd429a2c{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:3pt;padding-top:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;}.cl-dd42a832{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd42a833{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd42a83c{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd42a83d{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0.75pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd42a83e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-dd42a846{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0.75pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-dd44dac6'><thead><tr style="overflow-wrap:break-word;"><th class="cl-dd42a832"><p class="cl-dd429a22"><span class="cl-dd40dbc4">Term</span></p></th><th class="cl-dd42a833"><p class="cl-dd429a2c"><span class="cl-dd40dbc4">Linear.Regression</span></p></th><th class="cl-dd42a833"><p class="cl-dd429a2c"><span class="cl-dd40dbc4">Gaussian.GLM</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-dd42a83c"><p class="cl-dd429a22"><span class="cl-dd40dbec">(Intercept)</span></p></td><td class="cl-dd42a83d"><p class="cl-dd429a2c"><span class="cl-dd40dbec">37.885</span></p></td><td class="cl-dd42a83d"><p class="cl-dd429a2c"><span class="cl-dd40dbec">37.885</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-dd42a83e"><p class="cl-dd429a22"><span class="cl-dd40dbec">cyl</span></p></td><td class="cl-dd42a846"><p class="cl-dd429a2c"><span class="cl-dd40dbec">-2.876</span></p></td><td class="cl-dd42a846"><p class="cl-dd429a2c"><span class="cl-dd40dbec">-2.876</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-da1144f4{}.cl-da0db050{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-da0f5130{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-da0f513a{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-da0f5efa{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-da0f5efb{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-da0f5efc{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-da0f5f04{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-da0f5f05{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-da0f5f0e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-da1144f4'><thead><tr style="overflow-wrap:break-word;"><th class="cl-da0f5efa"><p class="cl-da0f5130"><span class="cl-da0db050">Term</span></p></th><th class="cl-da0f5efb"><p class="cl-da0f513a"><span class="cl-da0db050">Linear.Regression</span></p></th><th class="cl-da0f5efb"><p class="cl-da0f513a"><span class="cl-da0db050">Gaussian.GLM</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-da0f5efc"><p class="cl-da0f5130"><span class="cl-da0db050">(Intercept)</span></p></td><td class="cl-da0f5f04"><p class="cl-da0f513a"><span class="cl-da0db050">37.885</span></p></td><td class="cl-da0f5f04"><p class="cl-da0f513a"><span class="cl-da0db050">37.885</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-da0f5f05"><p class="cl-da0f5130"><span class="cl-da0db050">cyl</span></p></td><td class="cl-da0f5f0e"><p class="cl-da0f513a"><span class="cl-da0db050">-2.876</span></p></td><td class="cl-da0f5f0e"><p class="cl-da0f513a"><span class="cl-da0db050">-2.876</span></p></td></tr></tbody></table></div>
 ```
 
 :::
 
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/anova-glm-comparison-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/anova-glm-comparison-1.png){width=576}
 :::
 :::
 
@@ -1346,7 +1454,7 @@ model:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-revealjs/diagnostic-summary-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-html/diagnostic-summary-1.png){width=576}
 :::
 :::
 

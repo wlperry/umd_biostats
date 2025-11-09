@@ -57,7 +57,7 @@ format:
 
 ------------------------------------------------------------------------
 
-# Part 1: Gaussian GLM 
+# Part 1: Gaussian GLM
 
 The simplest form of GLM uses a normal (Gaussian) distribution with an
 identity link function. This is equivalent to standard ANOVA
@@ -482,7 +482,7 @@ W = 0.94396, p-value = 0.1273
 :::
 
 
-## Levenes Test
+## Levenes Test - this is why a Poisson Model fits
 
 
 ::: {.cell}
@@ -507,7 +507,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 
 
-Dharma Assumption Test
+## Dharma Assumption Test
 
 
 ::: {.cell}
@@ -926,7 +926,7 @@ Intervals are back-transformed from the log scale
 :::
 
 
-## POISSON GLM Pairs Plots 
+## POISSON GLM Pairs Plots
 
 
 ::: {.cell}
