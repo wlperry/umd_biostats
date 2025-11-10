@@ -4505,21 +4505,21 @@
     "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#review",
     "title": "Lecture 15 - ANCOVA",
     "section": "Review",
-    "text": "Review\nGeneral Linearized Models (GLM)\n\nGaussian GLMs (normal distribution)\nPoisson GLMs (count data)\nLogistic GLMs (binary outcomes)\nModel assumptions and diagnostics\nConnection to ANOVA and linear models"
+    "text": "Review\n\nGeneral Linear Models (GLM)\n\nGaussian GLMs (normal distribution)\nPoisson GLMs (count data)\nLogistic GLMs (binary outcomes)\nModel assumptions and diagnostics\nConnection to ANOVA and linear models"
   },
   {
     "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#overview",
     "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#overview",
     "title": "Lecture 15 - ANCOVA",
     "section": "Overview",
-    "text": "Overview\nAnalysis of covariance (ANCOVA):\n\nIntroduction to ANCOVA\nWhen to use ANCOVA\nLinear model for ANCOVA\nAnalysis of variance in ANCOVA\nAssumptions of ANCOVA\n\nHomogeneous slopes\n\nRobust ANCOVA approaches\nSpecific comparisons of means\nExamples and interpretation\nScientific reporting of ANCOVA results"
+    "text": "Overview\n\nAnalysis of covariance (ANCOVA):\n\nIntroduction to ANCOVA\nWhen to use ANCOVA\nLinear model for ANCOVA\nAnalysis of variance in ANCOVA\nAssumptions of ANCOVA\n\nHomogeneous slopes\n\nRobust ANCOVA approaches\nSpecific comparisons of means\nExamples and interpretation\nScientific reporting of ANCOVA results"
   },
   {
     "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#what-is-ancova",
     "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#what-is-ancova",
     "title": "Lecture 15 - ANCOVA",
     "section": "What is ANCOVA?",
-    "text": "What is ANCOVA?\n\nANCOVA = Analysis of COVAriance\nCombination of regression and ANOVA\nA continuous covariate is measured along with the response variable for each experimental unit\nCommon use: compare means of factor levels (groups), adjusting for variance from continuous covariate\nAnother use: determine whether two or more regression lines differ in slopes and intercepts"
+    "text": "What is ANCOVA?\n\nANCOVA = Analysis of COVAriance\nCombination of regression and ANOVA\nA continuous covariate is measured along with the response variable for each experimental unit\nCommon use:\n\ncompare means of factor levels (groups), adjusting for variance from continuous covariate\n\nAnother use:\n\ndetermine whether two or more regression lines differ in slopes and intercepts"
   },
   {
     "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#common-applications-of-ancova",
@@ -4533,14 +4533,7 @@
     "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#cricket-chirping-example",
     "title": "Lecture 15 - ANCOVA",
     "section": "Cricket Chirping Example",
-    "text": "Cricket Chirping Example\nWant to compare chirping rate of two cricket species:\n\nOecanthus exclamationis\nOecanthus niveus\n\nBut:\n\nMeasured rates at different temperatures\nRange of temperatures differed between species\nApparent relationship between pulse rate and temperature\n\nANCOVA lets us adjust for temperature effect to get a more powerful test!"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#the-ancova-model",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#the-ancova-model",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "The ANCOVA Model",
-    "text": "The ANCOVA Model\nKey concept in ANCOVA: the difference between “unadjusted” group means and “adjusted” means.\nIn this visualization:\n\nGroup Means (shown as asterisks): raw/unadjusted means for each group - simply the average X value and average Y value for all points in that group. Notice that Group A and Group B have different mean X values (they’re positioned at different points along the X axis).\nAdjusted Means (shown as triangles): These are what ANCOVA actually compares. The adjusted means represent what each group’s mean would be if all groups had the same value of the covariate (in this case, the overall mean X).\n\nThe core purpose of ANCOVA is to make this adjustment. This is important because:\n\nWhen groups differ in their covariate values (as they often do in observational studies or even in experiments with random assignment), comparing raw means can be misleading\nThe adjustment helps “level the playing field” by estimating what each group’s mean would be if they all had the same value of the covariate"
+    "text": "Cricket Chirping Example\n\nWant to compare chirping rate of two cricket species:\n\nOecanthus exclamationis\nOecanthus niveus\n\nBut:\n\nMeasured rates at different temperatures\nRange of temperatures differed between species\nApparent relationship between pulse rate and temperature\n\nANCOVA lets us adjust for temperature effect to get a more powerful test!"
   },
   {
     "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#interpretation-of-parameters",
@@ -4666,28 +4659,28 @@
     "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html",
     "title": "Lecture 15 - ANCOVA",
     "section": "",
-    "text": "General Linearized Models (GLM)\n\nGaussian GLMs (normal distribution)\nPoisson GLMs (count data)\nLogistic GLMs (binary outcomes)\nModel assumptions and diagnostics\nConnection to ANOVA and linear models"
+    "text": "General Linear Models (GLM)\n\nGaussian GLMs (normal distribution)\nPoisson GLMs (count data)\nLogistic GLMs (binary outcomes)\nModel assumptions and diagnostics\nConnection to ANOVA and linear models"
   },
   {
     "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#review",
     "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#review",
     "title": "Lecture 15 - ANCOVA",
     "section": "",
-    "text": "General Linearized Models (GLM)\n\nGaussian GLMs (normal distribution)\nPoisson GLMs (count data)\nLogistic GLMs (binary outcomes)\nModel assumptions and diagnostics\nConnection to ANOVA and linear models"
+    "text": "General Linear Models (GLM)\n\nGaussian GLMs (normal distribution)\nPoisson GLMs (count data)\nLogistic GLMs (binary outcomes)\nModel assumptions and diagnostics\nConnection to ANOVA and linear models"
   },
   {
     "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#overview",
     "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#overview",
     "title": "Lecture 15 - ANCOVA",
     "section": "Overview",
-    "text": "Overview\nAnalysis of covariance (ANCOVA):\n\nIntroduction to ANCOVA\nWhen to use ANCOVA\nLinear model for ANCOVA\nAnalysis of variance in ANCOVA\nAssumptions of ANCOVA\n\nHomogeneous slopes\n\nRobust ANCOVA approaches\nSpecific comparisons of means\nExamples and interpretation\nScientific reporting of ANCOVA results"
+    "text": "Overview\n\nAnalysis of covariance (ANCOVA):\n\nIntroduction to ANCOVA\nWhen to use ANCOVA\nLinear model for ANCOVA\nAnalysis of variance in ANCOVA\nAssumptions of ANCOVA\n\nHomogeneous slopes\n\nRobust ANCOVA approaches\nSpecific comparisons of means\nExamples and interpretation\nScientific reporting of ANCOVA results"
   },
   {
     "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#what-is-ancova",
     "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#what-is-ancova",
     "title": "Lecture 15 - ANCOVA",
     "section": "What is ANCOVA?",
-    "text": "What is ANCOVA?\n\nANCOVA = Analysis of COVAriance\nCombination of regression and ANOVA\nA continuous covariate is measured along with the response variable for each experimental unit\nCommon use: compare means of factor levels (groups), adjusting for variance from continuous covariate\nAnother use: determine whether two or more regression lines differ in slopes and intercepts"
+    "text": "What is ANCOVA?\n\nANCOVA = Analysis of COVAriance\nCombination of regression and ANOVA\nA continuous covariate is measured along with the response variable for each experimental unit\nCommon use:\n\ncompare means of factor levels (groups), adjusting for variance from continuous covariate\n\nAnother use:\n\ndetermine whether two or more regression lines differ in slopes and intercepts"
   },
   {
     "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#common-applications-of-ancova",
@@ -4701,14 +4694,7 @@
     "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#cricket-chirping-example",
     "title": "Lecture 15 - ANCOVA",
     "section": "Cricket Chirping Example",
-    "text": "Cricket Chirping Example\nWant to compare chirping rate of two cricket species:\n\nOecanthus exclamationis\nOecanthus niveus\n\nBut:\n\nMeasured rates at different temperatures\nRange of temperatures differed between species\nApparent relationship between pulse rate and temperature\n\nANCOVA lets us adjust for temperature effect to get a more powerful test!"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#the-ancova-model",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#the-ancova-model",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "The ANCOVA Model",
-    "text": "The ANCOVA Model\nKey concept in ANCOVA: the difference between “unadjusted” group means and “adjusted” means.\nIn this visualization:\n\nGroup Means (shown as asterisks): raw/unadjusted means for each group - simply the average X value and average Y value for all points in that group. Notice that Group A and Group B have different mean X values (they’re positioned at different points along the X axis).\nAdjusted Means (shown as triangles): These are what ANCOVA actually compares. The adjusted means represent what each group’s mean would be if all groups had the same value of the covariate (in this case, the overall mean X).\n\nThe core purpose of ANCOVA is to make this adjustment. This is important because:\n\nWhen groups differ in their covariate values (as they often do in observational studies or even in experiments with random assignment), comparing raw means can be misleading\nThe adjustment helps “level the playing field” by estimating what each group’s mean would be if they all had the same value of the covariate"
+    "text": "Cricket Chirping Example\n\nWant to compare chirping rate of two cricket species:\n\nOecanthus exclamationis\nOecanthus niveus\n\nBut:\n\nMeasured rates at different temperatures\nRange of temperatures differed between species\nApparent relationship between pulse rate and temperature\n\nANCOVA lets us adjust for temperature effect to get a more powerful test!"
   },
   {
     "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#interpretation-of-parameters",

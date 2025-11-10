@@ -24,13 +24,12 @@ format:
 ::: {.column width="60%"}
 ## Review
 
-General Linearized Models (GLM)
-
--   Gaussian GLMs (normal distribution)
--   Poisson GLMs (count data)
--   Logistic GLMs (binary outcomes)
--   Model assumptions and diagnostics
--   Connection to ANOVA and linear models
+-   General Linear Models (GLM)
+    -   Gaussian GLMs (normal distribution)
+    -   Poisson GLMs (count data)
+    -   Logistic GLMs (binary outcomes)
+    -   Model assumptions and diagnostics
+    -   Connection to ANOVA and linear models
 :::
 
 ::: {.column width="40%"}
@@ -46,18 +45,17 @@ General Linearized Models (GLM)
 
 ## Overview
 
-Analysis of covariance (ANCOVA):
-
--   Introduction to ANCOVA
--   When to use ANCOVA
--   Linear model for ANCOVA
--   Analysis of variance in ANCOVA
--   Assumptions of ANCOVA
-    -   Homogeneous slopes
--   Robust ANCOVA approaches
--   Specific comparisons of means
--   Examples and interpretation
--   Scientific reporting of ANCOVA results
+-   Analysis of covariance (ANCOVA):
+    -   Introduction to ANCOVA
+    -   When to use ANCOVA
+    -   Linear model for ANCOVA
+    -   Analysis of variance in ANCOVA
+    -   Assumptions of ANCOVA
+        -   Homogeneous slopes
+    -   Robust ANCOVA approaches
+    -   Specific comparisons of means
+    -   Examples and interpretation
+    -   Scientific reporting of ANCOVA results
 
 # Introduction to ANCOVA
 
@@ -69,10 +67,12 @@ Analysis of covariance (ANCOVA):
 -   Combination of regression and ANOVA
 -   A continuous covariate is measured along with the response variable
     for each experimental unit
--   Common use: compare means of factor levels (groups), adjusting for
-    variance from continuous covariate
--   Another use: determine whether two or more regression lines differ
-    in slopes and intercepts
+-   Common use:
+    -   compare means of factor levels (groups), adjusting for variance
+        from continuous covariate
+-   Another use:
+    -   determine whether two or more regression lines differ in slopes
+        and intercepts
 :::
 
 ::: {.column width="40%"}
@@ -108,19 +108,15 @@ Analysis of covariance (ANCOVA):
 ::: {.column width="60%"}
 ## Cricket Chirping Example
 
-Want to compare chirping rate of two cricket species:
-
--   *Oecanthus exclamationis*
--   *Oecanthus niveus*
-
-But:
-
--   Measured rates at different temperatures
--   Range of temperatures differed between species
--   Apparent relationship between pulse rate and temperature
-
-ANCOVA lets us adjust for temperature effect to get a more powerful
-test!
+-   Want to compare chirping rate of two cricket species:
+    -   *Oecanthus exclamationis*
+    -   *Oecanthus niveus*
+-   But:
+    -   Measured rates at different temperatures
+    -   Range of temperatures differed between species
+    -   Apparent relationship between pulse rate and temperature
+-   ANCOVA lets us adjust for temperature effect to get a more powerful
+    test!
 :::
 
 ::: {.column width="40%"}
@@ -136,33 +132,20 @@ test!
 
 # ANCOVA Linear Model: Conceptual Framework
 
-## The ANCOVA Model
+### The ANCOVA Model
 
-Key concept in ANCOVA: the difference between "unadjusted" group means
-and "adjusted" means.
-
-In this visualization:
-
--   Group Means (shown as asterisks): raw/unadjusted means for each
-    group - simply the average X value and average Y value for all
-    points in that group. Notice that Group A and Group B have different
-    mean X values (they're positioned at different points along the X
-    axis).
-
--   Adjusted Means (shown as triangles): These are what ANCOVA actually
-    compares. The adjusted means represent what each group's mean would
-    be if all groups had the same value of the covariate (in this case,
-    the overall mean X).
-
-The core purpose of ANCOVA is to make this adjustment. This is important
-because:
-
--   When groups differ in their covariate values (as they often do in
-    observational studies or even in experiments with random
-    assignment), comparing raw means can be misleading
--   The adjustment helps "level the playing field" by estimating what
-    each group's mean would be if they all had the same value of the
-    covariate
+-   Key concept in ANCOVA: the difference between "unadjusted" group
+    means and "adjusted" means.
+-   In this visualization:
+    -   Group Means (asterisks): unadjusted means for each group 
+          - average X value and average Y value for all points in that group. 
+            - Group A and Group B have different mean X values - different points along the X axis
+    -   Adjusted Means (triangles): What ANCOVA actually compares
+      - adjusted means represent group's mean if all groups had same value of covariate (overall mean X).
+-   The core purpose of ANCOVA is to make this adjustment and important because:
+    -   When groups differ in their covariate values (as they often do in observational studies or even in exps with random assignment), comparing raw means can be misleading
+    -   Adjustment helps "level the playing field" by estimating
+        what each group's mean would be if all had same value of covariate
 
 # ANCOVA Model Visualization
 
