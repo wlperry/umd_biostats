@@ -97,7 +97,8 @@ categorical/multinomial response variables, using maximum likelihood
 
 # Example comparison of logged response variable and GLM
 
-::: {.callout-important appearance="simple"}
+::::: columns
+::: {.column width="50%"}
 
 ::: {.cell}
 
@@ -108,9 +109,7 @@ treatment_data <- data.frame(
   treatment = rep(c("Control", "Low", "High"), each = 20),
   biomass = c(rlnorm(20, meanlog = 2, sdlog = 0.5),
               rlnorm(20, meanlog = 2.5, sdlog = 0.5),
-              rlnorm(20, meanlog = 3, sdlog = 0.5))
-)
-
+              rlnorm(20, meanlog = 3, sdlog = 0.5)))
 # Approach 1: Log transformation + ANOVA
 model_log <- lm(log(biomass) ~ treatment, data = treatment_data)
 
@@ -118,7 +117,18 @@ model_log <- lm(log(biomass) ~ treatment, data = treatment_data)
 model_glm <- glm(biomass ~ treatment, 
                  family = Gamma(link = "log"), 
                  data = treatment_data)
+```
+:::
 
+:::
+
+::: {.column width="50%"}
+
+Here is the difference
+
+::: {.cell}
+
+```{.r .cell-code}
 # Compare predictions on original scale
 cat("logged response variable\n\n")
 ## logged response variable
@@ -141,12 +151,12 @@ emmeans(model_glm, ~treatment, type = "response")  # Arithmetic means
 ## 
 ## Confidence level used: 0.95 
 ## Intervals are back-transformed from the log scale
-
-# Show how the interpretation differs
 ```
 :::
 
+
 :::
+::::
 
 # The Three Elements of a GLM
 
@@ -186,16 +196,11 @@ Galapagos islands, testing MacArthur-Wilson's theory of island
 biogeography.
 
 -   **Variables in the dataset:**
-    -   `Species`
-    -   Number of plant species (count data)
-    -   `Endemics`
-    -   Number of endemic species (count data)
-    -   `Area`
-    -   Island area (km²)
-    -   `Elevation`
-    -   Maximum elevation (m)
-    -   `Nearest`
-    -   Distance to nearest island (km)
+    -   `Species`-   Number of plant species (count data)
+    -   `Endemics`-   Number of endemic species (count data)
+    -   `Area`-   Island area (km²)
+    -   `Elevation`-   Maximum elevation (m)
+    -   `Nearest`-   Distance to nearest island (km)
     -   `Scruz` - Distance to Santa Cruz island (km)
     -   `Adjacent` - Area of adjacent island (km²)
 
@@ -348,7 +353,6 @@ residuals ($\sigma$)
     -   Null deviance
         -   This is the error (deviance) of the "Null" or
             "Intercept-Only" model
-
         -   how much error you have when you try to predict the number
             of endemics using *only* the overall average, without any
             predictors. It's your baseline, or the total amount of
@@ -356,7 +360,6 @@ residuals ($\sigma$)
     -   Residual deviance
         -   conceptually the same as the "Model Sum of Squares" in an
             ANOVA
-
         -   Null Deviance tells you your `size_category` predictor is
             *very* useful for explaining the number of endemics.
 
@@ -398,13 +401,10 @@ residuals ($\sigma$)
     package:
     -   **Residual Standard Error**. This is the standard deviation of
         the residuals ($\sigma$)
-
     -   **Residual Deviance divided by its degrees of freedom**: 5756.1
         / 27 = 213.1878
-
     -   In this context, "Sum Sq" (Sum of Squares) and "Deviance" are
         the same thing.
-
     -   **"Pearson residuals" are essentially the same as the regular
         residuals** (observed - predicted) that you get from a standard
         `lm()`
@@ -455,7 +455,6 @@ Visualizing the results:
 # Equivalence of Linear Models and Gaussian GLMs
 
 ### Equivalence of Linear Models and Gaussian GLMs
-
 When we use a **Gaussian distribution** with an **identity link**, GLM
 gives identical results to standard linear regression. This can be seen
 in the coefficient values and overall model statistics.
@@ -497,13 +496,10 @@ is why a Poisson model works**]{.underline}
     on the actual species count
 -   exp(2.67101) = 14.45 species on a "Small" island
 -   exp(1.33784) = 3.81
-    -   "Medium" island predicted to have 3.81x more species than
-        "Small" island, on average
+    -   "Medium" predicted to have 3.81x more spp than "Small" island
 -   exp(2.84300) = 17.17
-    -   "Large" island is predicted to have 17.17 times more species
-        than a "Small" island, on average
--   Dispersion - Divide the deviance by its df: $939.74 / 27 \approx$
-    34.8
+    -   "Large" island is predicted to have 17.17 times more species than a "Small" island, on average
+-   Dispersion - Divide the deviance by its df: $939.74 / 27 \approx$ 34.8
 
 
 ::: {.cell}

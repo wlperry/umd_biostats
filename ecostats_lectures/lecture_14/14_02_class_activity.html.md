@@ -1,5 +1,5 @@
 ---
-title: "Lecture 14 - Generalized Linear Models"
+title: "Lecture 14 - Generalized Linear Models Activity"
 author: "Bill Perry"
 metadata-files:
   - ../../_templates/activities.yml
@@ -12,6 +12,35 @@ format:
 
 # THE SETUP
 
+
+::: {.cell}
+
+```{.r .cell-code}
+# Load required packages
+# install.packages("ResourceSelection")
+# install.packages("pscl")
+library(janitor)
+library(pscl)
+library(tinytable)
+library(skimr)
+library(performance)
+library(ResourceSelection)
+library(car)
+library(emmeans)
+library(DHARMa)
+library(MASS)
+library(broom)
+library(flextable)
+library(parameters)
+library(patchwork)  # For combining plots
+library(faraway)  # For gala dataset
+library(tidyverse)
+
+
+# Set options
+options(scipen = 999)
+```
+:::
 
 
 # Lecture 14: Generalized Linear Models Activity
@@ -2256,8 +2285,6 @@ Odds Ratio: 0.861
 ::: {.cell}
 
 ```{.r .cell-code}
-library(parameters)
-
 # This function is specifically for model parameters
 model_parameters(lizard_model, exponentiate = TRUE)
 ```
