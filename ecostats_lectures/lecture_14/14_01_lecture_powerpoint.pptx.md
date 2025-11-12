@@ -188,11 +188,15 @@ The simplest form of GLM uses a normal (Gaussian) distribution with an
 identity link function. This is equivalent to standard ANOVA
 
 -   Let's compare a standard linear model and a Gaussian GLM
+
 -   Island Biogeography Data
+
 -   The `gala` dataset from the `faraway` package contains data on 30
     Galapagos islands, testing MacArthur-Wilson's theory of island
     biogeography.
+
 -   **Variables in the dataset:**
+
     -   `Species`- Number of plant species (count data)
 
     -   `Endemics`- Number of endemic species (count data)
@@ -202,15 +206,15 @@ identity link function. This is equivalent to standard ANOVA
     -   `Elevation`- Maximum elevation (m)
 
 
-::: {.cell}
-
-```
-##           Species Endemics  Area Elevation Nearest size_category
-## Baltra         58       23 25.09       346     0.6        Medium
-## Bartolome      31       21  1.24       109     0.6        Medium
-## Caldwell        3        3  0.21       114     2.8         Small
-```
-:::
+    ::: {.cell}
+    
+    ```
+    ##           Species Endemics  Area Elevation Nearest size_category
+    ## Baltra         58       23 25.09       346     0.6        Medium
+    ## Bartolome      31       21  1.24       109     0.6        Medium
+    ## Caldwell        3        3  0.21       114     2.8         Small
+    ```
+    :::
 
 :::
 
@@ -236,7 +240,7 @@ identity link function. This is equivalent to standard linear
 regression.
 
 Let's compare a standard linear model and a Gaussian GLM using the
-Galapagos dataset, modeling endemic species richness by island size
+Galapagos dataset, modeling endemic Endemics richness by island size
 category.
 
 
@@ -268,7 +272,7 @@ category.
 :::
 
 ::: {.column width="40%"}
-Let's visualize endemic species by island size:
+Let's visualize endemic Endemics by island size:
 
 
 ::: {.cell}
@@ -288,14 +292,13 @@ The simplest form of GLM uses a normal (Gaussian) distribution with an
 identity link function. This is equivalent to standard linear
 regression.
 
-Let's compare a standard linear model and a Gaussian GLM using the
-Galapagos dataset, modeling endemic species richness by island size
-category.
-
--   Fit a standard linear model - model_lm \<- lm(Endemics \~
-    size_category,\
-    data = gala)
--   Fit a Gaussian GLM
+-   Let's compare a standard linear model and a Gaussian GLM using the
+    Galapagos dataset, modeling endemic species richness by island size
+    category.
+    -   Fit a standard linear model - model_lm \<- lm(Endemics \~
+        size_category,\
+        data = gala)
+    -   Fit a Gaussian GLM
     -   model_gaussian \<- glm(Endemics \~ size_category, data = gala,\
         family = gaussian(link = "identity")) **Residual Standard
         Error**. This is the standard deviation of the residuals
@@ -339,13 +342,14 @@ category.
 # GLM with Gaussian (Normal) Distribution: Setup
 
 ::::: columns
-::: {.column width="50%"}
+::: {.column width="60%"}
 -   Let's look at the summary of our Gaussian GLM:
     -   Dispersion parameter
         -   **variance of the residuals** ($\sigma^2$)
     -   Null deviance
         -   This is the error (deviance) of the "Null" or
             "Intercept-Only" model
+
         -   how much error you have when you try to predict the number
             of endemics using *only* the overall average, without any
             predictors. It's your baseline, or the total amount of
@@ -353,11 +357,12 @@ category.
     -   Residual deviance
         -   conceptually the same as the "Model Sum of Squares" in an
             ANOVA
+
         -   Null Deviance tells you your `size_category` predictor is
             *very* useful for explaining the number of endemics.
 :::
 
-::: {.column width="50%"}
+::: {.column width="40%"}
 
 ::: {.cell}
 
@@ -395,18 +400,19 @@ category.
 -   Now let's perform an ANOVA on LM and GLM model using `car`:
     -   **Residual Standard Error**. This is the standard deviation of
         the residuals ($\sigma$)
+
     -   **Residual Deviance/df**: 5756.1 / 27 = 213.1878
+
     -   In this context, "Sum Sq" (Sum of Squares) and "Deviance" are
         the same thing.
+
     -   **"Pearson residuals" are essentially the same as the regular
-        residuals** (observed - predicted) that you get from a standard
-        `lm()`
+        residuals**
 
 
 ::: {.cell}
 
-```{.r .cell-code}
-Anova(model_lm, type = "III", test = "F")
+```
 ## Anova Table (Type III tests)
 ## 
 ## Response: Endemics
@@ -416,7 +422,6 @@ Anova(model_lm, type = "III", test = "F")
 ## Residuals      5756.1 27                      
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-Anova(model_gaussian, type = "III", test = "F")
 ## Analysis of Deviance Table (Type III tests)
 ## 
 ## Response: Endemics
@@ -461,8 +466,6 @@ is why a Poisson model works**]{.underline}
 
 # GLM with Poisson Distribution: Setup
 
-::::: columns
-::: {.column width="50%"}
 -   **Poisson GLMs** Poisson model used when response variable is
     **count data**:
     -   Number of species on an island
@@ -478,9 +481,9 @@ is why a Poisson model works**]{.underline}
 -   Now let's fit a Poisson GLM to model the relationship between the
     rounded quarter-mile time and the number of cylinders:
 
-### Fit Poisson GLM with size_category as predictor
-:::
+# Fit Poisson GLM with size_category as predictor
 
+::::: columns
 ::: {.column width="50%"}
 -   model is predicting the natural logarithm (log) of the expected
     species count
@@ -496,33 +499,35 @@ is why a Poisson model works**]{.underline}
         than a "Small" island, on average
 -   Dispersion - Divide the deviance by its df: $939.74 / 27 \approx$
     34.8
+:::
 
+::: {.column width="50%"}
 
 ::: {.cell}
 
 ```{.r .cell-code}
-model_poisson_gala <- glm(Species ~ size_category, 
+model_poisson_gala <- glm(Endemics ~ size_category, 
                           data = gala,
                           family = poisson(link = "log"))
 summary(model_poisson_gala)
 ## 
 ## Call:
-## glm(formula = Species ~ size_category, family = poisson(link = "log"), 
+## glm(formula = Endemics ~ size_category, family = poisson(link = "log"), 
 ##     data = gala)
 ## 
 ## Coefficients:
 ##                     Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)          2.67101    0.07930   33.68   <2e-16 ***
-## size_categoryMedium  1.33784    0.08833   15.15   <2e-16 ***
-## size_categoryLarge   2.84300    0.08285   34.31   <2e-16 ***
+## (Intercept)           1.7292     0.1270  13.616   <2e-16 ***
+## size_categoryMedium   1.3465     0.1413   9.527   <2e-16 ***
+## size_categoryLarge    2.4582     0.1353  18.173   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for poisson family taken to be 1)
 ## 
-##     Null deviance: 3510.73  on 29  degrees of freedom
-## Residual deviance:  939.74  on 27  degrees of freedom
-## AIC: 1106.6
+##     Null deviance: 743.55  on 29  degrees of freedom
+## Residual deviance: 177.05  on 27  degrees of freedom
+## AIC: 316
 ## 
 ## Number of Fisher Scoring iterations: 5
 ```
@@ -573,18 +578,12 @@ Anova(model_poisson_gala, type = "III", test = "LR")
 # GLM with Poisson Distribution: Setup
 
 ::::: columns
-::: {.column width="60%"}
-**Poisson GLMs** are appropriate for **count data**. The Poisson
-distribution assumes that the variance equals the mean.
-
--   Use the quarter-mile time (`qsec`) from the `mtcars` dataset,
-    rounded to create a count-like variable.
--   With the natural log link, coefficients represent **multiplicative
-    effects**:
--   A coefficient of β means: for each 1-unit increase in X, the
-    response is multiplied by exp(β)
--   For small β, exp(β) ≈ 1 + β, so β × 100% gives approximate
-    percentage change
+::: {.column width="50%"}
+**Poisson GLMs** appropriate for **count data** and assumes variance
+equals mean - use the Gala Data and endemics - With natural log link,
+coefficients = **multiplicative effects**: - A coefficient of β means:
+for each 1-unit increase in X, the response is multiplied by exp(β) -
+For small β, exp(β) ≈ 1 + β, so β × 100% =app. %change
 
 
 ::: {.cell}
@@ -615,25 +614,15 @@ distribution assumes that the variance equals the mean.
 
 :::
 
-::: {.column width="40%"}
--   Let's check for overdispersion, which is common in count data:
-
--   Should be close to 1 for a well-fitting Poisson model
-
+::: {.column width="50%"}
+-   check overdispersion- common in count data:
+-   Should be close to 1 for well-fitting Poisson model
 -   If \> 1.5, may indicate overdispersion
-
-    -   **What is Underdispersion?**
-        -   In a Poisson model, we expect the variance to equal the
-            mean. The dispersion parameter measures the ratio of
-            observed variance to expected variance:
-            -   **Dispersion ≈ 1**: Good fit (variance = mean, as
-                Poisson assumes)
-            -   **Dispersion \> 1**: Overdispersion (variance \> mean)
-            -   **Dispersion \< 1**: **Underdispersion** (variance \<
-                mean)
-    -   a dispersion parameter this large is a warning
-    -   our data more variable than a Poisson model expects
-    -   use a Negative Binomial model
+-   Dispersion parameter measures obs var / expected var:
+-   **Dispersion ≈ 1**: Good fit (var = mean)
+-   **Dispersion \> 1**: Overdispersion (var \> mean)
+-   **Dispersion \< 1**: **Underdispersion** (var \< mean)
+-   use Negative Binomial model
 
 
 ::: {.cell}
@@ -646,7 +635,7 @@ dispersion_gala <- sum(residuals(model_poisson_gala, type = "pearson")^2) /
 
 # Print dispersion parameter
 cat("Dispersion parameter:", round(dispersion_gala, 2), "\n")
-## Dispersion parameter: 32.9
+## Dispersion parameter: 6.05
 ```
 :::
 
@@ -657,23 +646,23 @@ cat("Dispersion parameter:", round(dispersion_gala, 2), "\n")
 
 ::::: columns
 ::: {.column width="60%"}
--   **Poisson GLMs** are appropriate for **count data**. The Poisson
-    distribution assumes that the variance equals the mean.
+-   **Poisson GLMs** are appropriate for **count data**
+-   assumes that the variance equals the mean.
 
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # 1. Calculate Estimated Marginal Means (EMMs)
-# type = "response" converts the log-means back to the "Species count" scale
+# type = "response" converts the log-means back to the "Endemics count" scale
 emm_gala <- emmeans(model_poisson_gala, 
                     specs = ~ size_category,
                     type = "response")
 print(emm_gala)
-##  size_category  rate   SE  df asymp.LCL asymp.UCL
-##  Small          14.5 1.15 Inf      12.4      16.9
-##  Medium         55.1 2.14 Inf      51.0      59.4
-##  Large         248.1 5.95 Inf     236.7     260.1
+##  size_category  rate    SE  df asymp.LCL asymp.UCL
+##  Small          5.64 0.716 Inf      4.39      7.23
+##  Medium        21.67 1.340 Inf     19.19     24.47
+##  Large         65.86 3.070 Inf     60.11     72.15
 ## 
 ## Confidence level used: 0.95 
 ## Intervals are back-transformed from the log scale
@@ -724,11 +713,11 @@ Let's check the emmeans and pairwise comparisons
     -   shows the model's predictions on top of the real data
 
 
-::: {.cell}
-::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-pptx/poisson-plot-1.png)
-:::
-:::
+    ::: {.cell}
+    ::: {.cell-output-display}
+    ![](14_01_lecture_powerpoint_files/figure-pptx/poisson-plot-1.png)
+    :::
+    :::
 
 :::
 
@@ -736,22 +725,20 @@ Let's check the emmeans and pairwise comparisons
 ### Interpreting Poisson GLM Coefficients
 
 -   In a Poisson GLM with a log link function:
-    -   The coefficients represent changes in the **log** of the
-        expected count
-    -   When exponentiated (`exp(coef)`), they represent multiplicative
-        effects
-    -   For example, `exp(coef)` = 0.90 means the expected count is 90%
-        of the reference level
+    -   Coefficientschanges in the **log** of the expected count
+    -   When exponentiated (`exp(coef)`)= multiplicative effects
+    -   `exp(coef)` = 0.90 = the expected count is 90% of reference
 :::
 :::::
 
 # Comparison of interpretation
 
-Model Type R Code (Example) Interpretation of β₁ GLM (Log-Link) glm(Y \~
-X, family = poisson) A 1-unit change in X multiplies the mean of Y by
-exp(β₁). lm (Log-Response) lm(log(Y) \~ X) A 1-unit change in X
-multiplies the median of Y by exp(β₁). lm (Log-Log) lm(log(Y) \~ log(X))
-A 1% change in
+-   Interpretation of β₁ GLM (Log-Link) glm(Y\~X, family = poisson)
+    -   1-unit change in X multiplies the mean of Y by exp(β₁)
+-   lm (Log-Response) lm(log(Y) \~ X)
+    -   1-unit change in X multiplies median Y by exp(β₁).
+-   lm (Log-Log) lm(log(Y) \~ log(X))
+    -   A 1% change in
 
 | Model Type | R Code (Example) | Interpretation of β₁ |
 |----|----|----|
@@ -775,50 +762,49 @@ A 1% change in
 
 ::::: columns
 ::: {.column width="60%"}
-When count data shows more variability than expected under a Poisson
-distribution (variance \> mean), may need to use negative binomial model
-`model_nb <- glm.nb(qsec_round ~ cyl, data = mtcars_count)`
-
-
-::: {.cell}
-
-```
-## 
-## Call:
-## glm.nb(formula = Species ~ size_category, data = gala, init.theta = 1.709503171, 
-##     link = log)
-## 
-## Coefficients:
-##                     Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)           2.6710     0.2439  10.953  < 2e-16 ***
-## size_categoryMedium   1.3378     0.3313   4.039 5.37e-05 ***
-## size_categoryLarge    2.8430     0.3790   7.502 6.28e-14 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## (Dispersion parameter for Negative Binomial(1.7095) family taken to be 1)
-## 
-##     Null deviance: 90.168  on 29  degrees of freedom
-## Residual deviance: 32.932  on 27  degrees of freedom
-## AIC: 297.35
-## 
-## Number of Fisher Scoring iterations: 1
-## 
-## 
-##               Theta:  1.710 
-##           Std. Err.:  0.449 
-## 
-##  2 x log-likelihood:  -289.348
-```
-:::
-
+When overdispersion (variance \> mean) - use negative binomial model
+`model_nb <- glm.nb(Endemics ~ area_cat, data = gala)`
 
 -   negative binomial model includes a dispersion parameter (theta)
-    -   allows the variance to be larger than the mean
-    -   standard errors bigger because NB model accounts for high
-        variability (overdispersion)
+
+    -   allows variance to be larger than mean
+    -   **standard errors bigger because NB model accounts for high
+        variability (overdispersion)**
     -   estimates dispersion parameter 'Theta' (or 1/theta)
-    -   how it models the overdispersion.
+
+
+    ::: {.cell}
+    
+    ```
+    ## 
+    ## Call:
+    ## glm.nb(formula = Endemics ~ size_category, data = gala, init.theta = 3.855017567, 
+    ##     link = log)
+    ## 
+    ## Coefficients:
+    ##                     Estimate Std. Error z value Pr(>|z|)    
+    ## (Intercept)           1.7292     0.1993   8.678  < 2e-16 ***
+    ## size_categoryMedium   1.3465     0.2553   5.274 1.33e-07 ***
+    ## size_categoryLarge    2.4582     0.2810   8.750  < 2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## (Dispersion parameter for Negative Binomial(3.855) family taken to be 1)
+    ## 
+    ##     Null deviance: 115.697  on 29  degrees of freedom
+    ## Residual deviance:  35.481  on 27  degrees of freedom
+    ## AIC: 227.27
+    ## 
+    ## Number of Fisher Scoring iterations: 1
+    ## 
+    ## 
+    ##               Theta:  3.86 
+    ##           Std. Err.:  1.39 
+    ## 
+    ##  2 x log-likelihood:  -219.269
+    ```
+    :::
+
 :::
 
 ::: {.column width="40%"}
@@ -842,22 +828,17 @@ Logistic regression is a GLM used when the response variable is binary
 (e.g., dead/alive, present/absent). It models the probability of the
 response being "1" (success) given predictor values.
 
-Let's examine the simple logistic regression model:
-
-$$\pi(x) = \frac{e^{\beta_0 + \beta_1 x}}{1 + e^{\beta_0 + \beta_1 x}}$$
-
--   Where:
+-   Logistic regression model:
+    -   $\pi(x) = \frac{e^{\beta_0 + \beta_1 x}}{1 + e^{\beta_0 + \beta_1 x}}$
+    -   Where:
     -   $\pi(x)$ is the probability that Y = 1 given X = x
     -   $\beta_0$ is the intercept
     -   $\beta_1$ is the slope (rate of change in $\pi(x)$ for a unit
         change in X)
-
-To linearize this relationship, we use the logit link function:
-
-$$g(x) = \log\left(\frac{\pi(x)}{1-\pi(x)}\right) = \beta_0 + \beta_1 x$$
-
-This transforms the probability (which is bounded between 0 and 1) to a
-linear function that can range from -∞ to +∞.
+-   To linearize this relationship, we use the logit link function:
+    -   $g(x) = \log\left(\frac{\pi(x)}{1-\pi(x)}\right) = \beta_0 + \beta_1 x$
+-   transforms probability (bounded between 0 and 1) to linear fx ranges
+    from -∞ to +∞.
 :::
 
 ::: {.column width="40%"}
@@ -873,9 +854,9 @@ linear function that can range from -∞ to +∞.
 
 # Example: Lizard Presence on Islands
 
-Based on the example from Polis et al. (1998), we'll model the
-presence/absence of lizards (*Uta*) on islands in the Gulf of California
-based on perimeter/area ratio.
+Based on the example from Polis et al. (1998) - presence/absence of
+lizards (*Uta*) on islands in Gulf of California based on perimeter/area
+ratio.
 
 ::: {.panel column="screen"}
 
@@ -889,11 +870,10 @@ based on perimeter/area ratio.
 
 # Example: Lizard Presence on Islands
 
-Based on the example from Polis et al. (1998), we'll model the
-presence/absence of lizards (*Uta*) on islands in the Gulf of California
-based on perimeter/area ratio.
+Based on the example from Polis et al. (1998) - presence/absence of
+lizards (*Uta*) on islands in Gulf of California based on perimeter/area
+ratio. ::: {.panel column="screen"}
 
-::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -927,6 +907,7 @@ summary(lizard_model)
 ```
 :::
 
+
 :::
 
 # Lizard Example: Visualization and Testing
@@ -945,14 +926,12 @@ Let's visualize the data and the fitted model:
 :::
 
 ::: {.column width="40%"}
-We want to test the null hypothesis that β₁ = 0, meaning there's no
-relationship between P/A ratio and lizard presence.
-
-There are two common ways to test this hypothesis:
+-   Test null hypothesis that β₁ = 0
+    -   no relationship between P/A ratio and lizard presence
+-   There are two common ways to test this hypothesis:
 
 1.  **Wald test**: Tests if the parameter estimate divided by its
     standard error differs significantly from zero
-
 2.  **Likelihood ratio test**: Compares the fit of the full model to a
     reduced model without the predictor variable
 
@@ -983,21 +962,18 @@ anova(reduced_model, lizard_model, test = "Chisq")
 
 ### Working with Odds Ratios
 
-The odds ratio represents how the odds of the event (e.g., lizard
-presence) change with a unit increase in the predictor.
+Odds ratio represents how odds of event (e.g., lizard presence) change
+with unit increase in predictor
 
 -   **Odds ratio = exp(β₁)**
--   If odds ratio \> 1: Increasing the predictor increases the odds of
-    event
--   If odds ratio \< 1: Increasing the predictor decreases the odds of
-    event
--   If odds ratio = 1: No effect of predictor on odds of event
--   For every one-unit increase in island's Perimeter/Area Ratio - odds
-    of finding a lizard present multiplied by 0.898
--   the odds decrease by 10.2% (which is 1 - 0.898) for every one-unit
-    increase in the P/A ratio
--   entire interval is below 1.0, you can be confident the relationship
-    is negative: more P/A ratio means lower odds of lizards
+-   \> 1: Increasing predictor increases odds of event
+-   \< 1: Increasing predictor decreases odds of event
+-   = 1: No effect of predictor on odds of event
+-   one-unit increase in island's Perimeter/Area Ratio - odds of finding
+    lizard present multiplied by 0.898
+-   odds decrease by 10.2% (1-0.898) for every one-unit increase P/A
+-   entire interval is below 1.0, relationship is negative: more P/A
+    ratio means lower odds of lizards
 
 ::: {.panel column="screen"}
 
@@ -1185,7 +1161,7 @@ Logistic regression has several key assumptions:
 3.  No extreme outliers
 4.  No multicollinearity (when multiple predictors are used)
 
-Let's check the diagnostics for our multiple logistic regression model:
+diagnostics for our multiple logistic regression model:
 :::
 
 ::: {.column width="50%"}
@@ -1203,14 +1179,12 @@ Let's check the diagnostics for our multiple logistic regression model:
 
 ::::: columns
 ::: {.column width="60%"}
-When working with multiple predictors, we often want to find the most
-parsimonious model. We can use:
+When working with multiple predictors, want to find most parsimonious
+model. use: - Likelihood ratio tests for nested models - Information
+criteria (AIC, BIC) for non-nested models - Classification metrics like
+accuracy, sensitivity, and specificity
 
-1.  Likelihood ratio tests for nested models
-2.  Information criteria (AIC, BIC) for non-nested models
-3.  Classification metrics like accuracy, sensitivity, and specificity
-
-Let's compare models and calculate AIC values:
+Compare models and AIC values:
 
 
 ::: {.cell}
@@ -1228,7 +1202,7 @@ Let's compare models and calculate AIC values:
 :::
 
 ::: {.column width="40%"}
-We can also evaluate the predictive performance of our model:
+Evaluate predictive performance of our model:
 
 
 ::: {.cell}
@@ -1354,32 +1328,23 @@ Let's demonstrate this equivalence:
 ::: {.column width="60%"}
 -   Generalized Linear Models- assumptions depend on distribution+link
     function used:
-
 -   **All GLMs:**
-
     -   Independence of observations, No outliers, No Multicolinearity
     -   Correct specification of the link function /variance structure
-
 -   **Gaussian GLMs (including linear regression):**
-
     -   Normality of residuals
     -   Homogeneity of variance
-
 -   **Poisson GLMs:**
-
     -   Count data (non-negative integers)
     -   Mean equals variance - overdispersed = negative binomial)
-
 -   **Logistic GLMs:**
-
     -   Binary response variable
     -   Linear relationship between predictors and log odds
     -   Adequate sample size relative to number of parameters
 :::
 
 ::: {.column width="40%"}
-The following R code checks some common diagnostics for our logistic
-model:
+R code checks common diagnostics for logistic model:
 
 
 ::: {.cell}
@@ -1396,13 +1361,17 @@ model:
 Generalized Linear Models (GLMs) provide a powerful and flexible
 framework for analyzing a wide range of data types in biology:
 
-1.  **Gaussian GLMs** with identity link function equivalent to standard
-    linear models and ANOVAs
-2.  **Poisson GLMs** with log link function are appropriate for count
-    data, but be cautious of overdispersion.
+1.  **Gaussian GLMs** identity link function = linear model ANOVAs
+
+2.  **Poisson GLMs** log link function appropriate for count data,
+    cautious of overdispersion.
+
 3.  **Negative Binomial** works with overdispersed data
-4.  **Logistic GLMs** with logit link function are useful for binary
-    responses - probability of success or presence.
+
+4.  **Logistic GLMs** with logit link function useful for binary
+    responses
+
+    -   probability of success or presence.
 
 -   Key advantages of GLMs include:
     -   Handle various response variables beyond normal distributions
@@ -1429,23 +1398,15 @@ data encountered in ecological, behavioral, and physiological research.
 
 # References
 
-Agresti, A. (1996). An Introduction to Categorical Data Analysis. Wiley,
-New York.
-
-Bolger, D. T., Alberts, A. C., Sauvajot, R. M., Potenza, P., McCalvin,
-C., Tran, D., Mazzoni, S., & Soulé, M. E. (1997). Response of rodents to
-habitat fragmentation in coastal southern California. Ecological
-Applications, 7(2), 552-563.
-
-Christensen, R. (1997). Log-linear Models and Logistic Regression.
-Springer, New York.
-
-Hosmer, D. W., & Lemeshow, S. (1989). Applied Logistic Regression.
-Wiley, New York.
-
-McCullagh, P., & Nelder, J. A. (1989). Generalized Linear Models.
-Chapman and Hall, London.
-
-Polis, G. A., Hurd, S. D., Jackson, C. T., & Piñero, F. S. (1998).
-Multifactor analysis of ecosystem patterns on islands in the Gulf of
-California. Ecological Monographs, 68, 490-502.
+-Agresti, A. (1996). An Introduction to Categorical Data Analysis.
+Wiley, New York. Bolger, D. T., Alberts, A. C., Sauvajot, R. M.,
+Potenza, P., McCalvin, C., Tran, D., Mazzoni, S., & Soulé, M. E. (1997).
+Response of rodents to habitat fragmentation in coastal southern
+California. Ecological Applications, 7(2), 552-563. -Christensen, R.
+(1997). Log-linear Models and Logistic Regression. Springer, New York.
+-Hosmer, D. W., & Lemeshow, S. (1989). Applied Logistic Regression.
+Wiley, New York. -McCullagh, P., & Nelder, J. A. (1989). Generalized
+Linear Models. Chapman and Hall, London. -Polis, G. A., Hurd, S. D.,
+Jackson, C. T., & Piñero, F. S. (1998). Multifactor analysis of
+ecosystem patterns on islands in the Gulf of California. Ecological
+Monographs, 68, 490-502.
