@@ -303,7 +303,6 @@ regression.
         family = gaussian(link = "identity")) **Residual Standard
         Error**. This is the standard deviation of the residuals
         ($\sigma$)
-
 :::
 
 ::: {.column .scrollable width="50%"}
@@ -500,7 +499,6 @@ is why a Poisson model works**]{.underline}
         than a "Small" island, on average
 -   Dispersion - Divide the deviance by its df: $939.74 / 27 \approx$
     34.8
-
 :::
 
 ::: {.column width="50%"}
@@ -554,7 +552,6 @@ effect on the number of plant species?
             with size_category) to simpler null model (one without
             size_category)
         -   LR test tells us if it is significant
-
 :::
 
 ::: {.column width="50%"}
@@ -722,7 +719,6 @@ Let's check the emmeans and pairwise comparisons
     :::
     :::
 
-
 :::
 
 ::: {.column width="40%"}
@@ -732,7 +728,6 @@ Let's check the emmeans and pairwise comparisons
     -   Coefficientschanges in the **log** of the expected count
     -   When exponentiated (`exp(coef)`)= multiplicative effects
     -   `exp(coef)` = 0.90 = the expected count is 90% of reference
-
 :::
 :::::
 
@@ -746,7 +741,7 @@ Let's check the emmeans and pairwise comparisons
     -   A 1% change in x is a beta percent change in y...
 
 | Model Type | R Code (Example) | Interpretation of β₁ |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | GLM (Log-Link) | `glm(Y ~ X, family = poisson)` | A 1-unit change in X multiplies the mean of Y by exp(β₁). |
 | lm (Log-Response) | `lm(log(Y) ~ X)` | A 1-unit change in X multiplies the median of Y by exp(β₁). |
 | lm (Log-Log) | `lm(log(Y) ~ log(X))` | A 1% change in X is associated with a β₁% change in Y. |
@@ -810,7 +805,6 @@ When overdispersion (variance \> mean) - use negative binomial model
     ```
     :::
 
-
 :::
 
 ::: {.column width="40%"}
@@ -822,7 +816,6 @@ Let's compare the predictions from both models:
 ![](14_01_lecture_powerpoint_files/figure-pptx/gala-compare-models-1.png)
 :::
 :::
-
 
 :::
 :::::
@@ -846,7 +839,6 @@ response being "1" (success) given predictor values.
     -   $g(x) = \log\left(\frac{\pi(x)}{1-\pi(x)}\right) = \beta_0 + \beta_1 x$
 -   transforms probability (bounded between 0 and 1) to linear fx ranges
     from -∞ to +∞.
-
 :::
 
 ::: {.column width="40%"}
@@ -880,8 +872,9 @@ ratio.
 
 Based on the example from Polis et al. (1998) - presence/absence of
 lizards (*Uta*) on islands in Gulf of California based on perimeter/area
-ratio. ::: {.panel column="screen"}
+ratio.
 
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -914,7 +907,6 @@ summary(lizard_model)
 ## Number of Fisher Scoring iterations: 6
 ```
 :::
-
 
 :::
 
@@ -1349,7 +1341,6 @@ Let's demonstrate this equivalence:
     -   Binary response variable
     -   Linear relationship between predictors and log odds
     -   Adequate sample size relative to number of parameters
-
 :::
 
 ::: {.column width="40%"}

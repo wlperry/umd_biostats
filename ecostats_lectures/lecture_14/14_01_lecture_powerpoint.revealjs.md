@@ -88,7 +88,7 @@ categorical/multinomial response variables, using maximum likelihood
 
 ::: {.cell}
 ::: {.cell-output-display}
-![Examples of distributions in the exponential family](14_01_lecture_powerpoint_files/figure-html/glm-distributions-1.png){width=576}
+![Examples of distributions in the exponential family](14_01_lecture_powerpoint_files/figure-revealjs/glm-distributions-1.png){width=576}
 :::
 :::
 
@@ -224,7 +224,7 @@ Let's look at the summary of our Gaussian GLM:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/summary-gaussian_2-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/summary-gaussian_2-1.png){width=576}
 :::
 :::
 
@@ -254,19 +254,19 @@ category.
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_dgbev689mq6qvoxs47bc = TinyTable.createTableFunctions("tinytable_dgbev689mq6qvoxs47bc");
+      const tableFns_6sempv6q45fnvkaziop8 = TinyTable.createTableFunctions("tinytable_6sempv6q45fnvkaziop8");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '8', j: 1 }, { i: '8', j: 2 }, { i: '8', j: 3 }, { i: '8', j: 4 } ], css_id: 'tinytable_css_olovomytbutydsv62mek',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_hwqokepuft57llugx3c4',}, 
+          { positions: [ { i: '8', j: 1 }, { i: '8', j: 2 }, { i: '8', j: 3 }, { i: '8', j: 4 } ], css_id: 'tinytable_css_k1c57vzdfmw9o7h8669n',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_6xci30ttofnaj2szlja7',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_dgbev689mq6qvoxs47bc.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_6sempv6q45fnvkaziop8.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -275,11 +275,11 @@ category.
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_dgbev689mq6qvoxs47bc td.tinytable_css_olovomytbutydsv62mek, #tinytable_dgbev689mq6qvoxs47bc th.tinytable_css_olovomytbutydsv62mek {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: black; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_dgbev689mq6qvoxs47bc td.tinytable_css_hwqokepuft57llugx3c4, #tinytable_dgbev689mq6qvoxs47bc th.tinytable_css_hwqokepuft57llugx3c4 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_6sempv6q45fnvkaziop8 td.tinytable_css_k1c57vzdfmw9o7h8669n, #tinytable_6sempv6q45fnvkaziop8 th.tinytable_css_k1c57vzdfmw9o7h8669n {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: black; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_6sempv6q45fnvkaziop8 td.tinytable_css_6xci30ttofnaj2szlja7, #tinytable_6sempv6q45fnvkaziop8 th.tinytable_css_6xci30ttofnaj2szlja7 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: black; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_dgbev689mq6qvoxs47bc" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
+      <table class="tinytable" id="tinytable_6sempv6q45fnvkaziop8" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing='true'>
         
         <thead>
               <tr>
@@ -356,7 +356,7 @@ Let's visualize endemic Endemics by island size:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/summarygaussian_2a-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/summarygaussian_2a-1.png){width=576}
 :::
 :::
 
@@ -382,7 +382,6 @@ regression.
         family = gaussian(link = "identity")) **Residual Standard
         Error**. This is the standard deviation of the residuals
         ($\sigma$)
-
 :::
 
 ::: {.column .scrollable width="50%"}
@@ -523,7 +522,7 @@ Visualizing the results:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/gaussian-plot-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/gaussian-plot-1.png){width=576}
 :::
 :::
 
@@ -579,7 +578,6 @@ is why a Poisson model works**]{.underline}
         than a "Small" island, on average
 -   Dispersion - Divide the deviance by its df: $939.74 / 27 \approx$
     34.8
-
 :::
 
 ::: {.column width="50%"}
@@ -633,7 +631,6 @@ effect on the number of plant species?
             with size_category) to simpler null model (one without
             size_category)
         -   LR test tells us if it is significant
-
 :::
 
 ::: {.column width="50%"}
@@ -797,10 +794,9 @@ Let's check the emmeans and pairwise comparisons
 
     ::: {.cell}
     ::: {.cell-output-display}
-    ![](14_01_lecture_powerpoint_files/figure-html/poisson-plot-1.png){width=480}
+    ![](14_01_lecture_powerpoint_files/figure-revealjs/poisson-plot-1.png){width=576}
     :::
     :::
-
 
 :::
 
@@ -811,7 +807,6 @@ Let's check the emmeans and pairwise comparisons
     -   Coefficientschanges in the **log** of the expected count
     -   When exponentiated (`exp(coef)`)= multiplicative effects
     -   `exp(coef)` = 0.90 = the expected count is 90% of reference
-
 :::
 :::::
 
@@ -825,7 +820,7 @@ Let's check the emmeans and pairwise comparisons
     -   A 1% change in x is a beta percent change in y...
 
 | Model Type | R Code (Example) | Interpretation of β₁ |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | GLM (Log-Link) | `glm(Y ~ X, family = poisson)` | A 1-unit change in X multiplies the mean of Y by exp(β₁). |
 | lm (Log-Response) | `lm(log(Y) ~ X)` | A 1-unit change in X multiplies the median of Y by exp(β₁). |
 | lm (Log-Log) | `lm(log(Y) ~ log(X))` | A 1% change in X is associated with a β₁% change in Y. |
@@ -836,7 +831,7 @@ Let's check the emmeans and pairwise comparisons
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/gala-poisson-diagnostics-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-revealjs/gala-poisson-diagnostics-1.png){width=576}
 :::
 :::
 
@@ -889,7 +884,6 @@ When overdispersion (variance \> mean) - use negative binomial model
     ```
     :::
 
-
 :::
 
 ::: {.column width="40%"}
@@ -898,10 +892,9 @@ Let's compare the predictions from both models:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/gala-compare-models-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/gala-compare-models-1.png){width=576}
 :::
 :::
-
 
 :::
 :::::
@@ -925,14 +918,13 @@ response being "1" (success) given predictor values.
     -   $g(x) = \log\left(\frac{\pi(x)}{1-\pi(x)}\right) = \beta_0 + \beta_1 x$
 -   transforms probability (bounded between 0 and 1) to linear fx ranges
     from -∞ to +∞.
-
 :::
 
 ::: {.column width="40%"}
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/logistic-curve-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/logistic-curve-1.png){width=576}
 :::
 :::
 
@@ -949,7 +941,7 @@ ratio.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/lizard-data-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/lizard-data-1.png){width=576}
 :::
 :::
 
@@ -959,8 +951,9 @@ ratio.
 
 Based on the example from Polis et al. (1998) - presence/absence of
 lizards (*Uta*) on islands in Gulf of California based on perimeter/area
-ratio. ::: {.panel column="screen"}
+ratio.
 
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -994,7 +987,6 @@ summary(lizard_model)
 ```
 :::
 
-
 :::
 
 # Lizard Example: Visualization and Testing
@@ -1006,7 +998,7 @@ Let's visualize the data and the fitted model:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/lizard-plot-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/lizard-plot-1.png){width=576}
 :::
 :::
 
@@ -1231,7 +1223,7 @@ mean values.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/visualize-effects-1.png){width=768}
+![](14_01_lecture_powerpoint_files/figure-revealjs/visualize-effects-1.png){width=768}
 :::
 :::
 
@@ -1255,7 +1247,7 @@ diagnostics for our multiple logistic regression model:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/diagnostics-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-revealjs/diagnostics-1.png){width=576}
 :::
 :::
 
@@ -1319,7 +1311,7 @@ scientific publication.
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/publication-figure-1.png){width=480}
+![](14_01_lecture_powerpoint_files/figure-revealjs/publication-figure-1.png){width=576}
 :::
 :::
 
@@ -1396,13 +1388,13 @@ Let's demonstrate this equivalence:
 ::: {.cell-output-display}
 
 ```{=html}
-<div class="tabwid"><style>.cl-51c8d830{}.cl-51c4a6e8{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-51c68fee{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-51c68ff8{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-51c6a010{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-51c6a01a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-51c6a01b{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-51c6a024{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-51c6a025{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-51c6a02e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-51c8d830'><thead><tr style="overflow-wrap:break-word;"><th class="cl-51c6a010"><p class="cl-51c68fee"><span class="cl-51c4a6e8">Term</span></p></th><th class="cl-51c6a01a"><p class="cl-51c68ff8"><span class="cl-51c4a6e8">Linear.Regression</span></p></th><th class="cl-51c6a01a"><p class="cl-51c68ff8"><span class="cl-51c4a6e8">Gaussian.GLM</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-51c6a01b"><p class="cl-51c68fee"><span class="cl-51c4a6e8">(Intercept)</span></p></td><td class="cl-51c6a024"><p class="cl-51c68ff8"><span class="cl-51c4a6e8">37.885</span></p></td><td class="cl-51c6a024"><p class="cl-51c68ff8"><span class="cl-51c4a6e8">37.885</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-51c6a025"><p class="cl-51c68fee"><span class="cl-51c4a6e8">cyl</span></p></td><td class="cl-51c6a02e"><p class="cl-51c68ff8"><span class="cl-51c4a6e8">-2.876</span></p></td><td class="cl-51c6a02e"><p class="cl-51c68ff8"><span class="cl-51c4a6e8">-2.876</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-60ab3144{}.cl-60a602a0{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-60a7be7e{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-60a7be7f{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-60a7cd24{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-60a7cd2e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-60a7cd2f{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-60a7cd30{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-60a7cd38{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-60a7cd39{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-60ab3144'><thead><tr style="overflow-wrap:break-word;"><th class="cl-60a7cd24"><p class="cl-60a7be7e"><span class="cl-60a602a0">Term</span></p></th><th class="cl-60a7cd2e"><p class="cl-60a7be7f"><span class="cl-60a602a0">Linear.Regression</span></p></th><th class="cl-60a7cd2e"><p class="cl-60a7be7f"><span class="cl-60a602a0">Gaussian.GLM</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-60a7cd2f"><p class="cl-60a7be7e"><span class="cl-60a602a0">(Intercept)</span></p></td><td class="cl-60a7cd30"><p class="cl-60a7be7f"><span class="cl-60a602a0">37.885</span></p></td><td class="cl-60a7cd30"><p class="cl-60a7be7f"><span class="cl-60a602a0">37.885</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-60a7cd38"><p class="cl-60a7be7e"><span class="cl-60a602a0">cyl</span></p></td><td class="cl-60a7cd39"><p class="cl-60a7be7f"><span class="cl-60a602a0">-2.876</span></p></td><td class="cl-60a7cd39"><p class="cl-60a7be7f"><span class="cl-60a602a0">-2.876</span></p></td></tr></tbody></table></div>
 ```
 
 :::
 
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/anova-glm-comparison-1.png){width=672}
+![](14_01_lecture_powerpoint_files/figure-revealjs/anova-glm-comparison-1.png){width=672}
 :::
 :::
 
@@ -1427,7 +1419,6 @@ Let's demonstrate this equivalence:
     -   Binary response variable
     -   Linear relationship between predictors and log odds
     -   Adequate sample size relative to number of parameters
-
 :::
 
 ::: {.column width="40%"}
@@ -1436,7 +1427,7 @@ R code checks common diagnostics for logistic model:
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](14_01_lecture_powerpoint_files/figure-html/diagnostic-summary-1.png){width=576}
+![](14_01_lecture_powerpoint_files/figure-revealjs/diagnostic-summary-1.png){width=576}
 :::
 :::
 
