@@ -4508,319 +4508,53 @@
     "text": "Visual Comparison"
   },
   {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#review",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#review",
+    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#building-the-ancova-model-in-r",
+    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#building-the-ancova-model-in-r",
     "title": "Lecture 15 - ANCOVA",
-    "section": "Review",
-    "text": "Review\n\nGeneral Linear Models (GLM)\n\nGaussian GLMs (normal distribution)\nPoisson GLMs (count data)\nLogistic GLMs (binary outcomes)\nModel assumptions and diagnostics\nConnection to ANOVA and linear models"
+    "section": "Building the ANCOVA Model in R",
+    "text": "Building the ANCOVA Model in R\n\nRemember lm(y ~ predictor).\n\nANCOVA combines the predictors from ANOVA and regression.\n\nSimple Linear Regression:\n\nPredict y using a continuous variable x.\n\nmodel_reg &lt;- lm(y ~ x, data = mydata)\n\n\nOne-Way ANOVA:\n\nWe want to compare y among groups in a categorical factor A.\n\nmodel_aov &lt;- lm(y ~ A, data = mydata)\n\n\nANCOVA (Additive Model):\n\nCompare y among groups in A, after accounting for effect of x.\nAdd terms together\n\nmodel_ancova &lt;- lm(y ~ A + x, data = mydata)\n\nModel assumes slope of y ~ x relationship is same for all groups in A.\n\nANCOVA (Interaction Model):\n\nWhat if the slopes are different for each group?\nTest for interaction between factor and covariate.\n\nmodel_int &lt;- lm(y ~ A * x, data = mydata)\n\nShorthand for: lm(y ~ A + x + A:x, data = mydata)\nThe A:x term tests if the slopes are different."
   },
   {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#overview",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#overview",
+    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#writing-up-ancova-results",
+    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#writing-up-ancova-results",
     "title": "Lecture 15 - ANCOVA",
-    "section": "Overview",
-    "text": "Overview\n\nAnalysis of covariance (ANCOVA):\n\nIntroduction to ANCOVA\nWhen to use ANCOVA\nLinear model for ANCOVA\nAnalysis of variance in ANCOVA\nAssumptions of ANCOVA\n\nHomogeneous slopes\n\nRobust ANCOVA approaches\nSpecific comparisons of means\nExamples and interpretation\nScientific reporting of ANCOVA results"
+    "section": "Writing Up ANCOVA Results",
+    "text": "Writing Up ANCOVA Results\nScientific Writing Example\nHere’s how you might write up ANCOVA results for publication:\n\n“We analyzed the effects of mating strategy on male fruitfly longevity using analysis of covariance (ANCOVA), with thorax length as a covariate. Before conducting the main analysis, we tested the homogeneity of slopes assumption and found no significant interaction between treatment and thorax length (F₄,₁₁₅ = xxx , indicating that the effect of body size on longevity was consistent across treatments.\nThe ANCOVA revealed significant effects of both treatment (F₄,₁₁₉ = xxxx and thorax length (F₁,₁₁₉ = xxxx, P &lt; 0.001) on longevity. Thorax length was positively associated with longevity…\nAfter adjusting for body size, males with no female partners lived significantly longer (adjusted mean ± SE: xxxx` days) than males in any other treatment group. Pairwise comparisons using Tukey’s HSD test indicated significant differences between most treatment groups (P &lt; 0.05) except between the ‘One virgin female’ and ‘One inseminated female’ groups (P = x).”"
   },
   {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#what-is-ancova",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#what-is-ancova",
+    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#publication-quality-figure",
+    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#publication-quality-figure",
     "title": "Lecture 15 - ANCOVA",
-    "section": "What is ANCOVA?",
-    "text": "What is ANCOVA?\n\nANCOVA = Analysis of COVAriance\nCombination of regression and ANOVA\nA continuous covariate is measured along with the response variable for each experimental unit\nCommon use:\n\ncompare means of factor levels (groups), adjusting for variance from continuous covariate\n\nAnother use:\n\ndetermine whether two or more regression lines differ in slopes and intercepts"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#common-applications-of-ancova",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#common-applications-of-ancova",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Common Applications of ANCOVA",
-    "text": "Common Applications of ANCOVA\n\nIncreasing statistical power\n\nRemoving variation associated with a covariate can reduce residual error\nMore powerful test of treatment effects\n\nAdjusting for confounding variables\n\nWhen treatments might differ in some continuous variable\nNeed to separate treatment effects from covariate effects\n\nTesting equality of regression lines\n\nDo treatments have the same relationship with a continuous variable?\nTests for both slopes and intercepts"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#cricket-chirping-example",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#cricket-chirping-example",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Cricket Chirping Example",
-    "text": "Cricket Chirping Example\n\nWant to compare chirping rate of two cricket species:\n\nOecanthus exclamationis\nOecanthus niveus\n\nBut:\n\nMeasured rates at different temperatures\nRange of temperatures differed between species\nApparent relationship between pulse rate and temperature\n\nANCOVA lets us adjust for temperature effect to get a more powerful test!"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#interpretation-of-parameters",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#interpretation-of-parameters",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Interpretation of Parameters",
-    "text": "Interpretation of Parameters\n\n\\(\\mu\\) = overall mean response\n\\(\\alpha_i\\) = effect of level i (difference between group mean and overall mean)\n\\(\\beta\\) = pooled within-group regression coefficient\n\\(X_{ij}\\) = covariate value for observation j in group i\n\\(\\bar{X}\\) = overall mean of covariate\n\\(\\varepsilon_{ij}\\) = unexplained error\n\nThis model assumes homogeneous slopes across all treatment groups (we’ll test this later)."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#running-ancova-in-r",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#running-ancova-in-r",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Running ANCOVA in R",
-    "text": "Running ANCOVA in R\nBasic ANCOVA model: - Response: continuous variable (y) - Predictor: categorical factor (A)\n- Covariate: continuous variable (x)\nThe simplest ANCOVA model is:\nmodel &lt;- lm(y ~ A + x, data = mydata)\nanova(model)\nAlternative: use aov() function\nmodel &lt;- aov(y ~ A + x, data = mydata)  \nsummary(model)\nBoth approaches use Type I SS (sequential). For unbalanced designs, you may want Type III SS using car package."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#testing-for-homogeneous-slopes",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#testing-for-homogeneous-slopes",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Testing for Homogeneous Slopes",
-    "text": "Testing for Homogeneous Slopes\nANCOVA assumes the regression slopes are the same for all groups (parallel regression lines)\nTo test this assumption:\n\nFit model with interaction term:\n\nmodel_int &lt;- lm(y ~ A * x, data = mydata)\n\nTest significance of interaction:\n\nanova(model_int)\n\nIf interaction is significant (p &lt; 0.05):\n\nSlopes are not homogeneous\nStandard ANCOVA inappropriate\nUse alternative approaches"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#parallel-vs.-non-parallel-slopes",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#parallel-vs.-non-parallel-slopes",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Parallel vs. Non-Parallel Slopes",
-    "text": "Parallel vs. Non-Parallel Slopes"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#when-slopes-are-not-homogeneous",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#when-slopes-are-not-homogeneous",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "When Slopes Are Not Homogeneous",
-    "text": "When Slopes Are Not Homogeneous\nIf the interaction term is significant (p &lt; 0.05), the slope-group relationship is not the same across groups.\nOptions:\n\nReport the interaction - this is a biologically interesting result!\nSeparate regressions - analyze each group separately\nJohnson-Neyman procedure - identifies regions of the covariate where groups differ significantly\nAlternative models - consider transformation, polynomial terms, or more complex models"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#ancova-on-longevity-of-male-fruitflies",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#ancova-on-longevity-of-male-fruitflies",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "ANCOVA on Longevity of Male Fruitflies",
-    "text": "ANCOVA on Longevity of Male Fruitflies\n\n# 1. Examine the partridge data structure\n# str(partridge)\n\n# Create better names for treatments\npartridge$treatment &lt;- factor(partridge$TREATMEN,\n                            levels = 1:5,\n                            labels = c(\"No females\", \n                                      \"One virgin female daily\",\n                                      \"Eight virgin females daily\",\n                                      \"One inseminated female daily\",\n                                      \"Eight inseminated females daily\"))\n\n# 2. Create a plot of the data showing relationship\nggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) + \n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  labs(title = \"Relationship between Thorax Length and Longevity\",\n       x = \"Thorax Length (mm)\",\n       y = \"Longevity (days)\",\n       color = \"Treatment\") +\n  theme_minimal() +\n  theme(legend.position = \"bottom\")"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#testing-homogeneity-of-slopes-1",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#testing-homogeneity-of-slopes-1",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Testing Homogeneity of Slopes",
-    "text": "Testing Homogeneity of Slopes\n\n# Test for homogeneity of slopes\nhomo_slopes_model &lt;- lm(LONGEV ~ THORAX * treatment, data = partridge)\nanova(homo_slopes_model)\n\nAnalysis of Variance Table\n\nResponse: LONGEV\n                  Df  Sum Sq Mean Sq  F value    Pr(&gt;F)    \nTHORAX             1 15496.6 15496.6 136.0170 &lt; 2.2e-16 ***\ntreatment          4  9611.5  2402.9  21.0905 4.617e-13 ***\nTHORAX:treatment   4    42.5    10.6   0.0933    0.9844    \nResiduals        115 13102.1   113.9                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Extract the p-value for the interaction\np_interaction &lt;- anova(homo_slopes_model)[3, \"Pr(&gt;F)\"]\n\nThe p-value for the interaction term (treatment × THORAX) is 0.984. Since this value is &gt; 0.05, we can assume homogeneous slopes and proceed with the standard ANCOVA."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#pairwise-comparisons-of-adjusted-means",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#pairwise-comparisons-of-adjusted-means",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Pairwise Comparisons of Adjusted Means",
-    "text": "Pairwise Comparisons of Adjusted Means\n\n# Pairwise comparisons of adjusted means\npairs(adjusted_means, adjust = \"tukey\")\n\n contrast                                                       estimate   SE\n No females - One virgin female daily                               3.93 3.00\n No females - Eight virgin females daily                            1.28 2.98\n No females - One inseminated female daily                         10.95 3.00\n No females - Eight inseminated females daily                      23.88 2.97\n One virgin female daily - Eight virgin females daily              -2.65 2.98\n One virgin female daily - One inseminated female daily             7.02 2.97\n One virgin female daily - Eight inseminated females daily         19.95 3.01\n Eight virgin females daily - One inseminated female daily          9.67 2.98\n Eight virgin females daily - Eight inseminated females daily      22.60 2.99\n One inseminated female daily - Eight inseminated females daily    12.93 3.01\n  df t.ratio p.value\n 119   1.311  0.6849\n 119   0.428  0.9929\n 119   3.650  0.0035\n 119   8.031  &lt;.0001\n 119  -0.891  0.8996\n 119   2.361  0.1336\n 119   6.636  &lt;.0001\n 119   3.249  0.0129\n 119   7.560  &lt;.0001\n 119   4.298  0.0003\n\nP value adjustment: tukey method for comparing a family of 5 estimates \n\n# Plot adjusted means with confidence intervals\nplot(adjusted_means, comparisons = TRUE) + \n  labs(title = \"Adjusted Means by Treatment\",\n       x = \"Adjusted Longevity (days)\",\n       y = \"Treatment\") +\n  theme_minimal()"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#visualization-options-for-ancova",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#visualization-options-for-ancova",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Visualization Options for ANCOVA",
-    "text": "Visualization Options for ANCOVA"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#heterogeneous-slopes-example",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#heterogeneous-slopes-example",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Heterogeneous Slopes Example",
-    "text": "Heterogeneous Slopes Example\nConstable (1993) studied shrinking in sea urchin test: - Compared suture widths between treatments - Three groups: high food, low food, initial sample - Covariate: body volume (cube root transformed)\nThe analysis showed: - Significant interaction between treatment and covariate - Heterogeneous slopes across treatments - Can’t use standard ANCOVA"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#johnson-neyman-procedure-for-heterogeneous-slopes",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#johnson-neyman-procedure-for-heterogeneous-slopes",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Johnson-Neyman Procedure for Heterogeneous Slopes",
-    "text": "Johnson-Neyman Procedure for Heterogeneous Slopes\n\n\nAnalysis of Variance Table\n\nResponse: suture_width\n                 Df   Sum Sq   Mean Sq F value    Pr(&gt;F)    \nvolume            1 0.015724 0.0157238  176.91 &lt; 2.2e-16 ***\ntreatment         2 0.036482 0.0182411  205.23 &lt; 2.2e-16 ***\nvolume:treatment  2 0.006213 0.0031064   34.95 4.453e-11 ***\nResiduals        66 0.005866 0.0000889                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#key-assumptions",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#key-assumptions",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Key Assumptions",
-    "text": "Key Assumptions\n\nIndependence of observations\n\nSamples are random and independent\nNo clustering or repeated measures\n\nNormal distribution of residuals\n\nResiduals follow a normal distribution\nCheck with QQ plots or formal tests\n\nHomogeneity of variances\n\nEqual variances across groups\nCheck with residual plots vs. fitted values\n\nLinearity\n\nLinear relationship between Y and X within each group\nCheck with scatterplots\n\nHomogeneity of regression slopes (critical!)\n\nRegression slopes equal across all groups\nTest with interaction term"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#checking-assumptions-in-r-1",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#checking-assumptions-in-r-1",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Checking Assumptions in R",
-    "text": "Checking Assumptions in R\n\n# Fit ANCOVA model for partridge data\nancova_model &lt;- lm(LONGEV ~ THORAX + treatment, data = partridge)\n\n# Create a 2x2 panel of diagnostic plots\npar(mfrow = c(2, 2))\nplot(ancova_model)"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#non-parametric-alternatives",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#non-parametric-alternatives",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Non-Parametric Alternatives",
-    "text": "Non-Parametric Alternatives\nWhen ANCOVA assumptions are violated, consider:\n\nRank Transformation\n\nRank transform both Y and X variables\nRun standard ANCOVA on ranked data\nSimple but may not handle interactions well\n\nANCOVA on Bootstrapped Data\n\nUse bootstrapping to estimate parameters\nDoesn’t require normality assumption\n\nQuantile Regression\n\nModels relationships at different quantiles\nRobust to outliers and heteroscedasticity\n\nPermutation Tests\n\nRandomization tests of treatment effects\nNo distributional assumptions"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#scientific-writing-example",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#scientific-writing-example",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Scientific Writing Example",
-    "text": "Scientific Writing Example\nHere’s how you might write up ANCOVA results for publication:\n\n“We analyzed the effects of mating strategy on male fruitfly longevity using analysis of covariance (ANCOVA), with thorax length as a covariate. Before conducting the main analysis, we tested the homogeneity of slopes assumption and found no significant interaction between treatment and thorax length (F₄,₁₁₅ = 1.56, P = 0.19), indicating that the effect of body size on longevity was consistent across treatments.\nThe ANCOVA revealed significant effects of both treatment (F₄,₁₁₉ = 27.97, P &lt; 0.001) and thorax length (F₁,₁₁₉ = 145.44, P &lt; 0.001) on longevity. Thorax length was positively associated with longevity (b = 1.19), with larger males living longer. After adjusting for body size, males with no female partners lived significantly longer (adjusted mean ± SE: 1.81 ± 0.02 log₁₀ days) than males in any other treatment group. Males provided with a single virgin female daily (1.77 ± 0.02) or a single inseminated female daily (1.79 ± 0.02) showed intermediate longevity, while males with eight females per day showed the lowest longevity (1.72 ± 0.02 for inseminated females; 1.59 ± 0.02 for virgin females). Pairwise comparisons using Tukey’s HSD test indicated significant differences between all treatment groups (P &lt; 0.05) except between the two treatments with a single female per day (P = 0.42).”"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#key-principles",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#key-principles",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Key Principles",
-    "text": "Key Principles\n\nPurpose:\n\nANCOVA combines regression and ANOVA approaches\nIncreases power by accounting for continuous covariates\nAllows comparison of adjusted means\n\nThe Analysis\n\nAlways test for homogeneity of slopes first!\nIf slopes are homogeneous, proceed with standard ANCOVA\nIf slopes are heterogeneous, use alternatives (Johnson-Neyman procedure)\n\nInterpretation\n\nFocus on adjusted means (at mean covariate value)\nConsider both statistical and biological significance\nVisualize results clearly with appropriate graphs"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#assumptions",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#assumptions",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Assumptions",
-    "text": "Assumptions\n\nIndependence of observations\nNormal distribution of residuals\nHomogeneity of variances\nLinearity of relationships within groups\nHomogeneity of regression slopes"
+    "section": "Publication Quality Figure",
+    "text": "Publication Quality Figure"
   },
   {
     "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html",
     "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html",
     "title": "Lecture 15 - ANCOVA",
     "section": "",
-    "text": "General Linear Models (GLM)\n\nGaussian GLMs (normal distribution)\nPoisson GLMs (count data)\nLogistic GLMs (binary outcomes)\nModel assumptions and diagnostics\nConnection to ANOVA and linear models"
+    "text": "Review\n\nGeneral Linear Models (GLM)\nGaussian GLMs (normal distribution)\nPoisson GLMs (count data)\nLogistic GLMs (binary outcomes)\nModel assumptions and diagnostics\nConnection to ANOVA and linear models\n\n\n\n# Placeholder for review image"
   },
   {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#review",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#review",
+    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#building-the-ancova-model-in-r",
+    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#building-the-ancova-model-in-r",
     "title": "Lecture 15 - ANCOVA",
-    "section": "",
-    "text": "General Linear Models (GLM)\n\nGaussian GLMs (normal distribution)\nPoisson GLMs (count data)\nLogistic GLMs (binary outcomes)\nModel assumptions and diagnostics\nConnection to ANOVA and linear models"
+    "section": "Building the ANCOVA Model in R",
+    "text": "Building the ANCOVA Model in R\n\nRemember lm(y ~ predictor).\n\nANCOVA combines the predictors from ANOVA and regression.\n\nSimple Linear Regression:\n\nPredict y using a continuous variable x.\n\nmodel_reg &lt;- lm(y ~ x, data = mydata)\n\n\nOne-Way ANOVA:\n\nWe want to compare y among groups in a categorical factor A.\n\nmodel_aov &lt;- lm(y ~ A, data = mydata)\n\n\nANCOVA (Additive Model):\n\nCompare y among groups in A, after accounting for effect of x.\nAdd terms together\n\nmodel_ancova &lt;- lm(y ~ A + x, data = mydata)\n\nModel assumes slope of y ~ x relationship is same for all groups in A.\n\nANCOVA (Interaction Model):\n\nWhat if the slopes are different for each group?\nTest for interaction between factor and covariate.\n\nmodel_int &lt;- lm(y ~ A * x, data = mydata)\n\nShorthand for: lm(y ~ A + x + A:x, data = mydata)\nThe A:x term tests if the slopes are different."
   },
   {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#overview",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#overview",
+    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#writing-up-ancova-results",
+    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#writing-up-ancova-results",
     "title": "Lecture 15 - ANCOVA",
-    "section": "Overview",
-    "text": "Overview\n\nAnalysis of covariance (ANCOVA):\n\nIntroduction to ANCOVA\nWhen to use ANCOVA\nLinear model for ANCOVA\nAnalysis of variance in ANCOVA\nAssumptions of ANCOVA\n\nHomogeneous slopes\n\nRobust ANCOVA approaches\nSpecific comparisons of means\nExamples and interpretation\nScientific reporting of ANCOVA results"
+    "section": "Writing Up ANCOVA Results",
+    "text": "Writing Up ANCOVA Results\nScientific Writing Example\nHere’s how you might write up ANCOVA results for publication:\n\n“We analyzed the effects of mating strategy on male fruitfly longevity using analysis of covariance (ANCOVA), with thorax length as a covariate. Before conducting the main analysis, we tested the homogeneity of slopes assumption and found no significant interaction between treatment and thorax length (F₄,₁₁₅ = xxx , indicating that the effect of body size on longevity was consistent across treatments.\nThe ANCOVA revealed significant effects of both treatment (F₄,₁₁₉ = xxxx and thorax length (F₁,₁₁₉ = xxxx, P &lt; 0.001) on longevity. Thorax length was positively associated with longevity…\nAfter adjusting for body size, males with no female partners lived significantly longer (adjusted mean ± SE: xxxx` days) than males in any other treatment group. Pairwise comparisons using Tukey’s HSD test indicated significant differences between most treatment groups (P &lt; 0.05) except between the ‘One virgin female’ and ‘One inseminated female’ groups (P = x).”"
   },
   {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#what-is-ancova",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#what-is-ancova",
+    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#publication-quality-figure",
+    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#publication-quality-figure",
     "title": "Lecture 15 - ANCOVA",
-    "section": "What is ANCOVA?",
-    "text": "What is ANCOVA?\n\nANCOVA = Analysis of COVAriance\nCombination of regression and ANOVA\nA continuous covariate is measured along with the response variable for each experimental unit\nCommon use:\n\ncompare means of factor levels (groups), adjusting for variance from continuous covariate\n\nAnother use:\n\ndetermine whether two or more regression lines differ in slopes and intercepts"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#common-applications-of-ancova",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#common-applications-of-ancova",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Common Applications of ANCOVA",
-    "text": "Common Applications of ANCOVA\n\nIncreasing statistical power\n\nRemoving variation associated with a covariate can reduce residual error\nMore powerful test of treatment effects\n\nAdjusting for confounding variables\n\nWhen treatments might differ in some continuous variable\nNeed to separate treatment effects from covariate effects\n\nTesting equality of regression lines\n\nDo treatments have the same relationship with a continuous variable?\nTests for both slopes and intercepts"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#cricket-chirping-example",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#cricket-chirping-example",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Cricket Chirping Example",
-    "text": "Cricket Chirping Example\n\nWant to compare chirping rate of two cricket species:\n\nOecanthus exclamationis\nOecanthus niveus\n\nBut:\n\nMeasured rates at different temperatures\nRange of temperatures differed between species\nApparent relationship between pulse rate and temperature\n\nANCOVA lets us adjust for temperature effect to get a more powerful test!"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#interpretation-of-parameters",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#interpretation-of-parameters",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Interpretation of Parameters",
-    "text": "Interpretation of Parameters\n\n\\(\\mu\\) = overall mean response\n\\(\\alpha_i\\) = effect of level i (difference between group mean and overall mean)\n\\(\\beta\\) = pooled within-group regression coefficient\n\\(X_{ij}\\) = covariate value for observation j in group i\n\\(\\bar{X}\\) = overall mean of covariate\n\\(\\varepsilon_{ij}\\) = unexplained error\n\nThis model assumes homogeneous slopes across all treatment groups (we’ll test this later)."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#running-ancova-in-r",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#running-ancova-in-r",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Running ANCOVA in R",
-    "text": "Running ANCOVA in R\nBasic ANCOVA model: - Response: continuous variable (y) - Predictor: categorical factor (A)\n- Covariate: continuous variable (x)\nThe simplest ANCOVA model is:\nmodel &lt;- lm(y ~ A + x, data = mydata)\nanova(model)\nAlternative: use aov() function\nmodel &lt;- aov(y ~ A + x, data = mydata)  \nsummary(model)\nBoth approaches use Type I SS (sequential). For unbalanced designs, you may want Type III SS using car package."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#testing-for-homogeneous-slopes",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#testing-for-homogeneous-slopes",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Testing for Homogeneous Slopes",
-    "text": "Testing for Homogeneous Slopes\nANCOVA assumes the regression slopes are the same for all groups (parallel regression lines)\nTo test this assumption:\n\nFit model with interaction term:\n\nmodel_int &lt;- lm(y ~ A * x, data = mydata)\n\nTest significance of interaction:\n\nanova(model_int)\n\nIf interaction is significant (p &lt; 0.05):\n\nSlopes are not homogeneous\nStandard ANCOVA inappropriate\nUse alternative approaches"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#parallel-vs.-non-parallel-slopes",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#parallel-vs.-non-parallel-slopes",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Parallel vs. Non-Parallel Slopes",
-    "text": "Parallel vs. Non-Parallel Slopes"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#when-slopes-are-not-homogeneous",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#when-slopes-are-not-homogeneous",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "When Slopes Are Not Homogeneous",
-    "text": "When Slopes Are Not Homogeneous\nIf the interaction term is significant (p &lt; 0.05), the slope-group relationship is not the same across groups.\nOptions:\n\nReport the interaction - this is a biologically interesting result!\nSeparate regressions - analyze each group separately\nJohnson-Neyman procedure - identifies regions of the covariate where groups differ significantly\nAlternative models - consider transformation, polynomial terms, or more complex models"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#ancova-on-longevity-of-male-fruitflies",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#ancova-on-longevity-of-male-fruitflies",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "ANCOVA on Longevity of Male Fruitflies",
-    "text": "ANCOVA on Longevity of Male Fruitflies\n\n# 1. Examine the partridge data structure\n# str(partridge)\n\n# Create better names for treatments\npartridge$treatment &lt;- factor(partridge$TREATMEN,\n                            levels = 1:5,\n                            labels = c(\"No females\", \n                                      \"One virgin female daily\",\n                                      \"Eight virgin females daily\",\n                                      \"One inseminated female daily\",\n                                      \"Eight inseminated females daily\"))\n\n# 2. Create a plot of the data showing relationship\nggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) + \n  geom_point() +\n  geom_smooth(method = \"lm\", se = FALSE) +\n  labs(title = \"Relationship between Thorax Length and Longevity\",\n       x = \"Thorax Length (mm)\",\n       y = \"Longevity (days)\",\n       color = \"Treatment\") +\n  theme_minimal() +\n  theme(legend.position = \"bottom\")"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#testing-homogeneity-of-slopes-1",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#testing-homogeneity-of-slopes-1",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Testing Homogeneity of Slopes",
-    "text": "Testing Homogeneity of Slopes\n\n# Test for homogeneity of slopes\nhomo_slopes_model &lt;- lm(LONGEV ~ THORAX * treatment, data = partridge)\nanova(homo_slopes_model)\n\nAnalysis of Variance Table\n\nResponse: LONGEV\n                  Df  Sum Sq Mean Sq  F value    Pr(&gt;F)    \nTHORAX             1 15496.6 15496.6 136.0170 &lt; 2.2e-16 ***\ntreatment          4  9611.5  2402.9  21.0905 4.617e-13 ***\nTHORAX:treatment   4    42.5    10.6   0.0933    0.9844    \nResiduals        115 13102.1   113.9                       \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n# Extract the p-value for the interaction\np_interaction &lt;- anova(homo_slopes_model)[3, \"Pr(&gt;F)\"]\n\nThe p-value for the interaction term (treatment × THORAX) is 0.984. Since this value is &gt; 0.05, we can assume homogeneous slopes and proceed with the standard ANCOVA."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#pairwise-comparisons-of-adjusted-means",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#pairwise-comparisons-of-adjusted-means",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Pairwise Comparisons of Adjusted Means",
-    "text": "Pairwise Comparisons of Adjusted Means\n\n# Pairwise comparisons of adjusted means\npairs(adjusted_means, adjust = \"tukey\")\n\n contrast                                                       estimate   SE\n No females - One virgin female daily                               3.93 3.00\n No females - Eight virgin females daily                            1.28 2.98\n No females - One inseminated female daily                         10.95 3.00\n No females - Eight inseminated females daily                      23.88 2.97\n One virgin female daily - Eight virgin females daily              -2.65 2.98\n One virgin female daily - One inseminated female daily             7.02 2.97\n One virgin female daily - Eight inseminated females daily         19.95 3.01\n Eight virgin females daily - One inseminated female daily          9.67 2.98\n Eight virgin females daily - Eight inseminated females daily      22.60 2.99\n One inseminated female daily - Eight inseminated females daily    12.93 3.01\n  df t.ratio p.value\n 119   1.311  0.6849\n 119   0.428  0.9929\n 119   3.650  0.0035\n 119   8.031  &lt;.0001\n 119  -0.891  0.8996\n 119   2.361  0.1336\n 119   6.636  &lt;.0001\n 119   3.249  0.0129\n 119   7.560  &lt;.0001\n 119   4.298  0.0003\n\nP value adjustment: tukey method for comparing a family of 5 estimates \n\n# Plot adjusted means with confidence intervals\nplot(adjusted_means, comparisons = TRUE) + \n  labs(title = \"Adjusted Means by Treatment\",\n       x = \"Adjusted Longevity (days)\",\n       y = \"Treatment\") +\n  theme_minimal()"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#visualization-options-for-ancova",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#visualization-options-for-ancova",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Visualization Options for ANCOVA",
-    "text": "Visualization Options for ANCOVA"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#heterogeneous-slopes-example",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#heterogeneous-slopes-example",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Heterogeneous Slopes Example",
-    "text": "Heterogeneous Slopes Example\nConstable (1993) studied shrinking in sea urchin test: - Compared suture widths between treatments - Three groups: high food, low food, initial sample - Covariate: body volume (cube root transformed)\nThe analysis showed: - Significant interaction between treatment and covariate - Heterogeneous slopes across treatments - Can’t use standard ANCOVA"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#johnson-neyman-procedure-for-heterogeneous-slopes",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#johnson-neyman-procedure-for-heterogeneous-slopes",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Johnson-Neyman Procedure for Heterogeneous Slopes",
-    "text": "Johnson-Neyman Procedure for Heterogeneous Slopes\n\n\nAnalysis of Variance Table\n\nResponse: suture_width\n                 Df   Sum Sq   Mean Sq F value    Pr(&gt;F)    \nvolume            1 0.015724 0.0157238  176.91 &lt; 2.2e-16 ***\ntreatment         2 0.036482 0.0182411  205.23 &lt; 2.2e-16 ***\nvolume:treatment  2 0.006213 0.0031064   34.95 4.453e-11 ***\nResiduals        66 0.005866 0.0000889                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#key-assumptions",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#key-assumptions",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Key Assumptions",
-    "text": "Key Assumptions\n\nIndependence of observations\n\nSamples are random and independent\nNo clustering or repeated measures\n\nNormal distribution of residuals\n\nResiduals follow a normal distribution\nCheck with QQ plots or formal tests\n\nHomogeneity of variances\n\nEqual variances across groups\nCheck with residual plots vs. fitted values\n\nLinearity\n\nLinear relationship between Y and X within each group\nCheck with scatterplots\n\nHomogeneity of regression slopes (critical!)\n\nRegression slopes equal across all groups\nTest with interaction term"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#checking-assumptions-in-r-1",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#checking-assumptions-in-r-1",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Checking Assumptions in R",
-    "text": "Checking Assumptions in R\n\n# Fit ANCOVA model for partridge data\nancova_model &lt;- lm(LONGEV ~ THORAX + treatment, data = partridge)\n\n# Create a 2x2 panel of diagnostic plots\npar(mfrow = c(2, 2))\nplot(ancova_model)"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#non-parametric-alternatives",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#non-parametric-alternatives",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Non-Parametric Alternatives",
-    "text": "Non-Parametric Alternatives\nWhen ANCOVA assumptions are violated, consider:\n\nRank Transformation\n\nRank transform both Y and X variables\nRun standard ANCOVA on ranked data\nSimple but may not handle interactions well\n\nANCOVA on Bootstrapped Data\n\nUse bootstrapping to estimate parameters\nDoesn’t require normality assumption\n\nQuantile Regression\n\nModels relationships at different quantiles\nRobust to outliers and heteroscedasticity\n\nPermutation Tests\n\nRandomization tests of treatment effects\nNo distributional assumptions"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#scientific-writing-example",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#scientific-writing-example",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Scientific Writing Example",
-    "text": "Scientific Writing Example\nHere’s how you might write up ANCOVA results for publication:\n\n“We analyzed the effects of mating strategy on male fruitfly longevity using analysis of covariance (ANCOVA), with thorax length as a covariate. Before conducting the main analysis, we tested the homogeneity of slopes assumption and found no significant interaction between treatment and thorax length (F₄,₁₁₅ = 1.56, P = 0.19), indicating that the effect of body size on longevity was consistent across treatments.\nThe ANCOVA revealed significant effects of both treatment (F₄,₁₁₉ = 27.97, P &lt; 0.001) and thorax length (F₁,₁₁₉ = 145.44, P &lt; 0.001) on longevity. Thorax length was positively associated with longevity (b = 1.19), with larger males living longer. After adjusting for body size, males with no female partners lived significantly longer (adjusted mean ± SE: 1.81 ± 0.02 log₁₀ days) than males in any other treatment group. Males provided with a single virgin female daily (1.77 ± 0.02) or a single inseminated female daily (1.79 ± 0.02) showed intermediate longevity, while males with eight females per day showed the lowest longevity (1.72 ± 0.02 for inseminated females; 1.59 ± 0.02 for virgin females). Pairwise comparisons using Tukey’s HSD test indicated significant differences between all treatment groups (P &lt; 0.05) except between the two treatments with a single female per day (P = 0.42).”"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#key-principles",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#key-principles",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Key Principles",
-    "text": "Key Principles\n\nPurpose:\n\nANCOVA combines regression and ANOVA approaches\nIncreases power by accounting for continuous covariates\nAllows comparison of adjusted means\n\nThe Analysis\n\nAlways test for homogeneity of slopes first!\nIf slopes are homogeneous, proceed with standard ANCOVA\nIf slopes are heterogeneous, use alternatives (Johnson-Neyman procedure)\n\nInterpretation\n\nFocus on adjusted means (at mean covariate value)\nConsider both statistical and biological significance\nVisualize results clearly with appropriate graphs"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#assumptions",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#assumptions",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Assumptions",
-    "text": "Assumptions\n\nIndependence of observations\nNormal distribution of residuals\nHomogeneity of variances\nLinearity of relationships within groups\nHomogeneity of regression slopes"
+    "section": "Publication Quality Figure",
+    "text": "Publication Quality Figure"
   },
   {
     "objectID": "ecostats_lectures/lecture_08/08_01_lecture_powerpoint_html.html",
