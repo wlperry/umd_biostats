@@ -91,6 +91,7 @@ format:
     -   **Another use:**
         -   Determine whether two or more regression lines differ in
             slopes and/or intercepts.
+   
 :::
 
 ::: {.column width="40%"}
@@ -146,6 +147,8 @@ format:
     different temperatures?
 -   **Solution:** ANCOVA lets us adjust for the temperature effect to
     get a clearer, more powerful test of the species effect.
+
+   
 :::
 
 ::: {.column width="40%"}
@@ -178,6 +181,7 @@ format:
 
 # ANCOVA Model Visualization
 
+::: {.panel column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -185,6 +189,7 @@ format:
 :::
 :::
 
+:::
 
 # Mathematical Model for ANCOVA
 
@@ -219,6 +224,7 @@ format:
     -   $\varepsilon_{ij}$ = unexplained error
 -   **Model assumes homogeneous slopes** (i.e., $\beta$ same for all
     groups)
+  
 :::
 
 ::: {.column width="40%"}
@@ -232,7 +238,7 @@ format:
 :::
 :::::
 
-## Building the ANCOVA Model in R
+# Building the ANCOVA Model in R
 
 -   Remember `lm(y ~ predictor)`.
     -   ANCOVA combines the predictors from ANOVA and regression.
@@ -248,6 +254,9 @@ format:
         -   `model_ancova <- lm(y ~ A + x, data = mydata)`
     -   Model assumes slope of y \~ x relationship is same for all
         groups in A.
+
+# Building the ANCOVA Model in R
+
 -   **ANCOVA (Interaction Model):**
     -   What if the slopes are different for each group?
     -   Test for interaction between factor and covariate.
@@ -284,6 +293,8 @@ format:
     -   Analysis stops here and interpret interaction (often most
         interesting result!)
 
+# ANCOVA in R: The 3-Step Workflow
+
 -   Step 3: Run the ANCOVA (Additive Model)
 
     -   If interaction not significant, run the simpler additive model
@@ -301,6 +312,7 @@ format:
 
 # Analysis of Variance for ANCOVA: Partitioning
 
+::: {.panel column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -308,10 +320,12 @@ format:
 :::
 :::
 
+:::
 
 # ANOVA Table for ANCOVA
 
 The ANOVA table for a single-factor ANCOVA has these components:
+:::{.panel column="screen"}
 
 
 ::: {.cell}
@@ -340,6 +354,8 @@ anova_table
 ```
 :::
 
+
+:::
 
 # Null Hypotheses in ANCOVA
 
@@ -372,6 +388,7 @@ Test with F = MS_Covariate/MS_Residual (the 'x' term in
 
 **Parallel vs. Non-Parallel Slopes**
 
+::: {.panel column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -379,59 +396,32 @@ Test with F = MS_Covariate/MS_Residual (the 'x' term in
 :::
 :::
 
+:::
 
 # Partridge Example: Data Overview
 
 **ANCOVA on Longevity of Male Fruitflies**
 
+::: {.panel column="screen"}
 
 ::: {.cell}
-
-```{.r .cell-code}
-# We've already loaded this, but good practice
-partridge <- read.csv("data/partridge.csv")
-
-# Create better names for treatments
-partridge$treatment <- factor(partridge$TREATMEN,
-                            levels = 1:5,
-                            labels = c("No females", 
-                                       "One virgin female daily",
-                                       "Eight virgin females daily",
-                                       "One inseminated female daily",
-                                       "Eight inseminated females daily"))
-
-# 2. Create a plot of the data showing relationship
-ggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) + 
-  geom_point() +
-  geom_smooth(method = "lm", se = FALSE) + # se=FALSE to see lines clearly
-  labs(title = "Relationship between Thorax Length and Longevity",
-       x = "Thorax Length (mm)",
-       y = "Longevity (days)",
-       color = "Treatment") +
-  theme_minimal() +
-  theme(legend.position = "bottom")
-```
-
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-9-1.png)
 :::
 :::
 
+:::
 
 # Partridge Example: Step 1 - Test Homogeneity
 
 -   **Testing Homogeneity of Slopes**
     -   First, fit interaction model.
-
-    -   The p-value for the interaction term (THORAX:treatment) is
-
-        xl. 
-
+    -   The p-value for the interaction term (THORAX:treatment) is xl.
     -   Since this value is \> 0.05, we conclude the slopes are
         homogeneous.
-
     -   We can proceed to Step 3 and fit the simpler additive model.
 
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -456,6 +446,7 @@ p_interaction <- Anova(homo_slopes_model, type = "III")["THORAX:treatment", "Pr(
 ```
 :::
 
+:::
 
 # Partridge Example: Step 3 ANCOVA Analysis
 
@@ -468,6 +459,7 @@ p_interaction <- Anova(homo_slopes_model, type = "III")["THORAX:treatment", "Pr(
         -   **treatment:** treatment effect, after adjusting for thorax
             length, is highly significant
 
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -489,6 +481,7 @@ Anova(ancova_model, type = "III")
 ```
 :::
 
+:::
 
 # Partridge Example: Getting Adjusted Means
 
@@ -504,6 +497,7 @@ Anova(ancova_model, type = "III")
 
     -   This is the "level playing field" comparison.
 
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -523,6 +517,7 @@ adjusted_means
 ```
 :::
 
+:::
 
 # Partridge Example: Pairwise Comparisons
 
@@ -539,6 +534,7 @@ adjusted_means
             not different from each other, but all other comparisons are
             significant.
 
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -572,6 +568,7 @@ pairs(adjusted_means, adjust = "tukey")
 ```
 :::
 
+:::
 
 # Partridge Example: Pairwise Comparisons
 
@@ -588,6 +585,7 @@ pairs(adjusted_means, adjust = "tukey")
             not different from each other, but all other comparisons are
             significant.
 
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -605,11 +603,13 @@ plot(adjusted_means, comparisons = TRUE) +
 :::
 :::
 
+:::
 
 # Visualizing ANCOVA Results
 
 **Visualization Options for ANCOVA**
 
+::: {.panel column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -617,6 +617,7 @@ plot(adjusted_means, comparisons = TRUE) +
 :::
 :::
 
+:::
 
 # What if Slopes are HETEROGENEOUS? (p \< 0.05)
 
@@ -636,6 +637,7 @@ plot(adjusted_means, comparisons = TRUE) +
 -   Relationship between body volume and suture width depends on
     treatment group
 -   **Standard ANCOVA is invalid.**
+
 :::
 
 ::: {.column width="40%"}
@@ -669,42 +671,44 @@ If the interaction term is significant (p \< 0.05):
 4.  **Separate regressions:** Analyze each group separately (less
     powerful).
 
+::: {.panel column="screen"}
 
-    ::: {.cell}
-    
-    ```
-    ## Anova Table (Type III tests)
-    ## 
-    ## Response: suture_width
-    ##                     Sum Sq Df F value    Pr(>F)    
-    ## (Intercept)      0.0005253  1    5.91   0.01778 *  
-    ## volume           0.0151663  1  170.64 < 2.2e-16 ***
-    ## treatment        0.0020070  2   11.29 6.064e-05 ***
-    ## volume:treatment 0.0062129  2   34.95 4.453e-11 ***
-    ## Residuals        0.0058662 66                      
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ```
-    :::
+::: {.cell}
 
+```{.r .cell-code}
+    #| echo: false
+    # Fit model with interaction
+    urchin_model <- lm(suture_width ~ volume * treatment, data = urchin_data)
+    Anova(urchin_model, type = 3)
+## Anova Table (Type III tests)
+## 
+## Response: suture_width
+##                     Sum Sq Df F value    Pr(>F)    
+## (Intercept)      0.0005253  1    5.91   0.01778 *  
+## volume           0.0151663  1  170.64 < 2.2e-16 ***
+## treatment        0.0020070  2   11.29 6.064e-05 ***
+## volume:treatment 0.0062129  2   34.95 4.453e-11 ***
+## Residuals        0.0058662 66                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+:::
+
+:::
 
 # Interpretation of Heterogeneous Slopes
 
 -   With heterogeneous slopes, interpretation shifts from "adjusted
     means" to "regions of significance":
-
     -   **Initial \> Low Food** when cube root body volume \> 2.95\
         For large urchins, initial sample has wider sutures than low
         food urchins
-
     -   **High Food \> Initial** when cube root body volume \> 1.81\
         For most urchins, high food treatment results in wider sutures
         than initial samples.
-
     -   **High Food \> Low Food** when cube root body volume \> 2.07\
         For most medium to large urchins, high food results in wider
         sutures than low food.
-
 -   Biological interpretation is food regime affects suture width
     differently depending on urchin size
 
@@ -714,18 +718,14 @@ If the interaction term is significant (p \< 0.05):
 
     1.  **Independence of observations**\
         Samples are random and independent.
-
     2.  **Normal distribution of residuals**\
         Check with QQ plots.
-
     3.  **Homogeneity of variances (Homoscedasticity)**\
         Equal variances across groups.\
         Check with residual vs. fitted plots.
-
     4.  **Linearity**\
         A linear relationship exists between Y and X within each group.\
         Check with scatterplots (we did this!).
-
     5.  **Homogeneity of regression slopes (The critical one!)**\
         Regression slopes are equal across all groups.\
         We tested this first! (the A:x interaction).
@@ -745,23 +745,15 @@ If the interaction term is significant (p \< 0.05):
         top/bottom right (high leverage/influence). Looks good.
 -   **Conclusion:** The assumptions are met.
 
+::: {.panel column="screen"}
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Fit ANCOVA model for partridge data
-ancova_model <- lm(LONGEV ~ THORAX + treatment, data = partridge)
-
-# Create a 2x2 panel of diagnostic plots
-par(mfrow = c(2, 2))
-plot(ancova_model)
-```
-
 ::: {.cell-output-display}
 ![](15_01_lecture_powerpoint_files/figure-docx/unnamed-chunk-17-1.png)
 :::
 :::
 
+:::
 
 # Robust ANCOVA Approaches
 
@@ -782,6 +774,8 @@ plot(ancova_model)
         instead of the mean.
 -   **Permutation Tests**
     -   Randomization tests of treatment effects.
+  
+
 :::
 
 ::: {.column width="40%"}
@@ -826,7 +820,7 @@ in our original parametric test.
 :::
 :::::
 
-## Writing Up ANCOVA Results
+# Writing Up ANCOVA Results
 
 **Scientific Writing Example**
 
@@ -852,6 +846,7 @@ Here's how you might write up ANCOVA results for publication:
 
 ## Publication Quality Figure
 
+::: {.panel column="screen"}
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -859,6 +854,7 @@ Here's how you might write up ANCOVA results for publication:
 :::
 :::
 
+:::
 
 # Summary
 
@@ -878,7 +874,11 @@ Here's how you might write up ANCOVA results for publication:
     -   Use `emmeans()` to get adjusted means and pairwise comparisons.
 -   **Assumptions**
     -   Independence of observations
+
     -   Normal distribution of residuals
+
     -   Homogeneity of variances
+
     -   Linearity of relationships within groups
+
     -   Homogeneity of regression slopes (The most important one!)

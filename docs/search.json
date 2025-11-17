@@ -4501,20 +4501,6 @@
     "text": "Visual Comparison"
   },
   {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#building-the-ancova-model-in-r",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#building-the-ancova-model-in-r",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Building the ANCOVA Model in R",
-    "text": "Building the ANCOVA Model in R\n\nRemember lm(y ~ predictor).\n\nANCOVA combines the predictors from ANOVA and regression.\n\nSimple Linear Regression:\n\nPredict y using a continuous variable x.\n\nmodel_reg &lt;- lm(y ~ x, data = mydata)\n\n\nOne-Way ANOVA:\n\nWe want to compare y among groups in a categorical factor A.\n\nmodel_aov &lt;- lm(y ~ A, data = mydata)\n\n\nANCOVA (Additive Model):\n\nCompare y among groups in A, after accounting for effect of x.\nAdd terms together\n\nmodel_ancova &lt;- lm(y ~ A + x, data = mydata)\n\nModel assumes slope of y ~ x relationship is same for all groups in A.\n\nANCOVA (Interaction Model):\n\nWhat if the slopes are different for each group?\nTest for interaction between factor and covariate.\n\nmodel_int &lt;- lm(y ~ A * x, data = mydata)\n\nShorthand for: lm(y ~ A + x + A:x, data = mydata)\nThe A:x term tests if the slopes are different."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#writing-up-ancova-results",
-    "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#writing-up-ancova-results",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Writing Up ANCOVA Results",
-    "text": "Writing Up ANCOVA Results\nScientific Writing Example\nHere’s how you might write up ANCOVA results for publication:\n\n“We analyzed the effects of mating strategy on male fruitfly longevity using analysis of covariance (ANCOVA), with thorax length as a covariate. Before conducting the main analysis, we tested the homogeneity of slopes assumption and found no significant interaction between treatment and thorax length (F₄,₁₁₅ = xxx , indicating that the effect of body size on longevity was consistent across treatments.\nThe ANCOVA revealed significant effects of both treatment (F₄,₁₁₉ = xxxx and thorax length (F₁,₁₁₉ = xxxx, P &lt; 0.001) on longevity. Thorax length was positively associated with longevity…\nAfter adjusting for body size, males with no female partners lived significantly longer (adjusted mean ± SE: xxxx` days) than males in any other treatment group. Pairwise comparisons using Tukey’s HSD test indicated significant differences between most treatment groups (P &lt; 0.05) except between the ‘One virgin female’ and ‘One inseminated female’ groups (P = x).”"
-  },
-  {
     "objectID": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#publication-quality-figure",
     "href": "ecostats_lectures/lecture_15/15_01_lecture_powerpoint_slides.html#publication-quality-figure",
     "title": "Lecture 15 - ANCOVA",
@@ -4527,20 +4513,6 @@
     "title": "Lecture 15 - ANCOVA",
     "section": "",
     "text": "Review\n\nGeneral Linear Models (GLM)\nGaussian GLMs (normal distribution)\nPoisson GLMs (count data)\nLogistic GLMs (binary outcomes)\nModel assumptions and diagnostics\nConnection to ANOVA and linear models\n\n\n\n# Placeholder for review image"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#building-the-ancova-model-in-r",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#building-the-ancova-model-in-r",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Building the ANCOVA Model in R",
-    "text": "Building the ANCOVA Model in R\n\nRemember lm(y ~ predictor).\n\nANCOVA combines the predictors from ANOVA and regression.\n\nSimple Linear Regression:\n\nPredict y using a continuous variable x.\n\nmodel_reg &lt;- lm(y ~ x, data = mydata)\n\n\nOne-Way ANOVA:\n\nWe want to compare y among groups in a categorical factor A.\n\nmodel_aov &lt;- lm(y ~ A, data = mydata)\n\n\nANCOVA (Additive Model):\n\nCompare y among groups in A, after accounting for effect of x.\nAdd terms together\n\nmodel_ancova &lt;- lm(y ~ A + x, data = mydata)\n\nModel assumes slope of y ~ x relationship is same for all groups in A.\n\nANCOVA (Interaction Model):\n\nWhat if the slopes are different for each group?\nTest for interaction between factor and covariate.\n\nmodel_int &lt;- lm(y ~ A * x, data = mydata)\n\nShorthand for: lm(y ~ A + x + A:x, data = mydata)\nThe A:x term tests if the slopes are different."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#writing-up-ancova-results",
-    "href": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#writing-up-ancova-results",
-    "title": "Lecture 15 - ANCOVA",
-    "section": "Writing Up ANCOVA Results",
-    "text": "Writing Up ANCOVA Results\nScientific Writing Example\nHere’s how you might write up ANCOVA results for publication:\n\n“We analyzed the effects of mating strategy on male fruitfly longevity using analysis of covariance (ANCOVA), with thorax length as a covariate. Before conducting the main analysis, we tested the homogeneity of slopes assumption and found no significant interaction between treatment and thorax length (F₄,₁₁₅ = xxx , indicating that the effect of body size on longevity was consistent across treatments.\nThe ANCOVA revealed significant effects of both treatment (F₄,₁₁₉ = xxxx and thorax length (F₁,₁₁₉ = xxxx, P &lt; 0.001) on longevity. Thorax length was positively associated with longevity…\nAfter adjusting for body size, males with no female partners lived significantly longer (adjusted mean ± SE: xxxx` days) than males in any other treatment group. Pairwise comparisons using Tukey’s HSD test indicated significant differences between most treatment groups (P &lt; 0.05) except between the ‘One virgin female’ and ‘One inseminated female’ groups (P = x).”"
   },
   {
     "objectID": "ecostats_lectures/lecture_15/15_02_lecture_powerpoint_html.html#publication-quality-figure",
