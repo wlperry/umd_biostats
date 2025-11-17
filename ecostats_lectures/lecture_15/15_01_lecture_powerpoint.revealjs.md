@@ -424,7 +424,8 @@ ggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) +
     -   First, fit interaction model.
 
     -   The p-value for the interaction term (THORAX:treatment) is
-        xxxx.
+
+        xl. 
 
     -   Since this value is \> 0.05, we conclude the slopes are
         homogeneous.
@@ -668,6 +669,25 @@ If the interaction term is significant (p \< 0.05):
 4.  **Separate regressions:** Analyze each group separately (less
     powerful).
 
+
+    ::: {.cell}
+    
+    ```
+    ## Anova Table (Type III tests)
+    ## 
+    ## Response: suture_width
+    ##                     Sum Sq Df F value    Pr(>F)    
+    ## (Intercept)      0.0093295  1  104.97 2.828e-15 ***
+    ## volume           0.0197876  1  222.63 < 2.2e-16 ***
+    ## treatment        0.0020070  2   11.29 6.064e-05 ***
+    ## volume:treatment 0.0062129  2   34.95 4.453e-11 ***
+    ## Residuals        0.0058662 66                      
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ```
+    :::
+
+
 # Interpretation of Heterogeneous Slopes
 
 -   With heterogeneous slopes, interpretation shifts from "adjusted
@@ -816,20 +836,19 @@ Here's how you might write up ANCOVA results for publication:
 > using analysis of covariance (ANCOVA), with thorax length as a
 > covariate. Before conducting the main analysis, we tested the
 > homogeneity of slopes assumption and found no significant interaction
-> between treatment and thorax length (F₄,₁₁₅ = xxx , indicating that the effect of body
-> size on longevity was consistent across treatments.
+> between treatment and thorax length (F₄,₁₁₅ = xxx , indicating that
+> the effect of body size on longevity was consistent across treatments.
 >
 > The ANCOVA revealed significant effects of both treatment (F₄,₁₁₉ =
-> xxxx and thorax length (F₁,₁₁₉ = xxxx,
-> P \< 0.001) on longevity. Thorax length was positively associated with
-> longevity...
+> xxxx and thorax length (F₁,₁₁₉ = xxxx, P \< 0.001) on longevity.
+> Thorax length was positively associated with longevity...
 >
 > After adjusting for body size, males with no female partners lived
-> significantly longer (adjusted mean ± SE: xxxx` days) than males in any other
-> treatment group. Pairwise comparisons using Tukey's HSD test indicated
-> significant differences between most treatment groups (P \< 0.05)
-> except between the 'One virgin female' and 'One inseminated female'
-> groups (P = x)."
+> significantly longer (adjusted mean ± SE: xxxx\` days) than males in
+> any other treatment group. Pairwise comparisons using Tukey's HSD test
+> indicated significant differences between most treatment groups (P \<
+> 0.05) except between the 'One virgin female' and 'One inseminated
+> female' groups (P = x)."
 
 ## Publication Quality Figure
 

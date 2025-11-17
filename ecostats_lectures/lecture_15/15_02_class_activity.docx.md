@@ -16,16 +16,17 @@ format:
 
 ## What is ANCOVA?
 
-ANCOVA (Analysis of Covariance) combines regression and ANOVA to: -
-Compare group means while adjusting for a continuous covariate -
-Increase statistical power by reducing residual error - Control for
-confounding variables
+-   ANCOVA (Analysis of Covariance) combines regression and ANOVA to:
+    -   Compare group means while adjusting for a continuous covariate
+    -   Increase statistical power by reducing residual error
+    -   Control for confounding variables
 
 ## When to Use ANCOVA
 
-Use ANCOVA when you have: - **Response variable**: Continuous -
-**Predictor variable**: Categorical (factor/groups) - **Covariate**:
-Continuous variable that affects the response
+-   Use ANCOVA when you have:
+    -   **Response variable**: Continuous
+    -   **Predictor variable**: Categorical (factor/groups)
+    -   **Covariate**: Continuous variable that affects the response
 
 ## Key Assumptions of ANCOVA
 
@@ -34,11 +35,10 @@ Continuous variable that affects the response
 3.  **Homogeneity of variances** across groups
 4.  **Linearity** between response and covariate within each group
 5.  **Homogeneity of slopes** (most critical!) - regression slopes must
-    be equal across all groups
+    be not significantly different across all groups
 
 ::: {.callout-important appearance="simple"}
 ## Critical First Step
-
 Always test for **homogeneity of slopes** before proceeding with ANCOVA.
 If slopes differ significantly between groups, standard ANCOVA is
 inappropriate.
@@ -48,12 +48,14 @@ inappropriate.
 
 ## Data Overview
 
-We want to compare chirping rate of two cricket species: - *Oecanthus
-exclamationis* - *Oecanthus niveus*
+We want to compare chirping rate of two cricket species:
+- *Oecanthus exclamationis* 
+- *Oecanthus niveus*
 
 But we measured rates at different temperatures, and there's a
 relationship between pulse rate and temperature. ANCOVA lets us adjust
 for temperature effect to get a more powerful test!
+
 
 ::: {.cell}
 
@@ -61,20 +63,20 @@ for temperature effect to get a more powerful test!
 # Create simulated cricket data based on lecture example
 set.seed(456)
 n <- 40
-species <- rep(c("O. exclamationis", "O. niveus"), each = n/2)
+spp <- rep(c("O. exclamationis", "O. niveus"), each = n/2)
 temp <- c(rnorm(n/2, mean = 22, sd = 2), rnorm(n/2, mean = 24, sd = 2))
-chirp_rate <- 40 + 2.5 * (temp - 23) + ifelse(species == "O. exclamationis", 10, 0) + rnorm(n, sd = 3)
-cricket_data <- data.frame(species = species, temp = temp, chirp_rate = chirp_rate)
+chirp_rate <- 40 + 2.5 * (temp - 23) + ifelse(spp == "O. exclamationis", 10, 0) + rnorm(n, sd = 3)
+c_df <- data.frame(spp = spp, temp = temp, chirp_rate = chirp_rate)
 
 # View data structure
 
-head(cricket_data)
+head(c_df)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-           species     temp chirp_rate
+               spp     temp chirp_rate
 1 O. exclamationis 19.31296   40.69557
 2 O. exclamationis 23.24355   51.78799
 3 O. exclamationis 23.60175   50.75553
@@ -87,11 +89,13 @@ head(cricket_data)
 :::
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Plot with regression lines by species
-ggplot(cricket_data, aes(x = temp, y = chirp_rate, color = species)) +
+ggplot(c_df, aes(x = temp, y = chirp_rate, color = spp)) +
   geom_point(alpha = 0.7) +
   geom_smooth(method = "lm", se = FALSE) 
 ```
@@ -110,17 +114,23 @@ ggplot(cricket_data, aes(x = temp, y = chirp_rate, color = species)) +
 :::
 :::
 
+
 ## Step 1: Test Homogeneity of Slopes
 
 This is the most critical assumption! We test if the regression slopes
 are equal across all groups.
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
+options(contrasts = c("contr.sum", "contr.poly")) # for true type 3 anovas
+# options(contrasts = c("contr.treatment", "contr.poly")) # original version
+# see below for interpretation...
+
 # Test for homogeneity of slopes by including interaction term
-cricket_slopes_model <- lm(chirp_rate ~ temp * species, data = cricket_data)
-Anova(cricket_slopes_model, type = 3)
+lm_int_model <- lm(chirp_rate ~ temp * spp, data = c_df)
+Anova(lm_int_model, type = 3)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -129,12 +139,12 @@ Anova(cricket_slopes_model, type = 3)
 Anova Table (Type III tests)
 
 Response: chirp_rate
-             Sum Sq Df F value           Pr(>F)    
-(Intercept)    6.32  1  0.9393         0.338915    
-temp         620.48  1 92.1572 0.00000000001828 ***
-species       69.76  1 10.3617         0.002724 ** 
-temp:species  26.08  1  3.8734         0.056796 .  
-Residuals    242.38 36                             
+             Sum Sq Df  F value                Pr(>F)    
+(Intercept)  133.06  1  19.7625            0.00008062 ***
+temp        1372.62  1 203.8707 < 0.00000000000000022 ***
+spp           69.76  1  10.3617              0.002724 ** 
+temp:spp      26.08  1   3.8734              0.056796 .  
+Residuals    242.38 36                                   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -143,23 +153,44 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-**Interpretation**: If p \> 0.05, slopes are homogeneous and we can
-proceed with ANCOVA. If p \< 0.05, slopes differ and standard ANCOVA is
-inappropriate.
 
-## Step 2: Fit ANCOVA Model
+**Interpretation**: 
+- p \> 0.05, slopes homogeneous - proceed with ANCOVA
+- p \< 0.05, slopes differ and standard ANCOVA is inappropriate
 
-Since slopes are homogeneous (p \> 0.05), we can fit the ANCOVA model
-without the interaction term.
+### The contrasts setting changes the specific hypothesis being tested for your main effects.
+- contr.treatment the test for temp is testing the effect of temperature only for the reference species (O. exclamationis)
+- one level of factor is the "reference" level ("O. exclamationis" comes first alphabetically).
+- is mean chirp_rate equal to zero for the reference species ("O. exclamationis") when temp is 0?
+
+### With contr.sum, test for temp is testing the average effect of temperature across both species.
+- "sum coding" or "deviation coding." 
+- compares each factor level to the grand mean
+- is average mean chirp_rate (averaged across both species) equal to zero when temp is 0?
+
+
+::: {.callout-important appearance="simple"}
+Intercept is hard to interpret in both models because temp = 0 is meaningless
+- center temp variable (e.g., temp_c = temp - mean(temp)) 
+- run model 
+- intercept would then test the chirp_rate at the average temperature
+- much more interpretable
+::: 
+
+
+# Step 2: Fit ANCOVA Model
+
+Since slopes are homogeneous (p \> 0.05), fit ANCOVA model without interaction term
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Fit ANCOVA model (without interaction)
-cricket_ancova <- lm(chirp_rate ~ temp + species, data = cricket_data)
+ancova_model <- lm(chirp_rate ~ temp + spp, data = c_df)
 
 # Get model summary
-summary(cricket_ancova)
+summary(ancova_model)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -167,17 +198,17 @@ summary(cricket_ancova)
 ```
 
 Call:
-lm(formula = chirp_rate ~ temp + species, data = cricket_data)
+lm(formula = chirp_rate ~ temp + spp, data = c_df)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
 -6.0065 -1.9653  0.1923  0.7886  5.9192 
 
 Coefficients:
-                 Estimate Std. Error t value             Pr(>|t|)    
-(Intercept)      -13.2012     4.7423  -2.784              0.00842 ** 
-temp               2.7926     0.2048  13.634 0.000000000000000530 ***
-speciesO. niveus -11.8005     0.8593 -13.733 0.000000000000000424 ***
+            Estimate Std. Error t value             Pr(>|t|)    
+(Intercept) -19.1014     4.7795  -3.997             0.000295 ***
+temp          2.7926     0.2048  13.634 0.000000000000000530 ***
+spp1          5.9003     0.4296  13.733 0.000000000000000424 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -190,11 +221,20 @@ F-statistic: 165.4 on 2 and 37 DF,  p-value: < 0.00000000000000022
 :::
 :::
 
+- Interpretation
+  - spp1 is clue that contr.sum is active
+  - represents coefficient for first species (O. exclamationis) relative to grand mean.
+  - (Intercept): -19.1014 - average chirp_rate (across both species) when temp is 0
+  - temp: 2.7926 - common slope- for every 1-degree increase in temp- chirp_rate increases by 2.7926 units
+  - spp1: 5.9003- spp1 coefficient - deviation from grand mean for first species- O. exclamationis
+  - effect for O. niveus is assumed to be -5.9003 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # View ANOVA table
-Anova(cricket_ancova)
+Anova(ancova_model, type = 2)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -205,7 +245,7 @@ Anova Table (Type II tests)
 Response: chirp_rate
            Sum Sq Df F value                Pr(>F)    
 temp      1348.81  1  185.90 0.0000000000000005296 ***
-species   1368.34  1  188.59 0.0000000000000004236 ***
+spp       1368.34  1  188.59 0.0000000000000004236 ***
 Residuals  268.46 37                                  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -215,14 +255,22 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
+Both Type II (technically more appropriate) and Type III end up doing the exact same calculation:
+
+- test for temp gets the Sum of Squares for temp after accounting for spp.
+- test for spp gets the Sum of Squares for spp after accounting for temp.
+
+
+
 ## Step 3: Check Model Assumptions
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create diagnostic plots
 par(mfrow = c(2, 2))
-plot(cricket_ancova, main = "ANCOVA Diagnostic Plots")
+plot(ancova_model, main = "ANCOVA Diagnostic Plots")
 ```
 
 ::: {.cell-output-display}
@@ -234,26 +282,106 @@ par(mfrow = c(1, 1))
 ```
 :::
 
+
+
+::: {.cell}
+
+```{.r .cell-code}
+shapiro.test(ancova_model$residuals)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  ancova_model$residuals
+W = 0.96208, p-value = 0.1971
+```
+
+
+:::
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+leveneTest( ~ temp * spp, data = c_df)
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+Warning in leveneTest.default(y = y, group = group, ...): group coerced to
+factor.
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(>F)
+group  1  0.9876 0.3266
+      38               
+```
+
+
+:::
+:::
+
+
+Breusch-Pagan (BP) Test for homoscedasticity
+
+
+::: {.cell}
+
+```{.r .cell-code}
+lmtest::bptest(ancova_model)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	studentized Breusch-Pagan test
+
+data:  ancova_model
+BP = 1.0098, df = 2, p-value = 0.6036
+```
+
+
+:::
+:::
+
+
+
 ## Step 4: Calculate Adjusted Means
 
 ANCOVA compares adjusted means - what each group's mean would be at the
 overall mean of the covariate.
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Calculate adjusted means using emmeans
-cricket_adjusted_means <- emmeans(cricket_ancova, "species")
+c_emmeans <- emmeans(ancova_model, "spp")
 
 # Convert to dataframe for plotting
-cricket_adj_means_df <- as.data.frame(cricket_adjusted_means)
+cricket_adj_means_df <- as.data.frame(c_emmeans)
 cricket_adj_means_df
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
- species            emmean        SE df lower.CL upper.CL
+ spp                emmean        SE df lower.CL upper.CL
  O. exclamationis 51.70513 0.6049702 37 50.47934 52.93091
  O. niveus        39.90462 0.6049702 37 38.67883 41.13040
 
@@ -264,13 +392,15 @@ Confidence level used: 0.95
 :::
 :::
 
+
 ## Step 5: Pairwise Comparisons
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Pairwise comparisons of adjusted means
-pairs(cricket_adjusted_means, adjust = "sidak")
+pairs(c_emmeans, adjust = "sidak")
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -284,13 +414,15 @@ pairs(cricket_adjusted_means, adjust = "sidak")
 :::
 :::
 
+
 ## Step 6: Visualize Results
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Plot adjusted means with confidence intervals
-plot(cricket_adjusted_means, comparisons = TRUE) 
+plot(c_emmeans, comparisons = TRUE) 
 ```
 
 ::: {.cell-output-display}
@@ -298,11 +430,14 @@ plot(cricket_adjusted_means, comparisons = TRUE)
 :::
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Bar chart of adjusted means
-ggplot(cricket_adj_means_df, aes(x = species, y = emmean, fill = species)) +
+c_emmeans_df <- as.data.frame(c_emmeans)
+ggplot(c_emmeans_df, aes(x = spp, y = emmean, fill = spp)) +
   geom_bar(stat = "identity", width = 0.7) +
   geom_errorbar(aes(ymin = lower.CL, ymax = upper.CL), width = 0.2) +
   labs(title = "Adjusted Mean Chirping Rate by Species",
@@ -319,6 +454,7 @@ ggplot(cricket_adj_means_df, aes(x = species, y = emmean, fill = species)) +
 :::
 :::
 
+
 # Part 2: Partridge Longevity Analysis
 
 ## Data Overview
@@ -326,14 +462,18 @@ ggplot(cricket_adj_means_df, aes(x = species, y = emmean, fill = species)) +
 We'll analyze the effect of mating strategy on male fruitfly longevity,
 using thorax length as a covariate.
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Load the partridge dataset
-partridge <- read.csv("data/partridge.csv")
+p_df <- read.csv("data/partridge.csv") %>% clean_names() %>% 
+  rename(
+    treat = treatmen
+  )
 
 # Create better treatment names
-partridge$treatment <- factor(partridge$TREATMEN,
+p_df$treat <- factor(p_df$treat,
                             levels = 1:5,
                             labels = c("No females", 
                                       "One virgin female daily",
@@ -342,37 +482,39 @@ partridge$treatment <- factor(partridge$TREATMEN,
                                       "Eight inseminated females daily"))
 
 # View data structure
-head(partridge)
+head(p_df)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-  PARTNERS TYPE TREATMEN LONGEV  LLONGEV THORAX     RESID1 PREDICT1      RESID2
-1        8    0        1     35 1.544068   0.64  -5.868456 40.86846 -0.04743024
-2        8    0        1     37 1.568202   0.68  -9.301196 46.30120 -0.07105067
-3        8    0        1     49 1.690196   0.68   2.698804 46.30120  0.05094369
-4        8    0        1     46 1.662758   0.72  -5.733936 51.73394 -0.02424867
-5        8    0        1     63 1.799341   0.72  11.266064 51.73394  0.11233405
-6        8    0        1     39 1.591065   0.76 -18.166676 57.16668 -0.14369601
-  PREDICT2  treatment
-1 1.591498 No females
-2 1.639252 No females
-3 1.639252 No females
-4 1.687007 No females
-5 1.687007 No females
-6 1.734761 No females
+  partners type      treat longev  llongev thorax     resid1 predict1
+1        8    0 No females     35 1.544068   0.64  -5.868456 40.86846
+2        8    0 No females     37 1.568202   0.68  -9.301196 46.30120
+3        8    0 No females     49 1.690196   0.68   2.698804 46.30120
+4        8    0 No females     46 1.662758   0.72  -5.733936 51.73394
+5        8    0 No females     63 1.799341   0.72  11.266064 51.73394
+6        8    0 No females     39 1.591065   0.76 -18.166676 57.16668
+       resid2 predict2
+1 -0.04743024 1.591498
+2 -0.07105067 1.639252
+3  0.05094369 1.639252
+4 -0.02424867 1.687007
+5  0.11233405 1.687007
+6 -0.14369601 1.734761
 ```
 
 
 :::
 :::
 
+
+
 ::: {.cell}
 
 ```{.r .cell-code}
 # Visualize the relationship between thorax length and longevity by treatment
-ggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) + 
+ggplot(p_df, aes(x = thorax, y = longev, color = treat)) + 
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
   labs(title = "Relationship between Thorax Length and Longevity",
@@ -393,17 +535,19 @@ ggplot(partridge, aes(x = THORAX, y = LONGEV, color = treatment)) +
 :::
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-docx/partridge-visualization-1.jpeg)
+![](15_02_class_activity_files/figure-docx/p_df-visualization-1.jpeg)
 :::
 :::
 
+
 ## Step 1: Test Homogeneity of Slopes
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Test for homogeneity of slopes
-homo_slopes_model <- lm(LONGEV ~ THORAX * treatment, data = partridge)
+homo_slopes_model <- lm(longev ~ thorax * treat, data = p_df)
 Anova(homo_slopes_model, type = 3)
 ```
 
@@ -412,13 +556,13 @@ Anova(homo_slopes_model, type = 3)
 ```
 Anova Table (Type III tests)
 
-Response: LONGEV
-                  Sum Sq  Df F value       Pr(>F)    
-(Intercept)        755.6   1  6.6320      0.01128 *  
-THORAX            3486.3   1 30.5999 0.0000002017 ***
-treatment           36.9   4  0.0810      0.98805    
-THORAX:treatment    42.5   4  0.0933      0.98441    
-Residuals        13102.1 115                         
+Response: longev
+              Sum Sq  Df F value    Pr(>F)    
+(Intercept)    755.6   1  6.6320   0.01128 *  
+thorax        3486.3   1 30.5999 2.017e-07 ***
+treat           36.9   4  0.0810   0.98805    
+thorax:treat    42.5   4  0.0933   0.98441    
+Residuals    13102.1 115                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -427,18 +571,18 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
+
 ## Step 2: Fit ANCOVA Model
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Fit the ANCOVA model (without interaction)
-ancova_model <- lm(LONGEV ~ THORAX + treatment, data = partridge)
-
-
+p_ancova_model <- lm(longev ~ thorax + treat, data = p_df)
 
 # Get more detailed summary
-summary(ancova_model)
+summary(p_ancova_model)
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -446,56 +590,51 @@ summary(ancova_model)
 ```
 
 Call:
-lm(formula = LONGEV ~ THORAX + treatment, data = partridge)
+lm(formula = longev ~ thorax + treat, data = p_df)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
 -26.189  -6.599  -0.989   6.408  30.244 
 
 Coefficients:
-                                         Estimate Std. Error t value
-(Intercept)                               -46.055     10.239  -4.498
-THORAX                                    135.819     12.439  10.919
-treatmentOne virgin female daily           -3.929      2.997  -1.311
-treatmentEight virgin females daily        -1.276      2.983  -0.428
-treatmentOne inseminated female daily     -10.946      2.999  -3.650
-treatmentEight inseminated females daily  -23.879      2.973  -8.031
-                                                     Pr(>|t|)    
-(Intercept)                                 0.000016052501519 ***
-THORAX                                   < 0.0000000000000002 ***
-treatmentOne virgin female daily                     0.192347    
-treatmentEight virgin females daily                  0.669517    
-treatmentOne inseminated female daily                0.000391 ***
-treatmentEight inseminated females daily    0.000000000000783 ***
+                                     Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                           -46.055     10.239  -4.498 1.61e-05 ***
+thorax                                135.819     12.439  10.919  < 2e-16 ***
+treatOne virgin female daily           -3.929      2.997  -1.311 0.192347    
+treatEight virgin females daily        -1.276      2.983  -0.428 0.669517    
+treatOne inseminated female daily     -10.946      2.999  -3.650 0.000391 ***
+treatEight inseminated females daily  -23.879      2.973  -8.031 7.83e-13 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Residual standard error: 10.51 on 119 degrees of freedom
 Multiple R-squared:  0.6564,	Adjusted R-squared:  0.6419 
-F-statistic: 45.46 on 5 and 119 DF,  p-value: < 0.00000000000000022
+F-statistic: 45.46 on 5 and 119 DF,  p-value: < 2.2e-16
 ```
 
 
 :::
 :::
+
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # View ANOVA table
-anova(ancova_model)
+Anova(p_ancova_model, type = "II")
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
-Analysis of Variance Table
+Anova Table (Type II tests)
 
-Response: LONGEV
-           Df  Sum Sq Mean Sq F value                Pr(>F)    
-THORAX      1 15496.6 15496.6 140.293 < 0.00000000000000022 ***
-treatment   4  9611.5  2402.9  21.753    0.0000000000001719 ***
-Residuals 119 13144.7   110.5                                  
+Response: longev
+           Sum Sq  Df F value    Pr(>F)    
+thorax    13168.9   1 119.219 < 2.2e-16 ***
+treat      9611.5   4  21.753 1.719e-13 ***
+Residuals 13144.7 119                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -504,35 +643,106 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
+
 ## Step 3: Check Assumptions
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Create diagnostic plots
 par(mfrow = c(2, 2))
-plot(ancova_model)
+plot(p_ancova_model)
 ```
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-docx/partridge-assumptions-1.jpeg)
+![](15_02_class_activity_files/figure-docx/p_df-assumptions-1.jpeg)
 :::
 :::
 
-## Step 4: Calculate Adjusted Means
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
-# Get adjusted means using emmeans
-adjusted_means <- emmeans(ancova_model, "treatment")
-adjusted_means
+shapiro.test(p_ancova_model$residuals)
 ```
 
 ::: {.cell-output .cell-output-stdout}
 
 ```
- treatment                       emmean   SE  df lower.CL upper.CL
+
+	Shapiro-Wilk normality test
+
+data:  p_ancova_model$residuals
+W = 0.99174, p-value = 0.6689
+```
+
+
+:::
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+leveneTest( ~ thorax * treat, data = p_df)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+Levene's Test for Homogeneity of Variance (center = median)
+       Df F value Pr(>F)
+group   4  0.6535 0.6255
+      120               
+```
+
+
+:::
+:::
+
+
+Breusch-Pagan (BP) Test for homoscedasticity
+
+
+::: {.cell}
+
+```{.r .cell-code}
+lmtest::bptest(p_ancova_model)
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+
+	studentized Breusch-Pagan test
+
+data:  p_ancova_model
+BP = 11.763, df = 5, p-value = 0.03818
+```
+
+
+:::
+:::
+
+
+## Step 4: Calculate Adjusted Means
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Get adjusted means using emmeans
+p_means <- emmeans(p_ancova_model, "treat")
+p_means
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+ treat                           emmean   SE  df lower.CL upper.CL
  No females                        65.4 2.11 119     61.3     69.6
  One virgin female daily           61.5 2.11 119     57.3     65.7
  Eight virgin females daily        64.2 2.10 119     60.0     68.3
@@ -546,13 +756,15 @@ Confidence level used: 0.95
 :::
 :::
 
+
 ## Step 5: Pairwise Comparisons
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Pairwise comparisons of adjusted means
-pairs(adjusted_means, adjust = "tukey")
+pairs(p_means, adjust = "tukey")
 ```
 
 ::: {.cell-output .cell-output-stdout}
@@ -586,26 +798,63 @@ P value adjustment: tukey method for comparing a family of 5 estimates
 
 
 :::
-
-```{.r .cell-code}
-# Plot adjusted means with confidence intervals
-plot(adjusted_means, comparisons = TRUE)
-```
-
-::: {.cell-output-display}
-![](15_02_class_activity_files/figure-docx/partridge-comparisons-1.jpeg)
-:::
 :::
 
-# Part 3: Example with Heterogeneous Slopes
-
-Let's look at an example where slopes are NOT homogeneous using sea
-urchin data.
 
 ::: {.cell}
 
 ```{.r .cell-code}
-# Create simulated sea urchin data with heterogeneous slopes
+# Plot adjusted means with confidence intervals
+plot(p_means, comparisons = TRUE)
+```
+
+::: {.cell-output-display}
+![](15_02_class_activity_files/figure-docx/unnamed-chunk-8-1.jpeg)
+:::
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+multcomp::cld(p_means) # Letters = letters
+```
+
+::: {.cell-output .cell-output-stdout}
+
+```
+ treat                           emmean   SE  df lower.CL upper.CL .group
+ Eight inseminated females daily   41.6 2.12 119     37.4     45.8  1    
+ One inseminated female daily      54.5 2.11 119     50.3     58.7   2   
+ One virgin female daily           61.5 2.11 119     57.3     65.7   23  
+ Eight virgin females daily        64.2 2.10 119     60.0     68.3    3  
+ No females                        65.4 2.11 119     61.3     69.6    3  
+
+Confidence level used: 0.95 
+P value adjustment: tukey method for comparing a family of 5 estimates 
+significance level used: alpha = 0.05 
+NOTE: If two or more means share the same grouping symbol,
+      then we cannot show them to be different.
+      But we also did not show them to be the same. 
+```
+
+
+:::
+:::
+
+
+
+# Part 3: Example with Heterogeneous Slopes
+
+Example where slopes are **NOT** homogeneous using sea urchin data.
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Create simulated sea urchin data with heterogeneous slopes 
+# used LM to get data estimate
 set.seed(345)
 n <- 72  # 24 urchins per group
 
@@ -626,19 +875,27 @@ suture_width <- ifelse(
   )
 ) + rnorm(n, 0, 0.01)
 
-urchin_data <- data.frame(treatment = treatments, volume = volume, suture_width = suture_width)
+u_df <- data.frame(treatment = treatments, volume = volume, suture_width = suture_width)
 
+# Explicitly set "Initial" as the reference level for the factor
+u_df$treatment <- factor(u_df$treatment, levels = c("Initial", "Low Food", "High Food"))
+```
+:::
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
 # Plot the data with regression lines
-ggplot(urchin_data, aes(x = volume, y = suture_width, color = treatment)) +
+ggplot(u_df, aes(x = volume, y = suture_width, color = treatment)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
-  labs(title = "Sea Urchin Suture Width vs. Volume",
-       subtitle = "Example with Heterogeneous Slopes",
+  labs(
        x = "Cube Root Body Volume",
        y = "Suture Width (mm)",
        color = "Treatment") +
-  theme_minimal() +
-  theme(legend.position = "bottom")
+  theme_minimal() 
 ```
 
 ::: {.cell-output .cell-output-stderr}
@@ -651,17 +908,20 @@ ggplot(urchin_data, aes(x = volume, y = suture_width, color = treatment)) +
 :::
 
 ::: {.cell-output-display}
-![](15_02_class_activity_files/figure-docx/urchin-data-1.jpeg)
+![](15_02_class_activity_files/figure-docx/unnamed-chunk-10-1.jpeg)
 :::
 :::
 
+
+
 ## Test for Homogeneity of Slopes
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Fit model with interaction
-urchin_model <- lm(suture_width ~ volume * treatment, data = urchin_data)
+urchin_model <- lm(suture_width ~ volume * treatment, data = u_df)
 Anova(urchin_model, type = 3)
 ```
 
@@ -671,12 +931,12 @@ Anova(urchin_model, type = 3)
 Anova Table (Type III tests)
 
 Response: suture_width
-                    Sum Sq Df F value                Pr(>F)    
-(Intercept)      0.0005253  1    5.91               0.01778 *  
-volume           0.0151663  1  170.64 < 0.00000000000000022 ***
-treatment        0.0020070  2   11.29      0.00006064438398 ***
-volume:treatment 0.0062129  2   34.95      0.00000000004453 ***
-Residuals        0.0058662 66                                  
+                    Sum Sq Df F value    Pr(>F)    
+(Intercept)      0.0080442  1  90.505 5.375e-14 ***
+volume           0.0086601  1  97.434 1.268e-14 ***
+treatment        0.0020070  2  11.290 6.064e-05 ***
+volume:treatment 0.0062129  2  34.950 4.453e-11 ***
+Residuals        0.0058662 66                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
@@ -685,20 +945,22 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 :::
 :::
 
-**Result**: With p \< 0.05, we have heterogeneous slopes! Standard
-ANCOVA would be inappropriate here.
+
+**Result**: With p \< 0.05 -  heterogeneous slopes! 
+- Standard ANCOVA inappropriate here
 
 ## What to do with Heterogeneous Slopes
 
-When slopes are not homogeneous, you have several options:
+When slopes are not homogeneous have several options:
+
 
 ::: {.cell}
 
 ```{.r .cell-code}
 # Option: Analyze groups separately
-initial_model <- lm(suture_width ~ volume, data = filter(urchin_data, treatment == "Initial"))
-low_food_model <- lm(suture_width ~ volume, data = filter(urchin_data, treatment == "Low Food"))
-high_food_model <- lm(suture_width ~ volume, data = filter(urchin_data, treatment == "High Food"))
+initial_model <- lm(suture_width ~ volume, data = filter(u_df, treatment == "Initial"))
+low_food_model <- lm(suture_width ~ volume, data = filter(u_df, treatment == "Low Food"))
+high_food_model <- lm(suture_width ~ volume, data = filter(u_df, treatment == "High Food"))
 
 # Summary for each group
 initial_model
@@ -709,8 +971,8 @@ initial_model
 ```
 
 Call:
-lm(formula = suture_width ~ volume, data = filter(urchin_data, 
-    treatment == "Initial"))
+lm(formula = suture_width ~ volume, data = filter(u_df, treatment == 
+    "Initial"))
 
 Coefficients:
 (Intercept)       volume  
@@ -729,8 +991,8 @@ low_food_model
 ```
 
 Call:
-lm(formula = suture_width ~ volume, data = filter(urchin_data, 
-    treatment == "Low Food"))
+lm(formula = suture_width ~ volume, data = filter(u_df, treatment == 
+    "Low Food"))
 
 Coefficients:
 (Intercept)       volume  
@@ -749,8 +1011,8 @@ high_food_model
 ```
 
 Call:
-lm(formula = suture_width ~ volume, data = filter(urchin_data, 
-    treatment == "High Food"))
+lm(formula = suture_width ~ volume, data = filter(u_df, treatment == 
+    "High Food"))
 
 Coefficients:
 (Intercept)       volume  
@@ -760,6 +1022,65 @@ Coefficients:
 
 :::
 :::
+
+
+# Option 2 - Johnson-Neyman procedure
+
+::: {.cell}
+
+```{.r .cell-code}
+# install.packages("interactions") # Run this once if you don't have it
+library(interactions)
+jn_model <- lm(suture_width ~ volume + treatment + volume * treatment, data = u_df)
+
+# --- The Fix ---
+# pred = "treatment" (the categorical predictor)
+# modx = "volume" (the continuous moderator)
+sim_slopes(jn_model,
+           pred = "volume",
+           modx = "treatment",
+           johnson_neyman = TRUE)
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+Warning: Johnson-Neyman intervals are not available for factor predictors or
+moderators.
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+SIMPLE SLOPES ANALYSIS
+
+Slope of volume when treatment = Initial: 
+
+  Est.   S.E.   t val.      p
+------ ------ -------- ------
+  0.00   0.00     9.87   0.00
+
+Slope of volume when treatment = Low Food: 
+
+  Est.   S.E.   t val.      p
+------ ------ -------- ------
+  0.00   0.00     2.47   0.02
+
+Slope of volume when treatment = High Food: 
+
+  Est.   S.E.   t val.      p
+------ ------ -------- ------
+  0.00   0.00    13.06   0.00
+```
+
+
+:::
+:::
+
+
 
 # Summary Checklist for ANCOVA
 
@@ -786,27 +1107,26 @@ When conducting ANCOVA, always follow these steps:
 -   **ANCOVA increases power** by accounting for covariate variation
 -   **Adjusted means** are what we compare, not raw group means
 -   **Homogeneity of slopes** is the most critical assumption
--   **Parallel lines** in your plot suggest homogeneous slopes
+-   **Parallel lines** in plot suggest homogeneous slopes
 -   **Non-parallel lines** indicate heterogeneous slopes - use
     alternative methods
 
 ::: {.callout-important appearance="simple"}
 ## Key Points from ANCOVA Analysis
 
-1.  **Test homogeneity of slopes first** - this is the most critical
-    assumption
+1.  **Test homogeneity of slopes first** - most critical assumption
 2.  **ANCOVA compares adjusted means** at the mean value of the
     covariate
 3.  **Increases statistical power** by removing variation due to the
     covariate
 4.  **Choose appropriate methods** based on whether slopes are
     homogeneous
-5.  **Visualize your results** clearly showing the relationship between
+5.  **Visualize your results** showing relationship between
     variables
 6.  **Check all assumptions** using diagnostic plots
 7.  **Interpret in biological context** - what do the adjusted means
     tell us?
 
-Remember: The covariate should be measured independently of the
+Remember: covariate should be measured independently of the
 treatment and should not be affected by the treatment itself!
 :::
