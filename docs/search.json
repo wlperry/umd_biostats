@@ -5250,193 +5250,95 @@
     "text": "Key Points to Remember\n\nNMDS preserves rank order of distances, not exact values\nStress &lt; 0.2 is acceptable, &lt; 0.1 is excellent\nPERMANOVA tests centroids, ANOSIM tests overlap\nCheck dispersion homogeneity - violated assumption affects interpretation\nMultiple comparisons require p-value adjustment\nAxes have no inherent meaning in NMDS (unlike PCA)\nUse appropriate distance measures for your data type\n\n\n\n\n\n\n\nKey Takeaways from NMDS/PERMANOVA Analysis\n\n\n\n\nNMDS is flexible - works with any distance measure and makes few assumptions\nStress indicates fit quality - always report and check this value\nPERMANOVA is powerful but assumes homogeneous dispersions\nANOSIM is complementary - provides different perspective on group separation\nVisualization is crucial - always plot your ordination results\nEnvironmental fitting helps interpret ecological patterns\nPermutation tests avoid distributional assumptions\n\nRemember: NMDS is iterative and may find different solutions - always set a seed for reproducibility!"
   },
   {
-    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#overview",
-    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#overview",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Overview",
-    "text": "Overview\n\nMultivariate data: multiple variables per object\nTypes of multivariate analyses\n\nFunctional vs. structural methods\nR-mode vs. Q-mode analyses\n\nEigenvectors, eigenvalues, and components\nDistance and dissimilarity measures\nData transformations and standardization\nScreening multivariate data\nMANOVA"
+    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#initial-data-exploration",
+    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#initial-data-exploration",
+    "title": "Principal Component Analysis (PCA)",
+    "section": "Initial Data Exploration",
+    "text": "Initial Data Exploration\nBefore any analysis, we should always look at our data:\n\nCheck for outliers\nExamine distributions\nLook for patterns by site\nUnderstand variable scales\n\nKey observations:\n\nVariables measured in different units (mm vs. g)\nDifferent ranges: height (hundreds) vs. biomass (fractions)\nNeed to standardize before PCA!"
   },
   {
-    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#functional-vs.-structural-methods-1",
-    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#functional-vs.-structural-methods-1",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Functional vs. Structural Methods",
-    "text": "Functional vs. Structural Methods\nFunctional methods: - Clear response and predictor variables - Goal: relate Y’s to X’s - Examples: MANOVA, PERMANOVA\nStructural methods: - Find patterns/structure in data - Often no clear predictors - Examples: PCA, NMDS, Cluster Analysis"
+    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#comparison-table",
+    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#comparison-table",
+    "title": "Principal Component Analysis (PCA)",
+    "section": "Comparison Table",
+    "text": "Comparison Table\n\n\n\n\n\n\n\n\n\n\nMethod\nData Type\nDistance/Similarity\nLinear?\nEigenanalysis?\n\n\n\n\nPCA\nContinuous, correlated\nEuclidean (correlation)\nYes\nYes\n\n\nCA\nCount data, species\nChi-square\nNo\nYes\n\n\nPCoA\nAny (via distance matrix)\nAny distance metric\nN/A\nYes\n\n\nNMDS\nAny (via distance matrix)\nAny distance metric\nNo\nNo\n\n\nDCA\nSpecies abundance\nWeighted averaging\nNo\nYes"
   },
   {
-    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#two-main-approaches",
-    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#two-main-approaches",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Two Main Approaches",
-    "text": "Two Main Approaches\nScaling/Ordination Methods: - Reduce dimensions with new derived variables - Summarize patterns in data - Examples: PCA, CCA\nDissimilarity-Based Methods: - Measure dissimilarity between objects - Visualize relationships between objects - Examples: NMDS, Cluster Analysis"
+    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#topics-we-havent-covered",
+    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#topics-we-havent-covered",
+    "title": "Principal Component Analysis (PCA)",
+    "section": "Topics We Haven’t Covered",
+    "text": "Topics We Haven’t Covered\n\nFactor Analysis: - Similar to PCA but with different goals - Assumes latent “factors” cause observed variables - Uses rotation to improve interpretation - More common in social sciences\nRobust PCA: - Less sensitive to outliers - Uses robust covariance estimators - Useful with messy ecological data\nSparse PCA: - Forces many loadings to exactly zero - Easier to interpret - Better for very high-dimensional data"
   },
   {
-    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#common-approaches",
-    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#common-approaches",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Common Approaches",
-    "text": "Common Approaches\nTransformations: - Log transformation for skewed data - Root transformations for count data\n- Fourth-root for species abundance data\nStandardization: - Centering: subtract mean (mean = 0) - Standardization: divide by SD (SD = 1) - Crucial for variables with different units - May not be appropriate for species data"
+    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#best-practices",
+    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#best-practices",
+    "title": "Principal Component Analysis (PCA)",
+    "section": "Best Practices",
+    "text": "Best Practices\n\n\nBefore PCA:\n\nExplore your data\n\nCheck distributions\nIdentify outliers\nUnderstand variable scales\n\nCheck correlations\n\nMake correlation plot\nEnsure variables are correlated\nConsider removing redundant variables\n\nStandardize appropriately\n\nUse scale = TRUE for different units\nConsider centering only for same units\n\nCheck sample size\n\nNeed at least 3× variables\nMore is better (50+ ideal)\n\n\n\nDuring PCA:\n\nExamine scree plot\n\nLook for elbow\nConsider cumulative variance\nUsually keep 2-5 components\n\nInterpret loadings\n\nLook for patterns\nConsider biological meaning\nIgnore very small loadings\n\nCheck scores plots\n\nLook for outliers\nIdentify patterns/groups\nConsider site/treatment effects\n\n\nAfter PCA:\n\nReport clearly\n\nState why you used PCA\nReport variance explained\nDescribe component interpretation\n\nUse results appropriately\n\nPC scores can go into other analyses\nDon’t over-interpret small components\nRemember: exploratory tool!"
   },
   {
-    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#visual-representation-methods",
-    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#visual-representation-methods",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Visual Representation Methods",
-    "text": "Visual Representation Methods\n\nSPLOMS/Scatterplot Matrices: show bivariate relationships\nStar plots: display multiple variables per object\nChernoff faces: represent variables as facial features\nHeatmaps: visualize data matrices with color\nBiplots: show objects and variables together\nOrdination plots: visualize relationships in reduced dimensions"
+    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#what-to-include-in-paperstheses",
+    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#what-to-include-in-paperstheses",
+    "title": "Principal Component Analysis (PCA)",
+    "section": "What to Include in Papers/Theses",
+    "text": "What to Include in Papers/Theses\n\n\nMethods Section:\n“We performed principal component analysis (PCA) on 10 morphological and biomass variables measured on 89 Darlingtonia californica plants from four sites. Variables were standardized (mean = 0, SD = 1) prior to analysis to account for different measurement scales. PCA was conducted using the prcomp() function in R. We retained principal components with eigenvalues &gt; 1 and that cumulatively explained &gt;70% of variance.”\nResults Section:\n“The first three principal components explained 77.3% of variance (PC1: 45.8%, PC2: 16.7%, PC3: 14.8%). PC1 represented overall plant size, with high positive loadings for most morphological and biomass variables…”\n\nEssential Figures:\n\nScree plot - shows variance explained\nLoadings plot - shows variable contributions\nScores plot or biplot - shows samples in PC space\n\nEssential Tables:\n\nVariance explained by each PC\nLoadings for retained PCs (usually PC1-PC3)\nANOVA results if testing groups\n\nDon’t Report:\n\nAll 10 PCs if only 3 are meaningful\nTiny loadings (&lt; 0.3)\nEvery individual PC score\nRaw eigenvalues (report % variance instead)"
   },
   {
-    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#key-issues-to-check",
-    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#key-issues-to-check",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Key Issues to Check",
-    "text": "Key Issues to Check\nMultivariate Outliers: - Objects with unusual patterns across variables - Detected with Mahalanobis distance (d²) - Test against χ² distribution with p df\nMissing Observations: - Common approaches: - Deletion: remove affected object or variable - Imputation: estimate missing values - Maximum likelihood methods - Multiple imputation"
+    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#mistakes-students-make",
+    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#mistakes-students-make",
+    "title": "Principal Component Analysis (PCA)",
+    "section": "Mistakes Students Make:",
+    "text": "Mistakes Students Make:\n❌ Not standardizing data with different units\n→ ✓ Always use scale = TRUE for different units\n❌ Forgetting to check correlations\n→ ✓ Make correlation plot first\n❌ Using too many components\n→ ✓ Use scree plot, keep components above elbow\n❌ Over-interpreting small loadings\n→ ✓ Focus on loadings &gt; |0.3|\n❌ Ignoring signs on loadings\n→ ✓ Sign can flip; look at patterns\n❌ Treating PC scores as original data\n→ ✓ Remember PCs are derived variables"
   },
   {
-    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#follow-up-univariate-anovas",
-    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#follow-up-univariate-anovas",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Follow-up Univariate ANOVAs",
-    "text": "Follow-up Univariate ANOVAs"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#post-hoc-comparisons-using-emmeans",
-    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#post-hoc-comparisons-using-emmeans",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Post-hoc Comparisons using emmeans",
-    "text": "Post-hoc Comparisons using emmeans"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#eigenvalues-and-canonical-variates",
-    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#eigenvalues-and-canonical-variates",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Eigenvalues and Canonical Variates",
-    "text": "Eigenvalues and Canonical Variates"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#canonical-coefficients-eigenvectors",
-    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#canonical-coefficients-eigenvectors",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Canonical Coefficients (Eigenvectors)",
-    "text": "Canonical Coefficients (Eigenvectors)"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#key-interpretation",
-    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#key-interpretation",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Key Interpretation",
-    "text": "Key Interpretation\nPillai’s Trace (1.1919): This is large, indicating substantial group differences across the multivariate space.\nF-statistic (53.466): Very large F-value indicates strong evidence against the null hypothesis.\nP-value: Essentially zero, meaning we reject the null hypothesis that all three species have the same multivariate means.\nConclusion: The three iris species are significantly different when considering all four morphological measurements simultaneously in multivariate space."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#interpretation",
-    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#interpretation",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Interpretation",
-    "text": "Interpretation\nDimensionality: The group differences are essentially one-dimensional - 99% of separation occurs along the first canonical axis.\nBiological Meaning: There’s one primary “direction” in morphological space that best separates the three iris species, with a very minor secondary pattern.\nPractical Implication: You could visualize almost all the group separation using just the first canonical variate, though plotting both dimensions shows the complete picture."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#advantages-of-manova-over-multiple-anovas",
-    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_slides.html#advantages-of-manova-over-multiple-anovas",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Advantages of MANOVA over Multiple ANOVAs",
-    "text": "Advantages of MANOVA over Multiple ANOVAs\nStatistical Advantages\n\nControls family-wise error rate (no need for Bonferroni correction)\nAccounts for correlations between response variables\nMore powerful when variables are correlated\nTests the ‘global’ null hypothesis\n\nInterpretational Advantages\n\nReveals patterns in multivariate space that univariate tests miss\nCanonical variates show optimal linear combinations for group separation\nProvides insight into which variables work together to discriminate groups\nShows the dimensionality of group differences\n\nBiological Relevance\n\nOrganisms function as integrated wholes, not independent traits\nNatural selection acts on trait combinations, not isolated traits\nMultivariate approaches better reflect biological reality"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html",
-    "title": "Lecture 16 - Multivariate Statistics",
+    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html",
+    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html",
+    "title": "Principal Component Analysis (PCA)",
     "section": "",
-    "text": "Multivariate data: multiple variables per object\nTypes of multivariate analyses\n\nFunctional vs. structural methods\nR-mode vs. Q-mode analyses\n\nEigenvectors, eigenvalues, and components\nDistance and dissimilarity measures\nData transformations and standardization\nScreening multivariate data\nMANOVA"
+    "text": "In ecology, often measure many variables on the same organisms:\n\nPlant morphology: height, width, leaf size, flower size\nEnvironmental conditions: temperature, pH, nutrients\nSpecies composition: presence/absence, abundance\n\nChallenge: How do we make sense of all these variables at once?\nPCA helps by:\n\nReducing many correlated variables to a few key dimensions\nVisualizing patterns in high-dimensional data\nIdentifying the most important sources of variation\n\n\n\n\nDarlingtonia californica (Cobra Lily)\n\n\n\nimage of a cobra lily Darlingtonia californica"
   },
   {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#overview",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#overview",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "",
-    "text": "Multivariate data: multiple variables per object\nTypes of multivariate analyses\n\nFunctional vs. structural methods\nR-mode vs. Q-mode analyses\n\nEigenvectors, eigenvalues, and components\nDistance and dissimilarity measures\nData transformations and standardization\nScreening multivariate data\nMANOVA"
+    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html#initial-data-exploration",
+    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html#initial-data-exploration",
+    "title": "Principal Component Analysis (PCA)",
+    "section": "Initial Data Exploration",
+    "text": "Initial Data Exploration\nBefore any analysis, we should always look at our data:\n\nCheck for outliers\nExamine distributions\nLook for patterns by site\nUnderstand variable scales\n\nKey observations:\n\nVariables measured in different units (mm vs. g)\nDifferent ranges: height (hundreds) vs. biomass (fractions)\nNeed to standardize before PCA!"
   },
   {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#functional-vs.-structural-methods-1",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#functional-vs.-structural-methods-1",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Functional vs. Structural Methods",
-    "text": "Functional vs. Structural Methods\nFunctional methods: - Clear response and predictor variables - Goal: relate Y’s to X’s - Examples: MANOVA, PERMANOVA\nStructural methods: - Find patterns/structure in data - Often no clear predictors - Examples: PCA, NMDS, Cluster Analysis"
+    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html#comparison-table",
+    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html#comparison-table",
+    "title": "Principal Component Analysis (PCA)",
+    "section": "Comparison Table",
+    "text": "Comparison Table\n\n\n\n\n\n\n\n\n\n\nMethod\nData Type\nDistance/Similarity\nLinear?\nEigenanalysis?\n\n\n\n\nPCA\nContinuous, correlated\nEuclidean (correlation)\nYes\nYes\n\n\nCA\nCount data, species\nChi-square\nNo\nYes\n\n\nPCoA\nAny (via distance matrix)\nAny distance metric\nN/A\nYes\n\n\nNMDS\nAny (via distance matrix)\nAny distance metric\nNo\nNo\n\n\nDCA\nSpecies abundance\nWeighted averaging\nNo\nYes"
   },
   {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#two-main-approaches",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#two-main-approaches",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Two Main Approaches",
-    "text": "Two Main Approaches\nScaling/Ordination Methods: - Reduce dimensions with new derived variables - Summarize patterns in data - Examples: PCA, CCA\nDissimilarity-Based Methods: - Measure dissimilarity between objects - Visualize relationships between objects - Examples: NMDS, Cluster Analysis"
+    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html#topics-we-havent-covered",
+    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html#topics-we-havent-covered",
+    "title": "Principal Component Analysis (PCA)",
+    "section": "Topics We Haven’t Covered",
+    "text": "Topics We Haven’t Covered\n\nFactor Analysis: - Similar to PCA but with different goals - Assumes latent “factors” cause observed variables - Uses rotation to improve interpretation - More common in social sciences\nRobust PCA: - Less sensitive to outliers - Uses robust covariance estimators - Useful with messy ecological data\nSparse PCA: - Forces many loadings to exactly zero - Easier to interpret - Better for very high-dimensional data"
   },
   {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#common-approaches",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#common-approaches",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Common Approaches",
-    "text": "Common Approaches\nTransformations: - Log transformation for skewed data - Root transformations for count data\n- Fourth-root for species abundance data\nStandardization: - Centering: subtract mean (mean = 0) - Standardization: divide by SD (SD = 1) - Crucial for variables with different units - May not be appropriate for species data"
+    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html#best-practices",
+    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html#best-practices",
+    "title": "Principal Component Analysis (PCA)",
+    "section": "Best Practices",
+    "text": "Best Practices\n\n\n\nBefore PCA:\n\nExplore your data\n\nCheck distributions\nIdentify outliers\nUnderstand variable scales\n\nCheck correlations\n\nMake correlation plot\nEnsure variables are correlated\nConsider removing redundant variables\n\nStandardize appropriately\n\nUse scale = TRUE for different units\nConsider centering only for same units\n\nCheck sample size\n\nNeed at least 3× variables\nMore is better (50+ ideal)\n\n\n\n\n\nDuring PCA:\n\nExamine scree plot\n\nLook for elbow\nConsider cumulative variance\nUsually keep 2-5 components\n\nInterpret loadings\n\nLook for patterns\nConsider biological meaning\nIgnore very small loadings\n\nCheck scores plots\n\nLook for outliers\nIdentify patterns/groups\nConsider site/treatment effects\n\n\n\n\nAfter PCA:\n\nReport clearly\n\nState why you used PCA\nReport variance explained\nDescribe component interpretation\n\nUse results appropriately\n\nPC scores can go into other analyses\nDon’t over-interpret small components\nRemember: exploratory tool!"
   },
   {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#visual-representation-methods",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#visual-representation-methods",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Visual Representation Methods",
-    "text": "Visual Representation Methods\n\nSPLOMS/Scatterplot Matrices: show bivariate relationships\nStar plots: display multiple variables per object\nChernoff faces: represent variables as facial features\nHeatmaps: visualize data matrices with color\nBiplots: show objects and variables together\nOrdination plots: visualize relationships in reduced dimensions"
+    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html#what-to-include-in-paperstheses",
+    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html#what-to-include-in-paperstheses",
+    "title": "Principal Component Analysis (PCA)",
+    "section": "What to Include in Papers/Theses",
+    "text": "What to Include in Papers/Theses\n\n\n\nMethods Section:\n“We performed principal component analysis (PCA) on 10 morphological and biomass variables measured on 89 Darlingtonia californica plants from four sites. Variables were standardized (mean = 0, SD = 1) prior to analysis to account for different measurement scales. PCA was conducted using the prcomp() function in R. We retained principal components with eigenvalues &gt; 1 and that cumulatively explained &gt;70% of variance.”\n\n\nResults Section:\n“The first three principal components explained 77.3% of variance (PC1: 45.8%, PC2: 16.7%, PC3: 14.8%). PC1 represented overall plant size, with high positive loadings for most morphological and biomass variables…”\n\n\n\nEssential Figures:\n\nScree plot - shows variance explained\nLoadings plot - shows variable contributions\nScores plot or biplot - shows samples in PC space\n\n\n\nEssential Tables:\n\nVariance explained by each PC\nLoadings for retained PCs (usually PC1-PC3)\nANOVA results if testing groups\n\n\n\nDon’t Report:\n\nAll 10 PCs if only 3 are meaningful\nTiny loadings (&lt; 0.3)\nEvery individual PC score\nRaw eigenvalues (report % variance instead)"
   },
   {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#key-issues-to-check",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#key-issues-to-check",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Key Issues to Check",
-    "text": "Key Issues to Check\nMultivariate Outliers: - Objects with unusual patterns across variables - Detected with Mahalanobis distance (d²) - Test against χ² distribution with p df\nMissing Observations: - Common approaches: - Deletion: remove affected object or variable - Imputation: estimate missing values - Maximum likelihood methods - Multiple imputation"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#follow-up-univariate-anovas",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#follow-up-univariate-anovas",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Follow-up Univariate ANOVAs",
-    "text": "Follow-up Univariate ANOVAs"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#post-hoc-comparisons-using-emmeans",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#post-hoc-comparisons-using-emmeans",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Post-hoc Comparisons using emmeans",
-    "text": "Post-hoc Comparisons using emmeans"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#eigenvalues-and-canonical-variates",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#eigenvalues-and-canonical-variates",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Eigenvalues and Canonical Variates",
-    "text": "Eigenvalues and Canonical Variates"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#canonical-coefficients-eigenvectors",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#canonical-coefficients-eigenvectors",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Canonical Coefficients (Eigenvectors)",
-    "text": "Canonical Coefficients (Eigenvectors)"
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#key-interpretation",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#key-interpretation",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Key Interpretation",
-    "text": "Key Interpretation\nPillai’s Trace (1.1919): This is large, indicating substantial group differences across the multivariate space.\nF-statistic (53.466): Very large F-value indicates strong evidence against the null hypothesis.\nP-value: Essentially zero, meaning we reject the null hypothesis that all three species have the same multivariate means.\nConclusion: The three iris species are significantly different when considering all four morphological measurements simultaneously in multivariate space."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#interpretation",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#interpretation",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Interpretation",
-    "text": "Interpretation\nDimensionality: The group differences are essentially one-dimensional - 99% of separation occurs along the first canonical axis.\nBiological Meaning: There’s one primary “direction” in morphological space that best separates the three iris species, with a very minor secondary pattern.\nPractical Implication: You could visualize almost all the group separation using just the first canonical variate, though plotting both dimensions shows the complete picture."
-  },
-  {
-    "objectID": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#advantages-of-manova-over-multiple-anovas",
-    "href": "ecostats_lectures/lecture_16/16_02_lecture_powerpoint_html.html#advantages-of-manova-over-multiple-anovas",
-    "title": "Lecture 16 - Multivariate Statistics",
-    "section": "Advantages of MANOVA over Multiple ANOVAs",
-    "text": "Advantages of MANOVA over Multiple ANOVAs\n\nStatistical Advantages\n\nControls family-wise error rate (no need for Bonferroni correction)\nAccounts for correlations between response variables\nMore powerful when variables are correlated\nTests the ‘global’ null hypothesis\n\n\n\nInterpretational Advantages\n\nReveals patterns in multivariate space that univariate tests miss\nCanonical variates show optimal linear combinations for group separation\nProvides insight into which variables work together to discriminate groups\nShows the dimensionality of group differences\n\n\n\nBiological Relevance\n\nOrganisms function as integrated wholes, not independent traits\nNatural selection acts on trait combinations, not isolated traits\nMultivariate approaches better reflect biological reality"
+    "objectID": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html#mistakes-students-make",
+    "href": "ecostats_lectures/lecture_16/16_01_lecture_powerpoint_html.html#mistakes-students-make",
+    "title": "Principal Component Analysis (PCA)",
+    "section": "Mistakes Students Make:",
+    "text": "Mistakes Students Make:\n❌ Not standardizing data with different units\n→ ✓ Always use scale = TRUE for different units\n❌ Forgetting to check correlations\n→ ✓ Make correlation plot first\n❌ Using too many components\n→ ✓ Use scree plot, keep components above elbow\n❌ Over-interpreting small loadings\n→ ✓ Focus on loadings &gt; |0.3|\n❌ Ignoring signs on loadings\n→ ✓ Sign can flip; look at patterns\n❌ Treating PC scores as original data\n→ ✓ Remember PCs are derived variables"
   },
   {
     "objectID": "ecostats_lectures/lecture_11/11_02_class_activity.html",
