@@ -4841,7 +4841,8 @@ font-size: 24px !important;
 <li>There is an apparent relationship between pulse rate and temperature.</li>
 </ul></li>
 <li><strong>Problem:</strong> Are the species different, or are they just at different temperatures?</li>
-<li><strong>Solution:</strong> ANCOVA lets us adjust for the temperature effect to get a clearer, more powerful test of the species effect.</li>
+<li><strong>Solution:</strong> ANCOVA lets us adjust for the temperature effect to get a clearer, more powerful test of the species effect. .<br>
+</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="cell">
@@ -4920,7 +4921,7 @@ font-size: 24px !important;
 <li><span class="math inline">\(\bar{X}\)</span> = overall mean of covariate</li>
 <li><span class="math inline">\(\varepsilon_{ij}\)</span> = unexplained error</li>
 </ul></li>
-<li><strong>Model assumes homogeneous slopes</strong> (i.e., <span class="math inline">\(\beta\)</span> same for all groups)</li>
+<li><strong>Model assumes homogeneous slopes</strong> (i.e., <span class="math inline">\(\beta\)</span> same for all groups) .</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="cell">
@@ -5036,7 +5037,8 @@ font-size: 24px !important;
 </section>
 <section id="anova-table-for-ancova" class="level1">
 <h1>ANOVA Table for ANCOVA</h1>
-<p>The ANOVA table for a single-factor ANCOVA has these components: :::{.panel column=“screen”}</p>
+<p>The ANOVA table for a single-factor ANCOVA has these components:</p>
+<div class="panel" data-column="screen">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a tibble with ANOVA table information</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>anova_table <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
@@ -5059,7 +5061,7 @@ font-size: 24px !important;
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 Residual          n-p-1 SS_Residual      &quot;MS_Residual… &quot;&quot;        &quot;σ²&quot;         </span></span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 Total             n-1   SS_Total         &quot;&quot;            &quot;&quot;        &quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>:::</p>
+</div>
 </section>
 <section id="null-hypotheses-in-ancova" class="level1">
 <h1>Null Hypotheses in ANCOVA</h1>
@@ -5313,7 +5315,9 @@ font-size: 24px !important;
 <li><p>Heterogeneous slopes across treatments</p></li>
 </ul></li>
 <li>Relationship between body volume and suture width depends on treatment group</li>
-<li><strong>Standard ANCOVA is invalid.</strong></li>
+<li><strong>Standard ANCOVA is invalid.</strong><br>
+.<br>
+</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <div class="cell">
@@ -5442,7 +5446,7 @@ We tested this first! (the A:x interaction).</li>
 </ul></li>
 <li><strong>Permutation Tests</strong>
 <ul>
-<li>Randomization tests of treatment effects.</li>
+<li>Randomization tests of treatment effects. .</li>
 </ul></li>
 </ul>
 </div><div class="column" style="width:40%;">

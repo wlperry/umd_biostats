@@ -91,7 +91,6 @@ format:
     -   **Another use:**
         -   Determine whether two or more regression lines differ in
             slopes and/or intercepts.
-   
 :::
 
 ::: {.column width="40%"}
@@ -146,9 +145,7 @@ format:
 -   **Problem:** Are the species different, or are they just at
     different temperatures?
 -   **Solution:** ANCOVA lets us adjust for the temperature effect to
-    get a clearer, more powerful test of the species effect.
-
-   
+    get a clearer, more powerful test of the species effect. .\
 :::
 
 ::: {.column width="40%"}
@@ -223,8 +220,7 @@ format:
     -   $\bar{X}$ = overall mean of covariate
     -   $\varepsilon_{ij}$ = unexplained error
 -   **Model assumes homogeneous slopes** (i.e., $\beta$ same for all
-    groups)
-  
+    groups) .
 :::
 
 ::: {.column width="40%"}
@@ -325,8 +321,8 @@ format:
 # ANOVA Table for ANCOVA
 
 The ANOVA table for a single-factor ANCOVA has these components:
-:::{.panel column="screen"}
 
+::: {.panel column="screen"}
 
 ::: {.cell}
 
@@ -353,7 +349,6 @@ anova_table
 ## 4 Total             n-1   SS_Total         ""            ""        ""
 ```
 :::
-
 
 :::
 
@@ -636,8 +631,8 @@ plot(adjusted_means, comparisons = TRUE) +
     -   Heterogeneous slopes across treatments
 -   Relationship between body volume and suture width depends on
     treatment group
--   **Standard ANCOVA is invalid.**
-
+-   **Standard ANCOVA is invalid.**\
+    .\
 :::
 
 ::: {.column width="40%"}
@@ -773,9 +768,7 @@ If the interaction term is significant (p \< 0.05):
     -   Models relationships at different quantiles (e.g., the median)
         instead of the mean.
 -   **Permutation Tests**
-    -   Randomization tests of treatment effects.
-  
-
+    -   Randomization tests of treatment effects. .
 :::
 
 ::: {.column width="40%"}

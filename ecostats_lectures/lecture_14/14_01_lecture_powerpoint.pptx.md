@@ -741,7 +741,7 @@ Let's check the emmeans and pairwise comparisons
     -   A 1% change in x is a beta percent change in y...
 
 | Model Type | R Code (Example) | Interpretation of β₁ |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | GLM (Log-Link) | `glm(Y ~ X, family = poisson)` | A 1-unit change in X multiplies the mean of Y by exp(β₁). |
 | lm (Log-Response) | `lm(log(Y) ~ X)` | A 1-unit change in X multiplies the median of Y by exp(β₁). |
 | lm (Log-Log) | `lm(log(Y) ~ log(X))` | A 1% change in X is associated with a β₁% change in Y. |

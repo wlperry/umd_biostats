@@ -70,23 +70,24 @@ californica](images/clipboard-3752708543.png){width="335"}
         -   wingsprea - Wing spread
     -   **Biomass measurements (g)**:
         -   hoodmass_g - Hood mass
+
         -   tubemass_g - Tube mass
+
         -   wingmass_g - Wing mass
 :::
 
 ::: {.column width="40%"}
 ```         
 ![Darlingtonia pitcher structure showing measured features\]
+```
 
-![](images/clipboard-4005369252.png){width="207"}
+![](images/clipboard-4005369252.png){width="211"}
 
-- **Sites**:
+-   \*\*Sites\*\*:
 -   TJH: T.J. Howell's Fen
 -   DG: Day's Gulch
 -   LEH: L.E. Hunter's Fen
 -   HD: High Divide
- 
-```
 :::
 :::::
 
@@ -588,7 +589,7 @@ names(pca_result)
     -   **Large negative loading**: variable decreases with PC
     -   **Near-zero loading**: variable unimportant for PC
 -   **Guidelines**:
-    -   Loadings \> 0.3 or \< -0.3 are worth considerin
+    -   Loadings \> 0.3 or \< -0.3 are worth considering
     -   Loadings \> 0.5 or \< -0.5 are important
     -   Sign (+ or -) can flip; patterns matter more
 :::
