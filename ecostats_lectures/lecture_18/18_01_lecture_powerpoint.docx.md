@@ -31,8 +31,7 @@ format:
     statistical methods
 -   When sampling species abundances across sites
 -   encounter data that is sparse (most species are absent from most
-    sites)
--   contains many zeros
+    sites) - many zeros
 -   exhibits non-linear relationships between species and environmental
     gradients
 -   has no clear distributional form
@@ -41,13 +40,13 @@ format:
     -   assumes linear relationships
     -   can leverage correlations between variables
     -   for species abundance data - assumptions often fail
-        spectacularly
+        ***spectacularly***
 -   **NMDS offers a fundamentally different approach**:
     -   instead of trying to preserve exact distances or maximize
-        variance explained,
+        variance explained
 
-    -   focuses on preserving the *rank order* of similarities between
-        samples
+    -   focuses on **preserving the *rank order* of similarities between
+        samples**
 
     -   makes it remarkably robust for ecological data.
 
@@ -55,11 +54,7 @@ format:
 
 ::::: columns
 ::: {.column width="60%"}
-**Introduction**
-
-This document outlines the workflow for Non-metric Multidimensional
-Scaling (NMDS). Unlike PCA, NMDS is rank-based and handles the
-"zero-rich" nature of ecological data much better.
+**Data - built in R and other plac**es
 
 | **Code** | **Description of the variable**              |
 |:---------|:---------------------------------------------|
@@ -139,10 +134,10 @@ Scaling (NMDS). Unlike PCA, NMDS is rank-based and handles the
 -   **What is NMDS?**
     -   **Overview of NMDS:**
         -   **Purpose**: Visualize dissimilarity between objects in
-            2D/3D spac
+            2D/3D space
         -   **Goal**: Preserve rank order of distances, not exact
             distances
-        -   **Method**: Iterative repositioning to minimize stress
+        -   **Method**: Iterative re-positioning to minimize stress
         -   **Output**: Ordination plot showing relationships between
             samples
     -   **Key Differences from PCA:**
@@ -175,10 +170,15 @@ Scaling (NMDS). Unlike PCA, NMDS is rank-based and handles the
 # Why Bray-Curtis for Community Data?
 
 -   **Bray-Curtis dissimilarity** is standard choice for community data
-    because it handles zeros appropriately (joint absences don't
-    contribute to similarity)
-    -   bounded between 0 and 1, weights by abundance (not just
-        presence/absence)
+    because it handles zeros appropriately (**joint absences don't
+    contribute to similarity**)
+    -   bounded between 0 and 1
+
+    -   weights by abundance (not just presence/absence) - ignores joint
+        absences entirely
+
+    -   Similarity is based only on what's actually present and shared
+        between sites
 
     -   performs well with sparse data
 
@@ -188,20 +188,19 @@ $$BC_{jk} = \frac{\sum_i |y_{ij} - y_{ik}|}{\sum_i (y_{ij} + y_{ik})}$$
 
 Where $y_{ij}$ is the abundance of species $i$ at site $j$
 
--   numerator sums up the absolute differences in abundance for each
-    species between two sites
--   denominator sums up the total abundance at both sites
--   Bray-Curtis asks: "Of all the individuals at these two sites, what
-    proportion would need to be moved to make the sites identical?"
--   **Bray-Curtis** ignores joint absences entirely. Similarity is based
-    only on what's actually present and shared between sites.
+-   **numerator sums up the [absolute differences in
+    abundance]{.underline} for each species between two sites**
+-   **denominator sums up the [total abundance]{.underline} at both
+    sites**
+-   Bray-Curtis asks: **"Of all the individuals at these two sites, what
+    proportion would need to be moved to make the sites identical?"**
 
 # The NMDS Algorithm
 
 -   **What NMDS Actually Does**
     -   NMDS tries to place samples in a low-dimensional space (usually
         2D)
-    -   so that **rank order** of distances in ordination matches **rank
+    -   so **rank order** of distances in ordination matches **rank
         order** of dissimilarities in original matrix
 -   Not your PCA which preserves *exact* distances (or variance)
 -   NMDS only cares about relative ordering:
@@ -216,8 +215,8 @@ Where $y_{ij}$ is the abundance of species $i$ at site $j$
 -   **The NMDS Algorithm:**
     1.  **Calculate dissimilarity matrix** between all pairs of sites
     2.  **Start with random configuration** of points in 2D space
-    3.  **Calculate stress** = difference between original distances and
-        ordination distances
+    3.  **Calculate stress** = **difference between original distances
+        and ordination distances**
     4.  **Move points** to reduce stress
     5.  **Repeat** until stress cannot be reduced further
     6.  **Try multiple random starts** to avoid local minima
@@ -245,7 +244,7 @@ Where $y_{ij}$ is the abundance of species $i$ at site $j$
 -   **What is Stress?**
     -   **Stress** is key diagnostic for NMDS quality
     -   measures disagreement between original dissimilarities and
-        distances in the ordination
+        distances in ordination
     -   stress is calculated by first ranking all pairwise
         dissimilarities
     -   then calculating corresponding distances in the ordination
@@ -258,7 +257,7 @@ Where $y_{ij}$ is the abundance of species $i$ at site $j$
     -   **Shepard diagram** (or stress plot) is primary diagnostic tool
         for NMDS
     -   shows relationship between original dissimilarities (x-axis) and
-        ordination distances (y-axis), with a fitted monotonic line.
+        ordination distances (y-axis) with a fitted monotonic line
     -   If NMDS is working well - points should closely follow the line
     -   Scatter indicates loss of information.
 :::
@@ -268,14 +267,8 @@ Where $y_{ij}$ is the abundance of species $i$ at site $j$
 
 
 ::: {.cell}
-
-```{.r .cell-code}
-# Create Shepard diagram
-stressplot(fish_nmds, main = "Shepard Diagram for Fish NMDS")
-```
-
 ::: {.cell-output-display}
-![](18_01_lecture_powerpoint_files/figure-docx/shepard-diagram-1.png)
+![](18_01_lecture_powerpoint_files/figure-docx/shepard-diagram_1-1.png)
 :::
 :::
 
@@ -284,30 +277,40 @@ stressplot(fish_nmds, main = "Shepard Diagram for Fish NMDS")
 
 # Interpreting the Shepard Diagram
 
+::::: columns
+::: {.column width="60%"}
 -   Shepard diagram
     -   each point represents one pair of sites
     -   x-axis shows their original Bray-Curtis dissimilarity
     -   y-axis shows their distance in the 2D ordination
-    -   stepped line is a monotonic regression, meaning it can only go
-        up or stay flat, never down
-    -   because NMDS preserves rank order - "stress" value quantifies
-        scatter around line
+    -   stepped line is a monotonic regression, = can only go up/stay
+        flat not down
+    -   because NMDS preserves rank order - "stress" = scatter around
+        line
 -   **Insights from our Shepard diagram:**
-    -   There's minimal scatter, especially at low dissimilarities
-    -   indicates this 2D solution captures the community relationships
-        well
-    -   **Stress Guidelines**
-        -   Clarke (1993) provided widely-used guidelines for
-            interpreting stress values
-            -   below 0.05 considered excellent representation w/no
-                misinterpretation
-            -   0.05 - 0.10 good ordination with no real risk of drawing
-                false inferences
-            -   0.10 - 0.20 usable ordination but details at lower end
-                interpreted cautiously
-            -   0.20 and 0.30 used with caution/ potentially higher
-                dimensions considered
-            -   \>0.30 is essentially random placement.
+    -   minimal scatter
+-   **Stress Guidelines**
+    -   Clarke (1993) widely-used guidelines for interpreting stress
+        -   \<0.05 excellent representation w/no misinterpretation
+        -   0.05 - 0.10 good ordination - no real risk of false
+            inferences
+        -   0.10 - 0.20 usable ordination but details at lower end
+            interpreted cautiously
+        -   0.20 and 0.30 used with caution/potentially higher
+            dimensions considered
+        -   \>0.30 = random placement.
+:::
+
+::: {.column width="40%"}
+
+::: {.cell}
+::: {.cell-output-display}
+![](18_01_lecture_powerpoint_files/figure-docx/shepard-diagram-1.png)
+:::
+:::
+
+:::
+:::::
 
 # Choosing the Number of Dimensions
 
@@ -419,6 +422,8 @@ cat("Final stress:", round(fish_nmds$stress, 3))
 ::::: columns
 ::: {.column width="50%"}
 -   **Code Explanation:**
+-   `fish_nmds <- metaMDS(spe_matrix, distance = "bray", # Bray-Curtis dissimilarity`
+    -   `k = 2, trymax = 100) # 2 dimensions + Maximum tries`
 -   `metaMDS()`: Main NMDS function from vegan package
     -   `distance = "bray"`: Bray-Curtis dissimilarity (best for
         abundances)
@@ -469,7 +474,9 @@ cat("Final stress:", round(fish_nmds$stress, 3))
 
 -   **What the NMDS Shows:**
     -   **Clear separation** between river reaches
+
     -   **Gradient pattern** from upper to lower reaches
+
     -   Sites within each reach are **more similar** to each other than
         to other reaches
 
@@ -483,7 +490,7 @@ cat("Final stress:", round(fish_nmds$stress, 3))
 
 :::
 
-# different plot using the actual hull definitions from vegan
+# Different plot using the actual hull definitions from vegan
 
 ::: panel
 
@@ -510,7 +517,9 @@ cat("Final stress:", round(fish_nmds$stress, 3))
             reassigning group labels
     -   **Think of it as:**
         -   Multivariate version of ANOVA
+
         -   Uses distances between samples instead of means
+
         -   Tests: "Are the centers of these groups different in
             multivariate space?" .
 :::
@@ -541,7 +550,9 @@ cat("Final stress:", round(fish_nmds$stress, 3))
     6.  **P-value** = proportion of permuted F ≥ observed F
 -   **Why permutation?**
     -   No assumptions about data distribution
+
     -   Creates empirical null distribution
+
     -   Accounts for complex dependency structures
 :::
 
@@ -563,11 +574,13 @@ cat("Final stress:", round(fish_nmds$stress, 3))
 -   **Research Question:** *"Do fish communities differ significantly
     between river reaches?"*
 -   **Statistical Hypotheses:**
--   **H₀**: The centroids of fish communities are the same across all
-    river reaches (Upper = Middle = Lower)
--   **H₁**: At least one river reach has a different community centroid
--   **In practical terms:** - H₀: River position doesn't affect
-    community composition
+    -   **H₀**: The centroids of fish communities are the same across
+        all river reaches (Upper = Middle = Lower)
+    -   **H₁**: At least one river reach has a different community
+        centroid
+-   **In practical terms:** -
+    -   H₀: River position doesn't affect community composition
+
     -   H₁: River position significantly affects community composition
 :::
 
@@ -597,8 +610,8 @@ cat("Final stress:", round(fish_nmds$stress, 3))
     -   Normality or other distribution
     -   Linearity
 -   **Checking Assumptions:**
-    -   Use `betadisper()` to test homogeneity of dispersion
-    -   If violated, PERMANOVA tests dispersion differences, not
+    -   **Use `betadisper()` to test homogeneity of dispersion**
+    -   If violated, PERMANOVA is testing dispersion differences and not
         location differences
 
 
@@ -612,6 +625,11 @@ cat("Final stress:", round(fish_nmds$stress, 3))
 :::
 
 ::: {.column width="50%"}
+-   vegan::betadisper() converts bray-curtis to euclidean distances to
+    calculate distance from sample to center
+-   Principal Coordinates Analysis (PCoA) - ordination for distances
+    between samples in a low-dimensional, Euclidean space
+
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -626,13 +644,14 @@ cat("Final stress:", round(fish_nmds$stress, 3))
 
 ::::: columns
 ::: {.column width="60%"}
--   **PERMANOVA on Fish Communities** - **Line-by-line interpretation:**
-    1.  **reach**: The factor being tested (river reach)
-    2.  **Df = 2**: Degrees of freedom (3 groups - 1)
-    3.  **SumOfSqs**: Between-group sum of squares
-    4.  **R2**: Proportion of variance explained by reach
-    5.  **F**: F-statistic (ratio of between/within group variation)
-    6.  **Pr(\>F)**: P-value from permutation test
+-   **PERMANOVA on Fish Communities**
+    -   **Line-by-line interpretation:**
+        1.  **reach**: The factor being tested (river reach)
+        2.  **Df = 2**: Degrees of freedom (3 groups - 1)
+        3.  **SumOfSqs**: Between-group sum of squares
+        4.  **R2**: Proportion of variance explained by reach
+        5.  **F**: F-statistic (ratio of between/within group variation)
+        6.  **Pr(\>F)**: P-value from permutation test
 
 
 ::: {.cell}
@@ -657,9 +676,12 @@ cat("Final stress:", round(fish_nmds$stress, 3))
 ::: {.column width="40%"}
 -   **What this means:**
     -   **Significant result** (p \< 0.001): We reject H₀
+
     -   River reach **explains substantial variation** in fish
         communities
+
     -   Fish communities **differ significantly** between river reaches
+
     -   Very few permutations gave F ≥ observed F
 :::
 :::::
@@ -669,10 +691,13 @@ cat("Final stress:", round(fish_nmds$stress, 3))
 -   **Interpretation of Pairwise Results:**
     -   All pairwise comparisons are **statistically significant** even
         after Bonferroni correction
+
     -   **Upper vs Lower** shows the strongest difference (highest
         F-statistic)
-    -   Each comparison explains a substantial portion of variance (R²
-        \> 0.3)
+
+    -   Downstream comparisons to up and middle explains a substantial
+        portion of variance (R² \> 0.3)
+
     -   **Biological interpretation**: Fish communities change
         progressively down the river
 
@@ -680,12 +705,14 @@ cat("Final stress:", round(fish_nmds$stress, 3))
 ::: {.cell}
 
 ```
-## # A tibble: 3 × 6
-##   comparison              F_stat    R2 p_value p_adjusted significant
-##   <chr>                    <dbl> <dbl>   <dbl>      <dbl> <chr>      
-## 1 Upstream vs Midstream     3.44 0.168   0.017      0.051 No         
-## 2 Upstream vs Downstream   15.5  0.477   0.001      0.003 Yes        
-## 3 Midstream vs Downstream   9.97 0.357   0.002      0.006 Yes
+##                     pairs Df SumsOfSqs   F.Model        R2 p.value p.adjusted
+## 1   Upstream vs Midstream  1 0.4068962  3.434528 0.1680747   0.021      0.063
+## 2  Upstream vs Downstream  1 1.8495110 15.490360 0.4767679   0.001      0.003
+## 3 Midstream vs Downstream  1 1.2829784  9.972485 0.3565105   0.001      0.003
+##   sig
+## 1    
+## 2   *
+## 3   *
 ```
 :::
 
@@ -708,19 +735,22 @@ cat("Final stress:", round(fish_nmds$stress, 3))
 
 ::::: columns
 ::: {.column width="60%"}
--   **What is ANOSIM?**
 -   **ANOSIM (Analysis of Similarities):**
-    -   **Purpose**: Test whether samples within groups are more similar
-        than samples between groups
+    -   **Purpose**: are samples w/in groups are more similar than
+        samples between groups
     -   **Method**: Based on rank dissimilarities
     -   **Statistic**: R-statistic ranging from -1 to +1
     -   **Interpretation**:
         -   R ≈ 1: Groups are completely separated
+
         -   R ≈ 0: Groups are indistinguishable
+
         -   R \< 0: More dissimilarity within groups than between
 -   **Differences from PERMANOVA:**
     -   ANOSIM uses ranks of distances
+
     -   PERMANOVA uses actual distances
+
     -   ANOSIM is more robust but less powerful
 :::
 
@@ -750,7 +780,9 @@ cat("Final stress:", round(fish_nmds$stress, 3))
     7.  **P-value** = proportion of permuted R ≥ observed R
 -   **R-statistic interpretation:**
     -   R = 1: Perfect separation
+
     -   R = 0: No separation
+
     -   R = -1: More similar between groups than within
 :::
 
@@ -786,27 +818,27 @@ anosim_result
 ::::: columns
 ::: {.column width="50%"}
 -   **ANOSIM Results Interpretation:**
-    -   **R = 0.5082** : This indicates "good"nseparation between groups
+    -   **R = 0.5082** : This indicates "good" separation between groups
     -   \*\*p-value = 0.001 - significant result
-    -   **Biological meaning**: Fish communities are well-separated
-        between river reaches, with communities within each reach being
-        much more similar to each other than to communities in other
-        reaches
+    -   **Biological meaning**: Fish communities well-separated between
+        river reaches, with communities within each reach being much
+        more similar to each other than to communities in other reaches
 -   "Within" box is clearly lower than the "Between" box
     -   sites within same river reach tend to be more similar to each
         other (lower dissimilarity ranks) than sites in different
         reaches (higher dissimilarity ranks)
 
-    -   R statistic of 0.51 quantifies this separation—there's clear
-        differentiation, but with some overlap.
+    -   R statistic of 0.51 quantifies this separation
+
+        -   there's clear differentiation, but with some overlap.
 :::
 
 ::: {.column width="50%"}
 -   Interpreting R:
 
     -   R = 1 - Complete separation
-        -   all within-group dissimilarities are smaller than all
-            between-group dissimilarities
+        -   all within-group dissimilarities smaller than between-group
+            dissimilarities
     -   R \> 0.75 Well separated
     -   R \> 0.5 Separated, but overlapping
     -   R \> 0.25 Barely separated
@@ -844,28 +876,31 @@ anosim_result
 -   **When to use which:**
     -   **PERMANOVA:**
         -   More powerful for detecting differences
+
         -   Better for complex experimental designs
+
         -   Can handle interactions and covariates
+
         -   Preferred for most applications
-  -   **ANOSIM:**
-      -   More robust to outliers
-      -   Simpler interpretation
-      -   Good for initial exploratory analysis
-      -   Useful when distributions are very non-normal
+    -   **ANOSIM:**
+        -   More robust to outliers
+        -   Simpler interpretation
+        -   Good for initial exploratory analysis
+        -   Useful when distributions are very non-normal
 
 # PERMANOVA vs ANOSIM
 
-- **What's the Difference?**
-- Both methods test whether groups differ, but they ask **different questions**:
-  - **PERMANOVA asks:** *Do the group centroids differ in location?*
-    - Uses actual squared distances
-    - Partitions variance like ANOVA
-  - **ANOSIM asks:** *Are within-group dissimilarities smaller than between-group?*
-    - Uses ranked distances
-    - Compares rank distributions
-- Three Critical Scenarios
+-   **What's the Difference? Three Scenarios**
+-   Both methods test whether groups differ, but they ask **different
+    questions**:
+    -   **PERMANOVA asks:** *Do the group centroids differ in location?*
+        -   Uses actual squared distances and partitions variance like
+            ANOVA
+    -   **ANOSIM asks:** *Are within-group dissimilarities smaller than
+        between-group?*
+        -   Uses ranked distances to compares rank distributions
 
-::: {.panel}
+::: panel
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -873,21 +908,20 @@ anosim_result
 :::
 :::
 
-
 :::
 
-# Scenario 2 is Key! 
+# Scenario 2 is Key!
 
-:::: {.columns}
+::::: columns
 ::: {.column width="50%"}
-- **The Problem:**
-  - Groups A and B have the **same centroid** (same average community)
-  - But Group B is much more **variable** (spread out)
-  - PERMANOVA will detect this as "significant"!
-- **Why?**
-  - PERMANOVA tests distances from points to centroids
-  - More spread = larger distances = detected as "different"
-     
+-   **The Problem:**
+    -   Groups A and B have the **same centroid** (same average
+        community)
+    -   But Group B is much more **variable** (spread out)
+    -   PERMANOVA will detect this as "significant"!
+-   **Why?**
+    -   PERMANOVA tests distances from points to centroids
+    -   More spread = larger distances = detected as "different"
 :::
 
 ::: {.column width="50%"}
@@ -899,14 +933,15 @@ anosim_result
 :::
 
 :::
-::::
+:::::
 
-# Dispersion test for PERMANOVA 
+# Dispersion test for PERMANOVA
 
-- **Solution:** Always run `betadisper()` before interpreting PERMANOVA!
-   - What PERMANOVA "Sees"
-   
-::: { .panel}
+-   **Solution:** Always run `betadisper()` before interpreting
+    PERMANOVA!
+    -   What PERMANOVA "Sees"
+
+::: panel
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -914,14 +949,13 @@ anosim_result
 :::
 :::
 
-        
 :::
 
-# What ANOSIM "Sees"  
+# What ANOSIM "Sees"
 
-- This is different
+-   This is different
 
-::: { .panel}
+::: panel
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -929,15 +963,13 @@ anosim_result
 :::
 :::
 
-    
 :::
 
-
 # Side-by-Side Comparison of PCA and ANOSIM
- Comparison
 
-::: {.panel}
+Comparison
 
+::: panel
 
 ::: {.cell}
 ::: {.cell-output-display}
@@ -945,10 +977,7 @@ anosim_result
 :::
 :::
 
-
 :::
-
-
 
 # Environmental Drivers
 
@@ -958,17 +987,15 @@ anosim_result
     -   Which Environmental Variables Matter?
     -   **Significant variables (p \< 0.05):**
 -   **What this means:**
-    -  variables significantly correlate w/ comm. comp
-    -  explain spatial arrangement of sites in NMDS
+    -   variables significantly correlate w/ comm. comp
+    -   explain spatial arrangement of sites in NMDS
 -   arrows show direction of max change for env. variables
     -   Longer arrows = stronger correlations with ordination
-    -   Arrow direction =  sites have high vs. low values of variable
+    -   Arrow direction = sites have high vs. low values of variable
 -   distance from source (das) and altitude (alt) point opp. directions
-    - (expected - altitude decreases as distance increases)
+    -   (expected - altitude decreases as distance increases)
 -   Oxygen (oxy) decreases downstream
 -   BOD (dbo) increases downstream = more org. pollution
-
-
 :::
 
 ::: {.column width="50%"}
